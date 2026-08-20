@@ -1,10 +1,10 @@
 import React from 'react';
 
 import Footer from '../common/footer';
-import Hero from './hero';
+import Hero, { HeroData } from './hero';
 
 interface HomePageProps {
-  data: any;
+  data?: HeroData | null;
 }
 
 const HomePage: React.FC<HomePageProps> = ({ data }) => {
