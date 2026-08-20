@@ -1,0 +1,17 @@
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+
+export interface ApiError {
+  message: string;
+  code?: string;
+  status?: number;
+}
+
+export type ApiResponse<T> = AxiosResponse<T>;
+
+export interface IHttpClient {
+  get<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
+  post<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>;
+  put<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>;
+  delete<T>(url: string, config?: AxiosRequestConfig): Promise<T>;
+  patch<T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<T>;
+}
