@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Hero from './hero';
 import Footer from '../common/footer';
+import Hero from './hero';
 
 interface HomePageProps {
   data: any;
