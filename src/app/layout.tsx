@@ -2,10 +2,24 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import localFont from 'next/font/local';
 
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+});
+
+const generalSans = localFont({
+  src: [
+    { path: '../../public/fonts/general-sans/200.woff2', weight: '200', style: 'normal' },
+    { path: '../../public/fonts/general-sans/300.woff2', weight: '300', style: 'normal' },
+    { path: '../../public/fonts/general-sans/400.woff2', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/general-sans/500.woff2', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/general-sans/600.woff2', weight: '600', style: 'normal' },
+    { path: '../../public/fonts/general-sans/700.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-general-sans',
+  display: 'swap',
 });
 
 import { RootProvider } from '@/context/root-provider';
@@ -22,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${inter.variable} ${generalSans.variable} antialiased`}>
         <RootProvider>{children}</RootProvider>
       </body>
     </html>

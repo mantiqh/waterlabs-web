@@ -1,11 +1,18 @@
 import React from 'react';
 
-import { Hero } from './home-components';
+import Footer from '../common/footer';
+import Hero, { HeroData } from './hero';
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  data?: HeroData | null;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ data }) => {
   return (
     <main>
-      <Hero />
+      <Hero data={data} />
+      {/* Additional home page sections will go here */}
+      <Footer />
     </main>
   );
 };
