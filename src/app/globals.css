@@ -46,7 +46,7 @@
   --spacing-120: 120px;
 
   /* Fonts */
-  --font-primary: 'General Sans', sans-serif;
+  --font-primary: var(--font-general-sans), sans-serif;
   --font-secondary: var(--font-inter), sans-serif;
 }
 
