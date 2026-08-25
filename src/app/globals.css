@@ -1,11 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* Breakpoints */
-  --breakpoint-mobile: 0px;
-  --breakpoint-tablet: 720px;
-  --breakpoint-desktop: 1024px;
-
   /* Colors - Neutral */
   --color-white: #FFFFFF;
   --color-ghost-white: #F4F6F9;
@@ -28,43 +23,47 @@
   --color-lavender-purple: #AE87E4;
   --color-warm-stone: #B8B1A5;
 
-  /* Spacing */
-  --spacing-0: 0px;
-  --spacing-4: 4px;
-  --spacing-8: 8px;
-  --spacing-12: 12px;
-  --spacing-14: 14px;
-  --spacing-16: 16px;
-  --spacing-20: 20px;
-  --spacing-24: 24px;
-  --spacing-26: 26px;
-  --spacing-32: 32px;
-  --spacing-40: 40px;
-  --spacing-48: 48px;
-  --spacing-60: 60px;
-  --spacing-80: 80px;
-  --spacing-120: 120px;
-
   /* Fonts */
   --font-primary: 'General Sans', sans-serif;
   --font-secondary: var(--font-inter), sans-serif;
+
+  /* Figma Design System Spacing */
+  --spacing-ds-0: 0px;
+  --spacing-ds-4: 4px;
+  --spacing-ds-8: 8px;
+  --spacing-ds-12: 12px;
+  --spacing-ds-14: 14px;
+  --spacing-ds-16: 16px;
+  --spacing-ds-20: 20px;
+  --spacing-ds-24: 24px;
+  --spacing-ds-26: 26px;
+  --spacing-ds-32: 32px;
+  --spacing-ds-40: 40px;
+  --spacing-ds-48: 48px;
+  --spacing-ds-60: 60px;
+  --spacing-ds-80: 80px;
+  --spacing-ds-120: 120px;
+
+  /* Figma Design System Breakpoints */
+  --breakpoint-md: 720px;
+  --breakpoint-lg: 1024px;
 }
 
 @utility gradient {
   background-image: linear-gradient(to right, var(--color-electric-blue), var(--color-aqua-mint));
 }
 
-/* Responsive Typography - Display */
+/* Responsive Typography - Display (General Sans) */
 @utility display-1 {
-  @apply font-primary font-medium capitalize text-[48px] leading-[56px] md:text-[64px] md:leading-[72px] lg:text-[80px] lg:leading-[88px];
+  @apply font-primary font-medium text-[48px] leading-[56px] md:text-[64px] md:leading-[72px] lg:text-[80px] lg:leading-[88px];
 }
 
 @utility display-h1 {
-  @apply font-primary font-normal capitalize text-[40px] leading-[48px] md:text-[56px] md:leading-[64px] lg:text-[68px] lg:leading-[76px];
+  @apply font-primary font-normal text-[40px] leading-[48px] md:text-[56px] md:leading-[64px] lg:text-[68px] lg:leading-[76px];
 }
 
 @utility display-h2 {
-  @apply font-primary font-normal capitalize text-[32px] leading-[40px] md:text-[44px] md:leading-[56px] lg:text-[52px] lg:leading-[60px];
+  @apply font-primary font-normal text-[32px] leading-[40px] md:text-[44px] md:leading-[56px] lg:text-[52px] lg:leading-[60px];
 }
 
 @utility display-h3 {
@@ -83,7 +82,7 @@
   @apply font-primary font-normal text-[18px] leading-[26px] md:text-[22px] md:leading-[32px] lg:text-[24px] lg:leading-[32px];
 }
 
-/* Responsive Typography - Body */
+/* Responsive Typography - Body (Inter) */
 @utility body-xl {
   @apply font-secondary font-normal text-[28px] leading-[36px] md:text-[28px] md:leading-[40px] lg:text-[32px] lg:leading-[40px];
 }
@@ -109,11 +108,11 @@
 }
 
 @utility body-caption {
-  @apply font-secondary font-normal text-[12px] leading-[16px] tracking-[0.01em] lg:text-[12px] lg:leading-[20px];
+  @apply font-secondary font-normal text-[12px] leading-[16px] md:text-[12px] md:leading-[16px] lg:text-[12px] lg:leading-[20px] tracking-[0.01em];
 }
 
 @utility body-cta {
-  @apply font-secondary font-medium text-[16px] leading-[24px];
+  @apply font-secondary font-medium text-[16px] leading-[24px] lg:text-[20px] lg:leading-[28px];
 }
 
 :root {
@@ -125,4 +124,16 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-secondary);
+}
+@theme {
+  --animate-marquee: marquee 35s linear infinite;
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 }

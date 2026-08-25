@@ -1,0 +1,151 @@
+            fills: fill_hgcx9l
+            layout: layout_hwl601x
+            children:
+              - id: '4081:11367'
+                name: Vector
+                type: IMAGE-SVG
+                fills: fill_hnw71v9
+                layout: layout_hwl601x
+              - id: '4081:11368'
+                name: Vector
+                type: IMAGE-SVG
+                fills: fill_hrtx9ax
+                layout: layout_hwl601x
+          - id: '4081:13910'
+            name: AdobeStock_588310218 3
+            type: FRAME
+            layout: layout_hwl601x
+            children:
+              - id: '4081:13911'
+                name: AdobeStock_588310218 3
+                type: RECTANGLE
+                fills: fill_hj8fili
+                layout: layout_hwl601x
+              - id: '4081:13912'
+                name: Vector
+                type: IMAGE-SVG
+                fills: fill_hfas2q0
+                strokes: stroke_hlbwnos
+                effects: effect_h3915j5
+                layout: layout_hwl601x
+                borderRadius: 30px
+          - id: '4081:13828'
+            name: img_testimonial_02
+            type: FRAME
+            layout: layout_hwl601x
+            children:
+              - id: '4081:13829'
+                name: AdobeStock_588310218 3
+                type: RECTANGLE
+                fills: fill_hza5s44
+                layout: layout_hwl601x
+              - id: '4081:13830'
+                name: Vector
+                type: IMAGE-SVG
+                fills: fill_hfas2q0
+                strokes: stroke_hlbwnos
+                effects: effect_h3915j5
+                layout: layout_hwl601x
+                borderRadius: 30px
+          - id: '4081:11372'
+            name: img_banner
+            type: FRAME
+            fills: fill_hunw70y
+            layout: layout_hwl601x
+          - id: '4081:11373'
+            name: img_kamal_raj
+            type: RECTANGLE
+            fills: fill_hw2vabz
+            layout: layout_hwl601x
+          - id: '4081:11374'
+            name: img_jitendra_gupta
+            type: RECTANGLE
+            fills: fill_h9d2pld
+            layout: layout_hwl601x
+          - id: '4081:11375'
+            name: img_kamal_raj
+            type: RECTANGLE
+            fills: fill_hw2vabz
+            layout: layout_hwl601x
+          - id: '4081:11376'
+            name: img_daphne_berlander
+            type: RECTANGLE
+            fills: fill_h65fm79
+            layout: layout_hwl601x
+          - id: '4081:11377'
+            name: img_sravan_aditya
+            type: RECTANGLE
+            fills: fill_h2juyxb
+            layout: layout_hwl601x
+          - id: '4081:11378'
+            name: img_robert_A._miller
+            type: RECTANGLE
+            fills: fill_hqad7z4
+            layout: layout_hwl601x
+          - id: '4081:11379'
+            name: img_megha_bhouraskar
+            type: RECTANGLE
+            fills: fill_h4v2pmm
+            layout: layout_hwl601x
+          - id: '4081:11380'
+            name: img_nick_tombrella
+            type: RECTANGLE
+            fills: fill_hqb3aqi
+            layout: layout_hwl601x
+          - id: '4081:11381'
+            name: img_ales_cejka
+            type: RECTANGLE
+            fills: fill_h26pbgy
+            layout: layout_hwl601x
+          - id: '4081:11382'
+            name: img_devanand_bangaru
+            type: RECTANGLE
+            fills: fill_ha8dh5x
+            layout: layout_hwl601x
+          - id: '4081:11383'
+            name: img_santhosh_kumar
+            type: RECTANGLE
+            fills: fill_hi8cszm
+            layout: layout_hwl601x
+          - id: '4081:11384'
+            name: img_rajgopal_keshava
+            type: RECTANGLE
+            fills: fill_hsl3bnh
+            layout: layout_hwl601x
+          - id: '4081:11385'
+            name: icon_accounts_and_accountability
+            type: RECTANGLE
+            fills: fill_hfcgw0m
+            layout: layout_hwl601x
+          - id: '4081:11386'
+            name: icon_customer_outcomes
+            type: RECTANGLE
+            fills: fill_hz88rpn
+            layout: layout_hwl601x
+          - id: '4081:11387'
+            name: icon_continous_improvement
+            type: RECTANGLE
+            fills: fill_hmo8vv5
+            layout: layout_hwl601x
+          - id: '4081:11388'
+            name: icon_innovation
+            type: RECTANGLE
+            fills: fill_hku0fau
+            layout: layout_hwl601x
+          - id: '4081:11389'
+            name: Icon_linkedin
+            type: FRAME
+            layout: layout_hwl601x
+            children:
+              - id: '4081:11390'
+                name: Icon_linkedin
+                type: IMAGE-SVG
+                fills: fill_h32jja7
+                layout: layout_hwl601x
+          - id: '4081:11391'
+            name: img_banner_mob
+            type: FRAME
+            fills: fill_hyjje99
+            layout: layout_hwl601x
+          - id: '4081:13515'
+            name: img_sheen_patel

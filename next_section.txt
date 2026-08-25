@@ -1,0 +1,351 @@
+                                        textStyle: text_hz649sp
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: 'Reduction in A/R days '
+                              - id: '3238:12835'
+                                name: Frame 2147203141
+                                type: FRAME
+                                fills: fill_hgcx9l
+                                layout: layout_h914dwo
+                                borderRadius: 20px
+                                children:
+                                  - id: '3238:13965'
+                                    name: ChatGPT Image Aug 2, 2026, 12_31_24 AM 1
+                                    type: RECTANGLE
+                                    fills: fill_h1pyqwx
+                                    layout: layout_hdznyh7
+                                  - id: '3238:12837'
+                                    name: Frame 2147203188
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: '3238:12838'
+                                        name: ~80%
+                                        type: TEXT
+                                        textStyle: text_hblc32c
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: ~80%
+                                      - id: '3238:12839'
+                                        name: Touchless resolution rate
+                                        type: TEXT
+                                        textStyle: text_hz649sp
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: Touchless resolution rate
+                          - id: '3238:12840'
+                            name: Frame 2147203148
+                            type: FRAME
+                            fills: fill_hgcx9l
+                            layout: layout_hvdx00h
+                            borderRadius: 20px
+                            children:
+                              - id: '3238:12841'
+                                name: AdobeStock_588310218 2
+                                type: RECTANGLE
+                                fills: fill_hr585k4
+                                layout: layout_hdznyh7
+                                borderRadius: 8px 8px 32px 8px
+                              - id: '3238:12842'
+                                name: Frame 2147203147
+                                type: FRAME
+                                layout: layout_he9s7ig
+                                children:
+                                  - id: '3238:12843'
+                                    name: Frame 2147203133
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: '3238:12844'
+                                        name: >-
+                                          60 outsourced staff → 3 in-house
+                                          managers.
+                                        type: TEXT
+                                        textStyle: text_hbagvr3
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: |-
+                                          60 outsourced staff 
+                                          → 3 in-house managers.
+                                      - id: '3238:12845'
+                                        name: Multi-state anesthesia group.
+                                        type: TEXT
+                                        textStyle: text_hz649sp
+                                        fills: fill_hu7pl5
+                                        layout: layout_hrapt2t
+                                        text: Multi-state anesthesia group.
+                                  - id: '3238:12846'
+                                    name: Frame 7
+                                    type: FRAME
+                                    fills: fill_h32jja7
+                                    layout: layout_h448eo2
+                                    borderRadius: 64px
+                                    children:
+                                      - id: '3238:12847'
+                                        name: Read the case
+                                        type: TEXT
+                                        textStyle: text_hvprblh
+                                        fills: fill_hgcx9l
+                                        layout: layout_hrapt2t
+                                        text: Read the case
+                                      - id: '3238:12848'
+                                        name: Group 1
+                                        type: GROUP
+                                        layout: layout_hdznyh7
+                                        children:
+                                          - id: '3238:12849'
+                                            name: Vector
+                                            type: IMAGE-SVG
+                                            fills: fill_hp9dii6
+                                            layout: layout_hwl601x
+                                          - id: '3238:12850'
+                                            name: Vector
+                                            type: IMAGE-SVG
+                                            fills: fill_hp9dii6
+                                            layout: layout_hwl601x
+                  - id: '4081:10562'
+                    name: Frame 2147226762
+                    type: INSTANCE
+                    mainComponentId: '4081:10473'
+                    layout: layout_hjc6vf8
+                    children:
+                      - id: I4081:10562;4081:10439
+                        name: Frame 2147226808
+                        type: FRAME
+                        layout: layout_h950yk
+                        children:
+                          - id: I4081:10562;4081:10440
+                            name: Frame 2147203209
+                            type: FRAME
+                            layout: layout_hbjr8i1
+                            children:
+                              - id: I4081:10562;4081:10441
+                                name: Frame 2147226809
+                                type: FRAME
+                                layout: layout_hdznyh7
+                                children:
+                                  - id: I4081:10562;4081:10442
+                                    name: AdobeStock_588310218 3
+                                    type: RECTANGLE
+                                    fills: fill_hj8fili
+                                    layout: layout_hwl601x
+                                    borderRadius: 20px 10px 20px 20px
+                                  - id: I4081:10562;4081:10443
+                                    name: Vector
+                                    type: IMAGE-SVG
+                                    fills: fill_hfas2q0
+                                    strokes: stroke_hlbwnos
+                                    effects: effect_h3915j5
+                                    layout: layout_hwl601x
+                                    borderRadius: 30px
+                              - id: I4081:10562;4081:10444
+                                name: Frame 2147203210
+                                type: FRAME
+                                layout: layout_hdxgxo8
+                                children:
+                                  - id: I4081:10562;4081:10445
+                                    name: >-
+                                      “Our partnership has become a valuable
+                                      extension of our front-office operations.
+                                      The team provides critical support with
+                                      eligibility verification, fax management,
+                                      authorization processing and retrieval,
+                                      plan of care tracking, and other essential
+                                      administrative functions. Through a strong
+                                      collaborative partnership, ongoing
+                                      training, and continuous process
+                                      improvement, we have achieved increased
+                                      efficiency, reduced denials, lowered
+                                      operational costs, and been able to
+                                      leverage automation more effectively.
+                                      Their commitment to our quality required,
+                                      turnaround times and adaptability has made
+                                      them a trusted partner in supporting our
+                                      growth and success.”
+                                    type: TEXT
+                                    textStyle: text_h3sixha
+                                    fills: fill_hq79idz
+                                    layout: layout_hk7aw6o
+                                    text: "“Our partnership has become a valuable extension of our front-office operations. The team provides critical support with eligibility verification, fax management, \rauthorization processing and retrieval, plan of care tracking, and other essential \radministrative functions. Through a strong collaborative partnership, ongoing training, \rand continuous process improvement, we have achieved increased efficiency, reduced denials, lowered operational costs, and been able to leverage automation more effectively. Their commitment to our quality required, turnaround times and adaptability has made them a trusted partner in supporting our growth and success.” "
+                                  - id: I4081:10562;4081:10446
+                                    name: Frame 2147203207
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: I4081:10562;4081:10447
+                                        name: Terri Edwards
+                                        type: TEXT
+                                        textStyle: text_hbagvr3
+                                        fills: fill_h32jja7
+                                        layout: layout_hk7aw6o
+                                        text: Terri Edwards
+                                      - id: I4081:10562;4081:10448
+                                        name: Vice President of Intake
+                                        type: TEXT
+                                        textStyle: text_h8slqg4
+                                        fills: fill_hkktm4c
+                                        layout: layout_hk7aw6o
+                                        text: Vice President of Intake
+                          - id: I4081:10562;4081:10449
+                            name: Frame 2147203210
+                            type: FRAME
+                            layout: layout_hbuknf2
+                            opacity: 0.30000001192092896
+                            children:
+                              - id: I4081:10562;4081:13704
+                                name: Frame 2147226810
+                                type: FRAME
+                                layout: layout_hdznyh7
+                                children:
+                                  - id: I4081:10562;4081:13705
+                                    name: AdobeStock_588310218 3
+                                    type: RECTANGLE
+                                    fills: fill_hza5s44
+                                    layout: layout_hwl601x
+                                    borderRadius: 20px 10px 20px 20px
+                                  - id: I4081:10562;4081:13706
+                                    name: Vector
+                                    type: IMAGE-SVG
+                                    fills: fill_hfas2q0
+                                    strokes: stroke_hlbwnos
+                                    effects: effect_h3915j5
+                                    layout: layout_hwl601x
+                                    borderRadius: 30px
+                              - id: I4081:10562;4081:10451
+                                name: Vector
+                                type: IMAGE-SVG
+                                fills: fill_hfas2q0
+                                strokes: stroke_hlbwnos
+                                effects: effect_h3915j5
+                                layout: layout_hj82xlf
+                                borderRadius: 30px
+                              - id: I4081:10562;4081:13488
+                                name: Frame 2147203211
+                                type: FRAME
+                                layout: layout_hkd9swd
+                                children:
+                                  - id: I4081:10562;4092:14578
+                                    name: >-
+                                      “Waterlabs has been a great partner for
+                                      our billing, coding, and follow-up needs.
+                                      Their team is responsive, helpful, and
+                                      always willing to work with us when issues
+                                      arise. Since partnering with Waterlabs, we
+                                      have seen an increase in collections and
+                                      improvement in our A/R. We truly work
+                                      together as a team with the same goal of
+                                      maximizing reimbursement and maintaining a
+                                      clean, healthy A/R.”
+                                    type: TEXT
+                                    textStyle: text_h3sixha
+                                    fills: fill_hq79idz
+                                    layout: layout_hk7aw6o
+                                    text: >-
+                                      “Waterlabs has been a great partner for
+                                      our billing, coding, and follow-up needs.
+                                      Their team is responsive, helpful, and
+                                      always willing to work with us when issues
+                                      arise. Since partnering with Waterlabs, we
+                                      have seen an increase in collections and
+                                      improvement in our A/R. We truly work
+                                      together as a team with the same goal of
+                                      maximizing reimbursement and maintaining a
+                                      clean, healthy A/R.”
+                                  - id: I4081:10562;4081:13490
+                                    name: Frame 2147203207
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: I4081:10562;4081:13491
+                                        name: Lorem Ipsum
+                                        type: TEXT
+                                        textStyle: text_hbagvr3
+                                        fills: fill_h32jja7
+                                        layout: layout_hk7aw6o
+                                        text: Lorem Ipsum
+                                      - id: I4081:10562;4081:13492
+                                        name: Lorem Ipsum
+                                        type: TEXT
+                                        textStyle: text_h8slqg4
+                                        fills: fill_hkktm4c
+                                        layout: layout_hk7aw6o
+                                        text: Lorem Ipsum
+                      - id: I4081:10562;4081:10457
+                        name: Arrow indicator
+                        type: INSTANCE
+                        mainComponentId: '2134:1263'
+                        layout: layout_hwrq4vi
+                        children:
+                          - id: I4081:10562;4081:10457;2134:1193
+                            name: Carousel indicators
+                            type: INSTANCE
+                            mainComponentId: '2134:1173'
+                            layout: layout_hozonfa
+                            children:
+                              - id: I4081:10562;4081:10457;2134:1193;2134:1169
+                                name: Rectangle 2
+                                type: RECTANGLE
+                                fills: fill_h32jja7
+                                layout: layout_hdznyh7
+                                borderRadius: 32px
+                              - id: I4081:10562;4081:10457;2134:1193;2134:1170
+                                name: Rectangle 3
+                                type: RECTANGLE
+                                fills: fill_hrctsjv
+                                layout: layout_hdznyh7
+                                borderRadius: 32px
+                              - id: I4081:10562;4081:10457;2134:1193;2134:1171
+                                name: Rectangle 4
+                                type: RECTANGLE
+                                fills: fill_hrctsjv
+                                layout: layout_hdznyh7
+                                borderRadius: 32px
+                          - id: I4081:10562;4081:10457;2134:1253
+                            name: Left - right - Arrow - indicators - white bg
+                            type: INSTANCE
+                            mainComponentId: '2134:1252'
+                            layout: layout_hlagykd
+                            children:
+                              - id: I4081:10562;4081:10457;2134:1253;2134:1218
+                                name: stroke - arrow - indicator
+                                type: INSTANCE
+                                mainComponentId: '2134:1217'
+                                strokes: stroke_hov38ce
+                                layout: layout_h53ccfo
+                                borderRadius: 64px
+                                children:
+                                  - id: >-
+                                      I4081:10562;4081:10457;2134:1253;2134:1218;2134:1229
+                                    name: Arrow
+                                    type: INSTANCE
+                                    mainComponentId: '2134:944'
+                                    layout: layout_hdznyh7
+                                    children:
+                                      - id: >-
+                                          I4081:10562;4081:10457;2134:1253;2134:1218;2134:1229;2134:941
+                                        name: Vector
+                                        type: IMAGE-SVG
+                                        fills: fill_hp9dii6
+                                        layout: layout_hwl601x
+                                      - id: >-
+                                          I4081:10562;4081:10457;2134:1253;2134:1218;2134:1229;2134:942
+                                        name: Vector
+                                        type: IMAGE-SVG
+                                        fills: fill_hp9dii6
+                                        layout: layout_hwl601x
+                              - id: I4081:10562;4081:10457;2134:1253;2134:1224
+                                name: Fill - arrow - indicator
+                                type: INSTANCE
+                                mainComponentId: '2134:1223'
+                                fills: fill_h32jja7
+                                layout: layout_h53ccfo
+                                borderRadius: 64px
+                                children:
+                                  - id: >-
+                                      I4081:10562;4081:10457;2134:1253;2134:1224;2134:1236
+                                    name: Arrow
+                                    type: INSTANCE
+                                    mainComponentId: '2134:944'
+                                    layout: layout_hdznyh7
+                                    children:
+                                      - id: >-
