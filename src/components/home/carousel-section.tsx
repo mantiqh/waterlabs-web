@@ -1,5 +1,5 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
 
 const marqueeItems = [
   { text: "No development fee", img: "/images/home/corousel-images/corousel-img-1.png" },

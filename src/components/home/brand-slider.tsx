@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
+import React, { useEffect,useRef, useState } from 'react';
 
 const brandLogos = [
   { src: "/images/home/brand-slider-images/brightview_logo.png", alt: "BrightView" },

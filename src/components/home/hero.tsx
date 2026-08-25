@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { CTA } from '@/components/CTA';
 
 import Navbar from '../common/navbar';

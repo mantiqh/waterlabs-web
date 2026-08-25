@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Hero from './hero';
-import CarouselSection from './carousel-section';
 import BrandSlider from './brand-slider';
-import { ProductsSection } from './products-section';
+import CarouselSection from './carousel-section';
 import EligibilitySection from './eligibility';
 import FeaturesSection from './features-section';
+import Hero from './hero';
+import { ProductsSection } from './products-section';
 import TestimonialsSection from './testimonials-section';
 
 const HomePage: React.FC = () => {
