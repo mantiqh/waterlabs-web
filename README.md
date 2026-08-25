@@ -1,5 +1,5 @@
 # Next.js Template
-
+## 
 This is a comprehensive [Next.js](https://nextjs.org) template designed for rapid development with a focus on code quality and a professional developer experience.
 
 ## Project Overview
