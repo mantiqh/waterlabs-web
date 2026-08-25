@@ -29,6 +29,8 @@ export const metadata: Metadata = {
   description: 'Waterlabs Next.js Application',
 };
 
+import { Footer } from '@/components/common/footer';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,8 +38,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${generalSans.variable} antialiased`}>
-        <RootProvider>{children}</RootProvider>
+      <body className={`${inter.variable} ${generalSans.variable} antialiased bg-[#F4F6F9]`}>
+        <RootProvider>
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-grow flex flex-col">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </RootProvider>
       </body>
     </html>
   );
