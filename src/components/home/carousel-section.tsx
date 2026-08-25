@@ -81,22 +81,24 @@ export const CarouselSection: React.FC = () => {
 
         {/* Video Thumbnail Area */}
         <div className="px-[20px] lg:px-[60px] w-full">
-          <div className="w-full max-w-[1320px] mx-auto relative rounded-[30px] overflow-hidden">
+          <div className="w-full max-w-[1320px] mx-auto relative rounded-[15px] lg:rounded-[30px] overflow-hidden aspect-[362/159] lg:aspect-[1320/579] bg-gray-100">
             {/* Desktop Image */}
             <Image 
               src="/images/home/corousel-images/corousel-banner-img.png" 
               alt="Video preview" 
-              width={1320}
-              height={740}
-              className="hidden lg:block w-full h-auto object-cover"
+              fill
+              priority
+              unoptimized
+              className="hidden lg:block object-cover w-full h-full"
             />
             {/* Mobile Image */}
             <Image 
               src="/images/home/corousel-images/corousel-banner-mobile-img.png" 
               alt="Video preview" 
-              width={335}
-              height={400}
-              className="block lg:hidden w-full h-auto object-cover"
+              fill
+              priority
+              unoptimized
+              className="block lg:hidden object-cover w-full h-full"
             />
             
             {/* Note: The play button icon is intentionally omitted here as requested by the user */}

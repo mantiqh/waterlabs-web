@@ -1,7 +1,10 @@
 import React from 'react';
 
+import BillingSection from './billing-section';
 import BrandSlider from './brand-slider';
+import CalculateSection from './calculate-section';
 import CarouselSection from './carousel-section';
+import CTASection from './cta-section';
 import EligibilitySection from './eligibility';
 import FeaturesSection from './features-section';
 import Hero, { HeroData } from './hero';
@@ -22,6 +25,9 @@ const HomePage: React.FC<HomePageProps> = ({ data }) => {
       <EligibilitySection />
       <FeaturesSection />
       <TestimonialsSection />
+      <CalculateSection />
+      <BillingSection />
+      <CTASection />
     </main>
   );
 };
