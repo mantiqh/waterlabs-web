@@ -8,6 +8,7 @@ const Navbar: React.FC = () => {
     <header className="flex flex-row items-center justify-between w-full max-w-[1320px] h-[60px] mx-auto rounded-[30px] border border-white/24 bg-white/70 backdrop-blur-[13.2px] pl-[24px] pr-[12px] py-[8px]">
       {/* Logo */}
       <Link href="/" className="flex items-center shrink-0">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/common/logo.svg" alt="Waterlabs AI" className="h-[24px] xl:h-[36px] w-[auto]" />
       </Link>
       
@@ -36,6 +37,7 @@ const Navbar: React.FC = () => {
           </svg>
         </button>
         <button aria-label="Open Menu">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/common/menu.svg" alt="Menu" className="w-[29px] h-[19px] text-midnight-blue hover:opacity-80 transition-opacity" />
         </button>
       </div>

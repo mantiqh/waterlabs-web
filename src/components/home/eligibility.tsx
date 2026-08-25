@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { CTA } from '../CTA';
 
 const EligibilitySection: React.FC = () => {
   return (

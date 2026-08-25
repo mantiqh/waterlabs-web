@@ -11,10 +11,11 @@ export const Footer: React.FC = () => {
           {/* Logo & Tagline (Col Span 2 on both Mobile and Desktop) */}
           <div className="col-span-2 flex flex-col gap-6">
             <Link href="/" className="inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/images/common/logo.svg" alt="Waterlabs AI" className="h-8 md:h-10 w-auto" />
             </Link>
             <p className="body-xxs text-white/70 max-w-sm">
-              Don't just automate your revenue cycle. Apply intelligence to it.
+              Don&apos;t just automate your revenue cycle. Apply intelligence to it.
             </p>
           </div>
 

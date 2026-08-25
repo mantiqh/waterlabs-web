@@ -75,7 +75,7 @@ const FeaturesSection: React.FC = () => {
                 <span className="text-[#111111]">never leaves your environment.</span>
               </h3>
               <p className="font-general-sans text-[16px] lg:text-[18px] text-[#7D8690] leading-[1.5]">
-                Our agents work inside your systems. The data stays where it is. Nothing is copied, moved, or stored on our side. After Change Healthcare showed what concentration risk really costs, this isn't a feature. It's the baseline for working in healthcare.
+                Our agents work inside your systems. The data stays where it is. Nothing is copied, moved, or stored on our side. After Change Healthcare showed what concentration risk really costs, this isn&apos;t a feature. It&apos;s the baseline for working in healthcare.
               </p>
             </div>
             
