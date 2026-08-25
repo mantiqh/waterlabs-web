@@ -1,0 +1,361 @@
+                fills: fill_hj857hk
+                layout: layout_hwq6m9i
+                borderRadius: 60px 0px 0px 60px
+                children:
+                  - id: '3238:12786'
+                    name: Frame 1272628353
+                    type: FRAME
+                    layout: layout_hk9hequ
+                    children:
+                      - id: '3238:12787'
+                        name: Frame 21
+                        type: FRAME
+                        layout: layout_h950yk
+                        children:
+                          - id: '3238:12788'
+                            name: Text - Tag
+                            type: INSTANCE
+                            mainComponentId: '2134:1431'
+                            layout: layout_h8jefgz
+                            children:
+                              - id: I3238:12788;2134:1428
+                                name: Ellipse 2
+                                type: ELLIPSE
+                                fills: fill_h32jja7
+                                layout: layout_hdznyh7
+                              - id: I3238:12788;2134:1429
+                                name: Tag Text
+                                type: TEXT
+                                textStyle: text_hscxwmb
+                                fills: fill_hs6lm1l
+                                layout: layout_htca7n3
+                                text: Every Stage, Owned.
+                          - id: '3238:12789'
+                            name: Frame 1272628347
+                            type: FRAME
+                            layout: layout_hfd1329
+                            children:
+                              - id: '3238:12790'
+                                name: Run end-to-end. Or start with one function.
+                                type: TEXT
+                                textStyle: text_hblc32c
+                                fills: fill_hq79idz
+                                layout: layout_htca7n3
+                                text: |-
+                                  Run end-to-end. 
+                                  Or start with one function.
+                              - id: '3238:12791'
+                                name: >-
+                                  The agents stay accountable either way. Prior
+                                  Authorization: Submitted, tracked, followed
+                                  up. 24/7, no human in the queue.
+                                type: TEXT
+                                textStyle: text_h3sixha
+                                fills: fill_hkktm4c
+                                layout: layout_hk7aw6o
+                                text: >-
+                                  The agents stay accountable either way. Prior
+                                  Authorization: 
+
+                                  Submitted, tracked, followed up. 24/7, no
+                                  human in the queue. 
+                      - id: '3238:12792'
+                        name: Frame 1272628345
+                        type: FRAME
+                        layout: layout_h69moyy
+                        children:
+                          - id: '3238:12793'
+                            name: Frame 1272628348
+                            type: FRAME
+                            fills: fill_hgcx9l
+                            layout: layout_hfgm36h
+                            borderRadius: 10px 10px 32px 32px
+                            children:
+                              - id: '3238:12794'
+                                name: Frame 31
+                                type: FRAME
+                                fills: fill_hgcx9l
+                                layout: layout_hxk59bq
+                                borderRadius: 20px 20px 0px 0px
+                                children:
+                                  - id: '3238:12795'
+                                    name: Frame 1272628343
+                                    type: FRAME
+                                    layout: layout_h7egj43
+                                    children:
+                                      - id: '3238:12796'
+                                        name: Explore Eligibility & Benefits
+                                        type: TEXT
+                                        textStyle: text_hbagvr3
+                                        fills: fill_heyaxgm
+                                        layout: layout_hk7aw6o
+                                        text: Explore Eligibility & Benefits
+                                      - id: '3238:12797'
+                                        name: >-
+                                          Verified in real time. Coverage gaps
+                                          caught before they cost you.
+                                        type: TEXT
+                                        textStyle: text_hz649sp
+                                        fills: fill_hu7pl5
+                                        layout: layout_hk7aw6o
+                                        text: >-
+                                          Verified in real time. Coverage gaps
+                                          caught before they cost you. 
+                              - id: '3238:12798'
+                                name: AdobeStock_588310218 2
+                                type: RECTANGLE
+                                fills: fill_h5mwmmj
+                                layout: layout_hbvi186
+                                borderRadius: 32px 8px 32px 32px
+                          - id: '3238:12799'
+                            name: Frame 1272628350
+                            type: FRAME
+                            fills: fill_hgcx9l
+                            layout: layout_hfgm36h
+                            borderRadius: 10px 10px 32px 32px
+                            children:
+                              - id: '3238:12800'
+                                name: Frame 31
+                                type: FRAME
+                                fills: fill_hgcx9l
+                                layout: layout_hxk59bq
+                                borderRadius: 20px 20px 0px 0px
+                                children:
+                                  - id: '3238:12801'
+                                    name: Frame 1272628343
+                                    type: FRAME
+                                    layout: layout_h7egj43
+                                    children:
+                                      - id: '3238:12802'
+                                        name: Improve Denial Prevention
+                                        type: TEXT
+                                        textStyle: text_hbagvr3
+                                        fills: fill_heyaxgm
+                                        layout: layout_hk7aw6o
+                                        text: Improve Denial Prevention
+                                      - id: '3238:12803'
+                                        name: >-
+                                          Catch and fix claims before they leave,
+                                          not after they come back.
+                                        type: TEXT
+                                        textStyle: text_hz649sp
+                                        fills: fill_hu7pl5
+                                        layout: layout_hk7aw6o
+                                        text: "Catch and fix claims before they leave, not after they come back.\r"
+                              - id: '3238:12804'
+                                name: AdobeStock_588310218 2
+                                type: RECTANGLE
+                                fills: fill_hohwqiq
+                                layout: layout_hbvi186
+                                borderRadius: 32px 8px 32px 32px
+                  - id: '3238:12805'
+                    name: Frame 2147203208
+                    type: FRAME
+                    layout: layout_hwzkrt6
+                    children:
+                      - id: '3238:12806'
+                        name: Frame 2147203197
+                        type: FRAME
+                        layout: layout_hayllr9
+                        children:
+                          - id: '3238:12807'
+                            name: Text - Tag
+                            type: INSTANCE
+                            mainComponentId: '2134:1431'
+                            layout: layout_h8jefgz
+                            children:
+                              - id: I3238:12807;2134:1428
+                                name: Ellipse 2
+                                type: ELLIPSE
+                                fills: fill_h32jja7
+                                layout: layout_hdznyh7
+                              - id: I3238:12807;2134:1429
+                                name: Tag Text
+                                type: TEXT
+                                textStyle: text_hscxwmb
+                                fills: fill_hs6lm1l
+                                layout: layout_htca7n3
+                                text: Healthcare-grade by default.
+                          - id: '3238:12808'
+                            name: Frame 2147203196
+                            type: FRAME
+                            layout: layout_hm3170n
+                            children:
+                              - id: '3238:12809'
+                                name: >-
+                                  Your patient data never leaves your
+                                  environment.
+                                type: TEXT
+                                textStyle: text_hblc32c
+                                fills: fill_hq79idz
+                                layout: layout_hk7aw6o
+                                text: >-
+                                  Your patient data never leaves your
+                                  environment. 
+                              - id: '3238:12810'
+                                name: >-
+                                  Our agents work inside your systems. The data
+                                  stays where it is. Nothing is copied, moved,
+                                  or stored on our side. After Change Healthcare
+                                  showed what concentration risk really costs,
+                                  this isn't a feature. It's the baseline for
+                                  working in healthcare.
+                                type: TEXT
+                                textStyle: text_h3sixha
+                                fills: fill_heyaxgm
+                                layout: layout_htca7n3
+                                text: "Our agents work inside your systems. The data stays where it is. Nothing is copied, moved, or stored on our side. After Change Healthcare showed what concentration risk really costs, this isn't a feature. It's the baseline for working in healthcare.\r"
+                      - id: '3238:12811'
+                        name: Frame 2147203200
+                        type: FRAME
+                        layout: layout_hishuzc
+                        children:
+                          - id: '3883:8922'
+                            name: Image
+                            type: RECTANGLE
+                            fills: fill_hom5nht
+                            layout: layout_hbvi186
+                            borderRadius: 32px 8px 32px 32px
+                          - id: '3238:12813'
+                            name: Vector
+                            type: IMAGE-SVG
+                            fills: fill_hfatcp2
+                            strokes: stroke_hlbwnos
+                            effects: effect_h3915j5
+                            layout: layout_h3zp108
+                            borderRadius: 30px
+                  - id: '3238:12814'
+                    name: Frame 2147203210
+                    type: FRAME
+                    layout: layout_hlsie1q
+                    children:
+                      - id: '3238:12815'
+                        name: Frame 21
+                        type: FRAME
+                        layout: layout_h7ay9gg
+                        children:
+                          - id: '3238:12816'
+                            name: Text - Tag
+                            type: INSTANCE
+                            mainComponentId: '2134:1431'
+                            layout: layout_h8jefgz
+                            children:
+                              - id: I3238:12816;2134:1428
+                                name: Ellipse 2
+                                type: ELLIPSE
+                                fills: fill_h32jja7
+                                layout: layout_hdznyh7
+                              - id: I3238:12816;2134:1429
+                                name: Tag Text
+                                type: TEXT
+                                textStyle: text_hscxwmb
+                                fills: fill_hs6lm1l
+                                layout: layout_htca7n3
+                                text: Measured against HFMA. Drawn from production.
+                          - id: '3238:12817'
+                            name: Our stats
+                            type: TEXT
+                            textStyle: text_hblc32c
+                            fills: fill_hq79idz
+                            layout: layout_htca7n3
+                            text: ' Our stats'
+                      - id: '3238:12818'
+                        name: Frame 2147203156
+                        type: FRAME
+                        layout: layout_hlw0npd
+                        children:
+                          - id: '3238:12819'
+                            name: Frame 2147203151
+                            type: FRAME
+                            layout: layout_h69moyy
+                            children:
+                              - id: '3238:12820'
+                                name: Frame 1272628343
+                                type: FRAME
+                                fills: fill_hgcx9l
+                                layout: layout_h914dwo
+                                borderRadius: 20px
+                                children:
+                                  - id: '3238:13960'
+                                    name: ChatGPT Image Aug 2, 2026, 12_27_51 AM 1
+                                    type: RECTANGLE
+                                    fills: fill_h8yv71s
+                                    layout: layout_hdznyh7
+                                  - id: '3238:12822'
+                                    name: Frame 2147203184
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: '3238:12823'
+                                        name: 30 to 70%
+                                        type: TEXT
+                                        textStyle: text_hblc32c
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: 30 to 70%
+                                      - id: '3238:12824'
+                                        name: Reduction in cost to collect
+                                        type: TEXT
+                                        textStyle: text_hz649sp
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: Reduction in cost to collect
+                              - id: '3238:12825'
+                                name: Frame 2147203139
+                                type: FRAME
+                                fills: fill_hgcx9l
+                                layout: layout_h3phob0
+                                borderRadius: 20px
+                                children:
+                                  - id: '3238:12826'
+                                    name: Rectangle 130
+                                    type: RECTANGLE
+                                    fills: fill_h39y86r
+                                    layout: layout_hdznyh7
+                                  - id: '3238:12827'
+                                    name: Frame 2147203185
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: '3238:12828'
+                                        name: 95%+
+                                        type: TEXT
+                                        textStyle: text_hblc32c
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: 95%+
+                                      - id: '3238:12829'
+                                        name: Clean claim rate
+                                        type: TEXT
+                                        textStyle: text_hz649sp
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: Clean claim rate
+                              - id: '3238:12830'
+                                name: Frame 2147203140
+                                type: FRAME
+                                fills: fill_hgcx9l
+                                layout: layout_h914dwo
+                                borderRadius: 20px
+                                children:
+                                  - id: '3238:12831'
+                                    name: Rectangle 130
+                                    type: RECTANGLE
+                                    fills: fill_hk54u9g
+                                    layout: layout_hdznyh7
+                                  - id: '3238:12832'
+                                    name: Frame 2147203187
+                                    type: FRAME
+                                    layout: layout_hpaual
+                                    children:
+                                      - id: '3238:12833'
+                                        name: 15–35 days
+                                        type: TEXT
+                                        textStyle: text_hblc32c
+                                        fills: fill_heyaxgm
+                                        layout: layout_hrapt2t
+                                        text: 15–35 days
+                                      - id: '3238:12834'
+                                        name: Reduction in A/R days
+                                        type: TEXT
+                                        textStyle: text_hz649sp
