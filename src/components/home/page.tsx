@@ -4,14 +4,18 @@ import BrandSlider from './brand-slider';
 import CarouselSection from './carousel-section';
 import EligibilitySection from './eligibility';
 import FeaturesSection from './features-section';
-import Hero from './hero';
+import Hero, { HeroData } from './hero';
 import { ProductsSection } from './products-section';
 import TestimonialsSection from './testimonials-section';
 
-const HomePage: React.FC = () => {
+interface HomePageProps {
+  data?: HeroData | null;
+}
+
+const HomePage: React.FC<HomePageProps> = ({ data }) => {
   return (
     <main>
-      <Hero />
+      <Hero data={data} />
       <CarouselSection />
       <BrandSlider />
       <ProductsSection />

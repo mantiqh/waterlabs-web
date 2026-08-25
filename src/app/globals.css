@@ -24,7 +24,7 @@
   --color-warm-stone: #B8B1A5;
 
   /* Fonts */
-  --font-primary: 'General Sans', sans-serif;
+  --font-primary: var(--font-general-sans), sans-serif;
   --font-secondary: var(--font-inter), sans-serif;
 
   /* Figma Design System Spacing */
