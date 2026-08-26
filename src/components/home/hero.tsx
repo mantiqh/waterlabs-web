@@ -50,12 +50,12 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             
             <div className="flex flex-row flex-wrap items-center gap-[12px] lg:gap-[16px]">
               {/* Get a demo button */}
-              <CTA variant="dark-bg" className="!py-[10px] !px-[20px] !text-[16px] lg:!py-[10px] lg:!px-[20px] lg:!text-[16px] font-medium">
+              <CTA variant="dark-bg">
                 {data?.heroButtonText || 'Get a demo'}
               </CTA>
               
               {/* See how it works button */}
-              <CTA variant="outline" className="!py-[10px] !px-[20px] !text-[16px] lg:!py-[10px] lg:!px-[20px] lg:!text-[16px] font-medium">
+              <CTA variant="outline">
                 {data?.heroSecondaryButtonText || 'See how it works'}
               </CTA>
             </div>

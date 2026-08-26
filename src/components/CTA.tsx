@@ -30,21 +30,21 @@ const ChevronRight = ({ className }: { className?: string }) => (
 
 export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
   ({ variant, children, className = '', ...props }, ref) => {
-    // Base classes for typography (responsive)
-    const typographyClass = 'font-secondary font-medium text-[16px] leading-[24px] lg:text-[20px] lg:leading-[28px]';
-    const baseClasses = `inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
+    // Base classes for typography conforming to Figma specs (height 44px with py-[10px])
+    const typographyClass = 'font-secondary font-medium text-[16px] leading-[24px]';
+    const baseClasses = `inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
     
     const isArrowOnly = variant === 'light-arrow' || variant === 'dark-arrow';
     const isTextOnly = variant === 'light-text' || variant === 'dark-text';
 
-    // Shape/Padding Classes (responsive)
+    // Shape/Padding Classes conforming to Figma design system
     let shapeClasses = "";
     if (isArrowOnly) {
-      shapeClasses = "rounded-[64px] p-[10px] lg:p-ds-16";
+      shapeClasses = "rounded-[64px] p-[10px]";
     } else if (isTextOnly) {
-      shapeClasses = "p-0 gap-[10px] lg:gap-ds-8";
+      shapeClasses = "p-0 gap-[10px]";
     } else {
-      shapeClasses = "rounded-[64px] py-[10px] px-[20px] gap-[10px] lg:py-[16px] lg:px-[24px] lg:gap-[8px]";
+      shapeClasses = "rounded-[64px] py-[10px] px-[20px] gap-[10px]";
     }
 
     let variantClasses = "";

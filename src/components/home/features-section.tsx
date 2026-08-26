@@ -154,13 +154,13 @@ const FeaturesSection: React.FC = () => {
             <div className="flex flex-col gap-[24px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[4px] h-[4px] lg:w-[6px] lg:h-[6px] rounded-full bg-[#0F68D6]"></div>
-                <span className="font-general-sans text-[14px] lg:text-[16px] text-[#7D8690] tracking-wide font-normal">Healthcare-grade by default.</span>
+                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">Healthcare-grade by default.</span>
               </div>
-              <h3 className="font-general-sans font-medium text-[32px] lg:text-[48px] leading-[1.2]">
+              <h3 className="font-primary font-normal text-[32px] lg:text-[48px] leading-[1.2]">
                 <span className="text-[#0F68D6]">Your patient data</span>{' '}
                 <span className="text-[#111111]">never leaves your environment.</span>
               </h3>
-              <p className="font-general-sans text-[16px] lg:text-[18px] text-[#7D8690] leading-[1.5]">
+              <p className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#7D8690] leading-[1.5]">
                 Our agents work inside your systems. The data stays where it is. Nothing is copied, moved, or stored on our side. After Change Healthcare showed what concentration risk really costs, this isn&apos;t a feature. It&apos;s the baseline for working in healthcare.
               </p>
             </div>
@@ -269,11 +269,11 @@ const FeaturesSection: React.FC = () => {
               {/* Content Side */}
               <div className="flex flex-col justify-center items-start gap-[24px] p-[32px] lg:p-0 lg:w-[45%]">
                 <div className="flex flex-col gap-[8px]">
-                  <h3 className="font-general-sans font-normal text-[32px] text-[#042849] leading-[1.2]">
+                  <h3 className="font-primary font-normal text-[32px] text-[#042849] leading-[1.2]">
                     60 outsourced staff <br className="hidden lg:block" />
                     <span className="relative -top-[4px]">→</span> 3 in-house managers.
                   </h3>
-                  <p className="font-general-sans font-normal text-[18px] text-[#111111]">
+                  <p className="font-secondary font-normal text-[18px] text-[#111111]">
                     Multi-state anesthesia group.
                   </p>
                 </div>

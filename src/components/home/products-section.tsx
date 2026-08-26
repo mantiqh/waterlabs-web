@@ -37,12 +37,12 @@ export const ProductsSection: React.FC = () => {
                   className="object-cover" 
                 />
               </div>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-[16px] pt-[8px]">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between w-full gap-[16px] pt-[8px]">
                 <div className="flex flex-col gap-[4px]">
-                  <h3 className="font-primary text-[24px] lg:text-[32px] text-[#111111] leading-[1.25]">
+                  <h3 className="font-primary font-normal text-[24px] lg:text-[32px] text-[#111111] leading-[1.25]">
                     HIMER AI OS
                   </h3>
-                  <p className="font-secondary text-[16px] lg:text-[18px] text-[#4B5563] leading-[1.4]">
+                  <p className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#4B5563] leading-[1.4]">
                     Orchestrate and build through commands. Just describe your task.
                   </p>
                 </div>
@@ -63,12 +63,12 @@ export const ProductsSection: React.FC = () => {
                   className="object-cover" 
                 />
               </div>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-[16px] pt-[8px]">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between w-full gap-[16px] pt-[8px]">
                 <div className="flex flex-col gap-[4px]">
-                  <h3 className="font-primary text-[24px] lg:text-[32px] text-[#111111] leading-[1.25]">
+                  <h3 className="font-primary font-normal text-[24px] lg:text-[32px] text-[#111111] leading-[1.25]">
                     CurieCode
                   </h3>
-                  <p className="font-secondary text-[16px] lg:text-[18px] text-[#4B5563] leading-[1.4]">
+                  <p className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#4B5563] leading-[1.4]">
                     Optimize reimbursements through automated, intelligent medical coding.
                   </p>
                 </div>

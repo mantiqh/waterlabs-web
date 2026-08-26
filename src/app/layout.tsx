@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${generalSans.variable}`}>
       <body className={`${inter.variable} ${generalSans.variable} antialiased bg-[#F4F6F9]`}>
         <RootProvider>
           <div className="flex flex-col min-h-screen">

@@ -112,7 +112,7 @@
 }
 
 @utility body-cta {
-  @apply font-secondary font-medium text-[16px] leading-[24px] lg:text-[20px] lg:leading-[28px];
+  @apply font-secondary font-medium text-[16px] leading-[24px];
 }
 
 :root {

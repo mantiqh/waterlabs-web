@@ -18,7 +18,7 @@ export const CTASection: React.FC = () => {
           backgroundImage: "url('/images/home/get-in-touch/img_get_in_touch%20(1).png')",
         }}
       >
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[32px] lg:gap-[48px]">
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[32px] lg:gap-[48px]">
           
           {/* Left Text Block */}
           <div className="flex flex-col gap-[12px] lg:gap-[16px]">
