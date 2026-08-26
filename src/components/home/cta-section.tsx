@@ -40,7 +40,7 @@ export const CTASection: React.FC = () => {
             </CTA>
             <CTA 
               variant="outline" 
-              className="lg:bg-white lg:text-midnight-blue lg:border-transparent lg:[&_svg]:text-midnight-blue [@media(hover:hover)]:lg:hover:bg-gradient-to-br [@media(hover:hover)]:lg:hover:from-[#042849] [@media(hover:hover)]:lg:hover:from-[40%] [@media(hover:hover)]:lg:hover:to-[#1E5667] [@media(hover:hover)]:lg:hover:text-white [@media(hover:hover)]:lg:hover:[&_svg]:text-white"
+              className="lg:bg-white lg:text-midnight-blue lg:border-transparent lg:[&>svg]:text-midnight-blue [@media(hover:hover)]:lg:hover:bg-gradient-to-br [@media(hover:hover)]:lg:hover:from-[#042849] [@media(hover:hover)]:lg:hover:from-[40%] [@media(hover:hover)]:lg:hover:to-[#1E5667] [@media(hover:hover)]:lg:hover:text-white [@media(hover:hover)]:lg:hover:[&>svg]:text-white"
             >
               Talk to a specialist
             </CTA>

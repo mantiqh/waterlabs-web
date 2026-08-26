@@ -74,14 +74,14 @@ const FeaturesSection: React.FC = () => {
         This white box creates the "bottom cut out" for the section above it,
         by curving inwards on the top-left while the blue gradient background shows through.
       */}
-      <div className="w-full bg-white rounded-tl-[40px] lg:rounded-tl-[60px] px-[20px] py-[60px] lg:p-[80px]">
-        
-        <div className="max-w-[1320px] mx-auto flex flex-col gap-[80px] lg:gap-[120px]">
-          
+      <div className="w-full bg-white rounded-tl-[40px] lg:rounded-tl-[60px] px-[20px] pt-[40px] pb-[20px] sm:pt-[60px] sm:pb-[40px] lg:p-[80px]">
+
+        <div className="max-w-[1320px] mx-auto flex flex-col gap-[48px] sm:gap-[64px] lg:gap-[120px]">
+
           {/* Row 1: Title Block (2-column layout on desktop matching Figma) */}
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-[24px] lg:gap-[60px]">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-[16px] sm:gap-[24px] lg:gap-[60px]">
             {/* Left Tag */}
-            <div className="lg:w-[360px] shrink-0 pt-[8px]">
+            <div className="lg:w-[360px] shrink-0 pt-[4px] lg:pt-[8px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[6px] h-[6px] rounded-full bg-electric-blue shrink-0"></div>
                 <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">
@@ -89,16 +89,16 @@ const FeaturesSection: React.FC = () => {
                 </span>
               </div>
             </div>
-            
+
             {/* Right Heading & Subheading */}
-            <div className="flex-1 flex flex-col gap-[20px] lg:gap-[24px]">
-              <h2 className="display-h2 tracking-[-0.01em]">
+            <div className="flex-1 flex flex-col gap-[16px] lg:gap-[24px]">
+              <h2 className="font-primary font-normal text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.12] tracking-[-0.01em]">
                 <span className="text-[#111111]">Run end-to-end.</span>
                 <br />
                 <span className="text-[#111111]">Or </span>
                 <span className="text-electric-blue">start with one function.</span>
               </h2>
-              <p className="body-s tracking-[0em] text-[#2A2A2A]">
+              <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[26px] text-[#4B5563] tracking-[0em]">
                 The agents stay accountable either way. Prior Authorization:<br className="hidden lg:block" />
                 Submitted, tracked, followed up. 24/7, no human in the queue.
               </p>
@@ -106,68 +106,77 @@ const FeaturesSection: React.FC = () => {
           </div>
 
           {/* Row 2: Two Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] lg:gap-[32px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px] sm:gap-[24px] lg:gap-[32px]">
             {/* Card 1 */}
-            <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-[24px] lg:p-[32px] justify-between">
-              <div className="flex flex-col gap-[12px] mb-[20px] lg:mb-[24px]">
-                <h3 className="font-primary font-normal text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
+            <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden justify-between">
+              <div className="flex flex-col gap-[8px] p-[20px] sm:p-[24px] lg:p-[32px] pb-0 lg:pb-0">
+                <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
                   Explore Eligibility & Benefits
                 </h3>
-                <p className="font-secondary font-normal text-[15px] lg:text-[18px] text-[#2A2A2A] leading-[1.4]">
+                <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[26px] text-[#111111]">
                   Verified in real time. Coverage gaps caught before they cost you.
                 </p>
               </div>
-              <div className="relative w-full aspect-[1300/574] rounded-[16px] lg:rounded-[24px] overflow-hidden">
-                <Image 
-                  src="/images/home/features-images/img_explore_eligibility_and_benefits.png" 
-                  alt="Explore Eligibility & Benefits" 
-                  fill 
-                  className="object-cover" 
+              <div className="w-full mt-[16px] lg:mt-[24px] overflow-hidden">
+                <Image
+                  src="/images/home/features-images/img_explore_eligibility_and_benefits.png"
+                  alt="Explore Eligibility & Benefits"
+                  width={1300}
+                  height={574}
+                  className="w-full h-auto block object-cover"
                 />
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-[24px] lg:p-[32px] justify-between">
-              <div className="flex flex-col gap-[12px] mb-[20px] lg:mb-[24px]">
-                <h3 className="font-primary font-normal text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
+            <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden justify-between">
+              <div className="flex flex-col gap-[8px] p-[20px] sm:p-[24px] lg:p-[32px] pb-0 lg:pb-0">
+                <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
                   Improve Denial Prevention
                 </h3>
-                <p className="font-secondary font-normal text-[15px] lg:text-[18px] text-[#2A2A2A] leading-[1.4]">
+                <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[26px] text-[#111111]">
                   Catch and fix claims before they leave, not after they come back.
                 </p>
               </div>
-              <div className="relative w-full aspect-[1300/574] rounded-[16px] lg:rounded-[24px] overflow-hidden">
-                <Image 
-                  src="/images/home/features-images/img_denial_prevention.png" 
-                  alt="Improve Denial Prevention" 
-                  fill 
-                  className="object-cover" 
+              <div className="w-full mt-[16px] lg:mt-[24px] overflow-hidden">
+                <Image
+                  src="/images/home/features-images/img_denial_prevention.png"
+                  alt="Improve Denial Prevention"
+                  width={1300}
+                  height={574}
+                  className="w-full h-auto block object-cover"
                 />
               </div>
             </div>
           </div>
 
           {/* Row 3: Healthcare-grade by default */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[40px] items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[24px] lg:gap-[40px] items-center">
             {/* Left Content */}
-            <div className="flex flex-col gap-[24px]">
+            <div className="flex flex-col gap-[16px] lg:gap-[24px]">
               <div className="flex items-center gap-[8px]">
-                <div className="w-[4px] h-[4px] lg:w-[6px] lg:h-[6px] rounded-full bg-[#0F68D6]"></div>
-                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">Healthcare-grade by default.</span>
+                <div className="w-[6px] h-[6px] rounded-full bg-[#0F68D6] shrink-0"></div>
+                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">
+                  Healthcare-grade by default.
+                </span>
               </div>
-              <h3 className="font-primary font-normal text-[32px] lg:text-[48px] leading-[1.2]">
+              <h3 className="font-primary font-normal text-[28px] sm:text-[36px] lg:text-[48px] leading-[1.18]">
                 <span className="text-[#0F68D6]">Your patient data</span>{' '}
                 <span className="text-[#111111]">never leaves your environment.</span>
               </h3>
-              <p className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#7D8690] leading-[1.5]">
+              <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[28px] text-[#4B5563]">
                 Our agents work inside your systems. The data stays where it is. Nothing is copied, moved, or stored on our side. After Change Healthcare showed what concentration risk really costs, this isn&apos;t a feature. It&apos;s the baseline for working in healthcare.
               </p>
             </div>
-            
-            {/* Right Image */}
-            <div className="relative w-full aspect-square lg:aspect-[4/3] rounded-[32px] overflow-hidden">
-                <Image src="/images/home/features-images/img_your_patient_data_never_leaves_your_environment.png" alt="Healthcare Grade" fill className="object-cover" />
+
+            {/* Right Image (Natural 1300/882 aspect ratio with no crop/zoom) */}
+            <div className="relative w-full aspect-[1300/882] rounded-[20px] lg:rounded-[32px] overflow-hidden">
+              <Image
+                src="/images/home/features-images/img_your_patient_data_never_leaves_your_environment.png"
+                alt="Healthcare Grade"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
 
@@ -189,7 +198,7 @@ const FeaturesSection: React.FC = () => {
             {/* Desktop 4-Column Grid */}
             <div className="hidden lg:grid lg:grid-cols-4 gap-[24px]">
               {statsData.map((item, index) => (
-                <div 
+                <div
                   key={`desktop-stat-${index}`}
                   className="flex flex-col justify-between p-[32px] h-[300px] bg-white rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100"
                 >
@@ -210,14 +219,14 @@ const FeaturesSection: React.FC = () => {
 
             {/* Mobile/Tablet Swipe Slider */}
             <div className="flex lg:hidden flex-col w-full gap-[20px]">
-              <div 
+              <div
                 ref={statsScrollRef}
                 onScroll={handleStatsScroll}
                 className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[16px] items-stretch [&::-webkit-scrollbar]:hidden -mx-[20px] px-[20px]"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {statsData.map((item, index) => (
-                  <div 
+                  <div
                     key={`mobile-stat-${index}`}
                     className="shrink-0 snap-start w-[280px] sm:w-[320px] flex flex-col justify-between p-[28px] h-[280px] bg-white rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100"
                   >
@@ -239,45 +248,44 @@ const FeaturesSection: React.FC = () => {
               {/* Slider Pagination Indicators */}
               <div className="flex items-center gap-[6px] mt-[4px]">
                 {statsData.map((_, i) => (
-                  <button 
+                  <button
                     key={`stat-dot-${i}`}
                     type="button"
                     onClick={() => scrollToStat(i)}
                     aria-label={`Go to slide ${i + 1}`}
-                    className={`h-[4px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${
-                      activeStatIndex === i 
-                        ? 'w-[24px] bg-electric-blue' 
+                    className={`h-[4px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${activeStatIndex === i
+                        ? 'w-[24px] bg-electric-blue'
                         : 'w-[8px] bg-[#91C6F2]'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>
             </div>
 
             {/* Case Study Banner */}
-            <div className="flex flex-col lg:flex-row items-center bg-white rounded-[20px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden lg:pr-[40px] lg:gap-[60px]">
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-center bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-[16px] sm:p-[20px] lg:p-0 lg:pr-[40px] gap-[20px] lg:gap-[60px] overflow-hidden">
               {/* Image Side */}
-              <div className="relative w-full lg:w-[55%] aspect-[4/3] lg:aspect-auto lg:h-[400px]">
-                <Image 
-                  src="/images/home/features-images/img_60_outsourced_staff_3_in_house_managers.png" 
-                  alt="Case Study" 
-                  fill 
-                  className="object-cover" 
+              <div className="relative w-full lg:w-[55%] aspect-[1300/784] lg:aspect-auto lg:h-[400px] rounded-[16px] lg:rounded-none overflow-hidden shrink-0">
+                <Image
+                  src="/images/home/features-images/img_60_outsourced_staff_3_in_house_managers.png"
+                  alt="Case Study"
+                  fill
+                  className="object-cover"
                 />
               </div>
-              
+
               {/* Content Side */}
-              <div className="flex flex-col justify-center items-start gap-[24px] p-[32px] lg:p-0 lg:w-[45%]">
+              <div className="flex flex-col justify-center items-start gap-[20px] lg:gap-[24px] px-[4px] pb-[4px] lg:p-0 lg:w-[45%]">
                 <div className="flex flex-col gap-[8px]">
-                  <h3 className="font-primary font-normal text-[32px] text-[#042849] leading-[1.2]">
-                    60 outsourced staff <br className="hidden lg:block" />
-                    <span className="relative -top-[4px]">→</span> 3 in-house managers.
+                  <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
+                    60 outsourced staff <br />
+                    <span className="inline-block mr-[4px]">→</span>3 in-house managers.
                   </h3>
-                  <p className="font-secondary font-normal text-[18px] text-[#111111]">
+                  <p className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#111111] leading-[1.4]">
                     Multi-state anesthesia group.
                   </p>
                 </div>
-                <CTA variant="light-bg" className="mt-[8px]">
+                <CTA variant="light-bg">
                   Read the case
                 </CTA>
               </div>

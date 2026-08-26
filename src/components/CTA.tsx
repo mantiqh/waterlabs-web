@@ -60,7 +60,7 @@ export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
         iconClasses = "text-midnight-blue [@media(hover:hover)]:group-hover:text-white transition-colors duration-300";
         break;
       case 'outline':
-        variantClasses = "bg-transparent border border-white text-white [@media(hover:hover)]:hover:bg-[#91C6F2]/40 [@media(hover:hover)]:hover:backdrop-blur-[24px] [@media(hover:hover)]:hover:border-[#91C6F2]";
+        variantClasses = "bg-white/10 backdrop-blur-[24px] border border-white text-white [@media(hover:hover)]:hover:bg-[#91C6F2]/30 [@media(hover:hover)]:hover:border-[#91C6F2]";
         iconClasses = "text-white";
         break;
       case 'light-text':
