@@ -206,8 +206,8 @@ const FeaturesSection: React.FC = () => {
                     <Image src={item.icon} alt={item.label} fill className="object-contain" />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <span className="font-primary font-normal text-[40px] lg:text-[48px] text-electric-blue leading-[1]">
-                      {item.stat} {item.unit && <span className="text-[24px] lg:text-[28px]">{item.unit}</span>}
+                    <span className="font-primary font-normal text-[40px] lg:text-[48px] text-[#111111] leading-[1]">
+                      {item.stat} {item.unit && <span className="text-[24px] lg:text-[28px] text-[#111111]">{item.unit}</span>}
                     </span>
                     <span className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#4B5563] leading-[1.3]">
                       {item.label}
@@ -263,9 +263,9 @@ const FeaturesSection: React.FC = () => {
             </div>
 
             {/* Case Study Banner */}
-            <div className="flex flex-col lg:flex-row items-stretch lg:items-center bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-[16px] sm:p-[20px] lg:p-0 lg:pr-[40px] gap-[20px] lg:gap-[60px] overflow-hidden">
-              {/* Image Side */}
-              <div className="relative w-full lg:w-[55%] aspect-[1300/784] lg:aspect-auto lg:h-[400px] rounded-[16px] lg:rounded-none overflow-hidden shrink-0">
+            <div className="flex flex-col lg:flex-row items-stretch bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
+              {/* Image Side - Edge to Edge in both Mobile & Desktop with exact Figma radius */}
+              <div className="relative w-full lg:w-[50%] aspect-[650/392] lg:aspect-auto lg:h-[392px] rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] rounded-br-[16px] lg:rounded-br-[32px] overflow-hidden shrink-0">
                 <Image
                   src="/images/home/features-images/img_60_outsourced_staff_3_in_house_managers.png"
                   alt="Case Study"
@@ -275,7 +275,7 @@ const FeaturesSection: React.FC = () => {
               </div>
 
               {/* Content Side */}
-              <div className="flex flex-col justify-center items-start gap-[20px] lg:gap-[24px] px-[4px] pb-[4px] lg:p-0 lg:w-[45%]">
+              <div className="flex flex-col justify-center items-start gap-[16px] sm:gap-[20px] lg:gap-[24px] p-[20px] sm:p-[24px] lg:p-[48px] w-full lg:w-[50%]">
                 <div className="flex flex-col gap-[8px]">
                   <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
                     60 outsourced staff <br />
