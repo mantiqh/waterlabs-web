@@ -16,7 +16,13 @@ const steps = [
     title: 'Develop and Deploy the Agents',
     day: 'Day 8 - 21',
     dayVariant: 'outline',
-    desc: 'We develop our agents to mirror your customized needs. Agents start working in your environment.',
+    desc: (
+      <>
+        We develop our agents to mirror your customized needs.
+        <br className="hidden sm:block" />
+        Agents start working in your environment.
+      </>
+    ),
     isPrimary: false,
   },
   {
@@ -99,15 +105,15 @@ export const BillingSection: React.FC = () => {
                         <h3 className="font-primary font-normal text-[22px] lg:text-[24px] text-[#111111] leading-[1.2]">
                           {step.title}
                         </h3>
-                        <span className={`text-[13px] font-medium px-[14px] py-[4px] rounded-full shrink-0 ${
+                        <span className={`font-secondary text-[13px] lg:text-[14px] font-normal px-[16px] py-[5px] rounded-tl-[16px] rounded-bl-[16px] rounded-br-[16px] rounded-tr-none shrink-0 ${
                           step.dayVariant === 'active'
-                            ? 'bg-[#EBF4FE] text-electric-blue'
-                            : 'border border-[#D7DCE2] text-[#4B5563]'
+                            ? 'bg-[#91C6F2] text-[#111111]'
+                            : 'bg-white border border-[#91C6F2] text-[#111111]'
                         }`}>
                           {step.day}
                         </span>
                       </div>
-                      <p className="font-secondary font-normal text-[15px] lg:text-[16px] text-[#4B5563] leading-[1.4]">
+                      <p className="font-secondary font-normal text-[15px] lg:text-[16px] text-[#111111] leading-[1.5]">
                         {step.desc}
                       </p>
                     </div>
@@ -116,10 +122,10 @@ export const BillingSection: React.FC = () => {
                   {/* Mobile Layout (Tag on top, Electric Blue title, no number) */}
                   <div className="flex lg:hidden flex-col gap-[12px]">
                     <div className="flex items-center">
-                      <span className={`text-[12px] font-medium px-[12px] py-[3px] rounded-full ${
+                      <span className={`font-secondary text-[12px] font-normal px-[12px] py-[4px] rounded-tl-[12px] rounded-bl-[12px] rounded-br-[12px] rounded-tr-none ${
                         step.dayVariant === 'active'
-                          ? 'bg-[#EBF4FE] text-electric-blue'
-                          : 'border border-[#D7DCE2] text-[#4B5563]'
+                          ? 'bg-[#91C6F2] text-[#111111]'
+                          : 'bg-white border border-[#91C6F2] text-[#111111]'
                       }`}>
                         {step.day}
                       </span>
@@ -127,7 +133,7 @@ export const BillingSection: React.FC = () => {
                     <h3 className="font-primary font-normal text-[20px] text-electric-blue leading-[1.2]">
                       {step.title}
                     </h3>
-                    <p className="font-secondary font-normal text-[14px] text-[#4B5563] leading-[1.4]">
+                    <p className="font-secondary font-normal text-[14px] text-[#111111] leading-[1.4]">
                       {step.desc}
                     </p>
                   </div>
