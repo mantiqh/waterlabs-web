@@ -22,17 +22,17 @@ const ChevronRight = ({ className }: { className?: string }) => (
 
 const filterCategories = [
   'All Roles',
-  'Engineering & AI',
+  'Engineering',
   'Product & Delivery',
   'Client Success',
-  'RCM & Domain',
+  'RCM & Ops',
 ];
 
 const jobsData = [
   {
     id: 'python-dev',
     title: 'Python Developer – Agentic AI / Machine Learning',
-    category: 'Engineering & AI',
+    category: 'Engineering',
     roleTag: 'Developer',
     experience: '3–8 years',
     eligibility: 'Agentic AI & LLMs',
@@ -41,16 +41,16 @@ const jobsData = [
   {
     id: 'fullstack-dev',
     title: 'Full Stack Developer – Node.js & React (Junior / Senior)',
-    category: 'Engineering & AI',
+    category: 'Engineering',
     roleTag: 'Developer',
-    experience: '1–3 yrs(Junior) / 5+ yrs(Senior)',
+    experience: '1–3 yrs (Junior) / 5+ yrs (Senior)',
     eligibility: 'Node.js & React',
     link: '#apply-fullstack-dev',
   },
   {
     id: 'java-lead',
     title: 'Agentic AI – Java Lead',
-    category: 'Engineering & AI',
+    category: 'Engineering',
     roleTag: 'Developer',
     experience: '8+ years',
     eligibility: 'Java & Agentic AI',
@@ -254,7 +254,7 @@ export const WhereYouWouldFitSection: React.FC = () => {
                       {/* Category */}
                       <div className="flex items-center gap-[4px] lg:gap-[8px]">
                         <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
-                          category:
+                          Category:
                         </span>
                         <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
                           {job.roleTag}

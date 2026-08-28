@@ -48,23 +48,27 @@ export const CareersHeroSection: React.FC = () => {
 
         {/* =====================================================================
             TABLET & DESKTOP HERO CONTENT (Figma Frame 8 / Frame 12)
-            - 1320px max-width, gap: 20px
-            - Vertically centered with my-auto for balanced tablet/desktop spacing
-            - Left: 650px width, justify-center, General Sans 48px / 56px
-            - Right: 650px x 441px team image card, rounded-tl-[80px] rounded-tr-[20px] rounded-br-[80px] rounded-bl-[20px]
+            - Tablet: vertically centered with md:my-auto md:items-center
+            - Desktop: 1320px width, height 470px, gap: 20px, align-items: flex-end (lg:my-0 lg:items-end)
+            - Left (Frame 12): 650px x 470px with pt-[32px] on desktop
+              - Inner Frame 2147203284: 650px x 438px, justify-center
+              - Heading: General Sans 48px / 56px, max-w-[650px]
+            - Right (Rectangle 131): 650px x 441px team image card, rounded-tl-[80px] rounded-tr-[20px] rounded-br-[80px] rounded-bl-[20px]
            ===================================================================== */}
-        <div className="hidden md:flex relative z-10 w-full max-w-[1320px] mx-auto flex-row items-center justify-between gap-[20px] xl:gap-[20px] my-auto">
+        <div className="hidden md:flex relative z-10 w-full max-w-[1320px] mx-auto flex-row md:items-center lg:items-end justify-between gap-[20px] md:my-auto lg:my-0 h-auto lg:h-[470px]">
           
-          {/* Left Column (Frame 2147203284): Heading */}
-          <div className="w-full md:w-1/2 max-w-[650px] h-[300px] md:h-[330px] lg:h-[441px] flex flex-col justify-center items-start">
-            <h1 className="font-primary font-normal text-[32px] md:text-[36px] lg:text-[42px] xl:text-[48px] leading-[40px] md:leading-[44px] lg:leading-[50px] xl:leading-[56px] tracking-[-0.01em] text-white max-w-[650px]">
-              We&apos;re tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
-            </h1>
+          {/* Left Column (Frame 12 -> Frame 2147203284): Heading */}
+          <div className="w-full md:w-1/2 max-w-[650px] h-auto lg:h-full pt-0 lg:pt-[32px] flex flex-col justify-center items-start">
+            <div className="w-full h-auto lg:h-[438px] flex flex-col justify-center items-start">
+              <h1 className="font-primary font-normal text-[32px] md:text-[36px] lg:text-[48px] leading-[40px] md:leading-[44px] lg:leading-[56px] tracking-[-0.01em] text-white max-w-[650px]">
+                We&apos;re tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
+              </h1>
+            </div>
           </div>
 
           {/* Right Column: Team Image Card (Rectangle 131) */}
           <div className="w-full md:w-1/2 max-w-[650px] shrink-0">
-            <div className="relative w-full h-[300px] md:h-[330px] lg:h-[400px] xl:h-[441px] rounded-tl-[60px] lg:rounded-tl-[80px] rounded-tr-[20px] rounded-br-[60px] lg:rounded-br-[80px] rounded-bl-[20px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)]">
+            <div className="relative w-full h-[300px] md:h-[340px] lg:h-[441px] rounded-tl-[60px] lg:rounded-tl-[80px] rounded-tr-[20px] rounded-br-[60px] lg:rounded-br-[80px] rounded-bl-[20px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)]">
               <Image
                 src="/images/careers/hero-section/img_banner%20(1).png"
                 alt="Waterlabs Team"
@@ -83,7 +87,7 @@ export const CareersHeroSection: React.FC = () => {
             - Top: Heading (General Sans 36px / 48px)
             - Bottom: Team image card (362px x 246px, rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px])
            ===================================================================== */}
-        <div className="flex md:hidden relative z-10 w-full max-w-[362px] mx-auto flex-col justify-end items-start gap-[20px] mt-auto">
+        <div className="flex md:hidden relative z-10 w-full flex-col justify-end items-start gap-[20px] mt-auto">
           
           {/* Top: Heading */}
           <div className="w-full">

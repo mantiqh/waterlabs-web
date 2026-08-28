@@ -118,7 +118,7 @@ export const WeAreHiringSection: React.FC = () => {
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
               <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#7D8690] tracking-[0.01em]">
-                Where You had Fit
+                Where You&apos;d Fit
               </span>
             </div>
 
