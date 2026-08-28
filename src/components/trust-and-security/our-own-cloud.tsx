@@ -46,23 +46,35 @@ export const OurOwnCloudSection: React.FC = () => {
             
             {/* 
               Top Feature Card with 3D Blue Sphere (Figma Frame 2147203214)
-              - Dimensions: 975px x 381px
-              - Border Radius: 20px 20px 20px 10px
-              - Padding: 40px
-              - Background: Generate_image_with_blue_ball_202608012331.png
-              - Heading: General Sans, 52px / 60px, -0.01em, #042849 / #0F68D6 (Bold 700)
+              - Mobile: 362px x 320px, img_we_didnt_rent_a_cloud_we_built_one (1).png, border-radius: 20px 10px 20px 20px
+              - Desktop: 975px x 381px, img_we_didnt_rent_a_cloud_we_built_one.png, border-radius: 20px 20px 20px 10px
+              - Heading: General Sans, 32px / 40px (mobile) -> 52px / 60px (desktop), -0.01em, #042849 / #0F68D6 (Bold 700)
             */}
-            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[20px] rounded-br-[20px] rounded-bl-[10px] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.3)] isolate">
-              <div className="absolute inset-0 pointer-events-none z-0">
+            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[10px] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.3)] isolate">
+              
+              {/* Desktop Banner Graphic Background */}
+              <div className="hidden sm:block absolute inset-0 pointer-events-none z-0">
                 <Image
                   src="/images/trust-and-security/our-own-cloud/img_we_didnt_rent_a_cloud_we_built_one.png"
                   alt="Our Own Cloud Sphere"
                   fill
                   priority
-                  className="object-cover object-[70%_20%] lg:object-center"
+                  className="object-cover object-center"
                 />
               </div>
-              <h2 className="relative z-10 font-primary text-[32px] sm:text-[40px] lg:text-[52px] leading-[38px] sm:leading-[48px] lg:leading-[60px] tracking-[-0.01em] max-w-[320px] sm:max-w-[420px] lg:max-w-[895px]">
+
+              {/* Mobile Banner Graphic Background */}
+              <div className="block sm:hidden absolute inset-0 pointer-events-none z-0">
+                <Image
+                  src="/images/trust-and-security/our-own-cloud/img_we_didnt_rent_a_cloud_we_built_one%20(1).png"
+                  alt="Our Own Cloud Sphere Mobile"
+                  fill
+                  priority
+                  className="object-cover object-center"
+                />
+              </div>
+
+              <h2 className="relative z-10 font-primary text-[32px] sm:text-[40px] lg:text-[52px] leading-[38px] sm:leading-[48px] lg:leading-[60px] tracking-[-0.01em] max-w-[322px] sm:max-w-[420px] lg:max-w-[895px]">
                 <span className="text-[#042849] font-normal">
                   We didn&apos;t
                   <br />
