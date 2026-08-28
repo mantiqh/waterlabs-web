@@ -95,45 +95,39 @@ const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Dropdown with slide-down & fade animation */}
-      <div 
-        className={`lg:hidden absolute top-[68px] left-0 right-0 w-full bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[30px] p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top ${
-          isOpen 
-            ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto visible' 
-            : 'opacity-0 -translate-y-3 scale-[0.98] pointer-events-none invisible'
-        }`}
-        aria-hidden={!isOpen}
-      >
-        <nav className="flex flex-col gap-[8px]">
-          {navItems.map((item, index) => (
-            <a
-              key={item}
-              href="#"
-              onClick={() => setIsOpen(false)}
-              style={{
-                transitionDelay: isOpen ? `${index * 30 + 50}ms` : '0ms',
-              }}
-              className={`font-secondary font-normal text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-all duration-200 py-[8px] ${
-                isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
-              }`}
-            >
-              {item}
-            </a>
-          ))}
-        </nav>
+      {/* Mobile Menu Dropdown expanding in flow to prevent hero content overlapping */}
+      {isOpen && (
         <div 
-          style={{
-            transitionDelay: isOpen ? '200ms' : '0ms',
-          }}
-          className={`pt-[16px] border-t border-white/40 flex flex-col transition-all duration-200 ${
-            isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-          }`}
+          className="lg:hidden relative mt-[12px] w-full bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[30px] p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top animate-in fade-in slide-in-from-top-2"
+          aria-hidden={!isOpen}
         >
-          <CTA variant="light-bg" className="w-full justify-center [&>svg]:!text-white" onClick={() => setIsOpen(false)}>
-            Discover
-          </CTA>
+          <nav className="flex flex-col gap-[8px]">
+            {navItems.map((item, index) => (
+              <a
+                key={item}
+                href="#"
+                onClick={() => setIsOpen(false)}
+                style={{
+                  transitionDelay: `${index * 30 + 50}ms`,
+                }}
+                className="font-secondary font-normal text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-all duration-200 py-[8px]"
+              >
+                {item}
+              </a>
+            ))}
+          </nav>
+          <div 
+            style={{
+              transitionDelay: '200ms',
+            }}
+            className="pt-[16px] border-t border-white/40 flex flex-col transition-all duration-200"
+          >
+            <CTA variant="light-bg" className="w-full justify-center [&>svg]:!text-white" onClick={() => setIsOpen(false)}>
+              Discover
+            </CTA>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
