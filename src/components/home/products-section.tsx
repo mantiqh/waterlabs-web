@@ -23,28 +23,28 @@ export const ProductsSection: React.FC = () => {
           </div>
 
           {/* Right Products Stack */}
-          <div className="flex flex-col gap-[48px] lg:gap-[80px] w-full lg:flex-1">
+          <div className="flex flex-col gap-[32px] lg:gap-[20px] w-full lg:flex-1 max-w-[853px]">
             
             {/* Product 1: HIMER AI OS */}
-            <div className="flex flex-col gap-[16px] lg:gap-[20px] w-full">
-              <div className="w-full relative rounded-[20px] lg:rounded-[24px] overflow-hidden aspect-[16/9] lg:aspect-[2/1] bg-gray-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+            <div className="flex flex-col gap-[16px] lg:gap-[16px] w-full">
+              <div className="w-full relative rounded-[20px] overflow-hidden aspect-[16/9] lg:aspect-[853/460] bg-gray-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
                 <Image 
                   src="/images/home/products-images/img_himer_ai_os.png" 
                   alt="HIMER AI OS" 
                   fill 
                   priority
-                  sizes="(max-width: 1024px) 100vw, 800px"
+                  sizes="(max-width: 1024px) 100vw, 853px"
                   className="object-cover" 
                 />
               </div>
 
-              {/* Desktop Layout: Left Title+Desc, Right Full CTA */}
-              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[16px] pt-[8px]">
-                <div className="flex flex-col gap-[4px]">
-                  <h3 className="font-primary font-normal text-[32px] text-[#111111] leading-[1.25]">
+              {/* Desktop Layout: Left Title+Desc (gap 16px), Right Full CTA */}
+              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[32px]">
+                <div className="flex flex-col gap-[16px] max-w-[646px]">
+                  <h3 className="font-primary font-normal text-[32px] text-[#2A2A2A] leading-[40px] tracking-[-0.01em]">
                     HIMER AI OS
                   </h3>
-                  <p className="font-secondary font-normal text-[18px] text-[#4B5563] leading-[1.4]">
+                  <p className="font-secondary font-normal text-[20px] text-[#2A2A2A] leading-[28px]">
                     Orchestrate and build through commands. Just describe your task.
                   </p>
                 </div>
@@ -78,24 +78,24 @@ export const ProductsSection: React.FC = () => {
 
             {/* Product 2: CurieCode */}
             <div className="flex flex-col gap-[16px] lg:gap-[20px] w-full">
-              <div className="w-full relative rounded-[20px] lg:rounded-[24px] overflow-hidden aspect-[16/9] lg:aspect-[2/1] bg-gray-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+              <div className="w-full relative rounded-[20px] overflow-hidden aspect-[16/9] lg:aspect-[853/460] bg-gray-100 shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
                 <Image 
                   src="/images/home/products-images/img_curiecode.png" 
                   alt="CurieCode" 
                   fill 
-                  sizes="(max-width: 1024px) 100vw, 800px"
+                  sizes="(max-width: 1024px) 100vw, 853px"
                   className="object-cover" 
                 />
               </div>
 
-              {/* Desktop Layout: Left Title+Desc, Right Full CTA */}
-              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[16px] pt-[8px]">
-                <div className="flex flex-col gap-[4px]">
-                  <h3 className="font-primary font-normal text-[32px] text-[#111111] leading-[1.25]">
+              {/* Desktop Layout: Left Title+Desc (gap 16px), Right Full CTA */}
+              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[32px]">
+                <div className="flex flex-col gap-[16px] max-w-[614px]">
+                  <h3 className="font-primary font-normal text-[32px] text-[#000000] leading-[40px] tracking-[-0.01em]">
                     CurieCode
                   </h3>
-                  <p className="font-secondary font-normal text-[18px] text-[#4B5563] leading-[1.4]">
-                    Optimize reimbursements through automated, intelligent medical coding.
+                  <p className="font-secondary font-normal text-[20px] text-[#2A2A2A] leading-[28px]">
+                    Optimize reimbursements through automated, intelligent coding.
                   </p>
                 </div>
                 <CTA variant="light-bg" className="shrink-0">
@@ -110,7 +110,7 @@ export const ProductsSection: React.FC = () => {
                 </h3>
                 <div className="flex flex-row items-end justify-between gap-[16px]">
                   <p className="font-secondary font-normal text-[15px] sm:text-[16px] text-[#111111] leading-[1.4] flex-1">
-                    Optimize reimbursements through automated, intelligent medical coding.
+                    Optimize reimbursements through automated, intelligent coding.
                   </p>
                   <button 
                     type="button" 

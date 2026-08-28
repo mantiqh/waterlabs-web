@@ -15,7 +15,8 @@ export const Footer: React.FC = () => {
               <img src="/images/common/logo.svg" alt="Waterlabs AI" className="h-8 md:h-10 w-auto" />
             </Link>
             <p className="body-xxs text-white/70 max-w-sm">
-              Don&apos;t just automate your revenue cycle. Apply intelligence to it.
+              Agentic AI built to own your revenue<br />
+              cycle, not just automate it.
             </p>
           </div>
 

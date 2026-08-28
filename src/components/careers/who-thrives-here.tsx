@@ -48,12 +48,13 @@ export const WhoThrivesHereSection: React.FC = () => {
 
               {/* Get in touch CTA */}
               <div className="flex flex-col gap-[8px] lg:gap-[12px]">
-                <p className="font-secondary font-bold text-[16px] lg:text-[18px] xl:text-[20px] leading-[26px] xl:leading-[28px] text-white">
-                  If this sounds like you, apply below. Or get in touch:
+                <p className="font-secondary font-medium text-[16px] lg:text-[18px] xl:text-[20px] leading-[26px] xl:leading-[28px] text-white">
+                  If this sounds like you, apply below.<br />
+                  Or get in touch:
                 </p>
                 <Link
                   href="mailto:hiring@waterlabs.ai"
-                  className="font-secondary font-bold text-[16px] lg:text-[18px] xl:text-[20px] leading-[26px] xl:leading-[28px] text-white underline hover:opacity-90 transition-opacity w-fit"
+                  className="font-secondary font-medium text-[16px] lg:text-[18px] xl:text-[20px] leading-[26px] xl:leading-[28px] text-white no-underline hover:opacity-90 transition-opacity w-fit whitespace-nowrap"
                 >
                   hiring@waterlabs.ai
                 </Link>

@@ -5,7 +5,20 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 
-const navItems = ['Platform', 'Solutions', 'Results', 'Resources', 'Company'];
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: 'About us', href: '/#about' },
+  { label: 'Products', href: '/#products' },
+  { label: 'Agentic RCM Solutions', href: '/#solutions' },
+  { label: 'Clients', href: '/#clients' },
+  { label: 'Trust and Security', href: '/trust-and-security' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Blogs', href: '/#blogs' },
+];
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,11 +59,15 @@ const Navbar: React.FC = () => {
         </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex flex-row gap-[40px] items-center">
+        <nav className="hidden lg:flex flex-row gap-[24px] xl:gap-[32px] items-center">
           {navItems.map((item) => (
-            <a key={item} href="#" className="font-secondary font-normal text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-colors whitespace-nowrap">
-              {item}
-            </a>
+            <Link
+              key={item.label}
+              href={item.href}
+              className="font-secondary font-normal text-[15px] xl:text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-colors whitespace-nowrap"
+            >
+              {item.label}
+            </Link>
           ))}
         </nav>
 
@@ -103,17 +120,17 @@ const Navbar: React.FC = () => {
         >
           <nav className="flex flex-col gap-[8px]">
             {navItems.map((item, index) => (
-              <a
-                key={item}
-                href="#"
+              <Link
+                key={item.label}
+                href={item.href}
                 onClick={() => setIsOpen(false)}
                 style={{
                   transitionDelay: `${index * 30 + 50}ms`,
                 }}
                 className="font-secondary font-normal text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-all duration-200 py-[8px]"
               >
-                {item}
-              </a>
+                {item.label}
+              </Link>
             ))}
           </nav>
           <div 

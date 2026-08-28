@@ -15,12 +15,12 @@ export const WhatWeDoMattersSection: React.FC = () => {
       <div className="w-full bg-white rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] pt-[40px] px-[20px] pb-[20px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         
         {/* 
-          Main Dark Card
-          Desktop: 1320px x 650px, rounded-tl-[20px] rounded-tr-[20px] rounded-br-[40px] rounded-bl-[20px], p-[32px] lg:p-[48px]
+          Main Dark Card (Figma Frame 2147203295)
+          Desktop: 1320px x 650px, rounded-tl-[20px] rounded-tr-[20px] rounded-br-[40px] rounded-bl-[20px], p-[32px], gap-[40px]
           Mobile: rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px], p-[20px]
         */}
         <div 
-          className="relative w-full max-w-[1320px] mx-auto min-h-[538px] lg:min-h-[650px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px] p-[20px] sm:p-[28px] lg:p-[48px] flex flex-col justify-between gap-[32px] lg:gap-[40px] overflow-hidden bg-[#042849]"
+          className="relative w-full max-w-[1320px] mx-auto min-h-[538px] lg:h-[650px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px] p-[20px] sm:p-[28px] lg:p-[32px] flex flex-col justify-between lg:justify-start gap-[32px] lg:gap-[40px] overflow-hidden bg-[#042849]"
         >
           {/* Background Architectural Image */}
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -33,7 +33,7 @@ export const WhatWeDoMattersSection: React.FC = () => {
             />
           </div>
 
-          {/* Top Header Block */}
+          {/* Top Header Block (Figma Frame 1272628356 / Frame 2147203229) */}
           <div className="relative z-10 w-full flex flex-col gap-[8px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
@@ -49,23 +49,23 @@ export const WhatWeDoMattersSection: React.FC = () => {
             </h2>
           </div>
 
-          {/* Bottom Content Area */}
-          <div className="relative z-10 w-full flex flex-col lg:flex-row items-start justify-between gap-[16px] lg:gap-[40px]">
-            {/* Left Column: Subheading */}
+          {/* Bottom Content Area (Figma Frame 2147203286: max-w-[1024px], gap-[20px]) */}
+          <div className="relative z-10 w-full max-w-[1024px] flex flex-col lg:flex-row items-start justify-start gap-[16px] lg:gap-[20px]">
+            {/* Left Column: Subheading (508px width in Figma) */}
             <div className="w-full lg:w-[508px] shrink-0">
-              <h3 className="font-primary font-normal text-[20px] lg:text-[32px] leading-[28px] lg:leading-[40px] tracking-[-0.01em] text-white">
+              <h3 className="font-primary font-normal text-[20px] lg:text-[32px] leading-[28px] lg:leading-[40px] tracking-[-0.01em] text-white max-w-[508px]">
                 This is a hard problem to solve.
               </h3>
             </div>
 
-            {/* Right Column: Paragraph & Team Image */}
-            <div className="w-full lg:w-[496px] flex flex-col gap-[16px]">
-              <p className="font-secondary font-normal text-[14px] lg:text-[18px] leading-[24px] lg:leading-[26px] text-[#D7DCE2]">
+            {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, gap 16px) */}
+            <div className="w-full lg:w-[496px] shrink-0 flex flex-col gap-[16px]">
+              <p className="font-secondary font-normal text-[14px] lg:text-[18px] leading-[24px] lg:leading-[26px] text-[#D7DCE2] max-w-[496px]">
                 Revenue cycle is one of the hardest problems in healthcare. Here, the rules are complex, the exceptions are abundant, and the stakes are high. Whether you&apos;re defining software, running operations, or working with customers, you&apos;ll be solving problems that don&apos;t come in playbooks.
               </p>
 
-              {/* Team Image with custom border-radius */}
-              <div className="relative w-full aspect-[322/182] lg:aspect-[496/250] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
+              {/* Team Image (496px x 250px with rounded-tl-[40px] rounded-tr-[10px] rounded-br-[40px] rounded-bl-[10px]) */}
+              <div className="relative w-full aspect-[322/182] lg:aspect-auto lg:w-[496px] lg:h-[250px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
                 <Image
                   src="/images/careers/what-we-do-matters/ing_this_is_a_hard_problem_to_solve.png"
                   alt="Problem Solving Team"
