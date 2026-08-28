@@ -53,6 +53,14 @@
   background-image: linear-gradient(to right, var(--color-electric-blue), var(--color-aqua-mint));
 }
 
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Responsive Typography - Display (General Sans) */
 @utility display-1 {
   @apply font-primary font-medium text-[48px] leading-[56px] md:text-[64px] md:leading-[72px] lg:text-[80px] lg:leading-[88px];
