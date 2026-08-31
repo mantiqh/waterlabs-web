@@ -3,8 +3,8 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="w-full bg-[#111111] text-white pt-16 pb-8 px-6 md:px-12 lg:px-24">
-      <div className="max-w-[1440px] mx-auto w-full">
+    <footer className="w-full bg-[#111111] text-white pt-16 pb-8 px-[20px] md:px-[40px] lg:px-[60px]">
+      <div className="max-w-[1320px] mx-auto w-full">
         {/* Main Grid Layout */}
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-12 lg:gap-12 mb-16">
           

@@ -73,14 +73,14 @@ export const CarouselSection: React.FC = () => {
         </div>
 
         {/* Mobile/Tablet Static Text */}
-        <div className="block lg:hidden w-full px-[20px] lg:px-[60px]">
+        <div className="block lg:hidden w-full px-[20px] md:px-[40px] lg:px-[60px]">
           <h2 className="type-h4 text-electric-blue">
             No development fee, Live in weeks, not months
           </h2>
         </div>
 
         {/* Video Thumbnail Area */}
-        <div className="px-[20px] lg:px-[60px] w-full">
+        <div className="px-[20px] md:px-[40px] lg:px-[60px] w-full">
           <div className="w-full max-w-[1320px] mx-auto relative rounded-[15px] lg:rounded-[30px] overflow-hidden aspect-[362/159] lg:aspect-[1320/579] bg-gray-100">
             {/* Desktop Image */}
             <Image 

@@ -35,11 +35,11 @@ export const ContactUsContactForm: React.FC = () => {
         - Mobile: Stacked — tag + heading, image, form
       */}
       <div className="w-full bg-ghost-white rounded-l-[30px] lg:rounded-l-[60px]">
-        <div className="w-full max-w-[1440px] mx-auto px-[20px] lg:px-[60px] py-[40px] lg:py-[80px]">
+        <div className="w-full max-w-[1440px] mx-auto px-[20px] md:px-[40px] lg:px-[60px] py-[40px] lg:py-[80px]">
           <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[20px] lg:gap-[32px]">
 
-            {/* Left Column (Frame 2147226540: 516px x 464px, gap: 40px) */}
-            <div className="w-full lg:w-[516px] lg:h-[464px] shrink-0 flex flex-col items-start gap-[12px] lg:gap-[40px]">
+            {/* Left Column (Frame 2147226540: max 516px, gap: 40px) */}
+            <div className="w-full lg:w-[40%] xl:w-[516px] lg:max-w-[516px] shrink-0 min-w-0 flex flex-col items-start gap-[12px] lg:gap-[40px]">
               {/* Tag + Heading (Frame 2147226533: 516px x 96px, gap: 12px) */}
               <div className="w-full flex flex-col items-start gap-[8px] lg:gap-[12px]">
                 {/* Text - Tag (gap: 8px, height: 24px) */}
@@ -55,8 +55,8 @@ export const ContactUsContactForm: React.FC = () => {
                 </h2>
               </div>
 
-              {/* Image Container (Frame 2147226534: 516px x 328px) */}
-              <div className="w-full relative overflow-hidden rounded-[20px_10px_20px_20px] lg:rounded-[30px_15px_30px_30px] h-[230px] lg:h-[328px] lg:w-[516px] shrink-0">
+              {/* Image Container (Frame 2147226534: max 516px x 328px) */}
+              <div className="w-full relative overflow-hidden rounded-[20px_10px_20px_20px] lg:rounded-[30px_15px_30px_30px] aspect-[516/328] lg:w-full">
                 <Image
                   src="/images/contact-us/contact-form/img_contact _form.png"
                   alt="Contact form illustration"
@@ -74,12 +74,12 @@ export const ContactUsContactForm: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Form (Frame: 772px x 464px, gap: 14px) */}
-            <form onSubmit={handleSubmit} className="w-full lg:w-[772px] lg:h-[464px] flex flex-col items-start gap-[16px] lg:gap-[14px]">
-              {/* Frame 2147226535 (772px x 246px, gap: 12px) */}
-              <div className="w-full flex flex-col items-start gap-[12px] lg:h-[246px]">
-                {/* Input container 1 (772px x 60px, gap: 12px) */}
-                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px] h-auto lg:h-[60px]">
+            {/* Right Column: Form (Frame: max 772px x 464px, gap: 14px) */}
+            <form onSubmit={handleSubmit} className="w-full lg:w-[60%] xl:w-[772px] lg:flex-1 min-w-0 flex flex-col items-start gap-[16px] lg:gap-[14px]">
+              {/* Input Fields Container */}
+              <div className="w-full flex flex-col items-start gap-[12px]">
+                {/* Input container 1 */}
+                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px]">
                   {/* First Name */}
                   <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
                     <input
@@ -106,8 +106,8 @@ export const ContactUsContactForm: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Input container 2 (772px x 60px, gap: 12px) */}
-                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px] h-auto lg:h-[60px]">
+                {/* Input container 2 */}
+                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px]">
                   {/* Work Email */}
                   <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
                     <input
@@ -133,7 +133,7 @@ export const ContactUsContactForm: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Message (772px x 102px) */}
+                {/* Message */}
                 <div className="w-full h-[102px] border-b border-[#D7DCE2] px-[16px] pt-[18px]">
                   <textarea
                     name="message"
@@ -146,17 +146,16 @@ export const ContactUsContactForm: React.FC = () => {
                 </div>
               </div>
 
-              {/* Frame 2147226538 (772px x 204px, gap: 16px) */}
-              <div className="w-full flex flex-col items-start gap-[16px] lg:h-[204px]">
-                {/* Frame 2147226537 (772px x 144px, gap: 12px) */}
-                <div className="w-full flex flex-col items-start gap-[12px] lg:h-[144px]">
-                  {/* Main heading (772px x 24px) */}
-                  <p className="type-body-xxs tracking-[0.01em] text-[#333333] lg:h-[24px]">
+              {/* Consent and Submit Area */}
+              <div className="w-full flex flex-col items-start gap-[16px] pt-[8px]">
+                <div className="w-full flex flex-col items-start gap-[12px]">
+                  {/* Main heading */}
+                  <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
                     Stay ahead of the curve. Sign up to receive exclusive Waterlabs updates, resources, and tips.
                   </p>
 
-                  {/* Frame 2147226536 (772px x 24px, gap: 8px) */}
-                  <div className="flex items-center gap-[8px] lg:h-[24px]">
+                  {/* Checkbox */}
+                  <div className="flex items-center gap-[8px]">
                     <button
                       type="button"
                       onClick={() => setAgreed(!agreed)}
@@ -176,8 +175,8 @@ export const ContactUsContactForm: React.FC = () => {
                     </span>
                   </div>
 
-                  {/* Main heading / Disclaimer (772px x 72px) */}
-                  <p className="type-body-xxs tracking-[0.01em] text-[#333333] lg:h-[72px]">
+                  {/* Main heading / Disclaimer */}
+                  <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
                     You may unsubscribe from these communications at any time. For more information on how to<br className="hidden lg:inline" />
                     unsubscribe, our privacy practices, and how we are committed to protecting and respecting your<br className="hidden lg:inline" />
                     privacy, please review our Privacy Policy.

@@ -18,7 +18,7 @@ export const ContactUsCTASection: React.FC = () => {
         - Heading: "Start Building on Waterlabs today"
         - CTA: White button with dark text
       */}
-      <div className="relative w-full rounded-r-[30px] lg:rounded-r-[20px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px] overflow-hidden">
+      <div className="relative w-full rounded-r-[30px] lg:rounded-r-[20px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
 
         {/* Background Image */}
         <div className="absolute inset-0 z-0">

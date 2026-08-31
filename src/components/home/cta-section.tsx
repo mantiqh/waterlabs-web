@@ -13,7 +13,7 @@ export const CTASection: React.FC = () => {
         and its inner content is cleanly centered within the 1320px container.
       */}
       <div 
-        className="w-full rounded-tr-[40px] lg:rounded-tr-[80px] bg-[#003AA5] bg-cover bg-right-top bg-no-repeat px-[20px] py-[48px] sm:px-[32px] sm:py-[60px] lg:px-[60px] lg:py-[72px]"
+        className="w-full rounded-tr-[40px] lg:rounded-tr-[80px] bg-[#003AA5] bg-cover bg-right-top bg-no-repeat px-[20px] md:px-[40px] lg:px-[60px] py-[48px] md:py-[60px] lg:py-[72px]"
         style={{
           backgroundImage: "url('/images/home/get-in-touch/img_get_in_touch%20(1).png')",
         }}

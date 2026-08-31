@@ -93,7 +93,7 @@ export const WhereYouWouldFitSection: React.FC = () => {
         - Top-left curve reveals Section 4's blue color (#0F68D6)
         - Bottom-left curve reveals Section 6's exact image background (#0B0B0B)
       */}
-      <div className="relative w-full bg-[#F4F6F9] lg:bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px] overflow-hidden">
+      <div className="relative w-full bg-[#F4F6F9] lg:bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         <div className="max-w-[1320px] mx-auto flex flex-col gap-[36px] lg:gap-[60px]">
 
           {/* Header Block: Tag + Title */}
@@ -300,7 +300,7 @@ export const WhereYouWouldFitSection: React.FC = () => {
               </div>
 
               {/* Left Mint Green Card */}
-              <div className="relative z-10 w-[36%] xl:w-[539px] h-full bg-[#63CCB7] rounded-tl-[30px] rounded-tr-[0px] rounded-br-[60px] rounded-bl-[30px] p-[32px] xl:p-[40px] flex flex-col justify-center gap-[16px] xl:gap-[20px]">
+              <div className="relative z-10 w-[48%] xl:w-[539px] min-w-0 h-full bg-[#63CCB7] rounded-tl-[30px] rounded-tr-[0px] rounded-br-[60px] rounded-bl-[30px] p-[32px] xl:p-[40px] flex flex-col justify-center gap-[16px] xl:gap-[20px]">
                 <h3 className="font-primary text-[36px] xl:text-[52px] leading-[44px] xl:leading-[60px] tracking-[-0.01em] text-[#042849]">
                   Don&apos;t see a fit?
                 </h3>

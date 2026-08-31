@@ -74,14 +74,14 @@ const FeaturesSection: React.FC = () => {
         This white box creates the "bottom cut out" for the section above it,
         by curving inwards on the top-left while the blue gradient background shows through.
       */}
-      <div className="w-full bg-white rounded-tl-[40px] lg:rounded-tl-[60px] px-[20px] pt-[40px] pb-[20px] sm:pt-[60px] sm:pb-[40px] lg:p-[80px]">
+      <div className="w-full bg-white rounded-tl-[40px] lg:rounded-tl-[60px] px-[20px] md:px-[40px] pt-[40px] pb-[20px] sm:pt-[60px] sm:pb-[40px] lg:px-[60px] lg:py-[80px]">
 
         <div className="max-w-[1320px] mx-auto flex flex-col gap-[48px] sm:gap-[64px] lg:gap-[120px]">
 
           {/* Row 1: Title Block (2-column layout on desktop matching Figma) */}
           <div className="flex flex-col lg:flex-row items-start justify-between gap-[16px] sm:gap-[24px] lg:gap-[60px]">
             {/* Left Tag */}
-            <div className="lg:w-[360px] shrink-0 pt-[4px] lg:pt-[8px]">
+            <div className="lg:w-[240px] xl:w-[360px] shrink-0 pt-[4px] lg:pt-[8px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[6px] h-[6px] rounded-full bg-electric-blue shrink-0"></div>
                 <span className="type-body-xxs text-[#7D8690]">
@@ -91,7 +91,7 @@ const FeaturesSection: React.FC = () => {
             </div>
 
             {/* Right Heading & Subheading */}
-            <div className="flex-1 flex flex-col gap-[16px] lg:gap-[24px]">
+            <div className="flex-1 min-w-0 flex flex-col gap-[16px] lg:gap-[24px]">
               <h2 className="type-h2">
                 <span className="text-[#111111]">Run end-to-end.</span>
                 <br />
@@ -196,11 +196,11 @@ const FeaturesSection: React.FC = () => {
             </div>
 
             {/* Desktop 4-Column Grid */}
-            <div className="hidden lg:grid lg:grid-cols-4 gap-[24px]">
+            <div className="hidden lg:grid lg:grid-cols-4 gap-[16px] xl:gap-[24px]">
               {statsData.map((item, index) => (
                 <div
                   key={`desktop-stat-${index}`}
-                  className="flex flex-col justify-between p-[32px] h-[300px] bg-white rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100"
+                  className="flex flex-col justify-between p-[20px] xl:p-[32px] h-[280px] xl:h-[300px] bg-white rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100 min-w-0"
                 >
                   <div className="relative w-[80px] h-[80px]">
                     <Image src={item.icon} alt={item.label} fill className="object-contain" />
@@ -222,7 +222,7 @@ const FeaturesSection: React.FC = () => {
               <div
                 ref={statsScrollRef}
                 onScroll={handleStatsScroll}
-                className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[16px] items-stretch [&::-webkit-scrollbar]:hidden -mx-[20px] px-[20px]"
+                className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[16px] items-stretch [&::-webkit-scrollbar]:hidden -mx-[20px] px-[20px] md:-mx-[40px] md:px-[40px]"
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {statsData.map((item, index) => (

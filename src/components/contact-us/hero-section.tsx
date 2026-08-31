@@ -15,7 +15,7 @@ export const ContactUsHeroSection: React.FC = () => {
         - Mobile: 402px x 490px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px
         - Background: linear-gradient overlay on hero image with decorative glassmorphic shape
       */}
-      <div className="relative w-full min-h-[490px] lg:h-[550px] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[10px]">
+      <div className="relative w-full min-h-[490px] lg:h-[550px] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:px-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[10px]">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">

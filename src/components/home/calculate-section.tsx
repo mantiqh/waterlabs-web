@@ -11,7 +11,7 @@ export const CalculateSection: React.FC = () => {
         - Left side: 0px (flat against the left screen edge, seamlessly attached to top/bottom curves).
         - Right side: Inset by 20px on mobile with rounded-tr-[30px] rounded-br-[30px] (80px on desktop).
       */}
-      <div className="w-[calc(100%-20px)] lg:w-[min(calc(100vw-60px),calc(50vw+660px))] mr-auto bg-[#91C6F2] rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[80px] lg:rounded-br-[80px] px-[20px] py-[36px] sm:py-[48px] lg:pt-[80px] lg:pb-[80px] lg:pl-[max(60px,calc((100vw-1320px)/2))] lg:pr-[60px] flex flex-col gap-[24px] sm:gap-[32px] lg:gap-[48px]">
+      <div className="w-[calc(100%-20px)] md:w-[calc(100%-40px)] lg:w-[min(calc(100vw-60px),calc(50vw+660px))] mr-auto bg-[#91C6F2] rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[80px] lg:rounded-br-[80px] px-[20px] md:px-[40px] py-[36px] sm:py-[48px] lg:pt-[80px] lg:pb-[80px] lg:pl-[max(60px,calc((100vw-1320px)/2))] lg:pr-[60px] flex flex-col gap-[24px] sm:gap-[32px] lg:gap-[48px]">
 
         {/* Title Block */}
         <div className="w-full flex flex-col">

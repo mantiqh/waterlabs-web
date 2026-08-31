@@ -62,7 +62,7 @@ export const InteractiveSecuritySections: React.FC = () => {
         - Spans across Data Sovereignty -> Our Own Cloud -> Security & Compliance -> Certifications
         =============================================================================
       */}
-      <div className="hidden lg:block absolute top-0 bottom-[60px] lg:bottom-[100px] left-0 w-full px-[20px] lg:px-[32px] xl:px-[60px] pointer-events-none z-30">
+      <div className="hidden lg:block absolute top-0 bottom-[60px] lg:bottom-[100px] left-0 w-full px-[60px] pointer-events-none z-30">
         <div className="w-full max-w-[1320px] mx-auto h-full">
           <aside className="w-[305px] sticky top-[120px] pt-0 lg:pt-[40px] pointer-events-auto">
             <TopicIndicator activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
