@@ -27,7 +27,7 @@ export const SecurityAndComplianceSection: React.FC = () => {
   return (
     <section 
       id="security-and-compliance" 
-      className="relative w-full bg-[#000000] overflow-hidden p-0 m-0 scroll-mt-[60px]"
+      className="relative w-full bg-gradient-to-b from-[#000000] from-50% to-[#DBE2F0] to-50% overflow-hidden p-0 m-0 scroll-mt-[60px]"
     >
       {/* 
         Main White Card with right curves:
@@ -62,7 +62,7 @@ export const SecurityAndComplianceSection: React.FC = () => {
                   alt="Security Breach Containment"
                   fill
                   priority
-                  className="object-cover object-right opacity-95"
+                  className="object-cover object-right"
                 />
               </div>
 
@@ -73,11 +73,11 @@ export const SecurityAndComplianceSection: React.FC = () => {
                   alt="Security Breach Containment Mobile"
                   fill
                   priority
-                  className="object-cover object-center opacity-95"
+                  className="object-cover object-center"
                 />
               </div>
 
-              <h2 className="relative z-10 font-primary text-[32px] sm:text-[40px] lg:text-[52px] leading-[40px] sm:leading-[48px] lg:leading-[60px] tracking-[-0.01em] max-w-[322px] sm:max-w-[420px] lg:max-w-[620px]">
+              <h2 className="relative z-10 type-h2 max-w-[895px]">
                 <span className="text-[#111111] font-normal">
                   Built so one breach
                   <br />
@@ -89,8 +89,8 @@ export const SecurityAndComplianceSection: React.FC = () => {
             </div>
 
             {/* Intro Paragraph */}
-            <p className="font-secondary font-normal text-[15px] sm:text-[16px] xl:text-[18px] leading-[24px] xl:leading-[26px] text-[#111111]">
-              Shared infrastructure is convenient for vendors and catastrophic when compromised. Waterlabs isolates every hospital and health system in its own dedicated, air-gapped instance. Even within the system, models operate with least-privilege access, touching only what they need to execute that specific task.
+            <p className="type-body-xs text-[#111111]">
+              Certifications are the floor, not the story. The story is how the system contains a problem before it spreads.
             </p>
 
             {/* =====================================================================
@@ -98,7 +98,7 @@ export const SecurityAndComplianceSection: React.FC = () => {
                ===================================================================== */}
             <div className="hidden lg:flex flex-col gap-[36px] lg:gap-[48px] w-full">
               
-              {/* Card 1: Closely Monitored Agents (Image on Left, Text on Right) */}
+              {/* Card 1: Closely monitored agents (Image on Left, Text on Right) */}
               <div className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
                 <div className="w-full lg:w-[45%] xl:w-[420px] shrink-0 relative aspect-[420/290] rounded-[16px] xl:rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-gray-100">
                   <Image
@@ -110,11 +110,11 @@ export const SecurityAndComplianceSection: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="font-primary font-normal text-[24px] sm:text-[28px] lg:text-[30px] xl:text-[32px] leading-[32px] sm:leading-[36px] lg:leading-[38px] xl:leading-[40px] tracking-[-0.01em] text-[#042849]">
-                    Closely Monitored Agents
+                  <h4 className="type-h5 text-[#042849]">
+                    Closely monitored agents
                   </h4>
-                  <p className="font-secondary font-normal text-[14px] sm:text-[15px] xl:text-[17px] leading-[22px] sm:leading-[24px] xl:leading-[26px] text-[#111111]">
-                    Every agent action is logged and auditable in real time. If an anomaly is detected, an agent halts immediately, not after the run finishes.
+                  <p className="type-body-xxs text-[#111111]">
+                    No agent works without limits. Each sees and does only what its task requires. Anything outside that boundary is captured, flagged, and escalated to a human. A human stays in the loop on every exception.
                   </p>
                 </div>
               </div>
@@ -131,10 +131,10 @@ export const SecurityAndComplianceSection: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="font-primary font-normal text-[24px] sm:text-[28px] lg:text-[30px] xl:text-[32px] leading-[32px] sm:leading-[36px] lg:leading-[38px] xl:leading-[40px] tracking-[-0.01em] text-[#042849]">
+                  <h4 className="type-h5 text-[#042849]">
                     Business Associate Agreement, every time
                   </h4>
-                  <p className="font-secondary font-normal text-[14px] sm:text-[15px] xl:text-[17px] leading-[22px] sm:leading-[24px] xl:leading-[26px] text-[#111111]">
+                  <p className="type-body-xxs text-[#111111]">
                     We sign a comprehensive BAA with every client before a single system connects. Our compliance posture isn&apos;t an afterthought. It&apos;s the condition under which we operate.
                   </p>
                 </div>
@@ -164,11 +164,11 @@ export const SecurityAndComplianceSection: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="font-primary font-normal text-[20px] leading-[28px] text-[#042849]">
-                      Closely Monitored Agents
+                    <h4 className="type-h5 text-[#042849]">
+                      Closely monitored agents
                     </h4>
-                    <p className="font-secondary font-normal text-[14px] leading-[24px] text-[#111111]">
-                      Every agent action is logged and auditable in real time. If an anomaly is detected, an agent halts immediately, not after the run finishes.
+                    <p className="type-body-xxs text-[#111111]">
+                      No agent works without limits. Each sees and does only what its task requires. Anything outside that boundary is captured, flagged, and escalated to a human. A human stays in the loop on every exception.
                     </p>
                   </div>
                 </div>
@@ -185,10 +185,10 @@ export const SecurityAndComplianceSection: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="font-primary font-normal text-[20px] leading-[28px] text-[#042849]">
+                    <h4 className="type-h5 text-[#042849]">
                       Business Associate Agreement, every time
                     </h4>
-                    <p className="font-secondary font-normal text-[14px] leading-[24px] text-[#111111]">
+                    <p className="type-body-xxs text-[#111111]">
                       We sign a comprehensive BAA with every client before a single system connects. Our compliance posture isn&apos;t an afterthought. It&apos;s the condition under which we operate.
                     </p>
                   </div>

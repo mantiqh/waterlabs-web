@@ -1,12 +1,18 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { IBM_Plex_Sans, Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: '--font-ibm-plex-sans',
+  subsets: ['latin'],
+  weight: ['400', '500'],
 });
 
 const generalSans = localFont({
@@ -37,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${generalSans.variable}`}>
-      <body className={`${inter.variable} ${generalSans.variable} antialiased bg-[#F4F6F9]`}>
+    <html lang="en" className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable}`}>
+      <body className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable} antialiased bg-[#F4F6F9]`}>
         <RootProvider>
           <div className="flex flex-col min-h-screen">
             <main className="flex-grow flex flex-col">

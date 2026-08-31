@@ -84,7 +84,7 @@ const FeaturesSection: React.FC = () => {
             <div className="lg:w-[360px] shrink-0 pt-[4px] lg:pt-[8px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[6px] h-[6px] rounded-full bg-electric-blue shrink-0"></div>
-                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">
+                <span className="type-body-xxs text-[#7D8690]">
                   Every Stage, Owned.
                 </span>
               </div>
@@ -92,13 +92,13 @@ const FeaturesSection: React.FC = () => {
 
             {/* Right Heading & Subheading */}
             <div className="flex-1 flex flex-col gap-[16px] lg:gap-[24px]">
-              <h2 className="font-primary font-normal text-[36px] sm:text-[44px] lg:text-[56px] leading-[1.12] tracking-[-0.01em]">
+              <h2 className="type-h2">
                 <span className="text-[#111111]">Run end-to-end.</span>
                 <br />
                 <span className="text-[#111111]">Or </span>
                 <span className="text-electric-blue">start with one function.</span>
               </h2>
-              <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[26px] text-[#4B5563] tracking-[0em]">
+              <p className="type-body-xs text-[#4B5563]">
                 The agents stay accountable either way. Prior Authorization:<br className="hidden lg:block" />
                 Submitted, tracked, followed up. 24/7, no human in the queue.
               </p>
@@ -110,10 +110,10 @@ const FeaturesSection: React.FC = () => {
             {/* Card 1 */}
             <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden justify-between">
               <div className="flex flex-col gap-[8px] p-[20px] sm:p-[24px] lg:p-[32px] pb-0 lg:pb-0">
-                <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
+                <h3 className="type-h5 text-electric-blue lg:text-[#042849]">
                   Explore Eligibility & Benefits
                 </h3>
-                <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[26px] text-[#111111]">
+                <p className="type-body-xs text-[#111111]">
                   Verified in real time. Coverage gaps caught before they cost you.
                 </p>
               </div>
@@ -131,10 +131,10 @@ const FeaturesSection: React.FC = () => {
             {/* Card 2 */}
             <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden justify-between">
               <div className="flex flex-col gap-[8px] p-[20px] sm:p-[24px] lg:p-[32px] pb-0 lg:pb-0">
-                <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
+                <h3 className="type-h5 text-electric-blue lg:text-[#042849]">
                   Improve Denial Prevention
                 </h3>
-                <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[26px] text-[#111111]">
+                <p className="type-body-xs text-[#111111]">
                   Catch and fix claims before they leave, not after they come back.
                 </p>
               </div>
@@ -156,15 +156,15 @@ const FeaturesSection: React.FC = () => {
             <div className="flex flex-col gap-[16px] lg:gap-[24px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[6px] h-[6px] rounded-full bg-[#0F68D6] shrink-0"></div>
-                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">
+                <span className="type-body-xxs text-[#7D8690]">
                   Healthcare-grade by default.
                 </span>
               </div>
-              <h3 className="font-primary font-normal text-[28px] sm:text-[36px] lg:text-[48px] leading-[1.18]">
+              <h3 className="type-h3">
                 <span className="text-[#0F68D6]">Your patient data</span>{' '}
                 <span className="text-[#111111]">never leaves your environment.</span>
               </h3>
-              <p className="font-secondary font-normal text-[16px] leading-[24px] lg:text-[18px] lg:leading-[28px] text-[#4B5563]">
+              <p className="type-body-xs text-[#4B5563]">
                 Our agents work inside your systems. The data stays where it is. Nothing is copied, moved, or stored on our side. After Change Healthcare showed what concentration risk really costs, this isn&apos;t a feature. It&apos;s the baseline for working in healthcare.
               </p>
             </div>
@@ -186,11 +186,11 @@ const FeaturesSection: React.FC = () => {
             <div className="flex flex-col gap-[12px] lg:gap-[16px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[6px] h-[6px] rounded-full bg-electric-blue shrink-0"></div>
-                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">
+                <span className="type-body-xxs text-[#7D8690]">
                   Measured against HFMA. Drawn from production.
                 </span>
               </div>
-              <h3 className="font-primary font-normal text-[32px] lg:text-[48px] leading-[1.2] text-[#111111]">
+              <h3 className="type-h3 text-[#111111]">
                 Our stats
               </h3>
             </div>
@@ -206,10 +206,10 @@ const FeaturesSection: React.FC = () => {
                     <Image src={item.icon} alt={item.label} fill className="object-contain" />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <span className="font-primary font-normal text-[40px] lg:text-[48px] text-[#111111] leading-[1]">
-                      {item.stat} {item.unit && <span className="text-[24px] lg:text-[28px] text-[#111111]">{item.unit}</span>}
+                    <span className="type-h3 text-[#111111] !leading-[1]">
+                      {item.stat} {item.unit && <span className="type-body-l text-[#111111]">{item.unit}</span>}
                     </span>
-                    <span className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#4B5563] leading-[1.3]">
+                    <span className="type-body-xs text-[#4B5563]">
                       {item.label}
                     </span>
                   </div>
@@ -234,10 +234,10 @@ const FeaturesSection: React.FC = () => {
                       <Image src={item.icon} alt={item.label} fill className="object-contain" />
                     </div>
                     <div className="flex flex-col gap-[8px]">
-                      <span className="font-primary font-normal text-[36px] text-electric-blue leading-[1]">
-                        {item.stat} {item.unit && <span className="text-[22px]">{item.unit}</span>}
+                      <span className="type-h4 text-electric-blue !leading-[1]">
+                        {item.stat} {item.unit && <span className="type-h6">{item.unit}</span>}
                       </span>
-                      <span className="font-secondary font-normal text-[15px] text-[#4B5563] leading-[1.3]">
+                      <span className="type-body-xxs text-[#4B5563]">
                         {item.label}
                       </span>
                     </div>
@@ -277,11 +277,11 @@ const FeaturesSection: React.FC = () => {
               {/* Content Side */}
               <div className="flex flex-col justify-center items-start gap-[16px] sm:gap-[20px] lg:gap-[24px] p-[20px] sm:p-[24px] lg:p-[48px] w-full lg:w-[50%]">
                 <div className="flex flex-col gap-[8px]">
-                  <h3 className="font-primary font-normal text-[22px] sm:text-[24px] lg:text-[32px] text-electric-blue lg:text-[#042849] leading-[1.2]">
+                  <h3 className="type-h5 text-electric-blue lg:text-[#042849]">
                     60 outsourced staff <br />
                     <span className="inline-block mr-[4px]">→</span>3 in-house managers.
                   </h3>
-                  <p className="font-secondary font-normal text-[16px] lg:text-[18px] text-[#111111] leading-[1.4]">
+                  <p className="type-body-xs text-[#111111]">
                     Multi-state anesthesia group.
                   </p>
                 </div>

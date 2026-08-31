@@ -110,15 +110,15 @@ export const TestimonialsSection: React.FC = () => {
 
                   {/* Content Side */}
                   <div className="flex flex-col justify-center w-full">
-                    <p className="font-secondary font-normal text-[15px] sm:text-[16px] leading-[1.5] text-[#111111] mb-[16px]">
+                    <p className="type-body-xxs text-[#111111] mb-[16px]">
                       {item.quote}
                     </p>
 
                     <div className="flex flex-col gap-[2px]">
-                      <span className="font-primary font-normal text-[22px] sm:text-[24px] text-electric-blue leading-[1.2]">
+                      <span className="type-h6 text-electric-blue">
                         {item.name}
                       </span>
-                      <span className="font-secondary font-normal text-[14px] text-[#7D8690]">
+                      <span className="type-body-xxs text-[#7D8690]">
                         {item.role}
                       </span>
                     </div>
@@ -173,15 +173,15 @@ export const TestimonialsSection: React.FC = () => {
 
                     {/* Right Content Side */}
                     <div className="flex flex-col justify-center flex-1">
-                      <p className="font-secondary font-normal text-[20px] leading-[1.5] text-[#111111] mb-[40px]">
+                      <p className="type-body-s text-[#111111] mb-[40px]">
                         {item.quote}
                       </p>
 
                       <div className="flex flex-col gap-[6px]">
-                        <span className="font-primary font-normal text-[32px] text-electric-blue leading-[1.2]">
+                        <span className="type-h5 text-electric-blue">
                           {item.name}
                         </span>
-                        <span className="font-secondary font-normal text-[16px] text-[#7D8690]">
+                        <span className="type-body-xxs text-[#7D8690]">
                           {item.role}
                         </span>
                       </div>

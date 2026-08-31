@@ -23,19 +23,38 @@ export const TopicIndicator: React.FC<TopicIndicatorProps> = ({
   activeTopic,
   onSelectTopic,
 }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (containerRef.current) {
+      const activeButton = containerRef.current.querySelector(
+        `[data-topic-id="${activeTopic}"]`
+      ) as HTMLElement;
+      if (activeButton) {
+        const container = containerRef.current;
+        const scrollLeft =
+          activeButton.offsetLeft - container.offsetWidth / 2 + activeButton.offsetWidth / 2;
+        container.scrollTo({
+          left: Math.max(0, scrollLeft),
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [activeTopic]);
+
   return (
     <>
       {/* 
         =============================================================================
         DESKTOP STICKY TOPIC INDICATOR (Figma Frame 1272628343)
-        - Responsive width: 260px on lg (1024px), 305px on xl (1280px+)
-        - Responsive padding: 24px 16px on lg, 32px 24px on xl
+        - Width: 305px, Height: 384px, Padding: 32px 24px, Gap: 20px
         - Background: #F4F6F9 with backdrop-blur-[20px]
         - Border Radius: 16px
+        - Typography: type-body-m (24px/32px Inter)
         =============================================================================
       */}
-      <div className="hidden lg:flex flex-row items-center w-[260px] xl:w-[305px] h-[384px] p-[24px_16px] xl:p-[32px_24px] bg-[#F4F6F9] backdrop-blur-[20px] rounded-[16px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white/60">
-        <nav className="flex flex-col justify-center items-start w-full h-[320px] gap-[24px] xl:gap-[32px]">
+      <div className="hidden lg:flex flex-row items-center w-[305px] h-[384px] p-[32px_24px] bg-[#F4F6F9] backdrop-blur-[20px] rounded-[16px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-white/60">
+        <nav className="flex flex-col justify-center items-start w-[257px] h-[320px] gap-[32px]">
           {topics.map((topic, index) => {
             const isActive = activeTopic === topic.id;
             return (
@@ -43,10 +62,10 @@ export const TopicIndicator: React.FC<TopicIndicatorProps> = ({
                 <button
                   type="button"
                   onClick={() => onSelectTopic(topic.id)}
-                  className={`w-full text-left font-secondary font-normal text-[17px] xl:text-[21px] 2xl:text-[23px] tracking-[-0.02em] whitespace-nowrap leading-[28px] xl:leading-[32px] pb-[12px] xl:pb-[16px] transition-colors duration-200 cursor-pointer ${
+                  className={`w-full text-left type-body-m whitespace-nowrap pb-[16px] transition-colors duration-200 cursor-pointer ${
                     isActive
-                      ? 'text-[#0F68D6]'
-                      : 'text-[#042849] hover:text-[#0F68D6]'
+                      ? 'text-electric-blue'
+                      : 'text-midnight-blue hover:text-electric-blue'
                   }`}
                 >
                   {topic.label}
@@ -55,7 +74,7 @@ export const TopicIndicator: React.FC<TopicIndicatorProps> = ({
                 {/* Divider Line (Vector 3, 6, 5: width 257px, border: 1px solid) */}
                 <div
                   className={`w-full h-[0px] border-t transition-colors duration-300 ${
-                    isActive ? 'border-[#0F68D6]' : 'border-[#D7DCE2]'
+                    isActive ? 'border-electric-blue' : 'border-[#D7DCE2]'
                   } ${index === topics.length - 1 ? 'hidden' : 'block'}`}
                 />
               </div>
@@ -69,18 +88,22 @@ export const TopicIndicator: React.FC<TopicIndicatorProps> = ({
         MOBILE / TABLET HORIZONTAL INDICATOR
         =============================================================================
       */}
-      <div className="flex lg:hidden w-full bg-[#F4F6F9] backdrop-blur-[20px] rounded-[16px] py-[12px] px-[14px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-white/80 overflow-x-auto no-scrollbar gap-[20px]">
+      <div 
+        ref={containerRef}
+        className="flex lg:hidden w-full bg-[#F4F6F9] backdrop-blur-[20px] rounded-[16px] py-[12px] px-[14px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-white/80 overflow-x-auto no-scrollbar gap-[20px] scroll-smooth"
+      >
         {topics.map((topic) => {
           const isActive = activeTopic === topic.id;
           return (
             <button
               key={`mob-${topic.id}`}
+              data-topic-id={topic.id}
               type="button"
               onClick={() => onSelectTopic(topic.id)}
-              className={`shrink-0 font-secondary font-normal text-[15px] sm:text-[17px] leading-[24px] sm:leading-[26px] pb-[4px] border-b-2 transition-colors duration-200 whitespace-nowrap cursor-pointer ${
+              className={`shrink-0 type-body-m pb-[4px] border-b-2 transition-all duration-200 whitespace-nowrap cursor-pointer ${
                 isActive
-                  ? 'text-[#0F68D6] border-[#0F68D6]'
-                  : 'text-[#042849] border-transparent opacity-80'
+                  ? 'text-electric-blue border-electric-blue'
+                  : 'text-midnight-blue border-transparent opacity-80'
               }`}
             >
               {topic.label}

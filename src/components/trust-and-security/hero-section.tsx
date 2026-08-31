@@ -7,7 +7,7 @@ import Navbar from '@/components/common/navbar';
 
 export const TrustHeroSection: React.FC = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section className="relative w-full bg-white">
       {/* 
         Trust & Security Hero Banner (Figma Specification):
         - Desktop: 1440px x 650px, border-radius: 0px 0px 0px 60px, padding: 40px 60px 80px
@@ -15,10 +15,10 @@ export const TrustHeroSection: React.FC = () => {
         - Mobile: 402px x 490px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px
         - Background: linear-gradient(180deg, #0F68D6 41.31%, #9A84E3 100%) with banner.png
       */}
-      <div className="relative w-full h-[490px] md:h-[560px] lg:h-[650px] bg-gradient-to-b from-[#0F68D6] from-40% to-[#9A84E3] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[28px] md:pb-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[20px] md:gap-0 overflow-hidden isolate">
+      <div className="relative w-full h-[490px] md:h-[560px] lg:h-[650px] bg-gradient-to-b from-[#0F68D6] from-40% to-[#9A84E3] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[28px] md:pb-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[20px] md:gap-0">
         
         {/* Background Banner Graphic aligned to bottom */}
-        <div className="absolute inset-0 pointer-events-none z-0">
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
           {/* Desktop & Tablet Banner Graphic */}
           <div className="hidden md:block absolute inset-0">
             <Image
@@ -56,7 +56,7 @@ export const TrustHeroSection: React.FC = () => {
           
           {/* Left Column: Heading (Display/H2: 52px / 60px in Figma, 650px x 120px) */}
           <div className="w-full md:w-1/2 max-w-[650px] h-auto lg:h-[441px] flex flex-col justify-center items-start">
-            <h1 className="font-primary font-normal text-[32px] md:text-[36px] lg:text-[52px] leading-[40px] md:leading-[44px] lg:leading-[60px] tracking-[-0.01em] text-white max-w-[650px]">
+            <h1 className="type-h2 text-white max-w-[650px]">
               Your patient data never leaves your environment.
             </h1>
           </div>
@@ -99,7 +99,7 @@ export const TrustHeroSection: React.FC = () => {
 
           {/* Bottom: Heading */}
           <div className="w-full">
-            <h1 className="font-primary font-normal text-[32px] leading-[40px] tracking-[-0.01em] text-white">
+            <h1 className="type-h2 text-white">
               Your patient data never leaves your environment.
             </h1>
           </div>

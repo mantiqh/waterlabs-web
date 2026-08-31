@@ -38,13 +38,13 @@ export const WhatWeDoMattersSection: React.FC = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#63CCB7] shrink-0" />
-              <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#D7DCE2] tracking-[0.01em]">
+              <span className="type-caption text-[#D7DCE2]">
                 Why Waterlabs
               </span>
             </div>
 
             {/* Title */}
-            <h2 className="font-primary font-normal text-[32px] lg:text-[52px] leading-[40px] lg:leading-[60px] tracking-[-0.01em] text-white">
+            <h2 className="type-h2 tracking-[-0.01em] text-white">
               Why what we do matters.
             </h2>
           </div>
@@ -53,14 +53,14 @@ export const WhatWeDoMattersSection: React.FC = () => {
           <div className="relative z-10 w-full max-w-[1024px] flex flex-col lg:flex-row items-start justify-start gap-[16px] lg:gap-[20px]">
             {/* Left Column: Subheading (508px width in Figma) */}
             <div className="w-full lg:w-[508px] shrink-0">
-              <h3 className="font-primary font-normal text-[20px] lg:text-[32px] leading-[28px] lg:leading-[40px] tracking-[-0.01em] text-white max-w-[508px]">
+              <h3 className="type-h5 tracking-[-0.01em] text-white max-w-[508px]">
                 This is a hard problem to solve.
               </h3>
             </div>
 
             {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, gap 16px) */}
             <div className="w-full lg:w-[496px] shrink-0 flex flex-col gap-[16px]">
-              <p className="font-secondary font-normal text-[14px] lg:text-[18px] leading-[24px] lg:leading-[26px] text-[#D7DCE2] max-w-[496px]">
+              <p className="type-body-xs text-[#D7DCE2] max-w-[496px]">
                 Revenue cycle is one of the hardest problems in healthcare. Here, the rules are complex, the exceptions are abundant, and the stakes are high. Whether you&apos;re defining software, running operations, or working with customers, you&apos;ll be solving problems that don&apos;t come in playbooks.
               </p>
 

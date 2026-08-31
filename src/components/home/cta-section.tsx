@@ -24,11 +24,11 @@ export const CTASection: React.FC = () => {
           <div className="flex flex-col gap-[12px] lg:gap-[16px]">
             <div className="flex items-center gap-[8px]">
               <div className="w-[6px] h-[6px] rounded-full bg-[#38BDF8] shrink-0" />
-              <span className="font-secondary font-normal text-[14px] lg:text-[16px] text-white/90 leading-[1.4]">
+              <span className="type-body-xxs text-white/90">
                 See it run on your payer mix.
               </span>
             </div>
-            <h2 className="font-primary font-normal text-[36px] sm:text-[44px] lg:text-[56px] text-white leading-[1.12] tracking-[-0.01em]">
+            <h2 className="type-h2 text-white">
               Get in touch with us.
             </h2>
           </div>
@@ -38,9 +38,19 @@ export const CTASection: React.FC = () => {
             <CTA variant="light-bg">
               Get a demo
             </CTA>
+            
+            {/* Small Screen: Outline Button */}
             <CTA 
               variant="outline" 
-              className="lg:bg-white lg:text-midnight-blue lg:border-transparent lg:[&>svg]:text-midnight-blue [@media(hover:hover)]:lg:hover:bg-gradient-to-br [@media(hover:hover)]:lg:hover:from-[#042849] [@media(hover:hover)]:lg:hover:from-[40%] [@media(hover:hover)]:lg:hover:to-[#1E5667] [@media(hover:hover)]:lg:hover:text-white [@media(hover:hover)]:lg:hover:[&>svg]:text-white"
+              className="lg:hidden h-[38px] text-[14px] leading-[20px]"
+            >
+              Talk to a specialist
+            </CTA>
+
+            {/* Desktop: Default White Button */}
+            <CTA 
+              variant="dark-bg" 
+              className="hidden lg:inline-flex"
             >
               Talk to a specialist
             </CTA>

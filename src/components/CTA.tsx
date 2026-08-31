@@ -31,8 +31,8 @@ const ChevronRight = ({ className }: { className?: string }) => (
 export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
   ({ variant, children, className = '', ...props }, ref) => {
     // Base classes for typography conforming to Figma specs (height 44px with py-[10px])
-    const typographyClass = 'font-secondary font-medium text-[16px] leading-[24px]';
-    const baseClasses = `inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
+    const typographyClass = 'type-cta';
+    const baseClasses = `relative overflow-hidden z-10 inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
     
     const isArrowOnly = variant === 'light-arrow' || variant === 'dark-arrow';
     const isTextOnly = variant === 'light-text' || variant === 'dark-text';
@@ -52,32 +52,32 @@ export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
 
     switch (variant) {
       case 'light-bg':
-        variantClasses = "bg-electric-blue text-white [@media(hover:hover)]:hover:bg-gradient-to-br [@media(hover:hover)]:hover:from-electric-blue [@media(hover:hover)]:hover:from-[50%] [@media(hover:hover)]:hover:to-aqua-mint border-none";
+        variantClasses = "bg-electric-blue text-white border-none before:absolute before:inset-0 before:z-[-1] before:bg-gradient-to-br before:from-electric-blue before:from-[50%] before:to-aqua-mint before:opacity-0 before:transition-opacity before:duration-300 [@media(hover:hover)]:hover:before:opacity-100";
         iconClasses = "text-[#91C6F2] [@media(hover:hover)]:group-hover:text-white transition-colors duration-300";
         break;
       case 'dark-bg':
-        variantClasses = "bg-white text-midnight-blue [@media(hover:hover)]:hover:bg-gradient-to-br [@media(hover:hover)]:hover:from-[#042849] [@media(hover:hover)]:hover:from-[40%] [@media(hover:hover)]:hover:to-[#1E5667] [@media(hover:hover)]:hover:text-white border-none";
+        variantClasses = "bg-white text-midnight-blue border-none [@media(hover:hover)]:hover:text-white transition-colors duration-300 before:absolute before:inset-0 before:z-[-1] before:bg-gradient-to-br before:from-[#042849] before:from-[40%] before:to-[#1E5667] before:opacity-0 before:transition-opacity before:duration-300 [@media(hover:hover)]:hover:before:opacity-100";
         iconClasses = "text-midnight-blue [@media(hover:hover)]:group-hover:text-white transition-colors duration-300";
         break;
       case 'outline':
-        variantClasses = "bg-white/10 backdrop-blur-[24px] border border-white text-white [@media(hover:hover)]:hover:bg-[#91C6F2]/30 [@media(hover:hover)]:hover:border-[#91C6F2]";
+        variantClasses = "bg-white/10 backdrop-blur-[24px] border border-white text-white [@media(hover:hover)]:hover:border-[#91C6F2] before:absolute before:inset-0 before:z-[-1] before:bg-[#91C6F2]/30 before:opacity-0 before:transition-opacity before:duration-300 [@media(hover:hover)]:hover:before:opacity-100";
         iconClasses = "text-white";
         break;
       case 'light-text':
         // Text is underlined by default
-        variantClasses = "bg-transparent text-midnight-blue [@media(hover:hover)]:hover:text-electric-blue underline underline-offset-4 decoration-1";
+        variantClasses = "bg-transparent text-midnight-blue [@media(hover:hover)]:hover:text-electric-blue underline underline-offset-4 decoration-1 transition-colors duration-300";
         iconClasses = "text-electric-blue [@media(hover:hover)]:group-hover:text-midnight-blue transition-colors duration-300 no-underline";
         break;
       case 'dark-text':
-        variantClasses = "bg-transparent text-aqua-mint [@media(hover:hover)]:hover:text-white underline underline-offset-4 decoration-1";
+        variantClasses = "bg-transparent text-aqua-mint [@media(hover:hover)]:hover:text-white underline underline-offset-4 decoration-1 transition-colors duration-300";
         iconClasses = "text-white [@media(hover:hover)]:group-hover:text-aqua-mint transition-colors duration-300 no-underline";
         break;
       case 'dark-arrow':
-        variantClasses = "bg-transparent border border-white text-white [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-electric-blue";
+        variantClasses = "bg-transparent border border-white text-white [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-electric-blue transition-all duration-300";
         iconClasses = "text-white [@media(hover:hover)]:group-hover:text-electric-blue transition-colors duration-300";
         break;
       case 'light-arrow':
-        variantClasses = "bg-transparent border border-electric-blue text-electric-blue [@media(hover:hover)]:hover:bg-electric-blue [@media(hover:hover)]:hover:text-white";
+        variantClasses = "bg-transparent border border-electric-blue text-electric-blue [@media(hover:hover)]:hover:bg-electric-blue [@media(hover:hover)]:hover:text-white transition-all duration-300";
         iconClasses = "text-electric-blue [@media(hover:hover)]:group-hover:text-white transition-colors duration-300";
         break;
     }

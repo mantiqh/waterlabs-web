@@ -32,19 +32,19 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           <div className="flex flex-col gap-[20px] w-full lg:max-w-[700px]">
             <div className="flex flex-row items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2]" />
-              <span className="font-secondary font-normal text-[12px] leading-[1.33] lg:text-[18px] lg:leading-[1.44] text-[#D7DCE2]">
+              <span className="type-caption lg:!text-[18px] lg:!leading-[26px] text-[#D7DCE2]">
                 {data?.heroSubheading || 'Agentic RCM built from inside healthcare'}
               </span>
             </div>
 
-            <h1 className="font-primary font-normal text-[36px] lg:text-[68px] leading-[1.33] lg:leading-[1.11] tracking-[-0.01em] text-white">
+            <h1 className="type-h1 text-white">
               {data?.heroHeading || "Don't just automate your revenue cycle. Apply intelligence to it."}
             </h1>
           </div>
 
           {/* Right Column */}
           <div className="flex flex-col gap-[20px] lg:gap-[40px] w-full lg:max-w-[460px]">
-            <p className="font-secondary font-normal text-[16px] lg:text-[20px] leading-[1.625] lg:leading-[1.4] text-[#F4F6F9]">
+            <p className="type-body-s text-[#F4F6F9]">
               We provide the platform that runs your revenue cycle. You measure it, we improve it.
             </p>
 

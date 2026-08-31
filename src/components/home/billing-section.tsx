@@ -58,7 +58,7 @@ export const BillingSection: React.FC = () => {
             <div className="lg:w-[320px] shrink-0 pt-[8px]">
               <div className="flex items-center gap-[8px]">
                 <div className="w-[6px] h-[6px] rounded-full bg-electric-blue shrink-0"></div>
-                <span className="font-secondary text-[14px] lg:text-[16px] text-[#7D8690] font-normal">
+                <span className="type-body-xxs text-[#7D8690]">
                   Proven before you pay.
                 </span>
               </div>
@@ -66,12 +66,12 @@ export const BillingSection: React.FC = () => {
 
             {/* Right Heading & Subheading */}
             <div className="flex-1 flex flex-col gap-[16px] lg:gap-[20px]">
-              <h2 className="display-h2 tracking-[-0.01em]">
+              <h2 className="type-h2">
                 <span className="text-electric-blue">Our billing model allows you flexibility.</span>
                 <br />
                 <span className="text-[#111111]">We charge you when our AI is live in your environment.</span>
               </h2>
-              <p className="body-s tracking-[0em] text-[#4B5563]">
+              <p className="type-body-s text-[#4B5563]">
                 No development fee. No software license. We charge after it works.
               </p>
             </div>
@@ -95,17 +95,17 @@ export const BillingSection: React.FC = () => {
                 >
                   {/* Desktop Layout (with large number on left) */}
                   <div className="hidden lg:flex items-start gap-[28px]">
-                    <span className={`font-primary font-normal text-[52px] leading-[1] shrink-0 w-[72px] ${
+                    <span className={`type-h2 !leading-[1] shrink-0 w-[72px] ${
                       step.num === '01' ? 'text-electric-blue' : 'text-[#111111]'
                     }`}>
                       {step.num}
                     </span>
                     <div className="flex-1 flex flex-col gap-[8px]">
                       <div className="flex items-center justify-between gap-[16px]">
-                        <h3 className="font-primary font-normal text-[22px] lg:text-[24px] text-[#111111] leading-[1.2]">
+                        <h3 className="type-h6 text-[#111111]">
                           {step.title}
                         </h3>
-                        <span className={`font-secondary text-[13px] lg:text-[14px] font-normal px-[16px] py-[5px] rounded-tl-[16px] rounded-bl-[16px] rounded-br-[16px] rounded-tr-none shrink-0 ${
+                        <span className={`type-body-xxs !font-normal px-[16px] py-[5px] rounded-tl-[16px] rounded-bl-[16px] rounded-br-[16px] rounded-tr-none shrink-0 ${
                           step.dayVariant === 'active'
                             ? 'bg-[#91C6F2] text-[#111111]'
                             : 'bg-white border border-[#91C6F2] text-[#111111]'
@@ -113,7 +113,7 @@ export const BillingSection: React.FC = () => {
                           {step.day}
                         </span>
                       </div>
-                      <p className="font-secondary font-normal text-[15px] lg:text-[16px] text-[#111111] leading-[1.5]">
+                      <p className="type-body-xxs text-[#111111]">
                         {step.desc}
                       </p>
                     </div>
@@ -122,7 +122,7 @@ export const BillingSection: React.FC = () => {
                   {/* Mobile Layout (Tag on top, Electric Blue title, no number) */}
                   <div className="flex lg:hidden flex-col gap-[12px]">
                     <div className="flex items-center">
-                      <span className={`font-secondary text-[12px] font-normal px-[12px] py-[4px] rounded-tl-[12px] rounded-bl-[12px] rounded-br-[12px] rounded-tr-none ${
+                      <span className={`type-caption px-[12px] py-[4px] rounded-tl-[12px] rounded-bl-[12px] rounded-br-[12px] rounded-tr-none ${
                         step.dayVariant === 'active'
                           ? 'bg-[#91C6F2] text-[#111111]'
                           : 'bg-white border border-[#91C6F2] text-[#111111]'
@@ -130,10 +130,10 @@ export const BillingSection: React.FC = () => {
                         {step.day}
                       </span>
                     </div>
-                    <h3 className="font-primary font-normal text-[20px] text-electric-blue leading-[1.2]">
+                    <h3 className="type-h5 text-electric-blue">
                       {step.title}
                     </h3>
-                    <p className="font-secondary font-normal text-[14px] text-[#111111] leading-[1.4]">
+                    <p className="type-body-xxs text-[#111111]">
                       {step.desc}
                     </p>
                   </div>
@@ -149,13 +149,13 @@ export const BillingSection: React.FC = () => {
                   background: 'linear-gradient(137.1deg, #042849 29.61%, #0A60AF 99.37%)',
                 }}
               >
-                <span className="display-h5 tracking-[-0.01em] text-left lg:text-center text-white">
+                <span className="type-h5 text-left lg:text-center text-white">
                   No development fee
                 </span>
-                <span className="display-h5 tracking-[-0.01em] text-left lg:text-center text-white">
+                <span className="type-h5 text-left lg:text-center text-white">
                   No software license
                 </span>
-                <span className="display-h5 tracking-[-0.01em] text-left lg:text-center text-white lg:max-w-[280px]">
+                <span className="type-h5 text-left lg:text-center text-white lg:max-w-[280px]">
                   You pay only when agents are live
                 </span>
               </div>

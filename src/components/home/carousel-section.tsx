@@ -28,7 +28,7 @@ export const CarouselSection: React.FC = () => {
                 <div className="relative w-[140px] h-[64px] rounded-[40px] overflow-hidden shrink-0">
                   <Image src={item.img} alt="" fill className="object-cover" />
                 </div>
-                <span className="font-primary font-normal text-electric-blue text-[68px] leading-[1.11] tracking-[-0.01em]">
+                <span className="type-h1 text-electric-blue">
                   {item.text}
                 </span>
               </div>
@@ -39,7 +39,7 @@ export const CarouselSection: React.FC = () => {
                 <div className="relative w-[140px] h-[64px] rounded-[40px] overflow-hidden shrink-0">
                   <Image src={item.img} alt="" fill className="object-cover" />
                 </div>
-                <span className="font-primary font-normal text-electric-blue text-[68px] leading-[1.11] tracking-[-0.01em]">
+                <span className="type-h1 text-electric-blue">
                   {item.text}
                 </span>
               </div>
@@ -53,7 +53,7 @@ export const CarouselSection: React.FC = () => {
                 <div className="relative w-[140px] h-[64px] rounded-[40px] overflow-hidden shrink-0">
                   <Image src={item.img} alt="" fill className="object-cover" />
                 </div>
-                <span className="font-primary font-normal text-electric-blue text-[68px] leading-[1.11] tracking-[-0.01em]">
+                <span className="type-h1 text-electric-blue">
                   {item.text}
                 </span>
               </div>
@@ -64,7 +64,7 @@ export const CarouselSection: React.FC = () => {
                 <div className="relative w-[140px] h-[64px] rounded-[40px] overflow-hidden shrink-0">
                   <Image src={item.img} alt="" fill className="object-cover" />
                 </div>
-                <span className="font-primary font-normal text-electric-blue text-[68px] leading-[1.11] tracking-[-0.01em]">
+                <span className="type-h1 text-electric-blue">
                   {item.text}
                 </span>
               </div>
@@ -74,7 +74,7 @@ export const CarouselSection: React.FC = () => {
 
         {/* Mobile/Tablet Static Text */}
         <div className="block lg:hidden w-full px-[20px] lg:px-[60px]">
-          <h2 className="font-primary font-normal text-electric-blue text-[24px] leading-[1.33] tracking-[-0.01em]">
+          <h2 className="type-h4 text-electric-blue">
             No development fee, Live in weeks, not months
           </h2>
         </div>

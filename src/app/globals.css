@@ -23,9 +23,16 @@
   --color-lavender-purple: #AE87E4;
   --color-warm-stone: #B8B1A5;
 
-  /* Fonts */
+  /* ============================================================
+     FONT FAMILIES — Figma Design System
+     ============================================================
+     Display: General Sans
+     Body-XL: IBM Plex Sans
+     Body (all others): Inter
+     ============================================================ */
   --font-primary: var(--font-general-sans), sans-serif;
   --font-secondary: var(--font-inter), sans-serif;
+  --font-ibm-plex: var(--font-ibm-plex-sans), sans-serif;
 
   /* Figma Design System Spacing */
   --spacing-ds-0: 0px;
@@ -44,7 +51,11 @@
   --spacing-ds-80: 80px;
   --spacing-ds-120: 120px;
 
-  /* Figma Design System Breakpoints */
+  /* Figma Design System Breakpoints
+     Mobile:  0–719px
+     Tablet:  720–1023px
+     Desktop: 1024px+
+  */
   --breakpoint-md: 720px;
   --breakpoint-lg: 1024px;
 }
@@ -61,67 +72,338 @@
   }
 }
 
-/* Responsive Typography - Display (General Sans) */
+/* ============================================================
+   TYPOGRAPHY DESIGN SYSTEM — SINGLE SOURCE OF TRUTH
+   ============================================================
+   Figma Design System: 3 breakpoints (Mobile / Tablet / Desktop)
+   - Mobile:  0–719px
+   - Tablet:  720–1023px  (md: 720px)
+   - Desktop: 1024px+     (lg: 1024px)
+
+   Typography is FIXED inside each breakpoint range.
+   NO clamp(), NO vw, NO fluid scaling.
+   ============================================================ */
+
+/* ---- DISPLAY TYPOGRAPHY (General Sans) ---- */
+
+/* Display/Dis 1 — General Sans Medium, Title Case */
+@utility type-dis-1 {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 64px;
+    line-height: 72px;
+  }
+  @media (width >= 1024px) {
+    font-size: 80px;
+    line-height: 88px;
+  }
+}
+
+/* Display/H1 — General Sans Regular, Title Case */
+@utility type-h1 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 56px;
+    line-height: 64px;
+  }
+  @media (width >= 1024px) {
+    font-size: 68px;
+    line-height: 76px;
+  }
+}
+
+/* Display/H2 — General Sans Regular, Title Case */
+@utility type-h2 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 44px;
+    line-height: 56px;
+  }
+  @media (width >= 1024px) {
+    font-size: 52px;
+    line-height: 60px;
+  }
+}
+
+/* Display/H3 — General Sans Regular, Sentence Case */
+@utility type-h3 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 40px;
+    line-height: 52px;
+  }
+  @media (width >= 1024px) {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+/* Display/H4 — General Sans Regular, Sentence Case */
+@utility type-h4 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 36px;
+    line-height: 48px;
+  }
+  @media (width >= 1024px) {
+    font-size: 40px;
+    line-height: 48px;
+  }
+}
+
+/* Display/H5 — General Sans Regular, Sentence Case */
+@utility type-h5 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 28px;
+    line-height: 40px;
+  }
+  @media (width >= 1024px) {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+/* Display/H6 — General Sans Regular, Sentence Case */
+@utility type-h6 {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 22px;
+    line-height: 32px;
+  }
+  @media (width >= 1024px) {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/* ---- BODY TYPOGRAPHY ---- */
+
+/* Body/Body-XL — IBM Plex Sans Regular, Sentence Case */
+@utility type-body-xl {
+  font-family: var(--font-ibm-plex);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 28px;
+    line-height: 40px;
+  }
+  @media (width >= 1024px) {
+    font-size: 32px;
+    line-height: 40px;
+  }
+}
+
+/* Body/Body-L — Inter Regular, Sentence Case */
+@utility type-body-l {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 24px;
+    line-height: 36px;
+  }
+  @media (width >= 1024px) {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+/* Body/Body-M — Inter Regular, Sentence Case */
+@utility type-body-m {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 20px;
+    line-height: 32px;
+  }
+  @media (width >= 1024px) {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+/* Body/Body-S — Inter Regular, Sentence Case */
+@utility type-body-s {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 18px;
+    line-height: 28px;
+  }
+  @media (width >= 1024px) {
+    font-size: 20px;
+    line-height: 28px;
+  }
+}
+
+/* Body/Body-XS — Inter Regular, Sentence Case */
+@utility type-body-xs {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  @media (width >= 1024px) {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+
+/* Body/Body-XXS — Inter Regular, Sentence Case */
+@utility type-body-xxs {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0em;
+  @media (width >= 720px) {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  @media (width >= 1024px) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+/* Body/Caption — Inter Regular, Sentence Case, 1% letter-spacing */
+@utility type-caption {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  @media (width >= 720px) {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  @media (width >= 1024px) {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+/* Body/CTA — Inter Medium, Sentence Case */
+@utility type-cta {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0em;
+}
+
+/* ============================================================
+   BACKWARD-COMPATIBLE ALIASES
+   These keep existing components working during migration.
+   They will be removed after all components are migrated.
+   ============================================================ */
+
 @utility display-1 {
-  @apply font-primary font-medium text-[48px] leading-[56px] md:text-[64px] md:leading-[72px] lg:text-[80px] lg:leading-[88px];
+  @apply type-dis-1;
 }
 
 @utility display-h1 {
-  @apply font-primary font-normal text-[40px] leading-[48px] md:text-[56px] md:leading-[64px] lg:text-[68px] lg:leading-[76px];
+  @apply type-h1;
 }
 
 @utility display-h2 {
-  @apply font-primary font-normal text-[32px] leading-[40px] md:text-[44px] md:leading-[56px] lg:text-[52px] lg:leading-[60px];
+  @apply type-h2;
 }
 
 @utility display-h3 {
-  @apply font-primary font-normal text-[28px] leading-[36px] md:text-[40px] md:leading-[52px] lg:text-[48px] lg:leading-[56px];
+  @apply type-h3;
 }
 
 @utility display-h4 {
-  @apply font-primary font-normal text-[24px] leading-[32px] md:text-[36px] md:leading-[48px] lg:text-[40px] lg:leading-[48px];
+  @apply type-h4;
 }
 
 @utility display-h5 {
-  @apply font-primary font-normal text-[20px] leading-[28px] md:text-[28px] md:leading-[40px] lg:text-[32px] lg:leading-[40px];
+  @apply type-h5;
 }
 
 @utility display-h6 {
-  @apply font-primary font-normal text-[18px] leading-[26px] md:text-[22px] md:leading-[32px] lg:text-[24px] lg:leading-[32px];
+  @apply type-h6;
 }
 
-/* Responsive Typography - Body (Inter) */
 @utility body-xl {
-  @apply font-secondary font-normal text-[28px] leading-[36px] md:text-[28px] md:leading-[40px] lg:text-[32px] lg:leading-[40px];
+  @apply type-body-xl;
 }
 
 @utility body-l {
-  @apply font-secondary font-normal text-[24px] leading-[32px] md:text-[24px] md:leading-[36px] lg:text-[28px] lg:leading-[36px];
+  @apply type-body-l;
 }
 
 @utility body-m {
-  @apply font-secondary font-normal text-[20px] leading-[28px] md:text-[20px] md:leading-[32px] lg:text-[24px] lg:leading-[32px];
+  @apply type-body-m;
 }
 
 @utility body-s {
-  @apply font-secondary font-normal text-[18px] leading-[26px] md:text-[18px] md:leading-[28px] lg:text-[20px] lg:leading-[28px];
+  @apply type-body-s;
 }
 
 @utility body-xs {
-  @apply font-secondary font-normal text-[16px] leading-[24px] md:text-[16px] md:leading-[24px] lg:text-[18px] lg:leading-[26px];
+  @apply type-body-xs;
 }
 
 @utility body-xxs {
-  @apply font-secondary font-normal text-[14px] leading-[20px] md:text-[14px] md:leading-[20px] lg:text-[16px] lg:leading-[24px];
+  @apply type-body-xxs;
 }
 
 @utility body-caption {
-  @apply font-secondary font-normal text-[12px] leading-[16px] md:text-[12px] md:leading-[16px] lg:text-[12px] lg:leading-[20px] tracking-[0.01em];
+  @apply type-caption;
 }
 
 @utility body-cta {
-  @apply font-secondary font-medium text-[16px] leading-[24px];
+  @apply type-cta;
 }
+
+/* ============================================================
+   GLOBAL STYLES
+   ============================================================ */
 
 :root {
   --background: var(--color-white);
@@ -133,6 +415,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-secondary);
 }
+
 @theme {
   --animate-marquee: marquee 35s linear infinite;
 

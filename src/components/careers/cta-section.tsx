@@ -38,22 +38,22 @@ export const CareersCTASection: React.FC = () => {
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
               {/* Desktop Tag Text */}
-              <span className="hidden lg:inline font-secondary font-normal text-[16px] leading-[24px] tracking-[0.01em] text-white">
+              <span className="hidden lg:inline type-body-xxs tracking-[0.01em] text-white">
                 Don&apos;t just automate your revenue cycle. Apply intelligence to it.
               </span>
               {/* Mobile Tag Text */}
-              <span className="inline lg:hidden font-secondary font-normal text-[12px] leading-[16px] tracking-[0.01em] text-white">
+              <span className="inline lg:hidden type-caption text-white">
                 See it run on your payer mix.
               </span>
             </div>
 
             {/* Heading */}
-            <h2 className="font-primary font-normal text-[28px] lg:text-[48px] leading-[36px] lg:leading-[56px] tracking-[-0.01em] text-white lg:text-[#91C6F2]">
+            <h2 className="type-h3 text-white lg:text-[#91C6F2]">
               Come do the most meaningful work of your career. On a problem that matters.
             </h2>
 
             {/* Description Subheading */}
-            <p className="font-secondary font-normal text-[14px] lg:text-[18px] leading-[24px] lg:leading-[26px] text-[#F4F6F9] max-w-[566px]">
+            <p className="type-body-xs text-[#F4F6F9] max-w-[566px]">
               We work for impact. The applause follows. Your work matters. We&apos;ll help you turn it into results that are visible.
             </p>
 

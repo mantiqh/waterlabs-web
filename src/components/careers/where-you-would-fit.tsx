@@ -4,19 +4,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { CTA } from '@/components/CTA';
-
 const ChevronRight = ({ className }: { className?: string }) => (
-  <svg 
-    width="13" 
-    height="19" 
-    viewBox="0 0 13 19" 
-    fill="none" 
+  <svg
+    width="13"
+    height="19"
+    viewBox="0 0 13 19"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className={`shrink-0 ${className}`}
   >
-    <path d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z" fill="currentColor"/>
-    <path d="M1.62891 2.17594C1.66288 1.75624 2.05784 1.5463 2.44778 1.59269C3.61166 1.73087 5.52127 2.60163 6.47222 3.28958L7.31844 3.90074L8.09486 4.55552C8.69238 5.05934 9.22065 5.62542 9.72473 6.20347C10.5812 7.18487 11.4347 8.68933 11.2448 9.91955C11.1328 10.6459 10.4159 11.272 9.65563 11.2678C8.53294 11.2612 7.45171 10.7455 6.58992 10.0102L6.23806 9.70934L5.83479 9.4162L4.77401 8.36857C4.77401 8.36857 4.69141 8.26712 4.63879 8.20628L3.92829 7.32231C2.99243 6.14976 2.3026 4.82543 1.82908 3.43141C1.68887 3.01834 1.59641 2.61685 1.63147 2.17687L1.62891 2.17594Z" fill="currentColor"/>
+    <path d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z" fill="currentColor" />
+    <path d="M1.62891 2.17594C1.66288 1.75624 2.05784 1.5463 2.44778 1.59269C3.61166 1.73087 5.52127 2.60163 6.47222 3.28958L7.31844 3.90074L8.09486 4.55552C8.69238 5.05934 9.22065 5.62542 9.72473 6.20347C10.5812 7.18487 11.4347 8.68933 11.2448 9.91955C11.1328 10.6459 10.4159 11.272 9.65563 11.2678C8.53294 11.2612 7.45171 10.7455 6.58992 10.0102L6.23806 9.70934L5.83479 9.4162L4.77401 8.36857C4.77401 8.36857 4.69141 8.26712 4.63879 8.20628L3.92829 7.32231C2.99243 6.14976 2.3026 4.82543 1.82908 3.43141C1.68887 3.01834 1.59641 2.61685 1.63147 2.17687L1.62891 2.17594Z" fill="currentColor" />
   </svg>
 );
 
@@ -86,8 +84,8 @@ export const WhereYouWouldFitSection: React.FC = () => {
   });
 
   return (
-    <section 
-      id="open-roles" 
+    <section
+      id="open-roles"
       className="relative w-full bg-gradient-to-b from-[#0F68D6] from-50% to-[#0B0B0B] to-50% overflow-hidden p-0 m-0"
     >
       {/* 
@@ -97,26 +95,26 @@ export const WhereYouWouldFitSection: React.FC = () => {
       */}
       <div className="relative w-full bg-[#F4F6F9] lg:bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         <div className="max-w-[1320px] mx-auto flex flex-col gap-[36px] lg:gap-[60px]">
-          
+
           {/* Header Block: Tag + Title */}
           <div className="w-full flex flex-col gap-[8px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#7D8690] tracking-[0.01em]">
+              <span className="type-caption text-[#7D8690]">
                 Open Roles
               </span>
             </div>
 
             {/* Title */}
-            <h2 className="font-primary font-normal text-[32px] lg:text-[52px] leading-[40px] lg:leading-[60px] tracking-[-0.01em] text-[#000000] lg:text-[#111111]">
+            <h2 className="type-h2 tracking-[-0.01em] text-[#000000] lg:text-[#111111]">
               Where you would fit.
             </h2>
           </div>
 
           {/* Filters & Job List Container */}
           <div className="w-full flex flex-col gap-[20px] lg:gap-[40px]">
-            
+
             {/* Desktop Filter Tabs (hidden on mobile) */}
             <div className="hidden lg:flex items-center gap-[16px] flex-wrap">
               {filterCategories.map((category) => {
@@ -126,17 +124,16 @@ export const WhereYouWouldFitSection: React.FC = () => {
                     key={category}
                     type="button"
                     onClick={() => setActiveCategory(category)}
-                    className={`px-[16px] py-[8px] rounded-[64px] font-secondary font-medium text-[16px] leading-[24px] transition-all cursor-pointer border-none outline-none ${
-                      isActive
-                        ? 'text-white shadow-sm'
-                        : 'text-[#7D8690] bg-[#91C6F2]/10 hover:bg-[#91C6F2]/20'
-                    }`}
+                    className={`px-[16px] py-[8px] rounded-[64px] type-cta transition-all cursor-pointer border-none outline-none ${isActive
+                      ? 'text-white shadow-sm'
+                      : 'text-[#7D8690] bg-[#91C6F2]/10 hover:bg-[#91C6F2]/20'
+                      }`}
                     style={
                       isActive
                         ? {
-                            background:
-                              'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
-                          }
+                          background:
+                            'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
+                        }
                         : undefined
                     }
                   >
@@ -168,7 +165,7 @@ export const WhereYouWouldFitSection: React.FC = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search"
-                  className="w-full bg-transparent font-secondary text-[12px] text-[#111111] placeholder:text-[#D7DCE2] outline-none"
+                  className="w-full bg-transparent type-caption text-[#111111] placeholder:text-[#D7DCE2] outline-none"
                 />
               </div>
 
@@ -177,13 +174,12 @@ export const WhereYouWouldFitSection: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
-                  className="bg-white rounded-tl-[12px] rounded-tr-[4px] rounded-br-[12px] rounded-bl-[12px] px-[14px] py-[10px] flex items-center gap-[8px] font-secondary font-medium text-[12px] text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-transparent hover:border-[#91C6F2] transition-all cursor-pointer outline-none"
+                  className="bg-white rounded-tl-[12px] rounded-tr-[4px] rounded-br-[12px] rounded-bl-[12px] px-[14px] py-[10px] flex items-center gap-[8px] type-caption !font-medium text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-transparent hover:border-[#91C6F2] transition-all cursor-pointer outline-none"
                 >
                   <span>{activeCategory}</span>
                   <svg
-                    className={`w-[10px] h-[10px] text-[#111111] transition-transform duration-200 ${
-                      isDropdownOpen ? 'rotate-180' : ''
-                    }`}
+                    className={`w-[10px] h-[10px] text-[#111111] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
+                      }`}
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -210,11 +206,10 @@ export const WhereYouWouldFitSection: React.FC = () => {
                             setActiveCategory(category);
                             setIsDropdownOpen(false);
                           }}
-                          className={`w-full text-left px-[12px] py-[8px] rounded-[8px] font-secondary text-[12px] leading-[16px] transition-colors cursor-pointer border-none outline-none ${
-                            isSelected
-                              ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
-                              : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
-                          }`}
+                          className={`w-full text-left px-[12px] py-[8px] rounded-[8px] type-caption transition-colors cursor-pointer border-none outline-none ${isSelected
+                            ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
+                            : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
+                            }`}
                         >
                           {category}
                         </button>
@@ -233,7 +228,7 @@ export const WhereYouWouldFitSection: React.FC = () => {
                   className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px_8px_16px_16px] lg:rounded-[16px] p-[16px] lg:p-[24px] flex flex-col gap-[12px] lg:gap-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] lg:shadow-none hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group"
                 >
                   {/* Title */}
-                  <h3 className="font-primary font-normal text-[20px] lg:text-[32px] leading-[28px] lg:leading-[40px] tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
+                  <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
                     {job.title}
                   </h3>
 
@@ -243,30 +238,30 @@ export const WhereYouWouldFitSection: React.FC = () => {
                     <div className="flex flex-col lg:flex-row lg:items-center gap-[6px] lg:gap-[48px] xl:gap-[60px]">
                       {/* Experience */}
                       <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                        <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
+                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
                           Experience:
                         </span>
-                        <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
+                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
                           {job.experience}
                         </span>
                       </div>
 
                       {/* Category */}
                       <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                        <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
+                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
                           Category:
                         </span>
-                        <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
+                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
                           {job.roleTag}
                         </span>
                       </div>
 
                       {/* Eligibility */}
                       <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                        <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
+                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
                           Eligibility:
                         </span>
-                        <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#000000] lg:text-[#2A2A2A] tracking-[0.01em]">
+                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
                           {job.eligibility}
                         </span>
                       </div>
@@ -287,43 +282,100 @@ export const WhereYouWouldFitSection: React.FC = () => {
 
           </div>
 
-          {/* "Don't see a fit?" Feature Banner Card */}
-          <div className="relative w-full aspect-[362/450] sm:aspect-[1320/520] lg:aspect-[1320/433] min-h-[420px] lg:min-h-[433px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[30px] lg:rounded-tr-[10px] lg:rounded-br-[30px] lg:rounded-bl-[30px] overflow-hidden flex flex-col justify-end lg:justify-stretch">
-            
-            {/* Background Architectural Glass Image */}
-            <div className="absolute inset-0 z-0">
-              <Image
-                src="/images/careers/where-you-would-fit/img_dont_see_a_fit.png"
-                alt="Don't see a fit background"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 1320px"
-                className="object-cover object-[75%_center] lg:object-right"
-              />
-            </div>
+                    {/* "Don't see a fit?" Feature Banner Card */}
+          <div className="w-full lg:rounded-tl-[30px] lg:rounded-tr-[10px] lg:rounded-br-[30px] lg:rounded-bl-[30px] lg:overflow-hidden lg:h-[433px]">
 
-            {/* Mint Green Content Card */}
-            <div className="relative z-10 w-full lg:w-[48%] xl:w-[539px] h-auto lg:h-full bg-[#63CCB7] rounded-tl-[20px] rounded-tr-[0px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[30px] lg:rounded-tr-[0px] lg:rounded-br-[60px] lg:rounded-bl-[30px] p-[20px] sm:p-[28px] lg:p-[36px] xl:p-[40px] flex flex-col justify-center gap-[14px] lg:gap-[18px] xl:gap-[20px]">
-              
-              {/* Heading */}
-              <h3 className="font-primary font-normal text-[28px] sm:text-[32px] lg:text-[40px] xl:text-[52px] leading-[1.15] tracking-[-0.01em] text-[#042849]">
-                Don&apos;t see a fit?
-              </h3>
-
-              {/* Description */}
-              <p className="font-secondary font-normal text-[14px] lg:text-[16px] xl:text-[20px] leading-[1.4] text-[#111111] max-w-[459px]">
-                We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
-              </p>
-
-              {/* Write to us CTA Button from standard CTA component */}
-              <div className="mt-[4px] w-fit">
-                <Link href="mailto:careers@waterlabs.ai">
-                  <CTA variant="dark-bg">
-                    Write to us
-                  </CTA>
-                </Link>
+            {/* Desktop View (lg: 1024px+, Figma node 3883-10419) */}
+            <div className="hidden lg:flex relative w-full h-full">
+              {/* Background Architectural Glass Image */}
+              <div className="absolute inset-0 z-0">
+                <Image
+                  src="/images/careers/where-you-would-fit/img_dont_see_a_fit.png"
+                  alt="Don't see a fit background"
+                  fill
+                  priority
+                  sizes="1320px"
+                  className="object-cover object-[80%_center] xl:object-right"
+                />
               </div>
 
+              {/* Left Mint Green Card */}
+              <div className="relative z-10 w-[36%] xl:w-[539px] h-full bg-[#63CCB7] rounded-tl-[30px] rounded-tr-[0px] rounded-br-[60px] rounded-bl-[30px] p-[32px] xl:p-[40px] flex flex-col justify-center gap-[16px] xl:gap-[20px]">
+                <h3 className="font-primary text-[36px] xl:text-[52px] leading-[44px] xl:leading-[60px] tracking-[-0.01em] text-[#042849]">
+                  Don&apos;t see a fit?
+                </h3>
+
+                <div className="flex flex-col gap-[16px] xl:gap-[26px]">
+                  <p className="font-secondary text-[15px] xl:text-[20px] leading-[22px] xl:leading-[28px] text-[#111111] max-w-[459px]">
+                    We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
+                  </p>
+
+                  <div className="w-fit">
+                    <Link href="mailto:careers@waterlabs.ai">
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center h-[40px] xl:h-[44px] px-[16px] xl:px-[20px] py-[8px] xl:py-[10px] gap-[8px] xl:gap-[10px] bg-white rounded-[64px] font-secondary text-[14px] xl:text-[16px] leading-[20px] xl:leading-[24px] font-medium text-[#042849] hover:bg-gradient-to-br hover:from-[#042849] hover:from-[40%] hover:to-[#1E5667] hover:text-white transition-all duration-300 group cursor-pointer border-none outline-none"
+                      >
+                        <span className="text-[#042849] group-hover:text-white transition-colors duration-300">
+                          Write to us
+                        </span>
+                        <ChevronRight className="text-[#042849] group-hover:text-white transition-colors duration-300" />
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile & Tablet View
+                - Normal document flow (Image first, Content second)
+                - Overlap using negative top-margin so top-left rounded radius curves into the image above
+                - Enhanced tablet proportions and synced radius matching Figma
+            */}
+            <div className="flex lg:hidden flex-col w-full rounded-tl-[20px] sm:rounded-tl-[30px] rounded-tr-[10px] rounded-br-[20px] sm:rounded-br-[30px] rounded-bl-[20px] sm:rounded-bl-[30px] overflow-hidden">
+
+              {/* Mobile / Tablet Image */}
+              <div className="w-full aspect-[16/10] sm:aspect-[16/9] md:h-[320px] overflow-hidden">
+                <Image
+                  src="/images/careers/where-you-would-fit/where-would-you-fit-mobile.jpg"
+                  alt="Don't see a fit background"
+                  width={1320}
+                  height={840}
+                  priority
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+
+              {/* Mobile / Tablet Content Card with synced corner radius overlapping the image */}
+              <div className="relative z-10 w-full bg-[#63CCB7] -mt-[24px] sm:-mt-[36px] md:-mt-[44px] rounded-tl-[24px] sm:rounded-tl-[36px] md:rounded-tl-[44px] rounded-tr-[0px] p-[24px] sm:p-[32px] md:p-[48px] flex flex-col gap-[18px] sm:gap-[22px] md:gap-[28px]">
+
+                <h3 className="type-h3 sm:type-h2 md:text-[44px] md:leading-[52px] tracking-[-0.01em] text-[#042849]">
+                  Don&apos;t see a fit?
+                </h3>
+
+                <div className="flex flex-col gap-[16px] sm:gap-[20px] md:gap-[24px]">
+
+                  <p className="type-body-xs sm:type-body-s md:text-[18px] md:leading-[28px] text-[#111111] max-w-[620px]">
+                    We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
+                  </p>
+
+                  <div className="w-fit">
+                    <Link href="mailto:careers@waterlabs.ai">
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center h-[40px] md:h-[44px] px-[16px] md:px-[20px] py-[8px] md:py-[10px] gap-[8px] md:gap-[10px] bg-white rounded-[64px] type-cta text-[#042849] hover:bg-gradient-to-br hover:from-[#042849] hover:from-[40%] hover:to-[#1E5667] hover:text-white transition-all duration-300 group cursor-pointer border-none outline-none"
+                      >
+                        <span className="text-[#042849] group-hover:text-white transition-colors duration-300">
+                          Write to us
+                        </span>
+
+                        <ChevronRight className="text-[#042849] group-hover:text-white transition-colors duration-300 scale-75 md:scale-100" />
+                      </button>
+                    </Link>
+                  </div>
+
+                </div>
+              </div>
             </div>
 
           </div>

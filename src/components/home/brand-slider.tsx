@@ -63,7 +63,7 @@ export const BrandSlider: React.FC = () => {
         
         {/* Header Section */}
         <div className="shrink-0">
-          <h2 className="font-primary font-normal text-[24px] lg:text-[40px] leading-[1.33] lg:leading-[1.2] tracking-[-0.01em]">
+          <h2 className="type-h4">
             <span className="text-electric-blue block lg:inline">Trusted at the scale </span>
             <span className="text-[#2A2A2A] block lg:inline">healthcare runs at</span>
           </h2>
