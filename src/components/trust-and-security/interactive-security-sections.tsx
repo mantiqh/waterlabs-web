@@ -13,9 +13,9 @@ export const InteractiveSecuritySections: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Responsive target line: 80px on mobile/tablet (top-0 indicator), 140px on desktop
+      // Responsive target line: 120px on mobile/tablet (60px navbar + indicator), 140px on desktop
       const isMobile = window.innerWidth < 1024;
-      const targetY = isMobile ? 80 : 140;
+      const targetY = isMobile ? 120 : 140;
 
       let activeId = topics[0].id;
       for (let i = 0; i < topics.length; i++) {
@@ -44,7 +44,7 @@ export const InteractiveSecuritySections: React.FC = () => {
     const element = document.getElementById(id);
     if (element) {
       const isMobile = window.innerWidth < 1024;
-      const yOffset = isMobile ? -65 : -90;
+      const yOffset = isMobile ? -115 : -90;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
@@ -73,10 +73,10 @@ export const InteractiveSecuritySections: React.FC = () => {
       {/* 
         =============================================================================
         MOBILE / TABLET STICKY INDICATOR BAR
-        - Sticky at top-0 replacing navbar when this section is active
+        - Sticky directly below navbar at top-[60px] taking full width (w-full px-0)
         =============================================================================
       */}
-      <div className="block lg:hidden sticky top-0 z-40 px-[16px] pt-0 pb-[8px] bg-transparent transition-all duration-300">
+      <div className="block lg:hidden sticky top-[60px] z-40 w-full px-0 pt-0 pb-0 bg-transparent transition-all duration-300">
         <TopicIndicator activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
       </div>
 

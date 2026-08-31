@@ -28,9 +28,9 @@ export const CTASection: React.FC = () => {
                 See it run on your payer mix.
               </span>
             </div>
-            <h2 className="type-h2 text-white">
+            <h3 className="type-h3 text-white">
               Get in touch with us.
-            </h2>
+            </h3>
           </div>
 
           {/* Right CTA Buttons (Exactly 2 buttons: Get a demo & Talk to a specialist) */}
@@ -40,20 +40,23 @@ export const CTASection: React.FC = () => {
             </CTA>
             
             {/* Small Screen: Outline Button */}
-            <CTA 
-              variant="outline" 
-              className="lg:hidden h-[38px] text-[14px] leading-[20px]"
-            >
-              Talk to a specialist
-            </CTA>
+            <div className="block lg:hidden">
+              <CTA 
+                variant="outline" 
+                className="h-[38px] text-[14px] leading-[20px]"
+              >
+                Talk to a specialist
+              </CTA>
+            </div>
 
             {/* Desktop: Default White Button */}
-            <CTA 
-              variant="dark-bg" 
-              className="hidden lg:inline-flex"
-            >
-              Talk to a specialist
-            </CTA>
+            <div className="hidden lg:block">
+              <CTA 
+                variant="dark-bg"
+              >
+                Talk to a specialist
+              </CTA>
+            </div>
           </div>
 
         </div>
