@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           <div className="flex flex-col gap-[20px] w-full flex-1 min-w-0 lg:max-w-[700px]">
             <div className="flex flex-row items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2]" />
-              <span className="type-caption lg:!text-[18px] lg:!leading-[26px] text-[#D7DCE2]">
+              <span className="type-caption text-[#D7DCE2]">
                 {data?.heroSubheading || 'Agentic RCM built from inside healthcare'}
               </span>
             </div>

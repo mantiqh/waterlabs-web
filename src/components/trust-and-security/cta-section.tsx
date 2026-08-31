@@ -48,13 +48,13 @@ export const TrustCTASection: React.FC = () => {
             {/* Frame 17: Tagline */}
             <div className="flex flex-row items-center gap-[8px] max-w-full">
               <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="font-sans font-normal text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] tracking-[0.01em] text-white">
+              <span className="type-body-xxs tracking-[0.01em] text-white">
                 Don&apos;t just automate your revenue cycle. Apply intelligence to it.
               </span>
             </div>
 
             {/* Display/H3 Heading with #91C6F2 accent for "Ours has answers." */}
-            <h2 className="font-display font-normal text-[28px] sm:text-[36px] md:text-[42px] lg:text-[48px] leading-[36px] sm:leading-[44px] md:leading-[50px] lg:leading-[56px] tracking-[-0.01em]">
+            <h2 className="type-h3 tracking-[-0.01em]">
               <span className="text-white">
                 Your security team<br />
                 probably has questions.<br />
@@ -64,8 +64,8 @@ export const TrustCTASection: React.FC = () => {
               </span>
             </h2>
 
-            {/* Subtext (18px/26px #F4F6F9) */}
-            <p className="font-sans font-normal text-[15px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-[#F4F6F9] max-w-[873px]">
+            {/* Subtext */}
+            <p className="type-body-s text-[#F4F6F9] max-w-[873px]">
               Send us your questionnaire, your review,<br className="hidden sm:inline" />{' '}
               your hardest questions. Or <Link href="mailto:security@waterlabs.ai" className="hover:text-white transition-colors">contact us here</Link>.
             </p>

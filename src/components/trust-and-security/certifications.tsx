@@ -179,10 +179,10 @@ export const CertificationsSection: React.FC = () => {
                     <div className="w-full h-0 border-t border-[#D7DCE2]" />
 
                     <div className="flex flex-col gap-[12px] w-full">
-                      <h4 className="font-secondary text-[20px] leading-[28px] font-normal text-[#0F68D6]">
+                      <h4 className="type-body-m text-[#0F68D6]">
                         {item.title}
                       </h4>
-                      <p className="font-secondary text-[16px] leading-[24px] font-normal tracking-[0.01em] text-[#111111]">
+                      <p className="type-body-xs tracking-[0.01em] text-[#111111]">
                         {item.description}
                       </p>
                     </div>
@@ -218,10 +218,10 @@ export const CertificationsSection: React.FC = () => {
                       <div className="w-full h-0 border-t border-[#D7DCE2]" />
 
                       <div className="flex flex-col gap-[12px]">
-                        <h4 className="font-secondary text-[16px] leading-[26px] font-normal text-[#0F68D6]">
+                        <h4 className="type-body-s text-[#0F68D6]">
                           {item.title}
                         </h4>
-                        <p className="font-secondary text-[14px] leading-[20px] font-normal tracking-[0.01em] text-[#111111]">
+                        <p className="type-body-xxs tracking-[0.01em] text-[#111111]">
                           {item.description}
                         </p>
                       </div>
