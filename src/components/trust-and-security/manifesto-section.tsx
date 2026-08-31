@@ -16,7 +16,7 @@ export const ManifestoSection: React.FC = () => {
         <div className="w-full max-w-[1320px] mx-auto flex flex-col justify-center">
 
           {/* Main Statement Text */}
-          <h2 className="font-primary font-normal text-[24px] sm:text-[28px] lg:text-[36px] xl:text-[48px] leading-[32px] sm:leading-[36px] lg:leading-[44px] xl:leading-[56px] tracking-[-0.01em]">
+          <h2 className="type-h3">
             <span className="text-[#2A2A2A]">
               Most AI vendors fumble this conversation. Here&apos;s our version:{' '}
             </span>

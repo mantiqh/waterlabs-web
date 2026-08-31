@@ -17,16 +17,16 @@ const complianceList: ComplianceItem[] = [
   {
     id: 'soc2',
     logo: '/images/trust-and-security/certifications/image 98.png',
-    logoWidth: 79,
-    logoHeight: 79,
+    logoWidth: 65,
+    logoHeight: 82,
     title: 'SOC 2 Type II',
-    description: 'The standard for organizational and operational security controls.',
+    description: 'Our controls, tested over time. Not a one-day snapshot.',
   },
   {
     id: 'hipaa',
     logo: '/images/trust-and-security/certifications/Hippa_logo.png',
-    logoWidth: 84,
-    logoHeight: 63,
+    logoWidth: 144,
+    logoHeight: 79,
     title: 'HIPAA',
     description: 'The US baseline for handling protected health information.',
   },
@@ -54,16 +54,17 @@ export const CertificationsSection: React.FC = () => {
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
-    const { scrollLeft, clientWidth } = carouselRef.current;
-    const index = Math.round(scrollLeft / clientWidth);
+    const { scrollLeft } = carouselRef.current;
+    const cardWidth = 289;
+    const index = Math.round(scrollLeft / cardWidth);
     setActiveCardIndex(Math.min(Math.max(index, 0), complianceList.length - 1));
   };
 
   const scrollToCard = (index: number) => {
     if (!carouselRef.current) return;
-    const clientWidth = carouselRef.current.clientWidth;
+    const cardWidth = 289;
     carouselRef.current.scrollTo({
-      left: index * clientWidth,
+      left: index * cardWidth,
       behavior: 'smooth',
     });
     setActiveCardIndex(index);
@@ -93,7 +94,7 @@ export const CertificationsSection: React.FC = () => {
               1. Top Headline (Placed directly at top of #DBE2F0 section)
               - Token: font/h4 (General Sans, 40px / 48px, -0.01em, Regular 400, #042849)
             */}
-            <h2 className="font-primary font-normal text-[24px] sm:text-[30px] lg:text-[40px] leading-[32px] sm:leading-[38px] lg:leading-[48px] tracking-[-0.01em] text-[#042849] max-w-[920px]">
+            <h2 className="type-h4 text-[#042849] max-w-[920px]">
               All infrastructure runs in the United States. For{' '}
               <br className="hidden lg:inline" />
               many clients that&apos;s not a preference, it&apos;s a{' '}
@@ -126,9 +127,8 @@ export const CertificationsSection: React.FC = () => {
                     alt="Data Center Engineer"
                     fill
                     priority
-                    className="object-cover object-[72%_center] lg:object-center opacity-90"
+                    className="object-cover object-[72%_center] lg:object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
                 </div>
 
                 {/* Mobile Banner Graphic Background */}
@@ -138,20 +138,19 @@ export const CertificationsSection: React.FC = () => {
                     alt="Data Center Engineer Mobile"
                     fill
                     priority
-                    className="object-cover object-center opacity-90"
+                    className="object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none" />
                 </div>
 
-                <div className="relative z-10 flex flex-col gap-[8px] lg:gap-[12px] max-w-[322px] sm:max-w-[440px] lg:max-w-[895px]">
-                  <h3 className="font-primary text-[32px] sm:text-[40px] lg:text-[52px] leading-[38px] sm:leading-[48px] lg:leading-[60px] tracking-[-0.01em] text-[#F4F6F9]">
+                <div className="relative z-10 flex flex-col gap-[8px] lg:gap-[12px] max-w-[895px]">
+                  <h3 className="type-h2 text-[#F4F6F9]">
                     <span className="font-normal">
                       The floor,
                       <br />
                     </span>
                     <span className="text-[#63CCB7] font-bold">cleared.</span>
                   </h3>
-                  <p className="font-secondary font-normal text-[14px] sm:text-[16px] lg:text-[18px] leading-[24px] lg:leading-[26px] tracking-normal text-[#D7DCE2]">
+                  <p className="type-body-xs text-[#D7DCE2]">
                     We comply with all required healthcare standards.
                   </p>
                 </div>
@@ -160,28 +159,30 @@ export const CertificationsSection: React.FC = () => {
               {/* 
                 Desktop: 4 Compliance Badge Columns (Figma Frame 2147203261 / Frame 2147203252)
               */}
-              <div className="hidden lg:grid grid-cols-2 xl:grid-cols-4 gap-[20px] xl:gap-[24px] w-full px-[24px]">
-                {complianceList.map((item, idx) => (
+              <div className="hidden lg:grid grid-cols-4 gap-0 w-full px-[8px] xl:px-[16px]">
+                {complianceList.map((item) => (
                   <div 
                     key={item.id}
-                    className={`flex flex-col gap-[14px] p-[16px] ${
-                      idx > 0 ? 'border-l border-[#000000]/10 pl-[24px]' : ''
-                    }`}
+                    className="flex flex-col items-start px-[14px] xl:px-[20px] py-[14px] gap-[32px]"
                   >
-                    <div className="h-[79px] flex items-center justify-start">
+                    <div className="h-[82px] flex items-center justify-start">
                       <Image
                         src={item.logo}
                         alt={item.title}
                         width={item.logoWidth}
                         height={item.logoHeight}
-                        className="object-contain max-h-[79px] w-auto"
+                        className="object-contain max-h-[82px] w-auto"
                       />
                     </div>
-                    <div className="flex flex-col gap-[8px]">
-                      <h4 className="font-primary font-normal text-[18px] xl:text-[20px] leading-[24px] xl:leading-[28px] text-[#042849]">
+
+                    {/* Horizontal Divider Vector 7 */}
+                    <div className="w-full h-0 border-t border-[#D7DCE2]" />
+
+                    <div className="flex flex-col gap-[12px] w-full">
+                      <h4 className="font-secondary text-[20px] leading-[28px] font-normal text-[#0F68D6]">
                         {item.title}
                       </h4>
-                      <p className="font-secondary font-normal text-[13px] xl:text-[14px] leading-[20px] xl:leading-[22px] text-[#111111]/80">
+                      <p className="font-secondary text-[16px] leading-[24px] font-normal tracking-[0.01em] text-[#111111]">
                         {item.description}
                       </p>
                     </div>
@@ -190,33 +191,37 @@ export const CertificationsSection: React.FC = () => {
               </div>
 
               {/* 
-                Mobile / Tablet: Carousel for Compliance Cards
+                Mobile / Tablet: Carousel for Compliance Cards (Figma Frame 2147203261 / 3883-11307)
               */}
-              <div className="flex lg:hidden flex-col gap-[16px] w-full px-[20px]">
+              <div className="flex lg:hidden flex-col gap-[20px] w-full p-[20px]">
                 <div 
                   ref={carouselRef}
                   onScroll={handleScroll}
-                  className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-[16px] w-full"
+                  className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-[20px] w-full"
                 >
                   {complianceList.map((item) => (
                     <div 
                       key={`mobile-${item.id}`}
-                      className="w-full min-w-full snap-center flex flex-col gap-[16px] p-[20px] rounded-[16px] bg-[#F4F6F9]"
+                      className="w-[269px] shrink-0 snap-start flex flex-col gap-[32px]"
                     >
-                      <div className="h-[64px] flex items-center justify-start">
+                      <div className="h-[82px] flex items-center justify-start">
                         <Image
                           src={item.logo}
                           alt={item.title}
                           width={item.logoWidth}
                           height={item.logoHeight}
-                          className="object-contain max-h-[64px] w-auto"
+                          className="object-contain max-h-[82px] w-auto"
                         />
                       </div>
-                      <div className="flex flex-col gap-[6px]">
-                        <h4 className="font-primary font-normal text-[18px] leading-[26px] text-[#042849]">
+
+                      {/* Horizontal Divider Vector 7 */}
+                      <div className="w-full h-0 border-t border-[#D7DCE2]" />
+
+                      <div className="flex flex-col gap-[12px]">
+                        <h4 className="font-secondary text-[16px] leading-[26px] font-normal text-[#0F68D6]">
                           {item.title}
                         </h4>
-                        <p className="font-secondary font-normal text-[14px] leading-[22px] text-[#111111]/80">
+                        <p className="font-secondary text-[14px] leading-[20px] font-normal tracking-[0.01em] text-[#111111]">
                           {item.description}
                         </p>
                       </div>
@@ -224,20 +229,23 @@ export const CertificationsSection: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Carousel Dots */}
-                <div className="flex flex-row items-center gap-[6px] self-start pt-[4px]">
+                {/* Carousel Indicators (Figma node 3883-11307) */}
+                <div className="flex flex-row items-center gap-[5px] self-start pt-[4px]">
                   {complianceList.map((_, idx) => {
                     const isActive = activeCardIndex === idx;
+                    const isAdjacent = Math.abs(activeCardIndex - idx) === 1;
                     return (
                       <button
                         key={`compliance-dot-${idx}`}
                         type="button"
                         aria-label={`Slide ${idx + 1}`}
                         onClick={() => scrollToCard(idx)}
-                        className={`h-[6px] rounded-[32px] transition-all duration-300 ${
+                        className={`h-[5px] rounded-[32px] transition-all duration-300 ${
                           isActive
-                            ? 'w-[32px] bg-[#042849]'
-                            : 'w-[16px] bg-[#042849]/20 hover:bg-[#042849]/40'
+                            ? 'w-[32px] bg-[#0F68D6]'
+                            : isAdjacent
+                            ? 'w-[16px] bg-[#0F68D6]/20 hover:bg-[#0F68D6]/40'
+                            : 'w-[6px] bg-[#0F68D6]/20 hover:bg-[#0F68D6]/40'
                         }`}
                       />
                     );

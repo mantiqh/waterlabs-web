@@ -74,7 +74,7 @@ export const OurOwnCloudSection: React.FC = () => {
                 />
               </div>
 
-              <h2 className="relative z-10 font-primary text-[32px] sm:text-[40px] lg:text-[52px] leading-[38px] sm:leading-[48px] lg:leading-[60px] tracking-[-0.01em] max-w-[322px] sm:max-w-[420px] lg:max-w-[895px]">
+              <h2 className="relative z-10 type-h2 max-w-[895px]">
                 <span className="text-[#042849] font-normal">
                   We didn&apos;t
                   <br />
@@ -86,7 +86,7 @@ export const OurOwnCloudSection: React.FC = () => {
             </div>
 
             {/* Intro Paragraph */}
-            <p className="font-secondary font-normal text-[15px] sm:text-[16px] xl:text-[18px] leading-[24px] xl:leading-[26px] text-white">
+            <p className="type-body-xs text-white">
               Most companies in this space run on someone else&apos;s cloud and trust the landlord. Waterlabs built and owns its own, a data center we run end to end, on our own hardware, housed entirely in the United States. Every agent, every model, every line that touches your workflow runs inside the infrastructure we control.
             </p>
 
@@ -107,10 +107,10 @@ export const OurOwnCloudSection: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="font-primary font-normal text-[24px] sm:text-[28px] lg:text-[30px] xl:text-[32px] leading-[32px] sm:leading-[36px] lg:leading-[38px] xl:leading-[40px] tracking-[-0.01em] text-white">
+                  <h4 className="type-h5 text-white">
                     No Shared Walls
                   </h4>
-                  <p className="font-secondary font-normal text-[14px] sm:text-[15px] xl:text-[17px] leading-[22px] sm:leading-[24px] xl:leading-[26px] text-white/90">
+                  <p className="type-body-xxs text-white/90">
                     Because we own the environment, we ensure that no client shares space with another. Your agents, your data path, your sealed world. The industry&apos;s biggest fear, one breach cascading across everyone on a shared platform, is the one thing this architecture makes impossible.
                   </p>
                 </div>
@@ -128,10 +128,10 @@ export const OurOwnCloudSection: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="font-primary font-normal text-[24px] sm:text-[28px] lg:text-[30px] xl:text-[32px] leading-[32px] sm:leading-[36px] lg:leading-[38px] xl:leading-[40px] tracking-[-0.01em] text-white">
+                  <h4 className="type-h5 text-white">
                     Built to take a hit
                   </h4>
-                  <p className="font-secondary font-normal text-[14px] sm:text-[15px] xl:text-[17px] leading-[22px] sm:leading-[24px] xl:leading-[26px] text-white/90">
+                  <p className="type-body-xxs text-white/90">
                     The system watches itself and heals itself. Backups are continuous and mirrored. If something fails, work continues. Recovery is built in, not bolted on.
                   </p>
                 </div>
@@ -149,10 +149,10 @@ export const OurOwnCloudSection: React.FC = () => {
                   />
                 </div>
                 <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="font-primary font-normal text-[24px] sm:text-[28px] lg:text-[30px] xl:text-[32px] leading-[32px] sm:leading-[36px] lg:leading-[38px] xl:leading-[40px] tracking-[-0.01em] text-white">
+                  <h4 className="type-h5 text-white">
                     Independently tested
                   </h4>
-                  <p className="font-secondary font-normal text-[14px] sm:text-[15px] xl:text-[17px] leading-[22px] sm:leading-[24px] xl:leading-[26px] text-white/90">
+                  <p className="type-body-xxs text-white/90">
                     The environment is independently penetration-tested, and we fix what the testers find. Security here is deep-rooted.
                   </p>
                 </div>
@@ -182,10 +182,10 @@ export const OurOwnCloudSection: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="font-primary font-normal text-[20px] leading-[28px] text-[#63CCB7]">
+                    <h4 className="type-h5 text-[#63CCB7]">
                       No shared walls
                     </h4>
-                    <p className="font-secondary font-normal text-[14px] leading-[24px] text-white">
+                    <p className="type-body-xxs text-white">
                       Because we own the environment, we ensure that no client shares space with another. Your agents, your data path, your sealed world. The industry&apos;s biggest fear, one breach cascading across everyone on a shared platform, is the one thing this architecture makes impossible.
                     </p>
                   </div>
@@ -203,10 +203,10 @@ export const OurOwnCloudSection: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="font-primary font-normal text-[20px] leading-[28px] text-[#63CCB7]">
+                    <h4 className="type-h5 text-[#63CCB7]">
                       Built to take a hit
                     </h4>
-                    <p className="font-secondary font-normal text-[14px] leading-[24px] text-white">
+                    <p className="type-body-xxs text-white">
                       The system watches itself and heals itself. Backups are continuous and mirrored, not tapes and manual restores. If something fails, work continues. Recovery is built in, not bolted on.
                     </p>
                   </div>
@@ -224,10 +224,10 @@ export const OurOwnCloudSection: React.FC = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="font-primary font-normal text-[20px] leading-[28px] text-[#63CCB7]">
+                    <h4 className="type-h5 text-[#63CCB7]">
                       Independently tested
                     </h4>
-                    <p className="font-secondary font-normal text-[14px] leading-[24px] text-white">
+                    <p className="type-body-xxs text-white">
                       The environment is independently penetration-tested, and we fix what the testers find. Security here is deep-rooted.
                     </p>
                   </div>

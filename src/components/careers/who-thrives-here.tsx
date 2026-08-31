@@ -26,13 +26,13 @@ export const WhoThrivesHereSection: React.FC = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#63CCB7] shrink-0" />
-              <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#D7DCE2] tracking-[0.01em]">
+              <span className="type-caption text-[#D7DCE2]">
                 The Fit
               </span>
             </div>
 
             {/* Title */}
-            <h2 className="font-primary font-normal text-[36px] lg:text-[48px] xl:text-[68px] leading-[48px] lg:leading-[56px] xl:leading-[76px] tracking-[-0.01em] text-[#F4F6F9]">
+            <h2 className="type-h1 tracking-[-0.01em] text-[#F4F6F9]">
               Who Thrives Here
             </h2>
           </div>
@@ -42,19 +42,19 @@ export const WhoThrivesHereSection: React.FC = () => {
             
             {/* Left Column: Mission Description & Email Contact */}
             <div className="w-full lg:w-1/2 xl:w-[536px] flex flex-col justify-between gap-[24px] lg:gap-[32px] xl:gap-[48px]">
-              <p className="font-primary font-normal text-[20px] lg:text-[24px] xl:text-[32px] leading-[28px] lg:leading-[34px] xl:leading-[40px] tracking-[-0.01em] text-white">
+              <p className="type-h5 tracking-[-0.01em] text-white">
                 We are not for everyone, and that&apos;s deliberate. People who do their best work here are ambitious, driven, self-starters, and not afraid of ambiguity.
               </p>
 
               {/* Get in touch CTA */}
               <div className="flex flex-col gap-[8px] lg:gap-[12px]">
-                <p className="font-secondary font-medium text-[16px] lg:text-[18px] xl:text-[20px] leading-[26px] xl:leading-[28px] text-white">
+                <p className="type-body-s text-white">
                   If this sounds like you, apply below.<br />
                   Or get in touch:
                 </p>
                 <Link
                   href="mailto:hiring@waterlabs.ai"
-                  className="font-secondary font-medium text-[16px] lg:text-[18px] xl:text-[20px] leading-[26px] xl:leading-[28px] text-white no-underline hover:opacity-90 transition-opacity w-fit whitespace-nowrap"
+                  className="type-body-s !font-medium text-white no-underline hover:opacity-90 transition-opacity w-fit whitespace-nowrap"
                 >
                   hiring@waterlabs.ai
                 </Link>

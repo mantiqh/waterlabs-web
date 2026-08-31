@@ -17,7 +17,7 @@ export const TrustCTASection: React.FC = () => {
       */}
       <div className="relative w-full min-h-[350px] lg:h-[444px] bg-[#000000] rounded-tr-[30px] rounded-br-none lg:rounded-tr-[80px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px] flex flex-col justify-center overflow-hidden">
         
-        {/* Desktop Background Image & Gradient */}
+        {/* Desktop Background Image */}
         <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
           <Image
             src="/images/trust-and-security/cta-section/img_trust_cta_desktop.png"
@@ -26,7 +26,6 @@ export const TrustCTASection: React.FC = () => {
             priority
             className="object-cover object-right"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
         </div>
 
         {/* Mobile / Tablet Background Image */}
@@ -43,21 +42,22 @@ export const TrustCTASection: React.FC = () => {
         {/* Content Container (Frame 21: max-w 1320px, height 284px on desktop) */}
         <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[28px] lg:gap-[40px]">
           
-          {/* Left Text Block (Frame 1272628347: width 873px) */}
-          <div className="w-full max-w-[873px] flex flex-col justify-center items-start gap-[16px] lg:gap-[20px]">
+          {/* Left Text Block (Frame 2147203251: width 873px, height 284px) */}
+          <div className="w-full lg:w-[873px] flex flex-col justify-center items-start gap-[16px] lg:gap-[20px]">
             
             {/* Frame 17: Tagline */}
-            <div className="flex items-center gap-[6px] lg:gap-[8px]">
-              <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-white tracking-[0.01em]">
+            <div className="flex flex-row items-center gap-[8px] max-w-full">
+              <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
+              <span className="font-sans font-normal text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] tracking-[0.01em] text-white">
                 Don&apos;t just automate your revenue cycle. Apply intelligence to it.
               </span>
             </div>
 
             {/* Display/H3 Heading with #91C6F2 accent for "Ours has answers." */}
-            <h2 className="font-primary font-normal text-[28px] sm:text-[36px] lg:text-[48px] leading-[36px] sm:leading-[44px] lg:leading-[56px] tracking-[-0.01em]">
+            <h2 className="font-display font-normal text-[28px] sm:text-[36px] md:text-[42px] lg:text-[48px] leading-[36px] sm:leading-[44px] md:leading-[50px] lg:leading-[56px] tracking-[-0.01em]">
               <span className="text-white">
-                Your security team<br className="hidden sm:inline" /> probably has questions.<br className="hidden sm:inline" />{' '}
+                Your security team<br />
+                probably has questions.<br />
               </span>
               <span className="text-[#91C6F2]">
                 Ours has answers.
@@ -65,8 +65,9 @@ export const TrustCTASection: React.FC = () => {
             </h2>
 
             {/* Subtext (18px/26px #F4F6F9) */}
-            <p className="font-secondary font-normal text-[14px] sm:text-[16px] lg:text-[18px] leading-[22px] sm:leading-[24px] lg:leading-[26px] text-[#F4F6F9]">
-              Send us your questionnaire, your review, your hardest questions. Or <Link href="mailto:security@waterlabs.ai" className="underline hover:text-white transition-colors">contact us here</Link>.
+            <p className="font-sans font-normal text-[15px] sm:text-[18px] leading-[22px] sm:leading-[26px] text-[#F4F6F9] max-w-[873px]">
+              Send us your questionnaire, your review,<br className="hidden sm:inline" />{' '}
+              your hardest questions. Or <Link href="mailto:security@waterlabs.ai" className="hover:text-white transition-colors">contact us here</Link>.
             </p>
 
           </div>

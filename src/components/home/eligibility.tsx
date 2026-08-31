@@ -42,13 +42,13 @@ const EligibilitySection: React.FC = () => {
           {/* Tagline */}
           <div className="flex items-center gap-[8px]">
             <div className="w-[8px] h-[8px] rounded-full bg-white shrink-0" />
-            <span className="font-secondary font-normal text-[14px] lg:text-[16px] leading-[24px] text-[#D7DCE2] tracking-[0.01em]">
+            <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
               Front to Back. No Handoffs.
             </span>
           </div>
 
           {/* Main Title (Display/H2: 52px / 60px) */}
-          <h2 className="font-primary font-normal text-[32px] sm:text-[40px] lg:text-[52px] leading-[40px] lg:leading-[60px] tracking-[-0.01em] text-white max-w-[702px]">
+          <h2 className="type-h2 text-white max-w-[702px]">
             We offer end-to-end coverage:<br />
             from Eligibility to Coding.
           </h2>
@@ -59,10 +59,10 @@ const EligibilitySection: React.FC = () => {
 
           {/* Left Column (315px width) */}
           <div className="w-full lg:w-[315px] shrink-0 flex flex-col justify-center gap-[12px] lg:gap-[16px]">
-            <span className="font-primary font-normal text-[20px] lg:text-[24px] leading-[28px] lg:leading-[32px] tracking-[-0.01em] text-white">
+            <span className="type-h6 text-white">
               Waterlabs covers every stage:
             </span>
-            <h3 className="font-primary font-normal text-[32px] sm:text-[36px] lg:text-[48px] leading-[40px] lg:leading-[56px] text-white tracking-[-0.01em]">
+            <h3 className="type-h3 text-white">
               Eligibility to<br className="hidden lg:block" /> Coding.
             </h3>
           </div>
@@ -83,7 +83,7 @@ const EligibilitySection: React.FC = () => {
 
           {/* Right Column - Descriptive Text (315px width, Display/H6: 24px / 32px) */}
           <div className="w-full lg:w-[315px] shrink-0 flex flex-col justify-center">
-            <p className="font-primary font-normal text-[15px] sm:text-[18px] lg:text-[20px] xl:text-[24px] leading-[24px] sm:leading-[26px] lg:leading-[30px] xl:leading-[32px] text-white tracking-[-0.01em]">
+            <p className="type-body-s text-white">
               Waterlabs covers complete RCM cycle. Exceptions and customizations are handled seamlessly through the human-in-loop model. Agentic intelligence learns and evolves based on your scenarios.
             </p>
           </div>

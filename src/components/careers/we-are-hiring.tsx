@@ -110,25 +110,25 @@ export const WeAreHiringSection: React.FC = () => {
         - Bottom-left curve reveals Section 4's blue color (#0F68D6)
       */}
       <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] lg:py-[60px] xl:py-[80px] lg:px-[40px] xl:px-[60px] overflow-hidden">
-        <div className="max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[40px] xl:gap-[60px]">
+        <div className="max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[20px] lg:gap-[40px] xl:gap-[60px]">
             
           {/* Left Column: Heading Block */}
           <div className="w-full lg:w-[42%] xl:w-[537px] shrink-0 flex flex-col gap-[12px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="font-secondary font-normal text-[12px] lg:text-[16px] leading-[16px] lg:leading-[24px] text-[#7D8690] tracking-[0.01em]">
-                Where You&apos;d Fit
+              <span className="type-caption text-[#7D8690]">
+                Where You had Fit
               </span>
             </div>
 
             {/* Heading */}
-            <h2 className="font-primary font-normal text-[32px] lg:text-[40px] xl:text-[52px] leading-[40px] lg:leading-[48px] xl:leading-[60px] tracking-[-0.01em] text-[#111111]">
+            <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
               We are hiring!
             </h2>
 
             {/* Subheading */}
-            <p className="font-secondary font-normal text-[14px] lg:text-[16px] xl:text-[18px] leading-[24px] lg:leading-[26px] text-[#111111]">
+            <p className="font-secondary text-[14px] leading-[24px] text-[#111111]">
               We&apos;re hiring across roles, and your work matters.
             </p>
           </div>
@@ -156,10 +156,10 @@ export const WeAreHiringSection: React.FC = () => {
 
                 {/* Role Text Content */}
                 <div className="flex flex-col gap-[6px] xl:gap-[8px] flex-1">
-                  <h3 className="font-primary font-normal text-[24px] xl:text-[32px] leading-[32px] xl:leading-[40px] tracking-[-0.01em] text-[#0F68D6]">
+                  <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">
                     {role.title}
                   </h3>
-                  <p className="font-secondary font-normal text-[15px] xl:text-[18px] leading-[22px] xl:leading-[26px] text-[#2A2A2A] max-w-[504px]">
+                  <p className="type-body-xs text-[#2A2A2A] max-w-[504px]">
                     {role.description}
                   </p>
                 </div>
@@ -167,13 +167,12 @@ export const WeAreHiringSection: React.FC = () => {
             ))}
           </div>
 
-          {/* Mobile / Tablet Horizontal Smooth Swipe Slider */}
+          {/* Mobile / Tablet Horizontal Smooth Swipe Slider (Figma Frame 2147203300) */}
           <div className="flex lg:hidden flex-col w-full gap-[20px]">
             <div
               ref={mobileScrollRef}
               onScroll={handleScroll}
-              className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[20px] items-start [&::-webkit-scrollbar]:hidden"
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[20px] items-start no-scrollbar"
             >
               {hiringRoles.map((role, index) => (
                 <div
@@ -182,8 +181,8 @@ export const WeAreHiringSection: React.FC = () => {
                 >
                   {/* Icon */}
                   <div 
-                    className="shrink-0 flex items-center justify-start"
-                    style={{ width: `${role.iconWidthMobile}px`, height: `${role.iconHeightMobile}px` }}
+                    className="shrink-0 flex items-center justify-start h-[62px]"
+                    style={{ width: `${role.iconWidthMobile}px` }}
                   >
                     <div className="relative w-full h-full">
                       <Image
@@ -195,12 +194,12 @@ export const WeAreHiringSection: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Text */}
-                  <div className="flex flex-col gap-[8px]">
-                    <h3 className="font-primary font-normal text-[20px] leading-[28px] tracking-[-0.01em] text-[#0F68D6]">
+                  {/* Text Container (Frame 2147226456) */}
+                  <div className="flex flex-col gap-[14px]">
+                    <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">
                       {role.title}
                     </h3>
-                    <p className="font-secondary font-normal text-[14px] leading-[24px] text-[#2A2A2A]">
+                    <p className="font-secondary text-[14px] leading-[24px] font-normal text-[#2A2A2A]">
                       {role.description}
                     </p>
                   </div>
@@ -208,21 +207,27 @@ export const WeAreHiringSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Mobile Pagination Indicators: Exactly 3 dots matching Figma */}
-            <div className="flex items-center gap-[5px] mt-[16px]">
-              {Array.from({ length: TOTAL_DOTS }).map((_, i) => (
-                <button
-                  key={`hiring-dot-${i}`}
-                  type="button"
-                  onClick={() => scrollToDot(i)}
-                  aria-label={`Go to slide ${i + 1}`}
-                  className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${
-                    activeDotIndex === i
-                      ? 'w-[32px] bg-[#0F68D6]'
-                      : 'w-[12px] bg-[#0F68D6]/20'
-                  }`}
-                />
-              ))}
+            {/* Mobile Carousel Indicators (Figma Frame Carousel indicators) */}
+            <div className="flex items-center gap-[5px] pt-[4px]">
+              {Array.from({ length: TOTAL_DOTS }).map((_, i) => {
+                const isActive = activeDotIndex === i;
+                const diff = Math.abs(activeDotIndex - i);
+                const widthClass = isActive
+                  ? 'w-[32px] bg-[#0F68D6]'
+                  : diff === 1
+                  ? 'w-[16px] bg-[#0F68D6]/20'
+                  : 'w-[6px] bg-[#0F68D6]/20';
+
+                return (
+                  <button
+                    key={`hiring-dot-${i}`}
+                    type="button"
+                    onClick={() => scrollToDot(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${widthClass}`}
+                  />
+                );
+              })}
             </div>
           </div>
 

@@ -22,6 +22,8 @@ const navItems: NavItem[] = [
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   // Close menu on click outside or escape key
@@ -38,33 +40,66 @@ const Navbar: React.FC = () => {
       }
     };
 
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+
+      // Check if interactive security section is currently covering the top of the viewport on small screens
+      const targetSec = document.getElementById('interactive-security-sections');
+      if (targetSec && window.innerWidth < 1024) {
+        const rect = targetSec.getBoundingClientRect();
+        if (rect.top <= 60 && rect.bottom >= 80) {
+          setIsHidden(true);
+        } else {
+          setIsHidden(false);
+        }
+      } else {
+        setIsHidden(false);
+      }
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     }
 
     return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
 
   return (
-    <div ref={menuRef} className="relative w-full max-w-[1320px] mx-auto z-50">
-      <header className="flex flex-row items-center justify-between w-full h-[60px] rounded-[30px] border border-white/24 bg-white/70 backdrop-blur-[13.2px] pl-[24px] pr-[12px] py-[8px] transition-all">
-        {/* Logo */}
-        <Link href="/" className="flex items-center shrink-0" onClick={() => setIsOpen(false)}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/common/logo.svg" alt="Waterlabs AI" className="h-[24px] xl:h-[36px] w-[auto]" />
-        </Link>
+    <div className="w-full h-[60px] lg:h-auto relative max-w-[1320px] mx-auto z-50">
+      <div 
+        ref={menuRef} 
+        className={`fixed top-0 left-0 right-0 z-50 px-[16px] md:px-[28px] lg:relative lg:top-0 lg:left-auto lg:right-auto lg:px-0 w-full max-w-[1320px] mx-auto transition-transform duration-300 ease-out ${
+          isHidden 
+            ? '-translate-y-full opacity-0 pointer-events-none lg:translate-y-0 lg:opacity-100 lg:pointer-events-auto' 
+            : isScrolled
+              ? 'translate-y-0 opacity-100'
+              : 'translate-y-[20px] opacity-100 lg:translate-y-0'
+        }`}
+      >
+        <header className="flex flex-row items-center justify-between w-full h-[60px] rounded-[30px] border border-white/24 bg-white/70 backdrop-blur-[13.2px] pl-[16px] xl:pl-[24px] pr-[8px] xl:pr-[12px] py-[8px] transition-all shadow-[0_4px_24px_rgba(4,40,73,0.06)]">
+          {/* Logo */}
+          <Link href="/" className="flex items-center shrink-0 mr-[6px] xl:mr-0" onClick={() => setIsOpen(false)}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/common/logo.svg" alt="Waterlabs AI" className="h-[22px] lg:h-[24px] xl:h-[30px] 2xl:h-[36px] w-auto" />
+          </Link>
         
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex flex-row gap-[24px] xl:gap-[32px] items-center">
+        <nav className="hidden lg:flex flex-row gap-[10px] xl:gap-[20px] 2xl:gap-[32px] items-center">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="font-secondary font-normal text-[15px] xl:text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-colors whitespace-nowrap"
+              className="text-[13px] xl:text-[14px] 2xl:text-[16px] leading-[20px] text-midnight-blue hover:text-electric-blue transition-colors whitespace-nowrap"
             >
               {item.label}
             </Link>
@@ -72,10 +107,12 @@ const Navbar: React.FC = () => {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:block shrink-0">
-          <CTA variant="light-bg" className="[&>svg]:!text-white">
-            Discover
-          </CTA>
+        <div className="hidden lg:block shrink-0 ml-[6px] xl:ml-0">
+          <Link href="/contact-us">
+            <CTA variant="light-bg" className="h-[38px] xl:h-[44px] px-[14px] xl:px-[20px] text-[13px] xl:text-[15px] 2xl:text-[16px]">
+              Contact Us
+            </CTA>
+          </Link>
         </div>
 
         {/* Mobile Menu Actions */}
@@ -112,39 +149,48 @@ const Navbar: React.FC = () => {
         </div>
       </header>
 
-      {/* Mobile Menu Dropdown expanding in flow to prevent hero content overlapping */}
-      {isOpen && (
-        <div 
-          className="lg:hidden relative mt-[12px] w-full bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[30px] p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top animate-in fade-in slide-in-from-top-2"
-          aria-hidden={!isOpen}
-        >
-          <nav className="flex flex-col gap-[8px]">
-            {navItems.map((item, index) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => setIsOpen(false)}
-                style={{
-                  transitionDelay: `${index * 30 + 50}ms`,
-                }}
-                className="font-secondary font-normal text-[16px] leading-[24px] text-midnight-blue hover:text-electric-blue transition-all duration-200 py-[8px]"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+      {/* Mobile Menu Dropdown overlay */}
+      <div 
+        className={`lg:hidden absolute top-[calc(100%+10px)] left-[16px] right-[16px] md:left-[28px] md:right-[28px] lg:left-0 lg:right-0 bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[30px] p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top ${
+          isOpen
+            ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto visible'
+            : 'opacity-0 -translate-y-4 scale-[0.98] pointer-events-none invisible'
+        }`}
+        aria-hidden={!isOpen}
+      >
+        <nav className="flex flex-col gap-[8px]">
+          {navItems.map((item, index) => (
+            <Link
+              key={item.label}
+              href={item.href}
+              onClick={() => setIsOpen(false)}
+              style={{
+                transitionDelay: isOpen ? `${index * 35 + 80}ms` : '0ms',
+              }}
+              className={`type-body-xxs text-midnight-blue hover:text-electric-blue transition-all duration-300 py-[8px] transform ${
+                isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
           <div 
             style={{
-              transitionDelay: '200ms',
+              transitionDelay: isOpen ? '360ms' : '0ms',
             }}
-            className="pt-[16px] border-t border-white/40 flex flex-col transition-all duration-200"
+            className={`pt-[16px] border-t border-white/40 flex flex-col transition-all duration-300 transform ${
+              isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
+            }`}
           >
-            <CTA variant="light-bg" className="w-full justify-center [&>svg]:!text-white" onClick={() => setIsOpen(false)}>
-              Discover
-            </CTA>
+            <Link href="/contact-us" onClick={() => setIsOpen(false)} className="w-full">
+              <CTA variant="light-bg" className="w-full justify-center">
+                Contact Us
+              </CTA>
+            </Link>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

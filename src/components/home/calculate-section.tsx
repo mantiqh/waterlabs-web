@@ -15,7 +15,7 @@ export const CalculateSection: React.FC = () => {
 
         {/* Title Block */}
         <div className="w-full flex flex-col">
-          <h2 className="font-primary font-normal text-[28px] sm:text-[36px] lg:text-[48px] leading-[1.12] tracking-[-0.01em] text-[#111111]">
+          <h2 className="type-h3 text-[#111111]">
             Calculate what you will save.<br />
             Use your real numbers.
           </h2>

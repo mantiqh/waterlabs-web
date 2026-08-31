@@ -13,9 +13,9 @@ export const InteractiveSecuritySections: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // The sticky indicator card is pinned at top: 120px.
-      // A section becomes active when its banner aligns with the indicator header (target line at 140px from viewport top).
-      const targetY = 140;
+      // Responsive target line: 80px on mobile/tablet (top-0 indicator), 140px on desktop
+      const isMobile = window.innerWidth < 1024;
+      const targetY = isMobile ? 80 : 140;
 
       let activeId = topics[0].id;
       for (let i = 0; i < topics.length; i++) {
@@ -43,14 +43,15 @@ export const InteractiveSecuritySections: React.FC = () => {
     setActiveTopic(id);
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -90;
+      const isMobile = window.innerWidth < 1024;
+      const yOffset = isMobile ? -65 : -90;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
 
   return (
-    <div className="relative w-full">
+    <div id="interactive-security-sections" className="relative w-full">
       {/* 
         =============================================================================
         DESKTOP STICKY INDICATOR OVERLAY
@@ -63,7 +64,7 @@ export const InteractiveSecuritySections: React.FC = () => {
       */}
       <div className="hidden lg:block absolute top-0 bottom-[60px] lg:bottom-[100px] left-0 w-full px-[20px] lg:px-[32px] xl:px-[60px] pointer-events-none z-30">
         <div className="w-full max-w-[1320px] mx-auto h-full">
-          <aside className="w-[260px] xl:w-[305px] sticky top-[120px] pt-0 lg:pt-[40px] pointer-events-auto">
+          <aside className="w-[305px] sticky top-[120px] pt-0 lg:pt-[40px] pointer-events-auto">
             <TopicIndicator activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
           </aside>
         </div>
@@ -72,10 +73,10 @@ export const InteractiveSecuritySections: React.FC = () => {
       {/* 
         =============================================================================
         MOBILE / TABLET STICKY INDICATOR BAR
-        - Sticky under navbar at top-[60px] with smooth blur
+        - Sticky at top-0 replacing navbar when this section is active
         =============================================================================
       */}
-      <div className="block lg:hidden sticky top-[60px] z-30 px-[16px] py-[8px] bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <div className="block lg:hidden sticky top-0 z-40 px-[16px] pt-0 pb-[8px] bg-transparent transition-all duration-300">
         <TopicIndicator activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
       </div>
 
