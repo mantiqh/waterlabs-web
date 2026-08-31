@@ -58,7 +58,7 @@ export const BrandSlider: React.FC = () => {
   }, []);
 
   return (
-    <section className="w-full bg-white rounded-tl-[30px] lg:rounded-tl-[80px] py-[40px] px-[20px] lg:py-[60px] lg:px-[60px]">
+    <section className="w-full bg-white rounded-tl-[30px] lg:rounded-tl-[80px] py-[40px] px-[20px] md:px-[40px] lg:py-[60px] lg:px-[60px]">
       <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[32px] lg:gap-[60px]">
         
         {/* Header Section */}

@@ -14,7 +14,7 @@ export const CareersCTASection: React.FC = () => {
         - Desktop: rounded-tr-[80px], py-[80px] px-[60px], min-h-[508px]
         - Mobile: rounded-tr-[30px], py-[40px] px-[20px], min-h-[402px]
       */}
-      <div className="relative w-full rounded-tr-[30px] lg:rounded-tr-[80px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px] min-h-[402px] lg:min-h-[508px] flex flex-col justify-center overflow-hidden">
+      <div className="relative w-full rounded-tr-[30px] lg:rounded-tr-[80px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] min-h-[402px] lg:min-h-[508px] flex flex-col justify-center overflow-hidden">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">

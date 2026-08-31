@@ -24,7 +24,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
   href,
 }) => {
   return (
-    <div className="flex flex-col items-start gap-[8px] lg:gap-[14px] pb-[12px] lg:pb-0 border-b border-[#D7DCE2] lg:border-b-0 w-full lg:w-[418.67px]">
+    <div className="flex flex-col items-start gap-[8px] lg:gap-[14px] pb-[12px] lg:pb-0 border-b border-[#D7DCE2] lg:border-b-0 w-full lg:flex-1 lg:max-w-[418.67px] min-w-0">
       {/* Text - Tag */}
       <div className="flex items-center gap-[4px] lg:gap-[8px] h-[16px] lg:h-[24px]">
         <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
@@ -88,7 +88,7 @@ export const ContactUsOperatingInfo: React.FC = () => {
         - Mobile: padding: 40px 20px, bg: white, border-radius: 0px 30px 30px 0px
         - Contains two location cards side by side on desktop (gap: 32px), stacked on mobile
       */}
-      <div className="w-full bg-white rounded-r-[30px] lg:rounded-r-[60px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px]">
+      <div className="w-full bg-white rounded-r-[30px] lg:rounded-r-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
         <div className="relative z-10 w-full max-w-[1320px] mx-auto">
           {/* Frame 2147226790 / Frame 2147226529 */}
           <div className="flex flex-col lg:flex-row items-start gap-[32px] max-w-[869.33px]">

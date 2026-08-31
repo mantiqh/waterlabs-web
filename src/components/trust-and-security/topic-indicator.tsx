@@ -88,7 +88,7 @@ export const TopicIndicator: React.FC<TopicIndicatorProps> = ({
       */}
       <div
         ref={containerRef}
-        className="flex lg:hidden w-full bg-white backdrop-blur-[20px] rounded-none py-[12px] px-[20px] md:px-[32px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-y border-[#D7DCE2] overflow-x-auto no-scrollbar gap-[20px] scroll-smooth transition-colors duration-300"
+        className="flex lg:hidden w-full bg-white backdrop-blur-[20px] rounded-none py-[12px] px-[20px] md:px-[40px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-y border-[#D7DCE2] overflow-x-auto no-scrollbar gap-[20px] scroll-smooth transition-colors duration-300"
       >
         {topics.map((topic) => {
           const isActive = activeTopic === topic.id;

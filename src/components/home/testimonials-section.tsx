@@ -78,7 +78,7 @@ export const TestimonialsSection: React.FC = () => {
         The main white card has rounded-bl-[30px] lg:rounded-bl-[80px] at the bottom-left corner,
         revealing the light blue background (#91C6F2) of the CalculateSection below it seamlessly without gaps.
       */}
-      <div className="w-full bg-white rounded-bl-[30px] sm:rounded-bl-[40px] lg:rounded-bl-[80px] pt-[16px] sm:pt-[24px] lg:pt-[60px] pb-[32px] sm:pb-[48px] lg:pb-[100px] px-[20px] lg:px-[60px]">
+      <div className="w-full bg-white rounded-bl-[30px] sm:rounded-bl-[40px] lg:rounded-bl-[80px] pt-[16px] sm:pt-[24px] lg:pt-[60px] pb-[32px] sm:pb-[48px] lg:pb-[100px] px-[20px] md:px-[40px] lg:px-[60px]">
         <div className="max-w-[1320px] mx-auto flex flex-col items-start lg:items-center">
           
           {/* ========================================================================= */}
@@ -157,22 +157,22 @@ export const TestimonialsSection: React.FC = () => {
                 {testimonialsData.map((item, idx) => (
                   <div 
                     key={`desktop-testimonial-${idx}`}
-                    className="w-full shrink-0 flex flex-row gap-[60px] items-start"
+                    className="w-full shrink-0 flex flex-row gap-[32px] xl:gap-[60px] items-start"
                   >
                     {/* Left Image Side */}
-                    <div className="relative w-[480px] aspect-[4/3] rounded-[20px] overflow-hidden shrink-0 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+                    <div className="relative w-[340px] xl:w-[480px] aspect-[4/3] rounded-[20px] overflow-hidden shrink-0 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
                       <Image 
                         src={item.image} 
                         alt={item.name} 
                         fill 
                         priority={idx === 0}
-                        sizes="480px"
+                        sizes="(max-width: 1280px) 340px, 480px"
                         className="object-cover" 
                       />
                     </div>
 
                     {/* Right Content Side */}
-                    <div className="flex flex-col justify-center flex-1">
+                    <div className="flex flex-col justify-center flex-1 min-w-0">
                       <p className="type-body-s text-[#111111] mb-[40px]">
                         {item.quote}
                       </p>

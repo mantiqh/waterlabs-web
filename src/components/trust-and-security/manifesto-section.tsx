@@ -12,7 +12,7 @@ export const ManifestoSection: React.FC = () => {
         - The top-right curve reveals the exact matching bottom gradient color (#9A84E3) 
           from the Hero Banner above seamlessly with zero split lines.
       */}
-      <div className="w-full bg-white rounded-tr-[30px] lg:rounded-tr-[60px] py-[40px] px-[20px] lg:py-[80px] lg:px-[32px] xl:px-[60px] overflow-hidden">
+      <div className="w-full bg-white rounded-tr-[30px] lg:rounded-tr-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         <div className="w-full max-w-[1320px] mx-auto flex flex-col justify-center">
 
           {/* Main Statement Text */}

@@ -15,7 +15,7 @@ export const CareersHeroSection: React.FC = () => {
         - Mobile: 402px x 659px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px
         - Background: linear-gradient(180deg, #0F68D6 2.92%, #B8B1A5 100%) with banner (1).png (desktop/tablet) / banner (2).png (mobile)
       */}
-      <div className="relative w-full min-h-[620px] md:h-[560px] lg:h-[650px] bg-gradient-to-b from-[#0F68D6] from-30% to-[#B8B1A5] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[28px] md:pb-[40px] lg:pt-[40px] lg:px-[32px] xl:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[20px] md:gap-0">
+      <div className="relative w-full min-h-[620px] md:h-[560px] lg:h-[650px] bg-gradient-to-b from-[#0F68D6] from-30% to-[#B8B1A5] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[20px] md:gap-0">
         
         {/* Background Banner Graphic anchored to bottom */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">

@@ -65,12 +65,12 @@ const Navbar: React.FC = () => {
         className={`fixed top-0 left-0 right-0 z-50 lg:relative lg:top-0 lg:left-auto lg:right-auto lg:px-0 w-full max-w-[1320px] mx-auto transition-all duration-300 ease-out ${
           isScrolled
             ? 'px-0 translate-y-0 opacity-100'
-            : 'px-[16px] md:px-[28px] translate-y-[20px] opacity-100 lg:translate-y-0'
+            : 'px-[20px] md:px-[40px] translate-y-[20px] opacity-100 lg:translate-y-0'
         }`}
       >
         <header className={`flex flex-row items-center justify-between w-full h-[60px] backdrop-blur-[13.2px] py-[8px] transition-all duration-300 shadow-[0_4px_24px_rgba(4,40,73,0.06)] ${
           isScrolled
-            ? 'bg-white rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] px-[20px] md:px-[32px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pl-[16px] lg:pr-[8px] xl:pl-[24px] xl:pr-[12px]'
+            ? 'bg-white rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pl-[16px] lg:pr-[8px] xl:pl-[24px] xl:pr-[12px]'
             : 'bg-white/70 rounded-[30px] border border-white/24 pl-[16px] md:pl-[20px] xl:pl-[24px] pr-[8px] md:pr-[12px] xl:pr-[12px]'
         }`}>
           {/* Logo */}
@@ -137,7 +137,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu Dropdown overlay */}
         <div
-          className={`lg:hidden absolute top-[calc(100%+10px)] left-[16px] right-[16px] md:left-[28px] md:right-[28px] lg:left-0 lg:right-0 bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[30px] p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top ${isOpen
+          className={`lg:hidden absolute top-[calc(100%+10px)] left-[20px] right-[20px] md:left-[40px] md:right-[40px] lg:left-0 lg:right-0 bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[30px] p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top ${isOpen
               ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto visible'
               : 'opacity-0 -translate-y-4 scale-[0.98] pointer-events-none invisible'
             }`}

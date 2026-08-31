@@ -109,11 +109,11 @@ export const WeAreHiringSection: React.FC = () => {
         - Top-left curve reveals white background
         - Bottom-left curve reveals Section 4's blue color (#0F68D6)
       */}
-      <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] lg:py-[60px] xl:py-[80px] lg:px-[40px] xl:px-[60px] overflow-hidden">
+      <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         <div className="max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[20px] lg:gap-[40px] xl:gap-[60px]">
             
           {/* Left Column: Heading Block */}
-          <div className="w-full lg:w-[42%] xl:w-[537px] shrink-0 flex flex-col gap-[12px] lg:gap-[14px]">
+          <div className="w-full lg:w-[38%] xl:w-[537px] lg:flex-1 min-w-0 shrink-0 flex flex-col gap-[12px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
@@ -134,7 +134,7 @@ export const WeAreHiringSection: React.FC = () => {
           </div>
 
           {/* Right Column: Desktop Vertical List (hidden on mobile/tablet) */}
-          <div className="hidden lg:flex flex-col w-full lg:w-[58%] xl:w-[769px] gap-[24px] xl:gap-[32px]">
+          <div className="hidden lg:flex flex-col w-full lg:w-[62%] xl:w-[769px] lg:flex-1 min-w-0 gap-[24px] xl:gap-[32px]">
             {hiringRoles.map((role, index) => (
               <div
                 key={`desktop-role-${index}`}

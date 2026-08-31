@@ -15,7 +15,7 @@ export const TrustCTASection: React.FC = () => {
         - Mobile: padding: 40px 20px, rounded-tr-[30px] rounded-br-none, min-h-[350px]
         - Top-right curve reveals the #DBE2F0 background from the Certifications section.
       */}
-      <div className="relative w-full min-h-[350px] lg:h-[444px] bg-[#000000] rounded-tr-[30px] rounded-br-none lg:rounded-tr-[80px] py-[40px] px-[20px] lg:py-[80px] lg:px-[60px] flex flex-col justify-center overflow-hidden">
+      <div className="relative w-full min-h-[350px] lg:h-[444px] bg-[#000000] rounded-tr-[30px] rounded-br-none lg:rounded-tr-[80px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] flex flex-col justify-center overflow-hidden">
         
         {/* Desktop Background Image */}
         <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">

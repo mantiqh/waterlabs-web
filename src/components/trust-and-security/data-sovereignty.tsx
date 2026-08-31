@@ -34,11 +34,11 @@ export const DataSovereigntySection: React.FC = () => {
         - Desktop: px-[32px] xl:px-[60px], py-[40px] lg:py-[80px]
         - Mobile: px-[20px], py-[24px]
       */}
-      <div className="w-full pt-[20px] lg:pt-[40px] pb-[40px] lg:pb-[80px] px-[20px] lg:px-[32px] xl:px-[60px] overflow-hidden">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[24px] xl:gap-[40px]">
+      <div className="w-full pt-[20px] lg:pt-[40px] pb-[40px] lg:pb-[80px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[24px] lg:gap-[40px]">
 
-          {/* Invisible Spacer matching Left Sidebar width (260px on lg, 305px on xl) */}
-          <div className="hidden lg:block w-[260px] xl:w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
+          {/* Invisible Spacer matching Left Sidebar width (305px) */}
+          <div className="hidden lg:block w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
 
           {/* Main Right Content Column (Fluid responsive max 975px) */}
           <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-[36px] lg:gap-[48px]">

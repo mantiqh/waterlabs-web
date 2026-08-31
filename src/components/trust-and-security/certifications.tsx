@@ -81,11 +81,11 @@ export const CertificationsSection: React.FC = () => {
         - Mobile: rounded-tl-[30px] rounded-bl-[30px], py-[40px] px-[20px]
         - Background: #DBE2F0
       */}
-      <div className="w-full bg-[#DBE2F0] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] pt-[40px] lg:pt-[80px] pb-[60px] lg:pb-[100px] px-[20px] lg:px-[32px] xl:px-[60px] overflow-hidden">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[24px] xl:gap-[40px]">
+      <div className="w-full bg-[#DBE2F0] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] pt-[40px] lg:pt-[80px] pb-[60px] lg:pb-[100px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[24px] lg:gap-[40px]">
           
-          {/* Invisible Spacer matching Data Sovereignty's left column (260px on lg, 305px on xl) */}
-          <div className="hidden lg:block w-[260px] xl:w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
+          {/* Invisible Spacer matching Data Sovereignty's left column (305px) */}
+          <div className="hidden lg:block w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
 
           {/* Main Content Column (Fluid responsive max 975px) */}
           <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-[32px] lg:gap-[48px]">
@@ -159,7 +159,7 @@ export const CertificationsSection: React.FC = () => {
               {/* 
                 Desktop: 4 Compliance Badge Columns (Figma Frame 2147203261 / Frame 2147203252)
               */}
-              <div className="hidden lg:grid grid-cols-4 gap-0 w-full px-[8px] xl:px-[16px]">
+              <div className="hidden lg:grid grid-cols-2 xl:grid-cols-4 gap-0 w-full px-[8px] xl:px-[16px]">
                 {complianceList.map((item) => (
                   <div 
                     key={item.id}

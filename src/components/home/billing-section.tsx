@@ -48,7 +48,7 @@ export const BillingSection: React.FC = () => {
         The rounded-tl-[60px] and rounded-bl-[60px] cut into the top (#91C6F2) and bottom (#111111) background colors only at the very corner tips.
         There is NO blue side column.
       */}
-      <div className="w-full bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] px-[20px] py-[60px] lg:py-[80px] lg:px-[60px]">
+      <div className="w-full bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] px-[20px] md:px-[40px] py-[60px] lg:py-[80px] lg:px-[60px]">
         
         <div className="max-w-[1320px] mx-auto flex flex-col gap-[40px] lg:gap-[56px]">
 

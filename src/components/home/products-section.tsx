@@ -10,11 +10,11 @@ export const ProductsSection: React.FC = () => {
     <section className="w-full bg-[#01191E] lg:bg-[#0E7FA8]">
 
       {/* Top White Section - Products */}
-      <div className="w-full bg-white rounded-bl-[40px] lg:rounded-bl-[60px] px-[20px] lg:px-[60px] py-[60px] lg:py-[100px] flex justify-center">
-        <div className="w-full max-w-[1320px] flex flex-col lg:flex-row gap-[40px] lg:gap-[80px] items-start">
+      <div className="w-full bg-white rounded-bl-[40px] lg:rounded-bl-[60px] px-[20px] md:px-[40px] lg:px-[60px] py-[60px] lg:py-[100px] flex justify-center">
+        <div className="w-full max-w-[1320px] flex flex-col lg:flex-row gap-[40px] lg:gap-[40px] xl:gap-[60px] 2xl:gap-[80px] items-start">
 
           {/* Left Heading - Sticky Pin Animation on Desktop */}
-          <div className="w-full lg:w-[440px] shrink-0 lg:sticky lg:top-[120px] self-start">
+          <div className="w-full lg:w-[300px] xl:w-[380px] 2xl:w-[440px] shrink-0 min-w-0 lg:sticky lg:top-[120px] self-start">
             <h2 className="type-h2">
               <span className="text-[#111111] lg:block">Two products. </span>
               <span className="text-[#111111] lg:block">One system. </span>
@@ -23,7 +23,7 @@ export const ProductsSection: React.FC = () => {
           </div>
 
           {/* Right Products Stack */}
-          <div className="flex flex-col gap-[32px] lg:gap-[20px] w-full lg:flex-1 max-w-[853px]">
+          <div className="flex flex-col gap-[32px] lg:gap-[20px] w-full lg:flex-1 min-w-0 max-w-[853px]">
 
             {/* Product 1: HIMER AI OS */}
             <div className="flex flex-col gap-[16px] lg:gap-[16px] w-full">
@@ -39,8 +39,8 @@ export const ProductsSection: React.FC = () => {
               </div>
 
               {/* Desktop Layout: Left Title+Desc (gap 16px), Right Full CTA */}
-              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[32px]">
-                <div className="flex flex-col gap-[16px] max-w-[646px]">
+              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[20px] xl:gap-[32px]">
+                <div className="flex flex-col gap-[16px] flex-1 min-w-0 max-w-[646px]">
                   <h3 className="type-h5 text-[#2A2A2A]">
                     HIMER AI OS
                   </h3>
@@ -89,8 +89,8 @@ export const ProductsSection: React.FC = () => {
               </div>
 
               {/* Desktop Layout: Left Title+Desc (gap 16px), Right Full CTA */}
-              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[32px]">
-                <div className="flex flex-col gap-[16px] max-w-[614px]">
+              <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[20px] xl:gap-[32px]">
+                <div className="flex flex-col gap-[16px] flex-1 min-w-0 max-w-[614px]">
                   <h3 className="type-h5 text-[#000000]">
                     CurieCode
                   </h3>

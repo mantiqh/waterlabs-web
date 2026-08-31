@@ -14,7 +14,7 @@ export const WhoThrivesHereSection: React.FC = () => {
         - Proportional vertical padding (py-[40px] lg:py-[48px] xl:py-[64px]) with zero artificial empty space at the bottom
       */}
       <div 
-        className="w-[calc(100%-20px)] lg:w-[calc(100%-40px)] xl:w-[min(calc(100vw-60px),calc(50vw+660px))] mr-auto rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] px-[20px] lg:py-[48px] xl:py-[64px] lg:pl-[max(40px,calc((100vw-1320px)/2))] lg:pr-[40px] xl:pr-[60px] flex flex-col justify-between gap-[32px] lg:gap-[40px] overflow-hidden"
+        className="w-[calc(100%-20px)] md:w-[calc(100%-40px)] lg:w-[min(calc(100vw-60px),calc(50vw+660px))] mr-auto rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[64px] lg:pl-[max(60px,calc((100vw-1320px)/2))] lg:pr-[60px] flex flex-col justify-between gap-[32px] lg:gap-[40px] overflow-hidden"
         style={{
           background: 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
         }}
@@ -41,7 +41,7 @@ export const WhoThrivesHereSection: React.FC = () => {
           <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[24px] lg:gap-[32px] xl:gap-[40px]">
             
             {/* Left Column: Mission Description & Email Contact */}
-            <div className="w-full lg:w-1/2 xl:w-[536px] flex flex-col justify-between gap-[24px] lg:gap-[32px] xl:gap-[48px]">
+            <div className="w-full lg:w-1/2 xl:w-[536px] min-w-0 flex flex-col justify-between gap-[24px] lg:gap-[32px] xl:gap-[48px]">
               <p className="type-h5 tracking-[-0.01em] text-white">
                 We are not for everyone, and that&apos;s deliberate. People who do their best work here are ambitious, driven, self-starters, and not afraid of ambiguity.
               </p>
@@ -62,7 +62,7 @@ export const WhoThrivesHereSection: React.FC = () => {
             </div>
 
             {/* Right Column: Team Culture Image */}
-            <div className="w-full lg:w-1/2 xl:w-[704px]">
+            <div className="w-full lg:w-1/2 xl:w-[704px] min-w-0">
               <div className="relative w-full aspect-[342/203] lg:aspect-[704/417] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)]">
                 <Image
                   src="/images/careers/who-thrives-here/img_who_thrives_here.png"

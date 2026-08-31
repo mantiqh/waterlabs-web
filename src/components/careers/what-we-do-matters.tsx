@@ -12,7 +12,7 @@ export const WhatWeDoMattersSection: React.FC = () => {
         - Mobile: rounded-tr-[30px] rounded-br-[30px]
         - Reveals #B8B1A5 at the top-right and #F4F6F9 at the bottom-right.
       */}
-      <div className="w-full bg-white rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] pt-[40px] px-[20px] pb-[20px] lg:py-[80px] lg:px-[60px] overflow-hidden">
+      <div className="w-full bg-white rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] pt-[40px] px-[20px] md:px-[40px] pb-[20px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         
         {/* 
           Main Dark Card (Figma Frame 2147203295)
@@ -52,20 +52,20 @@ export const WhatWeDoMattersSection: React.FC = () => {
           {/* Bottom Content Area (Figma Frame 2147203286: max-w-[1024px], gap-[20px]) */}
           <div className="relative z-10 w-full max-w-[1024px] flex flex-col lg:flex-row items-start justify-start gap-[16px] lg:gap-[20px]">
             {/* Left Column: Subheading (508px width in Figma) */}
-            <div className="w-full lg:w-[508px] shrink-0">
+            <div className="w-full lg:w-1/2 lg:max-w-[508px] min-w-0">
               <h3 className="type-h5 tracking-[-0.01em] text-white max-w-[508px]">
                 This is a hard problem to solve.
               </h3>
             </div>
 
             {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, gap 16px) */}
-            <div className="w-full lg:w-[496px] shrink-0 flex flex-col gap-[16px]">
+            <div className="w-full lg:w-1/2 lg:max-w-[496px] min-w-0 flex flex-col gap-[16px]">
               <p className="type-body-xs text-[#D7DCE2] max-w-[496px]">
                 Revenue cycle is one of the hardest problems in healthcare. Here, the rules are complex, the exceptions are abundant, and the stakes are high. Whether you&apos;re defining software, running operations, or working with customers, you&apos;ll be solving problems that don&apos;t come in playbooks.
               </p>
 
               {/* Team Image (496px x 250px with rounded-tl-[40px] rounded-tr-[10px] rounded-br-[40px] rounded-bl-[10px]) */}
-              <div className="relative w-full aspect-[322/182] lg:aspect-auto lg:w-[496px] lg:h-[250px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
+              <div className="relative w-full aspect-[322/182] lg:aspect-[496/250] lg:w-full lg:max-w-[496px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
                 <Image
                   src="/images/careers/what-we-do-matters/ing_this_is_a_hard_problem_to_solve.png"
                   alt="Problem Solving Team"
