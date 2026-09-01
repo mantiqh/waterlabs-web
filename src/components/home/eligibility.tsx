@@ -83,7 +83,7 @@ const EligibilitySection: React.FC = () => {
 
           {/* Right Column - Descriptive Text */}
           <div className="w-full lg:w-auto lg:flex-1 min-w-0 xl:max-w-[315px] flex flex-col justify-center">
-            <p className="type-body-s text-white">
+            <p className="type-h6 text-white">
               Waterlabs covers complete RCM cycle. Exceptions and customizations are handled seamlessly through the human-in-loop model. Agentic intelligence learns and evolves based on your scenarios.
             </p>
           </div>

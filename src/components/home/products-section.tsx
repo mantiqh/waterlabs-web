@@ -41,9 +41,9 @@ export const ProductsSection: React.FC = () => {
               {/* Desktop Layout: Left Title+Desc (gap 16px), Right Full CTA */}
               <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[20px] xl:gap-[32px]">
                 <div className="flex flex-col gap-[16px] flex-1 min-w-0 max-w-[646px]">
-                  <h3 className="type-h5 text-[#2A2A2A]">
+                  <h5 className="type-h5 text-[#2A2A2A]">
                     HIMER AI OS
-                  </h3>
+                  </h5>
                   <p className="type-body-s text-[#2A2A2A]">
                     Orchestrate and build through commands. Just describe your task.
                   </p>
@@ -55,9 +55,9 @@ export const ProductsSection: React.FC = () => {
 
               {/* Mobile/Tablet Layout: Title in Electric Blue, Description + Circular Arrow Button */}
               <div className="flex lg:hidden flex-col gap-[8px] w-full pt-[4px]">
-                <h3 className="type-h6 text-electric-blue">
+                <h6 className="type-h6 text-electric-blue">
                   HIMER AI OS
-                </h3>
+                </h6>
                 <div className="flex flex-row items-end justify-between gap-[16px]">
                   <p className="type-body-xxs text-[#111111] flex-1">
                     Orchestrate and build through commands. Just describe your task.
@@ -91,9 +91,9 @@ export const ProductsSection: React.FC = () => {
               {/* Desktop Layout: Left Title+Desc (gap 16px), Right Full CTA */}
               <div className="hidden lg:flex flex-row items-end justify-between w-full gap-[20px] xl:gap-[32px]">
                 <div className="flex flex-col gap-[16px] flex-1 min-w-0 max-w-[614px]">
-                  <h3 className="type-h5 text-[#000000]">
+                  <h5 className="type-h5 text-[#000000]">
                     CurieCode
-                  </h3>
+                  </h5>
                   <p className="type-body-s text-[#2A2A2A]">
                     Optimize reimbursements through automated, intelligent coding.
                   </p>
@@ -105,9 +105,9 @@ export const ProductsSection: React.FC = () => {
 
               {/* Mobile/Tablet Layout: Title in Electric Blue, Description + Circular Arrow Button */}
               <div className="flex lg:hidden flex-col gap-[8px] w-full pt-[4px]">
-                <h3 className="type-h6 text-electric-blue">
+                <h6 className="type-h6 text-electric-blue">
                   CurieCode
-                </h3>
+                </h6>
                 <div className="flex flex-row items-end justify-between gap-[16px]">
                   <p className="type-body-xxs text-[#111111] flex-1">
                     Optimize reimbursements through automated, intelligent coding.

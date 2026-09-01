@@ -6,17 +6,23 @@ import CareersCTASection from './cta-section';
 import CareersHeroSection from './hero-section';
 import WeAreHiringSection from './we-are-hiring';
 import WhatWeDoMattersSection from './what-we-do-matters';
-import WhereYouWouldFitSection from './where-you-would-fit';
+import { CareersOpenRolesData, WhereYouWouldFitSection } from './where-you-would-fit';
 import WhoThrivesHereSection from './who-thrives-here';
 
-export const CareersPage: React.FC = () => {
+export type CareersPageData = CareersOpenRolesData;
+
+interface CareersPageProps {
+  data?: CareersPageData | null;
+}
+
+export const CareersPage: React.FC<CareersPageProps> = ({ data }) => {
   return (
     <main>
       <CareersHeroSection />
       <WhatWeDoMattersSection />
       <WeAreHiringSection />
       <WhoThrivesHereSection />
-      <WhereYouWouldFitSection />
+      <WhereYouWouldFitSection data={data} />
       <CareersCTASection />
     </main>
   );

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 const ChevronRight = ({ className }: { className?: string }) => (
   <svg
@@ -18,45 +18,37 @@ const ChevronRight = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const filterCategories = [
-  'All Roles',
-  'Engineering',
-  'Product & Delivery',
-  'Client Success',
-  'RCM & Ops',
-];
+export interface JobRole {
+  _key?: string;
+  id?: string;
+  title: string;
+  experience?: string;
+  category?: string;
+  roleTag?: string;
+  tabName?: string;
+  eligibility?: string;
+  link?: string;
+}
 
-const jobsData = [
-  {
-    id: 'python-dev',
-    title: 'Python Developer – Agentic AI / Machine Learning',
-    category: 'Engineering',
-    roleTag: 'Developer',
-    experience: '3–8 years',
-    eligibility: 'Agentic AI & LLMs',
-    link: '#apply-python-dev',
-  },
-  {
-    id: 'fullstack-dev',
-    title: 'Full Stack Developer – Node.js & React (Junior / Senior)',
-    category: 'Engineering',
-    roleTag: 'Developer',
-    experience: '1–3 yrs (Junior) / 5+ yrs (Senior)',
-    eligibility: 'Node.js & React',
-    link: '#apply-fullstack-dev',
-  },
-  {
-    id: 'java-lead',
-    title: 'Agentic AI – Java Lead',
-    category: 'Engineering',
-    roleTag: 'Developer',
-    experience: '8+ years',
-    eligibility: 'Java & Agentic AI',
-    link: '#apply-java-lead',
-  },
-];
+export interface RoleCategory {
+  _key?: string;
+  tabName: string;
+  roles?: JobRole[];
+}
 
-export const WhereYouWouldFitSection: React.FC = () => {
+export interface CareersOpenRolesData {
+  openRolesTag?: string;
+  openRolesHeading?: string;
+  categories?: RoleCategory[];
+}
+
+interface WhereYouWouldFitSectionProps {
+  data?: CareersOpenRolesData | null;
+}
+
+export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = ({
+  data,
+}) => {
   const [activeCategory, setActiveCategory] = useState('All Roles');
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -73,15 +65,63 @@ export const WhereYouWouldFitSection: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const filteredJobs = jobsData.filter((job) => {
-    const matchesCategory =
-      activeCategory === 'All Roles' || job.category === activeCategory;
-    const matchesSearch =
-      searchQuery.trim() === '' ||
-      job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      job.eligibility.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const categoriesList = useMemo(() => data?.categories ?? [], [data?.categories]);
+
+  // Derive categories dynamically from configured CMS tabs
+  const filterCategories = useMemo(
+    () => [
+      'All Roles',
+      ...categoriesList
+        .map((cat) => cat.tabName?.trim())
+        .filter((name): name is string => Boolean(name)),
+    ],
+    [categoriesList]
+  );
+
+  // Flatten all roles across all categories, tagging with parent tabName
+  const allFlattenedRoles = useMemo(() => {
+    const list: JobRole[] = [];
+    categoriesList.forEach((cat) => {
+      (cat.roles ?? []).forEach((role) => {
+        list.push({
+          ...role,
+          tabName: cat.tabName,
+        });
+      });
+    });
+    return list;
+  }, [categoriesList]);
+
+  const currentCategory = filterCategories.includes(activeCategory)
+    ? activeCategory
+    : 'All Roles';
+
+  const categoryRoles = useMemo(() => {
+    if (currentCategory === 'All Roles') {
+      return allFlattenedRoles;
+    }
+    const matchingCat = categoriesList.find((cat) => cat.tabName === currentCategory);
+    return (matchingCat?.roles ?? []).map((r) => ({
+      ...r,
+      tabName: matchingCat?.tabName,
+    }));
+  }, [currentCategory, allFlattenedRoles, categoriesList]);
+
+  const filteredJobs = useMemo(() => {
+    return categoryRoles.filter((job) => {
+      return (
+        searchQuery.trim() === '' ||
+        job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (job.eligibility && job.eligibility.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (job.category && job.category.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (job.roleTag && job.roleTag.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (job.tabName && job.tabName.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
+    });
+  }, [categoryRoles, searchQuery]);
+
+  const tagText = data?.openRolesTag || 'Open Roles';
+  const headingText = data?.openRolesHeading || 'Where you would fit.';
 
   return (
     <section
@@ -102,13 +142,13 @@ export const WhereYouWouldFitSection: React.FC = () => {
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
               <span className="type-caption text-[#7D8690]">
-                Open Roles
+                {tagText}
               </span>
             </div>
 
             {/* Title */}
             <h2 className="type-h2 tracking-[-0.01em] text-[#000000] lg:text-[#111111]">
-              Where you would fit.
+              {headingText}
             </h2>
           </div>
 
@@ -116,32 +156,34 @@ export const WhereYouWouldFitSection: React.FC = () => {
           <div className="w-full flex flex-col gap-[20px] lg:gap-[40px]">
 
             {/* Desktop Filter Tabs (hidden on mobile) */}
-            <div className="hidden lg:flex items-center gap-[16px] flex-wrap">
-              {filterCategories.map((category) => {
-                const isActive = activeCategory === category;
-                return (
-                  <button
-                    key={category}
-                    type="button"
-                    onClick={() => setActiveCategory(category)}
-                    className={`px-[16px] py-[8px] rounded-[64px] type-cta transition-all cursor-pointer border-none outline-none ${isActive
-                      ? 'text-white shadow-sm'
-                      : 'text-[#7D8690] bg-[#91C6F2]/10 hover:bg-[#91C6F2]/20'
-                      }`}
-                    style={
-                      isActive
-                        ? {
-                          background:
-                            'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
-                        }
-                        : undefined
-                    }
-                  >
-                    {category}
-                  </button>
-                );
-              })}
-            </div>
+            {filterCategories.length > 1 && (
+              <div className="hidden lg:flex items-center gap-[16px] flex-wrap">
+                {filterCategories.map((category) => {
+                  const isActive = activeCategory === category;
+                  return (
+                    <button
+                      key={category}
+                      type="button"
+                      onClick={() => setActiveCategory(category)}
+                      className={`px-[16px] py-[8px] rounded-[64px] type-cta transition-all cursor-pointer border-none outline-none ${isActive
+                        ? 'text-white shadow-sm'
+                        : 'text-[#7D8690] bg-[#91C6F2]/10 hover:bg-[#91C6F2]/20'
+                        }`}
+                      style={
+                        isActive
+                          ? {
+                            background:
+                              'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
+                          }
+                          : undefined
+                      }
+                    >
+                      {category}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
 
             {/* Mobile Filter Bar with Search Input & Custom Dropdown (hidden on desktop) */}
             <div className="flex lg:hidden items-center gap-[12px] w-full relative z-20">
@@ -170,119 +212,147 @@ export const WhereYouWouldFitSection: React.FC = () => {
               </div>
 
               {/* Custom Role Dropdown */}
-              <div ref={dropdownRef} className="relative shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setIsDropdownOpen((prev) => !prev)}
-                  className="bg-white rounded-tl-[12px] rounded-tr-[4px] rounded-br-[12px] rounded-bl-[12px] px-[14px] py-[10px] flex items-center gap-[8px] type-caption !font-medium text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-transparent hover:border-[#91C6F2] transition-all cursor-pointer outline-none"
-                >
-                  <span>{activeCategory}</span>
-                  <svg
-                    className={`w-[10px] h-[10px] text-[#111111] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
-                      }`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
+              {filterCategories.length > 1 && (
+                <div ref={dropdownRef} className="relative shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setIsDropdownOpen((prev) => !prev)}
+                    className="bg-white rounded-tl-[12px] rounded-tr-[4px] rounded-br-[12px] rounded-bl-[12px] px-[14px] py-[10px] flex items-center gap-[8px] type-caption !font-medium text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-transparent hover:border-[#91C6F2] transition-all cursor-pointer outline-none"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
+                    <span>{activeCategory}</span>
+                    <svg
+                      className={`w-[10px] h-[10px] text-[#111111] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
+                        }`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
 
-                {/* Animated Dropdown Menu List */}
-                {isDropdownOpen && (
-                  <div className="absolute top-[calc(100%+6px)] right-0 w-[180px] bg-white rounded-[14px] p-[6px] shadow-[0_12px_36px_rgba(0,0,0,0.12)] border border-[#EBF0F5] z-50 flex flex-col gap-[2px] animate-in fade-in zoom-in-95 duration-150">
-                    {filterCategories.map((category) => {
-                      const isSelected = activeCategory === category;
-                      return (
-                        <button
-                          key={category}
-                          type="button"
-                          onClick={() => {
-                            setActiveCategory(category);
-                            setIsDropdownOpen(false);
-                          }}
-                          className={`w-full text-left px-[12px] py-[8px] rounded-[8px] type-caption transition-colors cursor-pointer border-none outline-none ${isSelected
-                            ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
-                            : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
-                            }`}
-                        >
-                          {category}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
+                  {/* Animated Dropdown Menu List */}
+                  {isDropdownOpen && (
+                    <div className="absolute top-[calc(100%+6px)] right-0 w-[180px] bg-white rounded-[14px] p-[6px] shadow-[0_12px_36px_rgba(0,0,0,0.12)] border border-[#EBF0F5] z-50 flex flex-col gap-[2px] animate-in fade-in zoom-in-95 duration-150">
+                      {filterCategories.map((category) => {
+                        const isSelected = activeCategory === category;
+                        return (
+                          <button
+                            key={category}
+                            type="button"
+                            onClick={() => {
+                              setActiveCategory(category);
+                              setIsDropdownOpen(false);
+                            }}
+                            className={`w-full text-left px-[12px] py-[8px] rounded-[8px] type-caption transition-colors cursor-pointer border-none outline-none ${isSelected
+                              ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
+                              : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
+                              }`}
+                          >
+                            {category}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Job Openings Cards List */}
             <div className="w-full flex flex-col gap-[12px] lg:gap-[20px]">
-              {filteredJobs.map((job) => (
-                <div
-                  key={job.id}
-                  className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px_8px_16px_16px] lg:rounded-[16px] p-[16px] lg:p-[24px] flex flex-col gap-[12px] lg:gap-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] lg:shadow-none hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group"
-                >
-                  {/* Title */}
-                  <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
-                    {job.title}
-                  </h3>
+              {filteredJobs.length === 0 ? (
+                <div className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px] p-[32px] lg:p-[48px] text-center flex flex-col items-center justify-center gap-[12px]">
+                  <p className="type-body-m font-medium text-[#042849]">
+                    {allFlattenedRoles.length === 0
+                      ? 'No open roles at the moment.'
+                      : `No roles found matching "${searchQuery || activeCategory}".`}
+                  </p>
+                  <p className="type-body-xs text-[#7D8690] max-w-[480px]">
+                    We&apos;re always looking for exceptional talent. Reach out to us below or check back soon!
+                  </p>
+                </div>
+              ) : (
+                filteredJobs.map((job, idx) => {
+                  const isExternal = job.link?.startsWith('http');
+                  const targetLink = job.link || 'mailto:careers@waterlabs.ai';
 
-                  {/* Metadata Row & Apply Button */}
-                  <div className="w-full flex flex-row items-end justify-between gap-[16px]">
-                    {/* Metadata Tags: Column on Mobile, Row on Desktop */}
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-[6px] lg:gap-[48px] xl:gap-[60px]">
-                      {/* Experience */}
-                      <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
-                          Experience:
-                        </span>
-                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
-                          {job.experience}
-                        </span>
-                      </div>
+                  return (
+                    <div
+                      key={job._key || job.id || `${job.title}-${idx}`}
+                      className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px_8px_16px_16px] lg:rounded-[16px] p-[16px] lg:p-[24px] flex flex-col gap-[12px] lg:gap-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] lg:shadow-none hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group"
+                    >
+                      {/* Title */}
+                      <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
+                        {job.title}
+                      </h3>
 
-                      {/* Category */}
-                      <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
-                          Category:
-                        </span>
-                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
-                          {job.roleTag}
-                        </span>
-                      </div>
+                      {/* Metadata Row & Apply Button */}
+                      <div className="w-full flex flex-row items-end justify-between gap-[16px]">
+                        {/* Metadata Tags: Column on Mobile, Row on Desktop */}
+                        <div className="flex flex-col lg:flex-row lg:items-center gap-[6px] lg:gap-[48px] xl:gap-[60px]">
+                          {/* Experience */}
+                          {job.experience && (
+                            <div className="flex items-center gap-[4px] lg:gap-[8px]">
+                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                                Experience:
+                              </span>
+                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                                {job.experience}
+                              </span>
+                            </div>
+                          )}
 
-                      {/* Eligibility */}
-                      <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
-                          Eligibility:
-                        </span>
-                        <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
-                          {job.eligibility}
-                        </span>
+                          {/* Category */}
+                          {(job.category || job.roleTag) && (
+                            <div className="flex items-center gap-[4px] lg:gap-[8px]">
+                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                                Category:
+                              </span>
+                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                                {job.category || job.roleTag}
+                              </span>
+                            </div>
+                          )}
+
+                          {/* Eligibility */}
+                          {job.eligibility && (
+                            <div className="flex items-center gap-[4px] lg:gap-[8px]">
+                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                                Eligibility:
+                              </span>
+                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                                {job.eligibility}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Apply Arrow Indicator */}
+                        <Link
+                          href={targetLink}
+                          aria-label={`Apply for ${job.title}`}
+                          target={isExternal ? '_blank' : undefined}
+                          rel={isExternal ? 'noopener noreferrer' : undefined}
+                          className="shrink-0 w-[34px] h-[34px] lg:w-[48px] lg:h-[48px] bg-[#0F68D6] rounded-full flex items-center justify-center text-white hover:scale-105 transition-transform"
+                        >
+                          <ChevronRight className="text-white scale-75 lg:scale-100" />
+                        </Link>
                       </div>
                     </div>
-
-                    {/* Apply Arrow Indicator */}
-                    <Link
-                      href={job.link}
-                      aria-label={`Apply for ${job.title}`}
-                      className="shrink-0 w-[34px] h-[34px] lg:w-[48px] lg:h-[48px] bg-[#0F68D6] rounded-full flex items-center justify-center text-white hover:scale-105 transition-transform"
-                    >
-                      <ChevronRight className="text-white scale-75 lg:scale-100" />
-                    </Link>
-                  </div>
-                </div>
-              ))}
+                  );
+                })
+              )}
             </div>
 
           </div>
 
-                    {/* "Don't see a fit?" Feature Banner Card */}
+          {/* "Don't see a fit?" Feature Banner Card */}
           <div className="w-full lg:rounded-tl-[30px] lg:rounded-tr-[10px] lg:rounded-br-[30px] lg:rounded-bl-[30px] lg:overflow-hidden lg:h-[433px]">
 
             {/* Desktop View (lg: 1024px+, Figma node 3883-10419) */}
@@ -327,11 +397,7 @@ export const WhereYouWouldFitSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Mobile & Tablet View
-                - Normal document flow (Image first, Content second)
-                - Overlap using negative top-margin so top-left rounded radius curves into the image above
-                - Enhanced tablet proportions and synced radius matching Figma
-            */}
+            {/* Mobile & Tablet View */}
             <div className="flex lg:hidden flex-col w-full rounded-tl-[20px] sm:rounded-tl-[30px] rounded-tr-[10px] rounded-br-[20px] sm:rounded-br-[30px] rounded-bl-[20px] sm:rounded-bl-[30px] overflow-hidden">
 
               {/* Mobile / Tablet Image */}

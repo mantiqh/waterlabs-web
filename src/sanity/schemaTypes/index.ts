@@ -1,7 +1,7 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { type SchemaTypeDefinition } from 'sanity';
 
-import { homepageSchema } from './homepage'
+import { careersPageSchema } from './careersPage';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [homepageSchema],
-}
+  types: [careersPageSchema],
+};
