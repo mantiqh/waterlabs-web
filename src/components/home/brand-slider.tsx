@@ -63,10 +63,10 @@ export const BrandSlider: React.FC = () => {
         
         {/* Header Section */}
         <div className="shrink-0">
-          <h2 className="type-h4">
+          <h4 className="type-h4">
             <span className="text-electric-blue block lg:inline">Trusted at the scale </span>
             <span className="text-[#2A2A2A] block lg:inline">healthcare runs at</span>
-          </h2>
+          </h4>
         </div>
 
         {/* Desktop Marquee Slider */}

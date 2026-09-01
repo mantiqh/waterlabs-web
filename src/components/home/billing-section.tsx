@@ -102,9 +102,9 @@ export const BillingSection: React.FC = () => {
                     </span>
                     <div className="flex-1 flex flex-col gap-[8px]">
                       <div className="flex items-center justify-between gap-[16px]">
-                        <h3 className="type-h6 text-[#111111]">
+                        <h6 className="type-h6 text-[#111111]">
                           {step.title}
-                        </h3>
+                        </h6>
                         <span className={`type-body-xxs !font-normal px-[16px] py-[5px] rounded-tl-[16px] rounded-bl-[16px] rounded-br-[16px] rounded-tr-none shrink-0 ${
                           step.dayVariant === 'active'
                             ? 'bg-[#91C6F2] text-[#111111]'
@@ -130,9 +130,9 @@ export const BillingSection: React.FC = () => {
                         {step.day}
                       </span>
                     </div>
-                    <h3 className="type-h5 text-electric-blue">
+                    <h5 className="type-h5 text-electric-blue">
                       {step.title}
-                    </h3>
+                    </h5>
                     <p className="type-body-xxs text-[#111111]">
                       {step.desc}
                     </p>

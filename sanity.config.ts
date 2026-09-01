@@ -2,6 +2,7 @@ import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 
 import { schema } from './src/sanity/schemaTypes';
+import { structure } from './src/sanity/structure';
 
 export default defineConfig({
   basePath: '/studio',
@@ -10,7 +11,7 @@ export default defineConfig({
   
   title: 'Waterlabs Web Studio',
 
-  plugins: [structureTool()],
+  plugins: [structureTool({ structure })],
 
   schema: {
     types: schema.types,
