@@ -6,17 +6,17 @@ const paragraphsData = [
   {
     id: 0,
     desktopColor: 'text-[#D7DCE2]',
-    text: "We spent twenty years inside the revenue cycle before we built anything. Long enough to watch every fix arrive and fall short. Tools that promised to end denials and didn't. Offshore reviews where the answer was always the same: we'll retrain the team. RPA that broke the moment a payer moved a button. Every wave automated the wrong thing, faster.",
+    text: "We spent twenty years working inside the revenue cycle before we built anything, which was long enough to watch every fix arrive and fall short. Software that vowed to end denials and didn't. Offshore teams where the answer to every problem was more training. RPA that stopped working the day a payer moved a button on a screen.",
   },
   {
     id: 1,
     desktopColor: 'text-[#7D8690]',
-    text: "None of it touched the real problem. The revenue cycle is still the hardest, most expensive, most manual thing a health system runs. Everyone improved it. Nobody ended it. And a problem you manage better is still a problem you manage.",
+    text: "These solutions increased speed but did not reduce the workload. The revenue cycle remains the most costly and manual process in health systems, often keeping staff at their desks late.",
   },
   {
     id: 2,
     desktopColor: 'text-[#7D8690]',
-    text: "For every dollar healthcare spends on care, it spends nearly another chasing money it already earned. That ratio has held for thirty years. We started Waterlabs to correct it. Not to make the paperwork quicker, but to make it run without you. It shouldn't be a problem you manage. So we built the thing that ends it.",
+    text: "For every dollar spent on care, nearly another dollar is spent collecting payment. This ratio has persisted for thirty years. We founded Waterlabs to change this, drawing on two decades of experience to create a lasting solution that erases the problem.",
   },
 ];
 
@@ -43,7 +43,7 @@ export const WhyWeStartedWaterlabsSection: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#041A2D] from-[5.62%] to-[#F4F6F9] to-[99.74%]">
+    <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#041E35] from-50% to-[#F4F6F9] to-50%">
       {/* 
         Top Frame Card:
         - Spans w-full edge-to-edge

@@ -7,7 +7,7 @@ import Navbar from '@/components/common/navbar';
 
 export const PhilosophyHeroSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-white overflow-hidden">
+    <section className="relative w-full bg-[#111111] overflow-hidden">
       {/* 
         Philosophy Hero Banner (Figma Specifications):
         - Desktop: 1440px x 650px, border-radius: 0px 0px 0px 60px, padding: 40px 60px 80px, gap: 10px
@@ -56,11 +56,11 @@ export const PhilosophyHeroSection: React.FC = () => {
           <div className="w-full max-w-[362px] lg:max-w-[664px]">
             <h2 className="type-h1 lg:type-h2">
               <span className="text-white">
-                Every year, health systems<br className="hidden lg:inline" />{' '}
-                spend billions collecting<br className="hidden lg:inline" />{' '}
+                Each year, health systems<br className="hidden lg:inline" />{' '}
+                spend billions to collect<br className="hidden lg:inline" />{' '}
               </span>
               <span className="text-[#63CCB7]">
-                money they&apos;ve already<br className="hidden lg:inline" />{' '}
+                revenue they have already<br className="hidden lg:inline" />{' '}
                 earned.
               </span>
             </h2>
