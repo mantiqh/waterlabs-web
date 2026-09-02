@@ -15,10 +15,10 @@ export const CalculateSection: React.FC = () => {
 
         {/* Title Block */}
         <div className="w-full flex flex-col">
-          <h2 className="type-h3 text-[#111111]">
+          <h3 className="type-h3 text-[#111111]">
             Calculate what you will save.<br />
             Use your real numbers.
-          </h2>
+          </h3>
         </div>
 
         {/* Calculator Image / Card */}

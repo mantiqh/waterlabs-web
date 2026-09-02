@@ -74,9 +74,9 @@ export const CarouselSection: React.FC = () => {
 
         {/* Mobile/Tablet Static Text */}
         <div className="block lg:hidden w-full px-[20px] md:px-[40px] lg:px-[60px]">
-          <h2 className="type-h4 text-electric-blue">
+          <h4 className="type-h4 text-electric-blue">
             No development fee, Live in weeks, not months
-          </h2>
+          </h4>
         </div>
 
         {/* Video Thumbnail Area */}

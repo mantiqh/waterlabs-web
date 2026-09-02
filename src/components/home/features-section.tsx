@@ -98,7 +98,7 @@ const FeaturesSection: React.FC = () => {
                 <span className="text-[#111111]">Or </span>
                 <span className="text-electric-blue">start with one function.</span>
               </h2>
-              <p className="type-body-xs text-[#4B5563]">
+              <p className="type-body-s text-[#4B5563]">
                 The agents stay accountable either way. Prior Authorization:<br className="hidden lg:block" />
                 Submitted, tracked, followed up. 24/7, no human in the queue.
               </p>
@@ -110,9 +110,9 @@ const FeaturesSection: React.FC = () => {
             {/* Card 1 */}
             <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden justify-between">
               <div className="flex flex-col gap-[8px] p-[20px] sm:p-[24px] lg:p-[32px] pb-0 lg:pb-0">
-                <h3 className="type-h5 text-electric-blue lg:text-[#042849]">
+                <h5 className="type-h5 text-electric-blue lg:text-[#042849]">
                   Explore Eligibility & Benefits
-                </h3>
+                </h5>
                 <p className="type-body-xs text-[#111111]">
                   Verified in real time. Coverage gaps caught before they cost you.
                 </p>
@@ -131,9 +131,9 @@ const FeaturesSection: React.FC = () => {
             {/* Card 2 */}
             <div className="flex flex-col bg-white rounded-[24px] lg:rounded-[32px] border border-gray-100 shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden justify-between">
               <div className="flex flex-col gap-[8px] p-[20px] sm:p-[24px] lg:p-[32px] pb-0 lg:pb-0">
-                <h3 className="type-h5 text-electric-blue lg:text-[#042849]">
+                <h5 className="type-h5 text-electric-blue lg:text-[#042849]">
                   Improve Denial Prevention
-                </h3>
+                </h5>
                 <p className="type-body-xs text-[#111111]">
                   Catch and fix claims before they leave, not after they come back.
                 </p>
@@ -277,10 +277,10 @@ const FeaturesSection: React.FC = () => {
               {/* Content Side */}
               <div className="flex flex-col justify-center items-start gap-[16px] sm:gap-[20px] lg:gap-[24px] p-[20px] sm:p-[24px] lg:p-[48px] w-full lg:w-[50%]">
                 <div className="flex flex-col gap-[8px]">
-                  <h3 className="type-h5 text-electric-blue lg:text-[#042849]">
+                  <h5 className="type-h5 text-electric-blue lg:text-[#042849]">
                     60 outsourced staff <br />
                     <span className="inline-block mr-[4px]">→</span>3 in-house managers.
-                  </h3>
+                  </h5>
                   <p className="type-body-xs text-[#111111]">
                     Multi-state anesthesia group.
                   </p>

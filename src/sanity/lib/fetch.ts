@@ -8,11 +8,13 @@ import { client } from '../client'
 export async function sanityFetch<QueryResponse>({
   query,
   params = {},
-  tags,
+  tags = [],
+  revalidate = 60,
 }: {
   query: string
   params?: QueryParams
   tags?: string[]
+  revalidate?: number | false
 }) {
   const isDraftMode = (await draftMode()).isEnabled
   if (isDraftMode && !process.env.SANITY_API_READ_TOKEN) {
@@ -24,15 +26,16 @@ export async function sanityFetch<QueryResponse>({
   const isDevelopment = process.env.NODE_ENV === 'development'
 
   return client
-    .withConfig({ useCdn: true })
+    .withConfig({
+      useCdn: false,
+    })
     .fetch<QueryResponse>(query, params, {
-      cache: isDevelopment || isDraftMode ? undefined : 'force-cache',
       ...(isDraftMode && {
         token: process.env.SANITY_API_READ_TOKEN,
         perspective: 'previewDrafts',
       }),
       next: {
-        ...(isDraftMode && { revalidate: 0 }),
+        revalidate: isDevelopment || isDraftMode ? 0 : revalidate,
         tags,
       },
     })

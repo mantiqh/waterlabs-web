@@ -172,7 +172,7 @@ export const WeAreHiringSection: React.FC = () => {
             <div
               ref={mobileScrollRef}
               onScroll={handleScroll}
-              className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[20px] items-start no-scrollbar"
+              className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[20px] items-stretch no-scrollbar"
             >
               {hiringRoles.map((role, index) => (
                 <div
@@ -195,7 +195,7 @@ export const WeAreHiringSection: React.FC = () => {
                   </div>
 
                   {/* Text Container (Frame 2147226456) */}
-                  <div className="flex flex-col gap-[14px]">
+                  <div className="flex flex-col gap-[14px] flex-1">
                     <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">
                       {role.title}
                     </h3>

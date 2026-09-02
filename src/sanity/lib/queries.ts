@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity'
+import { groq } from 'next-sanity';
 
 export const homepageQuery = groq`*[_type == "homepage"][0] {
   heroHeading,
@@ -6,7 +6,7 @@ export const homepageQuery = groq`*[_type == "homepage"][0] {
   heroButtonText,
   heroSecondaryButtonText,
   "heroBackgroundImageUrl": heroBackgroundImage.asset->url
-}`
+}`;
 
 export const careersPageQuery = groq`*[_type == "careersPage"][0] {
   openRolesTag,
@@ -24,5 +24,4 @@ export const careersPageQuery = groq`*[_type == "careersPage"][0] {
       link
     }
   }
-}`
-
+}`;
