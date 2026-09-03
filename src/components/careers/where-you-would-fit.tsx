@@ -288,9 +288,9 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
                       className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px_8px_16px_16px] lg:rounded-[16px] p-[16px] lg:p-[24px] flex flex-col gap-[12px] lg:gap-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] lg:shadow-none hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group"
                     >
                       {/* Title */}
-                      <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
+                      <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
                         {job.title}
-                      </h3>
+                      </h5>
 
                       {/* Metadata Row & Apply Button */}
                       <div className="w-full flex flex-row items-end justify-between gap-[16px]">
@@ -299,10 +299,10 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
                           {/* Experience */}
                           {job.experience && (
                             <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                              <span className="type-body-xxs text-[#000000] lg:text-[#2A2A2A]">
                                 Experience:
                               </span>
-                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                              <span className="type-body-xxs text-[#000000] lg:text-[#2A2A2A]">
                                 {job.experience}
                               </span>
                             </div>
@@ -311,10 +311,10 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
                           {/* Category */}
                           {(job.category || job.roleTag) && (
                             <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                              <span className="type-body-xxs text-[#000000] lg:text-[#2A2A2A]">
                                 Category:
                               </span>
-                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                              <span className="type-body-xxs text-[#000000] lg:text-[#2A2A2A]">
                                 {job.category || job.roleTag}
                               </span>
                             </div>
@@ -323,10 +323,10 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
                           {/* Eligibility */}
                           {job.eligibility && (
                             <div className="flex items-center gap-[4px] lg:gap-[8px]">
-                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                              <span className="type-body-xxs text-[#000000] lg:text-[#2A2A2A]">
                                 Eligibility:
                               </span>
-                              <span className="type-caption text-[#000000] lg:text-[#2A2A2A]">
+                              <span className="type-body-xxs text-[#000000] lg:text-[#2A2A2A]">
                                 {job.eligibility}
                               </span>
                             </div>
@@ -371,12 +371,12 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
 
               {/* Left Mint Green Card */}
               <div className="relative z-10 w-[48%] xl:w-[539px] min-w-0 h-full bg-[#63CCB7] rounded-tl-[30px] rounded-tr-[0px] rounded-br-[60px] rounded-bl-[30px] p-[32px] xl:p-[40px] flex flex-col justify-center gap-[16px] xl:gap-[20px]">
-                <h3 className="font-primary text-[36px] xl:text-[52px] leading-[44px] xl:leading-[60px] tracking-[-0.01em] text-[#042849]">
+                <h2 className="type-h2 text-[#042849]">
                   Don&apos;t see a fit?
-                </h3>
+                </h2>
 
                 <div className="flex flex-col gap-[16px] xl:gap-[26px]">
-                  <p className="font-secondary text-[15px] xl:text-[20px] leading-[22px] xl:leading-[28px] text-[#111111] max-w-[459px]">
+                  <p className="type-body-s text-[#111111] max-w-[459px]">
                     We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
                   </p>
 
@@ -415,13 +415,13 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
               {/* Mobile / Tablet Content Card with synced corner radius overlapping the image */}
               <div className="relative z-10 w-full bg-[#63CCB7] -mt-[24px] sm:-mt-[36px] md:-mt-[44px] rounded-tl-[24px] sm:rounded-tl-[36px] md:rounded-tl-[44px] rounded-tr-[0px] p-[24px] sm:p-[32px] md:p-[48px] flex flex-col gap-[18px] sm:gap-[22px] md:gap-[28px]">
 
-                <h3 className="type-h3 sm:type-h2 md:text-[44px] md:leading-[52px] tracking-[-0.01em] text-[#042849]">
+                <h2 className="type-h2 text-[#042849]">
                   Don&apos;t see a fit?
-                </h3>
+                </h2>
 
                 <div className="flex flex-col gap-[16px] sm:gap-[20px] md:gap-[24px]">
 
-                  <p className="type-body-xs sm:type-body-s md:text-[18px] md:leading-[28px] text-[#111111] max-w-[620px]">
+                  <p className="type-body-s text-[#111111] max-w-[620px]">
                     We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
                   </p>
 

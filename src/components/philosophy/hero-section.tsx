@@ -51,16 +51,16 @@ export const PhilosophyHeroSection: React.FC = () => {
           <Navbar />
         </div>
 
-        {/* Content Container (Figma Mobile Frame 2147226740 / Frame 12 | Desktop Frame 8 / Frame 12) */}
-        <div className="relative z-10 w-full max-w-[362px] lg:max-w-[1320px] mx-auto flex flex-col justify-start lg:justify-center items-start pt-[0px] lg:pt-[32px] flex-1">
-          <div className="w-full max-w-[362px] lg:max-w-[664px]">
+        {/* Content Container (Figma Mobile Frame 2147226740 / Frame 12 | Tablet Left Aligned | Desktop Frame 8 / Frame 12) */}
+        <div className="relative z-10 w-full max-w-[362px] md:max-w-none lg:max-w-[1320px] mx-auto md:mx-0 lg:mx-auto flex flex-col justify-start lg:justify-center items-start pt-[0px] lg:pt-[32px] flex-1">
+          <div className="w-full max-w-[362px] md:max-w-[540px] lg:max-w-[664px]">
             <h2 className="type-h1 lg:type-h2">
               <span className="text-white">
-                Each year, health systems<br className="hidden lg:inline" />{' '}
-                spend billions to collect<br className="hidden lg:inline" />{' '}
+                Each year, health systems<br className="hidden md:inline lg:inline" />{' '}
+                spend billions to collect<br className="hidden md:inline lg:inline" />{' '}
               </span>
               <span className="text-[#63CCB7]">
-                revenue they have already<br className="hidden lg:inline" />{' '}
+                revenue they have already<br className="hidden md:inline lg:inline" />{' '}
                 earned.
               </span>
             </h2>

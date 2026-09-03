@@ -53,16 +53,16 @@ const convictionsData = [
   },
   {
     id: 1,
-    title: 'Knowledge should remain within the organization, not just with individuals.',
+    title: 'Repetition should not need a person.',
     description:
-      'In most revenue cycles, critical expertise resides with long-tenured staff. When they leave, this knowledge is lost and must be relearned. Systems should retain organizational knowledge.',
+      'Most of a revenue cycle is the same work done over and over. A small part of it genuinely needs someone to think. Those two things have been tangled together for decades because there was no way to separate them. Now there is.',
     image: '/images/philosophy/what-we-believe/img_the_people_inside_the_problem_should_end_it..png',
   },
   {
     id: 2,
-    title: 'Repetition should not need a person.',
+    title: 'Knowledge should remain within the organization, not just with individuals.',
     description:
-      'Most of a revenue cycle is the same work done over and over. A small part of it genuinely needs someone to think. Those two things have been tangled together for decades because there was no way to separate them. Now there is.',
+      'In most revenue cycles, critical expertise resides with long-tenured staff. When they leave, this knowledge is lost and must be relearned. Systems should retain organizational knowledge.',
     image: '/images/philosophy/what-we-believe/img_Knowledge_should_compound_in_the_system..png',
   },
 ];
