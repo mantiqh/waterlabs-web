@@ -108,7 +108,7 @@ export const HowThatShowsUpSection: React.FC = () => {
         <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[20px] lg:gap-[40px]">
           
           {/* Main Card with Background Image (Frame 2147203302: 1320px x 500px) */}
-          <div className="relative w-full h-[488px] sm:h-[560px] md:h-[620px] lg:h-[500px] rounded-[20px_10px_20px_20px] lg:rounded-[0px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
+          <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] lg:h-[500px] rounded-[20px_10px_20px_20px] lg:rounded-[16px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
             
             {/* Background Image - Mobile & Tablet */}
             <div className="absolute inset-0 pointer-events-none lg:hidden">
@@ -152,8 +152,8 @@ export const HowThatShowsUpSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Glassmorphic Card (Frame 2147203299: 537px x 500px desktop, 362px x 259px mobile) */}
-            <div className="relative z-10 w-full lg:w-[420px] xl:w-[537px] h-auto lg:h-full bg-white/[0.90] backdrop-blur-[12px] rounded-[16px_8px_20px_20px] lg:rounded-[0px_0px_16px_8px] p-[20px] sm:p-[24px] lg:p-[32px] flex flex-col justify-between gap-[14px] lg:gap-[20px] shadow-sm overflow-hidden">
+            {/* Glassmorphic Card (top-left 16px, top-right 8px radius on desktop, w-[360px] on 1024px) */}
+            <div className="relative z-10 w-full lg:w-[360px] xl:w-[537px] h-auto lg:h-full bg-white/[0.90] backdrop-blur-[12px] rounded-[16px_8px_20px_20px] lg:rounded-[16px_8px_16px_8px] p-[20px] sm:p-[24px] lg:p-[28px] xl:p-[32px] flex flex-col justify-between gap-[14px] lg:gap-[20px] shadow-sm overflow-hidden">
               
               {/* Tag + Heading Block */}
               <div className="flex flex-col gap-[10px] lg:gap-[14px]">
@@ -197,7 +197,7 @@ export const HowThatShowsUpSection: React.FC = () => {
                       <div
                         key={item.id}
                         onClick={() => scrollToDesktopStatement(index)}
-                        className={`snap-start cursor-pointer transition-all duration-300 ${
+                        className={`snap-start transition-all duration-300 ${
                           isActive ? 'opacity-100' : 'opacity-20 hover:opacity-50'
                         }`}
                       >
@@ -269,7 +269,7 @@ export const HowThatShowsUpSection: React.FC = () => {
           <div className="w-full flex flex-row items-start gap-[8px] lg:gap-[12px]">
             <div className="w-[8px] h-[8px] rounded-full bg-[#63CCB7] shrink-0 mt-[10px] lg:mt-[12px]" />
             <p className="type-h6 text-white flex-1 leading-normal">
-              HIMER AI OS runs the cycle. CurieCode handles the coding. Both stay accountable for what they deliver, and we don&apos;t bill until they&apos;re live.
+              HIMER AI OS runs the cycle. CurieCode handles the coding.<br className="hidden lg:inline" /> Both stay accountable for what they deliver, and we don&apos;t bill until they&apos;re live.
             </p>
           </div>
 

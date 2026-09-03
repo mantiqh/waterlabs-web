@@ -38,10 +38,10 @@ export const WhoThrivesHereSection: React.FC = () => {
           </div>
 
           {/* Content Body: Two Responsive Columns */}
-          <div className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[24px] lg:gap-[32px] xl:gap-[40px]">
+          <div className="w-full flex flex-col lg:flex-row items-start lg:items-stretch justify-between gap-[24px] lg:gap-[32px] xl:gap-[40px]">
             
-            {/* Left Column: Mission Description & Email Contact */}
-            <div className="w-full lg:w-1/2 xl:w-[536px] min-w-0 flex flex-col justify-between gap-[24px] lg:gap-[32px] xl:gap-[48px]">
+            {/* Left Column: Mission Description & Email Contact (Stretches to image height so bottom text aligns with image bottom) */}
+            <div className="w-full lg:w-1/2 xl:w-[536px] min-w-0 flex flex-col justify-between gap-[24px] lg:gap-0">
               <p className="type-h5 tracking-[-0.01em] text-white">
                 We are not for everyone, and that&apos;s deliberate. People who do their best work here are ambitious, driven, self-starters, and not afraid of ambiguity.
               </p>
