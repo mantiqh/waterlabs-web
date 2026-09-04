@@ -40,10 +40,10 @@ export const CultureHeroSection: React.FC = () => {
         </div>
 
         {/* Introduction Section (1320px x 441px) */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-[24px] lg:gap-[40px] flex-1 my-auto">
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-[24px] lg:gap-[32px] xl:gap-[40px] flex-1 my-auto">
           
-          {/* Left Column: Introduction Content */}
-          <div className="w-full lg:w-[650px] flex flex-col justify-center items-start gap-[16px] lg:gap-[20px]">
+          {/* Left Column: Introduction Content (order-2 on small screens, order-1 on desktop) */}
+          <div className="w-full lg:w-1/2 xl:w-[650px] min-w-0 flex flex-col justify-center items-start gap-[16px] lg:gap-[20px] order-2 lg:order-1">
             
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
@@ -64,14 +64,14 @@ export const CultureHeroSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Right Column: Introduction Image Card */}
-          <div className="relative w-full lg:w-[650px] h-[320px] sm:h-[400px] lg:h-[441px] rounded-[20px] overflow-hidden shrink-0 shadow-lg">
+          {/* Right Column: Introduction Image Card (order-1 on small screens, order-2 on desktop) */}
+          <div className="relative w-full lg:w-1/2 xl:w-[650px] h-[300px] sm:h-[380px] lg:h-[380px] xl:h-[441px] rounded-[20px] overflow-hidden shrink-0 shadow-lg order-1 lg:order-2">
             <Image
               src="/images/culture/hero-section/Introduction image.png"
               alt="People at Waterlabs"
               fill
               priority
-              sizes="(max-width: 1024px) 100vw, 650px"
+              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 50vw, 650px"
               className="object-cover object-center"
             />
           </div>
