@@ -7,14 +7,16 @@ export type CTAVariant =
   | 'light-text' 
   | 'dark-text' 
   | 'light-arrow' 
-  | 'dark-arrow';
+  | 'dark-arrow'
+  | 'fill-arrow';
 
 export interface CTAProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant: CTAVariant;
   children?: React.ReactNode;
+  as?: 'button' | 'div' | 'span';
 }
 
-const ChevronRight = ({ className }: { className?: string }) => (
+export const ChevronRight = ({ className }: { className?: string }) => (
   <svg 
     width="13" 
     height="19" 
@@ -28,18 +30,20 @@ const ChevronRight = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
-  ({ variant, children, className = '', ...props }, ref) => {
+export const CTA = React.forwardRef<HTMLElement, CTAProps>(
+  ({ variant, children, as = 'button', className = '', ...props }, ref) => {
     // Base classes for typography conforming to Figma specs (height 44px with py-[10px])
     const typographyClass = 'type-cta';
     const baseClasses = `relative overflow-hidden z-10 inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
     
-    const isArrowOnly = variant === 'light-arrow' || variant === 'dark-arrow';
+    const isArrowOnly = variant === 'light-arrow' || variant === 'dark-arrow' || variant === 'fill-arrow' || !children;
     const isTextOnly = variant === 'light-text' || variant === 'dark-text';
 
     // Shape/Padding Classes conforming to Figma design system
     let shapeClasses = "";
-    if (isArrowOnly) {
+    if (variant === 'fill-arrow') {
+      shapeClasses = "rounded-[64px] p-0 w-[44px] h-[44px] lg:w-[48px] lg:h-[48px]";
+    } else if (isArrowOnly) {
       shapeClasses = "rounded-[64px] p-[10px]";
     } else if (isTextOnly) {
       shapeClasses = "p-0 gap-[10px]";
@@ -51,6 +55,7 @@ export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
     let iconClasses = "";
 
     switch (variant) {
+      case 'fill-arrow':
       case 'light-bg':
         variantClasses = "bg-electric-blue text-white border-none before:absolute before:inset-0 before:z-[-1] before:bg-gradient-to-br before:from-electric-blue before:from-[50%] before:to-aqua-mint before:opacity-0 before:transition-opacity before:duration-300 [@media(hover:hover)]:hover:before:opacity-100";
         iconClasses = "text-[#91C6F2] [@media(hover:hover)]:group-hover:text-white transition-colors duration-300";
@@ -82,9 +87,35 @@ export const CTA = React.forwardRef<HTMLButtonElement, CTAProps>(
         break;
     }
 
+    if (as === 'div') {
+      return (
+        <div
+          ref={ref as React.Ref<HTMLDivElement>}
+          className={`group ${baseClasses} ${shapeClasses} ${variantClasses} ${className}`}
+          {...(props as unknown as React.HTMLAttributes<HTMLDivElement>)}
+        >
+          {!isArrowOnly && children && <span>{children}</span>}
+          <ChevronRight className={iconClasses} />
+        </div>
+      );
+    }
+
+    if (as === 'span') {
+      return (
+        <span
+          ref={ref as React.Ref<HTMLSpanElement>}
+          className={`group ${baseClasses} ${shapeClasses} ${variantClasses} ${className}`}
+          {...(props as unknown as React.HTMLAttributes<HTMLSpanElement>)}
+        >
+          {!isArrowOnly && children && <span>{children}</span>}
+          <ChevronRight className={iconClasses} />
+        </span>
+      );
+    }
+
     return (
       <button
-        ref={ref}
+        ref={ref as React.Ref<HTMLButtonElement>}
         className={`group ${baseClasses} ${shapeClasses} ${variantClasses} ${className}`}
         {...props}
       >

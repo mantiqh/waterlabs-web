@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import CertificationsSection from './certifications';
 import DataSovereigntySection from './data-sovereignty';
@@ -10,12 +10,20 @@ import TopicIndicator, { topics } from './topic-indicator';
 
 export const InteractiveSecuritySections: React.FC = () => {
   const [activeTopic, setActiveTopic] = useState<string>('data-sovereignty');
+  const [isSticky, setIsSticky] = useState<boolean>(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       // Responsive target line: 120px on mobile/tablet (60px navbar + indicator), 140px on desktop
       const isMobile = window.innerWidth < 1024;
       const targetY = isMobile ? 120 : 140;
+
+      // Check if mobile indicator reached sticky top-[60px]
+      if (sentinelRef.current) {
+        const sentinelRect = sentinelRef.current.getBoundingClientRect();
+        setIsSticky(sentinelRect.top <= 61);
+      }
 
       let activeId = topics[0].id;
       for (let i = 0; i < topics.length; i++) {
@@ -70,14 +78,28 @@ export const InteractiveSecuritySections: React.FC = () => {
         </div>
       </div>
 
+      {/* Sentinel for detecting when mobile topic indicator hits sticky position */}
+      <div ref={sentinelRef} className="block lg:hidden h-[1px] w-full pointer-events-none" />
+
       {/* 
         =============================================================================
         MOBILE / TABLET STICKY INDICATOR BAR
-        - Sticky directly below navbar at top-[60px] taking full width (w-full px-0)
+        - When unscrolled: sits inside page padding as rounded card
+        - When scrolled: expands to full width (px-0) with border-y directly below fixed navbar
         =============================================================================
       */}
-      <div className="block lg:hidden sticky top-[60px] z-40 w-full px-0 pt-0 pb-0 bg-transparent transition-all duration-300">
-        <TopicIndicator activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
+      <div
+        className={`block lg:hidden sticky top-[60px] z-40 w-full transition-all duration-300 ${
+          isSticky
+            ? 'px-0 bg-transparent'
+            : 'max-w-[1320px] mx-auto px-[20px] md:px-[40px] pt-[12px] pb-[8px]'
+        }`}
+      >
+        <TopicIndicator
+          activeTopic={activeTopic}
+          onSelectTopic={scrollToTopic}
+          isSticky={isSticky}
+        />
       </div>
 
       {/* 

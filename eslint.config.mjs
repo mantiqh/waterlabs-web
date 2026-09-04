@@ -68,8 +68,9 @@ const eslintConfig = [
       'legacy-acquisitions-web/**',
       'public/**',
       '.git/**',
-      'scripts/commit-ui/**',
+      'scripts/**',
     ],
+
   },
 ];
 
