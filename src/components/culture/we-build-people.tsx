@@ -28,12 +28,24 @@ export const WeBuildPeopleSection: React.FC = () => {
           style={{ backgroundColor: '#A9D154' }}
         />
 
-        {/* Layer 1: Main Top Card (1320px x 433px Desktop) - 0px top-right radius on small screens */}
-        <div className="relative z-20 w-full h-auto lg:h-[433px] rounded-[24px_0px_24px_24px] sm:rounded-[30px_0px_30px_30px] lg:rounded-[30px_10px_30px_30px] overflow-hidden shadow-sm flex flex-col lg:flex-row bg-[#63CCB7]">
+        {/* Layer 1: Main Top Card (1320px x 433px Desktop) - border-radius: 30px 10px 30px 30px */}
+        <div className="relative z-20 w-full h-auto lg:h-[433px] max-lg:rounded-[24px_0px_24px_24px] sm:max-lg:rounded-[30px_0px_30px_30px] lg:!rounded-[30px_10px_30px_30px] overflow-hidden shadow-sm flex flex-col lg:flex-row">
           
-          {/* Mint/Teal Content Card (#63CCB7) - Rendered on top on mobile, left column on desktop */}
+          {/* Desktop Background Image (Frame 2147203292: url(image.png) spanning full card) */}
+          <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+            <Image
+              src="/images/culture/we-build-people/we_build_people.png"
+              alt="We build people for the role"
+              fill
+              priority
+              sizes="1320px"
+              className="object-cover object-[75%_center]"
+            />
+          </div>
+
+          {/* Mint/Teal Content Card (Frame 2147226448: 539px x 433px, border-radius: 30px 0px 60px 0px) */}
           <div
-            className="relative z-20 w-full lg:w-[480px] xl:w-[539px] h-auto lg:h-full p-[28px] sm:p-[36px] lg:p-[40px] flex flex-col justify-center items-start gap-[16px] lg:gap-[20px] rounded-[24px_0px_0px_0px] sm:rounded-[30px_0px_0px_0px] lg:rounded-[30px_0px_60px_0px] shrink-0"
+            className="relative z-20 w-full lg:w-[539px] h-auto lg:h-[433px] p-[28px] sm:p-[36px] lg:p-[40px] flex flex-col justify-center items-start gap-[16px] lg:gap-[20px] max-lg:rounded-[24px_0px_0px_0px] sm:max-lg:rounded-[30px_0px_0px_0px] lg:!rounded-[30px_0px_60px_0px] shrink-0"
             style={{ backgroundColor: '#63CCB7' }}
           >
             {/* Heading: type-h2, semantic <h2> */}
@@ -56,18 +68,6 @@ export const WeBuildPeopleSection: React.FC = () => {
               priority
               sizes="100vw"
               className="object-cover object-[70%_center]"
-            />
-          </div>
-
-          {/* Desktop Right Image Container (Preserves natural 1.91:1 ratio so all 3 women are fully visible) */}
-          <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[820px] xl:w-[840px] h-full z-10 overflow-hidden">
-            <Image
-              src="/images/culture/we-build-people/we_build_people.png"
-              alt="We build people for the role"
-              fill
-              priority
-              sizes="840px"
-              className="object-cover object-right"
             />
           </div>
 

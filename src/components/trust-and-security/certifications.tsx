@@ -73,7 +73,7 @@ export const CertificationsSection: React.FC = () => {
   return (
     <section 
       id="certifications" 
-      className="relative w-full bg-[#FFFFFF] overflow-hidden p-0 m-0 scroll-mt-[60px]"
+      className="relative w-full bg-gradient-to-b from-[#FFFFFF] from-50% to-[#000000] to-50% overflow-hidden p-0 m-0 scroll-mt-[60px]"
     >
       {/* 
         Main Light Blue Card (Figma Rectangle 132):

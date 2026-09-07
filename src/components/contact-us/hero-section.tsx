@@ -56,9 +56,9 @@ export const ContactUsHeroSection: React.FC = () => {
             {/* Heading + Subheading Stack (Frame 2147226524 gap-12) */}
             <div className="w-full flex flex-col items-start gap-[12px]">
               {/* Heading (52px / 60px / -0.01em, #111111) */}
-              <h1 className="type-h2 tracking-[-0.01em] text-[#111111]">
+              <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
                 Contact <span className="text-electric-blue">Waterlabs</span>
-              </h1>
+              </h2>
               {/* Subheading (20px / 28px, #2A2A2A) */}
               <p className="type-body-s text-[#2A2A2A] max-w-[540px] lg:max-w-[664px]">
                 We&apos;re always open to new conversations — whether<br className="hidden sm:inline" /> it&apos;s a question, a partnership, or just a hello.

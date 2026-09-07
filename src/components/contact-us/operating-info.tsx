@@ -88,7 +88,12 @@ export const ContactUsOperatingInfo: React.FC = () => {
         - Mobile: padding: 40px 20px, bg: white, border-radius: 0px 30px 30px 0px
         - Contains two location cards side by side on desktop (gap: 32px), stacked on mobile
       */}
-      <div className="w-full bg-white rounded-r-[30px] lg:rounded-r-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
+      <div 
+        className="w-full bg-white bg-cover bg-right bg-no-repeat rounded-r-[30px] lg:rounded-r-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px]"
+        style={{
+          backgroundImage: "url('/images/contact-us/operating-info/img_abstract_contact%20us_info_section.png')",
+        }}
+      >
         <div className="relative z-10 w-full max-w-[1320px] mx-auto">
           {/* Frame 2147226790 / Frame 2147226529 */}
           <div className="flex flex-col lg:flex-row items-start gap-[32px] max-w-[869.33px]">

@@ -11,6 +11,7 @@ import TopicIndicator, { topics } from './topic-indicator';
 export const InteractiveSecuritySections: React.FC = () => {
   const [activeTopic, setActiveTopic] = useState<string>('data-sovereignty');
   const [isSticky, setIsSticky] = useState<boolean>(false);
+  const [isDesktopSticky, setIsDesktopSticky] = useState<boolean>(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -23,6 +24,13 @@ export const InteractiveSecuritySections: React.FC = () => {
       if (sentinelRef.current) {
         const sentinelRect = sentinelRef.current.getBoundingClientRect();
         setIsSticky(sentinelRect.top <= 61);
+      }
+
+      // Check if desktop indicator reached sticky state / scrolling has started into section
+      const sectionEl = document.getElementById('interactive-security-sections');
+      if (sectionEl) {
+        const sectionRect = sectionEl.getBoundingClientRect();
+        setIsDesktopSticky(sectionRect.top <= 120);
       }
 
       let activeId = topics[0].id;
@@ -72,7 +80,11 @@ export const InteractiveSecuritySections: React.FC = () => {
       */}
       <div className="hidden lg:block absolute top-0 bottom-[60px] lg:bottom-[100px] left-0 w-full px-[60px] pointer-events-none z-30">
         <div className="w-full max-w-[1320px] mx-auto h-full">
-          <aside className="w-[305px] sticky top-[120px] pt-0 lg:pt-[40px] pointer-events-auto">
+          <aside
+            className={`w-[305px] sticky top-[120px] pointer-events-auto transition-all duration-300 ease-in-out ${
+              isDesktopSticky ? 'pt-0' : 'pt-0 lg:pt-[40px]'
+            }`}
+          >
             <TopicIndicator activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
           </aside>
         </div>

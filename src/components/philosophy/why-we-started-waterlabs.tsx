@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const paragraphsData = [
   {
@@ -23,6 +23,36 @@ const paragraphsData = [
 export const WhyWeStartedWaterlabsSection: React.FC = () => {
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const [revealedIndices, setRevealedIndices] = useState<number[]>([0]);
+
+  useEffect(() => {
+    const handleDesktopScrollAnimation = () => {
+      if (window.innerWidth < 1024) return;
+      
+      const newRevealed: number[] = [0];
+      const windowHeight = window.innerHeight;
+
+      paragraphRefs.current.forEach((el, index) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowHeight * 0.75) {
+          if (!newRevealed.includes(index)) {
+            newRevealed.push(index);
+          }
+        }
+      });
+
+      setRevealedIndices(newRevealed);
+    };
+
+    window.addEventListener('scroll', handleDesktopScrollAnimation, { passive: true });
+    handleDesktopScrollAnimation();
+
+    return () => {
+      window.removeEventListener('scroll', handleDesktopScrollAnimation);
+    };
+  }, []);
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
@@ -87,13 +117,24 @@ export const WhyWeStartedWaterlabsSection: React.FC = () => {
           {/* Right Column: Desktop Stacked / Mobile Native Snap Carousel */}
           <div className="w-full lg:w-1/2 max-w-[640px]">
             
-            {/* Desktop View (3 Stacked Paragraphs) */}
+            {/* Desktop View (3 Stacked Paragraphs with Scroll Revealing Animation) */}
             <div className="hidden lg:flex flex-col gap-[40px] pt-[38px] max-w-[498px]">
-              {paragraphsData.map((item) => (
-                <p key={item.id} className={`type-body-xxs ${item.desktopColor} tracking-[0.01em] leading-relaxed`}>
-                  {item.text}
-                </p>
-              ))}
+              {paragraphsData.map((item) => {
+                const isRevealed = revealedIndices.includes(item.id);
+                return (
+                  <p
+                    key={item.id}
+                    ref={(el) => {
+                      paragraphRefs.current[item.id] = el;
+                    }}
+                    className={`type-body-xxs tracking-[0.01em] leading-relaxed transition-all duration-700 ease-out ${
+                      isRevealed ? 'text-[#D7DCE2] opacity-100' : 'text-[#7D8690] opacity-35'
+                    }`}
+                  >
+                    {item.text}
+                  </p>
+                );
+              })}
             </div>
 
             {/* Mobile / Tablet View (Native Smooth Snap Carousel with All-White Text) */}

@@ -100,15 +100,15 @@ export const HowThatShowsUpSection: React.FC = () => {
         - Background: linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)
       */}
       <div
-        className="w-full rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[32px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px] flex flex-col gap-[20px] lg:gap-[40px] overflow-hidden"
+        className="w-full rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[32px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[60px] lg:px-[60px] flex flex-col gap-[20px] lg:gap-[24px] overflow-hidden"
         style={{
           background: 'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
         }}
       >
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[20px] lg:gap-[40px]">
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[20px] lg:gap-[24px]">
           
           {/* Main Card with Background Image (Frame 2147203302: 1320px x 500px) */}
-          <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] lg:h-[500px] rounded-[20px_10px_20px_20px] lg:rounded-[16px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
+          <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] lg:!h-[500px] lg:max-h-[500px] rounded-[20px_10px_20px_20px] lg:rounded-[0px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
             
             {/* Background Image - Mobile & Tablet */}
             <div className="absolute inset-0 pointer-events-none lg:hidden">
@@ -152,8 +152,8 @@ export const HowThatShowsUpSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Glassmorphic Card (top-left 16px, top-right 8px radius on desktop, w-[360px] on 1024px) */}
-            <div className="relative z-10 w-full lg:w-[360px] xl:w-[537px] h-auto lg:h-full bg-white/[0.90] backdrop-blur-[12px] rounded-[16px_8px_20px_20px] lg:rounded-[16px_8px_16px_8px] p-[20px] sm:p-[24px] lg:p-[28px] xl:p-[32px] flex flex-col justify-between gap-[14px] lg:gap-[20px] shadow-sm overflow-hidden">
+            {/* Glassmorphic Card (Frame 2147203299: 537px x 500px on desktop) */}
+            <div className="relative z-10 w-full lg:w-[360px] xl:w-[537px] h-auto lg:h-[500px] lg:max-h-[500px] bg-white/[0.90] backdrop-blur-[12px] rounded-[16px_8px_20px_20px] lg:rounded-[16px_8px_16px_8px] p-[20px] sm:p-[24px] lg:p-[32px_32px_0px] flex flex-col justify-between gap-[14px] shadow-sm overflow-hidden">
               
               {/* Tag + Heading Block */}
               <div className="flex flex-col gap-[10px] lg:gap-[14px]">

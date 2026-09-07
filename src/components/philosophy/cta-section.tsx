@@ -19,10 +19,10 @@ export const PhilosophyCTASection: React.FC = () => {
           
           {/* Text Block (Heading + Subtext) */}
           <div className="flex flex-col gap-[8px] lg:gap-[12px] max-w-[900px]">
-            <h3 className="type-h3 text-white">
+            <h2 className="type-h2 text-white">
               Explore our solution.
-            </h3>
-            <p className="type-body-m text-white/90">
+            </h2>
+            <p className="body-xs text-white/90">
               HIMER AI OS powers all our agents, embedding twenty years of revenue cycle expertise into agentic AI.
             </p>
           </div>
