@@ -34,18 +34,7 @@ export const CareersCTASection: React.FC = () => {
           {/* Main Text Content Block */}
           <div className="w-full max-w-[687px] flex flex-col items-start gap-[14px] lg:gap-[20px]">
             
-            {/* Tag */}
-            <div className="flex items-center gap-[4px] lg:gap-[8px]">
-              <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              {/* Desktop Tag Text */}
-              <span className="hidden lg:inline type-body-xxs tracking-[0.01em] text-white">
-                Don&apos;t just automate your revenue cycle. Apply intelligence to it.
-              </span>
-              {/* Mobile Tag Text */}
-              <span className="inline lg:hidden type-caption text-white">
-                See it run on your payer mix.
-              </span>
-            </div>
+           
 
             {/* Heading */}
             <h2 className="type-h3 text-white lg:text-[#91C6F2]">

@@ -111,13 +111,13 @@ export const WeAreHiringSection: React.FC = () => {
       */}
       <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
         <div className="max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[20px] lg:gap-[40px] xl:gap-[60px]">
-            
+
           {/* Left Column: Heading Block */}
           <div className="w-full lg:w-[38%] xl:w-[537px] lg:flex-1 min-w-0 shrink-0 flex flex-col gap-[12px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="type-caption text-[#7D8690]">
+              <span className="body-xxs text-[#7D8690]">
                 Where You had Fit
               </span>
             </div>
@@ -141,7 +141,7 @@ export const WeAreHiringSection: React.FC = () => {
                 className="flex flex-row items-center gap-[20px] xl:gap-[24px] pb-[20px] xl:pb-[24px] border-b border-[#91C6F2]"
               >
                 {/* Role 3D Icon */}
-                <div 
+                <div
                   className="shrink-0 flex items-center justify-center w-[72px] h-[72px] xl:w-[102px] xl:h-[99px]"
                 >
                   <div className="relative w-full h-full">
@@ -155,7 +155,7 @@ export const WeAreHiringSection: React.FC = () => {
                 </div>
 
                 {/* Role Text Content */}
-                <div className="flex flex-col gap-[6px] xl:gap-[8px] flex-1">
+                <div className="flex flex-col gap-[6px] xl:gap-[14px] flex-1">
                   <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">
                     {role.title}
                   </h3>
@@ -180,7 +180,7 @@ export const WeAreHiringSection: React.FC = () => {
                   className="shrink-0 snap-start w-[269px] flex flex-col justify-start gap-[14px] pb-[20px] border-b border-[#91C6F2]"
                 >
                   {/* Icon */}
-                  <div 
+                  <div
                     className="shrink-0 flex items-center justify-start h-[62px]"
                     style={{ width: `${role.iconWidthMobile}px` }}
                   >
@@ -215,8 +215,8 @@ export const WeAreHiringSection: React.FC = () => {
                 const widthClass = isActive
                   ? 'w-[32px] bg-[#0F68D6]'
                   : diff === 1
-                  ? 'w-[16px] bg-[#0F68D6]/20'
-                  : 'w-[6px] bg-[#0F68D6]/20';
+                    ? 'w-[16px] bg-[#0F68D6]/20'
+                    : 'w-[6px] bg-[#0F68D6]/20';
 
                 return (
                   <button
