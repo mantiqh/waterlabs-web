@@ -38,7 +38,7 @@ export const WhatWeDoMattersSection: React.FC = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#63CCB7] shrink-0" />
-              <span className="type-caption text-[#D7DCE2]">
+              <span className="body-xxs text-[#D7DCE2]">
                 Why Waterlabs
               </span>
             </div>
@@ -53,9 +53,9 @@ export const WhatWeDoMattersSection: React.FC = () => {
           <div className="relative z-10 w-full max-w-[1024px] flex flex-col lg:flex-row items-start justify-start gap-[16px] lg:gap-[20px]">
             {/* Left Column: Subheading (508px width in Figma) */}
             <div className="w-full lg:w-1/2 lg:max-w-[508px] min-w-0">
-              <h3 className="type-h5 tracking-[-0.01em] text-white max-w-[508px]">
+              <h5 className="type-h5 tracking-[-0.01em] text-white max-w-[508px]">
                 This is a hard problem to solve.
-              </h3>
+              </h5>
             </div>
 
             {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, gap 16px) */}

@@ -60,9 +60,9 @@ export const CareersHeroSection: React.FC = () => {
           {/* Left Column (Frame 12 -> Frame 2147203284): Heading */}
           <div className="w-full md:w-1/2 max-w-[650px] h-auto lg:h-full pt-0 lg:pt-[32px] flex flex-col justify-center items-start">
             <div className="w-full h-auto lg:h-[438px] flex flex-col justify-center items-start">
-              <h1 className="type-h3 tracking-[-0.01em] text-white max-w-[650px]">
+              <h2 className="type-h3 tracking-[-0.01em] text-white max-w-[650px]">
                 We&apos;re tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
-              </h1>
+              </h2>
             </div>
           </div>
 
@@ -91,9 +91,9 @@ export const CareersHeroSection: React.FC = () => {
           
           {/* Top: Heading */}
           <div className="w-full">
-            <h1 className="type-h3 tracking-[-0.01em] text-white">
+            <h2 className="type-h1 tracking-[-0.01em] text-white">
               We&apos;re tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
-            </h1>
+            </h2>
           </div>
 
           {/* Bottom: Team Image Card (Rectangle 132) */}
