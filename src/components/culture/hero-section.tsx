@@ -18,13 +18,13 @@ export const CultureHeroSection: React.FC = () => {
           - No <h1> tag (semantic <h2> with type-h1)
       */}
       <div
-        className="relative w-full min-h-[620px] lg:h-[653px] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[50px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[32px] overflow-hidden"
+        className="relative w-full min-h-[620px] lg:h-[653px] rounded-bl-[30px] rounded-br-[30px] lg:rounded-bl-[60px] lg:rounded-br-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[50px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[32px] overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #0F68D6 41.31%, #AE87E4 108.85%)',
         }}
       >
         {/* Background Banner Graphic */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] rounded-br-[30px] lg:rounded-bl-[60px] lg:rounded-br-[60px]">
           <Image
             src="/images/culture/hero-section/banner%20(4).png"
             alt="Culture Hero Background"
@@ -65,14 +65,14 @@ export const CultureHeroSection: React.FC = () => {
           </div>
 
           {/* Right Column: Introduction Image Card (order-1 on small screens, order-2 on desktop) */}
-          <div className="relative w-full lg:w-1/2 xl:w-[650px] h-[300px] sm:h-[380px] lg:h-[380px] xl:h-[441px] rounded-[20px] overflow-hidden shrink-0 shadow-lg order-1 lg:order-2">
+          <div className="relative w-full lg:w-1/2 xl:w-[650px] h-[300px] sm:h-[380px] lg:h-[420px] xl:h-[441px] rounded-[20px] overflow-hidden shrink-0 shadow-lg order-1 lg:order-2">
             <Image
-              src="/images/culture/hero-section/Introduction image.png"
+              src="/images/culture/hero-section/introduction_banner.png"
               alt="People at Waterlabs"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 50vw, 650px"
-              className="object-cover object-center"
+              className="object-cover object-bottom"
             />
           </div>
 

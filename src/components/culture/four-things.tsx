@@ -115,24 +115,14 @@ export const FourThingsSection: React.FC = () => {
       */}
       <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
         
-        {/* Subtle Background Watermark Graphic (Vector Ribbon Curve) */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px]">
-          <svg
-            className="absolute -left-[180px] sm:-left-[120px] lg:-left-[80px] top-[140px] lg:top-[180px] w-[500px] sm:w-[650px] lg:w-[750px] h-[500px] sm:h-[650px] lg:h-[750px] opacity-70"
-            viewBox="0 0 600 600"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            {/* Elegant looping curved ribbon matching Figma screenshot */}
-            <path
-              d="M100 480C140 420 220 340 320 380C420 420 480 340 440 240C400 140 280 120 200 180C120 240 60 380 140 460C220 540 360 520 420 420"
-              stroke="#FFFFFF"
-              strokeWidth="48"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="mix-blend-overlay"
-            />
-          </svg>
+        {/* Vector Background Graphic at Left Bottom */}
+        <div className="absolute left-0 bottom-0 pointer-events-none z-0 overflow-hidden w-[280px] sm:w-[380px] lg:w-[480px] xl:w-[563px] aspect-[1126/944]">
+          <Image
+            src="/images/culture/four-things/Vector.png"
+            alt="Vector Graphic"
+            fill
+            className="object-contain object-left-bottom"
+          />
         </div>
 
         {/* Content Container (1320px max width) */}

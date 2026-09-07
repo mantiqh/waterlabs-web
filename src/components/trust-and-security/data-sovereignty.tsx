@@ -27,14 +27,15 @@ export const DataSovereigntySection: React.FC = () => {
   return (
     <section
       id="data-sovereignty"
-      className="relative w-full bg-white overflow-hidden p-0 m-0 scroll-mt-[60px]"
+      className="relative w-full bg-gradient-to-b from-white from-50% to-[#000000] to-50% overflow-hidden p-0 m-0 scroll-mt-[60px]"
     >
       {/* 
         Container matching 1440px grid:
         - Desktop: px-[32px] xl:px-[60px], py-[40px] lg:py-[80px]
         - Mobile: px-[20px], py-[24px]
+        - Right curve: rounded-br-[30px] lg:rounded-br-[60px] exposing black background of Our Own Cloud below
       */}
-      <div className="w-full pt-[20px] lg:pt-[40px] pb-[40px] lg:pb-[80px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
+      <div className="w-full bg-white rounded-br-[30px] lg:rounded-br-[60px] pt-[20px] lg:pt-[40px] pb-[40px] lg:pb-[80px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
         <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[24px] lg:gap-[40px]">
 
           {/* Invisible Spacer matching Left Sidebar width (305px) */}
