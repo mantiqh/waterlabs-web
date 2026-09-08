@@ -55,8 +55,8 @@ export const ContactUsHeroSection: React.FC = () => {
           <div className="w-full max-w-[664px] flex flex-col items-start gap-[12px] lg:gap-[20px]">
             {/* Heading + Subheading Stack (Frame 2147226524 gap-12) */}
             <div className="w-full flex flex-col items-start gap-[12px]">
-              {/* Heading (52px / 60px / -0.01em, #111111) */}
-              <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
+              {/* Heading (Mobile: 32px / 40px, Desktop: type-h2, #111111) */}
+              <h2 className="type-h2 max-md:text-[32px] max-md:leading-[40px] tracking-[-0.01em] text-[#111111]">
                 Contact <span className="text-electric-blue">Waterlabs</span>
               </h2>
               {/* Subheading (20px / 28px, #2A2A2A) */}

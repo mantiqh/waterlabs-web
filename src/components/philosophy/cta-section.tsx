@@ -17,20 +17,20 @@ export const PhilosophyCTASection: React.FC = () => {
         {/* Content Container (Frame 2147226500: max-w-[1320px]) */}
         <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[20px] lg:gap-[40px]">
           
-          {/* Text Block (Heading + Subtext) */}
+          {/* Text Block (Heading + Subtext matching Figma Image 5) */}
           <div className="flex flex-col gap-[8px] lg:gap-[12px] max-w-[900px]">
             <h2 className="type-h2 text-white">
-              Explore our solution.
+              See what we built.
             </h2>
-            <p className="body-xs text-white/90">
-              HIMER AI OS powers all our agents, embedding twenty years of revenue cycle expertise into agentic AI.
+            <p className="type-body-xs text-white/90 max-w-[700px]">
+              HIMER AI OS is the operating system underneath every agent we run. It knows the<br className="hidden sm:inline" /> payers, the specialties, the systems and the rules before it knows you.
             </p>
           </div>
 
           {/* CTA Button */}
           <div className="shrink-0 flex items-center">
             <CTA variant="dark-bg">
-              Discover the Platform
+              Explore the Platform
             </CTA>
           </div>
 

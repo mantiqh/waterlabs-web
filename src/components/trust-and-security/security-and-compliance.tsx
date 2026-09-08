@@ -9,18 +9,22 @@ export const SecurityAndComplianceSection: React.FC = () => {
 
   const handleScroll = () => {
     if (!carouselRef.current) return;
-    const { scrollLeft, clientWidth } = carouselRef.current;
-    const index = Math.round(scrollLeft / clientWidth);
+    const { scrollLeft } = carouselRef.current;
+    const firstCard = carouselRef.current.children[0] as HTMLElement;
+    const step = firstCard ? firstCard.offsetWidth + 16 : carouselRef.current.clientWidth;
+    const index = Math.round(scrollLeft / step);
     setActiveCardIndex(Math.min(Math.max(index, 0), 1));
   };
 
   const scrollToCard = (index: number) => {
     if (!carouselRef.current) return;
-    const clientWidth = carouselRef.current.clientWidth;
-    carouselRef.current.scrollTo({
-      left: index * clientWidth,
-      behavior: 'smooth',
-    });
+    const card = carouselRef.current.children[index] as HTMLElement;
+    if (card) {
+      carouselRef.current.scrollTo({
+        left: card.offsetLeft - carouselRef.current.offsetLeft,
+        behavior: 'smooth',
+      });
+    }
     setActiveCardIndex(index);
   };
 
@@ -153,7 +157,7 @@ export const SecurityAndComplianceSection: React.FC = () => {
               >
                 
                 {/* Mobile Card 1 */}
-                <div className="w-full min-w-full snap-center flex flex-col gap-[16px]">
+                <div className="w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex flex-col gap-[12px]">
                   <div className="w-full relative aspect-[362/250] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-gray-100">
                     <Image
                       src="/images/trust-and-security/security-and-compliance/img_closely_monitored_agents.png"
@@ -174,7 +178,7 @@ export const SecurityAndComplianceSection: React.FC = () => {
                 </div>
 
                 {/* Mobile Card 2 */}
-                <div className="w-full min-w-full snap-center flex flex-col gap-[16px]">
+                <div className="w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex flex-col gap-[12px]">
                   <div className="w-full relative aspect-[362/250] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)] bg-gray-100">
                     <Image
                       src="/images/trust-and-security/security-and-compliance/img_business_associate_agreement_every_time.png"

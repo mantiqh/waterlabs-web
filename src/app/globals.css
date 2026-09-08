@@ -56,6 +56,7 @@
      Tablet:  720–1023px
      Desktop: 1024px+
   */
+  --breakpoint-sm: 640px;
   --breakpoint-md: 720px;
   --breakpoint-lg: 1024px;
 }

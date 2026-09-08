@@ -107,8 +107,8 @@ export const HowThatShowsUpSection: React.FC = () => {
       >
         <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[20px] lg:gap-[24px]">
           
-          {/* Main Card with Background Image (Frame 2147203302: 1320px x 500px) */}
-          <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] lg:!h-[500px] lg:max-h-[500px] rounded-[20px_10px_20px_20px] lg:rounded-[0px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
+          {/* Main Card with Background Image (Frame 2147203302: 1320px x 500px, 16px top-left radius to eliminate corner sliver) */}
+          <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] lg:!h-[500px] lg:max-h-[500px] rounded-[16px_10px_20px_20px] lg:rounded-[16px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
             
             {/* Background Image - Mobile & Tablet */}
             <div className="absolute inset-0 pointer-events-none lg:hidden">
