@@ -23,10 +23,10 @@ export const DoWorkThatMattersSection: React.FC = () => {
             - Frame 2147203133: gap 8px (Tag + Headline + Description)
             - Frame 7: CTA Button
         */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto rounded-[20px] p-0 flex flex-col lg:flex-row items-stretch lg:items-center justify-start gap-[24px] lg:gap-[32px] xl:gap-[44px] lg:pr-[40px] shadow-sm overflow-hidden min-h-[462px] bg-white">
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto rounded-t-[8px] rounded-b-[20px] lg:rounded-[20px] p-0 flex flex-col lg:flex-row items-stretch lg:items-center justify-start gap-[24px] lg:gap-[32px] xl:gap-[44px] lg:pr-[40px] shadow-sm overflow-hidden min-h-[462px] bg-white">
 
-        {/* Left Column: Speaker Image (650px x 462px on desktop, 8px top-right radius) */}
-        <div className="w-full lg:w-[480px] xl:w-[650px] min-h-[300px] sm:min-h-[380px] lg:min-h-[462px] relative rounded-t-[20px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] overflow-hidden shrink-0 self-stretch">
+        {/* Left Column: Speaker Image (Mobile: 8px 8px 32px 8px, Desktop: 650px x 462px with 8px top-right and 32px bottom-right) */}
+        <div className="w-full lg:w-[480px] xl:w-[650px] min-h-[250px] sm:min-h-[380px] lg:min-h-[462px] relative rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] rounded-br-[32px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] overflow-hidden shrink-0 self-stretch">
           <Image
             src="/images/culture/do-work-that-matters/do_work_that_matters.png"
             alt="Do work that matters, with people who'll back you"

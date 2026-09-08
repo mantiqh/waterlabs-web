@@ -11,7 +11,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: 'About us', href: '/#about' },
+  { label: 'About us', href: '/about-us' },
   { label: 'Products', href: '/#products' },
   { label: 'Agentic RCM Solutions', href: '/#solutions' },
   { label: 'Clients', href: '/#clients' },

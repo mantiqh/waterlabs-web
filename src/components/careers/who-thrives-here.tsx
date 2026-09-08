@@ -26,7 +26,7 @@ export const WhoThrivesHereSection: React.FC = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#63CCB7] shrink-0" />
-              <span className="type-caption text-[#D7DCE2]">
+              <span className="body-xxs text-[#D7DCE2]">
                 The Fit
               </span>
             </div>

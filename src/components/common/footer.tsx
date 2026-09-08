@@ -64,12 +64,12 @@ export const Footer: React.FC = () => {
             <h4 className="type-body-xxs text-white font-medium">Company</h4>
             <ul className="flex flex-col gap-4">
               <li>
-                <Link href="#" className="type-body-xxs text-white/70 hover:text-electric-blue transition-colors">
+                <Link href="/about-us" className="type-body-xxs text-white/70 hover:text-electric-blue transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="type-body-xxs text-white/70 hover:text-electric-blue transition-colors">
+                <Link href="/contact-us" className="type-body-xxs text-white/70 hover:text-electric-blue transition-colors">
                   Contact Us
                 </Link>
               </li>

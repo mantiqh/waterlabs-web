@@ -61,8 +61,7 @@ export const ThePromiseSection: React.FC = () => {
 
             {/* Outcome Headline */}
             <p className="type-h4 text-[#0F68D6] w-full max-w-[700px]">
-              <span className="lg:block">We own the outcome.</span>{' '}
-              <span className="lg:block">You get your attention back.</span>
+              We own the outcome.<br />You get your attention back.
             </p>
 
           </div>
