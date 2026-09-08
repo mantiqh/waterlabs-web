@@ -10,6 +10,118 @@ interface CaseStudyContentProps {
   caseStudy: CaseStudy;
 }
 
+const renderFormattedText = (text: string) => {
+  // If markdown **bold** is present, parse it
+  if (text.includes('**')) {
+    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={i} className="font-bold text-[#111111]">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      return part;
+    });
+  }
+
+  // Fallback: If starts with keyword (e.g. Operationally:, Financially:, Strategically:)
+  const keywordMatch = text.match(/^(Operationally[,:]?|Financially[,:]?|Strategically[,:]?)(.*)$/s);
+  if (keywordMatch) {
+    return (
+      <>
+        <strong className="font-bold text-[#111111]">{keywordMatch[1]}</strong>
+        {keywordMatch[2]}
+      </>
+    );
+  }
+
+  // Fallback: If starts with a colon prefix (e.g. "Daily claim surveillance: ")
+  const colonMatch = text.match(/^([^:\n]+:\s*)(.*)$/s);
+  if (colonMatch && colonMatch[1].length < 40) {
+    return (
+      <>
+        <strong className="font-bold text-[#111111]">{colonMatch[1]}</strong>
+        {colonMatch[2]}
+      </>
+    );
+  }
+
+  return text;
+};
+
+const renderResultsDetailParagraph = (text: string) => {
+  if (text.includes('**')) {
+    return renderFormattedText(text);
+  }
+
+  // Check known result clause splits
+  const clauseSplits = [
+    ', based on',
+    ', so patients',
+    ', so ',
+    ', creating capacity',
+    ', creating ',
+    ', allowing ',
+    ', resulting in ',
+    ', including ',
+  ];
+
+  for (const clause of clauseSplits) {
+    const idx = text.indexOf(clause);
+    if (idx !== -1) {
+      return (
+        <>
+          <strong className="font-bold text-[#111111]">{text.slice(0, idx + 1)}</strong>
+          {text.slice(idx + 1)}
+        </>
+      );
+    }
+  }
+
+  // Check first sentence ending with period (e.g., "$500,000 in annual labor savings.")
+  const dotSentenceMatch = text.match(/^([^.\n]+(?:\.[0-9]+)?[^.\n]*\.)\s+(.*)$/s);
+  if (dotSentenceMatch) {
+    return (
+      <>
+        <strong className="font-bold text-[#111111]">{dotSentenceMatch[1]}</strong>
+        {' ' + dotSentenceMatch[2]}
+      </>
+    );
+  }
+
+  return renderFormattedText(text);
+};
+
+const renderResultsParagraphs = (content?: string) => {
+  if (!content) return null;
+  const paragraphs = content.split('\n\n').filter(Boolean);
+  return (
+    <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] max-w-[975px]">
+      {paragraphs.map((para, idx) => (
+        <p key={idx} className="type-body-xs text-[#2A2A2A]">
+          {renderResultsDetailParagraph(para)}
+        </p>
+      ))}
+    </div>
+  );
+};
+
+const renderFormattedParagraphs = (content?: string) => {
+  if (!content) return null;
+  const paragraphs = content.split('\n\n').filter(Boolean);
+  return (
+    <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] max-w-[975px]">
+      {paragraphs.map((para, idx) => (
+        <p key={idx} className="type-body-xs text-[#2A2A2A]">
+          {renderFormattedText(para)}
+        </p>
+      ))}
+    </div>
+  );
+};
+
 export const CaseStudyContent: React.FC<CaseStudyContentProps> = ({ caseStudy }) => {
   const [activeTopic, setActiveTopic] = useState<string>(CASE_STUDY_TOPICS[0].id);
   const [isSticky, setIsSticky] = useState<boolean>(false);
@@ -82,15 +194,15 @@ export const CaseStudyContent: React.FC<CaseStudyContentProps> = ({ caseStudy })
   };
 
   return (
-    <section className="relative w-full bg-white pb-[80px] lg:pb-[120px]">
+    <section className="relative w-full bg-white pb-[80px] lg:pb-[80px]">
       {/* Sentinel for detecting when mobile TOC hits sticky position */}
       <div ref={sentinelRef} className="block lg:hidden h-[1px] w-full pointer-events-none" />
 
       {/* 
         =============================================================================
         MOBILE / TABLET STICKY INDICATOR BAR
-        - When unscrolled: sits inside page padding as rounded card (Image 2)
-        - When scrolled: expands to full width (px-0) with border-y directly below fixed navbar (Image 1)
+        - When unscrolled: sits inside page padding as rounded card
+        - When scrolled: expands to full width (px-0) with border-y directly below fixed navbar
         =============================================================================
       */}
       <div
@@ -110,171 +222,129 @@ export const CaseStudyContent: React.FC<CaseStudyContentProps> = ({ caseStudy })
       <div className="w-full px-[20px] md:px-[40px] lg:px-[60px]">
         <div className="w-full max-w-[1320px] mx-auto pt-[32px] lg:pt-[80px] flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[40px]">
         
-        {/* 
-          =============================================================================
-          LEFT COLUMN: STICKY TABLE OF CONTENTS (Desktop)
-          - Desktop: w-[305px] sticky top-[100px]
-          =============================================================================
-        */}
-        <aside className="hidden lg:block w-[305px] shrink-0 sticky top-[100px] z-20">
-          <CaseStudyTOC activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
-        </aside>
+          {/* 
+            =============================================================================
+            LEFT COLUMN: STICKY TABLE OF CONTENTS (Desktop)
+            - Desktop: w-[305px] sticky top-[100px]
+            =============================================================================
+          */}
+          <aside className="hidden lg:block w-[305px] shrink-0 sticky top-[100px] z-20">
+            <CaseStudyTOC activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
+          </aside>
 
-        {/* 
-          =============================================================================
-          RIGHT COLUMN: CASE STUDY BODY CONTENT (Frame 2147226949: 975px wide)
-          =============================================================================
-        */}
-        <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[60px] lg:gap-[80px]">
-          
-          {/* Section 1: The Client (Frame 2147226939) */}
-          <section id="the-client" className="flex flex-col items-start gap-[24px] lg:gap-[32px] scroll-mt-[120px]">
-            {clientSummary && (
-              <p className="type-body-xs text-[#2A2A2A] max-w-[975px]">
-                {clientSummary}
-              </p>
-            )}
-
-            {/* Stat Badges Row (Frame 2147226954: below text) */}
-            {statBadges && statBadges.length > 0 && (
-              <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-[12px] lg:gap-[20px] w-full">
-                {statBadges.map((badge, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center justify-center gap-[10px] py-[12px] px-[16px] lg:p-[20px] bg-[#F4F6F9] rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px]"
-                  >
-                    <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                    <span className="type-h6 text-[#111111] font-normal tracking-[-0.01em]">
-                      {badge.text}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-
-          {/* Section 2: The Challenge (Frame 2147226741) */}
-          {challenge && (
-            <section id="the-challenge" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-              <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
-                The Challenge
-              </h3>
-              <p className="type-body-xs text-[#2A2A2A] whitespace-pre-line max-w-[975px]">
-                {challenge}
-              </p>
-            </section>
-          )}
-
-          {/* Section 3: What Waterlabs did (Frame 2147226737) */}
-          {whatWaterlabsDid && (
-            <section id="what-waterlabs-did" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-              <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
-                What Waterlabs did
-              </h3>
-              <p className="type-body-xs text-[#2A2A2A] whitespace-pre-line max-w-[975px]">
-                {whatWaterlabsDid}
-              </p>
-            </section>
-          )}
-
-          {/* Section 4: The Results (Frame 2147226738) */}
-          {resultsBlock && (
-            <section id="the-results" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-              <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
-                The Results
-              </h3>
-              <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] w-full">
-                <div className="flex flex-col items-start gap-[8px] lg:gap-[16px]">
-                  <div className="type-body-xl font-bold text-[#111111]">
-                    {resultsBlock.headline}
-                  </div>
-                  <p className="type-body-xs text-[#2A2A2A]">
-                    {resultsBlock.subheadline}
-                  </p>
-                </div>
-                <p className="type-body-xs text-[#2A2A2A] whitespace-pre-line max-w-[975px]">
-                  {resultsBlock.details}
+          {/* 
+            =============================================================================
+            RIGHT COLUMN: CASE STUDY BODY CONTENT (Frame 2147226949: 975px wide)
+            =============================================================================
+          */}
+          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[60px] lg:gap-[80px]">
+            
+            {/* Section 1: The Client (Frame 2147226939) */}
+            <section id="the-client" className="flex flex-col items-start gap-[24px] lg:gap-[32px] scroll-mt-[120px]">
+              {clientSummary && (
+                <p className="type-body-xs text-[#2A2A2A] max-w-[975px]">
+                  {clientSummary}
                 </p>
-              </div>
-            </section>
-          )}
+              )}
 
-          {/* Section 5: The Outcomes (Frame 2147226739) */}
-          {outcomes && (
-            <section id="the-outcomes" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-              <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
-                The Outcomes
-              </h3>
-              <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] max-w-[975px]">
-                {outcomes.split('\n\n').filter(Boolean).map((para, idx) => {
-                  const keywordMatch = para.match(/^(Operationally[,:]?|Financially[,:]?|Strategically[,:]?)(.*)$/s);
-                  if (keywordMatch) {
-                    return (
-                      <p key={idx} className="type-body-xs text-[#2A2A2A]">
-                        <strong className="font-bold text-[#111111]">{keywordMatch[1]}</strong>
-                        {keywordMatch[2]}
-                      </p>
-                    );
-                  }
-
-                  if (para.includes('**')) {
-                    const parts = para.split(/(\*\*[^*]+\*\*)/g);
-                    return (
-                      <p key={idx} className="type-body-xs text-[#2A2A2A]">
-                        {parts.map((part, i) => {
-                          if (part.startsWith('**') && part.endsWith('**')) {
-                            return (
-                              <strong key={i} className="font-bold text-[#111111]">
-                                {part.slice(2, -2)}
-                              </strong>
-                            );
-                          }
-                          return part;
-                        })}
-                      </p>
-                    );
-                  }
-
-                  return (
-                    <p key={idx} className="type-body-xs text-[#2A2A2A] whitespace-pre-line">
-                      {para}
-                    </p>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-
-          {/* Section 6: The Bottom Line (Frame 2147226740) */}
-          {bottomLine && (
-            <section id="the-bottom-line" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-              <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
-                The Bottom Line
-              </h3>
-              <p className="type-body-xs text-[#2A2A2A] whitespace-pre-line max-w-[975px]">
-                {bottomLine}
-              </p>
-            </section>
-          )}
-
-          {/* Filter Badges (Frame 2147226517: positioned below all text sections) */}
-          {tags && tags.length > 0 && (
-            <div className="flex flex-wrap items-center gap-[12px] lg:gap-[16px] pt-[8px]">
-              {tags.map((tag) => (
-                <div
-                  key={tag}
-                  className="flex items-center gap-[10px] px-[16px] py-[8px] rounded-full bg-[rgba(145,198,242,0.1)]"
-                >
-                  <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                  <span className="type-cta text-[#2A2A2A] opacity-80">
-                    {tag}
-                  </span>
+              {/* Stat Badges Row (Frame 2147226954: below text) */}
+              {statBadges && statBadges.length > 0 && (
+                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-[12px] lg:gap-[20px] w-full">
+                  {statBadges.map((badge, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center justify-center gap-[10px] py-[12px] px-[16px] lg:p-[20px] bg-[#F4F6F9] rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px]"
+                    >
+                      <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
+                      <span className="type-h6 text-[#111111] font-normal tracking-[-0.01em]">
+                        {badge.text}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
+              )}
+            </section>
 
-        </div>
+            {/* Section 2: The Challenge (Frame 2147226741) */}
+            {challenge && (
+              <section id="the-challenge" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
+                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+                  The Challenge
+                </h3>
+                {renderFormattedParagraphs(challenge)}
+              </section>
+            )}
+
+            {/* Section 3: What Waterlabs did (Frame 2147226737) */}
+            {whatWaterlabsDid && (
+              <section id="what-waterlabs-did" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
+                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+                  What Waterlabs did
+                </h3>
+                {renderFormattedParagraphs(whatWaterlabsDid)}
+              </section>
+            )}
+
+            {/* Section 4: The Results (Frame 2147226738) */}
+            {resultsBlock && (
+              <section id="the-results" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
+                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+                  The Results
+                </h3>
+                <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] w-full">
+                  <div className="flex flex-col items-start gap-[8px] lg:gap-[16px]">
+                    <div className="type-body-xl font-bold text-[#111111]">
+                      {resultsBlock.headline}
+                    </div>
+                    <p className="type-body-xs text-[#2A2A2A]">
+                      {resultsBlock.subheadline}
+                    </p>
+                  </div>
+                  {renderResultsParagraphs(resultsBlock.details)}
+                </div>
+              </section>
+            )}
+
+            {/* Section 5: The Outcomes (Frame 2147226739) */}
+            {outcomes && (
+              <section id="the-outcomes" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
+                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+                  The Outcomes
+                </h3>
+                {renderFormattedParagraphs(outcomes)}
+              </section>
+            )}
+
+            {/* Section 6: The Bottom Line (Frame 2147226740) */}
+            {bottomLine && (
+              <section id="the-bottom-line" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
+                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+                  The Bottom Line
+                </h3>
+                <div className="flex flex-col items-start gap-[40px] w-full">
+                  {renderFormattedParagraphs(bottomLine)}
+
+                  {/* Filter Badges: exactly 40px below the paragraph */}
+                  {tags && tags.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-[12px] lg:gap-[16px]">
+                      {tags.map((tag) => (
+                        <div
+                          key={tag}
+                          className="flex items-center gap-[10px] px-[16px] py-[8px] rounded-full bg-[rgba(145,198,242,0.1)]"
+                        >
+                          <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
+                          <span className="type-cta text-[#2A2A2A] opacity-80">
+                            {tag}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+          </div>
 
         </div>
       </div>

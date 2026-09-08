@@ -105,15 +105,15 @@ export const FourThingsSection: React.FC = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#F4F6F9] p-0 m-0">
+    <section className="relative w-full bg-[#9983E2] p-0 m-0 overflow-hidden">
       {/* 
         Four Things Section Container (Figma top frame - color):
-        - Desktop: 1440px width, padding: 80px 60px, rounded-tl-[60px] rounded-bl-[60px]
-        - Mobile: rounded-tl-[30px] rounded-bl-[30px], padding: 40px 20px
+        - Desktop: 1440px width, padding: 80px 60px, rounded-tr-[60px]
+        - Mobile: rounded-tr-[30px], padding: 40px 20px
         - Background: #F4F6F9
-        - Left column stays fixed (sticky) on desktop while right side scrolls (matching Home page ProductsSection)
+        - Top-right corner reveals the hero purple (#9983E2) seamlessly matching Figma
       */}
-      <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
+      <div className="relative w-full bg-[#F4F6F9] rounded-tr-[30px] lg:rounded-tr-[60px] py-[40px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
         
         {/* Vector Background Graphic at Left Bottom */}
         <div className="absolute left-0 bottom-0 pointer-events-none z-0 overflow-hidden w-[280px] sm:w-[380px] lg:w-[480px] xl:w-[563px] aspect-[1126/944]">
