@@ -18,13 +18,13 @@ export const CultureHeroSection: React.FC = () => {
           - No <h1> tag (semantic <h2> with type-h1)
       */}
       <div
-        className="relative w-full min-h-[620px] lg:h-[653px] rounded-bl-[30px] rounded-br-[30px] lg:rounded-bl-[60px] lg:rounded-br-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[50px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[32px] overflow-hidden"
+        className="relative w-full min-h-[620px] lg:h-[653px] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[50px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[32px] overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #0F68D6 41.31%, #AE87E4 108.85%)',
         }}
       >
         {/* Background Banner Graphic */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] rounded-br-[30px] lg:rounded-bl-[60px] lg:rounded-br-[60px]">
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
           <Image
             src="/images/culture/hero-section/banner%20(4).png"
             alt="Culture Hero Background"

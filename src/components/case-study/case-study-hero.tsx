@@ -62,7 +62,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ caseStudy }) => {
             {/* Tag / Eyebrow (Text - Tag) */}
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
+              <span className="body-caption text-[#7D8690] tracking-[0.01em]">
                 {categoryTag}
               </span>
             </div>

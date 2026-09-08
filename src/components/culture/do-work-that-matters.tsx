@@ -8,16 +8,22 @@ import { CTA } from '@/components/CTA';
 
 export const DoWorkThatMattersSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-[#F4F6F9] py-[40px] md:py-[60px] lg:py-[90px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
+    <section className="relative w-full bg-[#111111] overflow-hidden">
       {/* 
-        Do Work That Matters Section (Figma node: 5419-5394 / 5419-5397):
-        - Container: 1320px x 462px, padding: 0 40px 0 0, gap: 60px, rounded-[20px], bg: #FFFFFF
-        - Left Image (AdobeStock_588310218 2): 650px x 462px, border-radius: 8px 8px 32px 8px
-        - Right Content (Frame 2147203147): 570px x 462px, padding: 50px 0px, gap: 24px
-          - Frame 2147203133: gap 8px (Tag + Headline + Description)
-          - Frame 7: CTA Button
+        Culture Page Last Section Wrapper:
+        - Background #111111 to match Footer
+        - Inner container #F4F6F9 with rounded-br-[30px] lg:rounded-br-[60px]
       */}
-      <div className="relative z-10 w-full max-w-[1320px] mx-auto rounded-[20px] p-0 flex flex-col lg:flex-row items-stretch lg:items-center justify-start gap-[24px] lg:gap-[32px] xl:gap-[44px] lg:pr-[40px] shadow-sm overflow-hidden min-h-[462px] bg-white">
+      <div className="w-full bg-[#F4F6F9] rounded-br-[30px] lg:rounded-br-[60px] py-[40px] md:py-[60px] lg:py-[90px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
+        {/* 
+          Do Work That Matters Section (Figma node: 5419-5394 / 5419-5397):
+          - Container: 1320px x 462px, padding: 0 40px 0 0, gap: 60px, rounded-[20px], bg: #FFFFFF
+          - Left Image (AdobeStock_588310218 2): 650px x 462px, border-radius: 8px 8px 32px 8px
+          - Right Content (Frame 2147203147): 570px x 462px, padding: 50px 0px, gap: 24px
+            - Frame 2147203133: gap 8px (Tag + Headline + Description)
+            - Frame 7: CTA Button
+        */}
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto rounded-[20px] p-0 flex flex-col lg:flex-row items-stretch lg:items-center justify-start gap-[24px] lg:gap-[32px] xl:gap-[44px] lg:pr-[40px] shadow-sm overflow-hidden min-h-[462px] bg-white">
 
         {/* Left Column: Speaker Image (650px x 462px on desktop, 8px top-right radius) */}
         <div className="w-full lg:w-[480px] xl:w-[650px] min-h-[300px] sm:min-h-[380px] lg:min-h-[462px] relative rounded-t-[20px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] overflow-hidden shrink-0 self-stretch">
@@ -67,6 +73,8 @@ export const DoWorkThatMattersSection: React.FC = () => {
               </CTA>
             </Link>
           </div>
+
+        </div>
 
         </div>
 

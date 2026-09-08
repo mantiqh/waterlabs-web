@@ -12,7 +12,7 @@ export const PhilosophyCTASection: React.FC = () => {
         - Desktop: 1440px x 288px, background #0F68D6, rounded-tr-[60px] rounded-br-[60px], padding: 60px
         - Mobile: 402px x 246px, background #0F68D6, rounded-tr-[30px] rounded-br-[30px], padding: 40px 20px
       */}
-      <div className="w-full bg-[#0F68D6] rounded-tr-[30px] rounded-bl-[0px] rounded-br-[30px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:rounded-br-[0px] py-[40px] px-[20px] md:py-[50px] md:px-[40px] lg:py-[60px] lg:px-[60px] overflow-hidden">
+      <div className="w-full bg-[#0F68D6] rounded-tr-[30px] rounded-bl-[0px] rounded-br-[30px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:rounded-br-[0px] py-[40px] px-[20px] md:py-[50px] md:px-[40px] lg:py-0 lg:px-[60px] lg:h-[252px] flex items-center overflow-hidden">
         
         {/* Content Container (Frame 2147226500: max-w-[1320px]) */}
         <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[20px] lg:gap-[40px]">
