@@ -1,5 +1,7 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+import { BoldTextInput } from '../components/BoldTextInput';
+
 export const caseStudySchema = defineType({
   name: 'caseStudy',
   title: 'Case Study',
@@ -9,8 +11,7 @@ export const caseStudySchema = defineType({
     { name: 'client', title: '02 · The Client' },
     { name: 'content', title: '03 · Challenge & Solution' },
     { name: 'results', title: '04 · Results & Outcomes' },
-    { name: 'metrics', title: '05 · Highlight Metrics' },
-    { name: 'cta', title: '06 · CTA Section' },
+    { name: 'cta', title: '05 · CTA Section' },
   ],
   fields: [
     // 01 · HERO & HEADER
@@ -89,38 +90,15 @@ export const caseStudySchema = defineType({
 
     // 02 · THE CLIENT
     defineField({
-      name: 'client',
-      title: 'Client Information',
-      type: 'object',
-      group: 'client',
-      fields: [
-        defineField({
-          name: 'name',
-          title: 'Organization / Client Name',
-          type: 'string',
-          description: 'e.g. Multi-State Rural Health Alliance',
-        }),
-        defineField({
-          name: 'specialties',
-          title: 'Specialties / Department Scope',
-          type: 'string',
-          description: 'e.g. 13 Clinical Specialties, Outpatient & Surgery',
-        }),
-        defineField({
-          name: 'systemType',
-          title: 'System / Facility Type',
-          type: 'string',
-          description: 'e.g. Acute & Ambulatory Health Network',
-        }),
-      ],
-    }),
-    defineField({
       name: 'clientSummary',
       title: 'Client Overview Paragraph',
       type: 'text',
       rows: 4,
       group: 'client',
-      description: 'Introductory summary under 02 · THE CLIENT',
+      description: 'Introductory summary under 02 · The Client. Use Make Bold (Ctrl+B) to bold words.',
+      components: {
+        input: BoldTextInput,
+      },
     }),
     defineField({
       name: 'statBadges',
@@ -155,7 +133,10 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 8,
       group: 'content',
-      description: 'Detailed description of the operational and documentation challenge. Paragraphs separated by blank lines.',
+      description: 'Detailed description of the operational and documentation challenge. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      components: {
+        input: BoldTextInput,
+      },
     }),
     defineField({
       name: 'whatWaterlabsDid',
@@ -163,7 +144,10 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 10,
       group: 'content',
-      description: 'Detailed implementation story and AI agent workflow. Paragraphs separated by blank lines.',
+      description: 'Detailed implementation story and AI agent workflow. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      components: {
+        input: BoldTextInput,
+      },
     }),
 
     // 04 · RESULTS & OUTCOMES
@@ -192,7 +176,10 @@ export const caseStudySchema = defineType({
           title: 'Detailed Result Bullets / Description',
           type: 'text',
           rows: 8,
-          description: 'Key impact takeaways (e.g. labor savings, accelerated A/R, hours returned)',
+          description: 'Key impact takeaways. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+          components: {
+            input: BoldTextInput,
+          },
         }),
       ],
     }),
@@ -202,7 +189,10 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 8,
       group: 'results',
-      description: 'Operational, financial, and strategic outcomes. Paragraphs separated by blank lines.',
+      description: 'Operational, financial, and strategic outcomes. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      components: {
+        input: BoldTextInput,
+      },
     }),
     defineField({
       name: 'bottomLine',
@@ -210,61 +200,13 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 4,
       group: 'results',
-      description: 'Concluding synthesis and summary statement',
+      description: 'Concluding synthesis and summary statement. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      components: {
+        input: BoldTextInput,
+      },
     }),
 
-    // 05 · HIGHLIGHT METRICS
-    defineField({
-      name: 'metrics',
-      title: 'Key Impact Metrics (Cards)',
-      type: 'array',
-      group: 'metrics',
-      description: '3 highlighted metric cards shown at top of the study',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'metric',
-          title: 'Metric Card',
-          fields: [
-            defineField({
-              name: 'value',
-              title: 'Metric Value',
-              type: 'string',
-              description: 'e.g. "24 hrs", "98.6%", "$3.4M"',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'label',
-              title: 'Metric Label / Description',
-              type: 'string',
-              description: 'e.g. "Claim release turnaround down from 10 days"',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'change',
-              title: 'Change / Delta Indicator',
-              type: 'string',
-              description: 'e.g. "-90%", "+14%", "Accelerated"',
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'value',
-              subtitle: 'label',
-              change: 'change',
-            },
-            prepare({ title, subtitle, change }) {
-              return {
-                title: `${title || ''} (${change || 'N/A'})`,
-                subtitle: subtitle || 'No label',
-              };
-            },
-          },
-        }),
-      ],
-    }),
-
-    // 06 · CTA SECTION
+    // 05 · CTA SECTION
     defineField({
       name: 'cta',
       title: 'Bottom CTA Box',

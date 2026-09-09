@@ -46,7 +46,7 @@ export const OurOwnCloudSection: React.FC = () => {
           <div className="hidden lg:block w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
 
           {/* Main Content Column aligned with 1st right section (Fluid responsive max 975px) */}
-          <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-[36px] lg:gap-[48px]">
+          <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-0 lg:gap-[48px]">
             
             {/* 
               Top Feature Card with 3D Blue Sphere (Figma Frame 2147203214)
@@ -54,7 +54,7 @@ export const OurOwnCloudSection: React.FC = () => {
               - Desktop: 975px x 381px, img_we_didnt_rent_a_cloud_we_built_one.png, border-radius: 20px 20px 20px 10px
               - Heading: General Sans, 32px / 40px (mobile) -> 52px / 60px (desktop), -0.01em, #042849 / #0F68D6 (Bold 700)
             */}
-            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[10px] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.3)] isolate">
+            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[10px] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.3)] isolate mb-[12px] lg:mb-0">
               
               {/* Desktop Banner Graphic Background */}
               <div className="hidden sm:block absolute inset-0 pointer-events-none z-0">
@@ -90,7 +90,7 @@ export const OurOwnCloudSection: React.FC = () => {
             </div>
 
             {/* Intro Paragraph */}
-            <p className="type-body-xs text-white">
+            <p className="type-body-xs text-white mb-[32px] lg:mb-0">
               Most companies in this space run on someone else&apos;s cloud and trust the landlord. Waterlabs built and owns its own, a data center we run end to end, on our own hardware, housed entirely in the United States. Every agent, every model, every line that touches your workflow runs inside the infrastructure we control.
             </p>
 

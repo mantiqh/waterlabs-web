@@ -6,6 +6,8 @@ import React from 'react';
 import Navbar from '@/components/common/navbar';
 import { CaseStudy } from '@/types/case-study';
 
+import { renderFormattedText } from './case-study-content';
+
 interface CaseStudyHeroProps {
   caseStudy: CaseStudy;
 }
@@ -84,7 +86,7 @@ export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ caseStudy }) => {
 
               {/* Subtitle / Excerpt: type-body-xs */}
               <p className="type-body-xs text-[#2A2A2A] max-w-[640px]">
-                {subtitle}
+                {renderFormattedText(subtitle)}
               </p>
             </div>
           </div>

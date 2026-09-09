@@ -50,9 +50,9 @@ export const HeroSection: React.FC = () => {
         <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[20px]">
           {/* Left Column: Heading (Semantic h2 with type-h1 styles) */}
           <div className="w-full lg:w-[551px] shrink-0">
-            <h2 className="type-h1 text-white">
-              More collections.<br />
-              Less manual work.
+            <h2 className="type-h1 text-white lg:tracking-[-0.01em]">
+              <span className="block lg:whitespace-nowrap">More collections.</span>
+              <span className="block lg:whitespace-nowrap">Less manual work.</span>
             </h2>
           </div>
 

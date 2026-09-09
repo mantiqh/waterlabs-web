@@ -110,12 +110,12 @@ export const TestimonialsSection: React.FC = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="flex flex-col justify-between items-start w-full gap-[16px]">
+                  <div className="flex flex-col items-start w-full gap-[20px]">
                     <p className="type-body-s text-black leading-[26px]">
                       {item.quote}
                     </p>
 
-                    <div className="flex flex-col gap-[4px]">
+                    <div className="flex flex-col gap-[8px]">
                       {/* Name with h5 HTML tag and type-h5 typography */}
                       <h5 className="type-h5 text-[#0F68D6]">
                         {item.name}
@@ -180,13 +180,13 @@ export const TestimonialsSection: React.FC = () => {
                         />
                       </div>
 
-                      {/* Right Content Side */}
-                      <div className="flex flex-col justify-between items-start flex-1 min-w-0 h-[360px] py-[4px]">
+                      {/* Right Content Side (Frame 2147203210) */}
+                      <div className="flex flex-col items-start flex-1 min-w-0 gap-[20px]">
                         <p className="type-body-s text-black leading-[28px]">
                           {item.quote}
                         </p>
 
-                        <div className="flex flex-col gap-[4px] lg:gap-[8px]">
+                        <div className="flex flex-col gap-[8px]">
                           {/* Name with h5 HTML tag and type-h5 typography */}
                           <h5 className="type-h5 text-[#0F68D6]">
                             {item.name}

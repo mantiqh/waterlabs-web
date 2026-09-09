@@ -45,10 +45,20 @@ export const CaseStudyCTA: React.FC<CaseStudyCTAProps> = ({
 
             {/* Headline: Display/H2 token */}
             <h2 className="type-h2 text-white">
-              {headline.includes('see how') ? (
+              {headline.toLowerCase().includes('waterlabs can') ? (
                 <>
-                  <span className="block">Schedule a 15-minute call to see how</span>
-                  <span className="block sm:whitespace-nowrap">Waterlabs can impact your organization’s results.</span>
+                  {/* Small screens layout matching Image 2 */}
+                  <span className="md:hidden">
+                    <span className="block">Schedule a 15-minute call</span>
+                    <span className="block">to see how Waterlabs can</span>
+                    <span className="block">impact your</span>
+                    <span className="block">organization’s results.</span>
+                  </span>
+                  {/* Tablet & Desktop layout */}
+                  <span className="hidden md:inline">
+                    <span className="block">Schedule a 15-minute call to see how</span>
+                    <span className="block md:whitespace-nowrap">Waterlabs can impact your organization’s results.</span>
+                  </span>
                 </>
               ) : (
                 headline

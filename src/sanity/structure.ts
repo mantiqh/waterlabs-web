@@ -13,6 +13,16 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       S.listItem()
+        .title('About Us – Leadership')
+        .schemaType('aboutUsPage')
+        .child(
+          S.document()
+            .title('Leadership Section')
+            .schemaType('aboutUsPage')
+            .documentId('aboutUsPage')
+        ),
+      S.divider(),
+      S.listItem()
         .title('Careers Page')
         .schemaType('careersPage')
         .child(
@@ -23,7 +33,7 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => !['careersPage', 'caseStudy'].includes(listItem.getId() || '')
+        (listItem) => !['aboutUsPage', 'careersPage', 'caseStudy'].includes(listItem.getId() || '')
       ),
     ]);
 

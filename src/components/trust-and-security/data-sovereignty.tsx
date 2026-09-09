@@ -46,7 +46,7 @@ export const DataSovereigntySection: React.FC = () => {
           <div className="hidden lg:block w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
 
           {/* Main Right Content Column (Fluid responsive max 975px) */}
-          <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-[36px] lg:gap-[48px]">
+          <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-0 lg:gap-[48px]">
 
             {/* 
               Top Feature Banner Card (Figma Frame 2147203214)
@@ -55,7 +55,7 @@ export const DataSovereigntySection: React.FC = () => {
               - Border Radius: 20px 10px 20px 20px
               - Padding: 20px (mobile) / 40px (desktop)
             */}
-            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#000000] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)] isolate">
+            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#000000] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)] isolate mb-[36px] lg:mb-0">
 
               {/* Desktop Fingerprint Graphic Background */}
               <div className="hidden sm:block absolute inset-0 pointer-events-none z-0">
@@ -88,7 +88,7 @@ export const DataSovereigntySection: React.FC = () => {
             </div>
 
             {/* Intro Heading + Description (Figma Design) */}
-            <div className="flex flex-col gap-[12px] lg:gap-[16px]">
+            <div className="flex flex-col gap-[12px] lg:gap-[16px] mb-[12px] lg:mb-0">
               <h3 className="type-h2 text-[#0F68D6] max-w-[720px]">
                 Your data stays yours. We only borrow the work.
               </h3>
