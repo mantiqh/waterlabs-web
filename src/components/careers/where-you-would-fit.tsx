@@ -65,6 +65,42 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Smooth scroll to section when navigated with #where-you-would-fit or #open-roles hash
+  useEffect(() => {
+    const scrollToTarget = () => {
+      const hash = window.location.hash;
+      if (hash === '#where-you-would-fit' || hash === '#open-roles') {
+        const el =
+          document.getElementById('where-you-would-fit') ||
+          document.getElementById('open-roles');
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    };
+
+    if (
+      window.location.hash === '#where-you-would-fit' ||
+      window.location.hash === '#open-roles'
+    ) {
+      scrollToTarget();
+      const t1 = setTimeout(scrollToTarget, 100);
+      const t2 = setTimeout(scrollToTarget, 350);
+      const t3 = setTimeout(scrollToTarget, 700);
+
+      window.addEventListener('hashchange', scrollToTarget);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+        window.removeEventListener('hashchange', scrollToTarget);
+      };
+    }
+
+    window.addEventListener('hashchange', scrollToTarget);
+    return () => window.removeEventListener('hashchange', scrollToTarget);
+  }, []);
+
   const categoriesList = useMemo(() => data?.categories ?? [], [data?.categories]);
 
   // Derive categories dynamically from configured CMS tabs
@@ -125,9 +161,10 @@ export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = (
 
   return (
     <section
-      id="open-roles"
-      className="relative w-full bg-gradient-to-b from-[#0F68D6] from-50% to-[#0B0B0B] to-50% overflow-hidden p-0 m-0"
+      id="where-you-would-fit"
+      className="relative w-full bg-gradient-to-b from-[#0F68D6] from-50% to-[#0B0B0B] to-50% overflow-hidden p-0 m-0 scroll-mt-[60px] lg:scroll-mt-[80px]"
     >
+      <div id="open-roles" className="absolute -top-[60px] lg:-top-[80px] pointer-events-none" />
       {/* 
         White Card with left curves:
         - Top-left curve reveals Section 4's blue color (#0F68D6)

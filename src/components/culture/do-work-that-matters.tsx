@@ -67,7 +67,7 @@ export const DoWorkThatMattersSection: React.FC = () => {
 
           {/* CTA Button: Frame 7 (gap 24px from Frame 2147203133) */}
           <div>
-            <Link href="/careers">
+            <Link href="/careers#where-you-would-fit">
               <CTA variant="light-bg">
                 See Open Roles
               </CTA>

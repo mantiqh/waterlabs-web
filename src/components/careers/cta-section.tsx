@@ -50,7 +50,7 @@ export const CareersCTASection: React.FC = () => {
 
           {/* CTA Action Button */}
           <div className="mt-[4px] lg:mt-[8px]">
-            <Link href="#open-roles">
+            <Link href="#where-you-would-fit">
               <CTA variant="dark-bg">
                 See Open Roles
               </CTA>
