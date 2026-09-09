@@ -10,10 +10,11 @@ interface CaseStudyContentProps {
   caseStudy: CaseStudy;
 }
 
-const renderFormattedText = (text: string) => {
+export const renderFormattedText = (text: string) => {
+  if (!text) return null;
   // If markdown **bold** is present, parse it
   if (text.includes('**')) {
-    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    const parts = text.split(/(\*\*[\s\S]*?\*\*)/g);
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return (
@@ -108,7 +109,7 @@ const renderResultsParagraphs = (content?: string) => {
   );
 };
 
-const renderFormattedParagraphs = (content?: string) => {
+export const renderFormattedParagraphs = (content?: string) => {
   if (!content) return null;
   const paragraphs = content.split('\n\n').filter(Boolean);
   return (
@@ -237,15 +238,11 @@ export const CaseStudyContent: React.FC<CaseStudyContentProps> = ({ caseStudy })
             RIGHT COLUMN: CASE STUDY BODY CONTENT (Frame 2147226949: 975px wide)
             =============================================================================
           */}
-          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[60px] lg:gap-[80px]">
+          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[40px] lg:gap-[80px]">
             
             {/* Section 1: The Client (Frame 2147226939) */}
             <section id="the-client" className="flex flex-col items-start gap-[24px] lg:gap-[32px] scroll-mt-[120px]">
-              {clientSummary && (
-                <p className="type-body-xs text-[#2A2A2A] max-w-[975px]">
-                  {clientSummary}
-                </p>
-              )}
+              {clientSummary && renderFormattedParagraphs(clientSummary)}
 
               {/* Stat Badges Row (Frame 2147226954: below text) */}
               {statBadges && statBadges.length > 0 && (
@@ -297,7 +294,7 @@ export const CaseStudyContent: React.FC<CaseStudyContentProps> = ({ caseStudy })
                       {resultsBlock.headline}
                     </div>
                     <p className="type-body-xs text-[#2A2A2A]">
-                      {resultsBlock.subheadline}
+                      {renderFormattedText(resultsBlock.subheadline)}
                     </p>
                   </div>
                   {renderResultsParagraphs(resultsBlock.details)}

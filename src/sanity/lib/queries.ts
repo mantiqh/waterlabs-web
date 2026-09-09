@@ -38,7 +38,6 @@ export const caseStudyBySlugQuery = groq`*[_type == "caseStudy" && (slug.current
   "heroImage": heroImage.asset->url,
   "heroImageAlt": heroImage.alt,
   tags,
-  client,
   clientSummary,
   statBadges,
   challenge,
@@ -46,7 +45,6 @@ export const caseStudyBySlugQuery = groq`*[_type == "caseStudy" && (slug.current
   resultsBlock,
   outcomes,
   bottomLine,
-  metrics,
   cta,
   order
 }`;
@@ -63,7 +61,6 @@ export const allCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(order as
   "heroImage": heroImage.asset->url,
   "heroImageAlt": heroImage.alt,
   tags,
-  client,
   clientSummary,
   statBadges,
   challenge,
@@ -71,7 +68,6 @@ export const allCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(order as
   resultsBlock,
   outcomes,
   bottomLine,
-  metrics,
   cta,
   order
 }`;
@@ -79,5 +75,16 @@ export const allCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(order as
 export const caseStudySlugsQuery = groq`*[_type == "caseStudy" && defined(slug.current)] {
   "slug": slug.current,
   aliases
+}`;
+
+export const aboutUsPageQuery = groq`*[_type == "aboutUsPage"][0] {
+  leadersTag,
+  leaders[] {
+    _key,
+    name,
+    title,
+    "image": image.asset->url,
+    linkedinUrl
+  }
 }`;
 
