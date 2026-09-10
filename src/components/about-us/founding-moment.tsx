@@ -21,11 +21,11 @@ export const FoundingMomentSection: React.FC = () => {
         - Desktop: padding 80px 60px, gap 48px
         - Mobile: padding 40px 20px, gap 20px
       */}
-      <div className="w-full bg-white rounded-tl-[30px] lg:rounded-tl-[60px] py-[40px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-[32px] md:gap-[40px]">
+      <div className="w-full bg-white rounded-tl-[30px] lg:rounded-tl-[60px] pt-[40px] pb-0 px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-[32px] md:gap-[40px] lg:gap-[32px] xl:gap-[40px]">
           
           {/* Left Column (537px desktop) */}
-          <div className="w-full lg:w-[537px] shrink-0 flex flex-col items-start gap-[16px] lg:gap-[20px]">
+          <div className="w-full lg:w-[42%] xl:w-[537px] shrink-0 min-w-0 flex flex-col items-start gap-[16px] lg:gap-[20px]">
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
@@ -35,13 +35,13 @@ export const FoundingMomentSection: React.FC = () => {
             </div>
 
             {/* Photo Card */}
-            <div className="relative w-full h-[239px] sm:h-[300px] lg:h-[355px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
+            <div className="relative w-full h-[239px] sm:h-[300px] lg:h-[290px] xl:h-[355px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
               <Image
                 src="/images/about-us/the-founding-moment/img_kamal_raj.png"
                 alt="Kamal Raj"
                 fill
                 className="object-cover object-top"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 500px, 537px"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 400px, 537px"
               />
             </div>
 
@@ -57,7 +57,7 @@ export const FoundingMomentSection: React.FC = () => {
           </div>
 
           {/* Right Column (743px desktop) */}
-          <div className="w-full lg:w-[743px] flex-1 flex flex-col justify-end items-start gap-[24px] lg:gap-[40px] lg:pt-[44px]">
+          <div className="w-full lg:w-[55%] xl:w-[743px] flex-1 min-w-0 flex flex-col justify-end items-start gap-[24px] lg:gap-[32px] xl:gap-[40px] lg:pt-[24px] xl:pt-[44px]">
             {/* Bio Paragraphs */}
             <div className="flex flex-col items-start gap-[20px] lg:gap-[32px]">
               <p className="type-h6 text-black leading-[26px] lg:leading-[32px]">

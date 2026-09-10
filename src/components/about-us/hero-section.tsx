@@ -15,7 +15,7 @@ export const HeroSection: React.FC = () => {
         - Background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%) over banner image
         - Layout: justify-between, Navbar at top, bottom content row at bottom
       */}
-      <div className="relative w-full min-h-[581px] lg:h-[726px] bg-transparent rounded-br-[30px] lg:rounded-br-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[32px] md:px-[40px] md:pb-[60px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[10px] overflow-hidden">
+      <div className="relative w-full min-h-[581px] lg:min-h-[640px] xl:h-[726px] bg-transparent rounded-br-[30px] lg:rounded-br-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[32px] md:px-[40px] md:pb-[60px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[10px] overflow-hidden">
         
         {/* Background Banner Image */}
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-br-[30px] lg:rounded-br-[60px]">
@@ -47,21 +47,24 @@ export const HeroSection: React.FC = () => {
         </div>
 
         {/* Bottom Content Row */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[20px]">
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] xl:gap-[20px]">
           {/* Left Column: Heading (Semantic h2 with type-h1 styles) */}
-          <div className="w-full lg:w-[551px] shrink-0">
+          <div className="w-full lg:w-[44%] xl:w-[551px] shrink-0 min-w-0">
             <h2 className="type-h1 text-white lg:tracking-[-0.01em]">
-              <span className="block lg:whitespace-nowrap">More collections.</span>
-              <span className="block lg:whitespace-nowrap">Less manual work.</span>
+              <span className="block xl:whitespace-nowrap">More collections.</span>
+              <span className="block xl:whitespace-nowrap">Less manual work.</span>
             </h2>
           </div>
 
           {/* Right Column: Description (Two paragraphs matching exact text placement) */}
-          <div className="w-full lg:w-[749px] flex-1 flex flex-col gap-[20px] lg:gap-[24px]">
+          <div className="w-full lg:w-[53%] xl:w-[749px] flex-1 min-w-0 flex flex-col gap-[16px] lg:gap-[20px] xl:gap-[24px]">
             <p className="type-body-s text-[#F4F6F9]">
-              <span className="hidden lg:block">
+              <span className="hidden xl:block">
                 As healthcare revenue cycle experts, we make healthcare&apos;s revenue cycle<br />
                 operate autonomously.
+              </span>
+              <span className="hidden lg:block xl:hidden">
+                As healthcare revenue cycle experts, we make healthcare&apos;s revenue cycle operate autonomously.
               </span>
               <span className="block lg:hidden">
                 As healthcare revenue cycle experts, we make<br />
@@ -71,9 +74,12 @@ export const HeroSection: React.FC = () => {
             </p>
 
             <p className="type-body-s text-[#F4F6F9]">
-              <span className="hidden lg:block">
+              <span className="hidden xl:block">
                 Founded in 2019 by two operators who&apos;d spent twenty years inside the back-<br />
                 office healthcare runs on.
+              </span>
+              <span className="hidden lg:block xl:hidden">
+                Founded in 2019 by two operators who&apos;d spent twenty years inside the back-office healthcare runs on.
               </span>
               <span className="block lg:hidden">
                 Founded in 2019 by two operators who&apos;d spent<br />

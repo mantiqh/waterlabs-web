@@ -41,10 +41,10 @@ export const WhosBuildingThisSection: React.FC = () => {
         Wrapper: #F4F6F9
         Inner Container: White background with bottom border divider separating from Leadership Section
       */}
-      <div className="w-full bg-white pt-[40px] px-[20px] md:pt-[60px] md:px-[40px] lg:pt-[80px] lg:px-[60px]">
+      <div className="w-full bg-white pt-[48px] px-[20px] md:pt-[60px] md:px-[40px] lg:pt-[80px] lg:px-[60px]">
         <div className="w-full max-w-[1320px] mx-auto border-b border-[#D7DCE2] pb-[32px] md:pb-[48px] lg:pb-[60px] flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[20px]">
           {/* Left Header Column */}
-          <div className="w-full lg:w-[538px] shrink-0 flex flex-col items-start gap-[16px] lg:gap-[20px]">
+          <div className="w-full lg:w-[35%] xl:w-[538px] shrink-0 min-w-0 flex flex-col items-start gap-[16px] lg:gap-[20px]">
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
@@ -60,20 +60,20 @@ export const WhosBuildingThisSection: React.FC = () => {
           </div>
 
           {/* Right: Two Founder Cards */}
-          <div className="w-full lg:w-[762px] flex flex-col sm:flex-row items-stretch gap-[20px]">
+          <div className="w-full lg:w-[62%] xl:w-[762px] flex-1 min-w-0 flex flex-col sm:flex-row items-stretch gap-[20px]">
             {founders.map((founder, idx) => (
               <div
                 key={idx}
                 className="flex-1 flex flex-col items-start gap-[16px] min-w-0"
               >
                 {/* Founder Photo */}
-                <div className="relative w-full h-[239px] sm:h-[260px] lg:h-[300px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
+                <div className="relative w-full h-[239px] sm:h-[260px] lg:h-[220px] xl:h-[300px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
                   <Image
                     src={founder.image}
                     alt={founder.name}
                     fill
                     className="object-cover object-top"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 360px, 371px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 300px, 371px"
                   />
                 </div>
 
