@@ -23,6 +23,30 @@ export const SolutionsHeroSection: React.FC = () => {
           background: 'linear-gradient(180deg, #0F68D6 41.31%, #B8B1A5 108.85%)',
         }}
       >
+        {/* Background Banner Graphic with abstract round lines */}
+        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[60px]">
+          {/* Desktop & Tablet Banner Graphic */}
+          <div className="hidden md:block absolute inset-0">
+            <Image
+              src="/images/solutions/hero-section/img_banner_bg.png"
+              alt="Solutions Gradient Background"
+              fill
+              priority
+              className="object-cover object-right-bottom md:object-bottom"
+            />
+          </div>
+          {/* Mobile Banner Graphic */}
+          <div className="block md:hidden absolute inset-0">
+            <Image
+              src="/images/solutions/hero-section/img_banner_bg%20_mobile(1).png"
+              alt="Solutions Gradient Background Mobile"
+              fill
+              priority
+              className="object-cover object-right-bottom md:object-bottom"
+            />
+          </div>
+        </div>
+
         {/* Top Navbar */}
         <div className="relative z-50 w-full">
           <Navbar />

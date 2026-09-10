@@ -32,8 +32,26 @@ export const structure: StructureResolver = (S) =>
             .documentId('careersPage')
         ),
       S.divider(),
+      S.listItem()
+        .title('Blog Articles')
+        .schemaType('blogPost')
+        .child(
+          S.documentTypeList('blogPost')
+            .title('Blog Articles')
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Blogs Page Settings')
+        .schemaType('blogsPage')
+        .child(
+          S.document()
+            .title('Blogs Page Settings')
+            .schemaType('blogsPage')
+            .documentId('blogsPage')
+        ),
+      S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => !['aboutUsPage', 'careersPage', 'caseStudy'].includes(listItem.getId() || '')
+        (listItem) => !['aboutUsPage', 'careersPage', 'caseStudy', 'blogPost', 'blogsPage'].includes(listItem.getId() || '')
       ),
     ]);
 

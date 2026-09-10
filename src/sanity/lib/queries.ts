@@ -88,3 +88,65 @@ export const aboutUsPageQuery = groq`*[_type == "aboutUsPage"][0] {
   }
 }`;
 
+export const allBlogPostsQuery = groq`*[_type == "blogPost" && !(_id in path('drafts.**'))] | order(order asc, publishedAt desc, _createdAt asc) {
+  _id,
+  "id": _id,
+  title,
+  "slug": slug.current,
+  category,
+  tag,
+  subTag,
+  "desktopImage": desktopImage.asset->url,
+  "mobileImage": mobileImage.asset->url,
+  order,
+  publishedAt,
+  excerpt
+}`;
+
+export const blogsPageQuery = groq`*[_type == "blogsPage"][0] {
+  categories,
+  searchPlaceholder,
+  filterByLabel,
+  readBlogButtonText
+}`;
+
+export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
+  _id,
+  "id": _id,
+  title,
+  "slug": slug.current,
+  category,
+  tag,
+  subTag,
+  titleAccent,
+  titleRest,
+  "desktopImage": desktopImage.asset->url,
+  "mobileImage": mobileImage.asset->url,
+  "heroBannerDesktop": heroBannerDesktop.asset->url,
+  "heroBannerMobile": heroBannerMobile.asset->url,
+  heroParagraphs,
+  order,
+  publishedAt,
+  excerpt,
+  sections[] {
+    _key,
+    title,
+    id,
+    content
+  },
+  "relatedArticles": relatedArticles[]-> {
+    _id,
+    "id": _id,
+    title,
+    "slug": slug.current,
+    "desktopImage": desktopImage.asset->url,
+    "mobileImage": mobileImage.asset->url,
+    excerpt
+  }
+}`;
+
+export const blogPostSlugsQuery = groq`*[_type == "blogPost" && defined(slug.current) && !(_id in path('drafts.**'))] {
+  "slug": slug.current
+}`;
+
+
