@@ -110,13 +110,13 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({ data }) =>
                 className="flex flex-col items-start gap-[16px] w-full"
               >
                 {/* Leader Photo */}
-                <div className="relative w-full aspect-[426.67/300] lg:h-[300px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
+                <div className="relative w-full aspect-[426.67/300] xl:h-[300px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
                   <Image
                     src={leader.image}
                     alt={leader.name}
                     fill
                     className="object-cover object-center"
-                    sizes="(max-width: 719px) 100vw, (max-width: 1023px) 50vw, 427px"
+                    sizes="(max-width: 719px) 100vw, (max-width: 1023px) 50vw, (max-width: 1280px) 300px, 427px"
                   />
                 </div>
 

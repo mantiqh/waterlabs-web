@@ -38,37 +38,37 @@ export const WhosTrustingUsSection: React.FC = () => {
           {/* Logo Row / Mobile Slider + Subheading */}
           <div className="w-full flex flex-col items-start justify-center gap-[20px]">
             {/* Logos: Horizontal slider on mobile with peek, space-between on desktop */}
-            <div className="w-full flex flex-row flex-nowrap items-center justify-start lg:justify-between gap-[45px] lg:gap-[82px] py-[10px] overflow-x-auto no-scrollbar scroll-smooth">
+            <div className="w-full flex flex-row flex-nowrap items-center justify-start lg:justify-between gap-[45px] lg:gap-[36px] xl:gap-[82px] py-[10px] overflow-x-auto no-scrollbar scroll-smooth">
               {/* HHA-eXchange */}
-              <div className="relative w-[150px] h-[68px] sm:w-[220px] sm:h-[100px] lg:w-[324px] lg:h-[147px] shrink-0 flex items-center justify-center">
+              <div className="relative w-[150px] h-[68px] sm:w-[220px] sm:h-[100px] lg:w-[240px] lg:h-[109px] xl:w-[324px] xl:h-[147px] shrink-0 flex items-center justify-center">
                 <Image
                   src="/images/about-us/who's-trusting-us/hha_exchange_logo.png"
                   alt="HHA-eXchange"
                   fill
                   className="object-contain"
-                  sizes="(max-width: 640px) 150px, (max-width: 1024px) 220px, 324px"
+                  sizes="(max-width: 640px) 150px, (max-width: 1024px) 240px, 324px"
                 />
               </div>
 
               {/* Qualifacts */}
-              <div className="relative w-[166px] h-[60px] sm:w-[260px] sm:h-[95px] lg:w-[382px] lg:h-[139px] shrink-0 flex items-center justify-center">
+              <div className="relative w-[166px] h-[60px] sm:w-[260px] sm:h-[95px] lg:w-[280px] lg:h-[102px] xl:w-[382px] xl:h-[139px] shrink-0 flex items-center justify-center">
                 <Image
                   src="/images/about-us/who's-trusting-us/qualifacts_logo.png"
                   alt="Qualifacts"
                   fill
                   className="object-contain"
-                  sizes="(max-width: 640px) 166px, (max-width: 1024px) 260px, 382px"
+                  sizes="(max-width: 640px) 166px, (max-width: 1024px) 280px, 382px"
                 />
               </div>
 
               {/* PCRCM */}
-              <div className="relative w-[149px] h-[40px] sm:w-[200px] sm:h-[54px] lg:w-[277px] lg:h-[75px] shrink-0 flex items-center justify-center">
+              <div className="relative w-[149px] h-[40px] sm:w-[200px] sm:h-[54px] lg:w-[210px] lg:h-[57px] xl:w-[277px] xl:h-[75px] shrink-0 flex items-center justify-center">
                 <Image
                   src="/images/about-us/who's-trusting-us/pc_revenue_cycle_management.png"
                   alt="PC Revenue Cycle Management"
                   fill
                   className="object-contain"
-                  sizes="(max-width: 640px) 149px, (max-width: 1024px) 200px, 277px"
+                  sizes="(max-width: 640px) 149px, (max-width: 1024px) 210px, 277px"
                 />
               </div>
             </div>

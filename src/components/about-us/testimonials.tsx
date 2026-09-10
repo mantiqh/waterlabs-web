@@ -154,9 +154,9 @@ export const TestimonialsSection: React.FC = () => {
           <div className="hidden lg:flex flex-col w-full">
             <div className="w-full overflow-hidden select-none">
               <div
-                className="flex w-full transition-transform duration-[700ms] ease-[cubic-bezier(0.25,1,0.5,1)] gap-[32px] xl:gap-[40px]"
+                className="flex w-full transition-transform duration-[700ms] ease-[cubic-bezier(0.25,1,0.5,1)] gap-[var(--slide-gap)] [--slide-peek:60px] [--slide-gap:24px] xl:[--slide-peek:100px] xl:[--slide-gap:40px]"
                 style={{
-                  transform: `translateX(calc(-${currentIndex} * (100% - 100px + 40px)))`,
+                  transform: `translateX(calc(-${currentIndex} * (100% - var(--slide-peek) + var(--slide-gap))))`,
                 }}
               >
                 {testimonialsData.map((item, idx) => {
@@ -164,24 +164,24 @@ export const TestimonialsSection: React.FC = () => {
                   return (
                     <div
                       key={`desktop-testimonial-${idx}`}
-                      className={`w-[calc(100%-100px)] shrink-0 flex flex-row gap-[32px] xl:gap-[40px] items-start transition-opacity duration-500 ${
+                      className={`w-[calc(100%-var(--slide-peek))] shrink-0 flex flex-row gap-[var(--slide-gap)] items-start transition-opacity duration-500 ${
                         isCurrent ? 'opacity-100' : 'opacity-30'
                       }`}
                     >
                       {/* Left Photo Card */}
-                      <div className="relative w-[480px] xl:w-[536px] h-[360px] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0 bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
+                      <div className="relative w-[340px] xl:w-[536px] h-[320px] xl:h-[360px] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0 bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
                         <Image
                           src={item.image}
                           alt={item.name}
                           fill
                           priority={idx === 0}
-                          sizes="536px"
+                          sizes="(max-width: 1280px) 340px, 536px"
                           className="object-cover object-top mix-blend-luminosity"
                         />
                       </div>
 
                       {/* Right Content Side (Frame 2147203210) */}
-                      <div className="flex flex-col items-start flex-1 min-w-0 gap-[20px]">
+                      <div className="flex flex-col items-start flex-1 min-w-0 gap-[16px] xl:gap-[20px]">
                         <p className="type-body-s text-black leading-[28px]">
                           {item.quote}
                         </p>

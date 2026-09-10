@@ -108,7 +108,7 @@ export const WhatWeBelieveSection: React.FC = () => {
           {/* Header Block (Frame 21) - padded 20px on mobile */}
           <div className="px-[20px] md:px-0 flex flex-col lg:flex-row items-start lg:justify-start gap-[16px] lg:gap-[20px]">
             {/* Tag / Eyebrow (Text - Tag) */}
-            <div className="flex items-center gap-[4px] lg:gap-[8px] lg:pt-[8px] lg:w-[427px] lg:shrink-0">
+            <div className="flex items-center gap-[4px] lg:gap-[8px] lg:pt-[8px] lg:w-[240px] xl:w-[427px] lg:shrink-0">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
               <span className="type-caption lg:type-body-xxs text-[#7D8690] tracking-[0.01em]">
                 What we believe
@@ -136,16 +136,16 @@ export const WhatWeBelieveSection: React.FC = () => {
             {principles.map((item, idx) => (
               <div
                 key={idx}
-                className="w-[269px] lg:w-full lg:flex-1 shrink-0 bg-white rounded-[16px] p-[20px] lg:p-[32px] flex flex-col justify-between items-start gap-[20px] lg:gap-[40px] min-h-[286px] lg:h-[418px] transition-shadow duration-300 hover:shadow-md"
+                className="w-[269px] lg:w-full lg:flex-1 shrink-0 bg-white rounded-[16px] p-[20px] lg:p-[20px] xl:p-[32px] flex flex-col justify-between items-start gap-[16px] lg:gap-[20px] xl:gap-[40px] min-h-[286px] lg:min-h-[360px] xl:min-h-[418px] lg:h-auto xl:h-[418px] transition-shadow duration-300 hover:shadow-md"
               >
                 {/* Principle Icon */}
-                <div className="relative w-[83px] h-[62px] lg:w-[137px] lg:h-[102px] shrink-0">
+                <div className="relative w-[83px] h-[62px] lg:w-[96px] lg:h-[72px] xl:w-[137px] xl:h-[102px] shrink-0">
                   <Image
                     src={item.icon}
                     alt={item.title}
                     fill
                     className="object-contain object-left"
-                    sizes="(max-width: 1024px) 83px, 137px"
+                    sizes="(max-width: 640px) 83px, (max-width: 1280px) 96px, 137px"
                   />
                 </div>
 
