@@ -11,7 +11,8 @@ export const caseStudySchema = defineType({
     { name: 'client', title: '02 · The Client' },
     { name: 'content', title: '03 · Challenge & Solution' },
     { name: 'results', title: '04 · Results & Outcomes' },
-    { name: 'cta', title: '05 · CTA Section' },
+    { name: 'related', title: '05 · Related Cases' },
+    { name: 'cta', title: '06 · CTA Section' },
   ],
   fields: [
     // 01 · HERO & HEADER
@@ -206,7 +207,66 @@ export const caseStudySchema = defineType({
       },
     }),
 
-    // 05 · CTA SECTION
+    // 05 · RELATED CASES
+    defineField({
+      name: 'relatedCasesHeading',
+      title: 'Section Heading',
+      type: 'string',
+      group: 'related',
+      description: 'Heading displayed above the related case study cards (defaults to "Related Cases")',
+      initialValue: 'Related Cases',
+    }),
+    defineField({
+      name: 'relatedCases',
+      title: 'Related Case Studies (Max 3)',
+      type: 'array',
+      group: 'related',
+      description:
+        'Optionally select up to 3 case studies to feature in the "Related Cases" section. You can reference existing case studies or create custom cards. If left empty, other case studies will be selected automatically.',
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          title: 'Case Study Reference',
+          to: [{ type: 'caseStudy' }],
+        }),
+        defineArrayMember({
+          type: 'object',
+          name: 'customRelatedCase',
+          title: 'Custom Case Study Card',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Title',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: { hotspot: true },
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'link',
+              title: 'Link / Destination URL',
+              type: 'string',
+              description: 'e.g. /case-study/enterprise-rcm-organization',
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'title',
+              media: 'image',
+            },
+          },
+        }),
+      ],
+      validation: (Rule) => Rule.max(3),
+    }),
+
+    // 06 · CTA SECTION
     defineField({
       name: 'cta',
       title: 'Bottom CTA Box',

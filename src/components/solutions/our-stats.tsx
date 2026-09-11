@@ -34,8 +34,6 @@ export const OurStatsSection: React.FC = () => {
                 <p className="type-body-xs text-charcoal">verification turnaround</p>
               </div>
 
-              {/* Divider */}
-              <div className="w-full h-[1px] lg:w-[1px] lg:h-auto bg-light-gray" />
 
               {/* Stat 2 */}
               <div className="flex-1 flex flex-col gap-[8px] lg:gap-[12px]">

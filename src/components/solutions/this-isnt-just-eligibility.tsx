@@ -157,7 +157,7 @@ export const ThisIsntJustEligibilitySection: React.FC = () => {
           <div
             className="flex lg:hidden w-full rounded-[20px] overflow-hidden flex-col"
             style={{
-              background: 'linear-gradient(160.61deg, #AE87E4 23.8%, #0F68D6 48.47%)',
+              background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
             }}
           >
             {/* Top: Laptop Image (full width, natural height on mobile, increased height on md:, 20px radius on all corners) */}
@@ -206,6 +206,7 @@ export const ThisIsntJustEligibilitySection: React.FC = () => {
             {/* Heading */}
             <h3 className="type-h3 text-black">
               <span className="text-electric-blue">The three things that usually</span>{' '}
+              <br className="hidden lg:block" />
               stop people. None of them apply here.
             </h3>
 
@@ -249,7 +250,7 @@ export const ThisIsntJustEligibilitySection: React.FC = () => {
                     className="w-[269px] shrink-0 bg-white rounded-[16px] p-[20px] flex flex-col gap-[20px] min-h-[260px]"
                   >
                     {/* Icon */}
-                    <div className="relative w-[64px] h-[64px] shrink-0">
+                    <div className="relative w-[62px] h-[62px] shrink-0">
                       <Image
                         src={card.icon}
                         alt={card.title}

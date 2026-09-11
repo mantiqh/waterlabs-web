@@ -20,20 +20,35 @@ export default async function CaseStudiesIndexPage() {
   const allStudies = await fetchAllCaseStudies();
   const primaryStudy = allStudies[0] || CASE_STUDIES[0];
 
-  const relatedStudies = await fetchRelatedCaseStudies(primaryStudy.slug, 3);
-  const relatedCases: RelatedCaseItem[] = relatedStudies.map((study, idx) => ({
-    id: study.id,
-    title: study.title,
-    image: study.heroImage,
-    href: `/case-study/${study.slug}`,
-    isShorter: idx === 1,
-  }));
+  let relatedCases: RelatedCaseItem[] = [];
+
+  if (primaryStudy.relatedCases && primaryStudy.relatedCases.length > 0) {
+    relatedCases = primaryStudy.relatedCases.map((item, idx) => ({
+      id: item.id || item.slug || `related-${idx}`,
+      title: item.title,
+      image: item.image || item.heroImage || '/images/case-study/common/Frame%202147203302.png',
+      href: item.href || (item.slug ? `/case-study/${item.slug}` : '#'),
+      isShorter: idx === 1,
+    }));
+  } else {
+    const relatedStudies = await fetchRelatedCaseStudies(primaryStudy.slug, 3);
+    relatedCases = relatedStudies.map((study, idx) => ({
+      id: study.id,
+      title: study.title,
+      image: study.heroImage,
+      href: `/case-study/${study.slug}`,
+      isShorter: idx === 1,
+    }));
+  }
 
   return (
     <div className="w-full bg-white min-h-screen">
       <CaseStudyHero caseStudy={primaryStudy} />
       <CaseStudyContent caseStudy={primaryStudy} />
-      <CaseStudyRelated relatedCases={relatedCases} />
+      <CaseStudyRelated
+        heading={primaryStudy.relatedCasesHeading}
+        relatedCases={relatedCases}
+      />
       <CaseStudyCTA {...primaryStudy.cta} />
     </div>
   );

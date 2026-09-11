@@ -286,7 +286,7 @@ export const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
             RIGHT COLUMN: BLOG ARTICLE BODY CONTENT (Frame 2147226791: 975px wide)
             =============================================================================
           */}
-          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[48px] lg:gap-[60px]">
+          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[32px] lg:gap-[60px]">
             {sections.map((section) => (
               <article
                 key={section.id}

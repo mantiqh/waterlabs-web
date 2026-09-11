@@ -39,9 +39,9 @@ export const BlogsHeroSection: React.FC = () => {
 
               {/* Title & Description (Frame 2147226899) */}
               <div className="flex flex-col items-start gap-[12px] w-full">
-                <h2 className="type-h5 text-white tracking-[-0.01em]">
+                <h5 className="type-h5 text-white tracking-[-0.01em]">
                   What Is Agentic RCM? The Definitive Guide to the Autonomous Revenue Cycle
-                </h2>
+                </h5>
                 <p className="type-body-xxs text-[#F4F6F9] tracking-[0.01em]">
                   Agentic RCM is revenue cycle management run by autonomous AI agents that do the work themselves.
                 </p>
@@ -98,9 +98,9 @@ export const BlogsHeroSection: React.FC = () => {
 
             {/* Title & Description */}
             <div className="flex flex-col items-start gap-[10px] w-full">
-              <h2 className="type-h5 text-white tracking-[-0.01em]">
+              <h5 className="type-h5 text-white tracking-[-0.01em]">
                 What Is Agentic RCM? The Definitive Guide to the Autonomous Revenue Cycle
-              </h2>
+              </h5>
               <p className="type-body-xxs text-[#F4F6F9] tracking-[0.01em]">
                 Agentic RCM is revenue cycle management run by autonomous AI agents that do the work themselves.
               </p>

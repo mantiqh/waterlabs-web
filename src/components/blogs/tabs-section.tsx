@@ -179,7 +179,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
                   key={category}
                   type="button"
                   onClick={() => setSelectedCategory(category)}
-                  className={`h-[40px] px-[16px] py-[8px] rounded-[64px] type-body-xs font-medium transition-all duration-300 cursor-pointer ${
+                  className={`h-[40px] px-[16px] py-[8px] rounded-[64px] body-cta font-medium transition-all duration-300 cursor-pointer ${
                     isSelected
                       ? 'bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] text-white shadow-sm'
                       : 'bg-[#91C6F2]/[0.09] text-[#7D8690] hover:text-[#042849] hover:bg-[#91C6F2]/[0.18]'
@@ -287,26 +287,6 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
             </div>
           </div>
 
-          {/* Mobile Category Pills Slider */}
-          <div className="flex flex-row items-center gap-[8px] overflow-x-auto no-scrollbar scroll-smooth pb-[4px]">
-            {categoriesList.map((category) => {
-              const isSelected = selectedCategory === category;
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => setSelectedCategory(category)}
-                  className={`shrink-0 h-[30px] px-[12px] py-[4px] rounded-[64px] type-caption transition-all duration-300 cursor-pointer ${
-                    isSelected
-                      ? 'bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] text-white font-medium shadow-sm'
-                      : 'bg-[#91C6F2]/[0.09] text-[#7D8690] hover:text-[#042849]'
-                  }`}
-                >
-                  {category}
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* ========================================================================= */}
@@ -316,7 +296,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
           {filteredArticles.map((article) => (
             <div
               key={article.id}
-              className="w-full border-b border-[#D7DCE2] pb-[20px] md:pb-[24px] flex flex-col gap-[12px]"
+              className="w-full border-b border-[#D7DCE2] pb-[20px] md:pb-[32px] flex flex-col gap-[8px] md:gap-[12px]"
             >
               {/* Tag / Eyebrow (Text - Tag) */}
               <div className="flex items-center gap-[6px] lg:gap-[8px]">
@@ -326,14 +306,14 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
               </div>
 
               {/* Desktop Article Layout (Side-by-side) */}
-              <div className="hidden md:flex flex-row items-start justify-between gap-[20px] w-full">
+              <div className="hidden md:flex flex-row items-stretch justify-between gap-[20px] w-full">
                 {/* Left Text & CTA (Frame 2147226512) */}
-                <div className="flex-1 min-w-0 flex flex-col justify-between items-start gap-[16px] min-h-[156px] xl:min-h-[188px]">
+                <div className="flex-1 min-w-0 flex flex-col items-start gap-[16px]">
                   <h6 className="type-h6 text-black tracking-[-0.01em]">
                     {article.title}
                   </h6>
 
-                  <Link href={`/blogs/${article.slug}`} className="inline-block pt-[4px]">
+                  <Link href={`/blogs/${article.slug}`} className="inline-block">
                     <div className="h-[44px] px-[20px] py-[10px] rounded-[64px] bg-[rgba(214,214,214,0.21)] border border-[#F4F6F9] backdrop-blur-[12px] flex items-center gap-[10px] cursor-pointer hover:bg-white/60 hover:border-[#0F68D6]/30 transition-all duration-300">
                       <span className="type-body-xxs text-[#2A2A2A] font-medium">
                         {settings?.readBlogButtonText || 'Read blog'}
@@ -344,7 +324,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
                 </div>
 
                 {/* Right Image (Frame 2147203302) */}
-                <div className="w-[227px] h-[188px] shrink-0 rounded-[20px] overflow-hidden relative shadow-sm">
+                <div className="w-[227px] shrink-0 self-stretch min-h-[144px] rounded-[20px] overflow-hidden relative shadow-sm">
                   <Image
                     src={article.desktopImage}
                     alt={article.rawTitle}

@@ -45,6 +45,26 @@ export const caseStudyBySlugQuery = groq`*[_type == "caseStudy" && (slug.current
   resultsBlock,
   outcomes,
   bottomLine,
+  relatedCasesHeading,
+  "relatedCases": relatedCases[] {
+    _type == "reference" => @-> {
+      _id,
+      "id": _id,
+      title,
+      "slug": slug.current,
+      "heroImage": heroImage.asset->url,
+      "image": heroImage.asset->url,
+      "href": "/case-study/" + slug.current
+    },
+    _type == "customRelatedCase" => {
+      _key,
+      title,
+      "image": image.asset->url,
+      "heroImage": image.asset->url,
+      "href": link,
+      "slug": link
+    }
+  },
   cta,
   order
 }`;
@@ -68,6 +88,26 @@ export const allCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(order as
   resultsBlock,
   outcomes,
   bottomLine,
+  relatedCasesHeading,
+  "relatedCases": relatedCases[] {
+    _type == "reference" => @-> {
+      _id,
+      "id": _id,
+      title,
+      "slug": slug.current,
+      "heroImage": heroImage.asset->url,
+      "image": heroImage.asset->url,
+      "href": "/case-study/" + slug.current
+    },
+    _type == "customRelatedCase" => {
+      _key,
+      title,
+      "image": image.asset->url,
+      "heroImage": image.asset->url,
+      "href": link,
+      "slug": link
+    }
+  },
   cta,
   order
 }`;
