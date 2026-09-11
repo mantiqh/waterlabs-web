@@ -110,7 +110,9 @@ export const HowWaterlabsClosesSection: React.FC = () => {
         <div className="w-full max-w-[1320px] flex flex-col gap-[20px] lg:gap-[32px]">
           {/* Heading */}
           <h3 className="type-h3 text-[#F4F6F9]">
-            How Waterlabs <span className="text-[#63CCB7]">closes the gap</span>
+            How Waterlabs{' '}
+            <br className="lg:hidden" />
+            <span className="text-[#63CCB7]">closes the gap</span>
           </h3>
 
           {/* Subheading */}

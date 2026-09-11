@@ -42,6 +42,17 @@ interface SanityCaseStudyDoc {
     buttonText?: string;
     buttonHref?: string;
   };
+  relatedCasesHeading?: string;
+  relatedCases?: {
+    _id?: string;
+    id?: string;
+    _key?: string;
+    title?: string;
+    slug?: string;
+    heroImage?: string;
+    image?: string;
+    href?: string;
+  }[];
   order?: number;
 }
 
@@ -75,6 +86,20 @@ function mapSanityToCaseStudy(doc: SanityCaseStudyDoc): CaseStudy {
     outcomes: doc.outcomes || '',
     bottomLine: doc.bottomLine || '',
     metrics: Array.isArray(doc.metrics) ? doc.metrics : [],
+    relatedCasesHeading: doc.relatedCasesHeading || 'Related Cases',
+    relatedCases:
+      Array.isArray(doc.relatedCases) && doc.relatedCases.length > 0
+        ? doc.relatedCases
+            .filter(Boolean)
+            .map((item) => ({
+              id: item._id || item.id || item._key || item.slug || '',
+              slug: item.slug || '',
+              title: item.title || '',
+              image: item.image || item.heroImage || '',
+              heroImage: item.heroImage || item.image || '',
+              href: item.href || (item.slug ? `/case-study/${item.slug}` : '#'),
+            }))
+        : undefined,
     cta: doc.cta || {
       tagText: 'Talk to us.',
       headline:
@@ -82,6 +107,7 @@ function mapSanityToCaseStudy(doc: SanityCaseStudyDoc): CaseStudy {
       buttonText: 'Get a Demo',
       buttonHref: '/contact-us',
     },
+    order: doc.order,
   };
 }
 

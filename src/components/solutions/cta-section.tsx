@@ -26,7 +26,9 @@ export const SolutionsCTASection: React.FC = () => {
 
           {/* Heading */}
           <h2 className="type-h2 text-white max-w-[1148px]">
-            Discover how this works on your patient schedule.
+            Discover how this works on{' '}
+            <br className="hidden lg:block" />
+            your patient schedule.
           </h2>
 
           {/* CTA Button */}

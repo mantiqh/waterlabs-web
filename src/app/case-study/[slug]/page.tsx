@@ -47,21 +47,36 @@ export default async function CaseStudyPage({ params }: Props) {
     notFound();
   }
 
-  // Pick 3 related cases from other case studies
-  const relatedStudies = await fetchRelatedCaseStudies(caseStudy.slug, 3);
-  const relatedCases: RelatedCaseItem[] = relatedStudies.map((study, idx) => ({
-    id: study.id,
-    title: study.title,
-    image: study.heroImage,
-    href: `/case-study/${study.slug}`,
-    isShorter: idx === 1,
-  }));
+  // Resolve related cases: use curated ones from CMS if configured, otherwise fallback to automatic 3 case studies
+  let relatedCases: RelatedCaseItem[] = [];
+
+  if (caseStudy.relatedCases && caseStudy.relatedCases.length > 0) {
+    relatedCases = caseStudy.relatedCases.map((item, idx) => ({
+      id: item.id || item.slug || `related-${idx}`,
+      title: item.title,
+      image: item.image || item.heroImage || '/images/case-study/common/Frame%202147203302.png',
+      href: item.href || (item.slug ? `/case-study/${item.slug}` : '#'),
+      isShorter: idx === 1,
+    }));
+  } else {
+    const relatedStudies = await fetchRelatedCaseStudies(caseStudy.slug, 3);
+    relatedCases = relatedStudies.map((study, idx) => ({
+      id: study.id,
+      title: study.title,
+      image: study.heroImage,
+      href: `/case-study/${study.slug}`,
+      isShorter: idx === 1,
+    }));
+  }
 
   return (
     <div className="w-full bg-white min-h-screen">
       <CaseStudyHero caseStudy={caseStudy} />
       <CaseStudyContent caseStudy={caseStudy} />
-      <CaseStudyRelated relatedCases={relatedCases} />
+      <CaseStudyRelated
+        heading={caseStudy.relatedCasesHeading}
+        relatedCases={relatedCases}
+      />
       <CaseStudyCTA {...caseStudy.cta} />
     </div>
   );

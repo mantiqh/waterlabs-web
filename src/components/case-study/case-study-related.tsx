@@ -39,10 +39,12 @@ const DEFAULT_RELATED_CASES: RelatedCaseItem[] = [
 ];
 
 interface CaseStudyRelatedProps {
+  heading?: string;
   relatedCases?: RelatedCaseItem[];
 }
 
 export const CaseStudyRelated: React.FC<CaseStudyRelatedProps> = ({
+  heading = 'Related Cases',
   relatedCases = DEFAULT_RELATED_CASES,
 }) => {
   return (
@@ -59,7 +61,7 @@ export const CaseStudyRelated: React.FC<CaseStudyRelatedProps> = ({
           
           {/* Section Heading: Display/H2 token */}
           <h2 className="type-h2 text-[#0F68D6]">
-            Related Cases
+            {heading}
           </h2>
 
           {/* =================================================================

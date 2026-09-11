@@ -10,10 +10,13 @@ export interface CaseStudyTOCItem {
 }
 
 export interface CaseStudyRelated {
+  id?: string;
   slug: string;
   title: string;
-  categoryTag: string;
-  image: string;
+  categoryTag?: string;
+  image?: string;
+  heroImage?: string;
+  href?: string;
 }
 
 export interface CaseStudyStatBadge {
@@ -58,7 +61,9 @@ export interface CaseStudy {
   };
   metrics?: CaseStudyMetric[];
   tableOfContents?: CaseStudyTOCItem[];
+  relatedCasesHeading?: string;
   relatedCases?: CaseStudyRelated[];
   cta?: CaseStudyCTAData;
+  order?: number;
 }
 
