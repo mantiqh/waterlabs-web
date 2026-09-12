@@ -2,14 +2,13 @@ import React from 'react';
 
 import type { AboutUsLeadershipData, AboutUsPageData } from '@/types/about-us';
 
-import BottomLineSection from './bottom-line';
-import FoundingMomentSection from './founding-moment';
+import ComeTalkToUsSection from './come-talk-to-us';
 import HeroSection from './hero-section';
-import LeadershipSection from './leadership';
-import TestimonialsSection from './testimonials';
-import WhatWeBelieveSection from './what-we-believe';
-import WhosBuildingThisSection from './whos-building-this';
-import WhosTrustingUsSection from './whos-trusting-us';
+import OurStorySection from './our-story';
+import TheFoundersSection from './the-founders';
+import TheTeamSection from './the-team';
+import WhatWeAreSection from './what-we-are';
+import WhatWeHoldSection from './what-we-hold';
 
 export interface AboutUsPageProps {
   data?: AboutUsPageData | null;
@@ -22,13 +21,12 @@ export const AboutUsPage: React.FC<AboutUsPageProps> = ({ data }) => {
   return (
     <div className="w-full flex flex-col">
       <HeroSection />
-      <WhosTrustingUsSection />
-      <TestimonialsSection />
-      <FoundingMomentSection />
-      <WhosBuildingThisSection />
-      <LeadershipSection data={leadershipData} />
-      <WhatWeBelieveSection />
-      <BottomLineSection />
+      <WhatWeAreSection />
+      <OurStorySection />
+      <WhatWeHoldSection />
+      <TheFoundersSection />
+      <TheTeamSection data={leadershipData} />
+      <ComeTalkToUsSection />
     </div>
   );
 };

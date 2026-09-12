@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { ChevronRight } from '@/components/CTA';
 import type { BlogsPageData, SanityBlogArticle } from '@/types/blogs';
@@ -26,6 +26,8 @@ const BLOG_CATEGORIES = [
   'Company News',
   'Case Studies',
 ] as const;
+
+const CARDS_PER_PAGE = 6;
 
 export interface BlogsTabsSectionProps {
   initialArticles?: SanityBlogArticle[];
@@ -113,6 +115,8 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const settingsCategories = settings?.categories;
   const categoriesList = useMemo(() => {
@@ -154,6 +158,47 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
     });
   }, [articlesList, selectedCategory, searchQuery]);
 
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(filteredArticles.length / CARDS_PER_PAGE));
+  const safeCurrentPage = Math.min(currentPage, totalPages);
+
+  const paginatedArticles = useMemo(() => {
+    const startIndex = (safeCurrentPage - 1) * CARDS_PER_PAGE;
+    return filteredArticles.slice(startIndex, startIndex + CARDS_PER_PAGE);
+  }, [filteredArticles, safeCurrentPage]);
+
+  const pageNumbers = useMemo(() => {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    if (safeCurrentPage <= 3) {
+      return [1, 2, 3, '...', totalPages];
+    }
+    if (safeCurrentPage >= totalPages - 2) {
+      return [1, '...', totalPages - 2, totalPages - 1, totalPages];
+    }
+    return [1, '...', safeCurrentPage - 1, safeCurrentPage, safeCurrentPage + 1, '...', totalPages];
+  }, [totalPages, safeCurrentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages || newPage === safeCurrentPage) return;
+    setCurrentPage(newPage);
+    if (gridRef.current) {
+      const yOffset = -120;
+      const y = gridRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       className="relative w-full overflow-hidden p-0 m-0"
@@ -178,7 +223,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
                 <button
                   key={category}
                   type="button"
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => handleCategorySelect(category)}
                   className={`h-[40px] px-[16px] py-[8px] rounded-[64px] body-cta font-medium transition-all duration-300 cursor-pointer ${
                     isSelected
                       ? 'bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] text-white shadow-sm'
@@ -207,7 +252,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               placeholder={settings?.searchPlaceholder || 'Search'}
               className="w-full bg-transparent border-none outline-none type-body-xs text-[#2A2A2A] placeholder:text-[#7D8690]"
             />
@@ -234,7 +279,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
               <input
                 type="text"
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder={settings?.searchPlaceholder || 'Search'}
                 className="w-full bg-transparent border-none outline-none type-body-xxs text-[#2A2A2A] placeholder:text-[#D7DCE2]"
               />
@@ -270,7 +315,7 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
                       key={category}
                       type="button"
                       onClick={() => {
-                        setSelectedCategory(category);
+                        handleCategorySelect(category);
                         setIsFilterDropdownOpen(false);
                       }}
                       className={`w-full text-left px-[14px] py-[8px] type-body-xxs transition-colors ${
@@ -292,8 +337,11 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
         {/* ========================================================================= */}
         {/* Blog Articles Grid (Figma: Frame 2147226515 / 2147226523)                  */}
         {/* ========================================================================= */}
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-[32px] gap-y-[32px] lg:gap-y-[40px]">
-          {filteredArticles.map((article) => (
+        <div
+          ref={gridRef}
+          className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-[32px] gap-y-[32px] lg:gap-y-[40px]"
+        >
+          {paginatedArticles.map((article) => (
             <div
               key={article.id}
               className="w-full border-b border-[#D7DCE2] pb-[20px] md:pb-[32px] flex flex-col gap-[8px] md:gap-[12px]"
@@ -419,38 +467,102 @@ export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
         {/* ========================================================================= */}
         {/* Pagination Bar (Figma: Frame 2147226742)                                  */}
         {/* ========================================================================= */}
-        <div className="w-full flex flex-row justify-end items-center gap-[24px] lg:gap-[32px] pt-[16px]">
-          <div className="flex flex-row items-center gap-[16px] md:gap-[24px] lg:gap-[32px]">
-            <span className="type-body-xxs text-[#0F68D6] font-medium cursor-pointer">01</span>
-            <span className="type-body-xxs text-[#7D8690] cursor-pointer hover:text-[#0F68D6] transition-colors">02</span>
-            <span className="type-body-xxs text-[#7D8690] cursor-pointer hover:text-[#0F68D6] transition-colors">03</span>
-            <span className="type-body-xxs text-[#7D8690] tracking-[0.2em]">....</span>
-            <span className="type-body-xxs text-[#7D8690] cursor-pointer hover:text-[#0F68D6] transition-colors">20</span>
-          </div>
+        {filteredArticles.length > 0 && (
+          <div className="w-full flex flex-row justify-end items-center gap-[16px] md:gap-[24px] lg:gap-[32px] pt-[16px]">
+            {/* Previous Page Button */}
+            {totalPages > 1 && (
+              <button
+                type="button"
+                aria-label="Previous page"
+                onClick={() => handlePageChange(safeCurrentPage - 1)}
+                disabled={safeCurrentPage === 1}
+                className={`w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] transition-opacity ${
+                  safeCurrentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-75 cursor-pointer'
+                }`}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="shrink-0"
+                >
+                  <path
+                    d="M8.75 2.625L4.375 7L8.75 11.375"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            )}
 
-          <button
-            type="button"
-            aria-label="Next page"
-            className="w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] hover:opacity-75 transition-opacity cursor-pointer"
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 14 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="shrink-0"
-            >
-              <path
-                d="M5.25 2.625L9.625 7L5.25 11.375"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
+            {/* Page Numbers */}
+            <div className="flex flex-row items-center gap-[16px] md:gap-[24px] lg:gap-[32px]">
+              {pageNumbers.map((page, idx) => {
+                if (page === '...') {
+                  return (
+                    <span
+                      key={`dots-${idx}`}
+                      className="type-body-xxs text-[#7D8690] tracking-[0.2em] select-none"
+                    >
+                      ....
+                    </span>
+                  );
+                }
+
+                const isSelected = page === safeCurrentPage;
+                const pageNum = page as number;
+                return (
+                  <button
+                    key={`page-${pageNum}`}
+                    type="button"
+                    onClick={() => handlePageChange(pageNum)}
+                    className={`type-body-xxs transition-colors cursor-pointer bg-transparent border-none p-0 outline-none ${
+                      isSelected
+                        ? 'text-[#0F68D6] font-medium'
+                        : 'text-[#7D8690] hover:text-[#0F68D6]'
+                    }`}
+                  >
+                    {String(page).padStart(2, '0')}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Next Page Button */}
+            {totalPages > 1 && (
+              <button
+                type="button"
+                aria-label="Next page"
+                onClick={() => handlePageChange(safeCurrentPage + 1)}
+                disabled={safeCurrentPage === totalPages}
+                className={`w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] transition-opacity ${
+                  safeCurrentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-75 cursor-pointer'
+                }`}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="shrink-0"
+                >
+                  <path
+                    d="M5.25 2.625L9.625 7L5.25 11.375"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
+        )}
 
       </div>
     </div>

@@ -1,98 +1,52 @@
 'use client';
 
-import Image from 'next/image';
 import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative w-full bg-white overflow-hidden">
+    <section className="w-full bg-white overflow-hidden">
       {/* 
-        Hero Banner Section (Desktop: 4081-10784 / Mobile: 4081-11031):
-        - Desktop: Full-width, 726px height, padding: 40px 60px 80px, border-radius: 0 0 60px 0
-        - Mobile: 581px height, padding: 20px 20px 40px, border-radius: 0 0 30px 0
-        - Background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%) over banner image
-        - Layout: justify-between, Navbar at top, bottom content row at bottom
+        Hero Banner Section (Desktop: 6211-17465 / Mobile: 6211-17810):
+        - Desktop: 1440px width, 726px height, padding: 40px 60px 80px, border-radius: 0 0 0 60px
+        - Mobile: 402px width, 581px height, padding: 20px 20px 40px, border-radius: 0 0 0 30px
+        - Background: CSS background image with linear-gradient and vector artwork
+        - Layout: Flex column justify-between, Navbar at top, Frame 2147203192 at bottom
       */}
-      <div className="relative w-full min-h-[581px] lg:min-h-[640px] xl:h-[726px] bg-transparent rounded-br-[30px] lg:rounded-br-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[32px] md:px-[40px] md:pb-[60px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[24px] lg:gap-[10px] overflow-hidden">
-        
-        {/* Background Banner Image */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-br-[30px] lg:rounded-br-[60px]">
-          {/* Desktop Banner Graphic */}
-          <div className="hidden md:block absolute inset-0">
-            <Image
-              src="/images/about-us/hero-section/img_banner.png"
-              alt="About Us Banner"
-              fill
-              priority
-              className="object-cover object-center"
-            />
-          </div>
-          {/* Mobile Banner Graphic */}
-          <div className="block md:hidden absolute inset-0">
-            <Image
-              src="/images/about-us/hero-section/img_banner_mob.png"
-              alt="About Us Banner Mobile"
-              fill
-              priority
-              className="object-cover object-center"
-            />
-          </div>
-        </div>
+      <div className="w-full min-h-[581px] lg:min-h-[640px] xl:h-[726px] bg-[#042849] bg-[url('/images/about-us/hero-section/img_banner_mob.png')] lg:bg-[url('/images/about-us/hero-section/img_banner.png')] bg-cover bg-center bg-no-repeat rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[32px] md:px-[40px] md:pb-[60px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between items-start gap-[40px] lg:gap-[10px]">
+        {/* Navbar */}
+        <Navbar />
 
-        {/* Top Navbar */}
-        <div className="relative z-50 w-full">
-          <Navbar />
-        </div>
-
-        {/* Bottom Content Row */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] xl:gap-[20px]">
-          {/* Left Column: Heading (Semantic h2 with type-h1 styles) */}
-          <div className="w-full lg:w-[44%] xl:w-[551px] shrink-0 min-w-0">
-            <h2 className="type-h1 text-white lg:tracking-[-0.01em]">
-              <span className="block xl:whitespace-nowrap">More collections.</span>
-              <span className="block xl:whitespace-nowrap">Less manual work.</span>
+        {/* Hero Content Area (Figma: Frame 2147203192) */}
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between gap-[12px] lg:gap-[20px]">
+          {/* Heading */}
+          <div className="w-full lg:w-[522px] shrink-0">
+            <h2 className="type-h1 text-white tracking-[-0.01em]">
+              We are building<br />
+              the revenue cycle<br />
+              that runs itself.
             </h2>
           </div>
 
-          {/* Right Column: Description (Two paragraphs matching exact text placement) */}
-          <div className="w-full lg:w-[53%] xl:w-[749px] flex-1 min-w-0 flex flex-col gap-[16px] lg:gap-[20px] xl:gap-[24px]">
+          {/* Description */}
+          <div className="w-full lg:max-w-[778px] flex-1">
             <p className="type-body-s text-[#F4F6F9]">
-              <span className="hidden xl:block">
-                As healthcare revenue cycle experts, we make healthcare&apos;s revenue cycle<br />
-                operate autonomously.
+              <span className="hidden xl:inline">
+                The US healthcare system loses billions every year to a revenue cycle run by<br />
+                hand. Waterlabs builds the agentic AI that runs it instead. Our agents work every<br />
+                stage, in every specialty, at health system scale.
               </span>
-              <span className="hidden lg:block xl:hidden">
-                As healthcare revenue cycle experts, we make healthcare&apos;s revenue cycle operate autonomously.
-              </span>
-              <span className="block lg:hidden">
-                As healthcare revenue cycle experts, we make<br />
-                healthcare&apos;s revenue cycle operate<br />
-                autonomously.
-              </span>
-            </p>
-
-            <p className="type-body-s text-[#F4F6F9]">
-              <span className="hidden xl:block">
-                Founded in 2019 by two operators who&apos;d spent twenty years inside the back-<br />
-                office healthcare runs on.
-              </span>
-              <span className="hidden lg:block xl:hidden">
-                Founded in 2019 by two operators who&apos;d spent twenty years inside the back-office healthcare runs on.
-              </span>
-              <span className="block lg:hidden">
-                Founded in 2019 by two operators who&apos;d spent<br />
-                twenty years inside the back-office healthcare<br />
-                runs on.
+              <span className="inline xl:hidden">
+                The US healthcare system loses billions every year to a revenue cycle run by hand. Waterlabs builds the agentic AI that runs it instead. Our agents work every stage, in every specialty, at health system scale.
               </span>
             </p>
           </div>
         </div>
-
       </div>
     </section>
   );
 };
 
 export default HeroSection;
+
