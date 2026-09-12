@@ -23,23 +23,23 @@ const founders: FounderItem[] = [
     name: 'Kamal Raj',
     title: 'Founder President Chairman of the Board',
     bio: 'Twenty years inside revenue cycle operations before founding Waterlabs in 2019. Built RCM systems for hospital networks across India and the US.',
-    image: "/images/about-us/who's-building-this./img_kamal_raj (1).png",
+    image: '/images/about-us/the-founders/img_kamal_raj.png',
   },
   {
     name: 'Jitendra Gupta',
     title: 'CEO',
     bio: 'Fifteen years building autonomous systems for healthcare. Author of the agentic-RCM architecture patents filed in 2019.',
-    image: "/images/about-us/who's-building-this./img_jitendra_gupta.png",
+    image: '/images/about-us/the-founders/img_jitendra_gupta.png',
   },
 ];
 
-export const WhosBuildingThisSection: React.FC = () => {
+export const TheFoundersSection: React.FC = () => {
   return (
     <section className="relative w-full bg-[#F4F6F9] overflow-hidden">
       {/* 
-        Who's building this Section (Operators, Engineers, Partners.)
+        The Founders Section
         Wrapper: #F4F6F9
-        Inner Container: White background with bottom border divider separating from Leadership Section
+        Inner Container: White background with bottom border divider separating from The Team Section
       */}
       <div className="w-full bg-white pt-[48px] px-[20px] md:pt-[60px] md:px-[40px] lg:pt-[80px] lg:px-[60px]">
         <div className="w-full max-w-[1320px] mx-auto border-b border-[#D7DCE2] pb-[32px] md:pb-[48px] lg:pb-[60px] flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[20px]">
@@ -49,13 +49,13 @@ export const WhosBuildingThisSection: React.FC = () => {
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
               <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
-                Who&apos;s building this.
+                Who we are
               </span>
             </div>
 
             {/* Heading */}
             <h2 className="type-h2 text-black">
-              Operators, Engineers, Partners.
+              The Founders
             </h2>
           </div>
 
@@ -81,9 +81,9 @@ export const WhosBuildingThisSection: React.FC = () => {
                 <div className="w-full flex flex-col items-start gap-[16px] lg:gap-[24px]">
                   <div className="w-full flex flex-row items-start justify-between gap-[8px]">
                     <div className="flex flex-col items-start gap-[4px] flex-1 min-w-0">
-                      <h3 className="type-h5 text-[#042849]">
+                      <h5 className="type-h5 text-[#042849]">
                         {founder.name}
-                      </h3>
+                      </h5>
                       <p className="type-body-xxs text-[#7D8690]">
                         {founder.title}
                       </p>
@@ -106,4 +106,4 @@ export const WhosBuildingThisSection: React.FC = () => {
   );
 };
 
-export default WhosBuildingThisSection;
+export default TheFoundersSection;

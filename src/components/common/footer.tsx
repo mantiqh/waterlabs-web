@@ -1,9 +1,27 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
+  const isAboutUs = pathname === '/about-us';
+
   return (
-    <footer className="w-full bg-[#111111] text-white pt-16 pb-8 px-[20px] md:px-[40px] lg:px-[60px]">
+    <div
+      className="w-full overflow-hidden"
+      style={{
+        background: isAboutUs
+          ? 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)'
+          : undefined,
+      }}
+    >
+      <footer
+        className={`w-full bg-[#111111] text-white pt-16 pb-8 px-[20px] md:px-[40px] lg:px-[60px] ${
+          isAboutUs ? 'rounded-tl-[30px] lg:rounded-tl-[60px]' : ''
+        }`}
+      >
       <div className="max-w-[1320px] mx-auto w-full">
         {/* Main Grid Layout */}
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-12 lg:gap-12 mb-16">
@@ -112,5 +130,6 @@ export const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
+    </div>
   );
 };

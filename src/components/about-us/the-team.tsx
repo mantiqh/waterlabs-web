@@ -22,57 +22,57 @@ const DEFAULT_LEADERS: LeaderItem[] = [
   {
     name: 'Daphne Oberlander',
     title: 'Chief Revenue Officer',
-    image: '/images/about-us/leadership/img_daphne_berlander.png',
+    image: '/images/about-us/the-team/img_daphne_berlander.png',
   },
   {
     name: 'Sravan Aditya',
     title: 'Chief Technology Officer',
-    image: '/images/about-us/leadership/img_sravan_aditya.png',
+    image: '/images/about-us/the-team/img_sravan_aditya.png',
   },
   {
     name: 'Robert A. Miller',
     title: 'Chief of Strategy & Partnerships',
-    image: '/images/about-us/leadership/img_robert_A._miller.png',
+    image: '/images/about-us/the-team/img_robert_A._miller.png',
   },
   {
     name: 'Megha Bhouraskar',
     title: 'General Counsel',
-    image: '/images/about-us/leadership/img_megha_bhouraskar.png',
+    image: '/images/about-us/the-team/img_megha_bhouraskar.png',
   },
   {
     name: 'Nick Tombrella',
     title: 'Senior Vice President Sales',
-    image: '/images/about-us/leadership/img_nick_tombrella.png',
+    image: '/images/about-us/the-team/img_nick_tombrella.png',
   },
   {
     name: 'Ales Cejka',
     title: 'SVP RCM, Coding and Compliance',
-    image: '/images/about-us/leadership/img_ales_cejka.png',
+    image: '/images/about-us/the-team/img_ales_cejka.png',
   },
   {
     name: 'Devanand Bangaru',
     title: 'Associate Vice President – Technology & Compliance',
-    image: '/images/about-us/leadership/img_devanand_bangaru.png',
+    image: '/images/about-us/the-team/img_devanand_bangaru.png',
   },
   {
     name: 'Santhosh Kumar',
     title: 'Vice President – Human Resources',
-    image: '/images/about-us/leadership/img_santhosh_kumar.png',
+    image: '/images/about-us/the-team/img_santhosh_kumar.png',
   },
   {
     name: 'Rajgopal Keshava',
     title: 'Associate Vice President',
-    image: '/images/about-us/leadership/img_rajgopal_keshava.png',
+    image: '/images/about-us/the-team/img_rajgopal_keshava.png',
   },
   {
     name: 'Sheen Patel',
     title: 'Chief of Staff & Strategic Projects Management',
-    image: '/images/about-us/leadership/img_sheen_patel.png',
+    image: '/images/about-us/the-team/img_sheen_patel.png',
   },
   {
     name: 'Vinay Khot',
     title: 'Vice President – Agentic AI & Platform Engineering',
-    image: '/images/about-us/leadership/img_vinay_khot.png',
+    image: '/images/about-us/the-team/img_vinay_khot.png',
   },
 ];
 
@@ -81,14 +81,22 @@ export interface LeadershipSectionProps {
 }
 
 export const LeadershipSection: React.FC<LeadershipSectionProps> = ({ data }) => {
-  const leadersTag = data?.leadersTag || 'Leadership';
+  const leadersTag =
+    data?.leadersTag && data.leadersTag.toLowerCase() !== 'leadership'
+      ? data.leadersTag
+      : 'The Team';
   const leaders = data?.leaders && data.leaders.length > 0 ? data.leaders : DEFAULT_LEADERS;
 
   return (
-    <section className="relative w-full bg-[#F4F6F9] overflow-hidden">
+    <section
+      className="w-full overflow-hidden"
+      style={{
+        background: 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
+      }}
+    >
       {/* 
-        Leadership Section (Desktop: 4081-10784 / Mobile: 4081-11031):
-        - Wrapper: #F4F6F9
+        The Team / Leadership Section
+        - Wrapper: Blue gradient showing behind bottom-left curve to connect into Come talk to us
         - Inner Container: White background with rounded bottom-left corner
       */}
       <div className="w-full bg-white rounded-bl-[30px] lg:rounded-bl-[60px] pt-[32px] pb-[40px] px-[20px] md:pt-[48px] md:pb-[60px] md:px-[40px] lg:pt-[48px] lg:pb-[80px] lg:px-[60px]">
@@ -97,7 +105,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({ data }) =>
           {/* Tag / Eyebrow */}
           <div className="flex items-center gap-[8px]">
             <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-            <span className="type-body-xxs text-[#7D8690] tracking-[0.01em] uppercase">
+            <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
               {leadersTag}
             </span>
           </div>
@@ -123,9 +131,9 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({ data }) =>
                 {/* Leader Details */}
                 <div className="w-full flex flex-row items-start justify-between gap-[4px]">
                   <div className="flex flex-col items-start gap-[4px] flex-1 min-w-0">
-                    <h3 className="type-h5 text-[#042849]">
+                    <h5 className="type-h5 text-[#042849]">
                       {leader.name}
-                    </h3>
+                    </h5>
                     <p className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
                       {leader.title}
                     </p>
@@ -158,4 +166,5 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({ data }) =>
 };
 
 export const TeamSection = LeadershipSection;
+export const TheTeamSection = LeadershipSection;
 export default LeadershipSection;
