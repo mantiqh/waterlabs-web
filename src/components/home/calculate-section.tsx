@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
-export const CalculateSection: React.FC = () => {
+export const CalculateSection = () => {
   return (
     <section className="relative w-full bg-white overflow-hidden p-0 m-0">
       {/* 

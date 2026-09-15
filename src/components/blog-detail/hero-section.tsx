@@ -1,11 +1,7 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
-
-import { renderFormattedText } from './blog-detail-content';
+import { renderFormattedText } from '@/lib/format-text';
 
 export interface BlogDetailHeroProps {
   tag?: string;
@@ -24,7 +20,7 @@ const DEFAULT_PARAGRAPHS = [
   'The shift is happening fast. A revenue cycle survey found that 80% of health systems were exploring, piloting, or implementing generative AI tools for RCM, a 38-percentage-point increase in under two years. Agentic RCM is the frontier of that shift, and the term is new enough that most definitions still get it wrong.',
 ];
 
-export const BlogDetailHeroSection: React.FC<BlogDetailHeroProps> = ({
+export const BlogDetailHeroSection = ({
   tag = 'Lorem',
   subTag = 'Lorem Ipsum',
   titleAccent = 'What Is Agentic RCM?',
@@ -33,7 +29,7 @@ export const BlogDetailHeroSection: React.FC<BlogDetailHeroProps> = ({
   desktopImage = '/images/blog-detail/hero-banner-desktop.png',
   mobileImage = '/images/blog-detail/hero-banner-mobile.png',
   paragraphs = DEFAULT_PARAGRAPHS,
-}) => {
+}: BlogDetailHeroProps) => {
   return (
     <section className="relative w-full bg-white">
       {/* 

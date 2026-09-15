@@ -3,6 +3,9 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { IBM_Plex_Sans, Inter } from 'next/font/google';
 import localFont from 'next/font/local';
+import type { ReactNode } from 'react';
+
+import { Footer } from '@/components/common/footer';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -28,31 +31,25 @@ const generalSans = localFont({
   display: 'swap',
 });
 
-import { RootProvider } from '@/context/root-provider';
-
 export const metadata: Metadata = {
   title: 'Waterlabs Web',
   description: 'Waterlabs Next.js Application',
 };
 
-import { Footer } from '@/components/common/footer';
-
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable}`}>
       <body className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable} antialiased bg-[#F4F6F9]`}>
-        <RootProvider>
-          <div className="flex flex-col min-h-screen">
-            <main className="flex-grow flex flex-col">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </RootProvider>
+        <div className="flex flex-col min-h-screen">
+          <main className="flex-grow flex flex-col">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   );

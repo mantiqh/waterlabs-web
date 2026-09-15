@@ -1,7 +1,3 @@
-'use client';
-
-import React from 'react';
-
 const STORY_PARAGRAPHS = [
   "Healthcare's revenue cycle has always scaled by adding people to it.",
   "Higher volumes have meant more staff. When experienced employees leave, their knowledge leaves too, requiring new hires to spend months relearning critical information.",
@@ -9,7 +5,7 @@ const STORY_PARAGRAPHS = [
   "Waterlabs offers a different approach: codifying knowledge within the system instead of relying on individuals, so the system performs the work efficiently.",
 ];
 
-export const OurStorySection: React.FC = () => {
+export const OurStorySection = () => {
   return (
     <section className="w-full bg-white pl-[20px] md:pl-[40px] lg:pl-[60px] min-[1440px]:pl-[calc((100vw-1320px)/2)] overflow-hidden">
       {/* 

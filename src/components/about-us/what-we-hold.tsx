@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface ValueItem {
   title: string;
@@ -46,7 +46,7 @@ const VALUES: ValueItem[] = [
   },
 ];
 
-export const WhatWeHoldSection: React.FC = () => {
+export const WhatWeHoldSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 

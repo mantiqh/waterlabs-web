@@ -1,11 +1,8 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const ProductsSection: React.FC = () => {
+export const ProductsSection = () => {
   return (
     <section className="w-full bg-[#01191E] lg:bg-[#0E7FA8]">
 

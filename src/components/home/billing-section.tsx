@@ -1,6 +1,4 @@
-'use client';
 
-import React from 'react';
 
 const steps = [
   {
@@ -35,7 +33,7 @@ const steps = [
   },
 ];
 
-export const BillingSection: React.FC = () => {
+export const BillingSection = () => {
   return (
     <section 
       className="relative w-full overflow-hidden bg-white"

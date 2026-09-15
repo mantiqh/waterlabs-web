@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
 
-export const Footer: React.FC = () => {
+export const Footer = () => {
   const pathname = usePathname();
   const isAboutUs = pathname === '/about-us';
 

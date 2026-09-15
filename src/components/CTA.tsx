@@ -1,4 +1,10 @@
-import React from 'react';
+import {
+  type ButtonHTMLAttributes,
+  forwardRef,
+  type HTMLAttributes,
+  type ReactNode,
+  type Ref,
+} from 'react';
 
 export type CTAVariant = 
   | 'light-bg' 
@@ -10,9 +16,9 @@ export type CTAVariant =
   | 'dark-arrow'
   | 'fill-arrow';
 
-export interface CTAProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CTAProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: CTAVariant;
-  children?: React.ReactNode;
+  children?: ReactNode;
   as?: 'button' | 'div' | 'span';
 }
 
@@ -30,7 +36,7 @@ export const ChevronRight = ({ className }: { className?: string }) => (
   </svg>
 );
 
-export const CTA = React.forwardRef<HTMLElement, CTAProps>(
+export const CTA = forwardRef<HTMLElement, CTAProps>(
   ({ variant, children, as = 'button', className = '', ...props }, ref) => {
     // Base classes for typography conforming to Figma specs (height 44px with py-[10px])
     const typographyClass = 'type-cta';
@@ -90,9 +96,9 @@ export const CTA = React.forwardRef<HTMLElement, CTAProps>(
     if (as === 'div') {
       return (
         <div
-          ref={ref as React.Ref<HTMLDivElement>}
+          ref={ref as Ref<HTMLDivElement>}
           className={`group ${baseClasses} ${shapeClasses} ${variantClasses} ${className}`}
-          {...(props as unknown as React.HTMLAttributes<HTMLDivElement>)}
+          {...(props as unknown as HTMLAttributes<HTMLDivElement>)}
         >
           {!isArrowOnly && children && <span>{children}</span>}
           <ChevronRight className={iconClasses} />
@@ -103,9 +109,9 @@ export const CTA = React.forwardRef<HTMLElement, CTAProps>(
     if (as === 'span') {
       return (
         <span
-          ref={ref as React.Ref<HTMLSpanElement>}
+          ref={ref as Ref<HTMLSpanElement>}
           className={`group ${baseClasses} ${shapeClasses} ${variantClasses} ${className}`}
-          {...(props as unknown as React.HTMLAttributes<HTMLSpanElement>)}
+          {...(props as unknown as HTMLAttributes<HTMLSpanElement>)}
         >
           {!isArrowOnly && children && <span>{children}</span>}
           <ChevronRight className={iconClasses} />
@@ -115,7 +121,7 @@ export const CTA = React.forwardRef<HTMLElement, CTAProps>(
 
     return (
       <button
-        ref={ref as React.Ref<HTMLButtonElement>}
+        ref={ref as Ref<HTMLButtonElement>}
         className={`group ${baseClasses} ${shapeClasses} ${variantClasses} ${className}`}
         {...props}
       >

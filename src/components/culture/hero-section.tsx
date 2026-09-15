@@ -1,11 +1,8 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 
-export const CultureHeroSection: React.FC = () => {
+export const CultureHeroSection = () => {
   return (
     <section className="relative w-full bg-[#F4F6F9] overflow-hidden">
       {/* 

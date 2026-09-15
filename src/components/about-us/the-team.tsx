@@ -1,11 +1,8 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import type { AboutUsLeadershipData, LeaderItem } from '@/types/about-us';
 
-const LinkedInIcon: React.FC = () => (
+const LinkedInIcon = () => (
   <svg
     width="24"
     height="24"
@@ -80,7 +77,7 @@ export interface LeadershipSectionProps {
   data?: AboutUsLeadershipData;
 }
 
-export const LeadershipSection: React.FC<LeadershipSectionProps> = ({ data }) => {
+export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
   const leadersTag =
     data?.leadersTag && data.leadersTag.toLowerCase() !== 'leadership'
       ? data.leadersTag

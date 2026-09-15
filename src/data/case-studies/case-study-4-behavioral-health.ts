@@ -10,6 +10,13 @@ export const caseStudy4: CaseStudy = {
   subtitle: 'An outpatient intake operation where every new patient waited on a phone call before anyone could book them in.',
   heroImage: '/images/case-study/case-study-4-behavioral/Frame%202147226953%20(3).png',
   heroImageAlt: 'Behavioral health practice clinical and intake coordination team with Waterlabs',
+  cardCategory: 'Company News',
+  cardTag: 'Behavioral Health',
+  cardStat: '4 days → 1 day',
+  cardSubtitle: 'Benefits Verification',
+  desktopImage: '/images/case-study-main-page/tabs/img_placeholder_04.png',
+  mobileImage: '/images/case-study-main-page/tabs/img_placeholder_04_mobile (1).png',
+  order: 4,
   tags: ['Behavioral Health', 'Eligibility and Benefits', 'Patient Intake', 'HIMER AI OS'],
   clientSummary:
     'An outpatient behavioral health practice verifying benefits for every new patient before a first appointment could be scheduled. Behavioral health coverage includes visit limits and prior authorization requirements that vary widely across payers and plans within the same payer.',

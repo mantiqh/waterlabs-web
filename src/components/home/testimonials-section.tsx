@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const testimonialsData = [
   {
@@ -20,7 +20,7 @@ const testimonialsData = [
   },
 ];
 
-export const TestimonialsSection: React.FC = () => {
+export const TestimonialsSection = () => {
   // Desktop Carousel State
   const [currentIndex, setCurrentIndex] = useState(0);
 

@@ -1,11 +1,8 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 
-export const TrustHeroSection: React.FC = () => {
+export const TrustHeroSection = () => {
   return (
     <section className="relative w-full bg-white">
       {/* 

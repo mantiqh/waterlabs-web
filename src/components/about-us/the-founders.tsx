@@ -1,11 +1,8 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import type { FounderItem } from '@/types/about-us';
 
-const LinkedInIcon: React.FC = () => (
+const LinkedInIcon = () => (
   <svg
     width="24"
     height="24"
@@ -33,7 +30,7 @@ const founders: FounderItem[] = [
   },
 ];
 
-export const TheFoundersSection: React.FC = () => {
+export const TheFoundersSection = () => {
   return (
     <section className="relative w-full bg-[#F4F6F9] overflow-hidden">
       {/* 

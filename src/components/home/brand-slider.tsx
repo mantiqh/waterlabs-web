@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect,useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const brandLogos = [
   { src: "/images/home/brand-slider-images/brightview_logo.png", alt: "BrightView" },
@@ -13,7 +13,7 @@ const brandLogos = [
   { src: "/images/home/brand-slider-images/angels_of_care_logo.png", alt: "Angels of Care" },
 ];
 
-export const BrandSlider: React.FC = () => {
+export const BrandSlider = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dotCount, setDotCount] = useState(0);

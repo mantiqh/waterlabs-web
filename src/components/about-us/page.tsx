@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { AboutUsLeadershipData, AboutUsPageData } from '@/types/about-us';
 
 import ComeTalkToUsSection from './come-talk-to-us';
@@ -14,7 +12,7 @@ export interface AboutUsPageProps {
   data?: AboutUsPageData | null;
 }
 
-export const AboutUsPage: React.FC<AboutUsPageProps> = ({ data }) => {
+export const AboutUsPage = ({ data }: AboutUsPageProps) => {
   const leadershipData: AboutUsLeadershipData | undefined =
     data?.leadership || (data ? { leadersTag: data.leadersTag, leaders: data.leaders } : undefined);
 

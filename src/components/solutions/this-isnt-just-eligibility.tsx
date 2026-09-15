@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 
@@ -34,7 +34,7 @@ const threeThingsCards: ThreeThingsCard[] = [
 
 const TOTAL_DOTS = 3;
 
-export const ThisIsntJustEligibilitySection: React.FC = () => {
+export const ThisIsntJustEligibilitySection = () => {
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 

@@ -1,23 +1,20 @@
-'use client';
-
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-interface CaseStudyCTAProps {
+export interface CaseStudyCTAProps {
   tagText?: string;
   headline?: string;
   buttonText?: string;
   buttonHref?: string;
 }
 
-export const CaseStudyCTA: React.FC<CaseStudyCTAProps> = ({
+export const CaseStudyCTA = ({
   tagText = 'Talk to us.',
   headline = 'Schedule a 15-minute call to see how Waterlabs can impact your organization’s results.',
   buttonText = 'Get a Demo',
   buttonHref = '/contact-us',
-}) => {
+}: CaseStudyCTAProps) => {
   return (
     <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#F4F6F9] from-50% to-[#111111] to-50%">
       {/* 

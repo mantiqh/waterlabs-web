@@ -1,12 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const DoWorkThatMattersSection: React.FC = () => {
+export const DoWorkThatMattersSection = () => {
   return (
     <section className="relative w-full bg-[#111111] overflow-hidden">
       {/* 

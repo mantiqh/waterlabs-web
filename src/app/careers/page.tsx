@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import React from 'react';
 
 import CareersPage, { type CareersPageData } from '@/components/careers/page';
 import { sanityFetch } from '@/sanity/lib/fetch';

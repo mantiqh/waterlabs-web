@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { CTA } from '@/components/CTA';
 
 import Navbar from '../common/navbar';
@@ -12,11 +10,11 @@ export interface HeroData {
   heroBackgroundImageUrl?: string;
 }
 
-interface HeroProps {
+export interface HeroProps {
   data?: HeroData | null;
 }
 
-const Hero: React.FC<HeroProps> = ({ data }) => {
+const Hero = ({ data }: HeroProps) => {
   return (
     <section className="relative w-full">
       <div

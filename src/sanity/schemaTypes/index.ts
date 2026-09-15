@@ -4,9 +4,17 @@ import { aboutUsPageSchema } from './aboutUsPage';
 import { blogPostSchema } from './blogPost';
 import { blogsPageSchema } from './blogsPage';
 import { careersPageSchema } from './careersPage';
+import { caseStudiesPageSchema } from './caseStudiesPage';
 import { caseStudySchema } from './caseStudy';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [aboutUsPageSchema, careersPageSchema, caseStudySchema, blogPostSchema, blogsPageSchema],
+  types: [
+    aboutUsPageSchema,
+    careersPageSchema,
+    caseStudySchema,
+    caseStudiesPageSchema,
+    blogPostSchema,
+    blogsPageSchema,
+  ],
 };
 

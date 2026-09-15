@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
-export const TheProblemSection: React.FC = () => {
+export const TheProblemSection = () => {
   return (
     <section
       className="relative w-full overflow-hidden"

@@ -1,11 +1,7 @@
-'use client';
-
-import React from 'react';
-
-import BlogDetailContent, { BlogArticleSection } from '@/components/blog-detail/blog-detail-content';
-import BlogDetailRelated, { RelatedBlogItem } from '@/components/blog-detail/blog-detail-related';
-import { TOCItem } from '@/components/blog-detail/blog-detail-toc';
-import BlogDetailHeroSection, { BlogDetailHeroProps } from '@/components/blog-detail/hero-section';
+import BlogDetailContent, { type BlogArticleSection } from '@/components/blog-detail/blog-detail-content';
+import BlogDetailRelated, { type RelatedBlogItem } from '@/components/blog-detail/blog-detail-related';
+import type { TOCItem } from '@/components/blog-detail/blog-detail-toc';
+import BlogDetailHeroSection, { type BlogDetailHeroProps } from '@/components/blog-detail/hero-section';
 
 export interface BlogDetailPageProps {
   heroProps?: BlogDetailHeroProps;
@@ -14,12 +10,12 @@ export interface BlogDetailPageProps {
   relatedBlogs?: RelatedBlogItem[];
 }
 
-export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({
+export const BlogDetailPage = ({
   heroProps,
   sections,
   topics,
   relatedBlogs,
-}) => {
+}: BlogDetailPageProps) => {
   return (
     <div className="w-full bg-white flex flex-col">
       {/* Blog Detail Hero Section */}

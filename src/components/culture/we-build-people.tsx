@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
-export const WeBuildPeopleSection: React.FC = () => {
+export const WeBuildPeopleSection = () => {
   return (
     <section className="relative w-full bg-[#F4F6F9] pt-[40px] md:pt-[60px] lg:pt-[80px] pb-[80px] sm:pb-[100px] lg:pb-[140px] px-[20px] md:px-[40px] lg:px-[60px] overflow-visible">
       {/* 

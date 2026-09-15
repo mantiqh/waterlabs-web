@@ -7,15 +7,78 @@ export const caseStudySchema = defineType({
   title: 'Case Study',
   type: 'document',
   groups: [
-    { name: 'hero', title: '01 · Hero & Header' },
-    { name: 'client', title: '02 · The Client' },
-    { name: 'content', title: '03 · Challenge & Solution' },
-    { name: 'results', title: '04 · Results & Outcomes' },
-    { name: 'related', title: '05 · Related Cases' },
-    { name: 'cta', title: '06 · CTA Section' },
+    { name: 'card', title: '01 · Listing Card (Tabs Section)' },
+    { name: 'hero', title: '02 · Hero & Header' },
+    { name: 'client', title: '03 · The Client' },
+    { name: 'content', title: '04 · Challenge & Solution' },
+    { name: 'results', title: '05 · Results & Outcomes' },
+    { name: 'related', title: '06 · Related Cases' },
+    { name: 'cta', title: '07 · CTA Section' },
   ],
   fields: [
-    // 01 · HERO & HEADER
+    // 01 · LISTING CARD (TABS SECTION)
+    defineField({
+      name: 'cardCategory',
+      title: 'Category Tab',
+      type: 'string',
+      group: 'card',
+      description:
+        'Category for tab filtering on /case-studies (e.g. Features, Use Cases, Company News, Case Studies)',
+      options: {
+        list: [
+          { title: 'Features', value: 'Features' },
+          { title: 'Use Cases', value: 'Use Cases' },
+          { title: 'Company News', value: 'Company News' },
+          { title: 'Case Studies', value: 'Case Studies' },
+        ],
+      },
+      initialValue: 'Features',
+    }),
+    defineField({
+      name: 'cardTag',
+      title: 'Eyebrow Tag (with blue dot)',
+      type: 'string',
+      group: 'card',
+      description:
+        'Tag shown beside the blue dot on the listing card (e.g. Rural Health System, Enterprise RCM, Multi-site Network)',
+      initialValue: 'Rural Health System',
+    }),
+    defineField({
+      name: 'cardStat',
+      title: 'Stat Headline',
+      type: 'string',
+      group: 'card',
+      description:
+        'Main prominent stat/metric headline on the listing card (e.g. "5 to 10 days → under 24 hours", "2 to 4 days → same day", "60 people → 4")',
+    }),
+    defineField({
+      name: 'cardSubtitle',
+      title: 'Card Subtitle',
+      type: 'string',
+      group: 'card',
+      description:
+        'Descriptive subtitle below the stat on the card (e.g. "13 Clinical Specialties", "7 Coding Disciplines", "Patient Intake Automation")',
+    }),
+    defineField({
+      name: 'desktopImage',
+      title: 'Card Thumbnail Image (Desktop)',
+      type: 'image',
+      group: 'card',
+      description:
+        'Image displayed on desktop in the /case-studies card (227x174 aspect ratio recommended)',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'mobileImage',
+      title: 'Card Thumbnail Image (Mobile - Optional)',
+      type: 'image',
+      group: 'card',
+      description:
+        'Optional custom image displayed on mobile screens on /case-studies cards (defaults to desktop image if omitted)',
+      options: { hotspot: true },
+    }),
+
+    // 02 · HERO & HEADER
     defineField({
       name: 'title',
       title: 'Title (H1)',
@@ -303,22 +366,29 @@ export const caseStudySchema = defineType({
       name: 'order',
       title: 'Sort Order',
       type: 'number',
-      description: 'Integer to order case studies (e.g. 1, 2, 3...)',
+      group: 'card',
+      description: 'Integer to order case studies in the tabs grid (e.g. 1, 2, 3...)',
       initialValue: 1,
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'categoryTag',
-      media: 'heroImage',
+      cardStat: 'cardStat',
+      cardTag: 'cardTag',
+      categoryTag: 'categoryTag',
+      media: 'desktopImage',
+      heroMedia: 'heroImage',
       slug: 'slug.current',
     },
-    prepare({ title, subtitle, media, slug }) {
+    prepare({ title, cardStat, cardTag, categoryTag, media, heroMedia, slug }) {
+      const subtitle = cardStat
+        ? `${cardTag ? `${cardTag} · ` : ''}${cardStat}`
+        : categoryTag || (slug ? `/case-study/${slug}` : 'Draft Case Study');
       return {
         title: title || 'Untitled Case Study',
-        subtitle: subtitle || (slug ? `/case-study/${slug}` : 'Draft Case Study'),
-        media,
+        subtitle,
+        media: media || heroMedia,
       };
     },
   },

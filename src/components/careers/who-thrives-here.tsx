@@ -1,10 +1,7 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
-export const WhoThrivesHereSection: React.FC = () => {
+export const WhoThrivesHereSection = () => {
   return (
     <section className="relative w-full bg-gradient-to-b from-[#F4F6F9] from-50% to-[#F4F6F9] lg:to-white to-50% overflow-hidden p-0 m-0">
       {/* 

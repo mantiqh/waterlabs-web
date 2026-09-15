@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
-export const ThePromiseSection: React.FC = () => {
+export const ThePromiseSection = () => {
   return (
     <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#0F68D6] from-50% to-[#0F68D6] to-50%">
       {/* 

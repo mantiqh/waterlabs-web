@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import CertificationsSection from './certifications';
 import DataSovereigntySection from './data-sovereignty';
@@ -8,7 +8,7 @@ import OurOwnCloudSection from './our-own-cloud';
 import SecurityAndComplianceSection from './security-and-compliance';
 import TopicIndicator, { topics } from './topic-indicator';
 
-export const InteractiveSecuritySections: React.FC = () => {
+export const InteractiveSecuritySections = () => {
   const [activeTopic, setActiveTopic] = useState<string>('data-sovereignty');
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [isDesktopSticky, setIsDesktopSticky] = useState<boolean>(false);

@@ -1,9 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-export const OurOwnCloudSection: React.FC = () => {
+export const OurOwnCloudSection = () => {
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 

@@ -1,12 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const ContactUsCTASection: React.FC = () => {
+export const ContactUsCTASection = () => {
   return (
     <section className="relative w-full bg-gradient-to-b from-ghost-white from-50% to-[#111111] to-50% overflow-hidden">
 

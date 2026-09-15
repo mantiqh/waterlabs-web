@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { type ChangeEvent, type FormEvent, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const ContactUsContactForm: React.FC = () => {
+export const ContactUsContactForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -15,11 +15,11 @@ export const ContactUsContactForm: React.FC = () => {
   });
   const [agreed, setAgreed] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     // Form submission logic would go here
     console.log('Form submitted:', formData, agreed);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const paragraphsData = [
   {
@@ -20,7 +20,7 @@ const paragraphsData = [
   },
 ];
 
-export const WhyWeStartedWaterlabsSection: React.FC = () => {
+export const WhyWeStartedWaterlabsSection = () => {
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);

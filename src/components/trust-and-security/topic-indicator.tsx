@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface TopicItem {
   id: string;
@@ -20,14 +20,14 @@ interface TopicIndicatorProps {
   isSticky?: boolean;
 }
 
-export const TopicIndicator: React.FC<TopicIndicatorProps> = ({
+export const TopicIndicator = ({
   activeTopic,
   onSelectTopic,
   isSticky = false,
-}) => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
+}: TopicIndicatorProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (containerRef.current) {
       const activeButton = containerRef.current.querySelector(
         `[data-topic-id="${activeTopic}"]`

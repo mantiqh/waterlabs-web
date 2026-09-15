@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React from 'react';
+import { useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 
@@ -29,9 +29,9 @@ const statsData = [
   },
 ];
 
-const FeaturesSection: React.FC = () => {
-  const statsScrollRef = React.useRef<HTMLDivElement>(null);
-  const [activeStatIndex, setActiveStatIndex] = React.useState(0);
+const FeaturesSection = () => {
+  const statsScrollRef = useRef<HTMLDivElement>(null);
+  const [activeStatIndex, setActiveStatIndex] = useState(0);
 
   const handleStatsScroll = () => {
     const container = statsScrollRef.current;

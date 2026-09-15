@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
-const EligibilitySection: React.FC = () => {
+const EligibilitySection = () => {
   return (
     <section className="relative w-full bg-white">
       {/* 

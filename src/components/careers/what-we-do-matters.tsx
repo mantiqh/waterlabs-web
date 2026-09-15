@@ -1,9 +1,6 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
-export const WhatWeDoMattersSection: React.FC = () => {
+export const WhatWeDoMattersSection = () => {
   return (
     <section className="relative w-full bg-gradient-to-b from-[#B8B1A5] from-50% to-[#F4F6F9] to-50% overflow-hidden">
       {/* 

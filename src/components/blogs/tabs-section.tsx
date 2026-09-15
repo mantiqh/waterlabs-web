@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useMemo, useRef, useState } from 'react';
+import { type ReactNode, useMemo, useRef, useState } from 'react';
 
 import { ChevronRight } from '@/components/CTA';
 import type { BlogsPageData, SanityBlogArticle } from '@/types/blogs';
@@ -12,7 +12,7 @@ interface BlogArticle {
   category: string;
   tag: string;
   subTag: string;
-  title: React.ReactNode;
+  title: ReactNode;
   rawTitle: string;
   slug: string;
   desktopImage: string;
@@ -107,11 +107,11 @@ const BLOG_ARTICLES: BlogArticle[] = [
   },
 ];
 
-export const BlogsTabsSection: React.FC<BlogsTabsSectionProps> = ({
+export const BlogsTabsSection = ({
   initialArticles,
   categories,
   settings,
-}) => {
+}: BlogsTabsSectionProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);

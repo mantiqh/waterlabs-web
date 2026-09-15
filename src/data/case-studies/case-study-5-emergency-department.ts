@@ -10,6 +10,13 @@ export const caseStudy5: CaseStudy = {
   subtitle: 'A high-volume ED in which every discharge produced physician, nursing, and ancillary documentation that had to be reconciled before a claim could move.',
   heroImage: '/images/case-study/case-study-5-hospital/Frame%202147226957.png',
   heroImageAlt: 'Hospital emergency department command center and autonomous coding workflow with Waterlabs',
+  cardCategory: 'Case Studies',
+  cardTag: 'Hospital Emergency Department',
+  cardStat: '90% of coding volume handled autonomously',
+  cardSubtitle: 'High-Volume Acute Care',
+  desktopImage: '/images/case-study-main-page/tabs/img_placeholder_05.png',
+  mobileImage: '/images/case-study-main-page/tabs/img_placeholder_05_mobile (1).png',
+  order: 5,
   tags: ['Hospital Emergency Department', 'Emergency Medicine', 'Autonomous Coding', 'CurieCode', 'HIMER AI OS'],
   clientSummary:
     'A high-volume hospital emergency department requiring full encounter coding at discharge. Every visit generates physician notes, nursing documentation, and ancillary records that must be read and reconciled before assigning diagnosis and procedure codes.',

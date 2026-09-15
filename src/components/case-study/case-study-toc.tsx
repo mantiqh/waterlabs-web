@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface TOCItem {
   id: string;
@@ -16,19 +16,19 @@ export const CASE_STUDY_TOPICS: TOCItem[] = [
   { id: 'the-bottom-line', label: 'The Bottom Line' },
 ];
 
-interface CaseStudyTOCProps {
+export interface CaseStudyTOCProps {
   activeTopic: string;
   onSelectTopic: (id: string) => void;
   topics?: TOCItem[];
   isSticky?: boolean;
 }
 
-export const CaseStudyTOC: React.FC<CaseStudyTOCProps> = ({
+export const CaseStudyTOC = ({
   activeTopic,
   onSelectTopic,
   topics = CASE_STUDY_TOPICS,
   isSticky = false,
-}) => {
+}: CaseStudyTOCProps) => {
   const mobileContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll the active topic into view on mobile

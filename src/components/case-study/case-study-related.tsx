@@ -1,8 +1,5 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
@@ -38,15 +35,15 @@ const DEFAULT_RELATED_CASES: RelatedCaseItem[] = [
   },
 ];
 
-interface CaseStudyRelatedProps {
+export interface CaseStudyRelatedProps {
   heading?: string;
   relatedCases?: RelatedCaseItem[];
 }
 
-export const CaseStudyRelated: React.FC<CaseStudyRelatedProps> = ({
+export const CaseStudyRelated = ({
   heading = 'Related Cases',
   relatedCases = DEFAULT_RELATED_CASES,
-}) => {
+}: CaseStudyRelatedProps) => {
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50%">
       {/* 

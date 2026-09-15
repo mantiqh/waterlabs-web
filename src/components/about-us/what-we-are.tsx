@@ -1,8 +1,4 @@
-'use client';
-
-import React from 'react';
-
-export const WhatWeAreSection: React.FC = () => {
+export const WhatWeAreSection = () => {
   return (
     <section
       id="what-we-are"

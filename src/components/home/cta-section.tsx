@@ -1,10 +1,6 @@
-'use client';
-
-import React from 'react';
-
 import { CTA } from '@/components/CTA';
 
-export const CTASection: React.FC = () => {
+export const CTASection = () => {
   return (
     <section className="relative w-full bg-white overflow-hidden">
       {/* 
