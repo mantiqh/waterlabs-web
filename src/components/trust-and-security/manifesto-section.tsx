@@ -1,8 +1,4 @@
-'use client';
-
-import React from 'react';
-
-export const ManifestoSection: React.FC = () => {
+export const ManifestoSection = () => {
   return (
     <section className="relative w-full bg-[#9A84E3] overflow-hidden p-0 m-0">
       {/* 

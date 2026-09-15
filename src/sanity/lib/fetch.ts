@@ -1,5 +1,3 @@
-import 'server-only'
-
 import { draftMode } from 'next/headers'
 import type { QueryParams } from 'next-sanity'
 
@@ -16,7 +14,13 @@ export async function sanityFetch<QueryResponse>({
   tags?: string[]
   revalidate?: number | false
 }) {
-  const isDraftMode = (await draftMode()).isEnabled
+  let isDraftMode = false;
+  try {
+    isDraftMode = (await draftMode()).isEnabled;
+  } catch {
+    // draftMode was called outside a request scope (e.g. during generateStaticParams / build)
+    isDraftMode = false;
+  }
   if (isDraftMode && !process.env.SANITY_API_READ_TOKEN) {
     throw new Error(
       'The `SANITY_API_READ_TOKEN` environment variable is required.'

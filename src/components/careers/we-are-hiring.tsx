@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const hiringRoles = [
   {
@@ -48,7 +48,7 @@ const hiringRoles = [
 
 const TOTAL_DOTS = 3;
 
-export const WeAreHiringSection: React.FC = () => {
+export const WeAreHiringSection = () => {
   const mobileScrollRef = useRef<HTMLDivElement>(null);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
 

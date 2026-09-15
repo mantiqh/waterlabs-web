@@ -64,6 +64,24 @@ export interface CaseStudy {
   relatedCasesHeading?: string;
   relatedCases?: CaseStudyRelated[];
   cta?: CaseStudyCTAData;
+  cardCategory?: 'Features' | 'Use Cases' | 'Company News' | 'Case Studies' | string;
+  cardTag?: string;
+  cardStat?: string;
+  cardSubtitle?: string;
+  desktopImage?: string;
+  mobileImage?: string;
   order?: number;
+}
+
+export interface CaseStudiesPageData {
+  categories?: string[];
+  searchPlaceholder?: string;
+  filterByLabel?: string;
+  readStoryButtonText?: string;
+}
+
+export interface CaseStudiesPageProps {
+  caseStudies?: CaseStudy[];
+  pageSettings?: CaseStudiesPageData | null;
 }
 

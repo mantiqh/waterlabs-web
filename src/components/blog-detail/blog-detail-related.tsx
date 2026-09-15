@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 
@@ -38,13 +38,13 @@ export const DEFAULT_RELATED_BLOGS: RelatedBlogItem[] = [
   },
 ];
 
-interface BlogDetailRelatedProps {
+export interface BlogDetailRelatedProps {
   relatedBlogs?: RelatedBlogItem[];
 }
 
-export const BlogDetailRelated: React.FC<BlogDetailRelatedProps> = ({
+export const BlogDetailRelated = ({
   relatedBlogs = DEFAULT_RELATED_BLOGS,
-}) => {
+}: BlogDetailRelatedProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 

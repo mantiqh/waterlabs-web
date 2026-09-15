@@ -1,11 +1,8 @@
-'use client';
-
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const SolutionsCTASection: React.FC = () => {
+export const SolutionsCTASection = () => {
   return (
     <section
       className="relative w-full overflow-hidden"

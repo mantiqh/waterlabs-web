@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { CaseStudy } from '@/types/case-study';
+import type { CaseStudy } from '@/types/case-study';
 
 import CaseStudyTOC, { CASE_STUDY_TOPICS } from './case-study-toc';
 
@@ -10,47 +10,8 @@ interface CaseStudyContentProps {
   caseStudy: CaseStudy;
 }
 
-export const renderFormattedText = (text: string) => {
-  if (!text) return null;
-  // If markdown **bold** is present, parse it
-  if (text.includes('**')) {
-    const parts = text.split(/(\*\*[\s\S]*?\*\*)/g);
-    return parts.map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return (
-          <strong key={i} className="font-bold text-[#111111]">
-            {part.slice(2, -2)}
-          </strong>
-        );
-      }
-      return part;
-    });
-  }
-
-  // Fallback: If starts with keyword (e.g. Operationally:, Financially:, Strategically:)
-  const keywordMatch = text.match(/^(Operationally[,:]?|Financially[,:]?|Strategically[,:]?)(.*)$/s);
-  if (keywordMatch) {
-    return (
-      <>
-        <strong className="font-bold text-[#111111]">{keywordMatch[1]}</strong>
-        {keywordMatch[2]}
-      </>
-    );
-  }
-
-  // Fallback: If starts with a colon prefix (e.g. "Daily claim surveillance: ")
-  const colonMatch = text.match(/^([^:\n]+:\s*)(.*)$/s);
-  if (colonMatch && colonMatch[1].length < 40) {
-    return (
-      <>
-        <strong className="font-bold text-[#111111]">{colonMatch[1]}</strong>
-        {colonMatch[2]}
-      </>
-    );
-  }
-
-  return text;
-};
+import { renderFormattedText } from '@/lib/format-text';
+export { renderFormattedText };
 
 const renderResultsDetailParagraph = (text: string) => {
   if (text.includes('**')) {
@@ -123,7 +84,7 @@ export const renderFormattedParagraphs = (content?: string) => {
   );
 };
 
-export const CaseStudyContent: React.FC<CaseStudyContentProps> = ({ caseStudy }) => {
+export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
   const [activeTopic, setActiveTopic] = useState<string>(CASE_STUDY_TOPICS[0].id);
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const sentinelRef = useRef<HTMLDivElement>(null);

@@ -1,12 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const CareersCTASection: React.FC = () => {
+export const CareersCTASection = () => {
   return (
     <section className="relative w-full overflow-hidden bg-white">
       {/* 

@@ -1,13 +1,10 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 
-export const SolutionsHeroSection: React.FC = () => {
+export const SolutionsHeroSection = () => {
   return (
     <section className="relative w-full bg-white overflow-hidden">
       {/*

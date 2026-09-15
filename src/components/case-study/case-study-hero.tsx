@@ -1,18 +1,14 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
-import { CaseStudy } from '@/types/case-study';
-
-import { renderFormattedText } from './case-study-content';
+import { renderFormattedText } from '@/lib/format-text';
+import type { CaseStudy } from '@/types/case-study';
 
 interface CaseStudyHeroProps {
   caseStudy: CaseStudy;
 }
 
-export const CaseStudyHero: React.FC<CaseStudyHeroProps> = ({ caseStudy }) => {
+export const CaseStudyHero = ({ caseStudy }: CaseStudyHeroProps) => {
   const { categoryTag, title, titleHighlight, subtitle, heroImage, heroImageAlt } = caseStudy;
 
   return (

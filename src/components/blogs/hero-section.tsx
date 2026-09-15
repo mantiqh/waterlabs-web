@@ -1,13 +1,10 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 
-export const BlogsHeroSection: React.FC = () => {
+export const BlogsHeroSection = () => {
   return (
     <section className="relative w-full bg-white rounded-bl-[30px] lg:rounded-bl-[60px] overflow-hidden pt-[20px] lg:pt-[40px] px-[20px] md:px-[40px] lg:px-[60px] pb-[40px] md:pb-[60px] lg:pb-[80px]">
       {/* Top Navbar */}

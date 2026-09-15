@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export interface TOCItem {
   id: string;
@@ -20,19 +20,19 @@ export const BLOG_DETAIL_TOPICS: TOCItem[] = [
   { id: 'the-bottom-line-on-agentic-rcm', label: 'The bottom line on agentic RCM' },
 ];
 
-interface BlogDetailTOCProps {
+export interface BlogDetailTOCProps {
   activeTopic: string;
   onSelectTopic: (id: string) => void;
   topics?: TOCItem[];
   isSticky?: boolean;
 }
 
-export const BlogDetailTOC: React.FC<BlogDetailTOCProps> = ({
+export const BlogDetailTOC = ({
   activeTopic,
   onSelectTopic,
   topics = BLOG_DETAIL_TOPICS,
   isSticky = false,
-}) => {
+}: BlogDetailTOCProps) => {
   const mobileContainerRef = useRef<HTMLDivElement>(null);
   const desktopContainerRef = useRef<HTMLDivElement>(null);
 

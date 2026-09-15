@@ -1,13 +1,9 @@
-'use client';
-
-import React from 'react';
-
 import ContactUsContactForm from './contact-form';
 import ContactUsCTASection from './cta-section';
 import ContactUsHeroSection from './hero-section';
 import ContactUsOperatingInfo from './operating-info';
 
-export const ContactUsPage: React.FC = () => {
+export const ContactUsPage = () => {
   return (
     <main className="w-full flex flex-col">
       <ContactUsHeroSection />

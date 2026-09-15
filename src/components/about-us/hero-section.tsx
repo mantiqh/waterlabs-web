@@ -1,10 +1,6 @@
-'use client';
-
-import React from 'react';
-
 import Navbar from '@/components/common/navbar';
 
-export const HeroSection: React.FC = () => {
+export const HeroSection = () => {
   return (
     <section className="w-full bg-white overflow-hidden">
       {/* 

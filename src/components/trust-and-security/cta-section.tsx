@@ -1,12 +1,9 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const TrustCTASection: React.FC = () => {
+export const TrustCTASection = () => {
   return (
     <section className="relative w-full bg-[#DBE2F0] overflow-hidden p-0 m-0">
       {/* 

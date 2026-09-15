@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useCallback, useRef, useState } from 'react';
-import { set, StringInputProps, unset } from 'sanity';
+import { type KeyboardEvent, useCallback, useRef, useState } from 'react';
+import { set, type StringInputProps, unset } from 'sanity';
 
 function escapeRegex(string: string) {
   return string.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&');
@@ -70,7 +70,7 @@ export function BoldTextInput(props: StringInputProps) {
 
   // Handle Ctrl+B / Cmd+B keyboard shortcut
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    (e: KeyboardEvent<HTMLTextAreaElement>) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'b' || e.key === 'B')) {
         e.preventDefault();
         handleToggleBold();

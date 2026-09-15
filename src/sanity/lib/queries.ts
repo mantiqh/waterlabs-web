@@ -108,8 +108,21 @@ export const allCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(order as
       "slug": link
     }
   },
+  cardCategory,
+  cardTag,
+  cardStat,
+  cardSubtitle,
+  "desktopImage": desktopImage.asset->url,
+  "mobileImage": mobileImage.asset->url,
   cta,
   order
+}`;
+
+export const caseStudiesPageQuery = groq`*[_type == "caseStudiesPage"][0] {
+  categories,
+  searchPlaceholder,
+  filterByLabel,
+  readStoryButtonText
 }`;
 
 export const caseStudySlugsQuery = groq`*[_type == "caseStudy" && defined(slug.current)] {

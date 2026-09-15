@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 const ChevronRight = ({ className }: { className?: string }) => (
   <svg
@@ -46,9 +46,9 @@ interface WhereYouWouldFitSectionProps {
   data?: CareersOpenRolesData | null;
 }
 
-export const WhereYouWouldFitSection: React.FC<WhereYouWouldFitSectionProps> = ({
+export const WhereYouWouldFitSection = ({
   data,
-}) => {
+}: WhereYouWouldFitSectionProps) => {
   const [activeCategory, setActiveCategory] = useState('All Roles');
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

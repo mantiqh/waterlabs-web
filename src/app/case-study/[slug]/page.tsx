@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import React from 'react';
 
 import CaseStudyContent from '@/components/case-study/case-study-content';
 import CaseStudyCTA from '@/components/case-study/case-study-cta';

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import React from 'react';
 
 import BlogsPage from '@/components/blogs/page';
 import { fetchAllBlogArticles, fetchBlogsPageSettings } from '@/sanity/lib/blogs';

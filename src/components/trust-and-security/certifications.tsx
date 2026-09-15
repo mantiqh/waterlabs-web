@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface ComplianceItem {
   id: string;
@@ -48,7 +48,7 @@ const complianceList: ComplianceItem[] = [
   },
 ];
 
-export const CertificationsSection: React.FC = () => {
+export const CertificationsSection = () => {
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 

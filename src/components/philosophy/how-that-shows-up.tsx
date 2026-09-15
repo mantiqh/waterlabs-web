@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const productStatements = [
   {
@@ -38,7 +38,7 @@ const productStatements = [
   },
 ];
 
-export const HowThatShowsUpSection: React.FC = () => {
+export const HowThatShowsUpSection = () => {
   const [activeDesktopIndex, setActiveDesktopIndex] = useState(0);
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
 

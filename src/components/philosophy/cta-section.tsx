@@ -1,10 +1,6 @@
-'use client';
-
-import React from 'react';
-
 import { CTA } from '@/components/CTA';
 
-export const PhilosophyCTASection: React.FC = () => {
+export const PhilosophyCTASection = () => {
   return (
     <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#F4F6F9] from-50% to-[#111111] to-50%">
       {/* 

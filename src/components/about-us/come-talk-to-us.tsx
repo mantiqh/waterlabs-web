@@ -1,11 +1,8 @@
-'use client';
-
 import Link from 'next/link';
-import React from 'react';
 
 import { ChevronRight } from '@/components/CTA';
 
-export const ComeTalkToUsSection: React.FC = () => {
+export const ComeTalkToUsSection = () => {
   return (
     <section className="w-full bg-white pr-[20px] md:pr-[40px] lg:pr-[60px] min-[1440px]:pr-[calc((100vw-1320px)/2)] overflow-hidden">
       {/* 

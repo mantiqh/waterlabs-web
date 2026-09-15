@@ -10,6 +10,13 @@ export const caseStudy6: CaseStudy = {
   subtitle: 'Scheduled visits across multiple specialties, each having its own contracted fee schedule, and no practical way to produce an estimate by hand.',
   heroImage: '/images/case-study/case-study-6-multi-specialty/Frame%202147226958.png',
   heroImageAlt: 'Multi-specialty practice patient access and automated estimation team with Waterlabs',
+  cardCategory: 'Case Studies',
+  cardTag: 'Multi-Specialty Practice',
+  cardStat: 'Zero manual benefit lookups per estimate',
+  cardSubtitle: 'Cost Estimation at Booking',
+  desktopImage: '/images/case-study-main-page/tabs/img_placeholder_06.png',
+  mobileImage: '/images/case-study-main-page/tabs/img_placeholder_06_mobile (1).png',
+  order: 6,
   tags: ['Multi-Specialty Practice', 'Patient Access', 'Cost Estimation', 'HIMER AI OS'],
   clientSummary:
     'A multi-specialty outpatient practice scheduling visits across several specialties, each billing against its own contracted fee schedule. Producing a meaningful estimate requires eligibility, accumulator status, and specialty-specific pricing, all of which must be current at the time of booking.',

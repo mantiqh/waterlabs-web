@@ -1,7 +1,12 @@
 import { getAllCaseStudies, getCaseStudyBySlug, getRelatedCaseStudies } from '@/data/case-studies';
 import { sanityFetch } from '@/sanity/lib/fetch';
-import { allCaseStudiesQuery, caseStudyBySlugQuery, caseStudySlugsQuery } from '@/sanity/lib/queries';
-import { CaseStudy } from '@/types/case-study';
+import {
+  allCaseStudiesQuery,
+  caseStudiesPageQuery,
+  caseStudyBySlugQuery,
+  caseStudySlugsQuery,
+} from '@/sanity/lib/queries';
+import { CaseStudiesPageData,CaseStudy } from '@/types/case-study';
 
 interface SanityCaseStudyDoc {
   _id?: string;
@@ -36,6 +41,12 @@ interface SanityCaseStudyDoc {
     label: string;
     change?: string;
   }[];
+  cardCategory?: string;
+  cardTag?: string;
+  cardStat?: string;
+  cardSubtitle?: string;
+  desktopImage?: string;
+  mobileImage?: string;
   cta?: {
     tagText?: string;
     headline?: string;
@@ -107,6 +118,12 @@ function mapSanityToCaseStudy(doc: SanityCaseStudyDoc): CaseStudy {
       buttonText: 'Get a Demo',
       buttonHref: '/contact-us',
     },
+    cardCategory: doc.cardCategory,
+    cardTag: doc.cardTag,
+    cardStat: doc.cardStat,
+    cardSubtitle: doc.cardSubtitle,
+    desktopImage: doc.desktopImage,
+    mobileImage: doc.mobileImage,
     order: doc.order,
   };
 }
@@ -206,4 +223,25 @@ export async function fetchAllCaseStudySlugs(): Promise<{ slug: string }[]> {
   }
 
   return Array.from(slugSet).map((slug) => ({ slug }));
+}
+
+/**
+ * Fetches case studies page configuration settings from Sanity CMS.
+ */
+export async function fetchCaseStudiesPageSettings(): Promise<CaseStudiesPageData | null> {
+  try {
+    const settings = await sanityFetch<CaseStudiesPageData | null>({
+      query: caseStudiesPageQuery,
+      tags: ['caseStudiesPage'],
+      revalidate: 60,
+    });
+
+    if (settings) {
+      return settings;
+    }
+  } catch (error) {
+    console.warn('[Sanity] Failed to fetch case studies page settings:', error);
+  }
+
+  return null;
 }

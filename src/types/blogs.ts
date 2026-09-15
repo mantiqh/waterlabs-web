@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 export interface SanityBlogDetailSection {
   _key?: string;
@@ -45,7 +45,7 @@ export interface BlogArticleItem {
   category: string;
   tag: string;
   subTag: string;
-  title: React.ReactNode;
+  title: ReactNode;
   rawTitle: string;
   slug: string;
   desktopImage: string;

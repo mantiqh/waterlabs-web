@@ -1,20 +1,18 @@
-'use client';
-
-import React from 'react';
+import type { ReactNode } from 'react';
 
 import { CTA } from '@/components/CTA';
 
 interface LocationCardProps {
   tag: string;
   title: string;
-  address: React.ReactNode;
+  address: ReactNode;
   email: string;
   hours: string;
   buttonText: string;
   href: string;
 }
 
-const LocationCard: React.FC<LocationCardProps> = ({
+const LocationCard = ({
   tag,
   title,
   address,
@@ -22,7 +20,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
   hours,
   buttonText,
   href,
-}) => {
+}: LocationCardProps) => {
   return (
     <div className="flex flex-col items-start gap-[8px] lg:gap-[14px] pb-[12px] lg:pb-0 border-b border-[#D7DCE2] lg:border-b-0 w-full lg:flex-1 lg:max-w-[418.67px] min-w-0">
       {/* Text - Tag */}
@@ -79,7 +77,7 @@ const LocationCard: React.FC<LocationCardProps> = ({
   );
 };
 
-export const ContactUsOperatingInfo: React.FC = () => {
+export const ContactUsOperatingInfo = () => {
   return (
     <section className="relative w-full bg-gradient-to-b from-[#8EBFE7] from-50% to-ghost-white to-50% overflow-hidden">
       {/* 

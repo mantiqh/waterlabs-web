@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const ChevronRight = ({ className }: { className?: string }) => (
   <svg
@@ -67,7 +67,7 @@ const convictionsData = [
   },
 ];
 
-export const WhatWeBelieveSection: React.FC = () => {
+export const WhatWeBelieveSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const isFirst = currentSlide === 0;

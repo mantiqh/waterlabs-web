@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import React from 'react';
 
 const marqueeItems = [
   { text: "No development fee", img: "/images/home/corousel-images/corousel-img-1.png" },
@@ -7,7 +6,7 @@ const marqueeItems = [
   { text: "Billing starts day 15", img: "/images/home/corousel-images/corousel-img-1.png" },
 ];
 
-export const CarouselSection: React.FC = () => {
+export const CarouselSection = () => {
   return (
     <section className="relative w-full bg-[#054FB9] lg:bg-[#2F70D1]">
       {/* 

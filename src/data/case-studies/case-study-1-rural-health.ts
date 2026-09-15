@@ -9,6 +9,13 @@ export const caseStudy1: CaseStudy = {
   subtitle: 'Hospitals and physician groups across the United States, running 13 specialties on a single revenue cycle.',
   heroImage: '/images/case-study/case-study-1-multi-state/Frame%202147226953.png',
   heroImageAlt: 'Rural health system command center monitoring claims with Waterlabs',
+  cardCategory: 'Features',
+  cardTag: 'Rural Health System',
+  cardStat: '5 to 10 days → under 24 hours',
+  cardSubtitle: '13 Clinical Specialties',
+  desktopImage: '/images/case-study-main-page/tabs/img_placeholder_01.png',
+  mobileImage: '/images/case-study-main-page/tabs/img_placeholder_01_mobile (1).png',
+  order: 1,
   tags: ['Rural Health System', 'Multi-specialty', 'Claim Release', 'HIMER AI OS'],
   clientSummary:
     'A large rural health system operates hospitals and physician groups across several states. Coding was not the issue; paperwork delayed claim submission for up to a week.',

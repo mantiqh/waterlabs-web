@@ -1,14 +1,10 @@
-'use client';
-
-import React from 'react';
-
 import type { BlogsPageProps } from '@/types/blogs';
 
 import BlogsCTASection from './cta-section';
 import BlogsHeroSection from './hero-section';
 import BlogsTabsSection from './tabs-section';
 
-export const BlogsPage: React.FC<BlogsPageProps> = ({ articles, pageSettings }) => {
+export const BlogsPage = ({ articles, pageSettings }: BlogsPageProps) => {
   return (
     <div className="w-full flex flex-col">
       <BlogsHeroSection />

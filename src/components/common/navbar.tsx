@@ -1,49 +1,75 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
-import { CTA } from '@/components/CTA';
+import { ChevronRight, CTA } from '@/components/CTA';
 
 interface NavSubItem {
   label: string;
   href: string;
 }
 
+interface NavItemColumn {
+  items: NavSubItem[];
+}
+
 interface NavItem {
   label: string;
   href?: string;
+  header?: string;
+  columns?: NavItemColumn[];
   children?: NavSubItem[];
 }
 
 const navItems: NavItem[] = [
   {
-    label: 'About Us',
+    label: 'About us',
     href: '/about-us',
+    header: 'About us',
     children: [
-      { label: 'About Us Overview', href: '/about-us' },
-      { label: 'Our Philosophy', href: '/philosophy' },
+      { label: 'Philosophy', href: '/philosophy' },
       { label: 'Careers', href: '/careers' },
     ],
   },
   {
     label: 'Products',
+    header: 'Products',
     children: [
-      { label: 'Himer', href: '/products/himer' },
+      { label: 'Himer AI OS', href: '/products/himer' },
       { label: 'Curiecode', href: '/products/curiecode' },
     ],
   },
   {
     label: 'Agentic RCM Solutions',
+    header: 'Agentic RCM Solutions',
+    columns: [
+      {
+        items: [
+          { label: 'Prior Authorization', href: '/solutions/prior-authorization' },
+          { label: 'Eligibility & Benefits Verification', href: '/solutions' },
+          { label: 'Denial Management', href: '/solutions/denial-management' },
+          { label: 'AR Follow-up', href: '/solutions/ar-follow-up' },
+        ],
+      },
+      {
+        items: [
+          { label: 'Charge Capture and Coding', href: '/solutions/charge-capture-and-coding' },
+          { label: 'Payment Posting', href: '/solutions/payment-posting' },
+          { label: 'Claim Submission and Scrubbing', href: '/solutions/claim-submission-and-scrubbing' },
+          { label: 'Patient Access and Registration', href: '/solutions/patient-access-and-registration' },
+        ],
+      },
+    ],
     children: [
       { label: 'Prior Authorization', href: '/solutions/prior-authorization' },
       { label: 'Eligibility & Benefits Verification', href: '/solutions' },
       { label: 'Denial Management', href: '/solutions/denial-management' },
       { label: 'AR Follow-up', href: '/solutions/ar-follow-up' },
-      { label: 'Charge capture and coding', href: '/solutions/charge-capture-and-coding' },
+      { label: 'Charge Capture and Coding', href: '/solutions/charge-capture-and-coding' },
       { label: 'Payment Posting', href: '/solutions/payment-posting' },
-      { label: 'Claim submission and scrubbing', href: '/solutions/claim-submission-and-scrubbing' },
-      { label: 'Denial Management', href: '/solutions/denial-management' },
+      { label: 'Claim Submission and Scrubbing', href: '/solutions/claim-submission-and-scrubbing' },
       { label: 'Patient Access and Registration', href: '/solutions/patient-access-and-registration' },
     ],
   },
@@ -52,10 +78,12 @@ const navItems: NavItem[] = [
   { label: 'Blogs', href: '/blogs' },
 ];
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
 
   const menuRef = useRef<HTMLDivElement>(null);
@@ -66,11 +94,13 @@ const Navbar: React.FC = () => {
       clearTimeout(timeoutRef.current);
     }
     setActiveDropdown(label);
+    setHoveredSubItem(null);
   };
 
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
+      setHoveredSubItem(null);
     }, 150);
   };
 
@@ -163,7 +193,7 @@ const Navbar: React.FC = () => {
                     <Link
                       href={item.href}
                       onClick={() => setActiveDropdown(null)}
-                      className={`group flex items-center gap-[4px] text-[13px] xl:text-[14px] 2xl:text-[15px] leading-[20px] transition-colors py-[8px] whitespace-nowrap ${
+                      className={`group flex items-center gap-[8px] text-[13px] xl:text-[14px] 2xl:text-[15px] leading-[20px] transition-colors py-[8px] whitespace-nowrap ${
                         isDropdownOpen
                           ? 'text-electric-blue'
                           : 'text-midnight-blue hover:text-electric-blue'
@@ -171,25 +201,13 @@ const Navbar: React.FC = () => {
                     >
                       <span>{item.label}</span>
                       {hasChildren && (
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                          className={`transition-transform duration-200 ${
+                        <ChevronRight
+                          className={`w-[8px] h-[12px] shrink-0 transition-transform duration-200 ${
                             isDropdownOpen
-                              ? 'rotate-180 text-electric-blue'
-                              : 'text-midnight-blue/60 group-hover:text-electric-blue'
+                              ? '-rotate-90 text-electric-blue'
+                              : 'rotate-90 text-midnight-blue/60 group-hover:text-electric-blue'
                           }`}
-                        >
-                          <path
-                            d="M2 3.5L5 6.5L8 3.5"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        />
                       )}
                     </Link>
                   ) : (
@@ -198,7 +216,7 @@ const Navbar: React.FC = () => {
                       onClick={() =>
                         setActiveDropdown(activeDropdown === item.label ? null : item.label)
                       }
-                      className={`group flex items-center gap-[4px] text-[13px] xl:text-[14px] 2xl:text-[15px] leading-[20px] transition-colors py-[8px] whitespace-nowrap cursor-pointer ${
+                      className={`group flex items-center gap-[8px] text-[13px] xl:text-[14px] 2xl:text-[15px] leading-[20px] transition-colors py-[8px] whitespace-nowrap cursor-pointer ${
                         isDropdownOpen
                           ? 'text-electric-blue'
                           : 'text-midnight-blue hover:text-electric-blue'
@@ -206,25 +224,13 @@ const Navbar: React.FC = () => {
                     >
                       <span>{item.label}</span>
                       {hasChildren && (
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                          className={`transition-transform duration-200 ${
+                        <ChevronRight
+                          className={`w-[8px] h-[12px] shrink-0 transition-transform duration-200 ${
                             isDropdownOpen
-                              ? 'rotate-180 text-electric-blue'
-                              : 'text-midnight-blue/60 group-hover:text-electric-blue'
+                              ? '-rotate-90 text-electric-blue'
+                              : 'rotate-90 text-midnight-blue/60 group-hover:text-electric-blue'
                           }`}
-                        >
-                          <path
-                            d="M2 3.5L5 6.5L8 3.5"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
+                        />
                       )}
                     </button>
                   )}
@@ -232,30 +238,119 @@ const Navbar: React.FC = () => {
                   {/* Dropdown Card */}
                   {hasChildren && item.children && (
                     <div
-                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-[20px] z-50 origin-top transition-all duration-200 ease-out ${
+                      className={`absolute top-full pt-[14px] z-50 origin-top transition-all duration-200 ease-out ${
+                        item.columns && item.columns.length > 1
+                          ? 'left-0 lg:left-[-120px] xl:left-0'
+                          : 'left-0'
+                      } ${
                         isDropdownOpen
                           ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto visible'
-                          : 'opacity-0 -translate-y-2 scale-[0.96] pointer-events-none invisible'
+                          : 'opacity-0 -translate-y-2 scale-[0.97] pointer-events-none invisible'
                       }`}
                     >
-                      <div
-                        className={`bg-white/70 backdrop-blur-[13.2px] border border-white/24 rounded-[20px] p-[6px] shadow-[0_16px_40px_rgba(4,40,73,0.1)] flex flex-col gap-[2px] [scrollbar-width:thin] [scrollbar-color:#CBD5E1_transparent] [&::-webkit-scrollbar]:w-[4px] [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#CBD5E1] [&::-webkit-scrollbar-thumb]:rounded-full ${
-                          item.children.length > 4
-                            ? 'w-[280px] xl:w-[310px] max-h-[calc(100vh-100px)] overflow-y-auto'
-                            : 'min-w-[190px] w-max'
-                        }`}
-                      >
-                        {item.children.map((subItem, subIdx) => (
-                          <Link
-                            key={`${subItem.label}-${subIdx}`}
-                            href={subItem.href}
-                            onClick={() => setActiveDropdown(null)}
-                            className="px-[14px] py-[8px] rounded-[12px] text-[13px] xl:text-[14px] text-midnight-blue hover:text-electric-blue hover:bg-white/60 transition-colors duration-150"
-                          >
-                            <span className="leading-[18px]">{subItem.label}</span>
-                          </Link>
-                        ))}
-                      </div>
+                      {item.columns && item.columns.length > 1 ? (
+                        /* 2-Column Dropdown (Agentic RCM Solutions: 746px x 284px) */
+                        <div
+                          className="w-[746px] max-w-[calc(100vw-32px)] bg-white/75 backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] border border-white/60 flex flex-col"
+                          onMouseLeave={() => setHoveredSubItem(null)}
+                        >
+                          {/* Header Frame 2147227094 */}
+                          <div className="flex flex-col items-start w-full">
+                            <span className="font-['Inter'] text-[12px] leading-[20px] tracking-[0.01em] text-[#7D8690]">
+                              {item.header || item.label}
+                            </span>
+                            <div className="w-full h-[1px] bg-[#7D8690] opacity-20 mt-[12px] mb-[12px]" />
+                          </div>
+
+                          {/* Columns Frame 2147227097 */}
+                          <div className="flex flex-row gap-[24px] items-start w-full">
+                            {item.columns.map((col, colIdx) => (
+                              <div key={colIdx} className="w-[337px] flex-1 flex flex-col gap-[8px]">
+                                {col.items.map((subItem, subIdx) => {
+                                  const allHrefs = item.children ? item.children.map((c) => c.href) : [];
+                                  const isFirst = colIdx === 0 && subIdx === 0;
+                                  const isActive = hoveredSubItem
+                                    ? hoveredSubItem === subItem.href
+                                    : allHrefs.includes(pathname)
+                                      ? pathname === subItem.href
+                                      : isFirst;
+
+                                  return (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      onMouseEnter={() => setHoveredSubItem(subItem.href)}
+                                      onClick={() => {
+                                        setActiveDropdown(null);
+                                        setHoveredSubItem(null);
+                                      }}
+                                      className={`h-[40px] flex flex-row items-center gap-[14px] py-[8px] font-['Inter'] text-[16px] leading-[24px] tracking-[0.01em] transition-colors duration-150 ${
+                                        isActive
+                                          ? 'text-[#0F68D6]'
+                                          : 'text-[#111111] hover:text-[#0F68D6]'
+                                      }`}
+                                    >
+                                      <span className="whitespace-nowrap">{subItem.label}</span>
+                                      {isActive && (
+                                        <ChevronRight className="w-[10px] h-[15px] shrink-0 text-[#0F68D6]" />
+                                      )}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        /* 1-Column Dropdown (About us / Products: 218px x 188px) */
+                        <div
+                          className="w-[218px] bg-white/55 backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] border border-white/60 flex flex-col"
+                          onMouseLeave={() => setHoveredSubItem(null)}
+                        >
+                          {/* Header Frame 2147227094 */}
+                          <div className="flex flex-col items-start w-full">
+                            <span className="font-['Inter'] text-[12px] leading-[20px] tracking-[0.01em] text-[#7D8690]">
+                              {item.header || item.label}
+                            </span>
+                            <div className="w-full h-[1px] bg-[#7D8690] opacity-20 mt-[12px] mb-[12px]" />
+                          </div>
+
+                          {/* Items Frame 2147227091 */}
+                          <div className="flex flex-col gap-[8px] w-full">
+                            {item.children.map((subItem, subIdx) => {
+                              const allHrefs = item.children ? item.children.map((c) => c.href) : [];
+                              const isFirst = subIdx === 0;
+                              const isActive = hoveredSubItem
+                                ? hoveredSubItem === subItem.href
+                                : allHrefs.includes(pathname)
+                                  ? pathname === subItem.href
+                                  : isFirst;
+
+                              return (
+                                <Link
+                                  key={subItem.href}
+                                  href={subItem.href}
+                                  onMouseEnter={() => setHoveredSubItem(subItem.href)}
+                                  onClick={() => {
+                                    setActiveDropdown(null);
+                                    setHoveredSubItem(null);
+                                  }}
+                                  className={`h-[40px] flex flex-row items-center gap-[12px] py-[8px] font-['Inter'] text-[16px] leading-[24px] tracking-[0.01em] transition-colors duration-150 ${
+                                    isActive
+                                      ? 'text-[#0F68D6]'
+                                      : 'text-[#111111] hover:text-[#0F68D6]'
+                                  }`}
+                                >
+                                  <span className="whitespace-nowrap">{subItem.label}</span>
+                                  {isActive && (
+                                    <ChevronRight className="w-[10px] h-[15px] shrink-0 text-[#0F68D6]" />
+                                  )}
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -372,23 +467,11 @@ const Navbar: React.FC = () => {
                       className="flex items-center justify-between w-full py-[8px] type-body-xxs text-midnight-blue hover:text-electric-blue transition-colors cursor-pointer text-left"
                     >
                       <span className="font-medium">{item.label}</span>
-                      <svg
-                        width="12"
-                        height="12"
-                        viewBox="0 0 10 10"
-                        fill="none"
-                        className={`transition-transform duration-300 ${
-                          isExpanded ? 'rotate-180 text-electric-blue' : 'text-midnight-blue/60'
+                      <ChevronRight
+                        className={`w-[8px] h-[12px] shrink-0 transition-transform duration-300 ${
+                          isExpanded ? '-rotate-90 text-electric-blue' : 'rotate-90 text-midnight-blue/60'
                         }`}
-                      >
-                        <path
-                          d="M2 3.5L5 6.5L8 3.5"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      />
                     </button>
 
                     {/* Accordion Sub-items */}
@@ -400,19 +483,29 @@ const Navbar: React.FC = () => {
                       }`}
                     >
                       <div className="min-h-0 flex flex-col gap-[2px] pl-[12px] border-l-2 border-[#0F68D6]/25 ml-[4px] pb-[8px]">
-                        {item.children.map((subItem, subIdx) => (
-                          <Link
-                            key={`${subItem.label}-${subIdx}`}
-                            href={subItem.href}
-                            onClick={() => {
-                              setIsOpen(false);
-                              setExpandedMobileItem(null);
-                            }}
-                            className="py-[6px] px-[8px] rounded-[10px] text-[13px] text-midnight-blue/80 hover:text-electric-blue hover:bg-white/60 transition-all duration-150"
-                          >
-                            {subItem.label}
-                          </Link>
-                        ))}
+                        {item.children.map((subItem, subIdx) => {
+                          const isCurrent = pathname === subItem.href;
+                          return (
+                            <Link
+                              key={`${subItem.label}-${subIdx}`}
+                              href={subItem.href}
+                              onClick={() => {
+                                setIsOpen(false);
+                                setExpandedMobileItem(null);
+                              }}
+                              className={`py-[8px] px-[10px] rounded-[10px] text-[14px] flex items-center justify-between transition-all duration-150 ${
+                                isCurrent
+                                  ? 'text-[#0F68D6] font-medium bg-white/40'
+                                  : 'text-midnight-blue/80 hover:text-[#0F68D6] hover:bg-white/60'
+                              }`}
+                            >
+                              <span>{subItem.label}</span>
+                              {isCurrent && (
+                                <ChevronRight className="w-[10px] h-[15px] shrink-0 text-[#0F68D6]" />
+                              )}
+                            </Link>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

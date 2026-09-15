@@ -10,6 +10,13 @@ export const caseStudy3: CaseStudy = {
   subtitle: 'Clinics across multiple locations, taking referrals by fax, email and patient portal.',
   heroImage: '/images/case-study/case-study-3-multi-site/Frame%202147226953%20(2).png',
   heroImageAlt: 'Physical therapy clinical team and automated intake workflow with Waterlabs',
+  cardCategory: 'Features',
+  cardTag: 'Multi-site Network',
+  cardStat: '60 people → 4',
+  cardSubtitle: 'Patient Intake Automation',
+  desktopImage: '/images/case-study-main-page/tabs/img_placeholder_03.png',
+  mobileImage: '/images/case-study-main-page/tabs/img_placeholder_03_mobile (1).png',
+  order: 3,
   tags: ['Multi-site Network', 'Patient Intake', 'Document Classification', 'HIMER AI OS'],
   clientSummary:
     'A multi-site physical therapy and outpatient rehabilitation practice received referrals by fax, email, and portal uploads in varying formats. Each referral required classification and manual data entry before processing.',

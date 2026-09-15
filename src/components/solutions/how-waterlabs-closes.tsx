@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface VerificationStep {
   title: string;
@@ -41,7 +41,7 @@ const stepOpacities = [1, 0.7, 0.6, 0.4, 0.13];
 
 const TOTAL_DOTS = 3;
 
-export const HowWaterlabsClosesSection: React.FC = () => {
+export const HowWaterlabsClosesSection = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);

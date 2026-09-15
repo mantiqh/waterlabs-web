@@ -1,12 +1,9 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 
-export const ContactUsHeroSection: React.FC = () => {
+export const ContactUsHeroSection = () => {
   return (
     <section className="relative w-full bg-white">
       {/* 

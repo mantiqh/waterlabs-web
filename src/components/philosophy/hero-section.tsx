@@ -1,11 +1,8 @@
-'use client';
-
 import Image from 'next/image';
-import React from 'react';
 
 import Navbar from '@/components/common/navbar';
 
-export const PhilosophyHeroSection: React.FC = () => {
+export const PhilosophyHeroSection = () => {
   return (
     <section className="relative w-full bg-[#111111] overflow-hidden">
       {/* 

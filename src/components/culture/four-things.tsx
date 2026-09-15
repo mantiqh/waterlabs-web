@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface PrincipleItem {
   id: string;
@@ -53,7 +53,7 @@ const fourThingsData: PrincipleItem[] = [
 
 const TOTAL_DOTS = 4;
 
-export const FourThingsSection: React.FC = () => {
+export const FourThingsSection = () => {
   const mobileScrollRef = useRef<HTMLDivElement>(null);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
 

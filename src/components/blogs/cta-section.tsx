@@ -1,11 +1,8 @@
-'use client';
-
 import Link from 'next/link';
-import React from 'react';
 
 import { CTA } from '@/components/CTA';
 
-export const BlogsCTASection: React.FC = () => {
+export const BlogsCTASection = () => {
   return (
     <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#F4F6F9] from-50% to-[#111111] to-50%">
       {/* 

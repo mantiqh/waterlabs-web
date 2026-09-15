@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import BlogDetailTOC, { BLOG_DETAIL_TOPICS, TOCItem } from './blog-detail-toc';
+import BlogDetailTOC, { BLOG_DETAIL_TOPICS, type TOCItem } from './blog-detail-toc';
 
 export interface BlogArticleSection {
   id: string;
@@ -107,35 +107,18 @@ export const DEFAULT_BLOG_SECTIONS: BlogArticleSection[] = [
   },
 ];
 
-export const renderFormattedText = (text: string) => {
-  if (!text) return null;
-  // If markdown **bold** is present, parse it
-  if (text.includes('**')) {
-    const parts = text.split(/(\*\*[\s\S]*?\*\*)/g);
-    return parts.map((part, i) => {
-      if (part.startsWith('**') && part.endsWith('**')) {
-        return (
-          <strong key={i} className="font-bold text-[#111111]">
-            {part.slice(2, -2)}
-          </strong>
-        );
-      }
-      return part;
-    });
-  }
-
-  return text;
-};
+import { renderFormattedText } from '@/lib/format-text';
+export { renderFormattedText };
 
 interface BlogDetailContentProps {
   sections?: BlogArticleSection[];
   topics?: TOCItem[];
 }
 
-export const BlogDetailContent: React.FC<BlogDetailContentProps> = ({
+export const BlogDetailContent = ({
   sections = DEFAULT_BLOG_SECTIONS,
   topics = BLOG_DETAIL_TOPICS,
-}) => {
+}: BlogDetailContentProps) => {
   const [activeTopic, setActiveTopic] = useState<string>(topics[0]?.id || '');
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
