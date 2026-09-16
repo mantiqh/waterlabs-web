@@ -119,7 +119,7 @@ export const CaseStudiesTabsSection = ({
 }: CaseStudiesTabsSectionProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
+  // const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -202,15 +202,15 @@ export const CaseStudiesTabsSection = ({
     return [1, '...', safeCurrentPage - 1, safeCurrentPage, safeCurrentPage + 1, '...', totalPages];
   }, [totalPages, safeCurrentPage]);
 
-  const handleCategorySelect = (category: string) => {
-    setSelectedCategory(category);
-    setCurrentPage(1);
-  };
+  // const handleCategorySelect = (category: string) => {
+  //   setSelectedCategory(category);
+  //   setCurrentPage(1);
+  // };
 
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-    setCurrentPage(1);
-  };
+  // const handleSearchChange = (query: string) => {
+  //   setSearchQuery(query);
+  //   setCurrentPage(1);
+  // };
 
   const handlePageChange = (newPage: number) => {
     if (newPage < 1 || newPage > totalPages || newPage === safeCurrentPage) return;
@@ -238,12 +238,11 @@ export const CaseStudiesTabsSection = ({
         <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[32px] md:gap-[40px] lg:gap-[40px]">
           
           {/* ========================================================================= */}
-          {/* Top Filter & Search Bar                                                   */}
+          {/* Top Filter & Search Bar - Commented out for now                           */}
           {/* ========================================================================= */}
 
           {/* Desktop Filter Bar (Figma: Frame 2147226517) */}
-          <div className="hidden lg:flex flex-row items-center justify-between gap-[32px] w-full">
-            {/* Category Pills (Filters) */}
+          {/* <div className="hidden lg:flex flex-row items-center justify-between gap-[32px] w-full">
             <div className="flex flex-row items-center gap-[12px] xl:gap-[16px] flex-wrap">
               {categoriesList.map((category) => {
                 const isSelected = selectedCategory === category;
@@ -264,7 +263,6 @@ export const CaseStudiesTabsSection = ({
               })}
             </div>
 
-            {/* Desktop Search Input */}
             <div className="w-[280px] xl:w-[313px] h-[40px] bg-white/70 border border-white rounded-[64px] px-[16px] py-[8px] flex items-center gap-[10px] focus-within:bg-white focus-within:border-[#0F68D6] transition-all">
               <svg
                 width="14"
@@ -285,12 +283,11 @@ export const CaseStudiesTabsSection = ({
                 className="w-full bg-transparent border-none outline-none type-cta font-normal text-[#2A2A2A] placeholder:text-[#7D8690]"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Mobile & Tablet Filter Bar (Figma: Frame 2147226778) */}
-          <div className="flex lg:hidden flex-col gap-[16px] w-full">
+          {/* <div className="flex lg:hidden flex-col gap-[16px] w-full">
             <div className="flex flex-row items-center gap-[12px] w-full">
-              {/* Mobile Search Input */}
               <div className="flex-1 h-[39px] bg-white rounded-[12px_6px_12px_12px] px-[12px] flex items-center gap-[8px] border border-transparent focus-within:border-[#0F68D6]">
                 <svg
                   width="14"
@@ -312,7 +309,6 @@ export const CaseStudiesTabsSection = ({
                 />
               </div>
 
-              {/* Mobile Filter by Dropdown Trigger */}
               <div className="relative">
                 <button
                   type="button"
@@ -334,7 +330,6 @@ export const CaseStudiesTabsSection = ({
                   </svg>
                 </button>
 
-                {/* Dropdown Menu */}
                 {isFilterDropdownOpen && (
                   <div className="absolute right-0 top-[45px] z-30 w-[180px] bg-white rounded-[12px] shadow-lg border border-[#D7DCE2] py-[6px] overflow-hidden">
                     {categoriesList.map((category) => (
@@ -358,7 +353,7 @@ export const CaseStudiesTabsSection = ({
                 )}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* ========================================================================= */}
           {/* Case Studies Grid (2 Columns on Desktop)                                  */}
@@ -372,27 +367,30 @@ export const CaseStudiesTabsSection = ({
                 key={card.id}
                 className="w-full border-b border-[#D7DCE2] pb-[20px] md:pb-[24px] flex flex-col gap-[8px] md:gap-[12px]"
               >
-                {/* Eyebrow Tag: Blue Dot + Text */}
-                <div className="flex items-center gap-[6px] lg:gap-[8px]">
+                {/* Eyebrow Tag: Blue Dot + Text - Commented out */}
+                {/* <div className="flex items-center gap-[6px] lg:gap-[8px]">
                   <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
                   <span className="type-body-xxs text-[14px] lg:text-[16px] text-[rgba(42,42,42,0.6)] tracking-[0.01em]">
                     {card.tag}
                   </span>
-                </div>
+                </div> */}
 
                 {/* =================================================================== */}
                 {/* Desktop Card Layout (Side-by-side)                                  */}
                 {/* =================================================================== */}
                 <div className="hidden md:flex flex-row items-stretch justify-between gap-[20px] w-full">
-                  {/* Left Column: Stat, Subtitle, CTA */}
+                  {/* Left Column: Title (clickable) & CTA Button */}
                   <div className="flex-1 min-w-0 flex flex-col justify-between items-start gap-[16px]">
                     <div className="flex flex-col items-start gap-[12px] w-full">
-                      <h5 className="type-h5 text-[#0F68D6] tracking-[-0.01em]">
-                        {card.stat}
-                      </h5>
-                      <p className="type-body-xxs text-black font-medium tracking-[0.01em]">
-                        {card.subtitle}
-                      </p>
+                      {/* Clickable Card Heading matching inner case study page */}
+                      <Link
+                        href={`/case-study/${card.slug}`}
+                        className="group/title block w-full"
+                      >
+                        <h5 className="type-h5 text-[#0F68D6] group-hover/title:text-[#042849] transition-colors tracking-[-0.01em]">
+                          {card.title || card.stat}
+                        </h5>
+                      </Link>
                     </div>
 
                     <Link href={`/case-study/${card.slug}`} className="inline-block group">
@@ -409,7 +407,7 @@ export const CaseStudiesTabsSection = ({
                   <div className="w-[227px] h-[174px] rounded-[20px_10px_20px_20px] overflow-hidden relative shrink-0 shadow-sm">
                     <Image
                       src={card.desktopImage}
-                      alt={card.stat}
+                      alt={card.title || card.stat}
                       fill
                       className="object-cover object-center"
                       sizes="227px"
@@ -425,32 +423,33 @@ export const CaseStudiesTabsSection = ({
                   <div className="w-full h-[217px] rounded-[20px_10px_20px_20px] overflow-hidden relative shrink-0 shadow-sm">
                     <Image
                       src={card.mobileImage}
-                      alt={card.stat}
+                      alt={card.title || card.stat}
                       fill
                       className="object-cover object-center"
                       sizes="100vw"
                     />
                   </div>
 
-                  {/* Bottom Row: Stat & Subtitle on left, Circular Arrow on right */}
-                  <Link
-                    href={`/case-study/${card.slug}`}
-                    className="w-full flex flex-row items-end justify-between gap-[12px] pt-[4px]"
-                  >
-                    <div className="flex flex-col items-start gap-[8px] flex-1">
-                      <h5 className="type-h5 text-[20px] leading-[28px] text-[#0F68D6] tracking-[-0.01em]">
-                        {card.stat}
+                  {/* Bottom Row: Clickable Title on left, Circular Arrow on right */}
+                  <div className="w-full flex flex-row items-end justify-between gap-[12px] pt-[4px]">
+                    <Link
+                      href={`/case-study/${card.slug}`}
+                      className="flex flex-col items-start gap-[8px] flex-1 group/mobiletitle"
+                    >
+                      <h5 className="type-h5 text-[20px] leading-[28px] text-[#0F68D6] group-hover/mobiletitle:text-[#042849] transition-colors tracking-[-0.01em]">
+                        {card.title || card.stat}
                       </h5>
-                      <p className="type-body-xxs text-[14px] leading-[20px] font-medium text-black tracking-[0.01em]">
-                        {card.subtitle}
-                      </p>
-                    </div>
+                    </Link>
 
                     {/* Circular Blue Arrow Indicator (Fill - arrow - indicator) */}
-                    <div className="w-[34px] h-[34px] bg-[#0F68D6] rounded-full flex items-center justify-center text-white shrink-0 shadow-sm">
+                    <Link
+                      href={`/case-study/${card.slug}`}
+                      aria-label={settings?.readStoryButtonText || 'Read the story'}
+                      className="w-[34px] h-[34px] bg-[#0F68D6] hover:bg-[#042849] transition-colors rounded-full flex items-center justify-center text-white shrink-0 shadow-sm"
+                    >
                       <ChevronRight className="w-[10px] h-[14px] text-white" />
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

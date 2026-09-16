@@ -47,20 +47,19 @@ const HERO_SLIDES: SlideItem[] = [
 ];
 
 export const CaseStudiesHeroSection = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex] = useState(0);
 
-  const isFirst = activeIndex === 0;
-  const isLast = activeIndex === HERO_SLIDES.length - 1;
-
-  const handlePrev = () => {
-    if (isFirst) return;
-    setActiveIndex((prev) => prev - 1);
-  };
-
-  const handleNext = () => {
-    if (isLast) return;
-    setActiveIndex((prev) => prev + 1);
-  };
+  // Carousel controls (commented out while controls are hidden)
+  // const isFirst = activeIndex === 0;
+  // const isLast = activeIndex === HERO_SLIDES.length - 1;
+  // const handlePrev = () => {
+  //   if (isFirst) return;
+  //   setActiveIndex((prev) => prev - 1);
+  // };
+  // const handleNext = () => {
+  //   if (isLast) return;
+  //   setActiveIndex((prev) => prev + 1);
+  // };
 
   const currentSlide = HERO_SLIDES[activeIndex];
 
@@ -114,9 +113,8 @@ export const CaseStudiesHeroSection = () => {
               </div>
             </div>
 
-            {/* Bottom Controls Row: Carousel Indicators & Arrow Buttons (Arrow indicator) */}
-            <div className="w-full flex flex-row justify-between items-center pt-[16px]">
-              {/* Carousel Indicators */}
+            {/* Bottom Controls Row: Carousel Indicators & Arrow Buttons (Arrow indicator) - Commented out for now */}
+            {/* <div className="w-full flex flex-row justify-between items-center pt-[16px]">
               <div className="flex flex-row items-center gap-[5px]" role="tablist" aria-label="Slide indicators">
                 {HERO_SLIDES.map((_, idx) => {
                   const isActive = idx === activeIndex;
@@ -135,9 +133,7 @@ export const CaseStudiesHeroSection = () => {
                 })}
               </div>
 
-              {/* Arrow Indicator Buttons (Frame: Left - right - Arrow - indicators) */}
               <div className="flex flex-row items-center gap-[14px]">
-                {/* Left Arrow Button (stroke indicator when disabled/isFirst, fill when enabled) */}
                 <CTA
                   variant={isFirst ? 'dark-arrow' : 'dark-bg'}
                   onClick={handlePrev}
@@ -150,7 +146,6 @@ export const CaseStudiesHeroSection = () => {
                   aria-label="Previous slide"
                 />
 
-                {/* Right Arrow Button (fill when enabled, stroke indicator when disabled/isLast) */}
                 <CTA
                   variant={isLast ? 'dark-arrow' : 'dark-bg'}
                   onClick={handleNext}
@@ -163,7 +158,7 @@ export const CaseStudiesHeroSection = () => {
                   aria-label="Next slide"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right Column: Hero Image (Frame 2147226502) - Pure CSS background image */}
