@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 
-export const DenialManagementHeroSection = () => {
+export const PatientEstimatesHeroSection = () => {
   return (
     <section className="relative w-full bg-white overflow-hidden">
       <div
@@ -48,18 +48,18 @@ export const DenialManagementHeroSection = () => {
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
               <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-                Agentic RCM Solutions &middot; Denial Management
+                Agentic RCM Solutions &middot; Patient Estimates
               </span>
             </div>
 
             {/* Headline */}
             <h2 className="type-h1 text-white tracking-[-0.01em]">
-              Denials worked the day they land.
+              Every patient knows what they owe before they arrive.
             </h2>
 
             {/* Description */}
             <p className="type-body-s text-[#F4F6F9] max-w-[650px]">
-              Our agents read the denial, identify the cause, build the appeal, and file it even when the deadline is still weeks away.
+              Our agents generate a benefits-adjusted estimate as soon as a visit is booked and deliver it before the date of service.
             </p>
 
             {/* CTA Button */}
@@ -76,7 +76,7 @@ export const DenialManagementHeroSection = () => {
           <div className="relative w-full lg:flex-1 lg:max-w-[650px] aspect-[650/441] rounded-[20px] overflow-hidden z-[2]">
             <Image
               src="/images/solutions/hero-section/img_banner%20(5).png"
-              alt="Denial management digital cards and appeal workflow"
+              alt="Patient estimates calculation and pre-service transparency"
               fill
               priority
               sizes="(max-width: 1440px) 50vw, 650px"
@@ -91,18 +91,18 @@ export const DenialManagementHeroSection = () => {
           <div className="flex items-center gap-[8px]">
             <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
             <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-              Agentic RCM Solutions &middot; Denial Management
+              Agentic RCM Solutions &middot; Patient Estimates
             </span>
           </div>
 
           {/* Headline */}
           <h2 className="type-h1 text-white tracking-[-0.01em]">
-            Denials worked the day they land.
+            Every patient knows what they owe before they arrive.
           </h2>
 
           {/* Description */}
           <p className="type-body-s text-[#F4F6F9]">
-            Our agents read the denial, identify the cause, build the appeal, and file it even when the deadline is still weeks away.
+            Our agents generate a benefits-adjusted estimate as soon as a visit is booked and deliver it before the date of service.
           </p>
 
           {/* CTA Button */}
@@ -118,7 +118,7 @@ export const DenialManagementHeroSection = () => {
           <div className="relative w-full aspect-[362/246] rounded-[20px] overflow-hidden z-[2]">
             <Image
               src="/images/solutions/hero-section/img_banner_mobile%20(6).png"
-              alt="Denial management digital cards and appeal workflow"
+              alt="Patient estimates calculation and pre-service transparency"
               fill
               priority
               sizes="100vw"
@@ -131,4 +131,4 @@ export const DenialManagementHeroSection = () => {
   );
 };
 
-export default DenialManagementHeroSection;
+export default PatientEstimatesHeroSection;

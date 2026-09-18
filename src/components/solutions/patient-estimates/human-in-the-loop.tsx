@@ -11,31 +11,6 @@ export const HumanInTheLoopSection = () => {
       <div className="w-full bg-white rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] px-[20px] md:px-[40px] lg:px-[60px] py-[40px] md:py-[60px] lg:py-[80px]">
         <div className="max-w-[1320px] mx-auto flex flex-col gap-[40px] lg:gap-[60px]">
 
-          {/* ── OUR STATS ── */}
-          <div className="flex flex-col gap-[20px] lg:gap-[32px]">
-            <h3 className="type-h3 text-electric-blue">Our Stats</h3>
-
-            <div className="w-full bg-ghost-white rounded-[20px] p-[20px] md:p-[32px] lg:p-[40px] flex flex-col lg:flex-row gap-[24px] lg:gap-[40px]">
-              {/* Stat 1 */}
-              <div className="flex-1 flex flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">Under 2%</h3>
-                <p className="type-body-xs text-charcoal">Authorization denial rate</p>
-              </div>
-
-              {/* Stat 2 */}
-              <div className="flex-1 flex flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">24&ndash;48 hour</h3>
-                <p className="type-body-xs text-charcoal">turnaround time</p>
-              </div>
-
-              {/* Stat 3 */}
-              <div className="flex-1 flex flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">75%</h3>
-                <p className="type-body-xs text-charcoal">of authorizations cleared fully autonomously</p>
-              </div>
-            </div>
-          </div>
-
           {/* ── HUMAN IN THE LOOP ── */}
           <div className="flex flex-col lg:flex-row items-center justify-between gap-[24px] lg:gap-[32px]">
             {/* Left: Text Content */}
@@ -44,10 +19,7 @@ export const HumanInTheLoopSection = () => {
                 <span className="text-[#0F68D6]">Human in the loop,</span> by design
               </h3>
               <p className="type-body-xs text-[#111111] max-w-[644px]">
-                When an authorization requires clinical judgment, peer review, a clinical call, or an appeal, it is routed to your team. The case is fully prepared, with records, payer criteria, and history consolidated for your specialist&apos;s review.
-              </p>
-              <p className="type-body-xs text-[#111111] max-w-[644px]">
-                It is one application within an operating system that manages the full revenue cycle.
+                If a plan is ambiguous or coverage is unclear, or if a patient requires a detailed discussion about their financial responsibility, our agents escalate the case to your team. The eligibility response, accumulator status, and calculation are included.
               </p>
             </div>
 
@@ -57,7 +29,7 @@ export const HumanInTheLoopSection = () => {
               <div className="hidden lg:block relative w-full aspect-[644/309] rounded-[30px_10px_30px_30px] overflow-hidden">
                 <Image
                   src="/images/solutions/human-in-the-loop/img_human_in_the_loop.png"
-                  alt="Human in the loop reviewing prior authorizations and clinical criteria"
+                  alt="Human in the loop reviewing patient estimates and coverage"
                   fill
                   priority
                   sizes="(max-width: 1440px) 50vw, 644px"
@@ -69,7 +41,7 @@ export const HumanInTheLoopSection = () => {
               <div className="block lg:hidden relative w-full aspect-[362/156] rounded-[20px_10px_20px_20px] overflow-hidden">
                 <Image
                   src="/images/solutions/human-in-the-loop/img_human_in_the_loop_mobile%20(1).png"
-                  alt="Human in the loop reviewing prior authorizations and clinical criteria"
+                  alt="Human in the loop reviewing patient estimates and coverage"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 644px"

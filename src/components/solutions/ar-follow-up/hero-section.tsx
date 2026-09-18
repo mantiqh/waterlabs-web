@@ -48,7 +48,7 @@ export const ARFollowUpHeroSection = () => {
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
               <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-                The Revenue Cycle &middot; AR Follow-up
+                Agentic RCM Solutions &middot; AR Follow-up
               </span>
             </div>
 
@@ -91,7 +91,7 @@ export const ARFollowUpHeroSection = () => {
           <div className="flex items-center gap-[8px]">
             <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
             <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-              The Revenue Cycle &middot; AR Follow-up
+              Agentic RCM Solutions &middot; AR Follow-up
             </span>
           </div>
 
