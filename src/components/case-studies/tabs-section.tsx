@@ -387,7 +387,7 @@ export const CaseStudiesTabsSection = ({
                         href={`/case-study/${card.slug}`}
                         className="group/title block w-full"
                       >
-                        <h5 className="type-body-l text-[#0F68D6] group-hover/title:text-[#042849] transition-colors">
+                        <h5 className="type-body-l text-[#042849] group-hover/title:text-[#0F68D6] transition-colors">
                           {card.title || card.stat}
                         </h5>
                       </Link>
@@ -436,7 +436,7 @@ export const CaseStudiesTabsSection = ({
                       href={`/case-study/${card.slug}`}
                       className="flex flex-col items-start gap-[8px] flex-1 group/mobiletitle"
                     >
-                      <h5 className="type-body-l text-[#0F68D6] group-hover/mobiletitle:text-[#042849] transition-colors">
+                      <h5 className="type-body-l text-[#042849] group-hover/mobiletitle:text-[#0F68D6] transition-colors">
                         {card.title || card.stat}
                       </h5>
                     </Link>
