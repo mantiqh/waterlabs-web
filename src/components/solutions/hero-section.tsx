@@ -57,7 +57,7 @@ export const SolutionsHeroSection = () => {
             <div className="flex items-center gap-[8px]">
               <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
               <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-                The Revenue Cycle &middot; Eligibility &amp; Benefits Verification
+                Agentic RCM Solutions &middot; Eligibility &amp; Benefits Verification
               </span>
             </div>
 
@@ -100,7 +100,7 @@ export const SolutionsHeroSection = () => {
           <div className="flex items-center gap-[8px]">
             <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
             <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-              The Revenue Cycle &middot; Eligibility &amp; Benefits <br className="block sm:hidden" />Verification
+              Agentic RCM Solutions &middot; Eligibility &amp; Benefits <br className="block sm:hidden" />Verification
             </span>
           </div>
 

@@ -17,7 +17,7 @@ export const TheProblemSection = () => {
             <div className="relative w-full lg:flex-[1.766] lg:max-w-[830px] min-w-0 min-h-[456px] rounded-[30px_10px_30px_30px] overflow-hidden">
               <Image
                 src="/images/solutions/the-problem/img_the_problem.png"
-                alt="Healthcare staff reviewing prior authorization requests"
+                alt="Healthcare staff reviewing claim rejections and scrubbing logs"
                 fill
                 priority
                 sizes="(max-width: 1440px) 60vw, 830px"
@@ -54,23 +54,18 @@ export const TheProblemSection = () => {
 
                 {/* Headline */}
                 <h5 className="type-h5 text-[#111111] tracking-[-0.01em]">
-                  How backlogged is your authorization process{' '}
-                  <span className="text-[#0F68D6]">right now?</span>
+                  How many claims went out last month{' '}
+                  <span className="text-[#0F68D6]">and came straight back?</span>
                 </h5>
 
                 {/* Description Paragraphs */}
                 <div className="flex flex-col gap-[14px]">
                   <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
-                    Most practices lack visibility into their authorization backlog, often relying on manual counts. This lack of transparency prevents staff from providing patients with clear information.
+                    Most practices track denials but do not distinguish rejections. Rejected claims never reach adjudication, so they are excluded from denial rates and the associated rework is not tracked.
                   </p>
-                  <div className="pt-[4px] border-t border-[rgba(4,40,73,0.12)] flex flex-col gap-[4px]">
-                    <p className="type-body-xxs font-medium text-[#111111] tracking-[0.01em]">
-                      &ldquo;1 in 3 physicians say prior authorization delays have caused serious harm to a patient.&rdquo;
-                    </p>
-                    <span className="type-caption text-[#0F68D6] font-medium">
-                      &mdash; American Medical Association
-                    </span>
-                  </div>
+                  <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
+                    Rework is a hidden cost, reflected in increased staffing rather than as a direct expense.
+                  </p>
                 </div>
               </div>
             </div>
@@ -100,18 +95,16 @@ export const TheProblemSection = () => {
 
                 {/* Headline */}
                 <h5 className="type-h5 text-[#111111] tracking-[-0.01em]">
-                  How backlogged is your authorization
+                  How many claims went out last month
                   <br />
-                  <span className="whitespace-nowrap">
-                    process <span className="text-[#0F68D6]">right now?</span>
-                  </span>
+                  <span className="text-[#0F68D6]">and came straight back?</span>
                 </h5>
 
                 {/* Image */}
                 <div className="relative w-full aspect-[338/185.7] rounded-[20px_10px_20px_20px] overflow-hidden">
                   <Image
                     src="/images/solutions/the-problem/img_the_problem_mobile%20(1).png"
-                    alt="Healthcare staff reviewing prior authorization requests"
+                    alt="Healthcare staff reviewing claim rejections and scrubbing logs"
                     fill
                     sizes="(max-width: 1024px) 100vw, 338px"
                     className="object-cover object-center"
@@ -127,16 +120,11 @@ export const TheProblemSection = () => {
                 {/* Description Paragraphs */}
                 <div className="flex flex-col gap-[14px]">
                   <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
-                    Most practices lack visibility into their authorization backlog, often relying on manual counts. This lack of transparency prevents staff from providing patients with clear information.
+                    Most practices track denials but do not distinguish rejections. Rejected claims never reach adjudication, so they are excluded from denial rates and the associated rework is not tracked.
                   </p>
-                  <div className="pt-[4px] border-t border-[rgba(4,40,73,0.12)] flex flex-col gap-[4px]">
-                    <p className="type-body-xxs font-medium text-[#111111] tracking-[0.01em]">
-                      &ldquo;1 in 3 physicians say prior authorization delays have caused serious harm to a patient.&rdquo;
-                    </p>
-                    <span className="type-caption text-[#0F68D6] font-medium">
-                      &mdash; American Medical Association
-                    </span>
-                  </div>
+                  <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
+                    Rework is a hidden cost, reflected in increased staffing rather than as a direct expense.
+                  </p>
                 </div>
               </div>
             </div>

@@ -17,7 +17,7 @@ export const TheProblemSection = () => {
             <div className="relative w-full lg:flex-[1.766] lg:max-w-[830px] min-w-0 min-h-[456px] rounded-[30px_10px_30px_30px] overflow-hidden">
               <Image
                 src="/images/solutions/the-problem/img_the_problem.png"
-                alt="Healthcare staff reviewing prior authorization requests"
+                alt="Healthcare staff addressing patient payment questions and billing estimates"
                 fill
                 priority
                 sizes="(max-width: 1440px) 60vw, 830px"
@@ -54,23 +54,18 @@ export const TheProblemSection = () => {
 
                 {/* Headline */}
                 <h5 className="type-h5 text-[#111111] tracking-[-0.01em]">
-                  How backlogged is your authorization process{' '}
-                  <span className="text-[#0F68D6]">right now?</span>
+                  How often do your patients learn what they owe{' '}
+                  <span className="text-[#0F68D6]">only after receiving care?</span>
                 </h5>
 
                 {/* Description Paragraphs */}
                 <div className="flex flex-col gap-[14px]">
                   <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
-                    Most practices lack visibility into their authorization backlog, often relying on manual counts. This lack of transparency prevents staff from providing patients with clear information.
+                    While producing an estimate before a visit is theoretically possible, it is often impractical. The process requires eligibility checks, reviewing deductible and coinsurance status, and matching the correct specialty’s contracted rate. Each step is manual, and accumulators change throughout the plan year.
                   </p>
-                  <div className="pt-[4px] border-t border-[rgba(4,40,73,0.12)] flex flex-col gap-[4px]">
-                    <p className="type-body-xxs font-medium text-[#111111] tracking-[0.01em]">
-                      &ldquo;1 in 3 physicians say prior authorization delays have caused serious harm to a patient.&rdquo;
-                    </p>
-                    <span className="type-caption text-[#0F68D6] font-medium">
-                      &mdash; American Medical Association
-                    </span>
-                  </div>
+                  <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
+                    Scaling this process across all scheduled visits is not feasible. As a result, most patients receive no estimate, and financial discussions occur after care is provided.
+                  </p>
                 </div>
               </div>
             </div>
@@ -100,18 +95,16 @@ export const TheProblemSection = () => {
 
                 {/* Headline */}
                 <h5 className="type-h5 text-[#111111] tracking-[-0.01em]">
-                  How backlogged is your authorization
+                  How often do your patients learn what they owe
                   <br />
-                  <span className="whitespace-nowrap">
-                    process <span className="text-[#0F68D6]">right now?</span>
-                  </span>
+                  <span className="text-[#0F68D6]">only after receiving care?</span>
                 </h5>
 
                 {/* Image */}
                 <div className="relative w-full aspect-[338/185.7] rounded-[20px_10px_20px_20px] overflow-hidden">
                   <Image
                     src="/images/solutions/the-problem/img_the_problem_mobile%20(1).png"
-                    alt="Healthcare staff reviewing prior authorization requests"
+                    alt="Healthcare staff addressing patient payment questions and billing estimates"
                     fill
                     sizes="(max-width: 1024px) 100vw, 338px"
                     className="object-cover object-center"
@@ -127,16 +120,11 @@ export const TheProblemSection = () => {
                 {/* Description Paragraphs */}
                 <div className="flex flex-col gap-[14px]">
                   <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
-                    Most practices lack visibility into their authorization backlog, often relying on manual counts. This lack of transparency prevents staff from providing patients with clear information.
+                    While producing an estimate before a visit is theoretically possible, it is often impractical. The process requires eligibility checks, reviewing deductible and coinsurance status, and matching the correct specialty’s contracted rate. Each step is manual, and accumulators change throughout the plan year.
                   </p>
-                  <div className="pt-[4px] border-t border-[rgba(4,40,73,0.12)] flex flex-col gap-[4px]">
-                    <p className="type-body-xxs font-medium text-[#111111] tracking-[0.01em]">
-                      &ldquo;1 in 3 physicians say prior authorization delays have caused serious harm to a patient.&rdquo;
-                    </p>
-                    <span className="type-caption text-[#0F68D6] font-medium">
-                      &mdash; American Medical Association
-                    </span>
-                  </div>
+                  <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em]">
+                    Scaling this process across all scheduled visits is not feasible. As a result, most patients receive no estimate, and financial discussions occur after care is provided.
+                  </p>
                 </div>
               </div>
             </div>
