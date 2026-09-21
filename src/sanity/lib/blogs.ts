@@ -7,6 +7,12 @@ import {
 } from '@/sanity/lib/queries';
 import type { BlogsPageData, SanityBlogArticle } from '@/types/blogs';
 
+const EXCLUDED_SLUGS = new Set([
+  'testing-blog',
+  'testing-blog2',
+  'prior-authorization-automation-broken-process-healthcare',
+]);
+
 /**
  * Fetches all published blog articles from Sanity CMS.
  * Returns an empty array if none are found or if an error occurs.
@@ -20,7 +26,7 @@ export async function fetchAllBlogArticles(): Promise<SanityBlogArticle[]> {
     });
 
     if (Array.isArray(articles) && articles.length > 0) {
-      return articles;
+      return articles.filter((a) => a.slug && !EXCLUDED_SLUGS.has(a.slug));
     }
   } catch (error) {
     console.warn('[Sanity] Failed to fetch blog articles:', error);
@@ -33,6 +39,9 @@ export async function fetchAllBlogArticles(): Promise<SanityBlogArticle[]> {
  * Fetches a single blog post by its slug from Sanity CMS.
  */
 export async function fetchBlogPostBySlug(slug: string): Promise<SanityBlogArticle | null> {
+  if (EXCLUDED_SLUGS.has(slug)) {
+    return null;
+  }
   try {
     const article = await sanityFetch<SanityBlogArticle | null>({
       query: blogPostBySlugQuery,
@@ -63,7 +72,9 @@ export async function fetchAllBlogSlugs(): Promise<string[]> {
     });
 
     if (Array.isArray(items) && items.length > 0) {
-      return items.map((i) => i.slug).filter(Boolean);
+      return items
+        .map((i) => i.slug)
+        .filter((slug): slug is string => Boolean(slug) && !EXCLUDED_SLUGS.has(slug));
     }
   } catch (error) {
     console.warn('[Sanity] Failed to fetch blog slugs:', error);

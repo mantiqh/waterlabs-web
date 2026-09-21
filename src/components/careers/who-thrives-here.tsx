@@ -30,7 +30,7 @@ export const WhoThrivesHereSection = () => {
 
             {/* Title */}
             <h2 className="type-h1 tracking-[-0.01em] text-[#F4F6F9]">
-              Who Thrives Here
+              Who thrives here
             </h2>
           </div>
 

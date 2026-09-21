@@ -11,13 +11,13 @@ export const caseStudy3: CaseStudy = {
   heroImage: '/images/case-study/case-study-3-multi-site/Frame%202147226953%20(2).png',
   heroImageAlt: 'Physical therapy clinical team and automated intake workflow with Waterlabs',
   cardCategory: 'Features',
-  cardTag: 'Multi-site Network',
+  cardTag: 'Physical Therapy',
   cardStat: '60 people → 4',
-  cardSubtitle: 'Patient Intake Automation',
+  cardSubtitle: 'Intake Automation',
   desktopImage: '/images/case-study-main-page/tabs/img_placeholder_03.png',
   mobileImage: '/images/case-study-main-page/tabs/img_placeholder_03_mobile (1).png',
   order: 3,
-  tags: ['Multi-site Network', 'Patient Intake', 'Document Classification', 'HIMER AI OS'],
+  tags: ['HIMER AI OS'],
   clientSummary:
     'A multi-site physical therapy and outpatient rehabilitation practice received referrals by fax, email, and portal uploads in varying formats. Each referral required classification and manual data entry before processing.',
   statBadges: [
@@ -34,7 +34,7 @@ export const caseStudy3: CaseStudy = {
     subheadline:
       'Intake operations now require only four team members, allowing 56 staff to transition to higher-value work. This represents a 93% reduction in intake headcount.',
     details:
-      'Intake labor costs down approximately 90%. Remaining expenses are focused on review rather than data entry.\n\nDays → same day. A referral used to spend days in the manual queue. It now clears on the day it arrives, in real time, so the backlog never gets a chance to form.\n\nAround the clock. Our agents classify documents independent of staffing shifts, with far fewer keying and misclassification errors reaching the PM and EHR.',
+      'Intake labor costs down approximately 90%: Remaining expenses are focused on review rather than data entry.\n\nDays → same day: A referral used to spend days in the manual queue. It now clears on the day it arrives, in real time, so the backlog never gets a chance to form.\n\nAround the clock: Our agents classify documents independent of staffing shifts, with far fewer keying and misclassification errors reaching the PM and EHR.',
   },
   outcomes:
     'Operationally, intake capacity now rises with referral volume on its own, and it holds through nights and weekends without anyone rostered on. Every referral source is read to one standard, so classification no longer depends on who happened to be at their desk.\n\nFinancially, the cost of processing each intake dropped while throughput held, and cleaner data at the front end meant fewer expensive corrections at the back.\n\nStrategically, the network stopped tying growth to headcount and now has a compelling case for bringing agentic AI across the rest of its front office. What worked for intake now serves as a foundation for enterprise-scale adoption elsewhere in the operation.',
@@ -52,8 +52,8 @@ export const caseStudy3: CaseStudy = {
   ],
   cta: {
     tagText: 'Talk to us.',
-    headline: '15-minute call to see what Waterlabs would do on your numbers.',
-    buttonText: 'Get a Demo',
+    headline: 'See what Waterlabs would do on your numbers.',
+    buttonText: 'GET A DEMO',
     buttonHref: '/contact-us',
   },
 };

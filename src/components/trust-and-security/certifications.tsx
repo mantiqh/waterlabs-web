@@ -28,7 +28,7 @@ const complianceList: ComplianceItem[] = [
     logoWidth: 144,
     logoHeight: 79,
     title: 'HIPAA',
-    description: 'The US baseline for handling protected health information.',
+    description: 'The United States baseline for handling protected health information.',
   },
   {
     id: 'iso27001',

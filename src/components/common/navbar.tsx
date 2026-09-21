@@ -25,10 +25,10 @@ interface NavItem {
 
 const navItems: NavItem[] = [
   {
-    label: 'About us',
-    href: '/about-us',
-    header: 'About us',
+    label: 'Company',
+    header: 'Company',
     children: [
+      { label: 'About Us', href: '/about-us' },
       { label: 'Philosophy', href: '/philosophy' },
       { label: 'Careers', href: '/careers' },
       { label: 'Culture', href: '/culture' },
@@ -39,7 +39,7 @@ const navItems: NavItem[] = [
     header: 'Products',
     children: [
       { label: 'Himer AI OS', href: '/products/himer' },
-      { label: 'Curiecode', href: '/products/curiecode' },
+      { label: 'CurieCode', href: '/products/curiecode' },
     ],
   },
   {

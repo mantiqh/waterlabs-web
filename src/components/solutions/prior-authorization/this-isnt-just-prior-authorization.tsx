@@ -28,7 +28,7 @@ const threeThingsCards: ThreeThingsCard[] = [
     icon: '/images/solutions/the-three-things/icon_data_remains_source.png',
     title: 'Data remains secure',
     description:
-      'Patient data remains securely within your facility.',
+      'Our agents run on infrastructure Waterlabs owns and operates in the United States, under a BAA, on servers we control end to end.',
   },
 ];
 

@@ -34,7 +34,7 @@ export const caseStudy2: CaseStudy = {
     subheadline:
       'Coding turnaround is now often within 24 hours, enabling faster claims submission, reducing DNFB, and supporting quicker cash flow.',
     details:
-      'Coding headcount requirements down 60% to 70%. Most charts are now processed by our agents, allowing coders to focus on validation and exception handling.\n\n$4.5M in annual savings on coding labor alone.\n\n$5M to $7M in total annual economic impact, including savings from reduced recruiting, overtime, temporary staffing, attrition, and onboarding costs. The exact amount depends on volume and staffing models, which affect both labor needs and savings.\n\nMore consistent than manual coding. By leveraging clinical relationships and specialty rules instead of pattern matching, coding accuracy surpassed manual benchmarks and improved guideline adherence.',
+      'Coding headcount requirements down 60% to 70%: Most charts are now processed by our agents, allowing coders to focus on validation and exception handling.\n\n$4.5M in annual savings: On coding labor alone.\n\n$5M to $7M: In total annual economic impact, including savings from reduced recruiting, overtime, temporary staffing, attrition, and onboarding costs. The exact amount depends on volume and staffing models, which affect both labor needs and savings.\n\nMore consistent than manual coding: By leveraging clinical relationships and specialty rules instead of pattern matching, coding accuracy surpassed manual benchmarks and improved guideline adherence.',
   },
   outcomes:
     'Operationally, the business can onboard new clients without extensive hiring, and all centers now code to a unified standard rather than individual practices. Audits are more efficient because coding is consistent.\n\nFinancially, administrative and outsourced coding costs have decreased, and faster billing has improved margins for every client served.\n\nStrategically, coding is no longer a barrier to growth. The organization can now accept higher volumes that were previously unmanageable, and clients benefit from faster turnaround and consistent coding during volume spikes.',
@@ -52,8 +52,8 @@ export const caseStudy2: CaseStudy = {
   ],
   cta: {
     tagText: 'Talk to us.',
-    headline: '15-minute call to see what Waterlabs would do on your numbers.',
-    buttonText: 'Get a Demo',
+    headline: 'See what Waterlabs would do on your numbers.',
+    buttonText: 'GET A DEMO',
     buttonHref: '/contact-us',
   },
 };

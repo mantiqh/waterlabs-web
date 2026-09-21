@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { CTA } from '@/components/CTA';
 
 export const PhilosophyCTASection = () => {
@@ -11,23 +13,24 @@ export const PhilosophyCTASection = () => {
       <div className="w-full bg-[#0F68D6] rounded-tr-[30px] rounded-bl-[0px] rounded-br-[30px] lg:rounded-tr-[20px] lg:rounded-bl-[20px] lg:rounded-br-[0px] py-[40px] px-[20px] md:py-[50px] md:px-[40px] lg:py-0 lg:px-[60px] lg:h-[252px] flex items-center overflow-hidden">
         
         {/* Content Container (Frame 21: max-w-[1320px]) */}
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row lg:items-end justify-between lg:justify-start gap-[20px] lg:gap-[20px]">
+        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[24px] lg:gap-[32px]">
           
-          {/* Text Block (Frame 2147203251: width 873px) */}
-          <div className="w-full lg:w-[873px] lg:shrink-0 flex flex-col gap-[8px] lg:gap-[12px]">
+          {/* Text Block */}
+          <div className="flex flex-col gap-[8px] lg:gap-[12px]">
             <h2 className="type-h2 text-white">
-              See what we built.
+              See what Waterlabs would do
+              <br />
+              on your numbers.
             </h2>
-            <p className="type-body-xs text-white/90 max-w-[700px] lg:max-w-[873px]">
-              HIMER AI OS is the operating system underneath every agent we run. It knows the<br className="hidden sm:inline" /> payers, the specialties, the systems and the rules before it knows you.
-            </p>
           </div>
 
           {/* CTA Button */}
           <div className="shrink-0 flex items-center">
-            <CTA variant="dark-bg">
-              Explore the Platform
-            </CTA>
+            <Link href="/contact-us" className="inline-block">
+              <CTA variant="dark-bg" as="div">
+                GET A DEMO
+              </CTA>
+            </Link>
           </div>
 
         </div>

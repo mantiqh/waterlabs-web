@@ -27,7 +27,7 @@ const verificationSteps: VerificationStep[] = [
   {
     title: 'Payer rule validation',
     description:
-      "Codes are checked against the payer's policy so a technically correct code that payer will reject is caught first.",
+      "Codes are checked against the payer's policy so a technically correct code that the payer will reject is caught first.",
   },
   {
     title: 'Confidence escalation',

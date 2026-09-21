@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { CTA } from '@/components/CTA';
 
 export const CTASection = () => {
@@ -31,27 +33,33 @@ export const CTASection = () => {
 
           {/* Right CTA Buttons (Exactly 2 buttons: Get a demo & Talk to a specialist) */}
           <div className="flex items-center gap-[12px] sm:gap-[16px] flex-wrap">
-            <CTA variant="light-bg">
-              Get a demo
-            </CTA>
+            <Link href="/contact-us">
+              <CTA variant="light-bg">
+                Get a demo
+              </CTA>
+            </Link>
             
             {/* Small Screen: Outline Button */}
             <div className="block lg:hidden">
-              <CTA 
-                variant="outline" 
-                className="h-[38px] text-[14px] leading-[20px]"
-              >
-                Talk to a specialist
-              </CTA>
+              <Link href="/contact-us">
+                <CTA 
+                  variant="outline" 
+                  className="h-[38px] text-[14px] leading-[20px]"
+                >
+                  Talk to a specialist
+                </CTA>
+              </Link>
             </div>
 
             {/* Desktop: Default White Button */}
             <div className="hidden lg:block">
-              <CTA 
-                variant="dark-bg"
-              >
-                Talk to a specialist
-              </CTA>
+              <Link href="/contact-us">
+                <CTA 
+                  variant="dark-bg"
+                >
+                  Talk to a specialist
+                </CTA>
+              </Link>
             </div>
           </div>
 

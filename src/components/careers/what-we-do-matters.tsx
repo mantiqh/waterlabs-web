@@ -17,7 +17,7 @@ export const WhatWeDoMattersSection = () => {
           Mobile: rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px], p-[20px]
         */}
         <div 
-          className="relative w-full max-w-[1320px] mx-auto min-h-[538px] lg:h-[650px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px] p-[20px] sm:p-[28px] lg:p-[32px] flex flex-col justify-between lg:justify-start gap-[32px] lg:gap-[40px] overflow-hidden bg-[#042849]"
+          className="relative w-full max-w-[1320px] mx-auto min-h-[538px] lg:min-h-[650px] lg:h-auto rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px] p-[20px] sm:p-[28px] lg:p-[32px] pb-[32px] lg:pb-[40px] flex flex-col justify-between lg:justify-start gap-[28px] lg:gap-[36px] overflow-hidden bg-[#042849]"
         >
           {/* Background Architectural Image */}
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -36,33 +36,33 @@ export const WhatWeDoMattersSection = () => {
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#63CCB7] shrink-0" />
               <span className="body-xxs text-[#D7DCE2]">
-                Why Waterlabs
+                Why what we do matters
               </span>
             </div>
 
             {/* Title */}
             <h2 className="type-h2 tracking-[-0.01em] text-white">
-              Why what we do matters.
+              We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
             </h2>
           </div>
 
-          {/* Bottom Content Area (Figma Frame 2147203286: max-w-[1024px], gap-[20px], height: 448px) */}
-          <div className="relative z-10 w-full max-w-[1024px] flex flex-col lg:flex-row items-start justify-between gap-[16px] lg:gap-[20px] lg:h-[448px]">
-            {/* Left Column: Subheading (508px width in Figma, 2 lines) */}
+          {/* Bottom Content Area (Figma Frame 2147203286: max-w-[1024px], gap-[20px]) */}
+          <div className="relative z-10 w-full max-w-[1024px] flex flex-col lg:flex-row items-start justify-between gap-[16px] lg:gap-[20px]">
+            {/* Left Column: Subheading matching typographic weightage of eyebrow */}
             <div className="w-full lg:w-[508px] lg:max-w-[508px] min-w-0">
-              <h3 className="type-h5 tracking-[-0.01em] text-white max-w-[340px] lg:max-w-[380px]">
-                This is a hard problem<br className="hidden lg:inline" /> to solve.
+              <h3 className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
+                This is a hard problem to solve.
               </h3>
             </div>
 
-            {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, height: 448px, gap 16px) */}
-            <div className="w-full lg:w-[496px] lg:max-w-[496px] min-w-0 flex flex-col justify-between gap-[16px] lg:h-[448px]">
+            {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, gap 16px) */}
+            <div className="w-full lg:w-[496px] lg:max-w-[496px] min-w-0 flex flex-col gap-[16px] lg:gap-[20px]">
               <p className="type-body-xs text-[#D7DCE2] max-w-[496px]">
                 Revenue cycle is one of the hardest problems in healthcare. Here, the rules are complex, the exceptions are abundant, and the stakes are high. Whether you&apos;re defining software, running operations, or working with customers, you&apos;ll be solving problems that don&apos;t come in playbooks.
               </p>
 
               {/* Team Image (Frame 2147203292: 496px x 250px with rounded-tl-[40px] rounded-tr-[10px] rounded-br-[40px] rounded-bl-[10px]) */}
-              <div className="relative w-full aspect-[322/182] lg:aspect-auto lg:w-[496px] lg:h-[250px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)] shrink-0">
+              <div className="relative w-full aspect-[322/182] lg:aspect-auto lg:w-[496px] lg:h-[240px] xl:h-[250px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)] shrink-0">
                 <Image
                   src="/images/careers/what-we-do-matters/ing_this_is_a_hard_problem_to_solve.png"
                   alt="Problem Solving Team"

@@ -18,6 +18,17 @@ const renderResultsDetailParagraph = (text: string) => {
     return renderFormattedText(text);
   }
 
+  // Check heading ending with colon (e.g., "Same-day benefits summary: Intake receives...")
+  const colonMatch = text.match(/^([^:\n]+:)\s*(.*)$/s);
+  if (colonMatch) {
+    return (
+      <>
+        <strong className="font-bold text-[#111111]">{colonMatch[1]}</strong>
+        {' ' + colonMatch[2]}
+      </>
+    );
+  }
+
   // Check known result clause splits
   const clauseSplits = [
     ', based on',
@@ -285,7 +296,12 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
                   {/* Filter Badges: exactly 40px below the paragraph */}
                   {tags && tags.length > 0 && (
                     <div className="flex flex-wrap items-center gap-[12px] lg:gap-[16px]">
-                      {tags.map((tag) => (
+                      {tags
+                        .filter(
+                          (tag) =>
+                            !['Multi-site Network', 'Patient Intake', 'Document Classification'].includes(tag)
+                        )
+                        .map((tag) => (
                         <div
                           key={tag}
                           className="flex items-center gap-[10px] px-[16px] py-[8px] rounded-full bg-[rgba(145,198,242,0.1)]"

@@ -37,7 +37,7 @@ const verificationSteps: VerificationStep[] = [
   {
     title: 'Exception routing',
     description:
-      'Anything unbalanced goes to your team instead of being posted approximately.',
+      'Anything unbalanced goes to your team instead of being posted without reconciliation.',
   },
 ];
 

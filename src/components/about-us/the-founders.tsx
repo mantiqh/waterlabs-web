@@ -38,7 +38,7 @@ export const TheFoundersSection = () => {
         Wrapper: #F4F6F9
         Inner Container: White background with bottom border divider separating from The Team Section
       */}
-      <div className="w-full bg-white pt-[48px] px-[20px] md:pt-[60px] md:px-[40px] lg:pt-[80px] lg:px-[60px]">
+      <div className="w-full bg-white rounded-tl-[30px] lg:rounded-tl-[60px] pt-[48px] px-[20px] md:pt-[60px] md:px-[40px] lg:pt-[80px] lg:px-[60px]">
         <div className="w-full max-w-[1320px] mx-auto border-b border-[#D7DCE2] pb-[32px] md:pb-[48px] lg:pb-[60px] flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[20px]">
           {/* Left Header Column */}
           <div className="w-full lg:w-[35%] xl:w-[538px] shrink-0 min-w-0 flex flex-col items-start gap-[16px] lg:gap-[20px]">

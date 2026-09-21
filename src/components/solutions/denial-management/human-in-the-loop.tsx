@@ -38,7 +38,7 @@ export const HumanInTheLoopSection = () => {
                 <span className="text-[#0F68D6]">Human in the loop,</span> by design
               </h3>
               <p className="type-body-xs text-[#111111] max-w-[644px]">
-                Clinical appeals, peer to peer reviews and the denials worth escalating through a payer relationship are routed to your team. The denial history, the payer&apos;s criteria and the assembled evidence arrive in one place.
+                Clinical appeals, peer-to-peer reviews and the denials worth escalating through a payer relationship are routed to your team. The denial history, the payer&apos;s criteria and the assembled evidence arrive in one place.
               </p>
             </div>
 
@@ -48,7 +48,7 @@ export const HumanInTheLoopSection = () => {
               <div className="hidden lg:block relative w-full aspect-[644/309] rounded-[30px_10px_30px_30px] overflow-hidden">
                 <Image
                   src="/images/solutions/human-in-the-loop/img_human_in_the_loop.png"
-                  alt="Human in the loop managing clinical appeals and peer to peer reviews"
+                  alt="Human in the loop managing clinical appeals and peer-to-peer reviews"
                   fill
                   priority
                   sizes="(max-width: 1440px) 50vw, 644px"
@@ -60,7 +60,7 @@ export const HumanInTheLoopSection = () => {
               <div className="block lg:hidden relative w-full aspect-[362/156] rounded-[20px_10px_20px_20px] overflow-hidden">
                 <Image
                   src="/images/solutions/human-in-the-loop/img_human_in_the_loop_mobile%20(1).png"
-                  alt="Human in the loop managing clinical appeals and peer to peer reviews"
+                  alt="Human in the loop managing clinical appeals and peer-to-peer reviews"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 644px"

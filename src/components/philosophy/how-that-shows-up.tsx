@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const productStatements = [
   {
@@ -42,8 +42,47 @@ export const HowThatShowsUpSection = () => {
   const [activeDesktopIndex, setActiveDesktopIndex] = useState(0);
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
 
+  const sectionRef = useRef<HTMLDivElement>(null);
   const desktopScrollRef = useRef<HTMLDivElement>(null);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
+
+  // Sync window scroll with desktop statements progress
+  useEffect(() => {
+    const handleWindowScroll = () => {
+      if (window.innerWidth < 1024 || !sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      const start = windowHeight * 0.7;
+      const end = -rect.height * 0.3;
+      const total = start - end;
+      const current = start - rect.top;
+
+      if (current > 0 && current < total) {
+        const progress = Math.min(Math.max(current / total, 0), 1);
+        const index = Math.min(
+          Math.floor(progress * productStatements.length),
+          productStatements.length - 1
+        );
+        setActiveDesktopIndex(index);
+
+        if (desktopScrollRef.current) {
+          const container = desktopScrollRef.current;
+          const items = container.children;
+          if (items[index]) {
+            const targetItem = items[index] as HTMLElement;
+            container.scrollTo({
+              top: targetItem.offsetTop - container.offsetTop,
+              behavior: 'smooth',
+            });
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleWindowScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleWindowScroll);
+  }, []);
 
   // Handle Desktop vertical scroll
   const handleDesktopScroll = () => {
@@ -92,7 +131,7 @@ export const HowThatShowsUpSection = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden p-0 m-0 bg-[#F4F6F9]">
+    <section ref={sectionRef} className="relative w-full overflow-hidden p-0 m-0 bg-[#F4F6F9]">
       {/* 
         Outer Container Card (Frame 2147203276 / top frame):
         - Desktop: 1440px x 764px, rounded-tr-[60px] rounded-br-[60px], padding: 80px 60px, gap: 40px
@@ -155,16 +194,8 @@ export const HowThatShowsUpSection = () => {
             {/* Glassmorphic Card (Frame 2147203299: 537px x 500px on desktop) */}
             <div className="relative z-10 w-full lg:w-[360px] xl:w-[537px] h-auto lg:h-[500px] lg:max-h-[500px] bg-white/[0.90] backdrop-blur-[12px] rounded-[16px_8px_20px_20px] lg:rounded-[16px_8px_16px_8px] p-[20px] sm:p-[24px] lg:p-[32px_32px_0px] flex flex-col justify-between gap-[14px] shadow-sm overflow-hidden">
               
-              {/* Tag + Heading Block */}
+              {/* Heading Block */}
               <div className="flex flex-col gap-[10px] lg:gap-[14px]">
-                {/* Text - Tag */}
-                <div className="flex items-center gap-[6px] lg:gap-[8px]">
-                  <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                  <span className="type-caption lg:type-body-xxs text-[#7D8690] tracking-[0.01em]">
-                    In practice
-                  </span>
-                </div>
-
                 {/* Main Heading */}
                 <h2 className="type-h2 text-black">
                   How That Shows Up<br />in the Product
@@ -189,7 +220,7 @@ export const HowThatShowsUpSection = () => {
                 <div
                   ref={desktopScrollRef}
                   onScroll={handleDesktopScroll}
-                  className="flex flex-col gap-[20px] h-[183px] overflow-y-auto no-scrollbar snap-y snap-mandatory select-none flex-1 pr-[8px]"
+                  className="flex flex-col gap-[20px] h-[183px] overflow-y-auto no-scrollbar snap-y snap-mandatory select-none flex-1 pr-[8px] pb-[48px]"
                 >
                   {productStatements.map((item, index) => {
                     const isActive = index === activeDesktopIndex;
@@ -211,6 +242,8 @@ export const HowThatShowsUpSection = () => {
                       </div>
                     );
                   })}
+                  {/* Bottom spacer so the last statement has clear breathing room and is not blurry when scrolled to the end */}
+                  <div className="h-[28px] shrink-0 pointer-events-none" aria-hidden="true" />
                 </div>
 
               </div>
@@ -259,7 +292,7 @@ export const HowThatShowsUpSection = () => {
               </div>
 
               {/* Subtle bottom gradient fade on desktop card */}
-              <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-[40px] bg-gradient-to-t from-white/90 to-transparent pointer-events-none rounded-b-[8px]" />
+              <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-[20px] bg-gradient-to-t from-white/40 to-transparent pointer-events-none rounded-b-[8px]" />
 
             </div>
 

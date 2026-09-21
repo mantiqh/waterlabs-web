@@ -54,18 +54,18 @@ export const ContactUsHeroSection = () => {
             <div className="w-full flex flex-col items-start gap-[12px]">
               {/* Heading (Mobile: 32px / 40px, Desktop: type-h2, #111111) */}
               <h2 className="type-h2 max-md:text-[32px] max-md:leading-[40px] tracking-[-0.01em] text-[#111111]">
-                Contact <span className="text-electric-blue">Waterlabs</span>
+                Your revenue cycle, <span className="text-electric-blue">on our numbers</span>
               </h2>
               {/* Subheading (20px / 28px, #2A2A2A) */}
               <p className="type-body-s text-[#2A2A2A] max-w-[540px] lg:max-w-[664px]">
-                We&apos;re always open to new conversations — whether<br className="hidden sm:inline" /> it&apos;s a question, a partnership, or just a hello.
+                Bring us the function that is hurting most. In 15 minutes we will show you what changes, what it costs, and how quickly it goes live.
               </p>
             </div>
             
             {/* CTA Button */}
             <a href="#contact-form">
               <CTA variant="light-bg">
-                Contact us
+                Get a Demo
               </CTA>
             </a>
           </div>

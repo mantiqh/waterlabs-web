@@ -76,7 +76,8 @@ export const WhatWeHoldSection = () => {
     <section
       className="w-full overflow-hidden"
       style={{
-        background: 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
+        background:
+          'linear-gradient(to bottom, transparent 0%, transparent 50%, #FFFFFF 50%, #FFFFFF 100%), linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
       }}
     >
       {/* 
@@ -84,6 +85,7 @@ export const WhatWeHoldSection = () => {
         - Figma Desktop: node-id=6211-17492 (1440px x 924px, padding: 80px 60px, radius: 0 60px 60px 0)
         - Background: #F4F6F9 with extract watermark on bottom left (bg_what_we_hold_ourselves.png)
         - Top-right corner rounded (rounded-tr-[60px]) exposing the teal gradient of Our story above
+        - Bottom-right corner rounded (rounded-br-[60px]) exposing pure white of The Founders below
       */}
       <div className="w-full bg-[#F4F6F9] bg-[url('/images/about-us/what-we-hold/bg_what_we_hold_ourselves.png')] bg-cover bg-left-bottom bg-no-repeat rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] pt-[40px] pb-[40px] px-[20px] md:pt-[60px] md:pb-[60px] md:px-[40px] lg:pt-[80px] lg:pb-[80px] lg:px-[60px]">
         <div className="w-full max-w-[1320px] mx-auto">

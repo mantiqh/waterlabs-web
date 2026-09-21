@@ -89,25 +89,16 @@ export const WhyWeStartedWaterlabsSection = () => {
         {/* Content Container (Max width 1320px centered) */}
         <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[24px] lg:gap-[40px]">
           
-          {/* Left Column: Tag + Title */}
+          {/* Left Column: Title */}
           <div className="w-full lg:w-1/2 max-w-[640px] flex flex-col gap-[12px] lg:gap-[14px]">
-            
-            {/* Tag */}
-            <div className="flex items-center gap-[4px] lg:gap-[8px]">
-              <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#63CCB7] shrink-0" />
-              <span className="type-caption lg:type-body-xxs text-[#7D8690] tracking-[0.01em]">
-                Why we exist
-              </span>
-            </div>
-
             {/* Title */}
             <div className="w-full max-w-[640px]">
               <h2 className="type-h2">
                 <span className="text-[#F4F6F9]">
-                  Why We<br />
+                  Why we<br />
                 </span>
                 <span className="text-[#63CCB7]">
-                  Started Waterlabs
+                  started Waterlabs
                 </span>
               </h2>
             </div>

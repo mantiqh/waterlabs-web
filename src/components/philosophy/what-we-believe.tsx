@@ -105,7 +105,7 @@ export const WhatWeBelieveSection = () => {
               {/* Header Text Block */}
               <div className="flex flex-col gap-[10px] xl:gap-[14px]">
                 <h2 className="type-h2 text-[#111111]">
-                  What <span className="text-[#0F68D6]">We Believe</span>
+                  What <span className="text-[#0F68D6]">we believe</span>
                 </h2>
                 <p className="type-body-xs text-[#111111]">
                   Three convictions sit under everything we build.
@@ -254,7 +254,7 @@ export const WhatWeBelieveSection = () => {
             {/* Mobile Header Block */}
             <div className="flex flex-col gap-[12px] w-full">
               <h2 className="type-h2 text-[#111111]">
-                What <span className="text-[#0F68D6]">We Believe</span>
+                What <span className="text-[#0F68D6]">we believe</span>
               </h2>
               <p className="type-body-xs text-[#111111]">
                 Three convictions sit under everything we build.

@@ -141,7 +141,7 @@ export const aboutUsPageQuery = groq`*[_type == "aboutUsPage"][0] {
   }
 }`;
 
-export const allBlogPostsQuery = groq`*[_type == "blogPost" && !(_id in path('drafts.**'))] | order(order asc, publishedAt desc, _createdAt asc) {
+export const allBlogPostsQuery = groq`*[_type == "blogPost" && !(_id in path('drafts.**')) && !(slug.current in ['testing-blog', 'testing-blog2', 'prior-authorization-automation-broken-process-healthcare'])] | order(order asc, publishedAt desc, _createdAt asc) {
   _id,
   "id": _id,
   title,
@@ -163,7 +163,7 @@ export const blogsPageQuery = groq`*[_type == "blogsPage"][0] {
   readBlogButtonText
 }`;
 
-export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
+export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug && !(_id in path('drafts.**')) && !(slug.current in ['testing-blog', 'testing-blog2', 'prior-authorization-automation-broken-process-healthcare'])][0] {
   _id,
   "id": _id,
   title,
@@ -198,7 +198,7 @@ export const blogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current ==
   }
 }`;
 
-export const blogPostSlugsQuery = groq`*[_type == "blogPost" && defined(slug.current) && !(_id in path('drafts.**'))] {
+export const blogPostSlugsQuery = groq`*[_type == "blogPost" && defined(slug.current) && !(_id in path('drafts.**')) && !(slug.current in ['testing-blog', 'testing-blog2', 'prior-authorization-automation-broken-process-healthcare'])] {
   "slug": slug.current
 }`;
 

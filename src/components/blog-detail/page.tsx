@@ -2,6 +2,7 @@ import BlogDetailContent, { type BlogArticleSection } from '@/components/blog-de
 import BlogDetailRelated, { type RelatedBlogItem } from '@/components/blog-detail/blog-detail-related';
 import type { TOCItem } from '@/components/blog-detail/blog-detail-toc';
 import BlogDetailHeroSection, { type BlogDetailHeroProps } from '@/components/blog-detail/hero-section';
+import BlogsCTASection from '@/components/blogs/cta-section';
 
 export interface BlogDetailPageProps {
   heroProps?: BlogDetailHeroProps;
@@ -26,6 +27,9 @@ export const BlogDetailPage = ({
 
       {/* Related Blogs Section */}
       <BlogDetailRelated relatedBlogs={relatedBlogs} />
+
+      {/* Closing CTA Section */}
+      <BlogsCTASection />
     </div>
   );
 };

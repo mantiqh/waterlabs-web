@@ -24,7 +24,7 @@ export const HumanInTheLoopSection = () => {
 
               {/* Stat 2 */}
               <div className="flex-1 flex flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">24&ndash;48 hour</h3>
+                <h3 className="type-h3 text-black">24-48-hour</h3>
                 <p className="type-body-xs text-charcoal">turnaround time</p>
               </div>
 

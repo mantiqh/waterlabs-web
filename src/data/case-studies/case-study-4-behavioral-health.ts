@@ -2,8 +2,8 @@ import { CaseStudy } from '@/types/case-study';
 
 export const caseStudy4: CaseStudy = {
   id: 'case-study-4',
-  slug: 'behavioral-health-practice',
-  aliases: ['regional-health-system-ar'],
+  slug: 'regional-behavioral-health-network',
+  aliases: ['behavioral-health-practice', 'regional-health-system-ar'],
   categoryTag: 'Case Study · Behavioral Health',
   title: 'How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1.',
   titleHighlight: 'cut benefits verification from 4 days to 1.',
@@ -13,11 +13,11 @@ export const caseStudy4: CaseStudy = {
   cardCategory: 'Company News',
   cardTag: 'Behavioral Health',
   cardStat: '4 days → 1 day',
-  cardSubtitle: 'Benefits Verification',
+  cardSubtitle: 'An outpatient intake operation where every new patient waited on a phone call before anyone could book them in.',
   desktopImage: '/images/case-study-main-page/tabs/img_placeholder_04.png',
   mobileImage: '/images/case-study-main-page/tabs/img_placeholder_04_mobile (1).png',
   order: 4,
-  tags: ['Behavioral Health', 'Eligibility and Benefits', 'Patient Intake', 'HIMER AI OS'],
+  tags: ['Behavioral Health', 'Eligibility and Benefits', 'Denial Prevention', 'HIMER AI OS'],
   clientSummary:
     'An outpatient behavioral health practice verifying benefits for every new patient before a first appointment could be scheduled. Behavioral health coverage includes visit limits and prior authorization requirements that vary widely across payers and plans within the same payer.',
   statBadges: [
@@ -33,7 +33,7 @@ export const caseStudy4: CaseStudy = {
     headline: '4 days → 1 day',
     subheadline: 'Average verification turnaround, reducing time by about 75%.',
     details:
-      'Same-day benefits summary. Intake receives a structured summary on the day the visit is booked, so scheduling no longer has to wait for verification.\n\nManual payer calls only for exceptions. Staff who spent their day on hold now handle only cases that genuinely need a person.\n\nLower verification labor cost per patient. With fewer missed and delayed visits due to patient disengagement while waiting.\n\nConsistent interpretation, every time. Rules-based benefit interpretation is applied identically to every patient, replacing verification quality that varied by staff member and payer familiarity.',
+      'Same-day benefits summary: Intake receives a structured summary on the day the visit is booked, so scheduling no longer has to wait for verification.\n\nManual payer calls only for exceptions: Staff who spent their day on hold now handle only cases that genuinely need a person.\n\nLower verification labor cost per patient: With fewer missed and delayed visits due to patient disengagement while waiting.\n\nConsistent interpretation, every time: Rules-based benefit interpretation is applied identically to every patient, replacing verification quality that varied by staff member and payer familiarity.',
   },
   outcomes:
     'Operationally, the path from scheduling to first appointment no longer depends on how quickly someone can reach a payer by phone. Verification runs the same way regardless of the payer or who is at their desk that morning.\n\nFinancially, the labor cost of verifying each patient fell, and fewer patients disengaged during the wait, so fewer booked visits went unfilled.\n\nStrategically, the practice can handle referral volume without adding verification staff, and every new patient receives the same specialty-aware reading of their plan.',
@@ -51,8 +51,8 @@ export const caseStudy4: CaseStudy = {
   ],
   cta: {
     tagText: 'Talk to us.',
-    headline: '15-minute call to see what Waterlabs would do on your numbers.',
-    buttonText: 'Get a Demo',
+    headline: 'See what Waterlabs would do on your numbers.',
+    buttonText: 'GET A DEMO',
     buttonHref: '/contact-us',
   },
 };
