@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
@@ -157,7 +156,7 @@ export const WhereYouWouldFitSection = ({
   }, [categoryRoles, searchQuery]);
 
   const tagText = data?.openRolesTag || 'Open Roles';
-  const headingText = data?.openRolesHeading || 'Where you would fit.';
+  const headingText = data?.openRolesHeading || 'Where you fit';
 
   return (
     <section
@@ -385,100 +384,6 @@ export const WhereYouWouldFitSection = ({
                   );
                 })
               )}
-            </div>
-
-          </div>
-
-          {/* "Don't see a fit?" Feature Banner Card */}
-          <div className="w-full lg:rounded-tl-[30px] lg:rounded-tr-[10px] lg:rounded-br-[30px] lg:rounded-bl-[30px] lg:overflow-hidden lg:h-[433px]">
-
-            {/* Desktop View (lg: 1024px+, Figma node 3883-10419) */}
-            <div className="hidden lg:flex relative w-full h-full">
-              {/* Background Architectural Glass Image */}
-              <div className="absolute inset-0 z-0">
-                <Image
-                  src="/images/careers/where-you-would-fit/img_dont_see_a_fit.png"
-                  alt="Don't see a fit background"
-                  fill
-                  priority
-                  sizes="1320px"
-                  className="object-cover object-[80%_center] xl:object-right"
-                />
-              </div>
-
-              {/* Left Mint Green Card */}
-              <div className="relative z-10 w-[48%] xl:w-[539px] min-w-0 h-full bg-[#63CCB7] rounded-tl-[30px] rounded-tr-[0px] rounded-br-[60px] rounded-bl-[30px] p-[32px] xl:p-[40px] flex flex-col justify-center gap-[16px] xl:gap-[20px]">
-                <h2 className="type-h2 text-[#042849]">
-                  Don&apos;t see a fit?
-                </h2>
-
-                <div className="flex flex-col gap-[16px] xl:gap-[26px]">
-                  <p className="type-body-s text-[#111111] max-w-[459px]">
-                    We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
-                  </p>
-
-                  <div className="w-fit">
-                    <Link href="mailto:careers@waterlabs.ai">
-                      <button
-                        type="button"
-                        className="inline-flex items-center justify-center h-[40px] xl:h-[44px] px-[16px] xl:px-[20px] py-[8px] xl:py-[10px] gap-[8px] xl:gap-[10px] bg-white rounded-[64px] font-secondary text-[14px] xl:text-[16px] leading-[20px] xl:leading-[24px] font-medium text-[#042849] hover:bg-gradient-to-br hover:from-[#042849] hover:from-[40%] hover:to-[#1E5667] hover:text-white transition-all duration-300 group cursor-pointer border-none outline-none"
-                      >
-                        <span className="text-[#042849] group-hover:text-white transition-colors duration-300">
-                          Write to us
-                        </span>
-                        <ChevronRight className="text-[#042849] group-hover:text-white transition-colors duration-300" />
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile & Tablet View */}
-            <div className="flex lg:hidden flex-col w-full rounded-tl-[20px] sm:rounded-tl-[30px] rounded-tr-[10px] rounded-br-[20px] sm:rounded-br-[30px] rounded-bl-[20px] sm:rounded-bl-[30px] overflow-hidden">
-
-              {/* Mobile / Tablet Image */}
-              <div className="w-full aspect-[16/10] sm:aspect-[16/9] md:h-[320px] overflow-hidden">
-                <Image
-                  src="/images/careers/where-you-would-fit/where-would-you-fit-mobile.jpg"
-                  alt="Don't see a fit background"
-                  width={1320}
-                  height={840}
-                  priority
-                  className="w-full h-full object-cover object-top"
-                />
-              </div>
-
-              {/* Mobile / Tablet Content Card with synced corner radius overlapping the image */}
-              <div className="relative z-10 w-full bg-[#63CCB7] -mt-[24px] sm:-mt-[36px] md:-mt-[44px] rounded-tl-[24px] sm:rounded-tl-[36px] md:rounded-tl-[44px] rounded-tr-[0px] p-[24px] sm:p-[32px] md:p-[48px] flex flex-col gap-[18px] sm:gap-[22px] md:gap-[28px]">
-
-                <h2 className="type-h2 text-[#042849]">
-                  Don&apos;t see a fit?
-                </h2>
-
-                <div className="flex flex-col gap-[16px] sm:gap-[20px] md:gap-[24px]">
-
-                  <p className="type-body-s text-[#111111] max-w-[620px]">
-                    We make a few great hires every quarter, and the best people rarely fit a box we&apos;ve already drawn. If you&apos;re exceptional and you see the mission, tell us anyway.
-                  </p>
-
-                  <div className="w-fit">
-                    <Link href="mailto:careers@waterlabs.ai">
-                      <button
-                        type="button"
-                        className="inline-flex items-center justify-center h-[40px] md:h-[44px] px-[16px] md:px-[20px] py-[8px] md:py-[10px] gap-[8px] md:gap-[10px] bg-white rounded-[64px] type-cta text-[#042849] hover:bg-gradient-to-br hover:from-[#042849] hover:from-[40%] hover:to-[#1E5667] hover:text-white transition-all duration-300 group cursor-pointer border-none outline-none"
-                      >
-                        <span className="text-[#042849] group-hover:text-white transition-colors duration-300">
-                          Write to us
-                        </span>
-
-                        <ChevronRight className="text-[#042849] group-hover:text-white transition-colors duration-300 scale-75 md:scale-100" />
-                      </button>
-                    </Link>
-                  </div>
-
-                </div>
-              </div>
             </div>
 
           </div>

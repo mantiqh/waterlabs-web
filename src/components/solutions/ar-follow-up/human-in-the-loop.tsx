@@ -18,8 +18,8 @@ export const HumanInTheLoopSection = () => {
             <div className="w-full bg-ghost-white rounded-[20px] p-[20px] md:p-[32px] lg:p-[40px] flex flex-col lg:flex-row gap-[24px] lg:gap-[40px]">
               {/* Stat 1 */}
               <div className="flex-1 flex flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">15 to 35 days</h3>
-                <p className="type-body-xs text-charcoal">Days Sales Outstanding (DSO)</p>
+                <h3 className="type-h3 text-black">15-35-day</h3>
+                <p className="type-body-xs text-charcoal">reduction in DSO</p>
               </div>
             </div>
           </div>
@@ -42,7 +42,7 @@ export const HumanInTheLoopSection = () => {
               <div className="hidden lg:block relative w-full aspect-[644/309] rounded-[30px_10px_30px_30px] overflow-hidden">
                 <Image
                   src="/images/solutions/human-in-the-loop/img_human_in_the_loop.png"
-                  alt="Human in the loop managing payer disputes and high value claim escalations"
+                  alt="Human in the loop managing payer disputes and high-value claim escalations"
                   fill
                   priority
                   sizes="(max-width: 1440px) 50vw, 644px"
@@ -54,7 +54,7 @@ export const HumanInTheLoopSection = () => {
               <div className="block lg:hidden relative w-full aspect-[362/156] rounded-[20px_10px_20px_20px] overflow-hidden">
                 <Image
                   src="/images/solutions/human-in-the-loop/img_human_in_the_loop_mobile%20(1).png"
-                  alt="Human in the loop managing payer disputes and high value claim escalations"
+                  alt="Human in the loop managing payer disputes and high-value claim escalations"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 644px"

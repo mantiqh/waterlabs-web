@@ -11,10 +11,46 @@ export interface CaseStudyCTAProps {
 
 export const CaseStudyCTA = ({
   tagText = 'Talk to us.',
-  headline = 'Schedule a 15-minute call to see how Waterlabs can impact your organization’s results.',
-  buttonText = 'Get a Demo',
+  headline = 'See what Waterlabs would do on your numbers.',
+  buttonText = 'GET A DEMO',
   buttonHref = '/contact-us',
 }: CaseStudyCTAProps) => {
+  const safeButtonHref = buttonHref?.includes('waterlabs-w7eb.vercel.app')
+    ? '/contact-us'
+    : (buttonHref || '/contact-us');
+
+  const renderHeadline = (text: string) => {
+    if (text.toLowerCase().includes('waterlabs can')) {
+      return (
+        <>
+          {/* Small screens layout */}
+          <span className="md:hidden">
+            <span className="block">Schedule a 15-minute call</span>
+            <span className="block">to see how Waterlabs can</span>
+            <span className="block">impact your</span>
+            <span className="block">organization’s results.</span>
+          </span>
+          {/* Tablet & Desktop layout */}
+          <span className="hidden md:inline">
+            <span className="block">Schedule a 15-minute call to see how</span>
+            <span className="block md:whitespace-nowrap">Waterlabs can impact your organization’s results.</span>
+          </span>
+        </>
+      );
+    }
+    if (text.includes('on your numbers')) {
+      const parts = text.split('on your numbers');
+      return (
+        <>
+          {parts[0].trimEnd()}
+          <br />
+          on your numbers{parts.slice(1).join('on your numbers')}
+        </>
+      );
+    }
+    return text;
+  };
+
   return (
     <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#F4F6F9] from-50% to-[#111111] to-50%">
       {/* 
@@ -42,31 +78,14 @@ export const CaseStudyCTA = ({
 
             {/* Headline: Display/H2 token */}
             <h2 className="type-h2 text-white">
-              {headline.toLowerCase().includes('waterlabs can') ? (
-                <>
-                  {/* Small screens layout matching Image 2 */}
-                  <span className="md:hidden">
-                    <span className="block">Schedule a 15-minute call</span>
-                    <span className="block">to see how Waterlabs can</span>
-                    <span className="block">impact your</span>
-                    <span className="block">organization’s results.</span>
-                  </span>
-                  {/* Tablet & Desktop layout */}
-                  <span className="hidden md:inline">
-                    <span className="block">Schedule a 15-minute call to see how</span>
-                    <span className="block md:whitespace-nowrap">Waterlabs can impact your organization’s results.</span>
-                  </span>
-                </>
-              ) : (
-                headline
-              )}
+              {renderHeadline(headline)}
             </h2>
 
           </div>
 
           {/* Right Column: CTA Action Button (Desktop - Fill CTA) */}
           <div className="shrink-0 flex items-center pt-[4px] lg:pt-0">
-            <Link href={buttonHref}>
+            <Link href={safeButtonHref}>
               <CTA variant="dark-bg">
                 {buttonText}
               </CTA>

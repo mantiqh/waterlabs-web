@@ -114,7 +114,7 @@ export const CaseStudyRelated = ({
           {/* =================================================================
               MOBILE / SMALL SCREENS: Horizontal Swipe Slider (Figma Frame 2147226524)
              ================================================================= */}
-          <div className="flex lg:hidden w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-[4px]">
+          <div aria-hidden="true" className="flex lg:hidden w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-[4px]">
             <div className="flex flex-row items-start gap-[20px] pr-[20px]">
               {relatedCases.map((item) => (
                 <Link

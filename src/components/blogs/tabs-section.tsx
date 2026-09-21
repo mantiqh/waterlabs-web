@@ -39,8 +39,8 @@ const BLOG_ARTICLES: BlogArticle[] = [
   {
     id: '1',
     category: 'Features',
-    tag: 'Lorem',
-    subTag: 'Lorem Ipsum',
+    tag: 'Features',
+    subTag: 'Jun 26, 2025',
     title: (
       <>
         Denial Management in Revenue<br className="hidden md:inline" />{' '}
@@ -54,27 +54,10 @@ const BLOG_ARTICLES: BlogArticle[] = [
     mobileImage: '/images/blogs/tabs/img_denial_management_inrevenue_mobile (1).png',
   },
   {
-    id: '2',
-    category: 'Use Cases',
-    tag: 'Lorem',
-    subTag: 'Lorem Ipsum',
-    title: (
-      <>
-        Prior Authorization Automation:<br className="hidden md:inline" />{' '}
-        Fixing the Most Broken Process in<br className="hidden md:inline" />{' '}
-        Healthcare
-      </>
-    ),
-    rawTitle: 'Prior Authorization Automation: Fixing the Most Broken Process in Healthcare',
-    slug: 'prior-authorization-automation-broken-process-healthcare',
-    desktopImage: '/images/blogs/tabs/img_prior_authorization.png',
-    mobileImage: '/images/blogs/tabs/img_prior_authorization_mobile (1).png',
-  },
-  {
     id: '3',
     category: 'Features',
-    tag: 'Lorem',
-    subTag: 'Lorem Ipsum',
+    tag: 'Features',
+    subTag: 'Jun 24, 2025',
     title: (
       <>
         Autonomous Medical Coding:<br className="hidden md:inline" />{' '}
@@ -91,8 +74,8 @@ const BLOG_ARTICLES: BlogArticle[] = [
   {
     id: '4',
     category: 'Case Studies',
-    tag: 'Lorem',
-    subTag: 'Lorem Ipsum',
+    tag: 'Case Studies',
+    subTag: 'Jun 23, 2025',
     title: (
       <>
         The Economics of the Revenue Cycle:<br className="hidden md:inline" />{' '}
@@ -129,21 +112,57 @@ export const BlogsTabsSection = ({
     return Array.from(BLOG_CATEGORIES);
   }, [settingsCategories, categories]);
 
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return '';
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return d.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
+    } catch {
+      return dateStr;
+    }
+  };
+
   const articlesList: BlogArticle[] = useMemo(() => {
     if (!initialArticles || initialArticles.length === 0) {
       return BLOG_ARTICLES;
     }
-    return initialArticles.map((item, idx) => ({
-      id: item.id || item._id || String(idx),
-      category: item.category || 'Features',
-      tag: item.tag || 'Lorem',
-      subTag: item.subTag || 'Lorem Ipsum',
-      title: item.title,
-      rawTitle: item.title,
-      slug: item.slug,
-      desktopImage: item.desktopImage || '/images/blogs/tabs/img_denial_management_inrevenue.png',
-      mobileImage: item.mobileImage || item.desktopImage || '/images/blogs/tabs/img_denial_management_inrevenue_mobile (1).png',
-    }));
+    return initialArticles
+      .filter(
+        (item) =>
+          item.slug &&
+          ![
+            'testing-blog',
+            'testing-blog2',
+            'prior-authorization-automation-broken-process-healthcare',
+          ].includes(item.slug)
+      )
+      .map((item, idx) => {
+        const category = item.category || 'Features';
+        const tag = item.tag && item.tag !== 'Lorem' ? item.tag : category;
+        const formattedDate = formatDate(item.publishedAt);
+        const subTag = item.subTag && item.subTag !== 'Lorem Ipsum' ? item.subTag : formattedDate;
+
+        return {
+          id: item.id || item._id || String(idx),
+          category,
+          tag,
+          subTag,
+          title: item.title,
+          rawTitle: item.title,
+          slug: item.slug,
+          desktopImage:
+            item.desktopImage || '/images/blogs/tabs/img_denial_management_inrevenue.png',
+          mobileImage:
+            item.mobileImage ||
+            item.desktopImage ||
+            '/images/blogs/tabs/img_denial_management_inrevenue_mobile (1).png',
+        };
+      });
   }, [initialArticles]);
 
   const filteredArticles = useMemo(() => {
@@ -349,8 +368,12 @@ export const BlogsTabsSection = ({
               {/* Tag / Eyebrow (Text - Tag) */}
               <div className="flex items-center gap-[6px] lg:gap-[8px]">
                 <span className="type-caption text-[#7D8690]">{article.tag}</span>
-                <span className="h-[12px] lg:h-[14px] w-[1px] bg-[#7D8690]/40" />
-                <span className="type-caption text-[#7D8690]">{article.subTag}</span>
+                {article.subTag && (
+                  <>
+                    <span className="h-[12px] lg:h-[14px] w-[1px] bg-[#7D8690]/40" />
+                    <span className="type-caption text-[#7D8690]">{article.subTag}</span>
+                  </>
+                )}
               </div>
 
               {/* Desktop Article Layout (Side-by-side) */}

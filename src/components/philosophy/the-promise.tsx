@@ -34,7 +34,7 @@ export const ThePromiseSection = () => {
           </div>
 
           {/* Right Column: Statement, Image & Outcome Headline (Frame 2147226496) */}
-          <div className="w-full lg:w-[700px] xl:w-[764px] flex flex-col items-start gap-[20px] lg:gap-[24px]">
+          <div className="w-full lg:w-[700px] flex flex-col items-start gap-[20px] lg:gap-[24px]">
             
             {/* Lead Statement */}
             <p className="type-body-l text-[#042849] w-full max-w-[700px]">

@@ -1,6 +1,27 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 export const WeBuildPeopleSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      // Start revealing when the container top enters lower viewport, fully reveal when middle
+      const progress = Math.min(Math.max((windowHeight - rect.top) / (windowHeight * 0.7), 0), 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="relative w-full bg-[#F4F6F9] pt-[40px] md:pt-[60px] lg:pt-[80px] pb-[80px] sm:pb-[100px] lg:pb-[140px] px-[20px] md:px-[40px] lg:px-[60px] overflow-visible">
       {/* 
@@ -11,18 +32,26 @@ export const WeBuildPeopleSection = () => {
           2. Layer 2 (Lime Green, z-10): 1217px x 184px, left: 58px, right: 45px, -bottom-[36px] (exact 36px protrusion below main card)
           3. Layer 3 (Golden Ochre, z-0): 1084px x 184px, left: 116px, right: 120px, -bottom-[67px] (exact 31px protrusion below lime green, 67px total below main card)
       */}
-      <div className="relative w-full max-w-[1320px] mx-auto overflow-visible">
+      <div ref={containerRef} className="relative w-full max-w-[1320px] mx-auto overflow-visible">
         
-        {/* Layer 3: Deepest Golden Ochre Card (#D6A85F) - Decreased width, pulled out a bit more */}
+        {/* Layer 3: Deepest Golden Ochre Card (#D6A85F) - Progressively reveals on scroll */}
         <div
-          className="absolute left-[45px] right-[45px] sm:left-[80px] sm:right-[80px] lg:left-[145px] lg:right-[145px] -bottom-[54px] sm:-bottom-[66px] lg:-bottom-[80px] h-[90px] sm:h-[120px] lg:h-[184px] rounded-[20px] sm:rounded-[26px] lg:rounded-[30px] z-0 shadow-sm pointer-events-none"
-          style={{ backgroundColor: '#D6A85F' }}
+          className="absolute left-[45px] right-[45px] sm:left-[80px] sm:right-[80px] lg:left-[145px] lg:right-[145px] -bottom-[54px] sm:-bottom-[66px] lg:-bottom-[80px] h-[90px] sm:h-[120px] lg:h-[184px] rounded-[20px] sm:rounded-[26px] lg:rounded-[30px] z-0 shadow-sm pointer-events-none transition-all duration-500 ease-out"
+          style={{
+            backgroundColor: '#D6A85F',
+            transform: `translateY(${(1 - scrollProgress) * -36}px) scale(${0.96 + scrollProgress * 0.04})`,
+            opacity: 0.4 + scrollProgress * 0.6,
+          }}
         />
 
-        {/* Layer 2: Middle Lime Green Card (#A9D154) - Decreased width, pulled out a bit more */}
+        {/* Layer 2: Middle Lime Green Card (#A9D154) - Progressively reveals on scroll */}
         <div
-          className="absolute left-[24px] right-[24px] sm:left-[45px] sm:right-[45px] lg:left-[80px] lg:right-[72px] -bottom-[28px] sm:-bottom-[34px] lg:-bottom-[44px] h-[90px] sm:h-[120px] lg:h-[184px] rounded-[20px] sm:rounded-[26px] lg:rounded-[30px] z-10 shadow-sm pointer-events-none"
-          style={{ backgroundColor: '#A9D154' }}
+          className="absolute left-[24px] right-[24px] sm:left-[45px] sm:right-[45px] lg:left-[80px] lg:right-[72px] -bottom-[28px] sm:-bottom-[34px] lg:-bottom-[44px] h-[90px] sm:h-[120px] lg:h-[184px] rounded-[20px] sm:rounded-[26px] lg:rounded-[30px] z-10 shadow-sm pointer-events-none transition-all duration-500 ease-out"
+          style={{
+            backgroundColor: '#A9D154',
+            transform: `translateY(${(1 - scrollProgress) * -20}px) scale(${0.98 + scrollProgress * 0.02})`,
+            opacity: 0.5 + scrollProgress * 0.5,
+          }}
         />
 
         {/* Layer 1: Main Top Card (1320px x 433px Desktop) - border-radius: 30px 10px 30px 30px */}

@@ -31,7 +31,7 @@ export type CaseStudyCategory = (typeof CASE_STUDY_CATEGORIES)[number];
 
 const CARDS_PER_PAGE = 6;
 
-// Base 6 real case studies connecting directly to individual case study pages
+// Base 5 real case studies connecting directly to individual case study pages (Behavioral Health is featured in the hero section)
 const BASE_CASE_STUDIES: Omit<CaseStudyItem, 'id'>[] = [
   {
     category: 'Features',
@@ -57,25 +57,14 @@ const BASE_CASE_STUDIES: Omit<CaseStudyItem, 'id'>[] = [
   },
   {
     category: 'Features',
-    tag: 'Multi-site Network',
+    tag: 'Physical Therapy',
     stat: '60 people → 4',
-    subtitle: 'Patient Intake Automation',
+    subtitle: 'Intake Automation',
     title:
       'How a multi-site physical therapy network used Waterlabs to run intake with 4 people instead of 60.',
     slug: 'multi-site-physical-therapy-network',
     desktopImage: '/images/case-study-main-page/tabs/img_placeholder_03.png',
     mobileImage: '/images/case-study-main-page/tabs/img_placeholder_03_mobile (1).png',
-  },
-  {
-    category: 'Company News',
-    tag: 'Behavioral Health',
-    stat: '4 days → 1 day',
-    subtitle: 'Benefits Verification',
-    title:
-      'How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1.',
-    slug: 'behavioral-health-practice',
-    desktopImage: '/images/case-study-main-page/tabs/img_placeholder_04.png',
-    mobileImage: '/images/case-study-main-page/tabs/img_placeholder_04_mobile (1).png',
   },
   {
     category: 'Case Studies',
@@ -138,10 +127,17 @@ export const CaseStudiesTabsSection = ({
     if (!initialCaseStudies || initialCaseStudies.length === 0) {
       return DEFAULT_CASE_STUDIES;
     }
-    return initialCaseStudies.map((study, idx) => {
-      const fallback = DEFAULT_CASE_STUDIES[idx % DEFAULT_CASE_STUDIES.length];
+    return initialCaseStudies
+      .filter(
+        (study) =>
+          study.slug !== 'regional-behavioral-health-network' &&
+          study.slug !== 'behavioral-health-practice' &&
+          study.id !== 'case-study-4'
+      )
+      .map((study, idx) => {
+        const fallback = DEFAULT_CASE_STUDIES[idx % DEFAULT_CASE_STUDIES.length];
 
-      let category = (study.cardCategory as string) || fallback.category;
+        let category = (study.cardCategory as string) || fallback.category;
       if (!category || !categoriesList.includes(category)) {
         const catLower = (study.categoryTag || '').toLowerCase();
         if (catLower.includes('rural')) category = 'Features';

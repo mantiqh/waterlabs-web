@@ -1,27 +1,70 @@
 'use client';
 
 import Image from 'next/image';
-import { type ChangeEvent, type FormEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from 'react';
 
-import { CTA } from '@/components/CTA';
+import { ChevronRight, CTA } from '@/components/CTA';
+
+const ORG_TYPE_OPTIONS = [
+  'Health system',
+  'Medical Group',
+  'Community Health Center',
+  'Outpatient Facility',
+  'Hospital',
+  'Other',
+];
 
 export const ContactUsContactForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    workEmail: '',
+    name: '',
+    org: '',
+    emailId: '',
+    phoneNumber: '',
     company: '',
-    message: '',
+    orgType: '',
+    challenge: '',
   });
   const [agreed, setAgreed] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [hoveredOption, setHoveredOption] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDropdownOpen]);
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    // Form submission logic would go here
+    if (!formData.orgType) {
+      setIsDropdownOpen(true);
+      return;
+    }
+    // Form submission logic
     console.log('Form submitted:', formData, agreed);
   };
 
@@ -65,7 +108,7 @@ export const ContactUsContactForm = () => {
                   className="object-cover object-center"
                 />
                 {/* Exact Figma Gradient overlay */}
-                <div 
+                <div
                   className="absolute inset-0"
                   style={{
                     background: 'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
@@ -78,27 +121,27 @@ export const ContactUsContactForm = () => {
             <form onSubmit={handleSubmit} className="w-full lg:w-[60%] xl:w-[772px] lg:flex-1 min-w-0 flex flex-col items-start gap-[16px] lg:gap-[14px]">
               {/* Input Fields Container */}
               <div className="w-full flex flex-col items-start gap-[12px]">
-                {/* Input container 1 */}
+                {/* Input container 1: Name & Org */}
                 <div className="w-full flex flex-col lg:flex-row items-start gap-[12px]">
-                  {/* First Name */}
+                  {/* Name */}
                   <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
                     <input
                       type="text"
-                      name="firstName"
-                      placeholder="First Name*"
-                      value={formData.firstName}
+                      name="name"
+                      placeholder="Name*"
+                      value={formData.name}
                       onChange={handleChange}
                       required
                       className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
                     />
                   </div>
-                  {/* Last Name */}
+                  {/* Org */}
                   <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
                     <input
                       type="text"
-                      name="lastName"
-                      placeholder="Last Name*"
-                      value={formData.lastName}
+                      name="org"
+                      placeholder="Org*"
+                      value={formData.org}
                       onChange={handleChange}
                       required
                       className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
@@ -106,39 +149,119 @@ export const ContactUsContactForm = () => {
                   </div>
                 </div>
 
-                {/* Input container 2 */}
+                {/* Input container 2: Email ID & Phone number */}
                 <div className="w-full flex flex-col lg:flex-row items-start gap-[12px]">
-                  {/* Work Email */}
+                  {/* Email ID */}
                   <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
                     <input
                       type="email"
-                      name="workEmail"
-                      placeholder="Work Email*"
-                      value={formData.workEmail}
+                      name="emailId"
+                      placeholder="Email ID*"
+                      value={formData.emailId}
                       onChange={handleChange}
                       required
                       className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
                     />
                   </div>
+                  {/* Phone number */}
+                  <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
+                    <input
+                      type="tel"
+                      name="phoneNumber"
+                      placeholder="Phone number"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Input container 3: Company & Organization Type */}
+                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px] relative z-20">
                   {/* Company */}
                   <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
                     <input
                       type="text"
                       name="company"
-                      placeholder="Company"
+                      placeholder="Company*"
                       value={formData.company}
                       onChange={handleChange}
+                      required
                       className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
                     />
                   </div>
+                  {/* Organization Type */}
+                  <div
+                    ref={dropdownRef}
+                    className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px] relative"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setIsDropdownOpen((prev) => !prev)}
+                      aria-haspopup="listbox"
+                      aria-expanded={isDropdownOpen}
+                      className="w-full h-full flex items-center justify-between text-left outline-none cursor-pointer group"
+                    >
+                      <span className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
+                        {formData.orgType || 'Organization Type*'}
+                      </span>
+                      <div
+                        className={`transition-transform duration-200 text-[#7D8690] group-hover:text-[#0F68D6] ${isDropdownOpen ? '-rotate-90 text-[#0F68D6]' : 'rotate-90'
+                          }`}
+                      >
+                        <ChevronRight className="w-[8px] h-[12px] xl:w-[9.73px] xl:h-[14.63px] shrink-0" />
+                      </div>
+                    </button>
+
+                    {/* Hidden input to maintain form state */}
+                    <input type="hidden" name="orgType" value={formData.orgType} />
+
+                    {/* Dropdown Menu (matching Navbar dropdown UI in Image 2 and section colors) */}
+                    {isDropdownOpen && (
+                      <div
+                        className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#F4F6F9] backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.10)] border border-[#D7DCE2] z-50 flex flex-col gap-[4px] animate-in fade-in-0 zoom-in-95 duration-150"
+                        role="listbox"
+                      >
+                        {ORG_TYPE_OPTIONS.map((opt) => {
+                          const isSelected = formData.orgType === opt;
+                          const isHovered = hoveredOption === opt;
+                          return (
+                            <button
+                              key={opt}
+                              type="button"
+                              role="option"
+                              aria-selected={isSelected}
+                              onMouseEnter={() => setHoveredOption(opt)}
+                              onMouseLeave={() => setHoveredOption(null)}
+                              onClick={() => {
+                                setFormData((prev) => ({ ...prev, orgType: opt }));
+                                setIsDropdownOpen(false);
+                                setHoveredOption(null);
+                              }}
+                              className={`h-[40px] w-full flex flex-row items-center gap-[14px] px-[12px] py-[8px] body-xxs type-body-xxs transition-colors duration-150 cursor-pointer text-left ${
+                                isSelected || isHovered
+                                  ? 'text-[#0F68D6]'
+                                  : 'text-[#111111] hover:text-[#0F68D6]'
+                              }`}
+                            >
+                              <span className="whitespace-nowrap">{opt}</span>
+                              {(isSelected || isHovered) && (
+                                <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0 text-[#0F68D6]" />
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                {/* Message */}
+                {/* What challenge are you looking to overcome */}
                 <div className="w-full h-[102px] border-b border-[#D7DCE2] px-[16px] pt-[18px]">
                   <textarea
-                    name="message"
-                    placeholder="Message"
-                    value={formData.message}
+                    name="challenge"
+                    placeholder="What challenge are you looking to overcome"
+                    value={formData.challenge}
                     onChange={handleChange}
                     rows={3}
                     className="w-full h-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none resize-none"
@@ -159,9 +282,8 @@ export const ContactUsContactForm = () => {
                     <button
                       type="button"
                       onClick={() => setAgreed(!agreed)}
-                      className={`w-[20px] h-[20px] rounded-[2px] flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
-                        agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'
-                      }`}
+                      className={`w-[20px] h-[20px] rounded-[2px] flex items-center justify-center transition-colors cursor-pointer shrink-0 ${agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'
+                        }`}
                       aria-label="Agree to terms"
                     >
                       {agreed && (
@@ -198,3 +320,4 @@ export const ContactUsContactForm = () => {
 };
 
 export default ContactUsContactForm;
+

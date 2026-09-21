@@ -57,7 +57,7 @@ export const CultureHeroSection = () => {
 
             {/* Subtext Paragraph */}
             <p className="type-body-s text-[#F4F6F9] leading-relaxed max-w-[650px]">
-              Waterlabs is a technology company with people at its centre. We built our culture like our product, around ownership. You get clear expectations, real feedback, and room to do work that matters. In return, we ask one thing. Own the outcome.
+              Waterlabs is a technology company with people at its center. We built our culture like our product, around ownership. You get clear expectations, real feedback, and room to do work that matters. In return, we ask one thing. Own the outcome.
             </p>
           </div>
 

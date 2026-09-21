@@ -33,7 +33,7 @@ export const caseStudy6: CaseStudy = {
     headline: 'Zero manual benefit lookups per estimate',
     subheadline: 'The lookups that made estimates impractical no longer happen.',
     details:
-      'Estimates before the visit, not after it. Every scheduled visit now carries a benefits-adjusted estimate delivered ahead of the date of service.\n\nEvery specialty, every fee schedule. Contracted rates applied automatically across the practice, rather than relying on someone to know which schedule applies.\n\nHigher upfront collections. With fewer billing disputes and fewer write-offs.\n\nConsistent plan-specific pricing. The same calculation on every visit, replacing manual estimation that varied with who produced it.',
+      'Estimates before the visit, not after it: Every scheduled visit now carries a benefits-adjusted estimate delivered ahead of the date of service.\n\nEvery specialty, every fee schedule: Contracted rates applied automatically across the practice, rather than relying on someone to know which schedule applies.\n\nHigher upfront collections: With fewer billing disputes and fewer write-offs.\n\nConsistent plan-specific pricing: The same calculation on every visit, replacing manual estimation that varied with who produced it.',
   },
   outcomes:
     'Operationally, estimates are produced on every scheduled visit without adding a step to anyone’s day. Coverage of the practice is complete rather than limited to whichever visits staff had time for.\n\nFinancially, more patients pay upfront, fewer bills get disputed, and fewer disputed bills become write-offs.\n\nStrategically, the practice replaced a source of patient friction with a point of trust. A patient who knows the number in advance arrives ready to pay it, and the conversation about money happens before care rather than after.',
@@ -51,8 +51,8 @@ export const caseStudy6: CaseStudy = {
   ],
   cta: {
     tagText: 'Talk to us.',
-    headline: '15-minute call to see what Waterlabs would do on your numbers.',
-    buttonText: 'Get a Demo',
+    headline: 'See what Waterlabs would do on your numbers.',
+    buttonText: 'GET A DEMO',
     buttonHref: '/contact-us',
   },
 };

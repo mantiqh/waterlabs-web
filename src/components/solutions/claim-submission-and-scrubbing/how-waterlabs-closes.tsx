@@ -32,7 +32,7 @@ const verificationSteps: VerificationStep[] = [
   {
     title: 'Submission and tracking',
     description:
-      'Claims are filed and acknowledgements tracked to ensure nothing is lost between your system and the payer.',
+      'Claims are filed and acknowledgments tracked to ensure nothing is lost between your system and the payer.',
   },
   {
     title: 'Rejection handling',
@@ -42,7 +42,7 @@ const verificationSteps: VerificationStep[] = [
   {
     title: 'Write-back to your EHR',
     description:
-      'Submission status, acknowledgements, and rejection history are recorded on each claim for easy access by billing and accounts receivable teams.',
+      'Submission status, acknowledgments, and rejection history are recorded on each claim for easy access by billing and accounts receivable teams.',
   },
 ];
 

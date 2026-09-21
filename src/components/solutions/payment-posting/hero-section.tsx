@@ -59,7 +59,7 @@ export const PaymentPostingHeroSection = () => {
 
             {/* Description */}
             <p className="type-body-s text-[#F4F6F9] max-w-[650px]">
-              Our agents reconcile remittances, post payments, and route what does not balance at whatever volume your practice runs.
+              Our agents reconcile remittances, post payments, and route what does not balance at any volume your practice handles.
             </p>
 
             {/* CTA Button */}
@@ -102,7 +102,7 @@ export const PaymentPostingHeroSection = () => {
 
           {/* Description */}
           <p className="type-body-s text-[#F4F6F9]">
-            Our agents reconcile remittances, post payments, and route what does not balance at whatever volume your practice runs.
+            Our agents reconcile remittances, post payments, and route what does not balance at any volume your practice handles.
           </p>
 
           {/* CTA Button */}

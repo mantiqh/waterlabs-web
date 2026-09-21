@@ -29,9 +29,9 @@ export const BlogsHeroSection = () => {
             <div className="flex flex-col items-start gap-[20px] w-full">
               {/* Tag / Eyebrow (Text - Tag) */}
               <div className="flex items-center gap-[8px]">
-                <span className="type-caption text-[#D7DCE2]">Lorem</span>
+                <span className="type-caption text-[#D7DCE2]">Article</span>
                 <span className="h-[14px] w-[1px] bg-[#D7DCE2]/40" />
-                <span className="type-caption text-[#D7DCE2]">Lorem Ipsum</span>
+                <span className="type-caption text-[#D7DCE2]">Jun 26, 2025</span>
               </div>
 
               {/* Title & Description (Frame 2147226899) */}
@@ -88,9 +88,9 @@ export const BlogsHeroSection = () => {
           <div className="w-full p-[20px] sm:p-[24px] pb-[28px] sm:pb-[36px] flex flex-col items-start justify-between flex-1 gap-[20px]">
             {/* Tag / Eyebrow (Text - Tag) */}
             <div className="flex items-center gap-[6px]">
-              <span className="type-caption text-[#D7DCE2]">Lorem</span>
+              <span className="type-caption text-[#D7DCE2]">Article</span>
               <span className="h-[12px] w-[1px] bg-[#D7DCE2]/40" />
-              <span className="type-caption text-[#D7DCE2]">Lorem Ipsum</span>
+              <span className="type-caption text-[#D7DCE2]">Jun 26, 2025</span>
             </div>
 
             {/* Title & Description */}

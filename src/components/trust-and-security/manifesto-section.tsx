@@ -17,7 +17,7 @@ export const ManifestoSection = () => {
               Most AI vendors fumble this conversation. Here&apos;s our version:{' '}
             </span>
             <span className="text-[#A9B2BC]">
-              your patient data stays in your environment, is never copied to us, never stored with us. Our agents do the work in the moment, and then the trace is gone. We keep the lesson, not the patient.
+              your patient data stays in your environment, is never copied to us, and is never stored by us. Our agents do the work in the moment, and then the trace is gone. We keep the lesson, not the patient.
             </span>
           </h2>
 

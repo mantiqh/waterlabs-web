@@ -33,7 +33,7 @@ export const caseStudy5: CaseStudy = {
     headline: '90% of coding volume handled autonomously',
     subheadline: 'Nine encounters in 10 now reach billing without a coder having to open the chart.',
     details:
-      'The complex 10% go to specialists. Coders work only on the encounters that require judgment, achieving higher throughput per coder on the remaining work.\n\nReal-time coding replaces the backlog. Diagnosis and CPT assignment happen as documentation is finalized, so the queue that used to form between discharge and billing does not form.\n\nLower cost to code per encounter. With a faster reimbursement cycle and fewer days to bill.\n\nGuideline-validated coding, applied consistently. Payer policy is checked the same way on every encounter, reducing denial-driving errors that arose from coder-by-coder interpretation.',
+      'The complex 10% go to specialists: Coders work only on the encounters that require judgment, achieving higher throughput per coder on the remaining work.\n\nReal-time coding replaces the backlog: Diagnosis and CPT assignment happen as documentation is finalized, so the queue that used to form between discharge and billing does not form.\n\nLower cost to code per encounter: With a faster reimbursement cycle and fewer days to bill.\n\nGuideline-validated coding, applied consistently: Payer policy is checked the same way on every encounter, reducing denial-driving errors that arose from coder-by-coder interpretation.',
   },
   outcomes:
     'Operationally, coding throughput no longer depends on coder capacity. Claim submission occurs as encounters close rather than waiting in a queue, so volume spikes do not create a backlog.\n\nFinancially, the cost of coding each case is lower, and reimbursement arrives sooner because claims leave the department days earlier than they did.\n\nStrategically, denial and audit exposure dropped, because coding is consistent and every code carries the payer policy check behind it. Coder expertise now applies to encounters in which it changes the outcome.',
@@ -51,8 +51,8 @@ export const caseStudy5: CaseStudy = {
   ],
   cta: {
     tagText: 'Talk to us.',
-    headline: '15-minute call to see what Waterlabs would do on your numbers.',
-    buttonText: 'Get a Demo',
+    headline: 'See what Waterlabs would do on your numbers.',
+    buttonText: 'GET A DEMO',
     buttonHref: '/contact-us',
   },
 };

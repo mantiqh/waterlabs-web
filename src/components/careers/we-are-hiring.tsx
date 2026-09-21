@@ -129,7 +129,7 @@ export const WeAreHiringSection = () => {
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
               <span className="body-xxs text-[#7D8690]">
-                Where You had Fit
+                Where you fit
               </span>
             </div>
 
@@ -137,11 +137,6 @@ export const WeAreHiringSection = () => {
             <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
               We are hiring!
             </h2>
-
-            {/* Subheading */}
-            <p className="font-secondary text-[14px] leading-[24px] text-[#111111]">
-              We&apos;re hiring across roles, and your work matters.
-            </p>
           </div>
 
           {/* Right Column: Desktop Vertical List (hidden on mobile/tablet) */}

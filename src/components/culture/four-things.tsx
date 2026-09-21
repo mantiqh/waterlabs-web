@@ -26,7 +26,7 @@ const fourThingsData: PrincipleItem[] = [
     id: 'accountability',
     title: 'Accountability',
     description:
-      'Own it. Deliver it. Improve it. We honour our commitments, learn from experience, and keep looking for ways to do better.',
+      'Own it. Deliver it. Improve it. We honor our commitments, learn from experience, and keep looking for ways to do better.',
     icon: '/images/culture/four-things/icon_accountability.png',
     iconWidth: 102,
     iconHeight: 100,
