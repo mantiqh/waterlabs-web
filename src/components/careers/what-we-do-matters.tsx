@@ -64,7 +64,7 @@ export const WhatWeDoMattersSection = () => {
               {/* Team Image (Frame 2147203292: 496px x 250px with rounded-tl-[40px] rounded-tr-[10px] rounded-br-[40px] rounded-bl-[10px]) */}
               <div className="relative w-full aspect-[322/182] lg:aspect-auto lg:w-[496px] lg:h-[240px] xl:h-[250px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)] shrink-0">
                 <Image
-                  src="/images/careers/what-we-do-matters/ing_this_is_a_hard_problem_to_solve.png"
+                  src="/images/careers/what-we-do-matters/Frame%202147203292.png"
                   alt="Problem Solving Team"
                   fill
                   sizes="(max-width: 1024px) 100vw, 496px"

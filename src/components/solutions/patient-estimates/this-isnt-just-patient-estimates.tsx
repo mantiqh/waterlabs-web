@@ -14,18 +14,18 @@ interface ThreeThingsCard {
 
 const threeThingsCards: ThreeThingsCard[] = [
   {
-    icon: '/images/solutions/the-three-things/icon_start_small.png',
+    icon: '/images/solutions/solutions-patient-estimates/the-three-things/icon_start_small%20(1).png',
     title: 'Start small',
     description:
       'You can begin with patient estimates and add more features as needed.',
   },
   {
-    icon: '/images/solutions/the-three-things/icon_go_live_fast.png',
+    icon: '/images/solutions/solutions-patient-estimates/the-three-things/icon_go_live_fast%20(1).png',
     title: 'Go live fast',
     description: 'Your agents are live within 14 days.',
   },
   {
-    icon: '/images/solutions/the-three-things/icon_data_remains_source.png',
+    icon: '/images/solutions/solutions-patient-estimates/the-three-things/icon_data_remains_source%20(1).png',
     title: 'Data remains secure',
     description:
       'Our agents run on infrastructure Waterlabs owns and operates in the United States, under a BAA, on servers we control end to end.',
@@ -131,7 +131,7 @@ export const ThisIsntJustPatientEstimatesSection = () => {
             <div className="w-full lg:w-[55%] xl:w-1/2 self-stretch flex items-center justify-end overflow-hidden">
               <div className="relative w-full h-full min-h-[380px] xl:min-h-[500px]">
                 <Image
-                  src="/images/solutions/this-isn't-just-an-eligibility/img_this_isn't_just_an_eligibility_tool.png"
+                  src="/images/solutions/solutions-patient-estimates/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png"
                   alt="HIMER AI OS platform overview"
                   fill
                   priority
@@ -151,7 +151,7 @@ export const ThisIsntJustPatientEstimatesSection = () => {
           >
             <div className="w-full overflow-hidden rounded-[20px] md:h-[380px] md:relative">
               <Image
-                src="/images/solutions/this-isn't-just-an-eligibility/img_this_isn't_just_an_eligibility_tool_mobile (1).png"
+                src="/images/solutions/solutions-patient-estimates/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(2).png"
                 alt="HIMER AI OS platform overview"
                 width={724}
                 height={596}

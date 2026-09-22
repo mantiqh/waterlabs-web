@@ -41,7 +41,7 @@ export const HumanInTheLoopSection = () => {
               {/* Desktop Image */}
               <div className="hidden lg:block relative w-full aspect-[644/309] rounded-[30px_10px_30px_30px] overflow-hidden">
                 <Image
-                  src="/images/solutions/human-in-the-loop/img_human_in_the_loop.png"
+                  src="/images/solutions/solutions-AR-follow-up/human-in-the-loop/Frame%202147203302%20(3).png"
                   alt="Human in the loop managing payer disputes and high-value claim escalations"
                   fill
                   priority
@@ -53,7 +53,7 @@ export const HumanInTheLoopSection = () => {
               {/* Mobile / Tablet Image */}
               <div className="block lg:hidden relative w-full aspect-[362/156] rounded-[20px_10px_20px_20px] overflow-hidden">
                 <Image
-                  src="/images/solutions/human-in-the-loop/img_human_in_the_loop_mobile%20(1).png"
+                  src="/images/solutions/solutions-AR-follow-up/human-in-the-loop/img_human_in_the_loop%20(1).png"
                   alt="Human in the loop managing payer disputes and high-value claim escalations"
                   fill
                   priority

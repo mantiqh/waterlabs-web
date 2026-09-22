@@ -52,7 +52,7 @@ export const ComeTalkToUsSection = () => {
 
             {/* Right Column: Photo (responsive width & aspect ratio, exact at xl+) */}
             <div
-              className="w-full lg:w-[48%] xl:w-[704px] aspect-[704/417] xl:h-[417px] shrink-0 rounded-[40px_10px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img.png')]"
+              className="w-full lg:w-[48%] xl:w-[704px] aspect-[704/417] xl:h-[417px] shrink-0 rounded-[40px_10px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img%20(2).png')]"
               role="img"
               aria-label="Waterlabs team in conversation with healthcare client"
             />
@@ -71,7 +71,7 @@ export const ComeTalkToUsSection = () => {
             <div className="flex flex-col items-start gap-[12px] w-full">
               {/* Middle: Photo (342px x 203px, border-radius: 20px 10px 20px 20px) */}
               <div
-                className="w-full h-[203px] rounded-[20px_10px_20px_20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img_mob.png')]"
+                className="w-full h-[203px] rounded-[20px_10px_20px_20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img_mob%20(3).png')]"
                 role="img"
                 aria-label="Waterlabs team in conversation with healthcare client"
               />

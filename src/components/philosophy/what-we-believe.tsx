@@ -49,21 +49,21 @@ const convictionsData = [
     title: 'A problem you manage remains a problem.',
     description:
       'Improvements over the past thirty years have made the revenue cycle more manageable but have not eliminated the work. Our goal is not to help organizations manage this better, but to resolve it.',
-    image: '/images/philosophy/what-we-believe/img_Resolution_not_improvement..png',
+    image: '/images/philosophy/what-we-believe/img_Resolution_not_improvement.%20(1).png',
   },
   {
     id: 1,
     title: 'Repetition should not need a person.',
     description:
       'Most of a revenue cycle is the same work done over and over. A small part of it genuinely needs someone to think. Those two things have been tangled together for decades because there was no way to separate them. Now there is.',
-    image: '/images/philosophy/what-we-believe/img_the_people_inside_the_problem_should_end_it..png',
+    image: '/images/philosophy/what-we-believe/img_the_people_inside_the_problem_should_end_it.%20(1).png',
   },
   {
     id: 2,
     title: 'Knowledge should remain within the organization, not just with individuals.',
     description:
       'In most revenue cycles, critical expertise resides with long-tenured staff. When they leave, this knowledge is lost and must be relearned. Systems should retain organizational knowledge.',
-    image: '/images/philosophy/what-we-believe/img_Knowledge_should_compound_in_the_system..png',
+    image: '/images/philosophy/what-we-believe/img_Knowledge_should_compound_in_the_system.%20(1).png',
   },
 ];
 
@@ -150,7 +150,7 @@ export const WhatWeBelieveSection = () => {
               {/* Background Texture Graphic */}
               <div className="absolute inset-0 pointer-events-none">
                 <Image
-                  src="/images/philosophy/what-we-believe/img_bg_what_we_believe.png"
+                  src="/images/philosophy/what-we-believe/img_card_background.png"
                   alt="Card background texture"
                   fill
                   priority
@@ -271,7 +271,7 @@ export const WhatWeBelieveSection = () => {
               {/* Card Mobile Background Texture */}
               <div className="absolute inset-0 pointer-events-none">
                 <Image
-                  src="/images/philosophy/what-we-believe/img_bg_what_we_believe-mobile.png"
+                  src="/images/philosophy/what-we-believe/banner-mobile.png"
                   alt="Card background texture mobile"
                   fill
                   priority

@@ -23,7 +23,7 @@ export const TheProblemSection = () => {
             {/* Left: Large Image */}
             <div className="relative w-full lg:flex-[1.766] lg:max-w-[830px] min-w-0 min-h-[456px] rounded-[30px_10px_30px_30px] overflow-hidden">
               <Image
-                src="/images/solutions/the-problem/img_the_problem.png"
+                src="/images/solutions/solutions-charge-capture-&-coding/the-problem/img_the_problem%20(4).png"
                 alt="Healthcare staff reviewing medical claims and coding"
                 fill
                 priority
@@ -117,7 +117,7 @@ export const TheProblemSection = () => {
                 {/* Image */}
                 <div className="relative w-full aspect-[338/185.7] rounded-[20px_10px_20px_20px] overflow-hidden">
                   <Image
-                    src="/images/solutions/the-problem/img_the_problem_mobile%20(1).png"
+                    src="/images/solutions/solutions-charge-capture-&-coding/the-problem/img_the_problem%20(4).png"
                     alt="Healthcare staff reviewing medical claims and coding"
                     fill
                     sizes="(max-width: 1024px) 100vw, 338px"

@@ -44,7 +44,7 @@ export const ThePromiseSection = () => {
             {/* Visual Image Card (Frame 2147203302: 700px x 325px desktop, 362px x 168px mobile) */}
             <div className="w-full max-w-[700px] rounded-[20px_10px_20px_20px] lg:rounded-[40px_10px_40px_10px] overflow-hidden relative border-b border-[#91C6F2]">
               <Image
-                src="/images/philosophy/what-we-believe/img_the_promise.png"
+                src="/images/philosophy/what-we-believe/img_the_promise%20(1).png"
                 alt="The Promise Visual"
                 width={1400}
                 height={650}

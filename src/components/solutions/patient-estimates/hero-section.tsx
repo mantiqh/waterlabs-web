@@ -17,7 +17,7 @@ export const PatientEstimatesHeroSection = () => {
         <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[60px]">
           <div className="hidden md:block absolute inset-0">
             <Image
-              src="/images/solutions/hero-section/img_banner_bg.png"
+              src="/images/solutions/solutions-patient-estimates/hero-section/img_banner_bg%20(10).png"
               alt="Solutions Gradient Background"
               fill
               priority
@@ -26,7 +26,7 @@ export const PatientEstimatesHeroSection = () => {
           </div>
           <div className="block md:hidden absolute inset-0">
             <Image
-              src="/images/solutions/hero-section/img_banner_bg%20_mobile(1).png"
+              src="/images/solutions/solutions-patient-estimates/hero-section/img_banner_bg%20(10).png"
               alt="Solutions Gradient Background Mobile"
               fill
               priority
@@ -75,7 +75,7 @@ export const PatientEstimatesHeroSection = () => {
           {/* Right Column: Hero Image */}
           <div className="relative w-full lg:flex-1 lg:max-w-[650px] aspect-[650/441] rounded-[20px] overflow-hidden z-[2]">
             <Image
-              src="/images/solutions/hero-section/img_banner%20(5).png"
+              src="/images/solutions/solutions-patient-estimates/hero-section/img_banner%20(16).png"
               alt="Patient estimates calculation and pre-service transparency"
               fill
               priority
@@ -117,7 +117,7 @@ export const PatientEstimatesHeroSection = () => {
           {/* Hero Image (Mobile & Tablet) */}
           <div className="relative w-full aspect-[362/246] rounded-[20px] overflow-hidden z-[2]">
             <Image
-              src="/images/solutions/hero-section/img_banner_mobile%20(6).png"
+              src="/images/solutions/solutions-patient-estimates/hero-section/img_banner%20(16).png"
               alt="Patient estimates calculation and pre-service transparency"
               fill
               priority

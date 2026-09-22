@@ -67,7 +67,7 @@ export const CareersHeroSection = () => {
           <div className="w-full md:w-1/2 max-w-[650px] shrink-0">
             <div className="relative w-full h-[300px] md:h-[340px] lg:h-[441px] rounded-tl-[60px] lg:rounded-tl-[80px] rounded-tr-[20px] rounded-br-[60px] lg:rounded-br-[80px] rounded-bl-[20px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)]">
               <Image
-                src="/images/careers/hero-section/img_banner%20(1).png"
+                src="/images/careers/hero-section/img_banner%20(8).png"
                 alt="Waterlabs Team"
                 fill
                 priority
@@ -96,7 +96,7 @@ export const CareersHeroSection = () => {
           {/* Bottom: Team Image Card (Rectangle 132) */}
           <div className="w-full relative aspect-[362/246] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
             <Image
-              src="/images/careers/hero-section/img_banner%20(1).png"
+              src="/images/careers/hero-section/img_banner%20(8).png"
               alt="Waterlabs Team"
               fill
               priority

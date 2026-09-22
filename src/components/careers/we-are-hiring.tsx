@@ -103,13 +103,13 @@ export const WeAreHiringSection = () => {
   };
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50% overflow-hidden p-0 m-0">
+    <section className="relative w-full bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50% p-0 m-0">
       {/* 
         Gray Card with left curves:
         - Top-left curve reveals white background
         - Bottom-left curve reveals Section 4's blue color (#0F68D6)
       */}
-      <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
+      <div className="relative w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
         
         {/* Decorative Vector Graphic on Bottom Left */}
         <div className="absolute left-0 bottom-0 pointer-events-none z-0 overflow-hidden w-[280px] sm:w-[380px] lg:w-[480px] xl:w-[563px] aspect-[1126/944]">
@@ -123,8 +123,8 @@ export const WeAreHiringSection = () => {
 
         <div className="relative z-10 max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[20px] lg:gap-[40px] xl:gap-[60px]">
 
-          {/* Left Column: Heading Block */}
-          <div className="w-full lg:w-[38%] xl:w-[537px] lg:flex-1 min-w-0 shrink-0 flex flex-col gap-[12px] lg:gap-[14px]">
+          {/* Left Column: Heading Block (Sticky on Desktop) */}
+          <div className="w-full lg:w-[38%] xl:w-[537px] min-w-0 shrink-0 flex flex-col gap-[12px] lg:gap-[14px] lg:sticky lg:top-[120px] self-start">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
@@ -140,7 +140,7 @@ export const WeAreHiringSection = () => {
           </div>
 
           {/* Right Column: Desktop Vertical List (hidden on mobile/tablet) */}
-          <div className="hidden lg:flex flex-col w-full lg:w-[62%] xl:w-[769px] lg:flex-1 min-w-0 gap-[24px] xl:gap-[32px]">
+          <div className="hidden lg:flex flex-col w-full lg:w-[58%] xl:w-[769px] min-w-0 gap-[24px] xl:gap-[32px]">
             {hiringRoles.map((role, index) => (
               <div
                 key={`desktop-role-${index}`}

@@ -101,7 +101,7 @@ export const ContactUsContactForm = () => {
               {/* Image Container (Frame 2147226534: max 516px x 328px) */}
               <div className="w-full relative overflow-hidden rounded-[20px_10px_20px_20px] lg:rounded-[30px_15px_30px_30px] aspect-[516/328] lg:w-full">
                 <Image
-                  src="/images/contact-us/contact-form/img_contact _form.png"
+                  src="/images/contact-us/contact-form/contact-form.jpg"
                   alt="Contact form illustration"
                   fill
                   sizes="(max-width: 1024px) 100vw, 516px"
@@ -299,8 +299,8 @@ export const ContactUsContactForm = () => {
 
                   {/* Main heading / Disclaimer */}
                   <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
-                    You may unsubscribe from these communications at any time. For more information on how to<br className="hidden lg:inline" />
-                    unsubscribe, our privacy practices, and how we are committed to protecting and respecting your<br className="hidden lg:inline" />
+                    You may unsubscribe from these communications at any time. For more information on how to<br className="hidden xl:inline" />
+                    unsubscribe, our privacy practices, and how we are committed to protecting and respecting your<br className="hidden xl:inline" />
                     privacy, please review our Privacy Policy.
                   </p>
                 </div>
