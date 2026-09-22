@@ -22,7 +22,7 @@ export const WhatWeAreSection = () => {
           <div className="hidden lg:flex flex-row items-center justify-between gap-[20px] w-full">
             {/* Left Column: 3D Diagram (responsive width & aspect ratio, exact at xl+) */}
             <div
-              className="w-full lg:w-[62%] xl:w-[830px] aspect-[830/456] xl:h-[456px] shrink-0 rounded-[20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/what-we-are/img_what_we_are.png')]"
+              className="w-full lg:w-[62%] xl:w-[830px] aspect-[830/456] xl:h-[456px] shrink-0 rounded-[20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/what-we-are/img_What%20we%20are%20(2).png')]"
               role="img"
               aria-label="Waterlabs 3D revenue cycle operations and agents diagram"
             />
@@ -47,7 +47,7 @@ export const WhatWeAreSection = () => {
           <div className="lg:hidden w-full bg-[#91C6F2]/30 bg-[url('/images/about-us/what-we-are/bg_what_we_are_abstract.png')] bg-cover bg-bottom bg-no-repeat rounded-[20px_10px_20px_20px] overflow-hidden flex flex-col">
             {/* Top: ICD detail image (362px x 198.88px) */}
             <div
-              className="w-full h-[199px] sm:h-[240px] md:h-[300px] rounded-[20px_10px_20px_20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/what-we-are/img_what_we_are_mob.png')]"
+              className="w-full h-[199px] sm:h-[240px] md:h-[300px] rounded-[20px_10px_20px_20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/what-we-are/img_What%20we%20are_mob%20(3).png')]"
               role="img"
               aria-label="Waterlabs 3D revenue cycle operations and agents diagram"
             />

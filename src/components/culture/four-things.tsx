@@ -105,7 +105,7 @@ export const FourThingsSection = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#9983E2] p-0 m-0 overflow-hidden">
+    <section className="relative w-full bg-[#9983E2] p-0 m-0">
       {/* 
         Four Things Section Container (Figma top frame - color):
         - Desktop: 1440px width, padding: 80px 60px, rounded-tr-[60px]

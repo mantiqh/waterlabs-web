@@ -47,7 +47,7 @@ export const OurStorySection = () => {
 
               {/* Right Column: Photo (responsive width & aspect ratio, exact at xl+) */}
               <div
-                className="w-full lg:w-[48%] xl:w-[704px] aspect-[704/417] xl:h-[417px] shrink-0 rounded-[10px_40px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/our-story/img_our_Story.png')]"
+                className="w-full lg:w-[48%] xl:w-[704px] aspect-[704/417] xl:h-[417px] shrink-0 rounded-[10px_40px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/our-story/img_our_Story%20(2).png')]"
                 role="img"
                 aria-label="Waterlabs vision - architectural courtyard at sunrise"
               />
@@ -67,7 +67,7 @@ export const OurStorySection = () => {
             <div className="flex flex-col items-start gap-[12px] w-full">
               {/* Middle: Photo (342px x 203px, border-radius: 20px 10px 20px 20px) */}
               <div
-                className="w-full h-[203px] rounded-[20px_10px_20px_20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/our-story/img_our_story_mob.png')]"
+                className="w-full h-[203px] rounded-[20px_10px_20px_20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/our-story/img_our_Story_mob%20(3).png')]"
                 role="img"
                 aria-label="Waterlabs vision - architectural courtyard at sunrise"
               />

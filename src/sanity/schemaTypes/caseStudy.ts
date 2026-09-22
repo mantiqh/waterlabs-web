@@ -346,13 +346,13 @@ export const caseStudySchema = defineType({
           name: 'headline',
           title: 'Headline',
           type: 'string',
-          initialValue: 'Schedule a 15-minute call to see how Waterlabs can impact your organization’s results.',
+          initialValue: 'See what Waterlabs would do on your numbers.',
         }),
         defineField({
           name: 'buttonText',
           title: 'Button Text',
           type: 'string',
-          initialValue: 'Get a Demo',
+          initialValue: 'GET A DEMO',
         }),
         defineField({
           name: 'buttonHref',

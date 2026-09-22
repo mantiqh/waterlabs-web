@@ -132,7 +132,7 @@ export const HowWaterlabsClosesSection = () => {
               {/* Image */}
               <div className="relative w-full aspect-[590/287] rounded-[20px_10px_20px_20px] overflow-hidden">
                 <Image
-                  src="/images/solutions/how-waterlabs-closes/img_coverage_verfication.png"
+                  src="/images/solutions/solutions-charge-capture-&-coding/how-waterlabs-closes/img_waterlab_closes_the_gap%20(1).png"
                   alt={verificationSteps[activeStep].title}
                   fill
                   priority
@@ -188,7 +188,7 @@ export const HowWaterlabsClosesSection = () => {
                   {/* Card Image */}
                   <div className="relative w-full h-[166px] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0">
                     <Image
-                      src="/images/solutions/how-waterlabs-closes/img_coverage_verfication_mobile%20(1).png"
+                      src="/images/solutions/solutions-charge-capture-&-coding/how-waterlabs-closes/img_waterlab_closes_the_gap%20(1).png"
                       alt={step.title}
                       fill
                       sizes="342px"

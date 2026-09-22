@@ -74,7 +74,7 @@ export const WhatWeHoldSection = () => {
 
   return (
     <section
-      className="w-full overflow-hidden"
+      className="w-full"
       style={{
         background:
           'linear-gradient(to bottom, transparent 0%, transparent 50%, #FFFFFF 50%, #FFFFFF 100%), linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
@@ -93,8 +93,8 @@ export const WhatWeHoldSection = () => {
           {/* Desktop Layout (lg+): Left Heading (35% / 537px) + Right Cards (62% / 769px)*/}
           {/* ========================================================================= */}
           <div className="hidden lg:flex flex-row items-start justify-between gap-[20px] w-full">
-            {/* Left Column: Heading */}
-            <div className="w-full lg:w-[35%] xl:w-[537px] pt-[32px] shrink-0">
+            {/* Left Column: Heading (Sticky on Desktop) */}
+            <div className="w-full lg:w-[35%] xl:w-[537px] pt-[32px] shrink-0 lg:sticky lg:top-[120px] self-start">
               <h2 className="type-h2 text-[#111111] tracking-[-0.01em] text-[36px] leading-[44px] xl:text-[52px] xl:leading-[60px]">
                 What we hold<br />
                 ourselves to
@@ -147,7 +147,7 @@ export const WhatWeHoldSection = () => {
             <div
               ref={scrollContainerRef}
               onScroll={handleScroll}
-              className="w-full flex flex-row items-start gap-[20px] overflow-x-auto scrollbar-none snap-x snap-mandatory pt-[8px] pb-[8px]"
+              className="w-full flex flex-row items-stretch gap-[20px] overflow-x-auto scrollbar-none snap-x snap-mandatory pt-[8px] pb-[8px]"
               style={{
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
@@ -156,7 +156,7 @@ export const WhatWeHoldSection = () => {
               {VALUES.map((item, index) => (
                 <div
                   key={index}
-                  className="w-[269px] shrink-0 flex flex-col items-start gap-[14px] pb-[20px] border-b border-[#91C6F2] snap-start"
+                  className="w-[269px] shrink-0 flex flex-col items-start justify-start gap-[14px] pb-[20px] border-b border-[#91C6F2] snap-start"
                 >
                   {/* Icon on Top for Mobile */}
                   <div className="w-[64px] h-[62px] flex items-center justify-start shrink-0">
@@ -169,15 +169,18 @@ export const WhatWeHoldSection = () => {
                     />
                   </div>
 
-                  {/* Title */}
-                  <h5 className="type-h5 text-[#0F68D6] tracking-[-0.01em] text-[20px] leading-[28px]">
-                    {item.title}
-                  </h5>
+                  {/* Text Container */}
+                  <div className="flex flex-col gap-[14px] flex-1">
+                    {/* Title */}
+                    <h5 className="type-h5 text-[#0F68D6] tracking-[-0.01em] text-[20px] leading-[28px]">
+                      {item.title}
+                    </h5>
 
-                  {/* Description */}
-                  <p className="type-body-xs text-[#2A2A2A] text-[14px] leading-[24px]">
-                    {item.description}
-                  </p>
+                    {/* Description */}
+                    <p className="type-body-xs text-[#2A2A2A] text-[14px] leading-[24px]">
+                      {item.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>

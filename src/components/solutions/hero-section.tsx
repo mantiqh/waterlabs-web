@@ -25,7 +25,7 @@ export const SolutionsHeroSection = () => {
           {/* Desktop & Tablet Banner Graphic */}
           <div className="hidden md:block absolute inset-0">
             <Image
-              src="/images/solutions/hero-section/img_banner_bg.png"
+              src="/images/solutions/solutions-eligibility/hero-section/img_banner_bg%20(3).png"
               alt="Solutions Gradient Background"
               fill
               priority
@@ -35,7 +35,7 @@ export const SolutionsHeroSection = () => {
           {/* Mobile Banner Graphic */}
           <div className="block md:hidden absolute inset-0">
             <Image
-              src="/images/solutions/hero-section/img_banner_bg%20_mobile(1).png"
+              src="/images/solutions/solutions-eligibility/hero-section/img_banner_bg%20(4).png"
               alt="Solutions Gradient Background Mobile"
               fill
               priority
@@ -84,7 +84,7 @@ export const SolutionsHeroSection = () => {
           {/* Right Column: Hero Image */}
           <div className="relative w-full lg:flex-1 lg:max-w-[650px] aspect-[650/441] rounded-[20px] overflow-hidden z-[2]">
             <Image
-              src="/images/solutions/hero-section/img_banner%20(5).png"
+              src="/images/solutions/solutions-eligibility/hero-section/img_banner%20(9).png"
               alt="Patient eligibility verification digital cards"
               fill
               priority
@@ -126,7 +126,7 @@ export const SolutionsHeroSection = () => {
           {/* Hero Image (Mobile & Tablet) */}
           <div className="relative w-full aspect-[362/246] rounded-[20px] overflow-hidden z-[2]">
             <Image
-              src="/images/solutions/hero-section/img_banner_mobile%20(6).png"
+              src="/images/solutions/solutions-eligibility/hero-section/img_banner%20(9).png"
               alt="Patient eligibility verification digital cards"
               fill
               priority

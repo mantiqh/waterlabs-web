@@ -111,12 +111,10 @@ function mapSanityToCaseStudy(doc: SanityCaseStudyDoc): CaseStudy {
               href: item.href || (item.slug ? `/case-study/${item.slug}` : '#'),
             }))
         : undefined,
-    cta: doc.cta || {
-      tagText: 'Talk to us.',
-      headline:
-        'Schedule a 15-minute call to see how Waterlabs can impact your organization’s results.',
-      buttonText: 'Get a Demo',
-      buttonHref: '/contact-us',
+    cta: {
+      headline: 'See what Waterlabs would do on your numbers.',
+      buttonText: 'GET A DEMO',
+      buttonHref: doc.cta?.buttonHref || '/contact-us',
     },
     cardCategory: doc.cardCategory,
     cardTag: doc.cardTag,
