@@ -9,32 +9,40 @@ const productStatements = [
     leadText: 'Because knowledge should remain within the organization,',
     highlightText: 'every resolved exception is recorded and retained.',
     description: 'When a similar case arises, the agent is equipped with the necessary information.',
-    desktopImage: '/images/philosophy/how-that-shows-up/statement_0_desktop.png',
-    mobileImage: '/images/philosophy/how-that-shows-up/statement_0_mobile.png',
+    desktopImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(2).png',
+    mobileImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good_mobile%20(4).png',
   },
   {
     id: 1,
     leadText: 'Since a managed problem is still a problem,',
     highlightText: 'our agents address all cases, not just the most recent.',
     description: 'Every denial is appealed, and every outstanding item is processed.',
-    desktopImage: '/images/philosophy/how-that-shows-up/statement_1.png',
-    mobileImage: '/images/philosophy/how-that-shows-up/statement_1_mobile.png',
+    desktopImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
+    mobileImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.mobile%20(4).png',
   },
   {
     id: 2,
     leadText: 'Repetitive tasks are automated,',
     highlightText: 'while judgment calls are handled by your staff.',
     description: 'When an agent encounters an unresolved issue, they escalate the case, providing a complete record of all attempted solutions.',
-    desktopImage: '/images/philosophy/how-that-shows-up/statement_1.png',
-    mobileImage: '/images/philosophy/how-that-shows-up/statement_1_mobile.png',
+    desktopImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
+    mobileImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.mobile%20(4).png',
   },
   {
     id: 3,
     leadText: 'And because we think the risk should sit with us,',
     highlightText: 'there is no license fee and no charge for building the agents.',
     description: 'Billing starts once they are live and working.',
-    desktopImage: '/images/philosophy/how-that-shows-up/statement_1.png',
-    mobileImage: '/images/philosophy/how-that-shows-up/statement_1_mobile.png',
+    desktopImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
+    mobileImage:
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.mobile%20(4).png',
   },
 ];
 
@@ -185,7 +193,7 @@ export const HowThatShowsUpSection = () => {
                     fill
                     priority={idx === 0}
                     sizes="1320px"
-                    className="object-cover object-[82%_center] xl:object-center"
+                    className="object-cover object-[60%_center] xl:object-center"
                   />
                 </div>
               ))}

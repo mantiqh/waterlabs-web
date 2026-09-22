@@ -28,14 +28,7 @@ export const HeroSection = () => {
           {/* Description */}
           <div className="w-full lg:max-w-[778px] flex-1">
             <p className="type-body-s text-[#F4F6F9]">
-              <span className="hidden xl:inline">
-                The US healthcare system loses billions every year to a revenue cycle run by<br />
-                hand. Waterlabs builds the agentic AI that runs it instead. Our agents work every<br />
-                stage, in every specialty, at health system scale.
-              </span>
-              <span className="inline xl:hidden">
-                The US healthcare system loses billions every year to a revenue cycle run by hand. Waterlabs builds the agentic AI that runs it instead. Our agents work every stage, in every specialty, at health system scale.
-              </span>
+              The US healthcare system loses billions every year to a revenue cycle run by hand. Waterlabs builds the agentic AI that runs it instead. Our agents work every stage, in every specialty, at health system scale.
             </p>
           </div>
         </div>
