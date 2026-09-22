@@ -17,7 +17,7 @@ export const WhatWeDoMattersSection = () => {
           Mobile: rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px], p-[20px]
         */}
         <div 
-          className="relative w-full max-w-[1320px] mx-auto min-h-[538px] lg:min-h-[650px] lg:h-auto rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px] p-[20px] sm:p-[28px] lg:p-[32px] pb-[32px] lg:pb-[40px] flex flex-col justify-between lg:justify-start gap-[28px] lg:gap-[36px] overflow-hidden bg-[#042849]"
+          className="relative w-full max-w-[1320px] mx-auto rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px] p-[20px] sm:p-[28px] lg:p-[36px] pb-[28px] lg:pb-[36px] flex flex-col justify-start gap-[24px] lg:gap-[32px] overflow-hidden bg-[#042849]"
         >
           {/* Background Architectural Image */}
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -39,11 +39,6 @@ export const WhatWeDoMattersSection = () => {
                 Why what we do matters
               </span>
             </div>
-
-            {/* Title */}
-            <h2 className="type-h2 tracking-[-0.01em] text-white">
-              We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
-            </h2>
           </div>
 
           {/* Bottom Content Area (Figma Frame 2147203286: max-w-[1024px], gap-[20px]) */}

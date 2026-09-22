@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface VerificationStep {
   title: string;
@@ -54,8 +54,109 @@ const TOTAL_DOTS = 3;
 export const HowWaterlabsClosesSection = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
+  const desktopRowRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const activeStepRef = useRef(0);
+  const isProgrammaticScroll = useRef(false);
 
+  const scrollToStep = (index: number) => {
+    const clamped = Math.max(0, Math.min(index, verificationSteps.length - 1));
+    activeStepRef.current = clamped;
+    setActiveStep(clamped);
+
+    if (!listRef.current) return;
+    const container = listRef.current;
+    const items = container.children;
+    if (items[clamped]) {
+      const targetItem = items[clamped] as HTMLElement;
+      const containerRect = container.getBoundingClientRect();
+      const targetRect = targetItem.getBoundingClientRect();
+      const targetTop = targetRect.top - containerRect.top + container.scrollTop;
+
+      isProgrammaticScroll.current = true;
+      container.scrollTo({
+        top: targetTop,
+        behavior: 'smooth',
+      });
+      setTimeout(() => {
+        isProgrammaticScroll.current = false;
+      }, 200);
+    }
+  };
+
+  // Only animate when user specifically places cursor on this section and scrolls manually
+  useEffect(() => {
+    const rowEl = desktopRowRef.current;
+    if (!rowEl) return;
+
+    let isThrottled = false;
+    let throttleTimeout: NodeJS.Timeout | null = null;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (window.innerWidth < 1024) return;
+
+      const current = activeStepRef.current;
+      const isDown = e.deltaY > 0;
+      const isUp = e.deltaY < 0;
+
+      // Allow natural page scroll if at boundary
+      if (
+        (current === verificationSteps.length - 1 && isDown) ||
+        (current === 0 && isUp)
+      ) {
+        return;
+      }
+
+      // Prevent whole page from jumping while stepping through this section
+      e.preventDefault();
+
+      if (isThrottled) return;
+
+      if (Math.abs(e.deltaY) >= 8) {
+        isThrottled = true;
+        const nextStep = isDown ? current + 1 : current - 1;
+        scrollToStep(nextStep);
+
+        if (throttleTimeout) clearTimeout(throttleTimeout);
+        throttleTimeout = setTimeout(() => {
+          isThrottled = false;
+        }, 150);
+      }
+    };
+
+    rowEl.addEventListener('wheel', handleWheel, { passive: false });
+    return () => {
+      rowEl.removeEventListener('wheel', handleWheel);
+      if (throttleTimeout) clearTimeout(throttleTimeout);
+    };
+  }, []);
+
+  const handleDesktopScroll = () => {
+    if (isProgrammaticScroll.current || !listRef.current) return;
+    const container = listRef.current;
+    const containerRect = container.getBoundingClientRect();
+    const items = container.children;
+
+    let closestIndex = 0;
+    let minDiff = Infinity;
+
+    for (let i = 0; i < verificationSteps.length; i++) {
+      const item = items[i] as HTMLElement;
+      if (!item) continue;
+      const itemRect = item.getBoundingClientRect();
+      const diff = Math.abs(itemRect.top - containerRect.top);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = i;
+      }
+    }
+
+    if (closestIndex !== activeStepRef.current) {
+      activeStepRef.current = closestIndex;
+      setActiveStep(closestIndex);
+    }
+  };
   const handleScroll = () => {
     const container = scrollRef.current;
     if (!container) return;
@@ -122,7 +223,10 @@ export const HowWaterlabsClosesSection = () => {
           </p>
 
           {/* Desktop Layout: Image+Description Left, Tab List Right */}
-          <div className="hidden lg:flex flex-row items-start justify-between gap-[24px] xl:gap-[40px] pt-[20px]">
+          <div
+            ref={desktopRowRef}
+            className="hidden lg:flex flex-row items-start justify-between gap-[24px] xl:gap-[40px] pt-[20px]"
+          >
             {/* Left Column: Image + Description */}
             <div className="w-full lg:w-[44%] xl:w-[590px] lg:max-w-[590px] shrink-0 flex flex-col gap-[24px]">
               {/* Image */}
@@ -138,26 +242,37 @@ export const HowWaterlabsClosesSection = () => {
               </div>
 
               {/* Description for active step */}
-              <p className="type-body-xs text-[#D7DCE2] min-h-[48px]">
+              <p className="type-body-xs text-[#D7DCE2] min-h-[48px] transition-opacity duration-300">
                 {verificationSteps[activeStep].description}
               </p>
             </div>
 
             {/* Right Column: Tab List */}
-            <div className="flex-1 min-w-0 flex flex-col gap-[16px] xl:gap-[20px] pt-[8px]">
+            <div
+              ref={listRef}
+              onScroll={handleDesktopScroll}
+              className="flex-1 min-w-0 h-[360px] xl:h-[380px] overflow-y-auto no-scrollbar snap-y snap-mandatory select-none flex flex-col gap-[16px] xl:gap-[20px] pt-[8px] pr-[12px] pb-[380px] xl:pb-[400px]"
+            >
               {verificationSteps.map((step, idx) => {
                 const isActive = idx === activeStep;
+                const distance = idx - activeStep;
+                const opacity = isActive
+                  ? 1
+                  : distance > 0
+                  ? (stepOpacities[distance] ?? 0.15)
+                  : 0.15;
+
                 return (
                   <button
                     key={idx}
                     type="button"
-                    className={`text-left type-h4 transition-all duration-300 cursor-pointer bg-transparent border-none outline-none p-0 whitespace-normal ${
+                    className={`snap-start text-left type-h4 transition-all duration-300 cursor-pointer bg-transparent border-none outline-none p-0 whitespace-normal ${
                       isActive ? 'text-[#91C6F2]' : 'text-[#7D8690]'
                     }`}
                     style={{
-                      opacity: isActive ? 1 : stepOpacities[idx],
+                      opacity,
                     }}
-                    onClick={() => setActiveStep(idx)}
+                    onClick={() => scrollToStep(idx)}
                   >
                     {step.title}
                   </button>
