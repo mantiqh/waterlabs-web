@@ -31,7 +31,7 @@ export const CaseStudyCTA = ({
           
           {/* Left Column: Headline */}
           <div className="w-full lg:max-w-[1080px] flex-1 flex flex-col justify-center items-start">
-            <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[38px]">
+            <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[60px]">
               See what Waterlabs would do
               <br />
               on your numbers.

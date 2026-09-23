@@ -17,7 +17,7 @@ export const PhilosophyCTASection = () => {
           
           {/* Text Block */}
           <div className="flex flex-col gap-[8px] lg:gap-[12px]">
-            <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[38px]">
+            <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[60px]">
               See what Waterlabs would do
               <br />
               on your numbers.
