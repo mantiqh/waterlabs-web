@@ -54,7 +54,7 @@ export const CaseStudiesCTASection = ({
         {/* Content Container (max-w-[1320px]) */}
         <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[20px] lg:gap-[20px]">
           {/* Headline (Display/H2) */}
-          <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[38px]">
+          <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[60px]">
             {renderHeadline(headline)}
           </h2>
 
