@@ -94,7 +94,7 @@ export const TheProblemSection = () => {
                 </div>
 
                 {/* Headline */}
-                <h5 className="type-h5 text-[#111111] tracking-[-0.01em]">
+                <h5 className="text-[14px] min-[370px]:text-[15px] sm:type-h5 text-[#111111] tracking-[-0.015em] sm:tracking-[-0.01em] leading-[20px] min-[370px]:leading-[22px] sm:leading-[28px]">
                   How often do your patients learn what they owe
                   <br />
                   <span className="text-[#0F68D6]">only after receiving care?</span>

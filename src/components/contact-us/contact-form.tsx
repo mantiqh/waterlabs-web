@@ -299,9 +299,7 @@ export const ContactUsContactForm = () => {
 
                   {/* Main heading / Disclaimer */}
                   <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
-                    You may unsubscribe from these communications at any time. For more information on how to<br className="hidden xl:inline" />
-                    unsubscribe, our privacy practices, and how we are committed to protecting and respecting your<br className="hidden xl:inline" />
-                    privacy, please review our Privacy Policy.
+                    You may unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy.
                   </p>
                 </div>
 

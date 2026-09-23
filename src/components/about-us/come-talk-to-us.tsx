@@ -13,7 +13,7 @@ export const ComeTalkToUsSection = () => {
         - Gradient background: linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)
       */}
       <div
-        className="w-full rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] md:py-[60px] lg:py-[80px] pl-[20px] md:pl-[40px] lg:pl-[60px] min-[1440px]:pl-[calc((100vw-1320px)/2)] pr-[20px] md:pr-[32px] lg:pr-[40px] xl:pr-[60px]"
+        className="w-full rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] md:py-[60px] lg:py-[80px] pl-[20px] md:pl-[40px] lg:pl-[60px] min-[1440px]:pl-[calc((100vw-1320px)/2)] pr-[20px] md:pr-[32px] lg:pr-[40px] min-[1440px]:pr-[60px]"
         style={{
           background: 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
         }}
@@ -22,18 +22,18 @@ export const ComeTalkToUsSection = () => {
           {/* ========================================================================= */}
           {/* Desktop Layout (lg+): Side-by-side Row (Text Column + Photo Column)       */}
           {/* ========================================================================= */}
-          <div className="hidden lg:flex flex-row items-center justify-between gap-[20px] xl:gap-[20px] w-full">
+          <div className="hidden lg:flex flex-row items-center justify-between gap-[20px] w-full">
             {/* Left Column: Heading, Description, CTA Button */}
-            <div className="w-full lg:w-[48%] xl:w-[536px] flex flex-col justify-center items-start gap-[24px] xl:gap-[40px] shrink-0">
+            <div className="w-full lg:w-[48%] min-[1440px]:w-[536px] flex flex-col justify-center items-start gap-[24px] xl:gap-[28px] min-[1440px]:gap-[40px] shrink-0">
               {/* Heading: General Sans, responsive scaling */}
-              <h2 className="type-h1 text-[#F4F6F9] tracking-[-0.01em] text-[40px] leading-[48px] xl:text-[68px] xl:leading-[76px]">
+              <h2 className="type-h1 text-[#F4F6F9] tracking-[-0.01em] text-[40px] leading-[48px] xl:text-[48px] xl:leading-[56px] min-[1440px]:text-[68px] min-[1440px]:leading-[76px]">
                 Come talk to us.
               </h2>
 
               {/* Sub-stack: Paragraph + CTA */}
               <div className="flex flex-col items-start gap-[20px] xl:gap-[24px] w-full">
                 {/* Paragraph: Inter, responsive sizing */}
-                <p className="type-body-s text-white text-[16px] leading-[24px] xl:text-[20px] xl:leading-[28px] max-w-[536px]">
+                <p className="type-body-s text-white text-[16px] leading-[24px] xl:text-[17px] xl:leading-[25px] min-[1440px]:text-[20px] min-[1440px]:leading-[28px] max-w-[536px]">
                   Whether it is one function that needs fixing or a revenue cycle that needs rethinking, the fastest way to find out what we can do is to look at your numbers.
                 </p>
 
@@ -50,9 +50,9 @@ export const ComeTalkToUsSection = () => {
               </div>
             </div>
 
-            {/* Right Column: Photo (responsive width & aspect ratio, exact at xl+) */}
+            {/* Right Column: Photo (responsive width & aspect ratio, exact at 1440px+) */}
             <div
-              className="w-full lg:w-[48%] xl:w-[704px] aspect-[704/417] xl:h-[417px] shrink-0 rounded-[40px_10px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img%20(2).png')]"
+              className="w-full lg:w-[48%] min-[1440px]:w-[704px] aspect-[704/417] min-[1440px]:h-[417px] shrink-0 rounded-[40px_10px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img%20(2).png')]"
               role="img"
               aria-label="Waterlabs team in conversation with healthcare client"
             />

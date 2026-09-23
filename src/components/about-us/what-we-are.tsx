@@ -19,23 +19,23 @@ export const WhatWeAreSection = () => {
           {/* ========================================================================= */}
           {/* Desktop Layout (lg+): Side-by-side Row (830px image + 470px card)        */}
           {/* ========================================================================= */}
-          <div className="hidden lg:flex flex-row items-center justify-between gap-[20px] w-full">
-            {/* Left Column: 3D Diagram (responsive width & aspect ratio, exact at xl+) */}
+          <div className="hidden lg:flex flex-row items-stretch justify-between gap-[20px] w-full">
+            {/* Left Column: 3D Diagram (responsive width & aspect ratio, exact at 1440px+) */}
             <div
-              className="w-full lg:w-[62%] xl:w-[830px] aspect-[830/456] xl:h-[456px] shrink-0 rounded-[20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/what-we-are/img_What%20we%20are%20(2).png')]"
+              className="w-full lg:w-[62%] min-[1440px]:w-[830px] aspect-[830/456] min-[1440px]:h-[456px] shrink-0 rounded-[20px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/what-we-are/img_What%20we%20are%20(2).png')]"
               role="img"
               aria-label="Waterlabs 3D revenue cycle operations and agents diagram"
             />
 
-            {/* Right Column: ICD content column (responsive width, exact at xl+) */}
-            <div className="w-full lg:w-[35%] xl:w-[470px] lg:self-stretch xl:h-[456px] shrink-0 bg-[#91C6F2]/30 bg-[url('/images/about-us/what-we-are/bg_what_we_are_abstract.png')] bg-cover bg-bottom bg-no-repeat rounded-[20px_10px_20px_20px] overflow-hidden px-[24px] xl:px-[40px] py-[24px] xl:py-[20px] flex flex-col justify-center gap-[14px]">
+            {/* Right Column: ICD content column (responsive width, exact at 1440px+) */}
+            <div className="w-full lg:w-[35%] min-[1440px]:w-[470px] self-stretch min-[1440px]:h-[456px] shrink-0 bg-[#91C6F2]/30 bg-[url('/images/about-us/what-we-are/bg_what_we_are_abstract.png')] bg-cover bg-bottom bg-no-repeat rounded-[20px_10px_20px_20px] overflow-hidden px-[20px] py-[16px] xl:px-[28px] min-[1440px]:px-[40px] xl:py-[20px] flex flex-col justify-center gap-[8px] xl:gap-[12px] min-[1440px]:gap-[14px]">
               {/* Descriptor headline */}
-              <h5 className="type-h5 text-[#0F68D6] tracking-[-0.01em]">
+              <h5 className="text-[18px] leading-[24px] xl:text-[20px] xl:leading-[26px] min-[1440px]:type-h5 text-[#0F68D6] tracking-[-0.01em]">
                 What we are
               </h5>
 
               {/* Descriptor detail text */}
-              <p className="type-body-xs text-[#2A2A2A]">
+              <p className="text-[12.5px] leading-[17px] xl:text-[14px] xl:leading-[20px] min-[1440px]:type-body-xs text-[#2A2A2A]">
                 Founded in 2024 and headquartered in India, Waterlabs builds the agents running revenue cycle operations, the system building more of them, and the memory making each agent better than the last. Hospitals, health systems, and specialist practices run their revenue cycle on Waterlabs today. 100 agents are in production.
               </p>
             </div>

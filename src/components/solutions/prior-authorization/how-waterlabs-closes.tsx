@@ -54,11 +54,46 @@ const TOTAL_DOTS = 3;
 export const HowWaterlabsClosesSection = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
-  const desktopRowRef = useRef<HTMLDivElement>(null);
+  const [bottomPadding, setBottomPadding] = useState<number>(300);
   const listRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeStepRef = useRef(0);
   const isProgrammaticScroll = useRef(false);
+
+  useEffect(() => {
+    const updatePadding = () => {
+      if (!listRef.current) return;
+      const container = listRef.current;
+      const items = container.children;
+      if (items.length === 0) return;
+      const lastItem = items[verificationSteps.length - 1] as HTMLElement;
+      const firstItem = items[0] as HTMLElement;
+      if (!lastItem || !firstItem) return;
+
+      const containerHeight = container.clientHeight;
+      const lastItemHeight = lastItem.offsetHeight;
+      const paddingTop = firstItem.offsetTop - container.offsetTop;
+      const calculatedPadding = Math.max(
+        0,
+        containerHeight - lastItemHeight - paddingTop
+      );
+      setBottomPadding(calculatedPadding);
+    };
+
+    updatePadding();
+    window.addEventListener('resize', updatePadding);
+
+    let observer: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined' && listRef.current) {
+      observer = new ResizeObserver(updatePadding);
+      observer.observe(listRef.current);
+    }
+
+    return () => {
+      window.removeEventListener('resize', updatePadding);
+      observer?.disconnect();
+    };
+  }, []);
 
   const scrollToStep = (index: number) => {
     const clamped = Math.max(0, Math.min(index, verificationSteps.length - 1));
@@ -81,62 +116,33 @@ export const HowWaterlabsClosesSection = () => {
       });
       setTimeout(() => {
         isProgrammaticScroll.current = false;
-      }, 200);
+      }, 300);
     }
   };
-
-  // Only animate when user specifically places cursor on this section and scrolls manually
-  useEffect(() => {
-    const rowEl = desktopRowRef.current;
-    if (!rowEl) return;
-
-    let isThrottled = false;
-    let throttleTimeout: NodeJS.Timeout | null = null;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (window.innerWidth < 1024) return;
-
-      const current = activeStepRef.current;
-      const isDown = e.deltaY > 0;
-      const isUp = e.deltaY < 0;
-
-      // Allow natural page scroll if at boundary
-      if (
-        (current === verificationSteps.length - 1 && isDown) ||
-        (current === 0 && isUp)
-      ) {
-        return;
-      }
-
-      // Prevent whole page from jumping while stepping through this section
-      e.preventDefault();
-
-      if (isThrottled) return;
-
-      if (Math.abs(e.deltaY) >= 8) {
-        isThrottled = true;
-        const nextStep = isDown ? current + 1 : current - 1;
-        scrollToStep(nextStep);
-
-        if (throttleTimeout) clearTimeout(throttleTimeout);
-        throttleTimeout = setTimeout(() => {
-          isThrottled = false;
-        }, 150);
-      }
-    };
-
-    rowEl.addEventListener('wheel', handleWheel, { passive: false });
-    return () => {
-      rowEl.removeEventListener('wheel', handleWheel);
-      if (throttleTimeout) clearTimeout(throttleTimeout);
-    };
-  }, []);
 
   const handleDesktopScroll = () => {
     if (isProgrammaticScroll.current || !listRef.current) return;
     const container = listRef.current;
     const containerRect = container.getBoundingClientRect();
     const items = container.children;
+
+    const lastIndex = verificationSteps.length - 1;
+    const lastItem = items[lastIndex] as HTMLElement;
+    const firstItem = items[0] as HTMLElement;
+
+    if (lastItem && firstItem) {
+      const maxScroll = lastItem.offsetTop - firstItem.offsetTop;
+      if (container.scrollTop >= maxScroll) {
+        if (container.scrollTop > maxScroll) {
+          container.scrollTop = maxScroll;
+        }
+        if (activeStepRef.current !== lastIndex) {
+          activeStepRef.current = lastIndex;
+          setActiveStep(lastIndex);
+        }
+        return;
+      }
+    }
 
     let closestIndex = 0;
     let minDiff = Infinity;
@@ -223,10 +229,7 @@ export const HowWaterlabsClosesSection = () => {
           </p>
 
           {/* Desktop Layout: Image+Description Left, Tab List Right */}
-          <div
-            ref={desktopRowRef}
-            className="hidden lg:flex flex-row items-start justify-between gap-[24px] xl:gap-[40px] pt-[20px]"
-          >
+          <div className="hidden lg:flex flex-row items-start justify-between gap-[24px] xl:gap-[40px] pt-[20px]">
             {/* Left Column: Image + Description */}
             <div className="w-full lg:w-[44%] xl:w-[590px] lg:max-w-[590px] shrink-0 flex flex-col gap-[24px]">
               {/* Image */}
@@ -251,7 +254,8 @@ export const HowWaterlabsClosesSection = () => {
             <div
               ref={listRef}
               onScroll={handleDesktopScroll}
-              className="flex-1 min-w-0 h-[360px] xl:h-[380px] overflow-y-auto no-scrollbar snap-y snap-mandatory select-none flex flex-col gap-[16px] xl:gap-[20px] pt-[8px] pr-[12px] pb-[380px] xl:pb-[400px]"
+              style={{ paddingBottom: `${bottomPadding}px` }}
+              className="flex-1 min-w-0 h-[360px] xl:h-[380px] overflow-y-auto no-scrollbar scroll-smooth flex flex-col gap-[16px] xl:gap-[20px] pt-[8px] pr-[12px]"
             >
               {verificationSteps.map((step, idx) => {
                 const isActive = idx === activeStep;
@@ -266,7 +270,7 @@ export const HowWaterlabsClosesSection = () => {
                   <button
                     key={idx}
                     type="button"
-                    className={`snap-start text-left type-h4 transition-all duration-300 cursor-pointer bg-transparent border-none outline-none p-0 whitespace-normal ${
+                    className={`text-left type-h4 transition-all duration-300 cursor-pointer bg-transparent border-none outline-none p-0 whitespace-normal ${
                       isActive ? 'text-[#91C6F2]' : 'text-[#7D8690]'
                     }`}
                     style={{
