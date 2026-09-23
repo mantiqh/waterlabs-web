@@ -167,8 +167,8 @@ export const WeBuildPeopleSection = () => {
       index === 0
         ? 0.02
         : index === totalTransitions
-        ? 0.98
-        : (index + 0.5) / (totalTransitions + 1);
+          ? 0.98
+          : (index + 0.5) / (totalTransitions + 1);
     const targetScrollY =
       window.scrollY + rect.top + targetProgress * scrollDistance;
     window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
@@ -328,17 +328,17 @@ export const WeBuildPeopleSection = () => {
                   }}
                 >
                   <div className="w-full flex flex-col items-start gap-[12px] lg:gap-[16px] my-auto">
-                    {/* Card Heading — Display/H2 */}
+                    {/* Card Heading — Display/H3 on mobile, Display/H2 on md+ */}
                     <h3
-                      className="type-h2 max-w-[459px]"
+                      className="type-h3 md:type-h2 max-w-[459px]"
                       style={{ color: card.textColor }}
                     >
                       {card.title}
                     </h3>
 
-                    {/* Card Description — Body/Body-S */}
+                    {/* Card Description — Body/Body-XS on mobile, Body/Body-S on md+ */}
                     <p
-                      className="type-body-s max-w-[459px]"
+                      className="type-body-xs md:type-body-s max-w-[459px]"
                       style={{ color: card.descColor }}
                     >
                       {card.description}
