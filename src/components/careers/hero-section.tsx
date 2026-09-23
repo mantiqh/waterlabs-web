@@ -89,7 +89,7 @@ export const CareersHeroSection = () => {
           {/* Top: Heading */}
           <div className="w-full">
             <h2 className="type-h1 tracking-[-0.01em] text-white">
-              We&apos;re tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
+              We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
             </h2>
           </div>
 

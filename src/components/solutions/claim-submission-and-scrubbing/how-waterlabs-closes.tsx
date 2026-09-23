@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 interface VerificationStep {
   title: string;
@@ -53,58 +53,47 @@ const TOTAL_DOTS = 3;
 
 export const HowWaterlabsClosesSection = () => {
   const [activeStep, setActiveStep] = useState(0);
+  const [activeListIndex, setActiveListIndex] = useState(verificationSteps.length);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
-  const [bottomPadding, setBottomPadding] = useState<number>(300);
   const listRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeStepRef = useRef(0);
   const isProgrammaticScroll = useRef(false);
 
-  useEffect(() => {
-    const updatePadding = () => {
-      if (!listRef.current) return;
-      const container = listRef.current;
-      const items = container.children;
-      if (items.length === 0) return;
-      const lastItem = items[verificationSteps.length - 1] as HTMLElement;
-      const firstItem = items[0] as HTMLElement;
-      if (!lastItem || !firstItem) return;
-
-      const containerHeight = container.clientHeight;
-      const lastItemHeight = lastItem.offsetHeight;
-      const paddingTop = firstItem.offsetTop - container.offsetTop;
-      const calculatedPadding = Math.max(
-        0,
-        containerHeight - lastItemHeight - paddingTop
-      );
-      setBottomPadding(calculatedPadding);
-    };
-
-    updatePadding();
-    window.addEventListener('resize', updatePadding);
-
-    let observer: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== 'undefined' && listRef.current) {
-      observer = new ResizeObserver(updatePadding);
-      observer.observe(listRef.current);
-    }
-
-    return () => {
-      window.removeEventListener('resize', updatePadding);
-      observer?.disconnect();
-    };
+  // Repeat items for seamless, continuous looping scroll
+  const repeatedSteps = useMemo(() => {
+    const LOOP_COPIES = 3;
+    return Array.from({ length: LOOP_COPIES }).flatMap((_, setIndex) =>
+      verificationSteps.map((step, originalIndex) => ({
+        ...step,
+        originalIndex,
+        uniqueIndex: setIndex * verificationSteps.length + originalIndex,
+      }))
+    );
   }, []);
 
-  const scrollToStep = (index: number) => {
-    const clamped = Math.max(0, Math.min(index, verificationSteps.length - 1));
-    activeStepRef.current = clamped;
-    setActiveStep(clamped);
-
+  // Position at middle set on mount
+  useEffect(() => {
     if (!listRef.current) return;
     const container = listRef.current;
     const items = container.children;
-    if (items[clamped]) {
-      const targetItem = items[clamped] as HTMLElement;
+    const N = verificationSteps.length;
+    if (items.length >= 2 * N) {
+      const firstItem = items[0] as HTMLElement;
+      const midItem = items[N] as HTMLElement;
+      if (firstItem && midItem) {
+        const cycleHeight = midItem.offsetTop - firstItem.offsetTop;
+        container.scrollTop = cycleHeight;
+      }
+    }
+  }, []);
+
+  const scrollToStep = (index: number) => {
+    if (!listRef.current) return;
+    const container = listRef.current;
+    const items = container.children;
+    if (items[index]) {
+      const targetItem = items[index] as HTMLElement;
       const containerRect = container.getBoundingClientRect();
       const targetRect = targetItem.getBoundingClientRect();
       const targetTop = targetRect.top - containerRect.top + container.scrollTop;
@@ -114,40 +103,41 @@ export const HowWaterlabsClosesSection = () => {
         top: targetTop,
         behavior: 'smooth',
       });
+      const realStep = index % verificationSteps.length;
+      activeStepRef.current = realStep;
+      setActiveStep(realStep);
+      setActiveListIndex(index);
       setTimeout(() => {
         isProgrammaticScroll.current = false;
-      }, 300);
+      }, 400);
     }
   };
 
   const handleDesktopScroll = () => {
     if (isProgrammaticScroll.current || !listRef.current) return;
     const container = listRef.current;
-    const containerRect = container.getBoundingClientRect();
     const items = container.children;
+    const N = verificationSteps.length;
+    if (items.length < 2 * N) return;
 
-    const lastIndex = verificationSteps.length - 1;
-    const lastItem = items[lastIndex] as HTMLElement;
     const firstItem = items[0] as HTMLElement;
+    const midItem = items[N] as HTMLElement;
+    if (!firstItem || !midItem) return;
 
-    if (lastItem && firstItem) {
-      const maxScroll = lastItem.offsetTop - firstItem.offsetTop;
-      if (container.scrollTop >= maxScroll) {
-        if (container.scrollTop > maxScroll) {
-          container.scrollTop = maxScroll;
-        }
-        if (activeStepRef.current !== lastIndex) {
-          activeStepRef.current = lastIndex;
-          setActiveStep(lastIndex);
-        }
-        return;
+    const singleCycleHeight = midItem.offsetTop - firstItem.offsetTop;
+    if (singleCycleHeight > 0) {
+      if (container.scrollTop >= 2 * singleCycleHeight) {
+        container.scrollTop -= singleCycleHeight;
+      } else if (container.scrollTop <= 0.2 * singleCycleHeight) {
+        container.scrollTop += singleCycleHeight;
       }
     }
 
+    const containerRect = container.getBoundingClientRect();
     let closestIndex = 0;
     let minDiff = Infinity;
 
-    for (let i = 0; i < verificationSteps.length; i++) {
+    for (let i = 0; i < items.length; i++) {
       const item = items[i] as HTMLElement;
       if (!item) continue;
       const itemRect = item.getBoundingClientRect();
@@ -158,10 +148,12 @@ export const HowWaterlabsClosesSection = () => {
       }
     }
 
-    if (closestIndex !== activeStepRef.current) {
-      activeStepRef.current = closestIndex;
-      setActiveStep(closestIndex);
+    const realStep = closestIndex % N;
+    if (realStep !== activeStepRef.current) {
+      activeStepRef.current = realStep;
+      setActiveStep(realStep);
     }
+    setActiveListIndex(closestIndex);
   };
   const handleScroll = () => {
     const container = scrollRef.current;
@@ -254,12 +246,11 @@ export const HowWaterlabsClosesSection = () => {
             <div
               ref={listRef}
               onScroll={handleDesktopScroll}
-              style={{ paddingBottom: `${bottomPadding}px` }}
-              className="flex-1 min-w-0 h-[360px] xl:h-[380px] overflow-y-auto no-scrollbar scroll-smooth flex flex-col gap-[16px] xl:gap-[20px] pt-[8px] pr-[12px]"
+              className="flex-1 min-w-0 h-[360px] xl:h-[380px] overflow-y-auto no-scrollbar flex flex-col gap-[16px] xl:gap-[20px] pt-[8px] pr-[12px]"
             >
-              {verificationSteps.map((step, idx) => {
-                const isActive = idx === activeStep;
-                const distance = idx - activeStep;
+              {repeatedSteps.map((step) => {
+                const isActive = step.uniqueIndex === activeListIndex;
+                const distance = step.uniqueIndex - activeListIndex;
                 const opacity = isActive
                   ? 1
                   : distance > 0
@@ -268,7 +259,7 @@ export const HowWaterlabsClosesSection = () => {
 
                 return (
                   <button
-                    key={idx}
+                    key={step.uniqueIndex}
                     type="button"
                     className={`text-left type-h4 transition-all duration-300 cursor-pointer bg-transparent border-none outline-none p-0 whitespace-normal ${
                       isActive ? 'text-[#91C6F2]' : 'text-[#7D8690]'
@@ -276,7 +267,7 @@ export const HowWaterlabsClosesSection = () => {
                     style={{
                       opacity,
                     }}
-                    onClick={() => scrollToStep(idx)}
+                    onClick={() => scrollToStep(step.uniqueIndex)}
                   >
                     {step.title}
                   </button>
