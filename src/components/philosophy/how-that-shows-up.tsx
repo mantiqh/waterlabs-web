@@ -12,7 +12,7 @@ const productStatements = [
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(2).png',
     mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good_mobile%20(4).png',
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(2).png',
   },
   {
     id: 1,
@@ -22,7 +22,7 @@ const productStatements = [
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
     mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.mobile%20(4).png',
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const productStatements = [
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
     mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.mobile%20(4).png',
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const productStatements = [
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
     mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.mobile%20(4).png',
+      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
   },
 ];
 
@@ -172,7 +172,7 @@ export const HowThatShowsUpSection = () => {
                     fill
                     priority={idx === 0}
                     sizes="100vw"
-                    className="object-cover object-top sm:object-[center_10%] md:object-[center_15%]"
+                    className="object-cover object-center"
                   />
                 </div>
               ))}

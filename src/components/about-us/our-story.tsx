@@ -16,7 +16,7 @@ export const OurStorySection = () => {
         - Gradient background: linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)
       */}
       <div
-        className="w-full rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] md:py-[60px] lg:py-[80px] px-[20px] md:px-[32px] lg:px-[40px] xl:px-[60px]"
+        className="w-full rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] md:py-[60px] lg:py-[80px] px-[20px] md:px-[32px] lg:px-[40px] min-[1440px]:px-[60px]"
         style={{
           background: 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
         }}
@@ -25,29 +25,29 @@ export const OurStorySection = () => {
           {/* ========================================================================= */}
           {/* Desktop Layout (lg+): Title top, Row below (Paragraphs left + Photo right)*/}
           {/* ========================================================================= */}
-          <div className="hidden lg:flex flex-col items-start gap-[24px] xl:gap-[40px] w-full">
+          <div className="hidden lg:flex flex-col items-start gap-[24px] min-[1440px]:gap-[40px] w-full">
             {/* Heading: General Sans, responsive scaling */}
-            <h2 className="type-h1 text-[#F4F6F9] tracking-[-0.01em] text-[40px] leading-[48px] xl:text-[68px] xl:leading-[76px] w-full">
+            <h2 className="type-h1 text-[#F4F6F9] tracking-[-0.01em] text-[40px] leading-[48px] xl:text-[48px] xl:leading-[56px] min-[1440px]:text-[68px] min-[1440px]:leading-[76px] w-full">
               Our story
             </h2>
 
             {/* Row: Left paragraphs (536px) + Right photo (704px x 417px) */}
             <div className="w-full flex flex-row items-center justify-between gap-[20px]">
               {/* Left Column: 4 story paragraphs */}
-              <div className="w-full lg:w-[48%] xl:w-[536px] flex flex-col justify-between gap-[16px] xl:gap-[24px] xl:h-[417px] shrink-0">
+              <div className="w-full lg:w-[48%] min-[1440px]:w-[536px] flex flex-col justify-between gap-[16px] xl:gap-[20px] min-[1440px]:gap-[24px] min-[1440px]:h-[417px] shrink-0">
                 {STORY_PARAGRAPHS.map((paragraph, index) => (
                   <p
                     key={index}
-                    className="type-body-s text-white text-[16px] leading-[24px] xl:text-[20px] xl:leading-[28px]"
+                    className="type-body-s text-white text-[16px] leading-[24px] xl:text-[17px] xl:leading-[25px] min-[1440px]:text-[20px] min-[1440px]:leading-[28px]"
                   >
                     {paragraph}
                   </p>
                 ))}
               </div>
 
-              {/* Right Column: Photo (responsive width & aspect ratio, exact at xl+) */}
+              {/* Right Column: Photo (responsive width & aspect ratio, exact at 1440px+) */}
               <div
-                className="w-full lg:w-[48%] xl:w-[704px] aspect-[704/417] xl:h-[417px] shrink-0 rounded-[10px_40px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/our-story/img_our_Story%20(2).png')]"
+                className="w-full lg:w-[48%] min-[1440px]:w-[704px] aspect-[704/417] min-[1440px]:h-[417px] shrink-0 rounded-[10px_40px] bg-cover bg-center bg-no-repeat bg-[url('/images/about-us/our-story/img_our_Story%20(2).png')]"
                 role="img"
                 aria-label="Waterlabs vision - architectural courtyard at sunrise"
               />

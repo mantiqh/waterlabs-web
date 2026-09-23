@@ -58,7 +58,7 @@ export const CareersHeroSection = () => {
           <div className="w-full md:w-1/2 max-w-[650px] h-auto lg:h-full pt-0 lg:pt-[32px] flex flex-col justify-center items-start">
             <div className="w-full h-auto lg:h-[438px] flex flex-col justify-center items-start">
               <h2 className="type-h3 tracking-[-0.01em] text-white max-w-[650px]">
-                We&apos;re tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
+                We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
               </h2>
             </div>
           </div>
