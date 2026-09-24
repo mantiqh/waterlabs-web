@@ -202,4 +202,144 @@ export const blogPostSlugsQuery = groq`*[_type == "blogPost" && defined(slug.cur
   "slug": slug.current
 }`;
 
+export const solutionBySlugQuery = groq`*[_type == "solutionPage" && slug.current == $slug && !(_id in path('drafts.**'))][0] {
+  _id,
+  title,
+  "id": _id,
+  "slug": slug.current,
+  navLabel,
+  order,
+  heroEyebrow,
+  heroHeadline,
+  heroDescription,
+  heroCtaText,
+  heroCtaLink,
+  "heroImage": heroImage.asset->url,
+  "heroImageAlt": heroImage.alt,
+  "heroBanner": heroBanner.asset->url,
+  problemTag,
+  problemHeadline,
+  problemHeadlineHighlight,
+  problemDescription,
+  problemDescriptionSecondary,
+  problemQuoteText,
+  problemQuoteAuthor,
+  "problemImage": problemImage.asset->url,
+  "problemImageAlt": problemImage.alt,
+  closesSectionTitle,
+  closesSectionHighlight,
+  closesSubtitle,
+  "closesImage": closesImage.asset->url,
+  "closesImageAlt": closesImage.alt,
+  closesSteps[] {
+    title,
+    description
+  },
+  statsTitle,
+  stats[] {
+    value,
+    label
+  },
+  humanHeading,
+  humanHeadingHighlight,
+  humanParagraphs,
+  "humanImage": humanImage.asset->url,
+  "humanImageMobile": humanImageMobile.asset->url,
+  "humanImageAlt": humanImage.alt,
+  platformEyebrow,
+  platformHeading,
+  platformDescription,
+  platformCtaText,
+  platformCtaLink,
+  "platformImage": platformImage.asset->url,
+  threeThingsHeading,
+  threeThingsHeadingHighlight,
+  threeThingsCards[] {
+    "icon": icon.asset->url,
+    title,
+    description
+  },
+  ctaHeadline,
+  ctaButtonText,
+  ctaButtonLink,
+  metaTitle,
+  metaDescription
+}`;
+
+export const allSolutionsQuery = groq`*[_type == "solutionPage" && !(_id in path('drafts.**'))] | order(order asc, _createdAt asc) {
+  _id,
+  title,
+  "id": _id,
+  "slug": slug.current,
+  navLabel,
+  order,
+  heroEyebrow,
+  heroHeadline,
+  heroDescription,
+  heroCtaText,
+  heroCtaLink,
+  "heroImage": heroImage.asset->url,
+  "heroImageAlt": heroImage.alt,
+  "heroBanner": heroBanner.asset->url,
+  problemTag,
+  problemHeadline,
+  problemHeadlineHighlight,
+  problemDescription,
+  problemDescriptionSecondary,
+  problemQuoteText,
+  problemQuoteAuthor,
+  "problemImage": problemImage.asset->url,
+  "problemImageAlt": problemImage.alt,
+  closesSectionTitle,
+  closesSectionHighlight,
+  closesSubtitle,
+  "closesImage": closesImage.asset->url,
+  "closesImageAlt": closesImage.alt,
+  closesSteps[] {
+    title,
+    description
+  },
+  statsTitle,
+  stats[] {
+    value,
+    label
+  },
+  humanHeading,
+  humanHeadingHighlight,
+  humanParagraphs,
+  "humanImage": humanImage.asset->url,
+  "humanImageMobile": humanImageMobile.asset->url,
+  "humanImageAlt": humanImage.alt,
+  platformEyebrow,
+  platformHeading,
+  platformDescription,
+  platformCtaText,
+  platformCtaLink,
+  "platformImage": platformImage.asset->url,
+  threeThingsHeading,
+  threeThingsHeadingHighlight,
+  threeThingsCards[] {
+    "icon": icon.asset->url,
+    title,
+    description
+  },
+  ctaHeadline,
+  ctaButtonText,
+  ctaButtonLink,
+  metaTitle,
+  metaDescription
+}`;
+
+export const solutionNavQuery = groq`*[_type == "solutionPage" && defined(slug.current) && !(_id in path('drafts.**'))] | order(order asc, _createdAt asc) {
+  title,
+  navLabel,
+  "slug": slug.current,
+  order
+}`;
+
+export const solutionSlugsQuery = groq`*[_type == "solutionPage" && defined(slug.current) && !(_id in path('drafts.**'))] {
+  "slug": slug.current
+}`;
+
+
 

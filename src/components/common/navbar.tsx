@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ChevronRight, CTA } from '@/components/CTA';
+import { DEFAULT_SOLUTIONS_NAV } from '@/data/solutions';
 
 interface NavSubItem {
   label: string;
@@ -23,62 +24,6 @@ interface NavItem {
   children?: NavSubItem[];
 }
 
-const navItems: NavItem[] = [
-  {
-    label: 'Company',
-    header: 'Company',
-    children: [
-      { label: 'About Us', href: '/about-us' },
-      { label: 'Philosophy', href: '/philosophy' },
-      { label: 'Careers', href: '/careers' },
-      { label: 'Culture', href: '/culture' },
-    ],
-  },
-  {
-    label: 'Products',
-    header: 'Products',
-    children: [
-      { label: 'Himer AI OS', href: '/products/himer' },
-      { label: 'CurieCode', href: '/products/curiecode' },
-    ],
-  },
-  {
-    label: 'Agentic RCM Solutions',
-    header: 'Agentic RCM Solutions',
-    columns: [
-      {
-        items: [
-          { label: 'Prior Authorization', href: '/solutions/prior-authorization' },
-          { label: 'Eligibility & Benefits Verification', href: '/solutions' },
-          { label: 'Denial Management', href: '/solutions/denial-management' },
-          { label: 'AR Follow-up', href: '/solutions/ar-follow-up' },
-        ],
-      },
-      {
-        items: [
-          { label: 'Charge Capture and Coding', href: '/solutions/charge-capture-and-coding' },
-          { label: 'Payment Posting', href: '/solutions/payment-posting' },
-          { label: 'Claim Submission and Scrubbing', href: '/solutions/claim-submission-and-scrubbing' },
-          { label: 'Patient Estimates', href: '/solutions/patient-estimates' },
-        ],
-      },
-    ],
-    children: [
-      { label: 'Prior Authorization', href: '/solutions/prior-authorization' },
-      { label: 'Eligibility & Benefits Verification', href: '/solutions' },
-      { label: 'Denial Management', href: '/solutions/denial-management' },
-      { label: 'AR Follow-up', href: '/solutions/ar-follow-up' },
-      { label: 'Charge Capture and Coding', href: '/solutions/charge-capture-and-coding' },
-      { label: 'Payment Posting', href: '/solutions/payment-posting' },
-      { label: 'Claim Submission and Scrubbing', href: '/solutions/claim-submission-and-scrubbing' },
-      { label: 'Patient Estimates', href: '/solutions/patient-estimates' },
-    ],
-  },
-  { label: 'Case Studies', href: '/case-studies' },
-  { label: 'Trust and Security', href: '/trust-and-security' },
-  { label: 'Blogs', href: '/blogs' },
-];
-
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -86,6 +31,60 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
+  const [solutionsNav, setSolutionsNav] = useState<NavSubItem[]>(DEFAULT_SOLUTIONS_NAV);
+
+  useEffect(() => {
+    fetch('/api/solutions/nav')
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch solutions nav');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setSolutionsNav(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const navItems: NavItem[] = useMemo(() => {
+    const half = Math.ceil(solutionsNav.length / 2);
+    const col1 = solutionsNav.slice(0, half);
+    const col2 = solutionsNav.slice(half);
+
+    return [
+      {
+        label: 'Company',
+        header: 'Company',
+        children: [
+          { label: 'About Us', href: '/about-us' },
+          { label: 'Philosophy', href: '/philosophy' },
+          { label: 'Careers', href: '/careers' },
+          { label: 'Culture', href: '/culture' },
+        ],
+      },
+      {
+        label: 'Products',
+        header: 'Products',
+        children: [
+          { label: 'Himer AI OS', href: '/products/himer' },
+          { label: 'CurieCode', href: '/products/curiecode' },
+        ],
+      },
+      {
+        label: 'Agentic RCM Solutions',
+        header: 'Agentic RCM Solutions',
+        columns: [
+          { items: col1 },
+          { items: col2 },
+        ],
+        children: solutionsNav,
+      },
+      { label: 'Case Studies', href: '/case-studies' },
+      { label: 'Trust and Security', href: '/trust-and-security' },
+      { label: 'Blogs', href: '/blogs' },
+    ];
+  }, [solutionsNav]);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);

@@ -6,6 +6,7 @@ import { blogsPageSchema } from './blogsPage';
 import { careersPageSchema } from './careersPage';
 import { caseStudiesPageSchema } from './caseStudiesPage';
 import { caseStudySchema } from './caseStudy';
+import { solutionPageSchema } from './solutionPage';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -15,6 +16,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     caseStudiesPageSchema,
     blogPostSchema,
     blogsPageSchema,
+    solutionPageSchema,
   ],
 };
 

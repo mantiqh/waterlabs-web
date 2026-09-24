@@ -59,9 +59,16 @@ export const structure: StructureResolver = (S) =>
             .schemaType('blogsPage')
             .documentId('blogsPage')
         ),
+      S.listItem()
+        .title('Solutions')
+        .schemaType('solutionPage')
+        .child(
+          S.documentTypeList('solutionPage')
+            .title('Solutions')
+        ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => !['aboutUsPage', 'careersPage', 'caseStudy', 'caseStudiesPage', 'blogPost', 'blogsPage'].includes(listItem.getId() || '')
+        (listItem) => !['aboutUsPage', 'careersPage', 'caseStudy', 'caseStudiesPage', 'blogPost', 'blogsPage', 'solutionPage'].includes(listItem.getId() || '')
       ),
     ]);
 

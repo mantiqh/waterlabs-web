@@ -60,9 +60,9 @@ export const HowWaterlabsClosesSection = () => {
   const activeStepRef = useRef(0);
   const isProgrammaticScroll = useRef(false);
 
-  // Repeat items for seamless, continuous looping scroll
+  // Repeat items for seamless, continuous looping scroll (5 sets to allow infinite bi-directional scrolling)
   const repeatedSteps = useMemo(() => {
-    const LOOP_COPIES = 3;
+    const LOOP_COPIES = 5;
     return Array.from({ length: LOOP_COPIES }).flatMap((_, setIndex) =>
       verificationSteps.map((step, originalIndex) => ({
         ...step,
@@ -72,7 +72,7 @@ export const HowWaterlabsClosesSection = () => {
     );
   }, []);
 
-  // Position at middle set on mount
+  // Position at middle set (copy 2) on mount
   useEffect(() => {
     if (!listRef.current) return;
     const container = listRef.current;
@@ -83,7 +83,7 @@ export const HowWaterlabsClosesSection = () => {
       const midItem = items[N] as HTMLElement;
       if (firstItem && midItem) {
         const cycleHeight = midItem.offsetTop - firstItem.offsetTop;
-        container.scrollTop = cycleHeight;
+        container.scrollTop = 2 * cycleHeight;
       }
     }
   }, []);
@@ -126,9 +126,9 @@ export const HowWaterlabsClosesSection = () => {
 
     const singleCycleHeight = midItem.offsetTop - firstItem.offsetTop;
     if (singleCycleHeight > 0) {
-      if (container.scrollTop >= 2 * singleCycleHeight) {
+      if (container.scrollTop >= 2.8 * singleCycleHeight) {
         container.scrollTop -= singleCycleHeight;
-      } else if (container.scrollTop <= 0.2 * singleCycleHeight) {
+      } else if (container.scrollTop <= 1.2 * singleCycleHeight) {
         container.scrollTop += singleCycleHeight;
       }
     }
