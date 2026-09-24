@@ -502,6 +502,12 @@ body {
   font-family: var(--font-secondary);
 }
 
+select,
+select option {
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
 @theme {
   --animate-marquee: marquee 35s linear infinite;
 

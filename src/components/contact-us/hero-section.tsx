@@ -3,7 +3,39 @@ import Image from 'next/image';
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 
-export const ContactUsHeroSection = () => {
+interface ContactUsHeroSectionProps {
+  heading?: string;
+  headingHighlight?: string;
+  subheading?: string;
+  ctaText?: string;
+  ctaLink?: string;
+  imageDesktop?: string;
+  imageMobile?: string;
+}
+
+export const ContactUsHeroSection = ({
+  heading = 'Your revenue cycle, on our numbers',
+  headingHighlight = 'on our numbers',
+  subheading = 'Bring us the function that is hurting most. In 15 minutes we will show you what changes, what it costs, and how quickly it goes live.',
+  ctaText = 'Get a Demo',
+  ctaLink = '#contact-form',
+  imageDesktop = '/images/contact-us/hero-section/img_banner%20(3).png',
+  imageMobile = '/images/contact-us/hero-section/img_banner_mobile.png',
+}: ContactUsHeroSectionProps) => {
+  const renderHeading = () => {
+    if (headingHighlight && heading.includes(headingHighlight)) {
+      const parts = heading.split(headingHighlight);
+      return (
+        <>
+          {parts[0]}
+          <span className="text-electric-blue">{headingHighlight}</span>
+          {parts.slice(1).join(headingHighlight)}
+        </>
+      );
+    }
+    return heading;
+  };
+
   return (
     <section className="relative w-full bg-white">
       {/* 
@@ -13,13 +45,12 @@ export const ContactUsHeroSection = () => {
         - Background: linear-gradient overlay on hero image with decorative glassmorphic shape
       */}
       <div className="relative w-full min-h-[490px] lg:h-[550px] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:px-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[10px]">
-        
         {/* Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
           {/* Desktop Background */}
           <div className="hidden lg:block absolute inset-0">
             <Image
-              src="/images/contact-us/hero-section/img_banner (3).png"
+              src={imageDesktop}
               alt="Contact Us Background"
               fill
               priority
@@ -30,7 +61,7 @@ export const ContactUsHeroSection = () => {
           {/* Mobile/Tablet Background */}
           <div className="block lg:hidden absolute inset-0">
             <Image
-              src="/images/contact-us/hero-section/img_banner_mobile.png"
+              src={imageMobile}
               alt="Contact Us Background Mobile"
               fill
               priority
@@ -39,7 +70,6 @@ export const ContactUsHeroSection = () => {
             />
           </div>
         </div>
-
 
         {/* Navbar */}
         <div className="relative z-50 w-full">
@@ -54,23 +84,20 @@ export const ContactUsHeroSection = () => {
             <div className="w-full flex flex-col items-start gap-[12px]">
               {/* Heading (Mobile: 32px / 40px, Desktop: type-h2, #111111) */}
               <h2 className="type-h2 max-md:text-[32px] max-md:leading-[40px] tracking-[-0.01em] text-[#111111]">
-                Your revenue cycle, <span className="text-electric-blue">on our numbers</span>
+                {renderHeading()}
               </h2>
               {/* Subheading (20px / 28px, #2A2A2A) */}
               <p className="type-body-s text-[#2A2A2A] max-w-[540px] lg:max-w-[664px]">
-                Bring us the function that is hurting most. In 15 minutes we will show you what changes, what it costs, and how quickly it goes live.
+                {subheading}
               </p>
             </div>
-            
+
             {/* CTA Button */}
-            <a href="#contact-form">
-              <CTA variant="light-bg">
-                Get a Demo
-              </CTA>
+            <a href={ctaLink}>
+              <CTA variant="light-bg">{ctaText}</CTA>
             </a>
           </div>
         </div>
-
       </div>
     </section>
   );

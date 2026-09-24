@@ -1,7 +1,8 @@
 'use client';
 
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
+import { ChevronRight } from '@/components/CTA';
 import {
   calculateROI,
   formatMoney,
@@ -26,6 +27,9 @@ const GRADIENT_STYLE: React.CSSProperties = {
 export const ROICalculator = () => {
   // Calculator inputs state
   const [specialty, setSpecialty] = useState<string>('');
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [hoveredOption, setHoveredOption] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const [monthlyRevenue, setMonthlyRevenue] = useState<number>(20000000);
   const [monthlyRevenueStr, setMonthlyRevenueStr] = useState<string>('20,000,000');
   const [monthlyClaims, setMonthlyClaims] = useState<number>(10000);
@@ -57,9 +61,35 @@ export const ROICalculator = () => {
     });
   }, [specialty, monthlyRevenue, monthlyClaims, denialRatePct, headcount, outsourcedPct]);
 
+  // Close specialty dropdown on click outside or escape key
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDropdownOpen]);
+
   // Reset to defaults
   const handleReset = () => {
     setSpecialty('');
+    setIsDropdownOpen(false);
+    setHoveredOption(null);
     setMonthlyRevenue(20000000);
     setMonthlyRevenueStr('20,000,000');
     setMonthlyClaims(10000);
@@ -103,35 +133,75 @@ export const ROICalculator = () => {
                 </p>
               </div>
 
-              <div className="relative mt-[16px]">
-                <select
+              <div ref={dropdownRef} className="relative mt-[16px]">
+                <button
+                  type="button"
                   id={specialtyId}
-                  value={specialty}
-                  onChange={(e) => setSpecialty(e.target.value)}
-                  className={`w-full appearance-none bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[52px] px-[18px] pr-[44px] type-caption cursor-pointer focus:outline-none focus:border-electric-blue focus:ring-2 focus:ring-electric-blue/20 transition-colors ${
-                    specialty ? 'text-black font-medium' : 'text-medium-gray'
+                  onClick={() => setIsDropdownOpen((prev) => !prev)}
+                  aria-haspopup="listbox"
+                  aria-expanded={isDropdownOpen}
+                  className={`w-full bg-[#FCFDFE] border rounded-[12px_8px_12px_12px] h-[52px] px-[18px] flex items-center justify-between cursor-pointer transition-colors outline-none ${
+                    isDropdownOpen
+                      ? 'border-electric-blue ring-2 ring-electric-blue/20'
+                      : 'border-[#D7DCE2] hover:border-[#91C6F2]'
                   }`}
                 >
-                  <option value="" disabled>
-                    Select Your Specialty
-                  </option>
-                  {SORTED_SPECIALTIES.map((spec) => (
-                    <option key={spec} value={spec}>
-                      {spec}
-                    </option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute right-[18px] top-1/2 -translate-y-1/2 text-medium-gray">
-                  <svg
-                    className="w-[16px] h-[16px]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
+                  <span
+                    className={`type-caption truncate ${
+                      specialty ? 'text-[#111111] font-medium' : 'text-[#7D8690]'
+                    }`}
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </div>
+                    {specialty || 'Select Your Specialty'}
+                  </span>
+                  <div
+                    className={`transition-transform duration-200 text-[#111111] ${
+                      isDropdownOpen ? '-rotate-90 text-[#0F68D6]' : 'rotate-90'
+                    }`}
+                  >
+                    <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0" />
+                  </div>
+                </button>
+
+                {/* Dropdown Menu (Navbar Dropdown UI style with solid white background) */}
+                {isDropdownOpen && (
+                  <div
+                    className="absolute top-[calc(100%+8px)] left-0 w-full max-h-[320px] overflow-y-auto bg-white rounded-[20px_10px_20px_20px] p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.12)] border border-[#D7DCE2] z-50 flex flex-col gap-[4px] animate-in fade-in-0 zoom-in-95 duration-150"
+                    role="listbox"
+                    style={{ scrollbarWidth: 'thin' }}
+                  >
+                    {SORTED_SPECIALTIES.map((spec) => {
+                      const isSelected = specialty === spec;
+                      const isHovered = hoveredOption === spec;
+                      const isActive = isSelected || isHovered;
+
+                      return (
+                        <button
+                          key={spec}
+                          type="button"
+                          role="option"
+                          aria-selected={isSelected}
+                          onMouseEnter={() => setHoveredOption(spec)}
+                          onMouseLeave={() => setHoveredOption(null)}
+                          onClick={() => {
+                            setSpecialty(spec);
+                            setIsDropdownOpen(false);
+                            setHoveredOption(null);
+                          }}
+                          className={`min-h-[40px] w-full flex flex-row items-center justify-between gap-[14px] px-[12px] py-[8px] rounded-[8px] type-caption transition-colors duration-150 cursor-pointer text-left ${
+                            isActive
+                              ? 'text-[#0F68D6] bg-[#0F68D6]/5 font-medium'
+                              : 'text-[#111111] hover:text-[#0F68D6] hover:bg-[#F4F6F9]'
+                          }`}
+                        >
+                          <span className="truncate">{spec}</span>
+                          {isActive && (
+                            <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0 text-[#0F68D6]" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
 

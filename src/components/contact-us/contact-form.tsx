@@ -4,17 +4,39 @@ import Image from 'next/image';
 import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from 'react';
 
 import { ChevronRight, CTA } from '@/components/CTA';
+import { DEFAULT_CONTACT_US_DATA } from '@/data/contact-us';
 
-const ORG_TYPE_OPTIONS = [
-  'Health system',
-  'Medical Group',
-  'Community Health Center',
-  'Outpatient Facility',
-  'Hospital',
-  'Other',
-];
+interface ContactUsContactFormProps {
+  tag?: string;
+  heading?: string;
+  image?: string;
+  orgTypeOptions?: string[];
+  newsletterHeading?: string;
+  consentText?: string;
+  disclaimerText?: string;
+  submitButtonText?: string;
+}
 
-export const ContactUsContactForm = () => {
+export const ContactUsContactForm = ({
+  tag = DEFAULT_CONTACT_US_DATA.formTag || 'Send us a message',
+  heading = DEFAULT_CONTACT_US_DATA.formHeading,
+  image = DEFAULT_CONTACT_US_DATA.formImage || '/images/contact-us/contact-form/contact-form.jpg',
+  orgTypeOptions = DEFAULT_CONTACT_US_DATA.orgTypeOptions || [
+    'Health system',
+    'Medical Group',
+    'Community Health Center',
+    'Outpatient Facility',
+    'Hospital',
+    'Other',
+  ],
+  newsletterHeading = DEFAULT_CONTACT_US_DATA.newsletterHeading ||
+    'Stay ahead of the curve. Sign up to receive exclusive Waterlabs updates, resources, and tips.',
+  consentText = DEFAULT_CONTACT_US_DATA.consentText ||
+    'I agree to receive other communications from Waterlabs.*',
+  disclaimerText = DEFAULT_CONTACT_US_DATA.disclaimerText ||
+    'You may unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy.',
+  submitButtonText = DEFAULT_CONTACT_US_DATA.submitButtonText || 'Submit',
+}: ContactUsContactFormProps) => {
   const [formData, setFormData] = useState({
     name: '',
     org: '',
@@ -86,35 +108,39 @@ export const ContactUsContactForm = () => {
               {/* Tag + Heading (Frame 2147226533: 516px x 96px, gap: 12px) */}
               <div className="w-full flex flex-col items-start gap-[8px] lg:gap-[12px]">
                 {/* Text - Tag (gap: 8px, height: 24px) */}
-                <div className="flex items-center gap-[8px] h-[24px]">
-                  <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                  <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
-                    Send us a message
-                  </span>
-                </div>
+                {tag && (
+                  <div className="flex items-center gap-[8px] h-[24px]">
+                    <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
+                    <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
+                      {tag}
+                    </span>
+                  </div>
+                )}
                 {/* Heading (52px / 60px / -0.01em, #0F68D6) */}
                 <h2 className="type-h2 tracking-[-0.01em] text-electric-blue">
-                  Contact Form
+                  {heading}
                 </h2>
               </div>
 
               {/* Image Container (Frame 2147226534: max 516px x 328px) */}
-              <div className="w-full relative overflow-hidden rounded-[20px_10px_20px_20px] lg:rounded-[30px_15px_30px_30px] aspect-[516/328] lg:w-full">
-                <Image
-                  src="/images/contact-us/contact-form/contact-form.jpg"
-                  alt="Contact form illustration"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 516px"
-                  className="object-cover object-center"
-                />
-                {/* Exact Figma Gradient overlay */}
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
-                  }}
-                />
-              </div>
+              {image && (
+                <div className="w-full relative overflow-hidden rounded-[20px_10px_20px_20px] lg:rounded-[30px_15px_30px_30px] aspect-[516/328] lg:w-full">
+                  <Image
+                    src={image}
+                    alt="Contact form illustration"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 516px"
+                    className="object-cover object-center"
+                  />
+                  {/* Exact Figma Gradient overlay */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
+                    }}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Right Column: Form (Frame: max 772px x 464px, gap: 14px) */}
@@ -206,8 +232,9 @@ export const ContactUsContactForm = () => {
                         {formData.orgType || 'Organization Type*'}
                       </span>
                       <div
-                        className={`transition-transform duration-200 text-[#7D8690] group-hover:text-[#0F68D6] ${isDropdownOpen ? '-rotate-90 text-[#0F68D6]' : 'rotate-90'
-                          }`}
+                        className={`transition-transform duration-200 text-[#7D8690] group-hover:text-[#0F68D6] ${
+                          isDropdownOpen ? '-rotate-90 text-[#0F68D6]' : 'rotate-90'
+                        }`}
                       >
                         <ChevronRight className="w-[8px] h-[12px] xl:w-[9.73px] xl:h-[14.63px] shrink-0" />
                       </div>
@@ -222,7 +249,7 @@ export const ContactUsContactForm = () => {
                         className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#F4F6F9] backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.10)] border border-[#D7DCE2] z-50 flex flex-col gap-[4px] animate-in fade-in-0 zoom-in-95 duration-150"
                         role="listbox"
                       >
-                        {ORG_TYPE_OPTIONS.map((opt) => {
+                        {orgTypeOptions.map((opt) => {
                           const isSelected = formData.orgType === opt;
                           const isHovered = hoveredOption === opt;
                           return (
@@ -273,39 +300,59 @@ export const ContactUsContactForm = () => {
               <div className="w-full flex flex-col items-start gap-[16px] pt-[8px]">
                 <div className="w-full flex flex-col items-start gap-[12px]">
                   {/* Main heading */}
-                  <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
-                    Stay ahead of the curve. Sign up to receive exclusive Waterlabs updates, resources, and tips.
-                  </p>
+                  {newsletterHeading && (
+                    <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
+                      {newsletterHeading}
+                    </p>
+                  )}
 
                   {/* Checkbox */}
                   <div className="flex items-center gap-[8px]">
                     <button
                       type="button"
                       onClick={() => setAgreed(!agreed)}
-                      className={`w-[20px] h-[20px] rounded-[2px] flex items-center justify-center transition-colors cursor-pointer shrink-0 ${agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'
-                        }`}
+                      className={`w-[20px] h-[20px] rounded-[2px] flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
+                        agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'
+                      }`}
                       aria-label="Agree to terms"
                     >
                       {agreed && (
-                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[10px] h-[8px]">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        <svg
+                          width="10"
+                          height="8"
+                          viewBox="0 0 10 8"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-[10px] h-[8px]"
+                        >
+                          <path
+                            d="M1 4L3.5 6.5L9 1"
+                            stroke="white"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
                         </svg>
                       )}
                     </button>
-                    <span className="type-body-xxs tracking-[0.01em] text-[#333333]">
-                      I agree to receive other communications from Waterlabs.*
-                    </span>
+                    {consentText && (
+                      <span className="type-body-xxs tracking-[0.01em] text-[#333333]">
+                        {consentText}
+                      </span>
+                    )}
                   </div>
 
                   {/* Main heading / Disclaimer */}
-                  <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
-                    You may unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy.
-                  </p>
+                  {disclaimerText && (
+                    <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
+                      {disclaimerText}
+                    </p>
+                  )}
                 </div>
 
                 {/* Desktop - Fill CTA (Submit Button) */}
                 <CTA variant="light-bg" type="submit">
-                  Submit
+                  {submitButtonText}
                 </CTA>
               </div>
             </form>
@@ -318,4 +365,3 @@ export const ContactUsContactForm = () => {
 };
 
 export default ContactUsContactForm;
-

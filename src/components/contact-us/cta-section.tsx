@@ -2,11 +2,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CTA } from '@/components/CTA';
+import { DEFAULT_CONTACT_US_DATA } from '@/data/contact-us';
 
-export const ContactUsCTASection = () => {
+interface ContactUsCTASectionProps {
+  heading?: string;
+  headingHighlight?: string;
+  buttonText?: string;
+  buttonLink?: string;
+  imageDesktop?: string;
+  imageMobile?: string;
+}
+
+export const ContactUsCTASection = ({
+  heading = DEFAULT_CONTACT_US_DATA.ctaHeading,
+  headingHighlight = DEFAULT_CONTACT_US_DATA.ctaHeadingHighlight,
+  buttonText = DEFAULT_CONTACT_US_DATA.ctaButtonText,
+  buttonLink = DEFAULT_CONTACT_US_DATA.ctaButtonLink,
+  imageDesktop = DEFAULT_CONTACT_US_DATA.ctaBackgroundImageDesktop ||
+    '/images/contact-us/cta-section/img_start_building_waterlas_today.png',
+  imageMobile = DEFAULT_CONTACT_US_DATA.ctaBackgroundImageMobile ||
+    '/images/contact-us/cta-section/img_start_building_waterlas_today_mobile.png',
+}: ContactUsCTASectionProps) => {
   return (
     <section className="relative w-full bg-gradient-to-b from-ghost-white from-50% to-[#111111] to-50% overflow-hidden">
-
       {/* 
         Start Building CTA Section:
         - Desktop: 1440px, padding: 80px 60px, gap: 48px, border-radius: 0px 20px 20px 0px
@@ -16,29 +34,32 @@ export const ContactUsCTASection = () => {
         - CTA: White button with dark text
       */}
       <div className="relative w-full rounded-r-[30px] lg:rounded-r-[20px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
-
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           {/* Desktop Background */}
-          <div className="hidden lg:block absolute inset-0">
-            <Image
-              src="/images/contact-us/cta-section/img_start_building_waterlas_today.png"
-              alt="Start Building on Waterlabs today"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </div>
+          {imageDesktop && (
+            <div className="hidden lg:block absolute inset-0">
+              <Image
+                src={imageDesktop}
+                alt="Start Building on Waterlabs today"
+                fill
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
+          )}
           {/* Mobile Background */}
-          <div className="block lg:hidden absolute inset-0">
-            <Image
-              src="/images/contact-us/cta-section/img_start_building_waterlas_today_mobile.png"
-              alt="Start Building on Waterlabs today"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </div>
+          {imageMobile && (
+            <div className="block lg:hidden absolute inset-0">
+              <Image
+                src={imageMobile}
+                alt="Start Building on Waterlabs today"
+                fill
+                sizes="100vw"
+                className="object-cover object-center"
+              />
+            </div>
+          )}
         </div>
 
         {/* Content */}
@@ -48,25 +69,25 @@ export const ContactUsCTASection = () => {
             <div className="flex flex-col justify-center items-start gap-[20px]">
               <h2 className="type-h3 tracking-[-0.01em] max-w-[873px]">
                 <span className="text-white">
-                  Start Building<br />
+                  {heading}
+                  {headingHighlight ? <br /> : null}
                 </span>
-                <span className="text-[#91C6F2]">
-                  on Waterlabs today
-                </span>
+                {headingHighlight && (
+                  <span className="text-[#91C6F2]">
+                    {headingHighlight}
+                  </span>
+                )}
               </h2>
             </div>
 
             {/* CTA Button */}
             <div className="shrink-0">
-              <Link href="/#discover">
-                <CTA variant="dark-bg">
-                  Start Building
-                </CTA>
+              <Link href={buttonLink}>
+                <CTA variant="dark-bg">{buttonText}</CTA>
               </Link>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
