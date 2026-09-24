@@ -341,5 +341,43 @@ export const solutionSlugsQuery = groq`*[_type == "solutionPage" && defined(slug
   "slug": slug.current
 }`;
 
+export const contactUsPageQuery = groq`*[_type == "contactUsPage"][0] {
+  heroHeading,
+  heroHeadingHighlight,
+  heroSubheading,
+  heroCtaText,
+  heroCtaLink,
+  "heroImageDesktop": heroImageDesktop.asset->url,
+  "heroImageMobile": heroImageMobile.asset->url,
+  locations[] {
+    _key,
+    tag,
+    title,
+    address,
+    email,
+    hours,
+    buttonText,
+    href
+  },
+  "operatingInfoBgImage": operatingInfoBgImage.asset->url,
+  formTag,
+  formHeading,
+  "formImage": formImage.asset->url,
+  orgTypeOptions,
+  newsletterHeading,
+  consentText,
+  disclaimerText,
+  submitButtonText,
+  ctaHeading,
+  ctaHeadingHighlight,
+  ctaButtonText,
+  ctaButtonLink,
+  "ctaBackgroundImageDesktop": ctaBackgroundImageDesktop.asset->url,
+  "ctaBackgroundImageMobile": ctaBackgroundImageMobile.asset->url,
+  metaTitle,
+  metaDescription
+}`;
+
+
 
 
