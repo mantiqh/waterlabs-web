@@ -78,7 +78,7 @@ export const TheProblemSection = () => {
 
           {/* Mobile / Tablet Layout: Single Card */}
           <div className="flex lg:hidden justify-center">
-            <div className="relative w-full max-w-[362px] flex flex-col bg-[rgba(145,198,242,0.3)] rounded-[20px_10px_20px_20px] overflow-hidden">
+            <div className="relative w-full max-w-[362px] md:max-w-[460px] flex flex-col bg-[rgba(145,198,242,0.3)] rounded-[20px_10px_20px_20px] overflow-hidden">
               <div
                 className="absolute pointer-events-none rounded-[30px] border border-[rgba(255,255,255,0.4)] bg-[rgba(255,255,255,0.2)]"
                 style={{
@@ -100,10 +100,10 @@ export const TheProblemSection = () => {
 
                 {/* Headline */}
                 <h5 className="type-h5 text-[#111111] tracking-[-0.01em]">
-                  How backlogged is your authorization
+                  How backlogged is your
                   <br />
-                  <span className="whitespace-nowrap">
-                    process <span className="text-[#0F68D6]">right now?</span>
+                  <span className="md:whitespace-nowrap">
+                    authorization process <span className="text-[#0F68D6]">right now?</span>
                   </span>
                 </h5>
 
