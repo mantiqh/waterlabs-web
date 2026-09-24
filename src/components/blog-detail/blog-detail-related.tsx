@@ -156,7 +156,7 @@ export const BlogDetailRelated = ({
               onScroll={handleMobileScroll}
               className="w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-[4px]"
             >
-              <div className="flex flex-row items-start gap-[12px] pr-[20px]">
+              <div className="flex flex-row items-start gap-[12px]">
                 {relatedBlogs.map((item) => (
                   <Link
                     key={`mobile-${item.id}`}
@@ -200,6 +200,8 @@ export const BlogDetailRelated = ({
                     </div>
                   </Link>
                 ))}
+                {/* Trailing spacer to provide padding on the right side of the last card on small screens */}
+                <div className="w-[12px] md:w-[32px] h-[10px] shrink-0 pointer-events-none" aria-hidden="true" />
               </div>
             </div>
 

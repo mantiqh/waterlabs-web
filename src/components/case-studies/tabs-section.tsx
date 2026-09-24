@@ -383,7 +383,7 @@ export const CaseStudiesTabsSection = ({
                         href={`/case-study/${card.slug}`}
                         className="group/title block w-full"
                       >
-                        <h5 className="type-body-l text-[#042849] group-hover/title:text-[#0F68D6] transition-colors">
+                        <h5 className="type-body-l lg:type-body-s xl:type-body-l text-[#042849] group-hover/title:text-[#0F68D6] transition-colors">
                           {card.title || card.stat}
                         </h5>
                       </Link>
