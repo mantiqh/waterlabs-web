@@ -1,13 +1,24 @@
 import type { Metadata } from 'next';
 
+import DynamicSolutionPage from '@/components/solutions/dynamic-solution-page';
 import PaymentPostingPage from '@/components/solutions/payment-posting/page';
+import { fetchSolutionBySlug } from '@/sanity/lib/solutions';
 
-export const metadata: Metadata = {
-  title: 'Solutions — Payment Posting | Waterlabs AI',
-  description:
-    'Every payment posted the day it lands. Our agents reconcile remittances, post payments, and route what does not balance at whatever volume your practice runs.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const solution = await fetchSolutionBySlug('payment-posting');
+  return {
+    title: solution?.seo?.metaTitle || 'Solutions — Payment Posting | Waterlabs AI',
+    description:
+      solution?.seo?.metaDescription ||
+      solution?.hero.description ||
+      'Every payment posted the day it lands. Our agents reconcile remittances, post payments, and route what does not balance.',
+  };
+}
 
-export default function Page() {
+export default async function Page() {
+  const solution = await fetchSolutionBySlug('payment-posting');
+  if (solution) {
+    return <DynamicSolutionPage data={solution} />;
+  }
   return <PaymentPostingPage />;
 }
