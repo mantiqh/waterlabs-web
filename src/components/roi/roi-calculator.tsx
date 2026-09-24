@@ -151,29 +151,31 @@ export const ROICalculator = () => {
                       What lands in the bank
                     </span>
                   </div>
-                  <div className="bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[64px] px-[16px] flex items-baseline gap-[6px] focus-within:border-electric-blue focus-within:ring-2 focus-within:ring-electric-blue/20 transition-all">
-                    <span className="type-body-xs text-gray-black">$</span>
-                    <input
-                      id={revenueId}
-                      type="text"
-                      inputMode="numeric"
-                      value={monthlyRevenueStr}
-                      onFocus={() => {
-                        setMonthlyRevenueStr(
-                          monthlyRevenue > 0 ? monthlyRevenue.toString() : ''
-                        );
-                      }}
-                      onChange={(e) => {
-                        const val = sanitizeNumberInput(e.target.value, 999999999);
-                        setMonthlyRevenue(val);
-                        setMonthlyRevenueStr(e.target.value.replace(/[^0-9]/g, ''));
-                      }}
-                      onBlur={() => {
-                        setMonthlyRevenueStr(formatThousands(monthlyRevenue));
-                      }}
-                      className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
-                      aria-label="Monthly collected revenue in USD"
-                    />
+                  <div className="bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[64px] px-[16px] flex items-center focus-within:border-electric-blue focus-within:ring-2 focus-within:ring-electric-blue/20 transition-all">
+                    <div className="w-full flex items-baseline gap-[6px]">
+                      <span className="type-body-xs text-gray-black">$</span>
+                      <input
+                        id={revenueId}
+                        type="text"
+                        inputMode="numeric"
+                        value={monthlyRevenueStr}
+                        onFocus={() => {
+                          setMonthlyRevenueStr(
+                            monthlyRevenue > 0 ? monthlyRevenue.toString() : ''
+                          );
+                        }}
+                        onChange={(e) => {
+                          const val = sanitizeNumberInput(e.target.value, 999999999);
+                          setMonthlyRevenue(val);
+                          setMonthlyRevenueStr(e.target.value.replace(/[^0-9]/g, ''));
+                        }}
+                        onBlur={() => {
+                          setMonthlyRevenueStr(formatThousands(monthlyRevenue));
+                        }}
+                        className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
+                        aria-label="Monthly collected revenue in USD"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -190,31 +192,33 @@ export const ROICalculator = () => {
                       Claims submitted in an average month
                     </span>
                   </div>
-                  <div className="bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[64px] px-[16px] flex items-baseline justify-between gap-[6px] focus-within:border-electric-blue focus-within:ring-2 focus-within:ring-electric-blue/20 transition-all">
-                    <input
-                      id={claimsId}
-                      type="text"
-                      inputMode="numeric"
-                      value={monthlyClaimsStr}
-                      onFocus={() => {
-                        setMonthlyClaimsStr(
-                          monthlyClaims > 0 ? monthlyClaims.toString() : ''
-                        );
-                      }}
-                      onChange={(e) => {
-                        const val = sanitizeNumberInput(e.target.value, 9999999);
-                        setMonthlyClaims(val);
-                        setMonthlyClaimsStr(e.target.value.replace(/[^0-9]/g, ''));
-                      }}
-                      onBlur={() => {
-                        setMonthlyClaimsStr(formatThousands(monthlyClaims));
-                      }}
-                      className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
-                      aria-label="Monthly claims volume"
-                    />
-                    <span className="type-caption text-medium-gray shrink-0">
-                      claims
-                    </span>
+                  <div className="bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[64px] px-[16px] flex items-center focus-within:border-electric-blue focus-within:ring-2 focus-within:ring-electric-blue/20 transition-all">
+                    <div className="w-full flex items-baseline justify-between gap-[6px]">
+                      <input
+                        id={claimsId}
+                        type="text"
+                        inputMode="numeric"
+                        value={monthlyClaimsStr}
+                        onFocus={() => {
+                          setMonthlyClaimsStr(
+                            monthlyClaims > 0 ? monthlyClaims.toString() : ''
+                          );
+                        }}
+                        onChange={(e) => {
+                          const val = sanitizeNumberInput(e.target.value, 9999999);
+                          setMonthlyClaims(val);
+                          setMonthlyClaimsStr(e.target.value.replace(/[^0-9]/g, ''));
+                        }}
+                        onBlur={() => {
+                          setMonthlyClaimsStr(formatThousands(monthlyClaims));
+                        }}
+                        className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
+                        aria-label="Monthly claims volume"
+                      />
+                      <span className="type-caption text-medium-gray shrink-0">
+                        claims
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
