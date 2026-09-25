@@ -18,6 +18,7 @@ const DEFAULT_PLATFORM_IMG = '/images/solutions/solutions-priorauthorization/thi
 
 const STEP_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.15];
 const TOTAL_DOTS = 3;
+const CLOSES_TOTAL_DOTS = 4;
 
 interface DynamicSolutionPageProps {
   data: SolutionPageData;
@@ -171,14 +172,14 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
       return;
     }
     if (Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 15) {
-      setClosesDotIndex(TOTAL_DOTS - 1);
+      setClosesDotIndex(CLOSES_TOTAL_DOTS - 1);
       return;
     }
 
     const maxScroll = scrollWidth - clientWidth;
     if (maxScroll > 0) {
       const scrollRatio = scrollLeft / maxScroll;
-      const dotIndex = Math.min(TOTAL_DOTS - 1, Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1))));
+      const dotIndex = Math.min(CLOSES_TOTAL_DOTS - 1, Math.max(0, Math.round(scrollRatio * (CLOSES_TOTAL_DOTS - 1))));
       setClosesDotIndex(dotIndex);
     }
   };
@@ -192,10 +193,10 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
     if (dotIndex === 0) {
       container.scrollTo({ left: 0, behavior: 'smooth' });
-    } else if (dotIndex === TOTAL_DOTS - 1) {
+    } else if (dotIndex === CLOSES_TOTAL_DOTS - 1) {
       container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
     } else {
-      const targetScroll = (dotIndex / (TOTAL_DOTS - 1)) * maxScroll;
+      const targetScroll = (dotIndex / (CLOSES_TOTAL_DOTS - 1)) * maxScroll;
       container.scrollTo({ left: targetScroll, behavior: 'smooth' });
     }
     setClosesDotIndex(dotIndex);
@@ -550,7 +551,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                         key={step.uniqueIndex}
                         style={{ opacity }}
                         onClick={() => scrollToStep(step.uniqueIndex)}
-                        className="transition-opacity duration-300 flex items-center justify-between gap-[16px] py-[4px] cursor-pointer"
+                        className="transition-opacity duration-300 flex items-center py-[4px] cursor-pointer"
                       >
                         <span
                           className={`type-h4 tracking-[-0.01em] transition-colors duration-300 ${
@@ -559,11 +560,6 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                         >
                           {step.title}
                         </span>
-                        <div
-                          className={`w-[6px] h-[6px] rounded-full shrink-0 transition-all duration-300 ${
-                            isActive ? 'bg-[#63CCB7] scale-125' : 'bg-white/40'
-                          }`}
-                        />
                       </div>
                     );
                   })}
@@ -577,42 +573,58 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 <div
                   ref={scrollRef}
                   onScroll={handleMobileScroll}
-                  className="w-full flex flex-row gap-[16px] overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pr-[20px]"
+                  className="w-full flex flex-row gap-[12px] overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory pr-[20px]"
                 >
                   {steps.map((step, idx) => (
                     <div
                       key={idx}
-                      className="w-[280px] sm:w-[320px] shrink-0 snap-start bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.12)] rounded-[16px] p-[20px] flex flex-col gap-[12px]"
+                      className="w-[342px] max-w-[calc(100vw-60px)] h-[314px] shrink-0 snap-start bg-[rgba(17,17,17,0.3)] rounded-[20px_10px_20px_20px] overflow-hidden flex flex-col items-start"
                     >
-                      <div className="flex items-center gap-[8px]">
-                        <div className="w-[6px] h-[6px] rounded-full bg-[#63CCB7] shrink-0" />
-                        <span className="type-caption text-[#63CCB7] font-medium tracking-[0.02em]">
-                          Step 0{idx + 1}
-                        </span>
+                      {/* Image container */}
+                      <div className="relative w-full h-[166px] shrink-0 rounded-[20px_10px_20px_20px] overflow-hidden">
+                        <Image
+                          src={step.image || data.closes.image || DEFAULT_CLOSES_IMG}
+                          alt={step.title}
+                          fill
+                          sizes="(max-width: 640px) 342px, 342px"
+                          className="object-cover object-center"
+                        />
                       </div>
-                      <h4 className="type-body-s font-semibold text-white tracking-[-0.01em]">
-                        {step.title}
-                      </h4>
-                      <p className="type-body-xxs text-[#D7DCE2] leading-[1.5]">
-                        {step.description}
-                      </p>
+
+                      {/* Content container */}
+                      <div className="p-[12px] flex flex-col items-start gap-[12px] w-full flex-1 justify-start">
+                        <h4 className="type-h5 text-[#91C6F2] tracking-[-0.01em] line-clamp-1">
+                          {step.title}
+                        </h4>
+                        <p className="type-body-xs text-[#D7DCE2] leading-[24px] line-clamp-3">
+                          {step.description}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </div>
 
-                {/* Mobile Dots Pagination */}
-                <div className="flex items-center justify-center gap-[8px] pt-[8px]">
-                  {Array.from({ length: TOTAL_DOTS }).map((_, dotIdx) => (
-                    <button
-                      key={dotIdx}
-                      type="button"
-                      aria-label={`Go to slide group ${dotIdx + 1}`}
-                      onClick={() => scrollToClosesDot(dotIdx)}
-                      className={`h-[8px] rounded-full transition-all duration-300 cursor-pointer ${
-                        closesDotIndex === dotIdx ? 'w-[24px] bg-[#63CCB7]' : 'w-[8px] bg-white/30'
-                      }`}
-                    />
-                  ))}
+                {/* Mobile Carousel Indicators */}
+                <div className="flex flex-row items-center gap-[5px] pt-[4px]">
+                  {Array.from({ length: CLOSES_TOTAL_DOTS }).map((_, dotIdx) => {
+                    const isActive = closesDotIndex === dotIdx;
+                    const isAdjacent = Math.abs(closesDotIndex - dotIdx) === 1;
+                    const widthClass = isActive
+                      ? 'w-[32px] bg-white'
+                      : isAdjacent
+                      ? 'w-[16px] bg-white/20'
+                      : 'w-[6px] bg-white/20';
+
+                    return (
+                      <button
+                        key={dotIdx}
+                        type="button"
+                        aria-label={`Go to slide group ${dotIdx + 1}`}
+                        onClick={() => scrollToClosesDot(dotIdx)}
+                        className={`h-[6px] rounded-full transition-all duration-300 cursor-pointer ${widthClass}`}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             )}

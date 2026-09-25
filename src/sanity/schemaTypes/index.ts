@@ -7,10 +7,12 @@ import { careersPageSchema } from './careersPage';
 import { caseStudiesPageSchema } from './caseStudiesPage';
 import { caseStudySchema } from './caseStudy';
 import { contactUsPageSchema } from './contactUsPage';
+import { homePageSchema } from './homePage';
 import { solutionPageSchema } from './solutionPage';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    homePageSchema,
     aboutUsPageSchema,
     careersPageSchema,
     caseStudySchema,
