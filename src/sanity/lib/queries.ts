@@ -378,6 +378,128 @@ export const contactUsPageQuery = groq`*[_type == "contactUsPage"][0] {
   metaDescription
 }`;
 
+export const homePageQuery = groq`*[_type == "homePage"][0] {
+  heroSubheading,
+  heroHeading,
+  heroDescription,
+  heroCtaText,
+  heroCtaLink,
+  heroSecondaryCtaText,
+  heroSecondaryCtaLink,
+  "heroBackgroundImageDesktop": heroBackgroundImageDesktop.asset->url,
+  "heroBackgroundImageMobile": heroBackgroundImageMobile.asset->url,
+
+  marqueeItems[] {
+    _key,
+    text,
+    "image": image.asset->url
+  },
+  marqueeMobileText,
+  "bannerImageDesktop": bannerImageDesktop.asset->url,
+  "bannerImageMobile": bannerImageMobile.asset->url,
+
+  brandHeading,
+  brandHeadingHighlight,
+  brandLogos[] {
+    _key,
+    name,
+    "logo": logo.asset->url
+  },
+
+  productsHeadingPart1,
+  productsHeadingHighlight,
+  product1 {
+    name,
+    description,
+    "image": image.asset->url,
+    ctaText,
+    ctaLink
+  },
+  product2 {
+    name,
+    description,
+    "image": image.asset->url,
+    ctaText,
+    ctaLink
+  },
+
+  eligibilityTag,
+  eligibilityHeading,
+  eligibilitySubtag,
+  eligibilitySubheading,
+  "eligibilityDiagramImage": eligibilityDiagramImage.asset->url,
+  eligibilityDescription,
+  "eligibilityBgDesktop": eligibilityBgDesktop.asset->url,
+  "eligibilityBgMobile": eligibilityBgMobile.asset->url,
+
+  featuresTag,
+  featuresHeading,
+  featuresHeadingHighlight,
+  featuresDescription,
+  card1Title,
+  card1Description,
+  "card1Image": card1Image.asset->url,
+  card2Title,
+  card2Description,
+  "card2Image": card2Image.asset->url,
+  securityTag,
+  securityHeadingHighlight,
+  securityHeading,
+  securityDescription,
+  "securityImage": securityImage.asset->url,
+  statsTag,
+  statsHeading,
+  stats[] {
+    _key,
+    "icon": icon.asset->url,
+    stat,
+    unit,
+    label
+  },
+  caseStudyTitle,
+  caseStudySubtitle,
+  "caseStudyImage": caseStudyImage.asset->url,
+  caseStudyCtaText,
+  caseStudyCtaLink,
+
+  testimonials[] {
+    _key,
+    name,
+    role,
+    quote,
+    "image": image.asset->url
+  },
+
+  calculateHeading,
+  "calculateImage": calculateImage.asset->url,
+
+  billingTag,
+  billingHeadingHighlight,
+  billingHeading,
+  billingDescription,
+  billingSteps[] {
+    _key,
+    num,
+    title,
+    day,
+    dayVariant,
+    desc
+  },
+  billingPoints,
+
+  ctaTag,
+  ctaHeading,
+  ctaPrimaryButtonText,
+  ctaPrimaryButtonLink,
+  ctaSecondaryButtonText,
+  ctaSecondaryButtonLink,
+  "ctaBackgroundImage": ctaBackgroundImage.asset->url,
+
+  metaTitle,
+  metaDescription
+}`;
+
+
 
 
 

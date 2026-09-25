@@ -1,4 +1,4 @@
-import { ContactUsPageData } from '@/types/contact-us';
+import type { ContactUsPageData } from '@/types/contact-us';
 
 export const DEFAULT_CONTACT_US_DATA: ContactUsPageData = {
   // 01 · Hero Section
@@ -17,7 +17,7 @@ export const DEFAULT_CONTACT_US_DATA: ContactUsPageData = {
       _key: 'loc-us',
       tag: 'Operating Info - United States',
       title: 'Waterlabs Inc.',
-      address: '1201 Orange Street, Suite 600, Wilmington, DE 19801',
+      address: '1201 Orange Street, Suite 600,\nWilmington, DE 19801',
       email: 'info@waterlabs.ai',
       hours: 'Mon-Fri: 9:00 AM - 6:00 PM EST',
       buttonText: 'Get Directions',
@@ -27,7 +27,7 @@ export const DEFAULT_CONTACT_US_DATA: ContactUsPageData = {
       _key: 'loc-in',
       tag: 'Operating Info - India',
       title: 'Waterlabs Inc.',
-      address: '19th Floor, Tower A, Brigade Signature Towers, Bangalore, KA – 560049',
+      address: '19th Floor, Tower A, Brigade Signature Towers,\nBangalore, KA – 560049',
       email: 'info@waterlabs.ai',
       hours: 'Mon-Fri: 9:00 AM - 6:00 PM IST',
       buttonText: 'Get Directions',

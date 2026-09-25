@@ -5,6 +5,16 @@ export const structure: StructureResolver = (S) =>
     .title('Website Content')
     .items([
       S.listItem()
+        .title('Home Page')
+        .schemaType('homePage')
+        .child(
+          S.document()
+            .title('Home Page')
+            .schemaType('homePage')
+            .documentId('homePage')
+        ),
+      S.divider(),
+      S.listItem()
         .title('Case Studies')
         .schemaType('caseStudy')
         .child(
@@ -77,7 +87,18 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
-        (listItem) => !['aboutUsPage', 'careersPage', 'caseStudy', 'caseStudiesPage', 'blogPost', 'blogsPage', 'solutionPage', 'contactUsPage'].includes(listItem.getId() || '')
+        (listItem) =>
+          ![
+            'homePage',
+            'aboutUsPage',
+            'careersPage',
+            'caseStudy',
+            'caseStudiesPage',
+            'blogPost',
+            'blogsPage',
+            'solutionPage',
+            'contactUsPage',
+          ].includes(listItem.getId() || '')
       ),
     ]);
 
