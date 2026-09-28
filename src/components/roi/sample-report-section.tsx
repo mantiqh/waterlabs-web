@@ -71,7 +71,7 @@ export const ROISampleReportSection = () => {
           </div>
 
           {/* Description (Mobile — placed below image per Figma) */}
-          <p className="block md:hidden type-body-xs text-light-gray">
+          <p className="block md:hidden text-[13px] sm:text-[14px] leading-[20px] sm:leading-[22px] tracking-[-0.01em] text-light-gray">
             Below is an example of what comes back. Function by<br />
             function, where the money sits in your cycle, what it<br />
             would take to release it, and what we would run first.

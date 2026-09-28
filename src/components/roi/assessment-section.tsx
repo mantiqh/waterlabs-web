@@ -34,8 +34,24 @@ export const ROIAssessmentSection = () => {
 
               {/* Heading */}
               <h2 className="type-h2 tracking-[-0.01em]">
-                <span className="text-electric-blue block">The next step is an assessment.</span>
-                <span className="text-gray-black block">No cost, and no obligation to go further.</span>
+                {/* Desktop Heading (md+) */}
+                <span className="hidden md:block">
+                  <span className="text-electric-blue block">The next step is an assessment.</span>
+                  <span className="text-gray-black block">No cost, and no obligation to go further.</span>
+                </span>
+
+                {/* Mobile Heading (< md) — matching Figma Image 3 */}
+                <span className="block md:hidden">
+                  <span className="text-electric-blue">
+                    The next step is an<br />
+                    assessment.{' '}
+                  </span>
+                  <span className="text-gray-black">
+                    No cost,<br />
+                    and no obligation to go<br />
+                    further.
+                  </span>
+                </span>
               </h2>
             </div>
 
