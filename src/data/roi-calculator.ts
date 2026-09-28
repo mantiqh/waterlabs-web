@@ -672,7 +672,7 @@ export function formatThousands(val: number): string {
 
 export function sanitizeNumberInput(
   raw: string,
-  max: number = 999999999,
+  max: number = Number.MAX_SAFE_INTEGER,
 ): number {
   const cleaned = raw.replace(/[^0-9]/g, "");
   if (!cleaned) return 0;

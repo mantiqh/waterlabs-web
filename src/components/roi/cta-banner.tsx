@@ -37,22 +37,39 @@ export const ROICtaBanner = () => {
         </div>
 
         {/* Content Container (Frame 21: max-w-[1320px] mx-auto) */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[20px] lg:gap-[40px]">
-          {/* Frame 1272628347 Heading */}
-          <h2 className="type-h3 tracking-[-0.01em] max-w-[873px]">
-            <span className="text-aqua-mint block">Bring us one function.</span>
-            <span className="text-white">
-              Prior authorization, eligibility, denials. Whichever is costing you the most.
-            </span>
-          </h2>
+        <div className="relative z-10 w-full max-w-[1320px] mx-auto">
+          {/* Mobile / Tablet layout (< lg) */}
+          <div className="flex flex-col lg:hidden items-start gap-[20px]">
+            <h2 className="type-h3 tracking-[-0.01em] max-w-[873px]">
+              <span className="text-aqua-mint block">Bring us one function.</span>
+              <span className="text-white">
+                Prior authorization, eligibility, denials. Whichever is costing you the most.
+              </span>
+            </h2>
 
-          {/* CTA Button */}
-          <div className="shrink-0 self-start lg:self-end pt-[4px] lg:pt-0">
-            <Link href="/contact-us" className="inline-block">
-              <CTA variant="dark-bg" as="div">
-                Get a demo
-              </CTA>
-            </Link>
+            <div className="shrink-0 self-start pt-[4px]">
+              <Link href="/contact-us" className="inline-block">
+                <CTA variant="dark-bg" as="div">
+                  Get a demo
+                </CTA>
+              </Link>
+            </div>
+          </div>
+
+          {/* Desktop layout (>= lg) */}
+          <div className="hidden lg:flex flex-col items-start">
+            <h2 className="type-h3 tracking-[-0.01em]">
+              <span className="text-aqua-mint block">Bring us one function.</span>
+              <span className="text-white block">Prior authorization, eligibility, denials.</span>
+              <span className="flex items-center gap-[100px] xl:gap-[130px]">
+                <span className="text-white">Whichever is costing you the most.</span>
+                <Link href="/contact-us" className="inline-block shrink-0 not-italic font-normal">
+                  <CTA variant="dark-bg" as="span">
+                    Get a demo
+                  </CTA>
+                </Link>
+              </span>
+            </h2>
           </div>
         </div>
       </div>
