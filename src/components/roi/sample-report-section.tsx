@@ -30,11 +30,17 @@ export const ROISampleReportSection = () => {
             {/* Headline + Description (Desktop) */}
             <div className="flex flex-col gap-[12px] lg:gap-[20px]">
               <h2 className="type-h2 tracking-[-0.01em] max-w-[1005px]">
-                <span className="text-aqua-mint block">The estimate came from six answers.</span>
-                <span className="text-white block">The assessment goes considerably further.</span>
+                <span className="text-aqua-mint block">
+                  The estimate came<br className="block md:hidden" /> from six answers.
+                </span>
+                <span className="text-white block">
+                  The assessment goes<br className="block md:hidden" /> considerably further.
+                </span>
               </h2>
-              <p className="hidden md:block type-body-xs text-light-gray max-w-[1320px]">
-                Below is an example of what comes back. Function by function, where the money sits in your cycle, what it would take to release it, and what we would run first.
+              <p className="hidden md:block type-body-xs text-light-gray">
+                Below is an example of what comes back. Function by function, where the money sits in
+                <br />
+                your cycle, what it would take to release it, and what we would run first.
               </p>
             </div>
           </div>
@@ -66,7 +72,9 @@ export const ROISampleReportSection = () => {
 
           {/* Description (Mobile — placed below image per Figma) */}
           <p className="block md:hidden type-body-xs text-light-gray">
-            Below is an example of what comes back. Function by function, where the money sits in your cycle, what it would take to release it, and what we would run first.
+            Below is an example of what comes back. Function by<br />
+            function, where the money sits in your cycle, what it<br />
+            would take to release it, and what we would run first.
           </p>
 
         </div>

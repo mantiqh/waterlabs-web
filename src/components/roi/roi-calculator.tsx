@@ -6,9 +6,7 @@ import { ChevronRight } from '@/components/CTA';
 import {
   calculateROI,
   formatMoney,
-  formatThousands,
   ROI_BENCHMARKS,
-  sanitizeNumberInput,
   SORTED_SPECIALTIES,
 } from '@/data/roi-calculator';
 
@@ -30,10 +28,10 @@ export const ROICalculator = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [monthlyRevenue, setMonthlyRevenue] = useState<number>(20000000);
-  const [monthlyRevenueStr, setMonthlyRevenueStr] = useState<string>('20,000,000');
-  const [monthlyClaims, setMonthlyClaims] = useState<number>(10000);
-  const [monthlyClaimsStr, setMonthlyClaimsStr] = useState<string>('10,000');
+  const [monthlyRevenue, setMonthlyRevenue] = useState<number>(0);
+  const [monthlyRevenueStr, setMonthlyRevenueStr] = useState<string>('');
+  const [monthlyClaims, setMonthlyClaims] = useState<number>(0);
+  const [monthlyClaimsStr, setMonthlyClaimsStr] = useState<string>('');
   const [denialRatePct, setDenialRatePct] = useState<number>(15.0);
   const [headcount, setHeadcount] = useState<number>(60);
   const [outsourcedPct, setOutsourcedPct] = useState<number>(20);
@@ -90,10 +88,10 @@ export const ROICalculator = () => {
     setSpecialty('');
     setIsDropdownOpen(false);
     setHoveredOption(null);
-    setMonthlyRevenue(20000000);
-    setMonthlyRevenueStr('20,000,000');
-    setMonthlyClaims(10000);
-    setMonthlyClaimsStr('10,000');
+    setMonthlyRevenue(0);
+    setMonthlyRevenueStr('');
+    setMonthlyClaims(0);
+    setMonthlyClaimsStr('');
     setDenialRatePct(15.0);
     setHeadcount(60);
     setOutsourcedPct(20);
@@ -103,6 +101,55 @@ export const ROICalculator = () => {
   const denialFillPct = ((denialRatePct - 0) / (35 - 0)) * 100;
   const headcountFillPct = ((headcount - 3) / (400 - 3)) * 100;
   const outsourcedFillPct = ((outsourcedPct - 0) / (100 - 0)) * 100;
+
+  // Live number input handler with inline comma formatting and cursor preservation
+  const handleNumberInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setValue: (val: number) => void,
+    setValueStr: (valStr: string) => void,
+  ) => {
+    const input = e.target;
+    const rawValue = input.value;
+    const cursorPosition = input.selectionStart ?? rawValue.length;
+
+    // Count how many numeric digits occurred before the cursor in raw input
+    const digitsBeforeCursor = rawValue
+      .slice(0, cursorPosition)
+      .replace(/[^0-9]/g, '').length;
+
+    // Extract all digits (limit to 12 digits to prevent overflowing safe numbers)
+    const digits = rawValue.replace(/[^0-9]/g, '').slice(0, 12);
+
+    if (!digits) {
+      setValue(0);
+      setValueStr('');
+      return;
+    }
+
+    const num = parseInt(digits, 10);
+    const parsedVal = isNaN(num) ? 0 : num;
+    setValue(parsedVal);
+
+    // Format with commas live as the user types
+    const formatted = digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    setValueStr(formatted);
+
+    // Maintain accurate cursor position despite added or removed commas
+    requestAnimationFrame(() => {
+      let targetPos = 0;
+      let counted = 0;
+      for (let i = 0; i < formatted.length; i++) {
+        if (counted >= digitsBeforeCursor) {
+          break;
+        }
+        if (formatted[i] >= '0' && formatted[i] <= '9') {
+          counted++;
+        }
+        targetPos = i + 1;
+      }
+      input.setSelectionRange(targetPos, targetPos);
+    });
+  };
 
   return (
     <div className="w-full">
@@ -129,7 +176,7 @@ export const ROICalculator = () => {
                   Which specialty do you run?
                 </label>
                 <p className="type-body-xxs text-charcoal">
-                  Denial rates differ sharply by specialty. We work from yours, not an industry average.
+                  Denial rates differ sharply by specialty.<br className="hidden lg:inline" /> We work from yours, not an industry average.
                 </p>
               </div>
 
@@ -229,19 +276,9 @@ export const ROICalculator = () => {
                         type="text"
                         inputMode="numeric"
                         value={monthlyRevenueStr}
-                        onFocus={() => {
-                          setMonthlyRevenueStr(
-                            monthlyRevenue > 0 ? monthlyRevenue.toString() : ''
-                          );
-                        }}
-                        onChange={(e) => {
-                          const val = sanitizeNumberInput(e.target.value, 999999999);
-                          setMonthlyRevenue(val);
-                          setMonthlyRevenueStr(e.target.value.replace(/[^0-9]/g, ''));
-                        }}
-                        onBlur={() => {
-                          setMonthlyRevenueStr(formatThousands(monthlyRevenue));
-                        }}
+                        onChange={(e) =>
+                          handleNumberInputChange(e, setMonthlyRevenue, setMonthlyRevenueStr)
+                        }
                         className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
                         aria-label="Monthly collected revenue in USD"
                       />
@@ -269,19 +306,9 @@ export const ROICalculator = () => {
                         type="text"
                         inputMode="numeric"
                         value={monthlyClaimsStr}
-                        onFocus={() => {
-                          setMonthlyClaimsStr(
-                            monthlyClaims > 0 ? monthlyClaims.toString() : ''
-                          );
-                        }}
-                        onChange={(e) => {
-                          const val = sanitizeNumberInput(e.target.value, 9999999);
-                          setMonthlyClaims(val);
-                          setMonthlyClaimsStr(e.target.value.replace(/[^0-9]/g, ''));
-                        }}
-                        onBlur={() => {
-                          setMonthlyClaimsStr(formatThousands(monthlyClaims));
-                        }}
+                        onChange={(e) =>
+                          handleNumberInputChange(e, setMonthlyClaims, setMonthlyClaimsStr)
+                        }
                         className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
                         aria-label="Monthly claims volume"
                       />
