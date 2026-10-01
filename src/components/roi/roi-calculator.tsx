@@ -542,44 +542,29 @@ export const ROICalculator = () => {
                     background: 'rgba(145, 198, 242, 0.05)',
                   }}
                 >
-                  <div className="type-body-xxs text-gray-black font-normal">
-                    Estimated revenue opportunity
-                  </div>
-                  <div
-                    style={GRADIENT_STYLE}
-                    className="type-h1 tabular-nums whitespace-nowrap w-fit"
-                  >
-                    {formatMoney(results.revenueOpportunity)}
-                  </div>
-                  {results.pctOfCollections !== null && (
+                  {results.atBenchmark ? (
                     <p className="type-caption text-charcoal">
-                      {results.pctOfCollections.toFixed(1)}% of what you collect in a year.
+                      Your denial performance is already at or better than benchmark. We would review how your current processes run for opportunities to lift revenue by a further 1 to 2%.
                     </p>
+                  ) : (
+                    <>
+                      <div className="type-body-xxs text-gray-black font-normal">
+                        Estimated revenue opportunity
+                      </div>
+                      <div
+                        style={GRADIENT_STYLE}
+                        className="type-h1 tabular-nums whitespace-nowrap w-fit"
+                      >
+                        {formatMoney(results.revenueOpportunity)}
+                      </div>
+                      {results.pctOfCollections !== null && (
+                        <p className="type-caption text-charcoal">
+                          {results.pctOfCollections.toFixed(1)}% of what you collect in a year.
+                        </p>
+                      )}
+                    </>
                   )}
                 </div>
-
-                {/* At-Benchmark Notice */}
-                {results.atBenchmark && (
-                  <div className="p-[14px] lg:p-[16px] rounded-[12px] bg-[#FFF8EE] border border-[#F5E2B8] flex items-start gap-[10px]">
-                    <svg
-                      className="w-[18px] h-[18px] text-[#B27400] shrink-0 mt-[2px]"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <circle cx="12" cy="12" r="9" />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 8v5m0 3.5v.01"
-                      />
-                    </svg>
-                    <p className="type-caption text-[#6B4A00]">
-                      Your denials already sit at or better than benchmark. There is nothing for us to recover there. The opportunity above comes from operating efficiency instead.
-                    </p>
-                  </div>
-                )}
 
                 {/* Start again button */}
                 <div className="flex items-center justify-between pt-[4px]">
@@ -596,7 +581,7 @@ export const ROICalculator = () => {
 
             {/* Detail description / Disclaimer (Figma: Detail description) */}
             <p className="type-caption text-charcoal">
-              Estimates are illustrative and based on published benchmarks for your specialty applied to the inputs above. They do not account for every circumstance and are not a guarantee of results. Your assessment uses your actual claim, remit and denial data.
+              Estimates are illustrative and based on published benchmarks applicable to your specialty and the information provided. Results may vary and are not guaranteed. A detailed assessment incorporates your actual claims, remittance, denial, and operational data to provide a more accurate analysis.
             </p>
           </div>
         </div>
