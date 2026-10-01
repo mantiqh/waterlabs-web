@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { DEFAULT_HOME_DATA } from '@/data/home';
 
@@ -25,16 +26,16 @@ export const CalculateSection = ({
         {/* Calculator Image / Card */}
         {image && (
           <div className="w-full max-w-[1260px]">
-            <div className="relative w-full aspect-[2520/1149] rounded-[16px] sm:rounded-[20px] lg:rounded-[28px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+            <Link href="/roi" className="block relative w-full aspect-[2520/1149] rounded-[16px] sm:rounded-[20px] lg:rounded-[28px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.08)] group cursor-pointer">
               <Image
                 src={image}
                 alt="Calculate what you will save - ROI Estimator"
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 1260px"
-                className="object-contain"
+                className="object-contain transition-transform duration-300 group-hover:scale-[1.01]"
               />
-            </div>
+            </Link>
           </div>
         )}
       </div>

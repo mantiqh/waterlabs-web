@@ -619,7 +619,10 @@ export function calculateROI(
   const claimValue = benchmark.chargePerClaim;
   const benchmarkDenial = benchmark.denialRate;
 
-  const denialPool = annualClaims * denialRate * claimValue;
+  const denialPoolRaw = annualClaims * denialRate * claimValue;
+  const denialPoolMax =
+    denialRate < 1 ? (annualRevenue * denialRate) / (1 - denialRate) : 0;
+  const denialPool = Math.min(denialPoolRaw, denialPoolMax);
 
   const gap = Math.max(0, denialRate - benchmarkDenial);
 
