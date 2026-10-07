@@ -22,8 +22,8 @@ export const CaseStudiesCTASection = ({
     if (!content) {
       return (
         <>
-          See what Waterlabs would do
-          <br />
+          See what Waterlabs would do{' '}
+          <br className="hidden md:block" />
           on your numbers.
         </>
       );
@@ -33,8 +33,8 @@ export const CaseStudiesCTASection = ({
         const parts = content.split('on your numbers');
         return (
           <>
-            {parts[0].trimEnd()}
-            <br />
+            {parts[0].trimEnd()}{' '}
+            <br className="hidden md:block" />
             on your numbers{parts.slice(1).join('on your numbers')}
           </>
         );

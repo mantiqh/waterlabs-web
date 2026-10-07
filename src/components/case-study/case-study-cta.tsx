@@ -28,12 +28,12 @@ export const CaseStudyCTA = ({
       */}
       <div className="w-full bg-[#0F68D6] rounded-tl-[0px] rounded-tr-[24px] sm:rounded-tr-[30px] rounded-br-[24px] sm:rounded-br-[30px] rounded-bl-[24px] sm:rounded-bl-[30px] py-[40px] px-[20px] md:py-[48px] md:px-[40px] lg:py-0 lg:px-[60px] lg:h-[240px] flex items-center overflow-hidden">
         <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[20px] lg:gap-[20px]">
-          
+
           {/* Left Column: Headline */}
           <div className="w-full lg:max-w-[1080px] flex-1 flex flex-col justify-center items-start">
-            <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[60px]">
-              See what Waterlabs would do
-              <br />
+            <h2 className="type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[60px]">
+              See what Waterlabs would do{' '}
+              <br className='hidden md:block'/>
               on your numbers.
             </h2>
           </div>
