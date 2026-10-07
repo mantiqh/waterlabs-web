@@ -505,10 +505,12 @@ export const ROICalculator = () => {
                   </svg>
                 </div>
                 <h3 className="type-body-xxs font-semibold text-charcoal">
-                  Pick your specialty
+                  {!specialty ? 'Pick your specialty' : 'Enter your revenue and claims'}
                 </h3>
                 <p className="type-caption text-medium-gray max-w-[260px] mt-[6px]">
-                  Your numbers appear here and update as you move the sliders.
+                  {!specialty
+                    ? 'Your numbers appear here and update as you move the sliders.'
+                    : 'Provide your monthly collected revenue and claims volume to calculate your estimated opportunity.'}
                 </p>
               </div>
             ) : (

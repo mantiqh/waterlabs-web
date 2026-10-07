@@ -590,7 +590,12 @@ export interface CalculatorResults {
 export function calculateROI(
   inputs: CalculatorInputs,
 ): CalculatorResults | null {
-  if (!inputs.specialty || !ROI_BENCHMARKS[inputs.specialty]) {
+  if (
+    !inputs.specialty ||
+    !ROI_BENCHMARKS[inputs.specialty] ||
+    inputs.monthlyRevenue <= 0 ||
+    inputs.monthlyClaims <= 0
+  ) {
     return null;
   }
 
