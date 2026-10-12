@@ -329,12 +329,12 @@ export const RcmCoverageSection = ({
             <div
               ref={mobileScrollRef}
               onScroll={handleMobileScroll}
-              className="flex w-[calc(100%+40px)] -mx-[20px] md:w-[calc(100%+80px)] md:-mx-[40px] px-[20px] md:px-[40px] overflow-x-auto snap-x snap-mandatory gap-[16px] sm:gap-[20px] pb-[8px] no-scrollbar"
+              className="flex w-[calc(100%+20px)] -mr-[20px] md:w-[calc(100%+40px)] md:-mr-[40px] pr-[20px] md:pr-[40px] overflow-x-auto snap-x snap-mandatory gap-[16px] sm:gap-[20px] pb-[8px] no-scrollbar"
             >
               {agents.map((agent) => (
                 <div
                   key={`mobile-${agent.id}`}
-                  className="shrink-0 snap-start w-[calc(100vw-72px)] sm:w-[330px] max-w-[330px] min-h-[220px] p-[20px] rounded-[20px] bg-[rgba(145,198,242,0.1)] backdrop-blur-[15.7px] border border-[rgba(15,104,214,0.12)] flex flex-col justify-between gap-[12px] shadow-[0_8px_24px_rgba(15,104,214,0.04)]"
+                  className="shrink-0 snap-start w-[calc(100vw-60px)] sm:w-[340px] max-w-[360px] min-h-[220px] p-[20px] rounded-[20px] bg-[rgba(145,198,242,0.1)] backdrop-blur-[15.7px] border border-[rgba(15,104,214,0.12)] flex flex-col justify-between gap-[12px] shadow-[0_8px_24px_rgba(15,104,214,0.04)]"
                 >
                   {/* Card Header: Agent Title */}
                   <h3 className="type-body-m font-medium text-[#0F68D6] text-[18px] leading-[28px]">

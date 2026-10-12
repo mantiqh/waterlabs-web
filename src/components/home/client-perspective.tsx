@@ -67,19 +67,27 @@ export const TestimonialsSection = ({
   return (
     <section className="relative w-full bg-[#91C6F2] overflow-hidden">
       <div className="w-full bg-white rounded-bl-[30px] sm:rounded-bl-[40px] lg:rounded-bl-[80px] pt-[16px] sm:pt-[24px] lg:pt-[60px] pb-[32px] sm:pb-[48px] lg:pb-[100px] px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="max-w-[1320px] mx-auto flex flex-col items-start lg:items-center">
+        <div className="max-w-[1320px] mx-auto flex flex-col items-start w-full">
+          {/* Eyebrow: Client Perspective (Shown on both Mobile and Desktop) */}
+          <div className="inline-flex items-center gap-[6px] lg:gap-[8px] mb-[20px] lg:mb-[32px]">
+            <span className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
+            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
+              Client Perspective
+            </span>
+          </div>
+
           {/* Mobile / Tablet Smooth Snap Slider */}
           <div className="flex lg:hidden flex-col w-full">
             <div
               ref={mobileScrollRef}
               onScroll={handleMobileScroll}
-              className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[24px] items-start [&::-webkit-scrollbar]:hidden"
+              className="flex w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory gap-[16px] items-start no-scrollbar pr-[20px]"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((item, idx) => (
                 <div
                   key={`mobile-testimonial-${item._key || idx}`}
-                  className="shrink-0 snap-center w-full flex flex-col gap-[16px] items-start"
+                  className="shrink-0 snap-start w-[calc(100vw-60px)] sm:w-[340px] max-w-[360px] flex flex-col gap-[16px] items-start"
                 >
                   {/* Left Image Side */}
                   {item.image && (

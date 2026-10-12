@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 
@@ -33,7 +33,7 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
     id: 'card-3',
     title: '100+ agents in production, deployed in two weeks',
     description:
-      'Custom agents are built and deployed through the OS in about two weeks, and more than 100 are already working inside client environments. Live automation, running at scale, today.',
+      'Custom agents are built and deployed through the OS in about two weeks, and more than 100 are already working inside client environments. This is not a pilot or a proof of concept. It is live automation, running at scale, today.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_100+ agents in production, deployed in two weeks.png',
   },
@@ -41,7 +41,7 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
     id: 'card-4',
     title: 'Six years of RCM knowledge, pre-loaded',
     description:
-      'Waterlabs is built by RCM technology experts who have spent six years engineering deep healthcare billing domain intelligence into every agent. They hit production understanding your workflows, not training on your time.',
+      'Waterlabs is built by RCM and technology people who have spent years inside the problem. Payer policies, billing rules, and specialty nuance are in the system before deployment, which is why an agent is productive from its first day rather than its hundredth.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_Six years of RCM knowledge, pre-loaded.png',
   },
@@ -49,7 +49,7 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
     id: 'card-5',
     title: 'A sovereign cloud, wired to 4,000+ payers',
     description:
-      'Our infrastructure is vertically integrated, owned end-to-end, and directly integrated with more than 4,000 commercial and government payers. Your data never touches a public multi-tenant model or third-party cloud layer.',
+      'Our infrastructure is vertically integrated and owned end to end, on our own sovereign cloud, with connectivity to more than 4,000 payers. Data safety here is structural, not a promise you have to take on trust.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_A sovereign cloud, wired to 4,000+ payer.png',
   },
@@ -57,7 +57,7 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
     id: 'card-6',
     title: 'Proven results, priced on outcomes',
     description:
-      'Clients see 30% to 70% savings in cost-to-collect with performance-aligned pricing that charges only on completed outcomes. You pay only for results delivered, not for software access or promises.',
+      'Clients see 30 to 70% savings in cost to collect, with higher and faster cash collections. You pay only on successful deployment. No proof of concept, no experimentation, pricing tied to what we actually deliver.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_Proven results, priced on outcomes.png',
   },
@@ -76,21 +76,82 @@ export const WhyWaterlabsSection = ({
   headingLine2 = 'partner can say at once',
   cards = DEFAULT_CARDS,
 }: WhyWaterlabsSectionProps) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Mobile / Tablet Snap-Scroll State
+  const [mobileIndex, setMobileIndex] = useState(0);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  const isFirst = currentIndex === 0;
-  const isLast = currentIndex === cards.length - 1;
+  // Desktop Seamless Infinite Loop Carousel State
+  const SETS = 5;
+  const MIDDLE_SET = 2;
+  const displayCards = useMemo(
+    () =>
+      Array.from({ length: SETS }).flatMap((_, setIdx) =>
+        cards.map((c, cIdx) => ({
+          ...c,
+          uniqueKey: `set-${setIdx}-card-${c.id || cIdx}`,
+        }))
+      ),
+    [cards]
+  );
+
+  const [desktopIndex, setDesktopIndex] = useState(MIDDLE_SET * cards.length);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // When transition is disabled to silently normalize the index, re-enable it on the next paint
+  useEffect(() => {
+    if (!isTransitioning) {
+      const raf1 = requestAnimationFrame(() => {
+        const raf2 = requestAnimationFrame(() => {
+          setIsTransitioning(true);
+        });
+        return () => cancelAnimationFrame(raf2);
+      });
+      return () => cancelAnimationFrame(raf1);
+    }
+  }, [isTransitioning]);
+
+  const desktopRealIndex = ((desktopIndex % cards.length) + cards.length) % cards.length;
 
   const handlePrev = () => {
-    if (!isFirst) {
-      setCurrentIndex((prev) => prev - 1);
-    }
+    setIsTransitioning(true);
+    setDesktopIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
-    if (!isLast) {
-      setCurrentIndex((prev) => prev + 1);
+    setIsTransitioning(true);
+    setDesktopIndex((prev) => prev + 1);
+  };
+
+  const handleDotClick = (targetRealIndex: number) => {
+    setIsTransitioning(true);
+    const N = cards.length;
+    if (N === 0) return;
+    const currentReal = ((desktopIndex % N) + N) % N;
+    let diff = targetRealIndex - currentReal;
+    if (diff > N / 2) diff -= N;
+    if (diff < -N / 2) diff += N;
+    setDesktopIndex((prev) => prev + diff);
+  };
+
+  const handleCardClick = (idx: number) => {
+    if (idx === desktopIndex) return;
+    setIsTransitioning(true);
+    setDesktopIndex(idx);
+  };
+
+  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget || e.propertyName !== 'transform') return;
+
+    const N = cards.length;
+    if (N === 0) return;
+    const minSafe = MIDDLE_SET * N;
+    const maxSafe = (MIDDLE_SET + 1) * N - 1;
+
+    if (desktopIndex < minSafe || desktopIndex > maxSafe) {
+      const normalizedReal = ((desktopIndex % N) + N) % N;
+      const normalized = MIDDLE_SET * N + normalizedReal;
+      setIsTransitioning(false);
+      setDesktopIndex(normalized);
     }
   };
 
@@ -117,11 +178,11 @@ export const WhyWaterlabsSection = ({
       closestIndex = Math.min(closestIndex, cards.length - 2);
     }
 
-    setCurrentIndex(closestIndex);
+    setMobileIndex(closestIndex);
   };
 
   const scrollToCard = (index: number) => {
-    setCurrentIndex(index);
+    setMobileIndex(index);
     const container = mobileScrollRef.current;
     if (!container) return;
     const cardElements = Array.from(container.children) as HTMLElement[];
@@ -170,43 +231,61 @@ export const WhyWaterlabsSection = ({
             </div>
 
             {/* =========================================================
-                DESKTOP VIEW (>= 1024px) - Smooth Translating Carousel
+                DESKTOP VIEW (>= 1024px) - Seamless Infinite Looping Carousel
                ========================================================= */}
             <div className="hidden lg:flex flex-col gap-[40px]">
               {/* Card Slider Track Area */}
-              <div className="relative w-full overflow-visible">
+              <div className="relative w-full overflow-visible min-h-[464px]">
                 <div
-                  className="flex gap-[24px] transition-transform duration-500 ease-out"
+                  onTransitionEnd={handleTransitionEnd}
+                  className="flex items-start gap-[21.14px]"
                   style={{
-                    transform: `translateX(calc(-${currentIndex * 612}px))`,
+                    transform: `translateX(-${desktopIndex * 539.14}px)`,
+                    transition: isTransitioning
+                      ? 'transform 500ms ease-out'
+                      : 'none',
                   }}
                 >
-                  {cards.map((card, idx) => {
-                    const isActive = idx === currentIndex;
+                  {displayCards.map((card, idx) => {
+                    const isActive = idx === desktopIndex;
                     return (
                       <div
-                        key={card.id}
-                        onClick={() => setCurrentIndex(idx)}
-                        className={`shrink-0 w-[588px] flex flex-col gap-[20px] cursor-pointer transition-all duration-500 ${
+                        key={card.uniqueKey}
+                        onClick={() => handleCardClick(idx)}
+                        className={`shrink-0 flex flex-col cursor-pointer transition-all duration-500 ${
                           isActive
-                            ? 'opacity-100 scale-100 pointer-events-auto'
-                            : 'opacity-25 scale-[0.98] hover:opacity-50'
+                            ? 'w-[588px] gap-[20px] opacity-100 pointer-events-auto'
+                            : 'w-[518px] gap-[21.14px] opacity-25 hover:opacity-50'
                         }`}
                       >
                         {/* Card Image */}
-                        <div className="relative w-[588px] h-[304px] rounded-[20px_10px_20px_20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+                        <div
+                          className={`relative rounded-[20px_10px_20px_20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-500 ${
+                            isActive ? 'w-[588px] h-[304px]' : 'w-[518px] h-[211.43px]'
+                          }`}
+                        >
                           <Image
                             src={card.image}
                             alt={card.title}
                             fill
-                            sizes="588px"
+                            sizes={isActive ? '588px' : '518px'}
                             className="object-cover"
                           />
                         </div>
 
-                        {/* Card Content: Title in #0F68D6, Body in #2A2A2A */}
-                        <div className="flex flex-col gap-[12px] max-w-[588px]">
-                          <h3 className="type-h6 tracking-[-0.01em] text-[#0F68D6]">
+                        {/* Card Content: Title & Description */}
+                        <div
+                          className={`flex flex-col transition-all duration-500 ${
+                            isActive
+                              ? 'gap-[12px] max-w-[588px] min-h-[140px]'
+                              : 'gap-[10.57px] max-w-[518px] min-h-[140px]'
+                          }`}
+                        >
+                          <h3
+                            className={`type-h6 tracking-[-0.01em] transition-colors duration-500 ${
+                              isActive ? 'text-[#0F68D6]' : 'text-[#042849]'
+                            }`}
+                          >
                             {card.title}
                           </h3>
                           <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
@@ -224,8 +303,10 @@ export const WhyWaterlabsSection = ({
                 {/* Pagination Pill Indicators */}
                 <div className="flex items-center gap-[5px]">
                   {cards.map((card, i) => {
-                    const isActive = currentIndex === i;
-                    const isAdjacent = Math.abs(currentIndex - i) === 1;
+                    const isActive = desktopRealIndex === i;
+                    const isAdjacent =
+                      Math.abs(desktopRealIndex - i) === 1 ||
+                      Math.abs(desktopRealIndex - i) === cards.length - 1;
                     let widthClass = 'w-[6px] bg-[rgba(15,104,214,0.2)] hover:bg-[rgba(15,104,214,0.4)]';
                     if (isActive) {
                       widthClass = 'w-[32px] bg-[#0F68D6]';
@@ -236,7 +317,7 @@ export const WhyWaterlabsSection = ({
                       <button
                         key={`dot-${card.id}`}
                         type="button"
-                        onClick={() => setCurrentIndex(i)}
+                        onClick={() => handleDotClick(i)}
                         aria-label={`Go to slide ${i + 1}`}
                         className={`h-[6px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${widthClass}`}
                       />
@@ -244,32 +325,22 @@ export const WhyWaterlabsSection = ({
                   })}
                 </div>
 
-                {/* Left/Right Arrow Navigation Buttons using shared CTA component */}
+                {/* Left/Right Arrow Navigation Buttons - Continuous Loop (Never disabled) */}
                 <div className="flex items-center gap-[14px]">
-                  {/* Previous Arrow Button: Disabled on first card */}
+                  {/* Previous Arrow Button */}
                   <CTA
                     variant="light-arrow"
                     onClick={handlePrev}
-                    disabled={isFirst}
                     aria-label="Previous card"
-                    className={`w-[48px] h-[48px] rotate-180 transition-all duration-300 ${
-                      isFirst
-                        ? 'opacity-30 cursor-not-allowed pointer-events-none'
-                        : 'cursor-pointer'
-                    }`}
+                    className="w-[48px] h-[48px] rotate-180 transition-all duration-300 cursor-pointer"
                   />
 
-                  {/* Next Arrow Button: Disabled on last card */}
+                  {/* Next Arrow Button */}
                   <CTA
                     variant="light-arrow"
                     onClick={handleNext}
-                    disabled={isLast}
                     aria-label="Next card"
-                    className={`w-[48px] h-[48px] transition-all duration-300 ${
-                      isLast
-                        ? 'opacity-30 cursor-not-allowed pointer-events-none'
-                        : 'cursor-pointer'
-                    }`}
+                    className="w-[48px] h-[48px] transition-all duration-300 cursor-pointer"
                   />
                 </div>
               </div>
@@ -319,8 +390,8 @@ export const WhyWaterlabsSection = ({
               <div className="flex items-center gap-[5px] pt-[4px]">
                 {cards.map((card, i) => {
                   const isHiddenOnMd = i === cards.length - 1;
-                  const isActive = currentIndex === i;
-                  const isAdjacent = Math.abs(currentIndex - i) === 1;
+                  const isActive = mobileIndex === i;
+                  const isAdjacent = Math.abs(mobileIndex - i) === 1;
                   let widthClass = 'w-[6px] bg-[rgba(15,104,214,0.2)]';
                   if (isActive) {
                     widthClass = 'w-[32px] bg-[#0F68D6]';

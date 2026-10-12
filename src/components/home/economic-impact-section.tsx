@@ -366,10 +366,10 @@ export const EconomicImpactSection = ({
                 {points.map((point) => (
                   <div
                     key={point}
-                    className="inline-flex items-center gap-[8px] whitespace-nowrap"
+                    className="flex items-start sm:items-center gap-[8px] whitespace-normal sm:whitespace-nowrap"
                   >
-                    <span className="w-[5px] h-[5px] lg:w-[7px] lg:h-[7px] rounded-full bg-[#63CCB7] shrink-0" />
-                    <span className="type-body-xxs tracking-[0.01em] text-white">
+                    <span className="w-[5px] h-[5px] lg:w-[7px] lg:h-[7px] rounded-full bg-[#63CCB7] shrink-0 mt-[6px] sm:mt-0" />
+                    <span className="type-body-xxs tracking-[0.01em] text-white break-words">
                       {point}
                     </span>
                   </div>
