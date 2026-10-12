@@ -170,7 +170,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
       role: 'Vice President of Intake',
       quote:
         '“Our partnership has become a valuable extension of our front-office operations. The team provides critical support with eligibility verification, fax management, authorization processing and retrieval, plan of care tracking, and other essential administrative functions. Through a strong collaborative partnership, ongoing training, and continuous process improvement, we have achieved increased efficiency, reduced denials, lowered operational costs, and been able to leverage automation more effectively. Their commitment to our quality required, turnaround times and adaptability has made them a trusted partner in supporting our growth and success.”',
-      image: '/images/home/features-images/AdobeStock_588310218%204.png',
+      image: '/images/home/client-perspective/AdobeStock_588310218 4.png',
     },
     {
       _key: 't-2',
@@ -178,7 +178,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
       role: 'Lorem Ipsum',
       quote:
         '“Waterlabs has been a great partner for our billing, coding, and follow-up needs. Their team is responsive, helpful, and always willing to work with us when issues arise. Since partnering with Waterlabs, we have seen an increase in collections and improvement in our A/R. We truly work together as a team with the same goal of maximizing reimbursement and maintaining a clean, healthy A/R.”',
-      image: '/images/home/features-images/img_testimonial_02.png',
+      image: '/images/home/client-perspective/img_testimonial_02.png',
     },
   ],
 
