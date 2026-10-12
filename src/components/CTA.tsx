@@ -38,9 +38,12 @@ export const ChevronRight = ({ className }: { className?: string }) => (
 
 export const CTA = forwardRef<HTMLElement, CTAProps>(
   ({ variant, children, as = 'button', className = '', ...props }, ref) => {
-    // Base classes for typography conforming to Figma specs (height 44px with py-[10px])
+    // Base classes for typography conforming to Figma specs (default height 44px with py-[10px])
     const typographyClass = 'type-cta';
-    const baseClasses = `relative overflow-hidden z-10 inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} h-[44px] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
+    const hasCustomHeight = className.includes('h-');
+    const baseClasses = `relative overflow-hidden z-10 inline-flex items-center justify-center cursor-pointer transition-all duration-300 ${typographyClass} ${
+      hasCustomHeight ? '' : 'h-[44px]'
+    } focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`;
     
     const isArrowOnly = variant === 'light-arrow' || variant === 'dark-arrow' || variant === 'fill-arrow' || !children;
     const isTextOnly = variant === 'light-text' || variant === 'dark-text';
@@ -48,9 +51,9 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(
     // Shape/Padding Classes conforming to Figma design system
     let shapeClasses = "";
     if (variant === 'fill-arrow') {
-      shapeClasses = "rounded-[64px] p-0 w-[44px] h-[44px] lg:w-[48px] lg:h-[48px]";
+      shapeClasses = "rounded-[64px] p-0 aspect-square w-[44px] h-[44px] lg:w-[48px] lg:h-[48px]";
     } else if (isArrowOnly) {
-      shapeClasses = "rounded-[64px] p-[10px]";
+      shapeClasses = "rounded-[64px] p-0 aspect-square";
     } else if (isTextOnly) {
       shapeClasses = "p-0 gap-[10px]";
     } else {
