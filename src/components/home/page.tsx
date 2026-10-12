@@ -1,114 +1,63 @@
-import { DEFAULT_HOME_DATA } from '@/data/home';
 import type { HomePageData } from '@/types/home';
 
-import BillingSection from './billing-section';
-import BrandSlider from './brand-slider';
-import CalculateSection from './calculate-section';
-import CarouselSection from './carousel-section';
+import CaseStudiesSection from './case-studies-section';
+import TestimonialsSection from './client-perspective';
 import CTASection from './cta-section';
-import EligibilitySection from './eligibility';
-import FeaturesSection from './features-section';
-import Hero from './hero';
-import { ProductsSection } from './products-section';
-import TestimonialsSection from './testimonials-section';
+import EconomicImpactSection from './economic-impact-section';
+import EnterpriseSecuritySection from './enterprise-security-section';
+import HeroSection from './hero-section';
+import PlatformEngineSection from './platform-engine-section';
+import RcmCoverageSection from './rcm-coverage-section';
+import RevenueImpactSection from './revenue-impact-section';
+import WelcomeToWaterlabsSection from './welcome-to-waterlabs-section';
+import WhyWaterlabsSection from './why-waterlabs-section';
 
 export interface HomePageProps {
   data?: HomePageData | null;
 }
 
-const HomePage = ({ data = DEFAULT_HOME_DATA }: HomePageProps) => {
-  const homeData = data || DEFAULT_HOME_DATA;
-
+const HomePage = ({ data }: HomePageProps) => {
   return (
-    <main>
-      <Hero
-        data={{
-          heroHeading: homeData.heroHeading,
-          heroSubheading: homeData.heroSubheading,
-          heroDescription: homeData.heroDescription,
-          heroCtaText: homeData.heroCtaText,
-          heroCtaLink: homeData.heroCtaLink,
-          heroSecondaryCtaText: homeData.heroSecondaryCtaText,
-          heroSecondaryCtaLink: homeData.heroSecondaryCtaLink,
-          heroBackgroundImageDesktop: homeData.heroBackgroundImageDesktop,
-          heroBackgroundImageMobile: homeData.heroBackgroundImageMobile,
-        }}
+    <div className="w-full flex flex-col overflow-x-clip">
+      {/* 01 · Hero Section */}
+      <HeroSection
+        heading={data?.heroHeading}
+        subheading={data?.heroSubheading}
+        description={data?.heroDescription}
+        ctaText={data?.heroCtaText}
+        ctaLink={data?.heroCtaLink}
       />
-      <CarouselSection
-        marqueeItems={homeData.marqueeItems}
-        mobileText={homeData.marqueeMobileText}
-        bannerImageDesktop={homeData.bannerImageDesktop}
-        bannerImageMobile={homeData.bannerImageMobile}
-      />
-      <BrandSlider
-        heading={homeData.brandHeading}
-        headingHighlight={homeData.brandHeadingHighlight}
-        brandLogos={homeData.brandLogos}
-      />
-      <ProductsSection
-        headingPart1={homeData.productsHeadingPart1}
-        headingHighlight={homeData.productsHeadingHighlight}
-        product1={homeData.product1}
-        product2={homeData.product2}
-      />
-      <EligibilitySection
-        tag={homeData.eligibilityTag}
-        heading={homeData.eligibilityHeading}
-        subtag={homeData.eligibilitySubtag}
-        subheading={homeData.eligibilitySubheading}
-        diagramImage={homeData.eligibilityDiagramImage}
-        description={homeData.eligibilityDescription}
-        bgDesktop={homeData.eligibilityBgDesktop}
-        bgMobile={homeData.eligibilityBgMobile}
-      />
-      <FeaturesSection
-        tag={homeData.featuresTag}
-        heading={homeData.featuresHeading}
-        headingHighlight={homeData.featuresHeadingHighlight}
-        description={homeData.featuresDescription}
-        card1Title={homeData.card1Title}
-        card1Description={homeData.card1Description}
-        card1Image={homeData.card1Image}
-        card2Title={homeData.card2Title}
-        card2Description={homeData.card2Description}
-        card2Image={homeData.card2Image}
-        securityTag={homeData.securityTag}
-        securityHeadingHighlight={homeData.securityHeadingHighlight}
-        securityHeading={homeData.securityHeading}
-        securityDescription={homeData.securityDescription}
-        securityImage={homeData.securityImage}
-        statsTag={homeData.statsTag}
-        statsHeading={homeData.statsHeading}
-        stats={homeData.stats}
-        caseStudyTitle={homeData.caseStudyTitle}
-        caseStudySubtitle={homeData.caseStudySubtitle}
-        caseStudyImage={homeData.caseStudyImage}
-        caseStudyCtaText={homeData.caseStudyCtaText}
-        caseStudyCtaLink={homeData.caseStudyCtaLink}
-      />
-      <TestimonialsSection testimonials={homeData.testimonials} />
-      <CalculateSection
-        heading={homeData.calculateHeading}
-        image={homeData.calculateImage}
-      />
-      <BillingSection
-        tag={homeData.billingTag}
-        headingHighlight={homeData.billingHeadingHighlight}
-        heading={homeData.billingHeading}
-        description={homeData.billingDescription}
-        steps={homeData.billingSteps}
-        points={homeData.billingPoints}
-      />
-      <CTASection
-        tag={homeData.ctaTag}
-        heading={homeData.ctaHeading}
-        primaryButtonText={homeData.ctaPrimaryButtonText}
-        primaryButtonLink={homeData.ctaPrimaryButtonLink}
-        secondaryButtonText={homeData.ctaSecondaryButtonText}
-        secondaryButtonLink={homeData.ctaSecondaryButtonLink}
-        backgroundImage={homeData.ctaBackgroundImage}
-      />
-    </main>
+
+      {/* 02 · Welcome to Waterlabs */}
+      <WelcomeToWaterlabsSection />
+
+      {/* 03 · Why Waterlabs Is Different (Carousel) */}
+      <WhyWaterlabsSection />
+
+      {/* 04 · The Waterlabs Platform Engine (HIMER AI OS & CurieCode) */}
+      <PlatformEngineSection />
+
+      {/* 05 · End-to-End RCM Coverage (8 Functional Areas) */}
+      <RcmCoverageSection />
+
+      {/* 06 · Enterprise Healthcare Security */}
+      <EnterpriseSecuritySection />
+
+      {/* 07 · Proven Results with Active Clients (Case Studies Metrics) */}
+      <CaseStudiesSection />
+
+      {/* 08 · Client Perspective (Testimonials Carousel) */}
+      <TestimonialsSection testimonials={data?.testimonials} />
+
+      {/* 09 · Revenue Impact Calculator */}
+      <RevenueImpactSection />
+
+      {/* 10 · The Economic Impact of Going Agentic */}
+      <EconomicImpactSection />
+
+      {/* 11 · Start Automation With Any Functional Area of RCM (CTA Section) */}
+      <CTASection />
+    </div>
   );
 };
 

@@ -3,9 +3,9 @@ import { HomePageData } from '@/types/home';
 export const DEFAULT_HOME_DATA: HomePageData = {
   // 01 · Hero Section
   heroSubheading: 'Agentic RCM built from inside healthcare',
-  heroHeading: "Don't just automate your revenue cycle. Apply intelligence to it.",
+  heroHeading: 'Maximize net revenue. Reduce cost-to-collect.',
   heroDescription:
-    'We provide the platform that runs your revenue cycle. You measure it, we improve it.',
+    'Agentic AI across the full revenue cycle, working inside the systems your team already uses, with billing that starts only once the agents do.',
   heroCtaText: 'Get a demo',
   heroCtaLink: '/contact-us',
   heroSecondaryCtaText: 'See how it works',
