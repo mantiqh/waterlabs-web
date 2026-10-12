@@ -2,6 +2,9 @@ import Image from 'next/image';
 
 import Navbar from '@/components/common/navbar';
 
+import bannerDesktop from '../../../public/images/ROI/hero-section/img_banner.png';
+import bannerMobile from '../../../public/images/ROI/hero-section/img_banner_mobile (8).png';
+
 export const ROIHeroSection = () => {
   return (
     <section className="relative w-full overflow-hidden">
@@ -58,7 +61,7 @@ export const ROIHeroSection = () => {
             {/* Desktop image */}
             <div className="hidden md:block relative w-full aspect-[644/425] rounded-[20px_10px_20px_20px] overflow-hidden">
               <Image
-                src="/images/ROI/hero-section/img_banner.png"
+                src={bannerDesktop}
                 alt="ROI Calculator preview showing estimated savings and revenue opportunity"
                 fill
                 priority
@@ -68,7 +71,7 @@ export const ROIHeroSection = () => {
             {/* Mobile image */}
             <div className="block md:hidden relative w-full aspect-[362/246] rounded-[20px_10px_20px_20px] overflow-hidden">
               <Image
-                src="/images/ROI/hero-section/img_banner_mobile (8).png"
+                src={bannerMobile}
                 alt="ROI Calculator preview showing estimated savings and revenue opportunity"
                 fill
                 priority
