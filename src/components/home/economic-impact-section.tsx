@@ -65,7 +65,7 @@ const DEFAULT_POINTS = [
   'Billing starts only on completed output',
 ];
 
-// Helper calculating smooth, gradual vertical reveal styles for each item based on scroll progress
+// Helper calculating smooth, non-overlapping vertical reveal styles for each item based on scroll progress
 const getItemStyle = (
   idx: number,
   scrollProgress: number,
@@ -78,29 +78,32 @@ const getItemStyle = (
   const i = Math.min(Math.floor(s), maxStep - 1);
   const local = s - i; // 0.0 to 1.0 within current step segment
 
+  const transitionStyle =
+    'transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s ease-out';
+
   // Item is completely before the active transition pair
   if (idx < i) {
     return {
-      transform: 'translate3d(0, -28px, 0)',
+      transform: 'translate3d(0, -16px, 0)',
       opacity: 0,
       visibility: 'hidden',
       pointerEvents: 'none',
-      transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+      transition: transitionStyle,
     };
   }
 
   // Item is completely after the active transition pair
   if (idx > i + 1) {
     return {
-      transform: 'translate3d(0, 28px, 0)',
+      transform: 'translate3d(0, 16px, 0)',
       opacity: 0,
       visibility: 'hidden',
       pointerEvents: 'none',
-      transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+      transition: transitionStyle,
     };
   }
 
-  // Current item (i): stable until local = 0.3, then smoothly exits upward as (i + 1) enters
+  // Current item (i): stable until local = 0.30, then smoothly exits upward before (i + 1) takes over
   if (idx === i) {
     if (local <= 0.3) {
       return {
@@ -108,40 +111,56 @@ const getItemStyle = (
         opacity: 1,
         visibility: 'visible',
         pointerEvents: 'auto',
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+        transition: transitionStyle,
+      };
+    } else if (local < 0.55) {
+      const t = (local - 0.3) / 0.25;
+      const ease = t * t;
+      return {
+        transform: `translate3d(0, ${-16 * ease}px, 0)`,
+        opacity: Math.max(0, 1 - ease),
+        visibility: 'visible',
+        pointerEvents: 'none',
+        transition: transitionStyle,
       };
     } else {
-      const t = (local - 0.3) / 0.7; // 0.0 to 1.0
-      const ease = t * t * (3 - 2 * t);
       return {
-        transform: `translate3d(0, ${-28 * ease}px, 0)`,
-        opacity: Math.max(0, 1 - ease),
-        visibility: ease >= 0.99 ? 'hidden' : 'visible',
-        pointerEvents: ease >= 0.5 ? 'none' : 'auto',
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+        transform: 'translate3d(0, -16px, 0)',
+        opacity: 0,
+        visibility: 'hidden',
+        pointerEvents: 'none',
+        transition: transitionStyle,
       };
     }
   }
 
-  // Next item (i + 1): enters simultaneously from below as item (i) exits
+  // Next item (i + 1): enters from below after item (i) has faded out, settling by local = 0.75
   if (idx === i + 1) {
-    if (local <= 0.3) {
+    if (local <= 0.5) {
       return {
-        transform: 'translate3d(0, 28px, 0)',
+        transform: 'translate3d(0, 16px, 0)',
         opacity: 0,
         visibility: 'hidden',
         pointerEvents: 'none',
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+        transition: transitionStyle,
       };
-    } else {
-      const t = (local - 0.3) / 0.7; // 0.0 to 1.0
-      const ease = t * t * (3 - 2 * t);
+    } else if (local < 0.75) {
+      const t = (local - 0.5) / 0.25;
+      const ease = t * (2 - t);
       return {
-        transform: `translate3d(0, ${28 * (1 - ease)}px, 0)`,
+        transform: `translate3d(0, ${16 * (1 - ease)}px, 0)`,
         opacity: Math.min(1, ease),
         visibility: 'visible',
         pointerEvents: ease >= 0.5 ? 'auto' : 'none',
-        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+        transition: transitionStyle,
+      };
+    } else {
+      return {
+        transform: 'translate3d(0, 0px, 0)',
+        opacity: 1,
+        visibility: 'visible',
+        pointerEvents: 'auto',
+        transition: transitionStyle,
       };
     }
   }
@@ -150,7 +169,7 @@ const getItemStyle = (
     transform: 'translate3d(0, 0px, 0)',
     opacity: 1,
     visibility: 'visible',
-    transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
+    transition: transitionStyle,
   };
 };
 

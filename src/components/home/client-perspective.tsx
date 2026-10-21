@@ -92,20 +92,34 @@ export const TestimonialsSection = ({
                 >
                   {/* Left Image Side */}
                   {item.image && (
-                    <div className="relative w-full aspect-[4/3] rounded-[20px] overflow-hidden shrink-0 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+                    <div
+                      className="relative w-full aspect-[4/3] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0"
+                      style={{
+                        borderTopLeftRadius: '20px',
+                        borderTopRightRadius: '10px',
+                        borderBottomRightRadius: '20px',
+                        borderBottomLeftRadius: '20px',
+                      }}
+                    >
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
                         priority={idx === 0}
                         sizes="(max-width: 1024px) 100vw, 600px"
-                        className="object-cover"
+                        className="object-cover rounded-[20px_10px_20px_20px]"
+                        style={{
+                          borderTopLeftRadius: '20px',
+                          borderTopRightRadius: '10px',
+                          borderBottomRightRadius: '20px',
+                          borderBottomLeftRadius: '20px',
+                        }}
                       />
                     </div>
                   )}
 
                   {/* Content Side */}
-                  <div className="flex flex-col justify-center w-full">
+                  <div className="flex flex-col justify-center w-full bg-transparent">
                     <p className="type-body-xxs text-[#111111] mb-[16px]">
                       {item.quote}
                     </p>
@@ -151,24 +165,38 @@ export const TestimonialsSection = ({
                 {testimonials.map((item, idx) => (
                   <div
                     key={`desktop-testimonial-${item._key || idx}`}
-                    className="w-full shrink-0 flex flex-row gap-[32px] xl:gap-[60px] items-start"
+                    className="w-full shrink-0 flex flex-row gap-[32px] xl:gap-[60px] items-start overflow-hidden"
                   >
                     {/* Left Image Side */}
                     {item.image && (
-                      <div className="relative w-[340px] xl:w-[480px] aspect-[4/3] rounded-[20px] overflow-hidden shrink-0 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+                      <div
+                        className="relative w-[340px] xl:w-[480px] aspect-[4/3] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0"
+                        style={{
+                          borderTopLeftRadius: '20px',
+                          borderTopRightRadius: '10px',
+                          borderBottomRightRadius: '20px',
+                          borderBottomLeftRadius: '20px',
+                        }}
+                      >
                         <Image
                           src={item.image}
                           alt={item.name}
                           fill
                           priority={idx === 0}
                           sizes="(max-width: 1280px) 340px, 480px"
-                          className="object-cover"
+                          className="object-cover rounded-[20px_10px_20px_20px]"
+                          style={{
+                            borderTopLeftRadius: '20px',
+                            borderTopRightRadius: '10px',
+                            borderBottomRightRadius: '20px',
+                            borderBottomLeftRadius: '20px',
+                          }}
                         />
                       </div>
                     )}
 
                     {/* Right Content Side */}
-                    <div className="flex flex-col justify-center flex-1 min-w-0">
+                    <div className="flex flex-col justify-center flex-1 min-w-0 bg-transparent">
                       <p className="type-body-s text-[#111111] mb-[40px]">
                         {item.quote}
                       </p>
