@@ -223,7 +223,7 @@ export const RcmCoverageSection = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-gradient-to-b from-[#000000] via-[#000000] to-[#042849] lg:h-[500vh]"
+      className="relative w-full bg-gradient-to-b from-[#000000] via-[#000000] to-[#0A4890] lg:h-[500vh]"
     >
       {/* Sticky Viewport Container on Desktop (>= 1024px) */}
       <div className="w-full lg:sticky lg:top-0 lg:h-screen overflow-hidden">
@@ -231,15 +231,20 @@ export const RcmCoverageSection = ({
           Curved Container:
           Desktop: border-radius 60px 0px 0px 60px, padding 80px 60px
           Mobile: border-radius 30px 0px 0px 30px, padding 40px 20px
-          Background: #F4F6F9 with vector watermark texture on bottom-left
+          Background: #F4F6F9 with vector watermark texture on desktop
         */}
         <div
-          className="w-full lg:min-h-screen lg:flex lg:flex-col lg:justify-center bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] relative overflow-hidden bg-cover bg-left-bottom bg-no-repeat"
-          style={{
-            backgroundImage:
-              "url('/images/home/end-to-end-RCM-coverage/desktop/bg_Why it matters content.png')",
-          }}
+          className="w-full lg:min-h-screen lg:flex lg:flex-col lg:justify-center bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] relative overflow-hidden"
         >
+          {/* Desktop-only decorative vector watermark lines */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:block absolute inset-0 pointer-events-none bg-cover bg-left-bottom bg-no-repeat z-0"
+            style={{
+              backgroundImage:
+                "url('/images/home/end-to-end-RCM-coverage/desktop/bg_Why it matters content.png')",
+            }}
+          />
           <div className="relative z-10 max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[32px] sm:gap-[40px] lg:gap-[24px]">
             
             {/* =========================================================
@@ -267,8 +272,8 @@ export const RcmCoverageSection = ({
                     key={agent.id}
                     className={`w-full rounded-[20px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       isActive
-                        ? 'p-[32px] bg-[rgba(145,198,242,0.1)] backdrop-blur-[15.7px] border border-[rgba(15,104,214,0.12)] shadow-[0_8px_24px_rgba(15,104,214,0.04)]'
-                        : 'p-0 py-[4px] bg-transparent border border-transparent shadow-none backdrop-blur-none'
+                        ? 'px-[24px] lg:px-[32px] py-[24px] lg:py-[32px] bg-[rgba(145,198,242,0.1)] backdrop-blur-[15.7px] border border-[rgba(15,104,214,0.12)] shadow-[0_8px_24px_rgba(15,104,214,0.04)]'
+                        : 'px-[24px] lg:px-[32px] py-[8px] bg-transparent border border-transparent shadow-none backdrop-blur-none'
                     }`}
                   >
                     {/* Header Row: Title + Chevron Arrow */}
@@ -295,7 +300,7 @@ export const RcmCoverageSection = ({
                       />
                     </button>
 
-                    {/* Collapsible Content: Description Body + CTA Button */}
+                    {/* Collapsible Content: Description Body + CTA Button (reveals from bottom upward) */}
                     <div
                       className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         isActive
@@ -303,7 +308,11 @@ export const RcmCoverageSection = ({
                           : 'grid-rows-[0fr] opacity-0 pointer-events-none'
                       }`}
                     >
-                      <div className="overflow-hidden flex flex-col gap-[12px]">
+                      <div
+                        className={`overflow-hidden flex flex-col gap-[12px] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                          isActive ? 'translate-y-0' : 'translate-y-4'
+                        }`}
+                      >
                         {/* Description Body */}
                         <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em] max-w-[696px] pt-[12px]">
                           {agent.description}
@@ -349,8 +358,8 @@ export const RcmCoverageSection = ({
                     <div className="shrink-0 pb-[2px]">
                       <Link href={agent.link} aria-label={`Know more about ${agent.name}`}>
                         <CTA
-                          variant="light-bg"
-                          className="w-[34px] h-[34px] rounded-full shrink-0"
+                          variant="fill-arrow"
+                          className="[&_svg]:!text-white [&_svg]:!fill-white [&_path]:!fill-white"
                           aria-label={`Know more about ${agent.name}`}
                         />
                       </Link>

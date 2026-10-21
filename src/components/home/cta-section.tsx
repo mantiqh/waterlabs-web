@@ -66,12 +66,7 @@ export const CTASection = ({
 
             <div className="shrink-0">
               <Link href={ctaLink}>
-                <CTA
-                  variant="dark-bg"
-                  className="h-[38px] px-[12px] lg:h-[44px] lg:px-[20px]"
-                >
-                  {ctaText}
-                </CTA>
+                <CTA variant="dark-bg">{ctaText}</CTA>
               </Link>
             </div>
           </div>
