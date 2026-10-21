@@ -136,6 +136,7 @@ export const PlatformEngineSection = ({
                         <CTA
                           variant="dark-bg"
                           aria-label={item.ctaText}
+                          className="w-[44px] h-[44px] max-sm:!w-[34px] max-sm:!h-[34px] max-sm:!min-w-[34px] max-sm:!min-h-[34px] max-sm:!p-0"
                         />
                       </Link>
                     </div>

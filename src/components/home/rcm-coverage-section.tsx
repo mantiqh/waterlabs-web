@@ -359,7 +359,7 @@ export const RcmCoverageSection = ({
                       <Link href={agent.link} aria-label={`Know more about ${agent.name}`}>
                         <CTA
                           variant="fill-arrow"
-                          className="[&_svg]:!text-white [&_svg]:!fill-white [&_path]:!fill-white"
+                          className="[&_svg]:!text-white [&_svg]:!fill-white [&_path]:!fill-white w-[44px] h-[44px] max-sm:!w-[34px] max-sm:!h-[34px] max-sm:!min-w-[34px] max-sm:!min-h-[34px] max-sm:!p-0"
                           aria-label={`Know more about ${agent.name}`}
                         />
                       </Link>

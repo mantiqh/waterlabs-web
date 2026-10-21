@@ -67,8 +67,8 @@ const Navbar = () => {
         label: 'Products',
         header: 'Products',
         children: [
-          { label: 'Himer AI OS', href: '/products/himer' },
-          { label: 'CurieCode', href: '/products/curiecode' },
+          { label: 'Himer AI OS', href: '/solutions/prior-authorization' },
+          { label: 'CurieCode', href: '/solutions/charge-capture-and-coding' },
         ],
       },
       {

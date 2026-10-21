@@ -33,7 +33,8 @@ export const ROIProofBand = () => {
                   93%
                 </h2>
                 <p className="type-body-xxs text-charcoal">
-                  Less intake headcount, physical therapy network
+                  Less intake headcount,
+                  <br className="sm:hidden" /> physical therapy network
                 </p>
               </div>
 
@@ -52,7 +53,8 @@ export const ROIProofBand = () => {
                   $72M
                 </h2>
                 <p className="type-body-xxs text-charcoal">
-                  Released 3 to 5 days sooner, rural health system
+                  Released 3 to 5 days sooner,
+                  <br className="sm:hidden" /> rural health system
                 </p>
               </div>
 
@@ -71,7 +73,8 @@ export const ROIProofBand = () => {
                   90%
                 </h2>
                 <p className="type-body-xxs text-charcoal">
-                  Of ED encounters coded without a coder
+                  Of ED encounters coded
+                  <br className="sm:hidden" /> without a coder
                 </p>
               </div>
             </div>
