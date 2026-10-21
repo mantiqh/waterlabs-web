@@ -1,12 +1,12 @@
 'use client';
 
+import { FileSliders } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
-import { ChevronRight } from '@/components/CTA';
+import { ChevronRight,CTA } from '@/components/CTA';
 import {
   calculateROI,
   formatMoney,
-  ROI_BENCHMARKS,
   SORTED_SPECIALTIES,
 } from '@/data/roi-calculator';
 
@@ -200,7 +200,7 @@ export const ROICalculator = () => {
   const [monthlyRevenueStr, setMonthlyRevenueStr] = useState<string>('');
   const [monthlyClaims, setMonthlyClaims] = useState<number>(0);
   const [monthlyClaimsStr, setMonthlyClaimsStr] = useState<string>('');
-  const [denialRatePct, setDenialRatePct] = useState<number>(15.0);
+  const [denialRatePct, setDenialRatePct] = useState<number>(34.5);
   const [headcount, setHeadcount] = useState<number>(60);
   const [outsourcedPct, setOutsourcedPct] = useState<number>(20);
 
@@ -211,9 +211,6 @@ export const ROICalculator = () => {
   const denialId = useId();
   const headcountId = useId();
   const outsourcedId = useId();
-
-  // Selected benchmark data
-  const benchmark = specialty ? ROI_BENCHMARKS[specialty] : null;
 
   // Calculation results
   const results = useMemo(() => {
@@ -260,7 +257,7 @@ export const ROICalculator = () => {
     setMonthlyRevenueStr('');
     setMonthlyClaims(0);
     setMonthlyClaimsStr('');
-    setDenialRatePct(15.0);
+    setDenialRatePct(34.5);
     setHeadcount(60);
     setOutsourcedPct(20);
   };
@@ -268,7 +265,8 @@ export const ROICalculator = () => {
   // Slider track fill percentages
   const denialFillPct = ((denialRatePct - 0) / (35 - 0)) * 100;
   const headcountFillPct = ((headcount - 3) / (400 - 3)) * 100;
-  const outsourcedFillPct = ((outsourcedPct - 0) / (100 - 0)) * 100;
+  const inHousePct = 100 - outsourcedPct;
+  const inHouseFillPct = inHousePct;
 
   // Live number input handler with inline comma formatting and cursor preservation
   const handleNumberInputChange = (
@@ -364,18 +362,17 @@ export const ROICalculator = () => {
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
                   aria-haspopup="listbox"
                   aria-expanded={isDropdownOpen}
-                  className={`w-full bg-[#FCFDFE] border rounded-[12px_8px_12px_12px] h-[52px] px-[18px] flex items-center justify-between cursor-pointer transition-colors outline-none ${
-                    isDropdownOpen
+                  className={`w-full bg-[#FCFDFE] border rounded-[12px_8px_12px_12px] h-[52px] px-[18px] flex items-center justify-between cursor-pointer transition-colors outline-none ${isDropdownOpen
                       ? 'border-electric-blue ring-2 ring-electric-blue/20'
                       : 'border-[#D7DCE2] hover:border-[#91C6F2]'
-                  }`}
+                    }`}
                 >
                   <span
                     className={`type-caption truncate ${
                       specialty ? 'text-[#111111] font-medium' : 'text-[#7D8690]'
                     }`}
                   >
-                    {specialty || 'Select Your Specialty'}
+                    {specialty || 'Select Your Speciality'}
                   </span>
                   <div
                     className={`transition-transform duration-200 text-[#111111] ${
@@ -571,20 +568,6 @@ export const ROICalculator = () => {
 
               <div className="flex justify-between items-center mt-[8px] type-caption text-medium-gray tabular-nums">
                 <span>0%</span>
-                <span className="text-center font-medium">
-                  {benchmark ? (
-                    <>
-                      Benchmark{' '}
-                      <span className="font-semibold text-electric-blue">
-                        {Math.round(benchmark.denialRate * 100)}%
-                      </span>
-                    </>
-                  ) : (
-                    <span className="text-medium-gray/70">
-                      Select a specialty for its benchmark
-                    </span>
-                  )}
-                </span>
                 <span>35%</span>
               </div>
             </div>
@@ -672,17 +655,17 @@ export const ROICalculator = () => {
                 min={0}
                 max={100}
                 step={5}
-                value={outsourcedPct}
-                onChange={(e) => setOutsourcedPct(parseInt(e.target.value, 10))}
+                value={inHousePct}
+                onChange={(e) => setOutsourcedPct(100 - parseInt(e.target.value, 10))}
                 style={{
-                  background: `linear-gradient(to right, #0F68D6 ${outsourcedFillPct}%, #D7DCE2 ${outsourcedFillPct}%)`,
+                  background: `linear-gradient(to right, #0F68D6 ${inHouseFillPct}%, #D7DCE2 ${inHouseFillPct}%)`,
                 }}
                 className={`${styles.sliderInput} w-full`}
                 aria-label="Delivery model split"
                 aria-valuemin={0}
                 aria-valuemax={100}
-                aria-valuenow={outsourcedPct}
-                aria-valuetext={`${100 - outsourcedPct} percent in-house, ${outsourcedPct} percent outsourced`}
+                aria-valuenow={inHousePct}
+                aria-valuetext={`${inHousePct} percent in-house, ${outsourcedPct} percent outsourced`}
               />
             </div>
           </div>
@@ -694,128 +677,130 @@ export const ROICalculator = () => {
             className="w-full lg:w-[52%] xl:w-[688px] lg:flex-1 lg:min-h-[668px] bg-white rounded-[24px] p-[24px] sm:p-[28px] lg:p-[32px] xl:p-[36px] shadow-sm flex flex-col justify-between gap-[24px]"
             aria-live="polite"
           >
-            {/* Header: Dot + Label */}
-            <div className="flex items-center gap-[8px]">
-              <div className="w-[8px] h-[8px] rounded-full bg-electric-blue shrink-0" />
-              <span className="type-body-xxs text-medium-gray font-normal">
-                Your Estimated Opportunity
-              </span>
-            </div>
-
-            {/* Conditional Content: Empty State vs Results */}
             {!results ? (
-              /* Approved Empty State */
-              <div className="flex flex-col items-center justify-center text-center py-[48px] px-[16px] rounded-[16px] border border-dashed border-[#D7DCE2] bg-white my-[8px]">
-                <div className="w-[44px] h-[44px] rounded-full bg-[#EAF2FC] flex items-center justify-center text-electric-blue mb-[14px]">
-                  <svg
-                    className="w-[22px] h-[22px]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.75}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="type-body-xxs font-semibold text-charcoal">
-                  {!specialty ? 'Pick your specialty' : 'Enter your revenue and claims'}
-                </h3>
-                <p className="type-caption text-medium-gray max-w-[260px] mt-[6px]">
-                  {!specialty
-                    ? 'Your numbers appear here and update as you move the sliders.'
-                    : 'Provide your monthly collected revenue and claims volume to calculate your estimated opportunity.'}
-                </p>
-              </div>
-            ) : (
-              /* Calculated Result Cards (Figma: DetailBox1 & DetailBox2) */
-              <div className="flex flex-col gap-[16px]">
-                {/* DetailBox1: Estimated Annual Savings */}
-                <div
-                  data-tooltip-boundary="card"
-                  className="rounded-[16px_8px_16px_16px] p-[20px] flex flex-col gap-[12px] border border-[#F4F6F9]"
-                  style={{
-                    background: 'rgba(145, 198, 242, 0.05)',
-                  }}
-                >
-                  <div className="flex items-center gap-[6px]">
-                    <span className="type-body-xxs text-gray-black font-normal">
-                      Estimated annual savings
-                    </span>
-                    <InfoButton
-                      ariaLabel="Information about estimated annual savings"
-                      content="What your revenue cycle costs to run today against what it would cost with agents handling the routine work. Labour only. It does not include the cost of the Waterlabs programme."
-                    />
-                  </div>
+              /* BEFORE INPUTS STATE (Image 1) */
+              <>
+                <div className="w-full flex-1 min-h-[360px] sm:min-h-[400px] lg:min-h-[440px] bg-[#F8FAFC] rounded-[16px] sm:rounded-[20px] p-[24px] sm:p-[32px] flex flex-col items-center justify-center text-center">
                   <div
-                    style={GRADIENT_STYLE}
-                    className="type-h1 tabular-nums whitespace-nowrap w-fit"
+                    className="w-[40px] h-[40px] p-[8px] rounded-[20px] mb-[16px] flex items-center justify-center text-[#2A2A2A] shrink-0"
+                    style={{
+                      background: 'rgba(17, 17, 17, 0.05)',
+                      backdropFilter: 'blur(9.8px)',
+                      WebkitBackdropFilter: 'blur(9.8px)',
+                    }}
                   >
-                    {formatMoney(results.annualSaving)}
+                    <FileSliders className="w-[18px] h-[18px] shrink-0" strokeWidth={1.5} />
                   </div>
-                  <p className="type-caption text-charcoal">
-                    {formatMoney(results.monthlySaving)} a month, across the {headcount} people working your cycle today.
+                  <h3 className="type-h5 sm:type-h4 font-medium text-[#0F68D6] mb-[8px]">
+                    Pick your  Speciality
+                  </h3>
+                  <p className="type-caption text-[#7D8690] text-center max-w-[340px]">
+                    Your numbers appear here and update as you move the sliders.
                   </p>
                 </div>
 
-                {/* DetailBox2: Estimated Revenue Opportunity */}
-                <div
-                  data-tooltip-boundary="card"
-                  className="rounded-[16px_8px_16px_16px] p-[20px] flex flex-col gap-[12px] border border-[#F4F6F9]"
-                  style={{
-                    background: 'rgba(145, 198, 242, 0.05)',
-                  }}
-                >
-                  {results.atBenchmark ? (
-                    <p className="type-caption text-charcoal">
-                      Your denial performance is already at or better than benchmark. We would review how your current processes run for opportunities to lift revenue by a further 1 to 2%.
-                    </p>
-                  ) : (
-                    <>
+                {/* Disclaimer */}
+                <p className="type-caption text-[#7D8690] leading-[18px]">
+                  Estimates are illustrative and based on applied to the inputs above. They do not account for every circumstance and are not a guarantee of results. Your assessment uses your actual claim, remit and denial data.
+                </p>
+              </>
+            ) : (
+              /* AFTER INPUTS STATE (Image 2) */
+              <>
+                <div className="flex flex-col gap-[20px]">
+                  {/* Header: Dot + Label */}
+                  <div className="flex items-center gap-[8px]">
+                    <div className="w-[8px] h-[8px] rounded-full bg-electric-blue shrink-0" />
+                    <span className="type-body-xxs text-medium-gray font-normal">
+                      Your Estimated Opportunity
+                    </span>
+                  </div>
+
+                  {/* Calculated Result Cards */}
+                  <div className="flex flex-col gap-[16px]">
+                    {/* DetailBox1: Estimated Annual Savings */}
+                    <div
+                      data-tooltip-boundary="card"
+                      className="rounded-[16px_8px_16px_16px] p-[20px] flex flex-col gap-[12px] border border-[#F4F6F9]"
+                      style={{
+                        background: 'rgba(145, 198, 242, 0.05)',
+                      }}
+                    >
                       <div className="flex items-center gap-[6px]">
                         <span className="type-body-xxs text-gray-black font-normal">
-                          Estimated revenue opportunity
+                          Estimated annual savings
                         </span>
                         <InfoButton
-                          ariaLabel="Information about estimated revenue opportunity"
-                          content="Two things together: revenue sitting in the gap between your denial rate and the benchmark for your specialty, and the lift we would expect from automating routine steps in the cycle."
+                          ariaLabel="Information about estimated annual savings"
+                          content="What your revenue cycle costs to run today against what it would cost with agents handling the routine work. Labour only. It does not include the cost of the Waterlabs programme."
                         />
                       </div>
                       <div
                         style={GRADIENT_STYLE}
                         className="type-h1 tabular-nums whitespace-nowrap w-fit"
                       >
-                        {formatMoney(results.revenueOpportunity)}
+                        {formatMoney(results.annualSaving)}
                       </div>
-                      {results.pctOfCollections !== null && (
+                      <p className="type-caption text-charcoal">
+                        {formatMoney(results.monthlySaving)} a month, across the {headcount} people working your cycle today.
+                      </p>
+                    </div>
+
+                    {/* DetailBox2: Estimated Revenue Opportunity */}
+                    <div
+                      data-tooltip-boundary="card"
+                      className="rounded-[16px_8px_16px_16px] p-[20px] flex flex-col gap-[12px] border border-[#F4F6F9]"
+                      style={{
+                        background: 'rgba(145, 198, 242, 0.05)',
+                      }}
+                    >
+                      {results.atBenchmark ? (
                         <p className="type-caption text-charcoal">
-                          {results.pctOfCollections.toFixed(1)}% of what you collect in a year.
+                          Your denial performance is already at or better than benchmark. We would review how your current processes run for opportunities to lift revenue by a further 1 to 2%.
                         </p>
+                      ) : (
+                        <>
+                          <div className="flex items-center gap-[6px]">
+                            <span className="type-body-xxs text-gray-black font-normal">
+                              Estimated revenue opportunity
+                            </span>
+                            <InfoButton
+                              ariaLabel="Information about estimated revenue opportunity"
+                              content="Two things together: revenue sitting in the gap between your denial rate and the benchmark for your specialty, and the lift we would expect from automating routine steps in the cycle."
+                            />
+                          </div>
+                          <div
+                            style={GRADIENT_STYLE}
+                            className="type-h1 tabular-nums whitespace-nowrap w-fit"
+                          >
+                            {formatMoney(results.revenueOpportunity)}
+                          </div>
+                          {results.pctOfCollections !== null && (
+                            <p className="type-caption text-charcoal">
+                              {results.pctOfCollections.toFixed(1)}% of what you collect in a year.
+                            </p>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
+                    </div>
+                  </div>
                 </div>
 
-                {/* Start again button */}
-                <div className="flex items-center justify-between pt-[4px]">
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className="type-caption text-medium-gray hover:text-gray-black underline underline-offset-2 transition-colors cursor-pointer"
-                  >
-                    Start again
-                  </button>
+                <div className="flex flex-col gap-[20px]">
+                  {/* Disclaimer */}
+                  <p className="type-caption text-[#7D8690] leading-[18px]">
+                    Estimates are illustrative and based on applied to the inputs above. They do not account for every circumstance and are not a guarantee of results. Your assessment uses your actual claim, remit and denial data.
+                  </p>
+
+                  {/* Start again button */}
+                  <div>
+                    <CTA variant="light-bg" onClick={handleReset}>
+                      Start again
+                    </CTA>
+                  </div>
                 </div>
-              </div>
+              </>
             )}
-
-            {/* Detail description / Disclaimer (Figma: Detail description) */}
-            <p className="type-caption text-charcoal">
-              Estimates are illustrative and based on published benchmarks applicable to your specialty and the information provided. Results may vary and are not guaranteed. A detailed assessment incorporates your actual claims, remittance, denial, and operational data to provide a more accurate analysis.
-            </p>
           </div>
         </div>
       </div>

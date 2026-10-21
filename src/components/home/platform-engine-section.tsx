@@ -135,7 +135,6 @@ export const PlatformEngineSection = ({
                       <Link href={item.href} aria-label={item.ctaText}>
                         <CTA
                           variant="dark-bg"
-                          className="w-[34px] h-[34px] sm:w-[40px] sm:h-[40px] rounded-full shrink-0"
                           aria-label={item.ctaText}
                         />
                       </Link>

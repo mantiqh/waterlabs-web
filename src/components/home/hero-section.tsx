@@ -109,12 +109,7 @@ export const HeroSection = ({
             {/* Mobile: Row with CTA Button + Pause Circle | Desktop: Button only */}
             <div className="flex items-center justify-between lg:justify-start w-full lg:w-auto">
               <Link href={ctaLink}>
-                <CTA
-                  variant="light-bg"
-                  className="h-[38px] lg:h-[44px] px-[12px] lg:px-[20px] text-[14px] lg:text-[16px] leading-[24px]"
-                >
-                  {ctaText}
-                </CTA>
+                <CTA variant="light-bg">{ctaText}</CTA>
               </Link>
 
               {/* Video Pause Toggle Button on Mobile (aligned right on actions row) */}

@@ -65,7 +65,7 @@ const DEFAULT_POINTS = [
   'Billing starts only on completed output',
 ];
 
-// Helper calculating vertical reveal styles for each item based on scroll progress
+// Helper calculating smooth, gradual vertical reveal styles for each item based on scroll progress
 const getItemStyle = (
   idx: number,
   scrollProgress: number,
@@ -85,6 +85,7 @@ const getItemStyle = (
       opacity: 0,
       visibility: 'hidden',
       pointerEvents: 'none',
+      transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
     };
   }
 
@@ -95,54 +96,52 @@ const getItemStyle = (
       opacity: 0,
       visibility: 'hidden',
       pointerEvents: 'none',
+      transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
     };
   }
 
-  // Current item: resting then exiting upward
+  // Current item (i): stable until local = 0.3, then smoothly exits upward as (i + 1) enters
   if (idx === i) {
-    if (local < 0.5) {
+    if (local <= 0.3) {
       return {
         transform: 'translate3d(0, 0px, 0)',
         opacity: 1,
         visibility: 'visible',
         pointerEvents: 'auto',
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
       };
-    } else if (local < 0.75) {
-      const t = (local - 0.5) / 0.25;
+    } else {
+      const t = (local - 0.3) / 0.7; // 0.0 to 1.0
       const ease = t * t * (3 - 2 * t);
       return {
         transform: `translate3d(0, ${-28 * ease}px, 0)`,
         opacity: Math.max(0, 1 - ease),
-        visibility: 'visible',
-        pointerEvents: 'none',
-      };
-    } else {
-      return {
-        transform: 'translate3d(0, -28px, 0)',
-        opacity: 0,
-        visibility: 'hidden',
-        pointerEvents: 'none',
+        visibility: ease >= 0.99 ? 'hidden' : 'visible',
+        pointerEvents: ease >= 0.5 ? 'none' : 'auto',
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
       };
     }
   }
 
-  // Next item: waiting below then entering from below
+  // Next item (i + 1): enters simultaneously from below as item (i) exits
   if (idx === i + 1) {
-    if (local < 0.75) {
+    if (local <= 0.3) {
       return {
         transform: 'translate3d(0, 28px, 0)',
         opacity: 0,
         visibility: 'hidden',
         pointerEvents: 'none',
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
       };
     } else {
-      const t = (local - 0.75) / 0.25;
+      const t = (local - 0.3) / 0.7; // 0.0 to 1.0
       const ease = t * t * (3 - 2 * t);
       return {
         transform: `translate3d(0, ${28 * (1 - ease)}px, 0)`,
         opacity: Math.min(1, ease),
         visibility: 'visible',
         pointerEvents: ease >= 0.5 ? 'auto' : 'none',
+        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
       };
     }
   }
@@ -151,6 +150,7 @@ const getItemStyle = (
     transform: 'translate3d(0, 0px, 0)',
     opacity: 1,
     visibility: 'visible',
+    transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out',
   };
 };
 
@@ -203,7 +203,7 @@ export const EconomicImpactSection = ({
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-gradient-to-b from-[#0F68D6] to-[#042849]"
+      className="relative w-full bg-gradient-to-b from-[#2BAAB3] md:from-[#158AB6] lg:from-[#1275CB] to-[#042849]"
       style={{ height: '300vh' }}
     >
       {/* Pinned Sticky Viewport Container */}
@@ -274,13 +274,13 @@ export const EconomicImpactSection = ({
                ========================================================= */}
             <div className="relative z-10 w-full lg:h-[489px] bg-black/40 backdrop-blur-[25.35px] rounded-[20px_10px_20px_20px] lg:rounded-[20px] p-[24px_16px] sm:p-[32px_20px] lg:p-[32px] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[24px] lg:gap-[32px] xl:gap-[40px] border border-white/5 overflow-hidden">
               
-              {/* Vector Path on Right Side (Figma vector-path) */}
+              {/* Vector Path on Right Side (Figma vector-path) - Clean subtle blue/white lines matching design */}
               <div className="hidden lg:block absolute right-0 top-[61px] w-[224px] h-[428px] pointer-events-none z-0">
                 <Image
                   src="/images/home/the-economic-impact-of-going-agentic/desktop/vector-path.png"
                   alt=""
                   fill
-                  className="object-contain object-right"
+                  className="object-contain object-right brightness-0 invert opacity-20"
                   priority
                 />
               </div>

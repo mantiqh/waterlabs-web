@@ -36,10 +36,9 @@ export const WelcomeToWaterlabsSection = ({
       const rect = sectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
 
-      // Start highlighting when the top of the section reaches 85% of viewport
-      // Complete highlighting when section is comfortably centered around 35% of viewport
-      const start = windowHeight * 0.85;
-      const end = windowHeight * 0.35;
+      // Make reveal progression gradual and controlled across natural scrolling
+      const start = windowHeight * 0.75;
+      const end = windowHeight * 0.1;
 
       const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
       setScrollProgress(progress);
@@ -112,12 +111,7 @@ export const WelcomeToWaterlabsSection = ({
           {/* Actions / CTA Button: About us */}
           <div className="flex flex-col items-center">
             <Link href={ctaLink}>
-              <CTA
-                variant="light-bg"
-                className="h-[38px] lg:h-[44px] px-[12px] lg:px-[20px] text-[14px] lg:text-[16px] leading-[24px]"
-              >
-                {ctaText}
-              </CTA>
+              <CTA variant="light-bg">{ctaText}</CTA>
             </Link>
           </div>
 

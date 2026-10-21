@@ -10,6 +10,7 @@ export interface WhyWaterlabsCard {
   title: string;
   description: string;
   image: string;
+  mobileImage?: string;
 }
 
 const DEFAULT_CARDS: WhyWaterlabsCard[] = [
@@ -20,6 +21,8 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
       'Most vendors automate one function and hand the rest back. Waterlabs runs the whole cycle on one system, live across 16 functional areas, 27 specialties and 16 PM systems. Nothing falls into the gaps, because there are no handoffs.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_One AI partner across the entire cycle.png',
+    mobileImage:
+      '/images/home/why-waterlabs-is-different/mobile/img_One AI partner across the entire cycle (1).png',
   },
   {
     id: 'card-2',
@@ -28,6 +31,8 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
       'Waterlabs is built on HIMER, our own agentic operating system, with patented products already in production. You are buying infrastructure we own and keep building on, not a layer sitting on someone else\'s model.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_A patented operating system, not a GenAI wrapper.png',
+    mobileImage:
+      '/images/home/why-waterlabs-is-different/mobile/img_A patented operating system, not a GenAI wrapper (1).png',
   },
   {
     id: 'card-3',
@@ -36,6 +41,8 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
       'Custom agents are built and deployed through the OS in about two weeks, and more than 100 are already working inside client environments. This is not a pilot or a proof of concept. It is live automation, running at scale, today.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_100+ agents in production, deployed in two weeks.png',
+    mobileImage:
+      '/images/home/why-waterlabs-is-different/mobile/img_100+ agents in production, deployed in two weeks (1).png',
   },
   {
     id: 'card-4',
@@ -44,6 +51,8 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
       'Waterlabs is built by RCM and technology people who have spent years inside the problem. Payer policies, billing rules, and specialty nuance are in the system before deployment, which is why an agent is productive from its first day rather than its hundredth.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_Six years of RCM knowledge, pre-loaded.png',
+    mobileImage:
+      '/images/home/why-waterlabs-is-different/mobile/img_Six years of RCM knowledge, pre-loaded (1).png',
   },
   {
     id: 'card-5',
@@ -52,6 +61,8 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
       'Our infrastructure is vertically integrated and owned end to end, on our own sovereign cloud, with connectivity to more than 4,000 payers. Data safety here is structural, not a promise you have to take on trust.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_A sovereign cloud, wired to 4,000+ payer.png',
+    mobileImage:
+      '/images/home/why-waterlabs-is-different/mobile/img_A sovereign cloud, wired to 4,000+ payer (1).png',
   },
   {
     id: 'card-6',
@@ -60,6 +71,8 @@ const DEFAULT_CARDS: WhyWaterlabsCard[] = [
       'Clients see 30 to 70% savings in cost to collect, with higher and faster cash collections. You pay only on successful deployment. No proof of concept, no experimentation, pricing tied to what we actually deliver.',
     image:
       '/images/home/why-waterlabs-is-different/desktop/img_Proven results, priced on outcomes.png',
+    mobileImage:
+      '/images/home/why-waterlabs-is-different/mobile/One AI partner across the entire cycle.png',
   },
 ];
 
@@ -81,8 +94,7 @@ export const WhyWaterlabsSection = ({
   const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   // Desktop Seamless Infinite Loop Carousel State
-  const SETS = 5;
-  const MIDDLE_SET = 2;
+  const SETS = 3;
   const displayCards = useMemo(
     () =>
       Array.from({ length: SETS }).flatMap((_, setIdx) =>
@@ -94,7 +106,8 @@ export const WhyWaterlabsSection = ({
     [cards]
   );
 
-  const [desktopIndex, setDesktopIndex] = useState(MIDDLE_SET * cards.length);
+  // Initial visit/refresh starts at index 0 (matching Figma and user reference with no cards on left)
+  const [desktopIndex, setDesktopIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
 
   // When transition is disabled to silently normalize the index, re-enable it on the next paint
@@ -113,6 +126,22 @@ export const WhyWaterlabsSection = ({
   const desktopRealIndex = ((desktopIndex % cards.length) + cards.length) % cards.length;
 
   const handlePrev = () => {
+    const N = cards.length;
+    if (N === 0) return;
+
+    if (desktopIndex === 0) {
+      // Smoothly loop backwards: silently jump to middle set clone of card 0 (index N), then animate to N - 1
+      setIsTransitioning(false);
+      setDesktopIndex(N);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTransitioning(true);
+          setDesktopIndex(N - 1);
+        });
+      });
+      return;
+    }
+
     setIsTransitioning(true);
     setDesktopIndex((prev) => prev - 1);
   };
@@ -123,13 +152,27 @@ export const WhyWaterlabsSection = ({
   };
 
   const handleDotClick = (targetRealIndex: number) => {
-    setIsTransitioning(true);
     const N = cards.length;
     if (N === 0) return;
     const currentReal = ((desktopIndex % N) + N) % N;
     let diff = targetRealIndex - currentReal;
     if (diff > N / 2) diff -= N;
     if (diff < -N / 2) diff += N;
+
+    if (desktopIndex + diff < 0) {
+      setIsTransitioning(false);
+      const normalizedCurrent = desktopIndex + N;
+      setDesktopIndex(normalizedCurrent);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsTransitioning(true);
+          setDesktopIndex(normalizedCurrent + diff);
+        });
+      });
+      return;
+    }
+
+    setIsTransitioning(true);
     setDesktopIndex((prev) => prev + diff);
   };
 
@@ -144,14 +187,14 @@ export const WhyWaterlabsSection = ({
 
     const N = cards.length;
     if (N === 0) return;
-    const minSafe = MIDDLE_SET * N;
-    const maxSafe = (MIDDLE_SET + 1) * N - 1;
 
-    if (desktopIndex < minSafe || desktopIndex > maxSafe) {
-      const normalizedReal = ((desktopIndex % N) + N) % N;
-      const normalized = MIDDLE_SET * N + normalizedReal;
+    // Keep active card within valid clone range without jumping when advancing from set 0
+    if (desktopIndex >= 2 * N) {
       setIsTransitioning(false);
-      setDesktopIndex(normalized);
+      setDesktopIndex((prev) => prev - N);
+    } else if (desktopIndex < 0) {
+      setIsTransitioning(false);
+      setDesktopIndex((prev) => prev + N);
     }
   };
 
@@ -204,12 +247,17 @@ export const WhyWaterlabsSection = ({
         Background: #FFFFFF with decorative vector background image
       */}
       <div
-        className="w-full bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] relative overflow-hidden bg-cover bg-left"
-        style={{
-          backgroundImage:
-            "url('/images/home/why-waterlabs-is-different/desktop/bg_the_things_no_other_rcm_partner_can_say.png')",
-        }}
+        className="w-full bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] relative overflow-hidden"
       >
+        {/* Desktop-only decorative vector watermark lines */}
+        <div
+          aria-hidden="true"
+          className="hidden lg:block absolute inset-0 pointer-events-none bg-cover bg-left z-0"
+          style={{
+            backgroundImage:
+              "url('/images/home/why-waterlabs-is-different/desktop/bg_the_things_no_other_rcm_partner_can_say.png')",
+          }}
+        />
         {/* Inner Content: Aligned to right on desktop (982px content area) */}
         <div className="relative z-10 max-w-[1320px] mx-auto flex flex-col lg:items-end">
           <div className="w-full max-w-[982px] flex flex-col gap-[32px] lg:gap-[40px]">
@@ -363,11 +411,13 @@ export const WhyWaterlabsSection = ({
                     {/* Card Image */}
                     <div className="relative w-full aspect-[330/265.6] rounded-[20px_10px_20px_20px] overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
                       <Image
-                        src={card.image}
+                        src={card.mobileImage || card.image}
                         alt={card.title}
                         fill
                         sizes="(max-width: 768px) 330px, 400px"
-                        className="object-cover"
+                        className={`object-cover ${
+                          card.id === 'card-6' ? 'object-[75%_center]' : 'object-center'
+                        }`}
                       />
                     </div>
 

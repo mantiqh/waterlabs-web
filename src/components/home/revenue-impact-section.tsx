@@ -33,12 +33,10 @@ export const RevenueImpactSection = ({
         - Background: linear-gradient(336.01deg, #63CCB7 1.87%, #0F68D6 62.61%) with texture overlay
       */}
       <div
-        className="w-full lg:w-[min(calc(100vw-60px),calc(50vw+660px))] mr-auto rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:pl-[max(60px,calc((100vw-1320px)/2))] lg:pr-[60px] relative bg-cover bg-no-repeat bg-center"
+        className="w-full lg:w-[min(calc(100vw-60px),calc(50vw+660px))] mr-auto rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:pl-[max(60px,calc((100vw-1320px)/2))] lg:pr-[60px] relative overflow-hidden"
         style={{
           background:
-            'linear-gradient(336.01deg, #63CCB7 1.87%, #0F68D6 62.61%)',
-          backgroundImage:
-            "url('/images/home/revenue-impact-calculator/desktop/bg_roi_calculator.png')",
+            'linear-gradient(155deg, #0A60AF 0%, #0F68D6 30%, #168BB6 65%, #46D4B0 100%)',
         }}
       >
         <div className="relative z-10 w-full max-w-[1260px] flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[32px] lg:gap-[40px]">
