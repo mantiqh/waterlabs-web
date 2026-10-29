@@ -15,9 +15,9 @@ export const ROICtaBanner = () => {
         - Heading: "Bring us one function. Prior authorization, eligibility, denials. Whichever is costing you the most." (type-h3, #63CCB7)
         - Button: "Get a Demo" (white pill, dark text, dark arrow)
       */}
-      <div className="relative w-full bg-[#042849] rounded-tr-[30px] rounded-br-[30px] py-[40px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px] flex flex-col justify-center overflow-hidden">
+      <div className="relative flex w-full flex-col justify-center overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-[#042849] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:px-[60px] lg:py-[80px]">
         {/* Desktop Background Image */}
-        <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
+        <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <Image
             src="/images/ROI/cta-section/img_bg_pre_footer.png"
             alt=""
@@ -27,7 +27,7 @@ export const ROICtaBanner = () => {
         </div>
 
         {/* Mobile / Tablet Background Image */}
-        <div className="block lg:hidden absolute inset-0 pointer-events-none z-0">
+        <div className="pointer-events-none absolute inset-0 z-0 block lg:hidden">
           <Image
             src="/images/ROI/cta-section/img_bg_pre_footer_mobile (1).png"
             alt=""
@@ -37,10 +37,10 @@ export const ROICtaBanner = () => {
         </div>
 
         {/* Content Container (Frame 21: max-w-[1320px] mx-auto) */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto">
+        <div className="relative z-10 mx-auto w-full max-w-[1320px]">
           {/* Mobile / Tablet layout (< lg) */}
-          <div className="flex flex-col lg:hidden items-start gap-[20px]">
-            <h2 className="type-h3 tracking-[-0.01em] max-w-[873px]">
+          <div className="flex flex-col items-start gap-[20px] lg:hidden">
+            <h2 className="type-h3 max-w-[873px] tracking-[-0.01em]">
               <span className="text-aqua-mint block">Bring us one function.</span>
               <span className="text-white">
                 Prior authorization, eligibility, denials. Whichever is costing you the most.
@@ -57,13 +57,13 @@ export const ROICtaBanner = () => {
           </div>
 
           {/* Desktop layout (>= lg) */}
-          <div className="hidden lg:flex flex-col items-start">
+          <div className="hidden flex-col items-start lg:flex">
             <h2 className="type-h3 tracking-[-0.01em]">
               <span className="text-aqua-mint block">Bring us one function.</span>
-              <span className="text-white block">Prior authorization, eligibility, denials.</span>
+              <span className="block text-white">Prior authorization, eligibility, denials.</span>
               <span className="flex items-center gap-[100px] xl:gap-[130px]">
                 <span className="text-white">Whichever is costing you the most.</span>
-                <Link href="/contact-us" className="inline-block shrink-0 not-italic font-normal">
+                <Link href="/contact-us" className="inline-block shrink-0 font-normal not-italic">
                   <CTA variant="dark-bg" as="span">
                     Get a demo
                   </CTA>

@@ -17,7 +17,7 @@ export const AboutUsPage = ({ data }: AboutUsPageProps) => {
     data?.leadership || (data ? { leadersTag: data.leadersTag, leaders: data.leaders } : undefined);
 
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <HeroSection />
       <WhatWeAreSection />
       <OurStorySection />

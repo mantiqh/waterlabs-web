@@ -80,7 +80,7 @@ export const FourThingsSection = () => {
       const scrollRatio = scrollLeft / maxScroll;
       const dotIndex = Math.min(
         TOTAL_DOTS - 1,
-        Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1)))
+        Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1))),
       );
       setActiveDotIndex(dotIndex);
     }
@@ -105,7 +105,7 @@ export const FourThingsSection = () => {
   };
 
   return (
-    <section className="relative w-full bg-[#9983E2] p-0 m-0">
+    <section className="relative m-0 w-full bg-[#9983E2] p-0">
       {/* 
         Four Things Section Container (Figma top frame - color):
         - Desktop: 1440px width, padding: 80px 60px, rounded-tr-[60px]
@@ -113,10 +113,9 @@ export const FourThingsSection = () => {
         - Background: #F4F6F9
         - Top-right corner reveals the hero purple (#9983E2) seamlessly matching Figma
       */}
-      <div className="relative w-full bg-[#F4F6F9] rounded-tr-[30px] lg:rounded-tr-[60px] py-[40px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[80px] lg:px-[60px]">
-        
+      <div className="relative w-full rounded-tr-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:px-[60px] lg:py-[80px]">
         {/* Vector Background Graphic at Left Bottom */}
-        <div className="absolute left-0 bottom-0 pointer-events-none z-0 overflow-hidden w-[280px] sm:w-[380px] lg:w-[480px] xl:w-[563px] aspect-[1126/944]">
+        <div className="pointer-events-none absolute bottom-0 left-0 z-0 aspect-[1126/944] w-[280px] overflow-hidden sm:w-[380px] lg:w-[480px] xl:w-[563px]">
           <Image
             src="/images/culture/four-things/Vector.png"
             alt="Vector Graphic"
@@ -126,22 +125,21 @@ export const FourThingsSection = () => {
         </div>
 
         {/* Content Container (1320px max width) */}
-        <div className="relative z-10 max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[40px] xl:gap-[60px] 2xl:gap-[80px]">
-          
+        <div className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[32px] lg:flex-row lg:gap-[40px] xl:gap-[60px] 2xl:gap-[80px]">
           {/* =================================================================
               LEFT COLUMN: Heading Block (Sticky on Desktop matching ProductsSection)
              ================================================================= */}
-          <div className="w-full lg:w-[360px] xl:w-[440px] 2xl:w-[480px] shrink-0 min-w-0 lg:sticky lg:top-[120px] self-start flex flex-col gap-[14px]">
+          <div className="flex w-full min-w-0 shrink-0 flex-col gap-[14px] self-start lg:sticky lg:top-[120px] lg:w-[360px] xl:w-[440px] 2xl:w-[480px]">
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
-              <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
+              <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+              <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
                 What we stand for
               </span>
             </div>
 
             {/* Main Section Heading (type-h2, semantic <h2>) */}
-            <h2 className="type-h2 text-[#111111] max-w-[476px]">
+            <h2 className="type-h2 max-w-[476px] text-[#111111]">
               Four things we don&apos;t compromise on.
             </h2>
           </div>
@@ -149,20 +147,22 @@ export const FourThingsSection = () => {
           {/* =================================================================
               DESKTOP RIGHT COLUMN: Vertically Scrolling List of 4 Principles
              ================================================================= */}
-          <div className="hidden lg:flex flex-col w-full lg:flex-1 min-w-0 max-w-[760px] gap-[36px] xl:gap-[44px]">
+          <div className="hidden w-full max-w-[760px] min-w-0 flex-col gap-[36px] lg:flex lg:flex-1 xl:gap-[44px]">
             {fourThingsData.map((item, index) => (
               <div
                 key={`desktop-principle-${item.id}`}
                 className={`flex flex-row items-start gap-[24px] pb-[32px] xl:pb-[36px] ${
-                  index !== fourThingsData.length - 1 ? 'border-b border-[#91C6F2]' : 'border-b border-[#91C6F2]'
+                  index !== fourThingsData.length - 1
+                    ? 'border-b border-[#91C6F2]'
+                    : 'border-b border-[#91C6F2]'
                 }`}
               >
                 {/* 3D Glass Icon */}
                 <div
-                  className="shrink-0 flex items-center justify-center"
+                  className="flex shrink-0 items-center justify-center"
                   style={{ width: `${item.iconWidth}px`, height: `${item.iconHeight}px` }}
                 >
-                  <div className="relative w-full h-full">
+                  <div className="relative h-full w-full">
                     <Image
                       src={item.icon}
                       alt={item.title}
@@ -174,11 +174,9 @@ export const FourThingsSection = () => {
                 </div>
 
                 {/* Text Content */}
-                <div className="flex flex-col gap-[14px] flex-1">
-                  <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">
-                    {item.title}
-                  </h3>
-                  <p className="type-body-xs text-[#2A2A2A] leading-relaxed max-w-[507px]">
+                <div className="flex flex-1 flex-col gap-[14px]">
+                  <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{item.title}</h3>
+                  <p className="type-body-xs max-w-[507px] leading-relaxed text-[#2A2A2A]">
                     {item.description}
                   </p>
                 </div>
@@ -189,20 +187,20 @@ export const FourThingsSection = () => {
           {/* =================================================================
               MOBILE / TABLET: Horizontal Snap Swipe Slider (same as Careers)
              ================================================================= */}
-          <div className="flex lg:hidden flex-col w-full gap-[20px]">
+          <div className="flex w-full flex-col gap-[20px] lg:hidden">
             <div
               ref={mobileScrollRef}
               onScroll={handleMobileScroll}
-              className="flex w-full overflow-x-auto snap-x snap-mandatory gap-[16px] sm:gap-[20px] items-stretch no-scrollbar pt-[8px]"
+              className="no-scrollbar flex w-full snap-x snap-mandatory items-stretch gap-[16px] overflow-x-auto pt-[8px] sm:gap-[20px]"
             >
               {fourThingsData.map((item) => (
                 <div
                   key={`mobile-principle-${item.id}`}
-                  className="shrink-0 snap-start w-[270px] sm:w-[300px] flex flex-col justify-start gap-[14px] pb-[20px] border-b border-[#91C6F2]"
+                  className="flex w-[270px] shrink-0 snap-start flex-col justify-start gap-[14px] border-b border-[#91C6F2] pb-[20px] sm:w-[300px]"
                 >
                   {/* Icon */}
-                  <div className="shrink-0 flex items-center justify-start h-[76px] w-[90px]">
-                    <div className="relative w-full h-full">
+                  <div className="flex h-[76px] w-[90px] shrink-0 items-center justify-start">
+                    <div className="relative h-full w-full">
                       <Image
                         src={item.icon}
                         alt={item.title}
@@ -214,11 +212,9 @@ export const FourThingsSection = () => {
                   </div>
 
                   {/* Text Container */}
-                  <div className="flex flex-col gap-[10px] flex-1">
-                    <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">
-                      {item.title}
-                    </h3>
-                    <p className="type-body-xs text-[#2A2A2A] leading-relaxed">
+                  <div className="flex flex-1 flex-col gap-[10px]">
+                    <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{item.title}</h3>
+                    <p className="type-body-xs leading-relaxed text-[#2A2A2A]">
                       {item.description}
                     </p>
                   </div>
@@ -234,8 +230,8 @@ export const FourThingsSection = () => {
                 const widthClass = isActive
                   ? 'w-[32px] bg-[#0F68D6]'
                   : diff === 1
-                  ? 'w-[16px] bg-[#0F68D6]/20'
-                  : 'w-[6px] bg-[#0F68D6]/20';
+                    ? 'w-[16px] bg-[#0F68D6]/20'
+                    : 'w-[6px] bg-[#0F68D6]/20';
 
                 return (
                   <button
@@ -243,13 +239,12 @@ export const FourThingsSection = () => {
                     type="button"
                     onClick={() => scrollToDot(i)}
                     aria-label={`Go to principle ${i + 1}`}
-                    className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${widthClass}`}
+                    className={`h-[5px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${widthClass}`}
                   />
                 );
               })}
             </div>
           </div>
-
         </div>
       </div>
     </section>

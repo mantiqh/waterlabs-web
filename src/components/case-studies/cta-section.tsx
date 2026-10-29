@@ -16,14 +16,13 @@ export const CaseStudiesCTASection = ({
 }: CaseStudiesCTASectionProps) => {
   const safeButtonLink = buttonLink?.includes('waterlabs-w7eb.vercel.app')
     ? '/contact-us'
-    : (buttonLink || '/contact-us');
+    : buttonLink || '/contact-us';
 
   const renderHeadline = (content?: ReactNode) => {
     if (!content) {
       return (
         <>
-          See what Waterlabs would do{' '}
-          <br className="hidden md:block" />
+          See what Waterlabs would do <br className="hidden md:block" />
           on your numbers.
         </>
       );
@@ -33,8 +32,7 @@ export const CaseStudiesCTASection = ({
         const parts = content.split('on your numbers');
         return (
           <>
-            {parts[0].trimEnd()}{' '}
-            <br className="hidden md:block" />
+            {parts[0].trimEnd()} <br className="hidden md:block" />
             on your numbers{parts.slice(1).join('on your numbers')}
           </>
         );
@@ -44,22 +42,22 @@ export const CaseStudiesCTASection = ({
   };
 
   return (
-    <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#F4F6F9] from-50% to-[#111111] to-50%">
+    <section className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#F4F6F9] from-50% to-[#111111] to-50% p-0">
       {/* 
         CTA Banner Card (Figma: Frame 2147226494 / Frame 1272628356):
         - Desktop: 1440px x 140px, padding: 40px 60px, gap: 20px, background: #0F68D6, border-radius: 30px 0 0 30px
         - Mobile: 402px x 174px, padding: 40px 20px, gap: 24px, background: #0F68D6, border-radius: 30px 0 0 30px
       */}
-      <div className="w-full bg-[#0F68D6] rounded-tl-[30px] rounded-bl-[30px] rounded-tr-0 rounded-br-0 px-[20px] md:px-[40px] lg:px-[60px] py-[40px] md:py-[48px] lg:py-0 lg:h-[240px] flex items-center overflow-hidden">
+      <div className="rounded-tr-0 rounded-br-0 flex w-full items-center overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#0F68D6] px-[20px] py-[40px] md:px-[40px] md:py-[48px] lg:h-[240px] lg:px-[60px] lg:py-0">
         {/* Content Container (max-w-[1320px]) */}
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-[20px] lg:gap-[20px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-center lg:gap-[20px]">
           {/* Headline (Display/H2) */}
-          <h2 className="text-[23px] min-[375px]:text-[25px] sm:type-h2 text-white tracking-[-0.01em] leading-[29px] min-[375px]:leading-[31px] sm:leading-[60px]">
+          <h2 className="sm:type-h2 text-[23px] leading-[29px] tracking-[-0.01em] text-white min-[375px]:text-[25px] min-[375px]:leading-[31px] sm:leading-[60px]">
             {renderHeadline(headline)}
           </h2>
 
           {/* Action CTA Button */}
-          <div className="shrink-0 flex items-center">
+          <div className="flex shrink-0 items-center">
             <Link href={safeButtonLink} className="inline-block">
               <CTA variant="dark-bg" as="div">
                 {buttonText?.toUpperCase() || 'GET A DEMO'}

@@ -7,7 +7,7 @@ import ThisIsntJustDenialsSection from './this-isnt-just-denials';
 
 export const DenialManagementPage = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <DenialManagementHeroSection />
       <TheProblemSection />
       <HowWaterlabsClosesSection />

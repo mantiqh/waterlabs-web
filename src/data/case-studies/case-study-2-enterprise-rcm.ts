@@ -7,7 +7,8 @@ export const caseStudy2: CaseStudy = {
   categoryTag: 'Case Study · Enterprise RCM',
   title: 'How a $5B enterprise RCM organization used Waterlabs to code every chart the same day.',
   titleHighlight: 'code every chart the same day.',
-  subtitle: 'Health systems, physician groups, and community hospitals, coded across 7 disciplines.',
+  subtitle:
+    'Health systems, physician groups, and community hospitals, coded across 7 disciplines.',
   heroImage: '/images/case-study/case-study-2-enterprise/Frame%202147226953%20(1).png',
   heroImageAlt: 'Enterprise RCM analytics and autonomous coding dashboard powered by Waterlabs',
   cardCategory: 'Use Cases',
@@ -17,7 +18,13 @@ export const caseStudy2: CaseStudy = {
   desktopImage: '/images/case-study-main-page/tabs/img_placeholder_02.png',
   mobileImage: '/images/case-study-main-page/tabs/img_placeholder_02_mobile (1).png',
   order: 2,
-  tags: ['Enterprise RCM', 'Multi-specialty Coding', 'Autonomous Coding', 'CurieCode', 'HIMER AI OS'],
+  tags: [
+    'Enterprise RCM',
+    'Multi-specialty Coding',
+    'Autonomous Coding',
+    'CurieCode',
+    'HIMER AI OS',
+  ],
   clientSummary:
     'An enterprise revenue cycle management organization codes for providers nationwide. Its portfolio spans health systems, physician groups, and community hospitals across outpatient, emergency department, professional fee, surgery, radiology, evaluation and management, and multi-specialty physician coding.',
   statBadges: [

@@ -1,7 +1,13 @@
-import BlogDetailContent, { type BlogArticleSection } from '@/components/blog-detail/blog-detail-content';
-import BlogDetailRelated, { type RelatedBlogItem } from '@/components/blog-detail/blog-detail-related';
+import BlogDetailContent, {
+  type BlogArticleSection,
+} from '@/components/blog-detail/blog-detail-content';
+import BlogDetailRelated, {
+  type RelatedBlogItem,
+} from '@/components/blog-detail/blog-detail-related';
 import type { TOCItem } from '@/components/blog-detail/blog-detail-toc';
-import BlogDetailHeroSection, { type BlogDetailHeroProps } from '@/components/blog-detail/hero-section';
+import BlogDetailHeroSection, {
+  type BlogDetailHeroProps,
+} from '@/components/blog-detail/hero-section';
 import BlogsCTASection from '@/components/blogs/cta-section';
 
 export interface BlogDetailPageProps {
@@ -18,7 +24,7 @@ export const BlogDetailPage = ({
   relatedBlogs,
 }: BlogDetailPageProps) => {
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="flex w-full flex-col bg-white">
       {/* Blog Detail Hero Section */}
       <BlogDetailHeroSection {...heroProps} />
 

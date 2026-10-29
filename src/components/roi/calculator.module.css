@@ -8,7 +8,7 @@
   outline: none;
   margin: 0;
   padding: 0;
-  background-color: #D7DCE2;
+  background-color: #d7dce2;
 }
 
 .sliderInput:focus-visible {
@@ -52,7 +52,7 @@
 .sliderInput::-moz-range-track {
   height: 6px;
   border-radius: 9999px;
-  background: #D7DCE2;
+  background: #d7dce2;
   border: none;
 }
 
@@ -81,24 +81,26 @@
 
 .infoButtonCircle {
   fill: transparent;
-  stroke: #2A2A2A;
-  transition: fill 150ms ease, stroke 150ms ease;
+  stroke: #2a2a2a;
+  transition:
+    fill 150ms ease,
+    stroke 150ms ease;
 }
 
 .infoButtonDot {
-  fill: #2A2A2A;
+  fill: #2a2a2a;
   transition: fill 150ms ease;
 }
 
 .infoButtonStem {
-  stroke: #2A2A2A;
+  stroke: #2a2a2a;
   transition: stroke 150ms ease;
 }
 
 /* Desktop / Pointer Hover */
 .infoButton:hover .infoButtonCircle {
-  fill: #0F68D6;
-  stroke: #0F68D6;
+  fill: #0f68d6;
+  stroke: #0f68d6;
 }
 .infoButton:hover .infoButtonDot {
   fill: #ffffff;
@@ -109,8 +111,8 @@
 
 /* Active / Clicked state (for small screens & touch devices) */
 .infoButtonActive .infoButtonCircle {
-  fill: #0F68D6;
-  stroke: #0F68D6;
+  fill: #0f68d6;
+  stroke: #0f68d6;
 }
 
 .infoButtonActive .infoButtonDot {

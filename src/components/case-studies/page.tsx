@@ -4,12 +4,9 @@ import CaseStudiesCTASection from './cta-section';
 import CaseStudiesHeroSection from './hero-section';
 import CaseStudiesTabsSection from './tabs-section';
 
-export const CaseStudiesPage = ({
-  caseStudies,
-  pageSettings,
-}: CaseStudiesPageProps) => {
+export const CaseStudiesPage = ({ caseStudies, pageSettings }: CaseStudiesPageProps) => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <CaseStudiesHeroSection />
       <CaseStudiesTabsSection
         initialCaseStudies={caseStudies}

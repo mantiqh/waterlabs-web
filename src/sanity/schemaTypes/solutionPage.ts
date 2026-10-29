@@ -21,7 +21,8 @@ export const solutionPageSchema = defineType({
       title: 'Solution Name / Title',
       type: 'string',
       group: 'general',
-      description: 'The primary name of the solution (e.g. Prior Authorization, Eligibility & Benefits Verification)',
+      description:
+        'The primary name of the solution (e.g. Prior Authorization, Eligibility & Benefits Verification)',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -41,7 +42,8 @@ export const solutionPageSchema = defineType({
       title: 'Navbar Dropdown Label',
       type: 'string',
       group: 'general',
-      description: 'Short label to display in the "Agentic RCM Solutions" navbar dropdown (defaults to Title if blank)',
+      description:
+        'Short label to display in the "Agentic RCM Solutions" navbar dropdown (defaults to Title if blank)',
     }),
     defineField({
       name: 'order',
@@ -58,7 +60,8 @@ export const solutionPageSchema = defineType({
       title: 'Hero Eyebrow / Tag',
       type: 'string',
       group: 'hero',
-      description: 'Top tag beside the blue dot (e.g. "Agentic RCM Solutions · Prior Authorization")',
+      description:
+        'Top tag beside the blue dot (e.g. "Agentic RCM Solutions · Prior Authorization")',
       initialValue: 'Agentic RCM Solutions',
     }),
     defineField({
@@ -66,7 +69,8 @@ export const solutionPageSchema = defineType({
       title: 'Hero Headline (H1)',
       type: 'string',
       group: 'hero',
-      description: 'Main heading in the hero banner (e.g. "Prior authorization in 24 to 48 hours.")',
+      description:
+        'Main heading in the hero banner (e.g. "Prior authorization in 24 to 48 hours.")',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -161,7 +165,8 @@ export const solutionPageSchema = defineType({
       title: 'Problem Quote Text (Optional)',
       type: 'string',
       group: 'problem',
-      description: 'E.g. "1 in 3 physicians say prior authorization delays have caused serious harm to a patient."',
+      description:
+        'E.g. "1 in 3 physicians say prior authorization delays have caused serious harm to a patient."',
     }),
     defineField({
       name: 'problemQuoteAuthor',
@@ -357,7 +362,8 @@ export const solutionPageSchema = defineType({
       title: 'Platform Card Headline',
       type: 'string',
       group: 'platformAndFeatures',
-      initialValue: 'It is one application within an operating system that manages the full revenue cycle.',
+      initialValue:
+        'It is one application within an operating system that manages the full revenue cycle.',
     }),
     defineField({
       name: 'platformDescription',

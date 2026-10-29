@@ -1,27 +1,27 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Colors - Neutral */
-  --color-white: #FFFFFF;
-  --color-ghost-white: #F4F6F9;
-  --color-light-gray: #D7DCE2;
-  --color-medium-gray: #7D8690;
-  --color-charcoal: #2A2A2A;
+  --color-white: #ffffff;
+  --color-ghost-white: #f4f6f9;
+  --color-light-gray: #d7dce2;
+  --color-medium-gray: #7d8690;
+  --color-charcoal: #2a2a2a;
   --color-gray-black: #111111;
   --color-black: #000000;
 
   /* Colors - Primary */
-  --color-electric-blue: #0F68D6;
-  --color-sky-blue: #91C6F2;
+  --color-electric-blue: #0f68d6;
+  --color-sky-blue: #91c6f2;
   --color-midnight-blue: #042849;
 
   /* Colors - Secondary */
-  --color-aqua-mint: #63CCB7;
-  --color-lime-green: #A9D154;
-  --color-golden-ochre: #D6A85F;
-  --color-coral-pink: #F3838C;
-  --color-lavender-purple: #AE87E4;
-  --color-warm-stone: #B8B1A5;
+  --color-aqua-mint: #63ccb7;
+  --color-lime-green: #a9d154;
+  --color-golden-ochre: #d6a85f;
+  --color-coral-pink: #f3838c;
+  --color-lavender-purple: #ae87e4;
+  --color-warm-stone: #b8b1a5;
 
   /* ============================================================
      FONT FAMILIES — Figma Design System
@@ -505,7 +505,7 @@ body {
 select,
 select option {
   color: #000000;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 @theme {

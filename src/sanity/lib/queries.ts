@@ -498,8 +498,3 @@ export const homePageQuery = groq`*[_type == "homePage"][0] {
   metaTitle,
   metaDescription
 }`;
-
-
-
-
-

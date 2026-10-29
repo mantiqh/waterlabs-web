@@ -71,7 +71,7 @@ const renderResultsParagraphs = (content?: string) => {
   if (!content) return null;
   const paragraphs = content.split('\n\n').filter(Boolean);
   return (
-    <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] max-w-[975px]">
+    <div className="flex max-w-[975px] flex-col items-start gap-[16px] lg:gap-[20px]">
       {paragraphs.map((para, idx) => (
         <p key={idx} className="type-body-xs text-[#2A2A2A]">
           {renderResultsDetailParagraph(para)}
@@ -85,7 +85,7 @@ export const renderFormattedParagraphs = (content?: string) => {
   if (!content) return null;
   const paragraphs = content.split('\n\n').filter(Boolean);
   return (
-    <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] max-w-[975px]">
+    <div className="flex max-w-[975px] flex-col items-start gap-[16px] lg:gap-[20px]">
       {paragraphs.map((para, idx) => (
         <p key={idx} className="type-body-xs text-[#2A2A2A]">
           {renderFormattedText(para)}
@@ -169,7 +169,7 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
   return (
     <section className="relative w-full bg-white pb-[80px] lg:pb-[80px]">
       {/* Sentinel for detecting when mobile TOC hits sticky position */}
-      <div ref={sentinelRef} className="block lg:hidden h-[1px] w-full pointer-events-none" />
+      <div ref={sentinelRef} className="pointer-events-none block h-[1px] w-full lg:hidden" />
 
       {/* 
         =============================================================================
@@ -179,29 +179,24 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
         =============================================================================
       */}
       <div
-        className={`block lg:hidden sticky top-[60px] z-40 w-full transition-all duration-300 ${
+        className={`sticky top-[60px] z-40 block w-full transition-all duration-300 lg:hidden ${
           isSticky
-            ? 'px-0 bg-transparent'
-            : 'max-w-[1320px] mx-auto px-[20px] md:px-[40px] pt-[12px] pb-[8px]'
+            ? 'bg-transparent px-0'
+            : 'mx-auto max-w-[1320px] px-[20px] pt-[12px] pb-[8px] md:px-[40px]'
         }`}
       >
-        <CaseStudyTOC
-          activeTopic={activeTopic}
-          onSelectTopic={scrollToTopic}
-          isSticky={isSticky}
-        />
+        <CaseStudyTOC activeTopic={activeTopic} onSelectTopic={scrollToTopic} isSticky={isSticky} />
       </div>
 
       <div className="w-full px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto pt-[32px] lg:pt-[80px] flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[40px]">
-        
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[32px] pt-[32px] lg:flex-row lg:gap-[40px] lg:pt-[80px]">
           {/* 
             =============================================================================
             LEFT COLUMN: STICKY TABLE OF CONTENTS (Desktop)
             - Desktop: w-[305px] sticky top-[100px]
             =============================================================================
           */}
-          <aside className="hidden lg:block w-[305px] shrink-0 sticky top-[100px] z-20">
+          <aside className="sticky top-[100px] z-20 hidden w-[305px] shrink-0 lg:block">
             <CaseStudyTOC activeTopic={activeTopic} onSelectTopic={scrollToTopic} />
           </aside>
 
@@ -210,22 +205,24 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             RIGHT COLUMN: CASE STUDY BODY CONTENT (Frame 2147226949: 975px wide)
             =============================================================================
           */}
-          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[40px] lg:gap-[80px]">
-            
+          <div className="flex w-full flex-1 flex-col gap-[40px] lg:max-w-[975px] lg:gap-[80px]">
             {/* Section 1: The Client (Frame 2147226939) */}
-            <section id="the-client" className="flex flex-col items-start gap-[24px] lg:gap-[32px] scroll-mt-[120px]">
+            <section
+              id="the-client"
+              className="flex scroll-mt-[120px] flex-col items-start gap-[24px] lg:gap-[32px]"
+            >
               {clientSummary && renderFormattedParagraphs(clientSummary)}
 
               {/* Stat Badges Row (Frame 2147226954: below text) */}
               {statBadges && statBadges.length > 0 && (
-                <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-[12px] lg:gap-[20px] w-full">
+                <div className="flex w-full flex-col flex-wrap items-start gap-[12px] sm:flex-row sm:items-center lg:gap-[20px]">
                   {statBadges.map((badge, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-center gap-[10px] py-[12px] px-[16px] lg:p-[20px] bg-[#F4F6F9] rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px]"
+                      className="flex items-center justify-center gap-[10px] rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px] bg-[#F4F6F9] px-[16px] py-[12px] lg:p-[20px]"
                     >
-                      <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                      <span className="type-h6 text-[#111111] font-normal tracking-[-0.01em]">
+                      <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+                      <span className="type-h6 font-normal tracking-[-0.01em] text-[#111111]">
                         {badge.text}
                       </span>
                     </div>
@@ -236,8 +233,11 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 
             {/* Section 2: The Challenge (Frame 2147226741) */}
             {challenge && (
-              <section id="the-challenge" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+              <section
+                id="the-challenge"
+                className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
+              >
+                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
                   The Challenge
                 </h3>
                 {renderFormattedParagraphs(challenge)}
@@ -246,8 +246,11 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 
             {/* Section 3: What Waterlabs did (Frame 2147226737) */}
             {whatWaterlabsDid && (
-              <section id="what-waterlabs-did" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+              <section
+                id="what-waterlabs-did"
+                className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
+              >
+                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
                   What Waterlabs did
                 </h3>
                 {renderFormattedParagraphs(whatWaterlabsDid)}
@@ -256,11 +259,14 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 
             {/* Section 4: The Results (Frame 2147226738) */}
             {resultsBlock && (
-              <section id="the-results" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+              <section
+                id="the-results"
+                className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
+              >
+                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
                   The Results
                 </h3>
-                <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] w-full">
+                <div className="flex w-full flex-col items-start gap-[16px] lg:gap-[20px]">
                   <div className="flex flex-col items-start gap-[8px] lg:gap-[16px]">
                     <div className="type-body-xl font-bold text-[#111111]">
                       {resultsBlock.headline}
@@ -276,8 +282,11 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 
             {/* Section 5: The Outcomes (Frame 2147226739) */}
             {outcomes && (
-              <section id="the-outcomes" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+              <section
+                id="the-outcomes"
+                className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
+              >
+                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
                   The Outcomes
                 </h3>
                 {renderFormattedParagraphs(outcomes)}
@@ -286,11 +295,14 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
 
             {/* Section 6: The Bottom Line (Frame 2147226740) */}
             {bottomLine && (
-              <section id="the-bottom-line" className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]">
-                <h3 className="type-h4 text-[#000000] font-normal tracking-[-0.01em]">
+              <section
+                id="the-bottom-line"
+                className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
+              >
+                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
                   The Bottom Line
                 </h3>
-                <div className="flex flex-col items-start gap-[40px] w-full">
+                <div className="flex w-full flex-col items-start gap-[40px]">
                   {renderFormattedParagraphs(bottomLine)}
 
                   {/* Filter Badges: exactly 40px below the paragraph */}
@@ -299,27 +311,27 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
                       {tags
                         .filter(
                           (tag) =>
-                            !['Multi-site Network', 'Patient Intake', 'Document Classification'].includes(tag)
+                            ![
+                              'Multi-site Network',
+                              'Patient Intake',
+                              'Document Classification',
+                            ].includes(tag),
                         )
                         .map((tag) => (
-                        <div
-                          key={tag}
-                          className="flex items-center gap-[10px] px-[16px] py-[8px] rounded-full bg-[rgba(145,198,242,0.1)]"
-                        >
-                          <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                          <span className="type-cta text-[#2A2A2A] opacity-80">
-                            {tag}
-                          </span>
-                        </div>
-                      ))}
+                          <div
+                            key={tag}
+                            className="flex items-center gap-[10px] rounded-full bg-[rgba(145,198,242,0.1)] px-[16px] py-[8px]"
+                          >
+                            <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+                            <span className="type-cta text-[#2A2A2A] opacity-80">{tag}</span>
+                          </div>
+                        ))}
                     </div>
                   )}
                 </div>
               </section>
             )}
-
           </div>
-
         </div>
       </div>
     </section>

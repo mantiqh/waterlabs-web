@@ -5,15 +5,18 @@ export const caseStudy4: CaseStudy = {
   slug: 'regional-behavioral-health-network',
   aliases: ['behavioral-health-practice', 'regional-health-system-ar'],
   categoryTag: 'Case Study · Behavioral Health',
-  title: 'How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1.',
+  title:
+    'How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1.',
   titleHighlight: 'cut benefits verification from 4 days to 1.',
-  subtitle: 'An outpatient intake operation where every new patient waited on a phone call before anyone could book them in.',
+  subtitle:
+    'An outpatient intake operation where every new patient waited on a phone call before anyone could book them in.',
   heroImage: '/images/case-study/case-study-4-behavioral/Frame%202147226953%20(3).png',
   heroImageAlt: 'Behavioral health practice clinical and intake coordination team with Waterlabs',
   cardCategory: 'Company News',
   cardTag: 'Behavioral Health',
   cardStat: '4 days → 1 day',
-  cardSubtitle: 'An outpatient intake operation where every new patient waited on a phone call before anyone could book them in.',
+  cardSubtitle:
+    'An outpatient intake operation where every new patient waited on a phone call before anyone could book them in.',
   desktopImage: '/images/case-study-main-page/tabs/img_placeholder_04.png',
   mobileImage: '/images/case-study-main-page/tabs/img_placeholder_04_mobile (1).png',
   order: 4,

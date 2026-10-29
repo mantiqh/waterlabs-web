@@ -7,7 +7,7 @@ import WhyWeStartedWaterlabsSection from './why-we-started-waterlabs';
 
 export const PhilosophyPage = () => {
   return (
-    <main className="w-full flex flex-col">
+    <main className="flex w-full flex-col">
       <PhilosophyHeroSection />
       <WhyWeStartedWaterlabsSection />
       <WhatWeBelieveSection />

@@ -23,4 +23,3 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contactUsPageSchema,
   ],
 };
-

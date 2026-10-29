@@ -7,20 +7,12 @@ export const structure: StructureResolver = (S) =>
       S.listItem()
         .title('Home Page')
         .schemaType('homePage')
-        .child(
-          S.document()
-            .title('Home Page')
-            .schemaType('homePage')
-            .documentId('homePage')
-        ),
+        .child(S.document().title('Home Page').schemaType('homePage').documentId('homePage')),
       S.divider(),
       S.listItem()
         .title('Case Studies')
         .schemaType('caseStudy')
-        .child(
-          S.documentTypeList('caseStudy')
-            .title('Case Studies')
-        ),
+        .child(S.documentTypeList('caseStudy').title('Case Studies')),
       S.divider(),
       S.listItem()
         .title('Case Studies Page Settings')
@@ -29,7 +21,7 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .title('Case Studies Page Settings')
             .schemaType('caseStudiesPage')
-            .documentId('caseStudiesPage')
+            .documentId('caseStudiesPage'),
         ),
       S.divider(),
       S.listItem()
@@ -39,43 +31,31 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .title('Leadership Section')
             .schemaType('aboutUsPage')
-            .documentId('aboutUsPage')
+            .documentId('aboutUsPage'),
         ),
       S.divider(),
       S.listItem()
         .title('Careers Page')
         .schemaType('careersPage')
         .child(
-          S.document()
-            .title('Careers Page')
-            .schemaType('careersPage')
-            .documentId('careersPage')
+          S.document().title('Careers Page').schemaType('careersPage').documentId('careersPage'),
         ),
       S.divider(),
       S.listItem()
         .title('Blog Articles')
         .schemaType('blogPost')
-        .child(
-          S.documentTypeList('blogPost')
-            .title('Blog Articles')
-        ),
+        .child(S.documentTypeList('blogPost').title('Blog Articles')),
       S.divider(),
       S.listItem()
         .title('Blogs Page Settings')
         .schemaType('blogsPage')
         .child(
-          S.document()
-            .title('Blogs Page Settings')
-            .schemaType('blogsPage')
-            .documentId('blogsPage')
+          S.document().title('Blogs Page Settings').schemaType('blogsPage').documentId('blogsPage'),
         ),
       S.listItem()
         .title('Solutions')
         .schemaType('solutionPage')
-        .child(
-          S.documentTypeList('solutionPage')
-            .title('Solutions')
-        ),
+        .child(S.documentTypeList('solutionPage').title('Solutions')),
       S.listItem()
         .title('Contact Us Page')
         .schemaType('contactUsPage')
@@ -83,7 +63,7 @@ export const structure: StructureResolver = (S) =>
           S.document()
             .title('Contact Us Page')
             .schemaType('contactUsPage')
-            .documentId('contactUsPage')
+            .documentId('contactUsPage'),
         ),
       S.divider(),
       ...S.documentTypeListItems().filter(
@@ -98,7 +78,6 @@ export const structure: StructureResolver = (S) =>
             'blogsPage',
             'solutionPage',
             'contactUsPage',
-          ].includes(listItem.getId() || '')
+          ].includes(listItem.getId() || ''),
       ),
     ]);
-

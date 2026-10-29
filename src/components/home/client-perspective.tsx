@@ -66,34 +66,34 @@ export const TestimonialsSection = ({
   };
 
   return (
-    <section className="relative w-full bg-[#0A60AF] overflow-hidden">
-      <div className="w-full bg-white rounded-bl-[30px] sm:rounded-bl-[40px] lg:rounded-bl-[80px] pt-[16px] sm:pt-[24px] lg:pt-[60px] pb-[32px] sm:pb-[48px] lg:pb-[100px] px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="max-w-[1320px] mx-auto flex flex-col items-start w-full">
+    <section className="relative w-full overflow-hidden bg-[#0A60AF]">
+      <div className="w-full rounded-bl-[30px] bg-white px-[20px] pt-[16px] pb-[32px] sm:rounded-bl-[40px] sm:pt-[24px] sm:pb-[48px] md:px-[40px] lg:rounded-bl-[80px] lg:px-[60px] lg:pt-[60px] lg:pb-[100px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start">
           {/* Eyebrow: Client Perspective (Shown on both Mobile and Desktop) */}
-          <div className="inline-flex items-center gap-[6px] lg:gap-[8px] mb-[20px] lg:mb-[32px]">
-            <span className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
+          <div className="mb-[20px] inline-flex items-center gap-[6px] lg:mb-[32px] lg:gap-[8px]">
+            <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
             <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
               Client Perspective
             </span>
           </div>
 
           {/* Mobile / Tablet Smooth Snap Slider */}
-          <div className="flex lg:hidden flex-col w-full">
+          <div className="flex w-full flex-col lg:hidden">
             <div
               ref={mobileScrollRef}
               onScroll={handleMobileScroll}
-              className="flex w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory gap-[16px] items-start no-scrollbar pr-[20px]"
+              className="no-scrollbar -mr-[20px] flex w-[calc(100%+20px)] snap-x snap-mandatory items-start gap-[16px] overflow-x-auto pr-[20px]"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {testimonials.map((item, idx) => (
                 <div
                   key={`mobile-testimonial-${item._key || idx}`}
-                  className="shrink-0 snap-start w-[calc(100vw-60px)] sm:w-[340px] max-w-[360px] flex flex-col gap-[16px] items-start"
+                  className="flex w-[calc(100vw-60px)] max-w-[360px] shrink-0 snap-start flex-col items-start gap-[16px] sm:w-[340px]"
                 >
                   {/* Left Image Side */}
                   {item.image && (
                     <div
-                      className="relative w-full aspect-[4/3] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0"
+                      className="relative aspect-[4/3] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px]"
                       style={{
                         borderTopLeftRadius: '20px',
                         borderTopRightRadius: '10px',
@@ -107,7 +107,7 @@ export const TestimonialsSection = ({
                         fill
                         priority={idx === 0}
                         sizes="(max-width: 1024px) 100vw, 600px"
-                        className="object-cover rounded-[20px_10px_20px_20px]"
+                        className="rounded-[20px_10px_20px_20px] object-cover"
                         style={{
                           borderTopLeftRadius: '20px',
                           borderTopRightRadius: '10px',
@@ -119,18 +119,12 @@ export const TestimonialsSection = ({
                   )}
 
                   {/* Content Side */}
-                  <div className="flex flex-col justify-center w-full bg-transparent">
-                    <p className="type-body-xxs text-[#111111] mb-[16px]">
-                      {item.quote}
-                    </p>
+                  <div className="flex w-full flex-col justify-center bg-transparent">
+                    <p className="type-body-xxs mb-[16px] text-[#111111]">{item.quote}</p>
 
                     <div className="flex flex-col gap-[2px]">
-                      <span className="type-h6 text-electric-blue">
-                        {item.name}
-                      </span>
-                      <span className="type-body-xxs text-[#7D8690]">
-                        {item.role}
-                      </span>
+                      <span className="type-h6 text-electric-blue">{item.name}</span>
+                      <span className="type-body-xxs text-[#7D8690]">{item.role}</span>
                     </div>
                   </div>
                 </div>
@@ -138,17 +132,15 @@ export const TestimonialsSection = ({
             </div>
 
             {/* Mobile Pagination Indicators */}
-            <div className="flex items-center gap-[6px] mt-[16px]">
+            <div className="mt-[16px] flex items-center gap-[6px]">
               {testimonials.map((item, i) => (
                 <button
                   key={`mobile-dot-${item._key || i}`}
                   type="button"
                   onClick={() => scrollToMobileSlide(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-[4px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${
-                    activeMobileIndex === i
-                      ? 'w-[24px] bg-electric-blue'
-                      : 'w-[6px] bg-[#91C6F2]'
+                  className={`h-[4px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${
+                    activeMobileIndex === i ? 'bg-electric-blue w-[24px]' : 'w-[6px] bg-[#91C6F2]'
                   }`}
                 />
               ))}
@@ -156,7 +148,7 @@ export const TestimonialsSection = ({
           </div>
 
           {/* Desktop Carousel Container */}
-          <div className="hidden lg:flex flex-col w-full">
+          <div className="hidden w-full flex-col lg:flex">
             <div className="w-full overflow-hidden select-none">
               <div
                 className="flex w-full transition-transform duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
@@ -165,12 +157,12 @@ export const TestimonialsSection = ({
                 {testimonials.map((item, idx) => (
                   <div
                     key={`desktop-testimonial-${item._key || idx}`}
-                    className="w-full shrink-0 flex flex-row gap-[32px] xl:gap-[60px] items-start overflow-hidden"
+                    className="flex w-full shrink-0 flex-row items-start gap-[32px] overflow-hidden xl:gap-[60px]"
                   >
                     {/* Left Image Side */}
                     {item.image && (
                       <div
-                        className="relative w-[340px] xl:w-[480px] aspect-[4/3] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0"
+                        className="relative aspect-[4/3] w-[340px] shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] xl:w-[480px]"
                         style={{
                           borderTopLeftRadius: '20px',
                           borderTopRightRadius: '10px',
@@ -184,7 +176,7 @@ export const TestimonialsSection = ({
                           fill
                           priority={idx === 0}
                           sizes="(max-width: 1280px) 340px, 480px"
-                          className="object-cover rounded-[20px_10px_20px_20px]"
+                          className="rounded-[20px_10px_20px_20px] object-cover"
                           style={{
                             borderTopLeftRadius: '20px',
                             borderTopRightRadius: '10px',
@@ -196,18 +188,12 @@ export const TestimonialsSection = ({
                     )}
 
                     {/* Right Content Side */}
-                    <div className="flex flex-col justify-center flex-1 min-w-0 bg-transparent">
-                      <p className="type-body-s text-[#111111] mb-[40px]">
-                        {item.quote}
-                      </p>
+                    <div className="flex min-w-0 flex-1 flex-col justify-center bg-transparent">
+                      <p className="type-body-s mb-[40px] text-[#111111]">{item.quote}</p>
 
                       <div className="flex flex-col gap-[6px]">
-                        <span className="type-h5 text-electric-blue">
-                          {item.name}
-                        </span>
-                        <span className="type-body-xxs text-[#7D8690]">
-                          {item.role}
-                        </span>
+                        <span className="type-h5 text-electric-blue">{item.name}</span>
+                        <span className="type-body-xxs text-[#7D8690]">{item.role}</span>
                       </div>
                     </div>
                   </div>
@@ -216,7 +202,7 @@ export const TestimonialsSection = ({
             </div>
 
             {/* Desktop Carousel Indicators / Navigation */}
-            <div className="flex items-center justify-between w-full mt-[48px]">
+            <div className="mt-[48px] flex w-full items-center justify-between">
               {/* Dots */}
               <div className="flex items-center gap-[8px]">
                 {testimonials.map((item, i) => (
@@ -225,10 +211,8 @@ export const TestimonialsSection = ({
                     type="button"
                     onClick={() => setCurrentIndex(i)}
                     aria-label={`Go to testimonial ${i + 1}`}
-                    className={`h-[7px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${
-                      currentIndex === i
-                        ? 'w-[40px] bg-electric-blue'
-                        : 'w-[12px] bg-[#91C6F2]'
+                    className={`h-[7px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${
+                      currentIndex === i ? 'bg-electric-blue w-[40px]' : 'w-[12px] bg-[#91C6F2]'
                     }`}
                   />
                 ))}
@@ -241,14 +225,14 @@ export const TestimonialsSection = ({
                   variant="light-arrow"
                   onClick={handlePrev}
                   aria-label="Previous testimonial"
-                  className="w-[48px] h-[48px] rotate-180 transition-all duration-300 cursor-pointer"
+                  className="h-[48px] w-[48px] rotate-180 cursor-pointer transition-all duration-300"
                 />
                 {/* Right Arrow */}
                 <CTA
                   variant="light-arrow"
                   onClick={handleNext}
                   aria-label="Next testimonial"
-                  className="w-[48px] h-[48px] transition-all duration-300 cursor-pointer"
+                  className="h-[48px] w-[48px] cursor-pointer transition-all duration-300"
                 />
               </div>
             </div>

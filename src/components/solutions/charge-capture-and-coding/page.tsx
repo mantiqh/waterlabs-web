@@ -7,7 +7,7 @@ import ThisRunsOnCurieCodeSection from './this-runs-on-curiecode';
 
 export const ChargeCaptureAndCodingPage = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <ChargeCaptureHeroSection />
       <TheProblemSection />
       <HowWaterlabsClosesSection />

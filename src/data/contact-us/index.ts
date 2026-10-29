@@ -61,8 +61,7 @@ export const DEFAULT_CONTACT_US_DATA: ContactUsPageData = {
   ctaHeadingHighlight: 'on Waterlabs today',
   ctaButtonText: 'Start Building',
   ctaButtonLink: '/#discover',
-  ctaBackgroundImageDesktop:
-    '/images/contact-us/cta-section/img_start_building_waterlas_today.png',
+  ctaBackgroundImageDesktop: '/images/contact-us/cta-section/img_start_building_waterlas_today.png',
   ctaBackgroundImageMobile:
     '/images/contact-us/cta-section/img_start_building_waterlas_today_mobile.png',
 

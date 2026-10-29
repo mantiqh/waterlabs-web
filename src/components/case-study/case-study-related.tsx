@@ -53,23 +53,20 @@ export const CaseStudyRelated = ({
         - padding: 0px 60px (desktop), 0px 20px (mobile)
         - Inner Frame 2147226450: padding: 80px 0px, gap: 40px (desktop), 40px 0px, gap: 20px (mobile)
       */}
-      <div className="w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto py-[40px] md:py-[64px] lg:py-[80px] flex flex-col items-start gap-[20px] lg:gap-[40px]">
-          
+      <div className="w-full rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] py-[40px] md:py-[64px] lg:gap-[40px] lg:py-[80px]">
           {/* Section Heading: Display/H2 token */}
-          <h2 className="type-h2 text-[#0F68D6]">
-            {heading}
-          </h2>
+          <h2 className="type-h2 text-[#0F68D6]">{heading}</h2>
 
           {/* =================================================================
               DESKTOP: 3 columns grid (untouched)
              ================================================================= */}
-          <div className="hidden lg:grid lg:grid-cols-3 gap-[32px] items-start w-full">
+          <div className="hidden w-full items-start gap-[32px] lg:grid lg:grid-cols-3">
             {relatedCases.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className="group flex flex-col items-start gap-[16px] lg:gap-[20px] w-full"
+                className="group flex w-full flex-col items-start gap-[16px] lg:gap-[20px]"
               >
                 {/* Image Card Container (Frame 2147203302)
                     - Card 1 & 3: height 357px
@@ -90,20 +87,18 @@ export const CaseStudyRelated = ({
                     className="object-cover object-center"
                   />
                   {/* Subtle Gradient Overlay as specified in Figma */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(15,104,214,0.15)] pointer-events-none" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[rgba(15,104,214,0.15)]" />
                 </div>
 
                 {/* Caption Text & CTA Arrow (Frame 2147226519) */}
-                <div className="w-full flex flex-row items-center justify-between gap-[12px] pt-[4px]">
-                  <p className="type-body-s text-[#000000] flex-1 line-clamp-2">
-                    {item.title}
-                  </p>
+                <div className="flex w-full flex-row items-center justify-between gap-[12px] pt-[4px]">
+                  <p className="type-body-s line-clamp-2 flex-1 text-[#000000]">{item.title}</p>
 
                   {/* Circular Arrow Button (Default design system CTA button) */}
                   <CTA
                     as="div"
                     variant="fill-arrow"
-                    className="w-[48px] h-[48px] rounded-full shrink-0 shadow-sm group-hover:scale-105 transition-all duration-200 pointer-events-none"
+                    className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm transition-all duration-200 group-hover:scale-105"
                     aria-label="View related case"
                   />
                 </div>
@@ -114,16 +109,19 @@ export const CaseStudyRelated = ({
           {/* =================================================================
               MOBILE / SMALL SCREENS: Horizontal Swipe Slider (Figma Frame 2147226524)
              ================================================================= */}
-          <div aria-hidden="true" className="flex lg:hidden w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-[4px]">
+          <div
+            aria-hidden="true"
+            className="no-scrollbar -mr-[20px] flex w-[calc(100%+20px)] snap-x snap-mandatory overflow-x-auto pb-[4px] lg:hidden"
+          >
             <div className="flex flex-row items-start gap-[20px] pr-[20px]">
               {relatedCases.map((item) => (
                 <Link
                   key={`mobile-${item.id}`}
                   href={item.href}
-                  className="group shrink-0 snap-start flex flex-col items-start gap-[12px] w-[266px]"
+                  className="group flex w-[266px] shrink-0 snap-start flex-col items-start gap-[12px]"
                 >
                   {/* Image Frame 2147203302: 266px x 229px, rounded 20px */}
-                  <div className="relative w-[266px] h-[229px] overflow-hidden rounded-[20px] shadow-sm shrink-0 bg-gray-100">
+                  <div className="relative h-[229px] w-[266px] shrink-0 overflow-hidden rounded-[20px] bg-gray-100 shadow-sm">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -133,7 +131,7 @@ export const CaseStudyRelated = ({
                     />
                     {/* Linear Gradient from Figma CSS */}
                     <div
-                      className="absolute inset-0 pointer-events-none"
+                      className="pointer-events-none absolute inset-0"
                       style={{
                         background:
                           'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
@@ -142,14 +140,12 @@ export const CaseStudyRelated = ({
                   </div>
 
                   {/* Frame 2147226519: Title Text + Arrow Button stacked vertically */}
-                  <div className="flex flex-col items-start gap-[8px] w-[266px]">
-                    <p className="type-body-s text-[#000000] line-clamp-3">
-                      {item.title}
-                    </p>
+                  <div className="flex w-[266px] flex-col items-start gap-[8px]">
+                    <p className="type-body-s line-clamp-3 text-[#000000]">{item.title}</p>
                     <CTA
                       as="div"
                       variant="fill-arrow"
-                      className="w-[48px] h-[48px] rounded-full shrink-0 shadow-sm pointer-events-none"
+                      className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm"
                       aria-label="View related case"
                     />
                   </div>
@@ -157,7 +153,6 @@ export const CaseStudyRelated = ({
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>

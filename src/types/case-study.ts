@@ -84,4 +84,3 @@ export interface CaseStudiesPageProps {
   caseStudies?: CaseStudy[];
   pageSettings?: CaseStudiesPageData | null;
 }
-

@@ -12,8 +12,14 @@ const ChevronRight = ({ className }: { className?: string }) => (
     xmlns="http://www.w3.org/2000/svg"
     className={`shrink-0 ${className}`}
   >
-    <path d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z" fill="currentColor" />
-    <path d="M1.62891 2.17594C1.66288 1.75624 2.05784 1.5463 2.44778 1.59269C3.61166 1.73087 5.52127 2.60163 6.47222 3.28958L7.31844 3.90074L8.09486 4.55552C8.69238 5.05934 9.22065 5.62542 9.72473 6.20347C10.5812 7.18487 11.4347 8.68933 11.2448 9.91955C11.1328 10.6459 10.4159 11.272 9.65563 11.2678C8.53294 11.2612 7.45171 10.7455 6.58992 10.0102L6.23806 9.70934L5.83479 9.4162L4.77401 8.36857C4.77401 8.36857 4.69141 8.26712 4.63879 8.20628L3.92829 7.32231C2.99243 6.14976 2.3026 4.82543 1.82908 3.43141C1.68887 3.01834 1.59641 2.61685 1.63147 2.17687L1.62891 2.17594Z" fill="currentColor" />
+    <path
+      d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z"
+      fill="currentColor"
+    />
+    <path
+      d="M1.62891 2.17594C1.66288 1.75624 2.05784 1.5463 2.44778 1.59269C3.61166 1.73087 5.52127 2.60163 6.47222 3.28958L7.31844 3.90074L8.09486 4.55552C8.69238 5.05934 9.22065 5.62542 9.72473 6.20347C10.5812 7.18487 11.4347 8.68933 11.2448 9.91955C11.1328 10.6459 10.4159 11.272 9.65563 11.2678C8.53294 11.2612 7.45171 10.7455 6.58992 10.0102L6.23806 9.70934L5.83479 9.4162L4.77401 8.36857C4.77401 8.36857 4.69141 8.26712 4.63879 8.20628L3.92829 7.32231C2.99243 6.14976 2.3026 4.82543 1.82908 3.43141C1.68887 3.01834 1.59641 2.61685 1.63147 2.17687L1.62891 2.17594Z"
+      fill="currentColor"
+    />
   </svg>
 );
 
@@ -45,9 +51,7 @@ interface WhereYouWouldFitSectionProps {
   data?: CareersOpenRolesData | null;
 }
 
-export const WhereYouWouldFitSection = ({
-  data,
-}: WhereYouWouldFitSectionProps) => {
+export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) => {
   const [activeCategory, setActiveCategory] = useState('All Roles');
   const [searchQuery, setSearchQuery] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -70,18 +74,14 @@ export const WhereYouWouldFitSection = ({
       const hash = window.location.hash;
       if (hash === '#where-you-would-fit' || hash === '#open-roles') {
         const el =
-          document.getElementById('where-you-would-fit') ||
-          document.getElementById('open-roles');
+          document.getElementById('where-you-would-fit') || document.getElementById('open-roles');
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' });
         }
       }
     };
 
-    if (
-      window.location.hash === '#where-you-would-fit' ||
-      window.location.hash === '#open-roles'
-    ) {
+    if (window.location.hash === '#where-you-would-fit' || window.location.hash === '#open-roles') {
       scrollToTarget();
       const t1 = setTimeout(scrollToTarget, 100);
       const t2 = setTimeout(scrollToTarget, 350);
@@ -110,7 +110,7 @@ export const WhereYouWouldFitSection = ({
         .map((cat) => cat.tabName?.trim())
         .filter((name): name is string => Boolean(name)),
     ],
-    [categoriesList]
+    [categoriesList],
   );
 
   // Flatten all roles across all categories, tagging with parent tabName
@@ -127,9 +127,7 @@ export const WhereYouWouldFitSection = ({
     return list;
   }, [categoriesList]);
 
-  const currentCategory = filterCategories.includes(activeCategory)
-    ? activeCategory
-    : 'All Roles';
+  const currentCategory = filterCategories.includes(activeCategory) ? activeCategory : 'All Roles';
 
   const categoryRoles = useMemo(() => {
     if (currentCategory === 'All Roles') {
@@ -161,25 +159,22 @@ export const WhereYouWouldFitSection = ({
   return (
     <section
       id="where-you-would-fit"
-      className="relative w-full bg-gradient-to-b from-[#0F68D6] from-50% to-[#0B0B0B] to-50% overflow-hidden p-0 m-0 scroll-mt-[60px] lg:scroll-mt-[80px]"
+      className="relative m-0 w-full scroll-mt-[60px] overflow-hidden bg-gradient-to-b from-[#0F68D6] from-50% to-[#0B0B0B] to-50% p-0 lg:scroll-mt-[80px]"
     >
-      <div id="open-roles" className="absolute -top-[60px] lg:-top-[80px] pointer-events-none" />
+      <div id="open-roles" className="pointer-events-none absolute -top-[60px] lg:-top-[80px]" />
       {/* 
         White Card with left curves:
         - Top-left curve reveals Section 4's blue color (#0F68D6)
         - Bottom-left curve reveals Section 6's exact image background (#0B0B0B)
       */}
-      <div className="relative w-full bg-[#F4F6F9] lg:bg-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
-        <div className="max-w-[1320px] mx-auto flex flex-col gap-[36px] lg:gap-[60px]">
-
+      <div className="relative w-full overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:bg-white lg:px-[60px] lg:py-[80px]">
+        <div className="mx-auto flex max-w-[1320px] flex-col gap-[36px] lg:gap-[60px]">
           {/* Header Block: Tag + Title */}
-          <div className="w-full flex flex-col gap-[8px] lg:gap-[14px]">
+          <div className="flex w-full flex-col gap-[8px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
-              <div className="w-[6px] h-[6px] lg:w-[8px] lg:h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="type-caption text-[#7D8690]">
-                {tagText}
-              </span>
+              <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6] lg:h-[8px] lg:w-[8px]" />
+              <span className="type-caption text-[#7D8690]">{tagText}</span>
             </div>
 
             {/* Title */}
@@ -189,11 +184,10 @@ export const WhereYouWouldFitSection = ({
           </div>
 
           {/* Filters & Job List Container */}
-          <div className="w-full flex flex-col gap-[20px] lg:gap-[40px]">
-
+          <div className="flex w-full flex-col gap-[20px] lg:gap-[40px]">
             {/* Desktop Filter Tabs (hidden on mobile) */}
             {filterCategories.length > 1 && (
-              <div className="hidden lg:flex items-center gap-[16px] flex-wrap">
+              <div className="hidden flex-wrap items-center gap-[16px] lg:flex">
                 {filterCategories.map((category) => {
                   const isActive = activeCategory === category;
                   return (
@@ -201,16 +195,17 @@ export const WhereYouWouldFitSection = ({
                       key={category}
                       type="button"
                       onClick={() => setActiveCategory(category)}
-                      className={`px-[16px] py-[8px] rounded-[64px] type-cta transition-all cursor-pointer border-none outline-none ${isActive
-                        ? 'text-white shadow-sm'
-                        : 'text-[#7D8690] bg-[#91C6F2]/10 hover:bg-[#91C6F2]/20'
-                        }`}
+                      className={`type-cta cursor-pointer rounded-[64px] border-none px-[16px] py-[8px] transition-all outline-none ${
+                        isActive
+                          ? 'text-white shadow-sm'
+                          : 'bg-[#91C6F2]/10 text-[#7D8690] hover:bg-[#91C6F2]/20'
+                      }`}
                       style={
                         isActive
                           ? {
-                            background:
-                              'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
-                          }
+                              background:
+                                'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
+                            }
                           : undefined
                       }
                     >
@@ -222,11 +217,11 @@ export const WhereYouWouldFitSection = ({
             )}
 
             {/* Mobile Filter Bar with Search Input & Custom Dropdown (hidden on desktop) */}
-            <div className="flex lg:hidden items-center gap-[12px] w-full relative z-20">
+            <div className="relative z-20 flex w-full items-center gap-[12px] lg:hidden">
               {/* Search Input */}
-              <div className="flex-1 flex items-center gap-[10px] bg-white rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px] px-[12px] py-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-transparent focus-within:border-[#91C6F2] transition-colors">
+              <div className="flex flex-1 items-center gap-[10px] rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px] border border-transparent bg-white px-[12px] py-[10px] shadow-[0_2px_8px_rgba(0,0,0,0.03)] transition-colors focus-within:border-[#91C6F2]">
                 <svg
-                  className="w-[14px] h-[14px] text-[#042849]"
+                  className="h-[14px] w-[14px] text-[#042849]"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -243,7 +238,7 @@ export const WhereYouWouldFitSection = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search"
-                  className="w-full bg-transparent type-caption text-[#111111] placeholder:text-[#D7DCE2] outline-none"
+                  className="type-caption w-full bg-transparent text-[#111111] outline-none placeholder:text-[#D7DCE2]"
                 />
               </div>
 
@@ -253,28 +248,25 @@ export const WhereYouWouldFitSection = ({
                   <button
                     type="button"
                     onClick={() => setIsDropdownOpen((prev) => !prev)}
-                    className="bg-white rounded-tl-[12px] rounded-tr-[4px] rounded-br-[12px] rounded-bl-[12px] px-[14px] py-[10px] flex items-center gap-[8px] type-caption !font-medium text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.03)] border border-transparent hover:border-[#91C6F2] transition-all cursor-pointer outline-none"
+                    className="type-caption flex cursor-pointer items-center gap-[8px] rounded-tl-[12px] rounded-tr-[4px] rounded-br-[12px] rounded-bl-[12px] border border-transparent bg-white px-[14px] py-[10px] !font-medium text-[#111111] shadow-[0_2px_8px_rgba(0,0,0,0.03)] transition-all outline-none hover:border-[#91C6F2]"
                   >
                     <span>{activeCategory}</span>
                     <svg
-                      className={`w-[10px] h-[10px] text-[#111111] transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''
-                        }`}
+                      className={`h-[10px] w-[10px] text-[#111111] transition-transform duration-200 ${
+                        isDropdownOpen ? 'rotate-180' : ''
+                      }`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                       strokeWidth="2.5"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19 9l-7 7-7-7"
-                      />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
 
                   {/* Animated Dropdown Menu List */}
                   {isDropdownOpen && (
-                    <div className="absolute top-[calc(100%+6px)] right-0 w-[180px] bg-white rounded-[14px] p-[6px] shadow-[0_12px_36px_rgba(0,0,0,0.12)] border border-[#EBF0F5] z-50 flex flex-col gap-[2px] animate-in fade-in zoom-in-95 duration-150">
+                    <div className="animate-in fade-in zoom-in-95 absolute top-[calc(100%+6px)] right-0 z-50 flex w-[180px] flex-col gap-[2px] rounded-[14px] border border-[#EBF0F5] bg-white p-[6px] shadow-[0_12px_36px_rgba(0,0,0,0.12)] duration-150">
                       {filterCategories.map((category) => {
                         const isSelected = activeCategory === category;
                         return (
@@ -285,10 +277,11 @@ export const WhereYouWouldFitSection = ({
                               setActiveCategory(category);
                               setIsDropdownOpen(false);
                             }}
-                            className={`w-full text-left px-[12px] py-[8px] rounded-[8px] type-caption transition-colors cursor-pointer border-none outline-none ${isSelected
-                              ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
-                              : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
-                              }`}
+                            className={`type-caption w-full cursor-pointer rounded-[8px] border-none px-[12px] py-[8px] text-left transition-colors outline-none ${
+                              isSelected
+                                ? 'bg-[#0F68D6]/10 font-medium text-[#0F68D6]'
+                                : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
+                            }`}
                           >
                             {category}
                           </button>
@@ -301,16 +294,17 @@ export const WhereYouWouldFitSection = ({
             </div>
 
             {/* Job Openings Cards List */}
-            <div className="w-full flex flex-col gap-[12px] lg:gap-[20px]">
+            <div className="flex w-full flex-col gap-[12px] lg:gap-[20px]">
               {filteredJobs.length === 0 ? (
-                <div className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px] p-[32px] lg:p-[48px] text-center flex flex-col items-center justify-center gap-[12px]">
+                <div className="flex w-full flex-col items-center justify-center gap-[12px] rounded-[16px] bg-white p-[32px] text-center lg:bg-[#F4F6F9] lg:p-[48px]">
                   <p className="type-body-m font-medium text-[#042849]">
                     {allFlattenedRoles.length === 0
                       ? 'No open roles at the moment.'
                       : `No roles found matching "${searchQuery || activeCategory}".`}
                   </p>
-                  <p className="type-body-xs text-[#7D8690] max-w-[480px]">
-                    We&apos;re always looking for exceptional talent. Reach out to us below or check back soon!
+                  <p className="type-body-xs max-w-[480px] text-[#7D8690]">
+                    We&apos;re always looking for exceptional talent. Reach out to us below or check
+                    back soon!
                   </p>
                 </div>
               ) : (
@@ -321,17 +315,17 @@ export const WhereYouWouldFitSection = ({
                   return (
                     <div
                       key={job._key || job.id || `${job.title}-${idx}`}
-                      className="w-full bg-white lg:bg-[#F4F6F9] rounded-[16px_8px_16px_16px] lg:rounded-[16px] p-[16px] lg:p-[24px] flex flex-col gap-[12px] lg:gap-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] lg:shadow-none hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all group"
+                      className="group flex w-full flex-col gap-[12px] rounded-[16px_8px_16px_16px] bg-white p-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] lg:gap-[16px] lg:rounded-[16px] lg:bg-[#F4F6F9] lg:p-[24px] lg:shadow-none"
                     >
                       {/* Title */}
-                      <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6] lg:text-[#042849] group-hover:text-[#0F68D6] transition-colors">
+                      <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6] transition-colors group-hover:text-[#0F68D6] lg:text-[#042849]">
                         {job.title}
                       </h5>
 
                       {/* Metadata Row & Apply Button */}
-                      <div className="w-full flex flex-row items-end justify-between gap-[16px]">
+                      <div className="flex w-full flex-row items-end justify-between gap-[16px]">
                         {/* Metadata Tags: Column on Mobile, Row on Desktop */}
-                        <div className="flex flex-col lg:flex-row lg:items-center gap-[6px] lg:gap-[48px] xl:gap-[60px]">
+                        <div className="flex flex-col gap-[6px] lg:flex-row lg:items-center lg:gap-[48px] xl:gap-[60px]">
                           {/* Experience */}
                           {job.experience && (
                             <div className="flex items-center gap-[4px] lg:gap-[8px]">
@@ -375,9 +369,9 @@ export const WhereYouWouldFitSection = ({
                           aria-label={`Apply for ${job.title}`}
                           target={isExternal ? '_blank' : undefined}
                           rel={isExternal ? 'noopener noreferrer' : undefined}
-                          className="shrink-0 w-[34px] h-[34px] lg:w-[48px] lg:h-[48px] bg-[#0F68D6] rounded-full flex items-center justify-center text-white hover:scale-105 transition-transform"
+                          className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white transition-transform hover:scale-105 lg:h-[48px] lg:w-[48px]"
                         >
-                          <ChevronRight className="text-white scale-75 lg:scale-100" />
+                          <ChevronRight className="scale-75 text-white lg:scale-100" />
                         </Link>
                       </div>
                     </div>
@@ -385,9 +379,7 @@ export const WhereYouWouldFitSection = ({
                 })
               )}
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

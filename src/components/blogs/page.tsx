@@ -6,7 +6,7 @@ import BlogsTabsSection from './tabs-section';
 
 export const BlogsPage = ({ articles, pageSettings }: BlogsPageProps) => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <BlogsHeroSection />
       <BlogsTabsSection
         initialArticles={articles}

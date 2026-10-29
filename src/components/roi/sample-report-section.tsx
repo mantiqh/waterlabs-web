@@ -10,18 +10,17 @@ export const ROISampleReportSection = () => {
         - Contains: tag, headline, description, full-width report image
       */}
       <div
-        className="w-full rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] px-[20px] md:py-[48px] md:px-[40px] lg:py-[60px] lg:px-[60px]"
+        className="w-full rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[40px] md:px-[40px] md:py-[48px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]"
         style={{
           background: 'linear-gradient(238.07deg, #0F68D6 -29.17%, #000000 45.98%)',
         }}
       >
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[20px] lg:gap-[40px]">
-
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[20px] lg:gap-[40px]">
           {/* Header: Tag + Headline + Description */}
           <div className="flex flex-col gap-[8px] lg:gap-[14px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
-              <div className="w-[8px] h-[8px] rounded-full bg-aqua-mint shrink-0" />
+              <div className="bg-aqua-mint h-[8px] w-[8px] shrink-0 rounded-full" />
               <span className="type-body-xxs text-medium-gray tracking-[0.01em]">
                 Sample Report
               </span>
@@ -29,16 +28,19 @@ export const ROISampleReportSection = () => {
 
             {/* Headline + Description (Desktop) */}
             <div className="flex flex-col gap-[12px] lg:gap-[20px]">
-              <h2 className="type-h2 tracking-[-0.01em] max-w-[1005px]">
+              <h2 className="type-h2 max-w-[1005px] tracking-[-0.01em]">
                 <span className="text-aqua-mint block">
-                  The estimate came<br className="block md:hidden" /> from six answers.
+                  The estimate came
+                  <br className="block md:hidden" /> from six answers.
                 </span>
-                <span className="text-white block">
-                  The assessment goes<br className="block md:hidden" /> considerably further.
+                <span className="block text-white">
+                  The assessment goes
+                  <br className="block md:hidden" /> considerably further.
                 </span>
               </h2>
-              <p className="hidden md:block type-body-xs text-light-gray">
-                Below is an example of what comes back. Function by function, where the money sits in
+              <p className="type-body-xs text-light-gray hidden md:block">
+                Below is an example of what comes back. Function by function, where the money sits
+                in
                 <br />
                 your cycle, what it would take to release it, and what we would run first.
               </p>
@@ -48,19 +50,20 @@ export const ROISampleReportSection = () => {
           {/* Report Image */}
           <div className="w-full">
             {/* Desktop report image */}
-            <div className="hidden md:block relative w-full aspect-[1320/635] rounded-[30px_15px_30px_30px] overflow-hidden">
+            <div className="relative hidden aspect-[1320/635] w-full overflow-hidden rounded-[30px_15px_30px_30px] md:block">
               <Image
                 src="/images/ROI/sample-report/img_bg_sample_report_ui_screen.png"
                 alt="Sample ROI assessment report showing denial rates, days in AR, cost to collect, and automation potential"
                 fill
                 className="object-cover"
                 style={{
-                  background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 86.38%, rgba(0, 0, 0, 0.7) 100%)',
+                  background:
+                    'linear-gradient(180deg, rgba(0, 0, 0, 0) 86.38%, rgba(0, 0, 0, 0.7) 100%)',
                 }}
               />
             </div>
             {/* Mobile report image */}
-            <div className="block md:hidden relative w-full aspect-[362/246] rounded-[10px_4px_10px_10px] overflow-hidden">
+            <div className="relative block aspect-[362/246] w-full overflow-hidden rounded-[10px_4px_10px_10px] md:hidden">
               <Image
                 src="/images/ROI/sample-report/img_bg_sample_report_ui_screen_mobile (1).png"
                 alt="Sample ROI assessment report showing denial rates, days in AR, cost to collect, and automation potential"
@@ -71,12 +74,13 @@ export const ROISampleReportSection = () => {
           </div>
 
           {/* Description (Mobile — placed below image per Figma) */}
-          <p className="block md:hidden text-[13px] sm:text-[14px] leading-[20px] sm:leading-[22px] tracking-[-0.01em] text-light-gray">
-            Below is an example of what comes back. Function by<br />
-            function, where the money sits in your cycle, what it<br />
+          <p className="text-light-gray block text-[13px] leading-[20px] tracking-[-0.01em] sm:text-[14px] sm:leading-[22px] md:hidden">
+            Below is an example of what comes back. Function by
+            <br />
+            function, where the money sits in your cycle, what it
+            <br />
             would take to release it, and what we would run first.
           </p>
-
         </div>
       </div>
     </section>

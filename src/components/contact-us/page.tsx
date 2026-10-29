@@ -10,11 +10,9 @@ interface ContactUsPageProps {
   data?: ContactUsPageData;
 }
 
-export const ContactUsPage = ({
-  data = DEFAULT_CONTACT_US_DATA,
-}: ContactUsPageProps) => {
+export const ContactUsPage = ({ data = DEFAULT_CONTACT_US_DATA }: ContactUsPageProps) => {
   return (
-    <main className="w-full flex flex-col">
+    <main className="flex w-full flex-col">
       <ContactUsHeroSection
         heading={data.heroHeading}
         headingHighlight={data.heroHeadingHighlight}
@@ -24,10 +22,7 @@ export const ContactUsPage = ({
         imageDesktop={data.heroImageDesktop}
         imageMobile={data.heroImageMobile}
       />
-      <ContactUsOperatingInfo
-        locations={data.locations}
-        bgImage={data.operatingInfoBgImage}
-      />
+      <ContactUsOperatingInfo locations={data.locations} bgImage={data.operatingInfoBgImage} />
       <ContactUsContactForm
         tag={data.formTag}
         heading={data.formHeading}

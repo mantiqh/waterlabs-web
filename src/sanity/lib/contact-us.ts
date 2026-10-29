@@ -24,10 +24,8 @@ export async function fetchContactUsPageSettings(): Promise<ContactUsPageData> {
         heroSubheading: data.heroSubheading || DEFAULT_CONTACT_US_DATA.heroSubheading,
         heroCtaText: data.heroCtaText || DEFAULT_CONTACT_US_DATA.heroCtaText,
         heroCtaLink: data.heroCtaLink || DEFAULT_CONTACT_US_DATA.heroCtaLink,
-        heroImageDesktop:
-          data.heroImageDesktop || DEFAULT_CONTACT_US_DATA.heroImageDesktop,
-        heroImageMobile:
-          data.heroImageMobile || DEFAULT_CONTACT_US_DATA.heroImageMobile,
+        heroImageDesktop: data.heroImageDesktop || DEFAULT_CONTACT_US_DATA.heroImageDesktop,
+        heroImageMobile: data.heroImageMobile || DEFAULT_CONTACT_US_DATA.heroImageMobile,
 
         // 02 · Operating Info & Locations
         locations:
@@ -54,12 +52,10 @@ export async function fetchContactUsPageSettings(): Promise<ContactUsPageData> {
           Array.isArray(data.orgTypeOptions) && data.orgTypeOptions.length > 0
             ? data.orgTypeOptions
             : DEFAULT_CONTACT_US_DATA.orgTypeOptions,
-        newsletterHeading:
-          data.newsletterHeading ?? DEFAULT_CONTACT_US_DATA.newsletterHeading,
+        newsletterHeading: data.newsletterHeading ?? DEFAULT_CONTACT_US_DATA.newsletterHeading,
         consentText: data.consentText ?? DEFAULT_CONTACT_US_DATA.consentText,
         disclaimerText: data.disclaimerText ?? DEFAULT_CONTACT_US_DATA.disclaimerText,
-        submitButtonText:
-          data.submitButtonText || DEFAULT_CONTACT_US_DATA.submitButtonText,
+        submitButtonText: data.submitButtonText || DEFAULT_CONTACT_US_DATA.submitButtonText,
 
         // 04 · CTA Section
         ctaHeading: data.ctaHeading || DEFAULT_CONTACT_US_DATA.ctaHeading,
@@ -68,16 +64,13 @@ export async function fetchContactUsPageSettings(): Promise<ContactUsPageData> {
         ctaButtonText: data.ctaButtonText || DEFAULT_CONTACT_US_DATA.ctaButtonText,
         ctaButtonLink: data.ctaButtonLink || DEFAULT_CONTACT_US_DATA.ctaButtonLink,
         ctaBackgroundImageDesktop:
-          data.ctaBackgroundImageDesktop ||
-          DEFAULT_CONTACT_US_DATA.ctaBackgroundImageDesktop,
+          data.ctaBackgroundImageDesktop || DEFAULT_CONTACT_US_DATA.ctaBackgroundImageDesktop,
         ctaBackgroundImageMobile:
-          data.ctaBackgroundImageMobile ||
-          DEFAULT_CONTACT_US_DATA.ctaBackgroundImageMobile,
+          data.ctaBackgroundImageMobile || DEFAULT_CONTACT_US_DATA.ctaBackgroundImageMobile,
 
         // 05 · SEO
         metaTitle: data.metaTitle || DEFAULT_CONTACT_US_DATA.metaTitle,
-        metaDescription:
-          data.metaDescription || DEFAULT_CONTACT_US_DATA.metaDescription,
+        metaDescription: data.metaDescription || DEFAULT_CONTACT_US_DATA.metaDescription,
       };
     }
   } catch (error) {

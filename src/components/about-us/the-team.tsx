@@ -9,7 +9,7 @@ const LinkedInIcon = () => (
     viewBox="0 0 24 24"
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"
-    className="text-[#0F68D6] shrink-0 hover:opacity-80 transition-opacity"
+    className="shrink-0 text-[#0F68D6] transition-opacity hover:opacity-80"
   >
     <path d="M19 3H5C3.895 3 3 3.895 3 5V19C3 20.105 3.895 21 5 21H19C20.105 21 21 20.105 21 19V5C21 3.895 20.105 3 19 3ZM9 17H6.5V10H9V17ZM7.75 8.875C6.92 8.875 6.25 8.205 6.25 7.375C6.25 6.545 6.92 5.875 7.75 5.875C8.58 5.875 9.25 6.545 9.25 7.375C9.25 8.205 8.58 8.875 7.75 8.875ZM18 17H15.5V13.25C15.5 12.15 14.85 11.75 14.25 11.75C13.5 11.75 13 12.3 13 13.25V17H10.5V10H13V11C13.5 10.3 14.4 9.8 15.4 9.8C16.9 9.8 18 10.8 18 12.8V17Z" />
   </svg>
@@ -96,26 +96,20 @@ export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
         - Wrapper: Blue gradient showing behind bottom-left curve to connect into Come talk to us
         - Inner Container: White background with rounded bottom-left corner
       */}
-      <div className="w-full bg-white rounded-bl-[30px] lg:rounded-bl-[60px] pt-[32px] pb-[40px] px-[20px] md:pt-[48px] md:pb-[60px] md:px-[40px] lg:pt-[48px] lg:pb-[80px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col items-start gap-[20px]">
-          
+      <div className="w-full rounded-bl-[30px] bg-white px-[20px] pt-[32px] pb-[40px] md:px-[40px] md:pt-[48px] md:pb-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[48px] lg:pb-[80px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px]">
           {/* Tag / Eyebrow */}
           <div className="flex items-center gap-[8px]">
-            <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-            <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
-              {leadersTag}
-            </span>
+            <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{leadersTag}</span>
           </div>
 
           {/* Leadership Grid: 3 columns desktop, 2 columns tablet, 1 column mobile */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-[20px] gap-y-[28px] lg:gap-y-[32px] items-start">
+          <div className="grid w-full grid-cols-1 items-start gap-x-[20px] gap-y-[28px] md:grid-cols-2 lg:grid-cols-3 lg:gap-y-[32px]">
             {leaders.map((leader, idx) => (
-              <div
-                key={leader._key || idx}
-                className="flex flex-col items-start gap-[16px] w-full"
-              >
+              <div key={leader._key || idx} className="flex w-full flex-col items-start gap-[16px]">
                 {/* Leader Photo */}
-                <div className="relative w-full aspect-[426.67/300] xl:h-[300px] rounded-[20px_10px_20px_20px] overflow-hidden bg-gradient-to-b from-[#7D8690] to-[#D7DCE2]">
+                <div className="relative aspect-[426.67/300] w-full overflow-hidden rounded-[20px_10px_20px_20px] bg-gradient-to-b from-[#7D8690] to-[#D7DCE2] xl:h-[300px]">
                   <Image
                     src={leader.image}
                     alt={leader.name}
@@ -126,24 +120,20 @@ export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
                 </div>
 
                 {/* Leader Details */}
-                <div className="w-full flex flex-row items-start justify-between gap-[4px]">
-                  <div className="flex flex-col items-start gap-[4px] flex-1 min-w-0">
-                    <h5 className="type-h5 text-[#042849]">
-                      {leader.name}
-                    </h5>
-                    <p className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
-                      {leader.title}
-                    </p>
+                <div className="flex w-full flex-row items-start justify-between gap-[4px]">
+                  <div className="flex min-w-0 flex-1 flex-col items-start gap-[4px]">
+                    <h5 className="type-h5 text-[#042849]">{leader.name}</h5>
+                    <p className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{leader.title}</p>
                   </div>
                   {/* LinkedIn Icon */}
-                  <div className="pt-[9px] shrink-0">
+                  <div className="shrink-0 pt-[9px]">
                     {leader.linkedinUrl ? (
                       <a
                         href={leader.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${leader.name}'s LinkedIn profile`}
-                        className="inline-flex hover:opacity-80 transition-opacity"
+                        className="inline-flex transition-opacity hover:opacity-80"
                       >
                         <LinkedInIcon />
                       </a>
@@ -155,7 +145,6 @@ export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>

@@ -7,7 +7,7 @@ import ThisIsntJustEligibilitySection from './this-isnt-just-eligibility';
 
 export const SolutionsPage = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <SolutionsHeroSection />
       <TheProblemSection />
       <HowWaterlabsClosesSection />

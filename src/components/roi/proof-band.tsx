@@ -14,14 +14,14 @@ export const ROIProofBand = () => {
           background: 'linear-gradient(180deg, #4AAEC0 0%, #FFFFFF 100%)',
         }}
       >
-        <div className="w-full bg-ghost-white rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] px-[20px] md:py-[48px] md:px-[40px] lg:py-[60px] lg:px-[60px]">
-          <div className="w-full max-w-[1320px] mx-auto">
+        <div className="bg-ghost-white w-full rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[40px] md:px-[40px] md:py-[48px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]">
+          <div className="mx-auto w-full max-w-[1320px]">
             {/* Stats Grid */}
-            <div className="flex flex-col lg:flex-row items-start gap-[40px] lg:gap-[40px]">
+            <div className="flex flex-col items-start gap-[40px] lg:flex-row lg:gap-[40px]">
               {/* Stat 1 */}
-              <div className="flex-1 flex flex-col gap-[8px] lg:gap-[14px]">
+              <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
-                  className="type-h2 tracking-[-0.01em] w-fit"
+                  className="type-h2 w-fit tracking-[-0.01em]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
                     WebkitBackgroundClip: 'text',
@@ -39,9 +39,9 @@ export const ROIProofBand = () => {
               </div>
 
               {/* Stat 2 */}
-              <div className="flex-1 flex flex-col gap-[8px] lg:gap-[14px]">
+              <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
-                  className="type-h2 tracking-[-0.01em] w-fit"
+                  className="type-h2 w-fit tracking-[-0.01em]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
                     WebkitBackgroundClip: 'text',
@@ -59,9 +59,9 @@ export const ROIProofBand = () => {
               </div>
 
               {/* Stat 3 */}
-              <div className="flex-1 flex flex-col gap-[8px] lg:gap-[14px]">
+              <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
-                  className="type-h2 tracking-[-0.01em] w-fit"
+                  className="type-h2 w-fit tracking-[-0.01em]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
                     WebkitBackgroundClip: 'text',

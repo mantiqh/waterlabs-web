@@ -37,11 +37,14 @@ export const HeroSection = ({
   // Part 1 in sky blue (#91C6F2)
   // Part 2 in pure white (#FFFFFF)
   const renderHeading = (text: string) => {
-    if (text.includes('Maximize net revenue.') && (text.includes('Reduce cost to collect.') || text.includes('Reduce cost-to-collect.'))) {
+    if (
+      text.includes('Maximize net revenue.') &&
+      (text.includes('Reduce cost to collect.') || text.includes('Reduce cost-to-collect.'))
+    ) {
       return (
         <>
-          <span className="text-[#91C6F2] block">Maximize net revenue.</span>
-          <span className="text-white block">Reduce cost to collect.</span>
+          <span className="block text-[#91C6F2]">Maximize net revenue.</span>
+          <span className="block text-white">Reduce cost to collect.</span>
         </>
       );
     }
@@ -49,8 +52,8 @@ export const HeroSection = ({
     if (parts.length >= 2) {
       return (
         <>
-          <span className="text-[#91C6F2] block">{parts[0]}</span>
-          <span className="text-white block">{parts.slice(1).join(' ')}</span>
+          <span className="block text-[#91C6F2]">{parts[0]}</span>
+          <span className="block text-white">{parts.slice(1).join(' ')}</span>
         </>
       );
     }
@@ -58,10 +61,10 @@ export const HeroSection = ({
   };
 
   return (
-    <section className="relative w-full bg-[#F4F6F9] overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-[#F4F6F9]">
       {/* Hero Banner Card */}
       <div
-        className="relative w-full min-h-[700px] lg:min-h-[830px] rounded-bl-[30px] lg:rounded-bl-[60px] overflow-hidden flex flex-col justify-between pt-[20px] pb-[40px] px-[16px] sm:px-[20px] md:px-[40px] lg:pt-[40px] lg:pb-[80px] lg:px-[60px] bg-cover bg-center"
+        className="relative flex min-h-[700px] w-full flex-col justify-between overflow-hidden rounded-bl-[30px] bg-cover bg-center px-[16px] pt-[20px] pb-[40px] sm:px-[20px] md:px-[40px] lg:min-h-[830px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]"
         style={{
           backgroundImage: `
             linear-gradient(180deg, rgba(0, 0, 0, 0) 39.89%, rgba(0, 0, 0, 0.65) 75%, rgba(0, 0, 0, 0.85) 100%),
@@ -73,7 +76,7 @@ export const HeroSection = ({
         {/* Decorative Blurred Glass Layer (Figma: vector-path) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute w-[787px] h-[393px] lg:w-[1708px] lg:h-[854px] left-[78px] bottom-[-146px] lg:left-[569px] lg:top-[61px] bg-[rgba(0,0,0,0.2)] backdrop-blur-[6.6px] rounded-[30px] z-0"
+          className="pointer-events-none absolute bottom-[-146px] left-[78px] z-0 h-[393px] w-[787px] rounded-[30px] bg-[rgba(0,0,0,0.2)] backdrop-blur-[6.6px] lg:top-[61px] lg:left-[569px] lg:h-[854px] lg:w-[1708px]"
         />
 
         {/* Top Navbar */}
@@ -82,32 +85,30 @@ export const HeroSection = ({
         </div>
 
         {/* Hero Main Content */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[24px] lg:gap-[32px] mt-auto pt-[40px] lg:pt-[80px]">
+        <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[24px] pt-[40px] lg:flex-row lg:items-end lg:gap-[32px] lg:pt-[80px]">
           {/* Left Text & CTA Block */}
-          <div className="flex flex-col items-start gap-[24px] lg:gap-[40px] max-w-[1235px] w-full">
+          <div className="flex w-full max-w-[1235px] flex-col items-start gap-[24px] lg:gap-[40px]">
             {/* Text Stack: Eyebrow + Heading + Description */}
-            <div className="flex flex-col items-start gap-[12px] lg:gap-[20px] w-full">
+            <div className="flex w-full flex-col items-start gap-[12px] lg:gap-[20px]">
               {/* Eyebrow / Tag */}
-              <div className="flex items-center gap-[4px] lg:gap-[8px] h-[20px] lg:h-[24px]">
-                <span className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
-                <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
-                  {subheading}
-                </span>
+              <div className="flex h-[20px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
+                <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
+                <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">{subheading}</span>
               </div>
 
               {/* H1 Heading & Paragraph */}
-              <div className="flex flex-col items-start gap-[12px] lg:gap-[20px] w-full">
-                <h1 className="type-h1 max-sm:tracking-[-0.025em] tracking-[-0.01em] w-full max-w-[760px]">
+              <div className="flex w-full flex-col items-start gap-[12px] lg:gap-[20px]">
+                <h1 className="type-h1 w-full max-w-[760px] tracking-[-0.01em] max-sm:tracking-[-0.025em]">
                   {renderHeading(effectiveHeading)}
                 </h1>
-                <p className="type-body-s text-[#F4F6F9] max-w-[362px] md:max-w-[600px] lg:max-w-[710px]">
+                <p className="type-body-s max-w-[362px] text-[#F4F6F9] md:max-w-[600px] lg:max-w-[710px]">
                   {effectiveDescription}
                 </p>
               </div>
             </div>
 
             {/* Mobile: Row with CTA Button + Pause Circle | Desktop: Button only */}
-            <div className="flex items-center justify-between lg:justify-start w-full lg:w-auto">
+            <div className="flex w-full items-center justify-between lg:w-auto lg:justify-start">
               <Link href={ctaLink}>
                 <CTA variant="light-bg">{ctaText}</CTA>
               </Link>
@@ -117,7 +118,7 @@ export const HeroSection = ({
                 type="button"
                 aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
                 onClick={() => setIsPlaying((prev) => !prev)}
-                className="flex lg:hidden shrink-0 w-[43px] h-[43px] rounded-full bg-[rgba(42,42,42,0.8)] backdrop-blur-[14.4px] items-center justify-center cursor-pointer transition-all hover:scale-105 hover:bg-[rgba(42,42,42,0.95)]"
+                className="flex h-[43px] w-[43px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-[rgba(42,42,42,0.8)] backdrop-blur-[14.4px] transition-all hover:scale-105 hover:bg-[rgba(42,42,42,0.95)] lg:hidden"
               >
                 {isPlaying ? (
                   <svg
@@ -127,18 +128,8 @@ export const HeroSection = ({
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <path
-                      d="M1.5 1V11"
-                      stroke="#FFFFFF"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M6.5 1V11"
-                      stroke="#FFFFFF"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                    />
+                    <path d="M1.5 1V11" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+                    <path d="M6.5 1V11" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 ) : (
                   <svg
@@ -161,7 +152,7 @@ export const HeroSection = ({
             type="button"
             aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
             onClick={() => setIsPlaying((prev) => !prev)}
-            className="hidden lg:flex shrink-0 w-[53px] h-[53px] rounded-full bg-[rgba(42,42,42,0.8)] backdrop-blur-[14.4px] items-center justify-center self-end cursor-pointer transition-all hover:scale-105 hover:bg-[rgba(42,42,42,0.95)]"
+            className="hidden h-[53px] w-[53px] shrink-0 cursor-pointer items-center justify-center self-end rounded-full bg-[rgba(42,42,42,0.8)] backdrop-blur-[14.4px] transition-all hover:scale-105 hover:bg-[rgba(42,42,42,0.95)] lg:flex"
           >
             {isPlaying ? (
               <svg
@@ -171,18 +162,8 @@ export const HeroSection = ({
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path
-                  d="M2 1.5V12.5"
-                  stroke="#FFFFFF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8 1.5V12.5"
-                  stroke="#FFFFFF"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
+                <path d="M2 1.5V12.5" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M8 1.5V12.5" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
               </svg>
             ) : (
               <svg
@@ -204,4 +185,3 @@ export const HeroSection = ({
 };
 
 export default HeroSection;
-

@@ -1,10 +1,13 @@
 # Next.js Template
-## 
+
+##
+
 This is a comprehensive [Next.js](https://nextjs.org) template designed for rapid development with a focus on code quality and a professional developer experience.
 
 ## Project Overview
 
 This repository includes:
+
 - **Core**: Next.js 15, React 19, TypeScript
 - **State Management**: React Context API
 - **Styling**: Tailwind CSS
@@ -17,7 +20,6 @@ This repository includes:
   - **Rich Git Hooks**: A custom terminal-based UI for commit messages and pre-commit checks.
   - **Shared Components**: Pre-built common components like `Button`, `Hero`, and `RootProvider`.
   - **Services Layer**: Integrated Axios configuration for API handling.
-
 
 ## Getting Started
 

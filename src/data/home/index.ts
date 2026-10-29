@@ -102,10 +102,8 @@ export const DEFAULT_HOME_DATA: HomePageData = {
   eligibilityDiagramImage: '/images/home/eligibility-images/img_eliigibility_to_coding.png',
   eligibilityDescription:
     'Waterlabs covers complete RCM cycle. Exceptions and customizations are handled seamlessly through the human-in-the-loop model. Agentic intelligence learns and evolves based on your scenarios.',
-  eligibilityBgDesktop:
-    '/images/home/eligibility-images/we_offer_end_to_end_coverage_desktop.png',
-  eligibilityBgMobile:
-    '/images/home/eligibility-images/we_offer_end_to_end_coverage_mobile.png',
+  eligibilityBgDesktop: '/images/home/eligibility-images/we_offer_end_to_end_coverage_desktop.png',
+  eligibilityBgMobile: '/images/home/eligibility-images/we_offer_end_to_end_coverage_mobile.png',
 
   // 06 · Features & Stats
   featuresTag: 'Every Stage, Owned.',
@@ -157,8 +155,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
   ],
   caseStudyTitle: '60 outsourced staff → 3 in-house managers.',
   caseStudySubtitle: 'Multi-state anesthesia group.',
-  caseStudyImage:
-    '/images/home/features-images/img_60_outsourced_staff_3_in_house_managers.png',
+  caseStudyImage: '/images/home/features-images/img_60_outsourced_staff_3_in_house_managers.png',
   caseStudyCtaText: 'Read the case',
   caseStudyCtaLink: '/case-studies',
 
@@ -190,8 +187,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
   billingTag: 'Proven before you pay.',
   billingHeadingHighlight: 'Our billing model allows you flexibility.',
   billingHeading: 'We charge you when our AI is live in your environment.',
-  billingDescription:
-    'No development fee. No software license. We charge after it works.',
+  billingDescription: 'No development fee. No software license. We charge after it works.',
   billingSteps: [
     {
       _key: 'step-1',
@@ -218,11 +214,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
       desc: 'We invoice after our agents are live in your system.',
     },
   ],
-  billingPoints: [
-    'No development fee',
-    'No software license',
-    'You pay only when agents are live',
-  ],
+  billingPoints: ['No development fee', 'No software license', 'You pay only when agents are live'],
 
   // 10 · CTA Section
   ctaTag: 'See it run on your payer mix.',

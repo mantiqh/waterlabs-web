@@ -15,13 +15,13 @@ export const ROIHeroSection = () => {
         - Mobile: 402px x 599px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px, gap: 20px
       */}
       <div
-        className="relative w-full rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[32px] md:px-[40px] md:pb-[60px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col gap-[20px] lg:gap-[32px] overflow-hidden"
+        className="relative flex w-full flex-col gap-[20px] overflow-hidden rounded-bl-[30px] px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pt-[32px] md:pb-[60px] lg:gap-[32px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]"
         style={{
           background: 'linear-gradient(180deg, #0F68D6 68.83%, #63CCB7 108.85%)',
         }}
       >
         {/* Desktop Background Image */}
-        <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
+        <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <Image
             src="/images/ROI/hero-section/img_banner_bg (2).png"
             alt=""
@@ -32,7 +32,7 @@ export const ROIHeroSection = () => {
         </div>
 
         {/* Mobile / Tablet Background Image */}
-        <div className="block lg:hidden absolute inset-0 pointer-events-none z-0">
+        <div className="pointer-events-none absolute inset-0 z-0 block lg:hidden">
           <Image
             src="/images/ROI/hero-section/img_banner_bg_mobile (3).png"
             alt=""
@@ -48,18 +48,19 @@ export const ROIHeroSection = () => {
         </div>
 
         {/* Content Area: Text + Image side-by-side (desktop) / stacked (mobile) */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start lg:items-center gap-[20px] lg:gap-[32px] flex-1">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-1 flex-col items-start gap-[20px] lg:flex-row lg:items-center lg:gap-[32px]">
           {/* Left: Headline */}
           <div className="w-full lg:flex-1">
-            <h1 className="type-h2 text-white tracking-[-0.01em]">
-              Find out what your revenue cycle actually costs you. Then find out what it could cost instead.
+            <h1 className="type-h2 tracking-[-0.01em] text-white">
+              Find out what your revenue cycle actually costs you. Then find out what it could cost
+              instead.
             </h1>
           </div>
 
           {/* Right: Hero Image */}
-          <div className="w-full lg:flex-1 relative">
+          <div className="relative w-full lg:flex-1">
             {/* Desktop image */}
-            <div className="hidden md:block relative w-full aspect-[644/425] rounded-[20px_10px_20px_20px] overflow-hidden">
+            <div className="relative hidden aspect-[644/425] w-full overflow-hidden rounded-[20px_10px_20px_20px] md:block">
               <Image
                 src={bannerDesktop}
                 alt="ROI Calculator preview showing estimated savings and revenue opportunity"
@@ -69,7 +70,7 @@ export const ROIHeroSection = () => {
               />
             </div>
             {/* Mobile image */}
-            <div className="block md:hidden relative w-full aspect-[362/246] rounded-[20px_10px_20px_20px] overflow-hidden">
+            <div className="relative block aspect-[362/246] w-full overflow-hidden rounded-[20px_10px_20px_20px] md:hidden">
               <Image
                 src={bannerMobile}
                 alt="ROI Calculator preview showing estimated savings and revenue opportunity"

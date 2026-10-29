@@ -7,7 +7,7 @@ import Pipeline from './pipeline';
 const { waitUntilExit } = render(<Pipeline />);
 
 try {
-    await waitUntilExit();
+  await waitUntilExit();
 } catch {
-    process.exit(1);
+  process.exit(1);
 }

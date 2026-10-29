@@ -69,15 +69,11 @@ export default async function CaseStudyPage({ params }: Props) {
   }
 
   return (
-    <div className="w-full bg-white min-h-screen">
+    <div className="min-h-screen w-full bg-white">
       <CaseStudyHero caseStudy={caseStudy} />
       <CaseStudyContent caseStudy={caseStudy} />
-      <CaseStudyRelated
-        heading={caseStudy.relatedCasesHeading}
-        relatedCases={relatedCases}
-      />
+      <CaseStudyRelated heading={caseStudy.relatedCasesHeading} relatedCases={relatedCases} />
       <CaseStudyCTA {...caseStudy.cta} />
     </div>
   );
 }
-

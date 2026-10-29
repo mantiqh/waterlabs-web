@@ -5,13 +5,13 @@ import { CTA } from '@/components/CTA';
 
 export const DoWorkThatMattersSection = () => {
   return (
-    <section className="relative w-full bg-[#111111] overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-[#111111]">
       {/* 
         Culture Page Last Section Wrapper:
         - Background #111111 to match Footer
         - Inner container #F4F6F9 with rounded-br-[30px] lg:rounded-br-[60px]
       */}
-      <div className="w-full bg-[#F4F6F9] rounded-br-[30px] lg:rounded-br-[60px] py-[40px] md:py-[60px] lg:py-[90px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
+      <div className="w-full overflow-hidden rounded-br-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[90px]">
         {/* 
           Do Work That Matters Section (Figma node: 5419-5394 / 5419-5397):
           - Container: 1320px x 462px, padding: 0 40px 0 0, gap: 60px, rounded-[20px], bg: #FFFFFF
@@ -20,61 +20,52 @@ export const DoWorkThatMattersSection = () => {
             - Frame 2147203133: gap 8px (Tag + Headline + Description)
             - Frame 7: CTA Button
         */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto rounded-t-[8px] rounded-b-[20px] lg:rounded-[20px] p-0 flex flex-col lg:flex-row items-stretch lg:items-center justify-start gap-[24px] lg:gap-[32px] xl:gap-[44px] lg:pr-[40px] shadow-sm overflow-hidden min-h-[462px] bg-white">
+        <div className="relative z-10 mx-auto flex min-h-[462px] w-full max-w-[1320px] flex-col items-stretch justify-start gap-[24px] overflow-hidden rounded-t-[8px] rounded-b-[20px] bg-white p-0 shadow-sm lg:flex-row lg:items-center lg:gap-[32px] lg:rounded-[20px] lg:pr-[40px] xl:gap-[44px]">
+          {/* Left Column: Speaker Image (Mobile: 8px 8px 32px 8px, Desktop: 650px x 462px with 8px top-right and 32px bottom-right) */}
+          <div className="relative min-h-[250px] w-full shrink-0 self-stretch overflow-hidden rounded-tl-[8px] rounded-tr-[8px] rounded-br-[32px] rounded-bl-[8px] sm:min-h-[380px] lg:min-h-[462px] lg:w-[480px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] xl:w-[650px]">
+            <Image
+              src="/images/culture/do-work-that-matters/do_work_that_matters.png"
+              alt="Do work that matters, with people who'll back you"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 480px, 650px"
+              className="object-cover object-center"
+            />
+          </div>
 
-        {/* Left Column: Speaker Image (Mobile: 8px 8px 32px 8px, Desktop: 650px x 462px with 8px top-right and 32px bottom-right) */}
-        <div className="w-full lg:w-[480px] xl:w-[650px] min-h-[250px] sm:min-h-[380px] lg:min-h-[462px] relative rounded-tl-[8px] rounded-tr-[8px] rounded-bl-[8px] rounded-br-[32px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] overflow-hidden shrink-0 self-stretch">
-          <Image
-            src="/images/culture/do-work-that-matters/do_work_that_matters.png"
-            alt="Do work that matters, with people who'll back you"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 480px, 650px"
-            className="object-cover object-center"
-          />
-        </div>
+          {/* Right Column: Content Block (570px x 462px in Figma, padding: 50px 0px, gap: 24px) */}
+          <div className="flex w-full flex-col items-start justify-center gap-[20px] bg-white p-[24px] sm:p-[36px] lg:flex-1 lg:gap-[24px] lg:px-0 lg:py-[50px] xl:w-[570px] xl:max-w-[570px]">
+            {/* Header & Body Block (Frame 2147203133: gap 8px) */}
+            <div className="flex w-full max-w-[570px] flex-col items-start gap-[8px]">
+              {/* Tag / Eyebrow (Text - Tag) */}
+              <div className="flex items-center gap-[8px]">
+                <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+                <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
+                  Build what&apos;s next
+                </span>
+              </div>
 
-        {/* Right Column: Content Block (570px x 462px in Figma, padding: 50px 0px, gap: 24px) */}
-        <div className="w-full lg:flex-1 xl:w-[570px] xl:max-w-[570px] flex flex-col justify-center items-start gap-[20px] lg:gap-[24px] p-[24px] sm:p-[36px] lg:py-[50px] lg:px-0 bg-white">
+              {/* Headline: type-h2, semantic <h2> */}
+              <h2 className="type-h2 max-w-[570px] text-[#042849]">
+                Do work that matters, with people who&apos;ll back you.
+              </h2>
 
-          {/* Header & Body Block (Frame 2147203133: gap 8px) */}
-          <div className="flex flex-col items-start gap-[8px] w-full max-w-[570px]">
-            {/* Tag / Eyebrow (Text - Tag) */}
-            <div className="flex items-center gap-[8px]">
-              <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-              <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
-                Build what&apos;s next
-              </span>
+              {/* Body Description: type-body-xs (Exact line breaks matching Figma Image 1) */}
+              <p className="type-body-xs max-w-[540px] pt-[2px] text-[#111111]">
+                We want curious people who take ownership and want to solve real problems. Whether
+                you are early in your career or leading a team, there is room here to build
+                something real.
+              </p>
             </div>
 
-            {/* Headline: type-h2, semantic <h2> */}
-            <h2 className="type-h2 text-[#042849] max-w-[570px]">
-              Do work that matters, with people who&apos;ll back you.
-            </h2>
-
-            {/* Body Description: type-body-xs (Exact line breaks matching Figma Image 1) */}
-            <p className="type-body-xs text-[#111111] max-w-[540px] pt-[2px]">
-              We want curious people who take ownership and want to solve{' '}
-
-              real problems. Whether you are early in your career or leading a{' '}
-
-              team, there is room here to build something real.
-            </p>
+            {/* CTA Button: Frame 7 (gap 24px from Frame 2147203133) */}
+            <div>
+              <Link href="/careers#where-you-would-fit">
+                <CTA variant="light-bg">See Open Roles</CTA>
+              </Link>
+            </div>
           </div>
-
-          {/* CTA Button: Frame 7 (gap 24px from Frame 2147203133) */}
-          <div>
-            <Link href="/careers#where-you-would-fit">
-              <CTA variant="light-bg">
-                See Open Roles
-              </CTA>
-            </Link>
-          </div>
-
         </div>
-
-        </div>
-
       </div>
     </section>
   );

@@ -35,8 +35,7 @@ export const careersPageSchema = defineType({
               name: 'tabName',
               title: 'Tab / Category Name',
               type: 'string',
-              description:
-                'e.g. Engineering, Product & Delivery, Client Success, RCM & Ops',
+              description: 'e.g. Engineering, Product & Delivery, Client Success, RCM & Ops',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
@@ -54,16 +53,14 @@ export const careersPageSchema = defineType({
                       name: 'title',
                       title: 'Job Title',
                       type: 'string',
-                      description:
-                        'e.g. Python Developer – Agentic AI / Machine Learning',
+                      description: 'e.g. Python Developer – Agentic AI / Machine Learning',
                       validation: (Rule) => Rule.required(),
                     }),
                     defineField({
                       name: 'experience',
                       title: 'Experience',
                       type: 'string',
-                      description:
-                        'e.g. 3–8 years, 1–3 yrs (Junior) / 5+ yrs (Senior)',
+                      description: 'e.g. 3–8 years, 1–3 yrs (Junior) / 5+ yrs (Senior)',
                     }),
                     defineField({
                       name: 'category',
@@ -82,8 +79,7 @@ export const careersPageSchema = defineType({
                       name: 'link',
                       title: 'Application Link / Email',
                       type: 'string',
-                      description:
-                        'URL (e.g. Greenhouse/Lever link) or email (mailto:...)',
+                      description: 'URL (e.g. Greenhouse/Lever link) or email (mailto:...)',
                       initialValue: 'mailto:careers@waterlabs.ai',
                     }),
                   ],
@@ -96,9 +92,7 @@ export const careersPageSchema = defineType({
                     prepare({ title, category, experience }) {
                       return {
                         title: title || 'Untitled Role',
-                        subtitle: [category, experience]
-                          .filter(Boolean)
-                          .join(' • '),
+                        subtitle: [category, experience].filter(Boolean).join(' • '),
                       };
                     },
                   },

@@ -5,7 +5,8 @@ export const caseStudy3: CaseStudy = {
   slug: 'multi-site-physical-therapy-network',
   aliases: ['multi-site-behavioral-health'],
   categoryTag: 'Case Study · Physical Therapy Network',
-  title: 'How a multi-site physical therapy network used Waterlabs to run intake with 4 people instead of 60.',
+  title:
+    'How a multi-site physical therapy network used Waterlabs to run intake with 4 people instead of 60.',
   titleHighlight: 'run intake with 4 people instead of 60.',
   subtitle: 'Clinics across multiple locations, taking referrals by fax, email and patient portal.',
   heroImage: '/images/case-study/case-study-3-multi-site/Frame%202147226953%20(2).png',

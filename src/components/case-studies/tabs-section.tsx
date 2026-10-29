@@ -49,8 +49,7 @@ const BASE_CASE_STUDIES: Omit<CaseStudyItem, 'id'>[] = [
     tag: 'Enterprise RCM',
     stat: '2 to 4 days → same day',
     subtitle: '7 Coding Disciplines',
-    title:
-      'How a $5B enterprise RCM organization used Waterlabs to code every chart the same day.',
+    title: 'How a $5B enterprise RCM organization used Waterlabs to code every chart the same day.',
     slug: 'enterprise-rcm-organization',
     desktopImage: '/images/case-study-main-page/tabs/img_placeholder_02.png',
     mobileImage: '/images/case-study-main-page/tabs/img_placeholder_02_mobile (1).png',
@@ -132,39 +131,42 @@ export const CaseStudiesTabsSection = ({
         (study) =>
           study.slug !== 'regional-behavioral-health-network' &&
           study.slug !== 'behavioral-health-practice' &&
-          study.id !== 'case-study-4'
+          study.id !== 'case-study-4',
       )
       .map((study, idx) => {
         const fallback = DEFAULT_CASE_STUDIES[idx % DEFAULT_CASE_STUDIES.length];
 
         let category = (study.cardCategory as string) || fallback.category;
-      if (!category || !categoriesList.includes(category)) {
-        const catLower = (study.categoryTag || '').toLowerCase();
-        if (catLower.includes('rural')) category = 'Features';
-        else if (catLower.includes('enterprise')) category = 'Use Cases';
-        else if (catLower.includes('physical')) category = 'Features';
-        else if (catLower.includes('behavioral')) category = 'Company News';
-        else category = 'Case Studies';
-      }
+        if (!category || !categoriesList.includes(category)) {
+          const catLower = (study.categoryTag || '').toLowerCase();
+          if (catLower.includes('rural')) category = 'Features';
+          else if (catLower.includes('enterprise')) category = 'Use Cases';
+          else if (catLower.includes('physical')) category = 'Features';
+          else if (catLower.includes('behavioral')) category = 'Company News';
+          else category = 'Case Studies';
+        }
 
-      return {
-        id: study.id || String(idx + 1),
-        category,
-        tag: study.cardTag || study.tags?.[0] || study.categoryTag?.replace(/^Case Study · /, '') || fallback.tag,
-        stat: study.cardStat || study.resultsBlock?.headline || fallback.stat,
-        subtitle: study.cardSubtitle || study.client?.specialties || fallback.subtitle,
-        title: study.title || fallback.title,
-        slug: study.slug || fallback.slug,
-        desktopImage: study.desktopImage || study.heroImage || fallback.desktopImage,
-        mobileImage: study.mobileImage || study.heroImage || fallback.mobileImage,
-      };
-    });
+        return {
+          id: study.id || String(idx + 1),
+          category,
+          tag:
+            study.cardTag ||
+            study.tags?.[0] ||
+            study.categoryTag?.replace(/^Case Study · /, '') ||
+            fallback.tag,
+          stat: study.cardStat || study.resultsBlock?.headline || fallback.stat,
+          subtitle: study.cardSubtitle || study.client?.specialties || fallback.subtitle,
+          title: study.title || fallback.title,
+          slug: study.slug || fallback.slug,
+          desktopImage: study.desktopImage || study.heroImage || fallback.desktopImage,
+          mobileImage: study.mobileImage || study.heroImage || fallback.mobileImage,
+        };
+      });
   }, [initialCaseStudies, categoriesList]);
 
   const filteredItems = useMemo(() => {
     return itemsList.filter((item) => {
-      const matchesCategory =
-        selectedCategory === 'All' || item.category === selectedCategory;
+      const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
       const q = searchQuery.trim().toLowerCase();
       const matchesSearch =
         q === '' ||
@@ -220,7 +222,7 @@ export const CaseStudiesTabsSection = ({
 
   return (
     <section
-      className="relative w-full overflow-hidden p-0 m-0"
+      className="relative m-0 w-full overflow-hidden p-0"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 50%, #0F68D6 50%)',
       }}
@@ -230,9 +232,8 @@ export const CaseStudiesTabsSection = ({
         - Desktop: background #F4F6F9, border-radius: 0px 60px 60px 0px (rounded-tr-[60px] rounded-br-[60px]), padding: 80px 60px
         - Mobile: background #F4F6F9, border-radius: 0px 30px 30px 0px (rounded-tr-[30px] rounded-br-[30px]), padding: 40px 20px
       */}
-      <div className="w-full bg-[#F4F6F9] rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] md:py-[60px] lg:py-[80px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[32px] md:gap-[40px] lg:gap-[40px]">
-          
+      <div className="w-full overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[32px] md:gap-[40px] lg:gap-[40px]">
           {/* ========================================================================= */}
           {/* Top Filter & Search Bar - Commented out for now                           */}
           {/* ========================================================================= */}
@@ -356,12 +357,12 @@ export const CaseStudiesTabsSection = ({
           {/* ========================================================================= */}
           <div
             ref={gridRef}
-            className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-[32px] gap-y-[32px] lg:gap-y-[40px]"
+            className="grid w-full grid-cols-1 gap-x-[32px] gap-y-[32px] lg:grid-cols-2 lg:gap-y-[40px]"
           >
             {paginatedItems.map((card) => (
               <div
                 key={card.id}
-                className="w-full border-b border-[#D7DCE2] pb-[20px] md:pb-[24px] flex flex-col gap-[8px] md:gap-[12px]"
+                className="flex w-full flex-col gap-[8px] border-b border-[#D7DCE2] pb-[20px] md:gap-[12px] md:pb-[24px]"
               >
                 {/* Eyebrow Tag: Blue Dot + Text - Commented out */}
                 {/* <div className="flex items-center gap-[6px] lg:gap-[8px]">
@@ -374,33 +375,30 @@ export const CaseStudiesTabsSection = ({
                 {/* =================================================================== */}
                 {/* Desktop Card Layout (Side-by-side)                                  */}
                 {/* =================================================================== */}
-                <div className="hidden md:flex flex-row items-stretch justify-between gap-[20px] w-full">
+                <div className="hidden w-full flex-row items-stretch justify-between gap-[20px] md:flex">
                   {/* Left Column: Title (clickable) & CTA Button */}
-                  <div className="flex-1 min-w-0 flex flex-col justify-between items-start gap-[16px]">
-                    <div className="flex flex-col items-start gap-[12px] w-full">
+                  <div className="flex min-w-0 flex-1 flex-col items-start justify-between gap-[16px]">
+                    <div className="flex w-full flex-col items-start gap-[12px]">
                       {/* Clickable Card Heading matching inner case study page */}
-                      <Link
-                        href={`/case-study/${card.slug}`}
-                        className="group/title block w-full"
-                      >
-                        <h5 className="type-body-l lg:type-body-s xl:type-body-l text-[#042849] group-hover/title:text-[#0F68D6] transition-colors">
+                      <Link href={`/case-study/${card.slug}`} className="group/title block w-full">
+                        <h5 className="type-body-l lg:type-body-s xl:type-body-l text-[#042849] transition-colors group-hover/title:text-[#0F68D6]">
                           {card.title || card.stat}
                         </h5>
                       </Link>
                     </div>
 
-                    <Link href={`/case-study/${card.slug}`} className="inline-block group">
-                      <div className="h-[44px] px-[20px] py-[10px] rounded-[64px] bg-[rgba(214,214,214,0.6)] border border-[#F4F6F9] backdrop-blur-[12px] flex items-center gap-[10px] cursor-pointer hover:bg-white/80 hover:border-[#0F68D6]/30 transition-all duration-300">
+                    <Link href={`/case-study/${card.slug}`} className="group inline-block">
+                      <div className="flex h-[44px] cursor-pointer items-center gap-[10px] rounded-[64px] border border-[#F4F6F9] bg-[rgba(214,214,214,0.6)] px-[20px] py-[10px] backdrop-blur-[12px] transition-all duration-300 hover:border-[#0F68D6]/30 hover:bg-white/80">
                         <span className="type-body-xxs text-[#2A2A2A]">
                           {settings?.readStoryButtonText || 'Read the story'}
                         </span>
-                        <ChevronRight className="w-[12px] h-[18px] text-[#2A2A2A] opacity-20 group-hover:opacity-70 transition-opacity" />
+                        <ChevronRight className="h-[18px] w-[12px] text-[#2A2A2A] opacity-20 transition-opacity group-hover:opacity-70" />
                       </div>
                     </Link>
                   </div>
 
                   {/* Right Column: Image */}
-                  <div className="w-[227px] h-[174px] rounded-[20px_10px_20px_20px] overflow-hidden relative shrink-0 shadow-sm">
+                  <div className="relative h-[174px] w-[227px] shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] shadow-sm">
                     <Image
                       src={card.desktopImage}
                       alt={card.title || card.stat}
@@ -414,9 +412,9 @@ export const CaseStudiesTabsSection = ({
                 {/* =================================================================== */}
                 {/* Mobile Card Layout (Stacked: Image Top / Bottom Info Row)           */}
                 {/* =================================================================== */}
-                <div className="flex md:hidden flex-col items-start gap-[12px] w-full">
+                <div className="flex w-full flex-col items-start gap-[12px] md:hidden">
                   {/* Top Image */}
-                  <div className="w-full h-[217px] rounded-[20px_10px_20px_20px] overflow-hidden relative shrink-0 shadow-sm">
+                  <div className="relative h-[217px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] shadow-sm">
                     <Image
                       src={card.mobileImage}
                       alt={card.title || card.stat}
@@ -427,12 +425,12 @@ export const CaseStudiesTabsSection = ({
                   </div>
 
                   {/* Bottom Row: Clickable Title on left, Circular Arrow on right */}
-                  <div className="w-full flex flex-row items-end justify-between gap-[12px] pt-[4px]">
+                  <div className="flex w-full flex-row items-end justify-between gap-[12px] pt-[4px]">
                     <Link
                       href={`/case-study/${card.slug}`}
-                      className="flex flex-col items-start gap-[8px] flex-1 group/mobiletitle"
+                      className="group/mobiletitle flex flex-1 flex-col items-start gap-[8px]"
                     >
-                      <h5 className="type-body-l text-[#042849] group-hover/mobiletitle:text-[#0F68D6] transition-colors">
+                      <h5 className="type-body-l text-[#042849] transition-colors group-hover/mobiletitle:text-[#0F68D6]">
                         {card.title || card.stat}
                       </h5>
                     </Link>
@@ -441,9 +439,9 @@ export const CaseStudiesTabsSection = ({
                     <Link
                       href={`/case-study/${card.slug}`}
                       aria-label={settings?.readStoryButtonText || 'Read the story'}
-                      className="w-[34px] h-[34px] bg-[#0F68D6] hover:bg-[#042849] transition-colors rounded-full flex items-center justify-center text-white shrink-0 shadow-sm"
+                      className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm transition-colors hover:bg-[#042849]"
                     >
-                      <ChevronRight className="w-[10px] h-[14px] text-white" />
+                      <ChevronRight className="h-[14px] w-[10px] text-white" />
                     </Link>
                   </div>
                 </div>
@@ -453,15 +451,17 @@ export const CaseStudiesTabsSection = ({
 
           {/* Empty Search State */}
           {filteredItems.length === 0 && (
-            <div className="w-full py-[60px] text-center flex flex-col items-center gap-[12px]">
-              <p className="type-body-s text-[#7D8690]">No case studies found matching your search.</p>
+            <div className="flex w-full flex-col items-center gap-[12px] py-[60px] text-center">
+              <p className="type-body-s text-[#7D8690]">
+                No case studies found matching your search.
+              </p>
               <button
                 type="button"
                 onClick={() => {
                   setSelectedCategory('All');
                   setSearchQuery('');
                 }}
-                className="type-body-xxs text-[#0F68D6] underline cursor-pointer"
+                className="type-body-xxs cursor-pointer text-[#0F68D6] underline"
               >
                 Reset filters
               </button>
@@ -472,7 +472,7 @@ export const CaseStudiesTabsSection = ({
           {/* Pagination (Figma: Frame 2147226503)                                      */}
           {/* ========================================================================= */}
           {filteredItems.length > 0 && (
-            <div className="w-full flex flex-row justify-end items-center gap-[16px] md:gap-[24px] lg:gap-[32px] pt-[16px]">
+            <div className="flex w-full flex-row items-center justify-end gap-[16px] pt-[16px] md:gap-[24px] lg:gap-[32px]">
               {/* Prev Page Button */}
               {totalPages > 1 && (
                 <button
@@ -480,8 +480,10 @@ export const CaseStudiesTabsSection = ({
                   aria-label="Previous page"
                   onClick={() => handlePageChange(safeCurrentPage - 1)}
                   disabled={safeCurrentPage === 1}
-                  className={`w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] transition-opacity ${
-                    safeCurrentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-75 cursor-pointer'
+                  className={`flex h-[24px] w-[24px] items-center justify-center text-[#0F68D6] transition-opacity ${
+                    safeCurrentPage === 1
+                      ? 'cursor-not-allowed opacity-30'
+                      : 'cursor-pointer hover:opacity-75'
                   }`}
                 >
                   <svg
@@ -510,7 +512,7 @@ export const CaseStudiesTabsSection = ({
                     return (
                       <span
                         key={`dots-${idx}`}
-                        className="type-body-xxs text-[#7D8690] tracking-[0.2em] select-none"
+                        className="type-body-xxs tracking-[0.2em] text-[#7D8690] select-none"
                       >
                         ....
                       </span>
@@ -524,9 +526,9 @@ export const CaseStudiesTabsSection = ({
                       key={`page-${pageNum}`}
                       type="button"
                       onClick={() => handlePageChange(pageNum)}
-                      className={`type-body-xxs transition-colors cursor-pointer bg-transparent border-none p-0 outline-none ${
+                      className={`type-body-xxs cursor-pointer border-none bg-transparent p-0 transition-colors outline-none ${
                         isSelected
-                          ? 'text-[#0F68D6] font-medium'
+                          ? 'font-medium text-[#0F68D6]'
                           : 'text-[#7D8690] hover:text-[#0F68D6]'
                       }`}
                     >
@@ -543,8 +545,10 @@ export const CaseStudiesTabsSection = ({
                   aria-label="Next page"
                   onClick={() => handlePageChange(safeCurrentPage + 1)}
                   disabled={safeCurrentPage === totalPages}
-                  className={`w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] transition-opacity ${
-                    safeCurrentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-75 cursor-pointer'
+                  className={`flex h-[24px] w-[24px] items-center justify-center text-[#0F68D6] transition-opacity ${
+                    safeCurrentPage === totalPages
+                      ? 'cursor-not-allowed opacity-30'
+                      : 'cursor-pointer hover:opacity-75'
                   }`}
                 >
                   <svg
@@ -567,7 +571,6 @@ export const CaseStudiesTabsSection = ({
               )}
             </div>
           )}
-
         </div>
       </div>
     </section>

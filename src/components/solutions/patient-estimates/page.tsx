@@ -7,7 +7,7 @@ import ThisIsntJustPatientEstimatesSection from './this-isnt-just-patient-estima
 
 export const PatientEstimatesPage = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <PatientEstimatesHeroSection />
       <TheProblemSection />
       <HowWaterlabsClosesSection />

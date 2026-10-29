@@ -18,7 +18,7 @@ export interface HomePageProps {
 
 const HomePage = ({ data }: HomePageProps) => {
   return (
-    <div className="w-full flex flex-col overflow-x-clip">
+    <div className="flex w-full flex-col overflow-x-clip">
       {/* 01 · Hero Section */}
       <HeroSection
         heading={data?.heroHeading}
