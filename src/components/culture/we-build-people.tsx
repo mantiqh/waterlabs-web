@@ -22,8 +22,7 @@ const CULTURE_CARDS: CultureCard[] = [
     title: 'Performance is a conversation.',
     description:
       'We set clear goals and give feedback you can use. We talk about where you are headed as much as where you have been. Reviews happen on schedule. Conversations about your growth happen whenever needed.',
-    desktopImage:
-      '/images/culture/we-build-people/img_Performance%20is%20a%20conversation..png',
+    desktopImage: '/images/culture/we-build-people/img_Performance%20is%20a%20conversation..png',
     mobileImage:
       '/images/culture/we-build-people/img_Performance%20is%20a%20conversation_mobile%20%281%29.png',
     bgColor: '#63CCB7', // Mint
@@ -36,8 +35,7 @@ const CULTURE_CARDS: CultureCard[] = [
     title: 'We build people for the role.',
     description:
       'We identify capability gaps and invest in closing them through mentoring, coaching, leadership development, and stretch assignments that teach you faster than any training module. Development starts from an honest read of where you are, and it is planned against where you want to go.',
-    desktopImage:
-      '/images/culture/we-build-people/img_We%20build%20people%20for%20the%20role.png',
+    desktopImage: '/images/culture/we-build-people/img_We%20build%20people%20for%20the%20role.png',
     mobileImage:
       '/images/culture/we-build-people/img_We%20build%20people%20for%20the%20role_mobile%20%281%29.png',
     bgColor: '#A9D154', // Lime Green
@@ -78,8 +76,7 @@ const CULTURE_CARDS: CultureCard[] = [
     title: 'We act on engagement.',
     description:
       'We ask, listen, and close the loop. Feedback that goes nowhere is a survey. Ours turns into decisions.',
-    desktopImage:
-      '/images/culture/we-build-people/img_We%20act%20on%20engagement..png',
+    desktopImage: '/images/culture/we-build-people/img_We%20act%20on%20engagement..png',
     mobileImage:
       '/images/culture/we-build-people/img_We%20act%20on%20engagement_mobile%20%281%29.png',
     bgColor: '#A9D154', // Lime Green
@@ -112,12 +109,8 @@ export const WeBuildPeopleSection = () => {
     if (progress <= 0) return 0;
     if (progress >= 1) return totalTransitions;
 
-    const segment = Math.min(
-      Math.floor(progress * totalTransitions),
-      totalTransitions - 1
-    );
-    const progressInSegment =
-      (progress - segment / totalTransitions) * totalTransitions;
+    const segment = Math.min(Math.floor(progress * totalTransitions), totalTransitions - 1);
+    const progressInSegment = (progress - segment / totalTransitions) * totalTransitions;
 
     const smoothstep = (min: number, max: number, value: number) => {
       const x = Math.min(Math.max((value - min) / (max - min), 0), 1);
@@ -169,8 +162,7 @@ export const WeBuildPeopleSection = () => {
         : index === totalTransitions
           ? 0.98
           : (index + 0.5) / (totalTransitions + 1);
-    const targetScrollY =
-      window.scrollY + rect.top + targetProgress * scrollDistance;
+    const targetScrollY = window.scrollY + rect.top + targetProgress * scrollDistance;
     window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
   };
 
@@ -269,22 +261,20 @@ export const WeBuildPeopleSection = () => {
       {/* Sticky Viewport Container */}
       <div
         ref={stickyRef}
-        className="sticky top-0 w-full flex flex-col justify-start pt-[16px] sm:pt-[20px] lg:pt-[24px] pb-0 overflow-visible"
+        className="sticky top-0 flex w-full flex-col justify-start overflow-visible pt-[16px] pb-0 sm:pt-[20px] lg:pt-[24px]"
       >
         {/* =================================================================
             SECTION HEADER: Tag + Eyebrow + Section Title
            ================================================================= */}
-        <div className="w-full max-w-[1320px] mx-auto mb-[12px] sm:mb-[16px] lg:mb-[20px] flex flex-col gap-[8px] sm:gap-[10px] shrink-0">
+        <div className="mx-auto mb-[12px] flex w-full max-w-[1320px] shrink-0 flex-col gap-[8px] sm:mb-[16px] sm:gap-[10px] lg:mb-[20px]">
           {/* Tag / Eyebrow */}
           <div className="flex items-center gap-[8px]">
-            <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-            <span className="type-body-xxs text-[#7D8690] tracking-[0.01em]">
-              How we work
-            </span>
+            <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">How we work</span>
           </div>
 
           {/* Main Section Heading */}
-          <h2 className="type-h2 text-[#111111] uppercase tracking-[-0.01em]">
+          <h2 className="type-h2 tracking-[-0.01em] text-[#111111] uppercase">
             CULTURE AT WATERLABS
           </h2>
         </div>
@@ -292,7 +282,7 @@ export const WeBuildPeopleSection = () => {
         {/* =================================================================
             STACKED CARDS DECK: 6 Stacking Cards
            ================================================================= */}
-        <div className="relative w-full max-w-[1320px] mx-auto h-[500px] sm:h-[540px] lg:h-[433px]">
+        <div className="relative mx-auto h-[500px] w-full max-w-[1320px] sm:h-[540px] lg:h-[433px]">
           {CULTURE_CARDS.map((card, index) => {
             const dynamicStyle = getCardStyle(index);
 
@@ -305,11 +295,11 @@ export const WeBuildPeopleSection = () => {
                   transition:
                     'transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.12s ease-out',
                 }}
-                className="absolute inset-x-0 top-0 w-full h-[500px] sm:h-[540px] lg:h-[433px] rounded-[30px_0px_30px_30px] lg:rounded-[30px_10px_30px_30px] overflow-hidden shadow-[0_16px_40px_rgba(4,40,73,0.08)] bg-white border border-black/5 flex flex-col lg:flex-row will-change-transform cursor-pointer"
+                className="absolute inset-x-0 top-0 flex h-[500px] w-full cursor-pointer flex-col overflow-hidden rounded-[30px_0px_30px_30px] border border-black/5 bg-white shadow-[0_16px_40px_rgba(4,40,73,0.08)] will-change-transform sm:h-[540px] lg:h-[433px] lg:flex-row lg:rounded-[30px_10px_30px_30px]"
                 onClick={() => scrollToCard(index)}
               >
                 {/* Desktop Full-Span Image (Transparent Left, Photo on Right) */}
-                <div className="hidden lg:block absolute inset-0 w-full h-full z-0 pointer-events-none overflow-hidden">
+                <div className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full overflow-hidden lg:block">
                   <Image
                     src={card.desktopImage}
                     alt={card.title}
@@ -322,12 +312,12 @@ export const WeBuildPeopleSection = () => {
 
                 {/* Mint/Lime/Gold Left Content Box (Frame 2147226448 geometry) */}
                 <div
-                  className="relative z-10 w-full lg:w-[480px] xl:w-[539px] flex-1 min-h-0 lg:h-full lg:flex-none p-[24px] sm:p-[32px] lg:p-[36px] xl:p-[40px] flex flex-col justify-center items-start rounded-[30px_0px_0px_0px] lg:!rounded-[30px_0px_60px_0px] shrink-0 overflow-y-auto no-scrollbar"
+                  className="no-scrollbar relative z-10 flex min-h-0 w-full flex-1 shrink-0 flex-col items-start justify-center overflow-y-auto rounded-[30px_0px_0px_0px] p-[24px] sm:p-[32px] lg:h-full lg:w-[480px] lg:flex-none lg:!rounded-[30px_0px_60px_0px] lg:p-[36px] xl:w-[539px] xl:p-[40px]"
                   style={{
                     backgroundColor: card.bgColor,
                   }}
                 >
-                  <div className="w-full flex flex-col items-start gap-[12px] lg:gap-[16px] my-auto">
+                  <div className="my-auto flex w-full flex-col items-start gap-[12px] lg:gap-[16px]">
                     {/* Card Heading — Display/H3 on mobile, Display/H2 on md+ */}
                     <h3
                       className="type-h3 md:type-h2 max-w-[459px]"
@@ -347,7 +337,7 @@ export const WeBuildPeopleSection = () => {
                 </div>
 
                 {/* Mobile / Tablet Image Box */}
-                <div className="block lg:hidden relative w-full h-[225px] sm:h-[250px] shrink-0 rounded-[0px_10px_30px_30px] overflow-hidden">
+                <div className="relative block h-[225px] w-full shrink-0 overflow-hidden rounded-[0px_10px_30px_30px] sm:h-[250px] lg:hidden">
                   <Image
                     src={card.mobileImage}
                     alt={card.title}
@@ -367,5 +357,3 @@ export const WeBuildPeopleSection = () => {
 };
 
 export default WeBuildPeopleSection;
-
-

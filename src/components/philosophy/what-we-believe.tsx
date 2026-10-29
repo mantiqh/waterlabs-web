@@ -56,14 +56,16 @@ const convictionsData = [
     title: 'Repetition should not need a person.',
     description:
       'Most of a revenue cycle is the same work done over and over. A small part of it genuinely needs someone to think. Those two things have been tangled together for decades because there was no way to separate them. Now there is.',
-    image: '/images/philosophy/what-we-believe/img_the_people_inside_the_problem_should_end_it.%20(1).png',
+    image:
+      '/images/philosophy/what-we-believe/img_the_people_inside_the_problem_should_end_it.%20(1).png',
   },
   {
     id: 2,
     title: 'Knowledge should remain within the organization, not just with individuals.',
     description:
       'In most revenue cycles, critical expertise resides with long-tenured staff. When they leave, this knowledge is lost and must be relearned. Systems should retain organizational knowledge.',
-    image: '/images/philosophy/what-we-believe/img_Knowledge_should_compound_in_the_system.%20(1).png',
+    image:
+      '/images/philosophy/what-we-believe/img_Knowledge_should_compound_in_the_system.%20(1).png',
   },
 ];
 
@@ -86,22 +88,19 @@ export const WhatWeBelieveSection = () => {
   };
 
   return (
-    <section className="relative w-full overflow-hidden p-0 m-0 bg-gradient-to-b from-[#111111] from-50% to-[#2481ce] to-50%">
+    <section className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#111111] from-50% to-[#2481ce] to-50% p-0">
       {/* 
         Top Frame Card:
         - Desktop: 1440px x 597px (inner max-w: 1320px), padding: 80px 60px, rounded-tl-[60px] rounded-bl-[60px]
         - Mobile: 402px x 579.46px, padding: 40px 20px, rounded-tl-[30px] rounded-bl-[30px]
         - Background: #F4F6F9
       */}
-      <div className="w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[60px] xl:py-[80px] xl:px-[60px] overflow-hidden">
-        <div className="w-full max-w-[1320px] mx-auto">
-          
+      <div className="w-full overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-[60px] xl:px-[60px] xl:py-[80px]">
+        <div className="mx-auto w-full max-w-[1320px]">
           {/* Desktop Layout (1024px+) */}
-          <div className="hidden lg:flex flex-row items-stretch justify-between gap-[16px] xl:gap-[20px] h-[437px]">
-            
+          <div className="hidden h-[437px] flex-row items-stretch justify-between gap-[16px] lg:flex xl:gap-[20px]">
             {/* Left Column: Heading, Subtitle & Syncing 3D Graphic */}
-            <div className="w-[38%] xl:w-[512px] max-w-[512px] flex flex-col justify-between shrink-0 h-full">
-              
+            <div className="flex h-full w-[38%] max-w-[512px] shrink-0 flex-col justify-between xl:w-[512px]">
               {/* Header Text Block */}
               <div className="flex flex-col gap-[10px] xl:gap-[14px]">
                 <h2 className="type-h2 text-[#111111]">
@@ -113,14 +112,14 @@ export const WhatWeBelieveSection = () => {
               </div>
 
               {/* Left Image Card with Smooth Cross-Fade Animation */}
-              <div className="w-full h-[220px] xl:h-[287px] relative rounded-[30px_10px_30px_10px] xl:rounded-[40px_10px_40px_10px] overflow-hidden border-b border-[#91C6F2] shrink-0">
+              <div className="relative h-[220px] w-full shrink-0 overflow-hidden rounded-[30px_10px_30px_10px] border-b border-[#91C6F2] xl:h-[287px] xl:rounded-[40px_10px_40px_10px]">
                 {convictionsData.map((item, idx) => (
                   <div
                     key={`desktop-img-${item.id}`}
                     className={`absolute inset-0 transition-opacity duration-500 ease-in-out will-change-[opacity] ${
                       currentSlide === idx
-                        ? 'opacity-100 z-10'
-                        : 'opacity-0 z-0 pointer-events-none'
+                        ? 'z-10 opacity-100'
+                        : 'pointer-events-none z-0 opacity-0'
                     }`}
                   >
                     <Image
@@ -135,20 +134,19 @@ export const WhatWeBelieveSection = () => {
                   </div>
                 ))}
                 {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-[52.42%] to-[#0F68D6]/[0.66] to-[109.85%] pointer-events-none z-20" />
+                <div className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-b from-transparent from-[52.42%] to-[#0F68D6]/[0.66] to-[109.85%]" />
               </div>
-
             </div>
 
             {/* Right Column: Interactive Card (Locked Width & Height with Smooth Sliding Track) */}
             <div
-              className="flex-1 xl:w-[788px] h-full relative rounded-[30px_10px_30px_10px] xl:rounded-[40px_10px_40px_10px] p-[24px] xl:p-[32px] overflow-hidden flex flex-col justify-between shrink-0"
+              className="relative flex h-full flex-1 shrink-0 flex-col justify-between overflow-hidden rounded-[30px_10px_30px_10px] p-[24px] xl:w-[788px] xl:rounded-[40px_10px_40px_10px] xl:p-[32px]"
               style={{
                 background: 'linear-gradient(204.93deg, #63CCB7 5.28%, #0F68D6 98.54%)',
               }}
             >
               {/* Background Texture Graphic */}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="pointer-events-none absolute inset-0">
                 <Image
                   src="/images/philosophy/what-we-believe/img_card_background.png"
                   alt="Card background texture"
@@ -156,27 +154,25 @@ export const WhatWeBelieveSection = () => {
                   priority
                   loading="eager"
                   sizes="(max-width: 1280px) 600px, 788px"
-                  className="object-cover object-center mix-blend-overlay opacity-90"
+                  className="object-cover object-center opacity-90 mix-blend-overlay"
                 />
               </div>
 
               {/* Top Text Content - Animated Carousel Track */}
               <div className="relative z-10 w-full overflow-hidden pt-[4px] xl:pt-[8px]">
                 <div
-                  className="flex flex-row w-full transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                  className="flex w-full flex-row transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
                   style={{ transform: `translate3d(-${currentSlide * 100}%, 0, 0)` }}
                 >
                   {convictionsData.map((item, idx) => (
                     <div
                       key={`desktop-slide-${item.id}`}
-                      className={`w-full min-w-full shrink-0 flex flex-col justify-start gap-[10px] xl:gap-[14px] max-w-[680px] transition-opacity duration-500 ${
-                        currentSlide === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                      className={`flex w-full max-w-[680px] min-w-full shrink-0 flex-col justify-start gap-[10px] transition-opacity duration-500 xl:gap-[14px] ${
+                        currentSlide === idx ? 'opacity-100' : 'pointer-events-none opacity-0'
                       }`}
                     >
-                      <h3 className="type-h3 text-white">
-                        {item.title}
-                      </h3>
-                      <p className="type-body-xs text-[#F4F6F9] leading-relaxed">
+                      <h3 className="type-h3 text-white">{item.title}</h3>
+                      <p className="type-body-xs leading-relaxed text-[#F4F6F9]">
                         {item.description}
                       </p>
                     </div>
@@ -185,8 +181,7 @@ export const WhatWeBelieveSection = () => {
               </div>
 
               {/* Bottom Controls Row: Carousel Indicators + Arrow Buttons */}
-              <div className="relative z-10 w-full flex flex-row justify-between items-center pt-[16px] mt-auto">
-                
+              <div className="relative z-10 mt-auto flex w-full flex-row items-center justify-between pt-[16px]">
                 {/* Carousel Pill Indicators */}
                 <div className="flex items-center gap-[5px]">
                   {convictionsData.map((_, idx) => {
@@ -197,12 +192,12 @@ export const WhatWeBelieveSection = () => {
                         type="button"
                         aria-label={`Slide ${idx + 1}`}
                         onClick={() => setCurrentSlide(idx)}
-                        className={`h-[6px] rounded-[32px] transition-all duration-300 cursor-pointer border-none outline-none ${
+                        className={`h-[6px] cursor-pointer rounded-[32px] border-none transition-all duration-300 outline-none ${
                           isActive
-                            ? 'w-[28px] xl:w-[32px] bg-white'
+                            ? 'w-[28px] bg-white xl:w-[32px]'
                             : idx === (currentSlide + 1) % 3
-                            ? 'w-[14px] xl:w-[16px] bg-white/20 hover:bg-white/40'
-                            : 'w-[6px] bg-white/20 hover:bg-white/40'
+                              ? 'w-[14px] bg-white/20 hover:bg-white/40 xl:w-[16px]'
+                              : 'w-[6px] bg-white/20 hover:bg-white/40'
                         }`}
                       />
                     );
@@ -217,13 +212,15 @@ export const WhatWeBelieveSection = () => {
                     aria-label="Previous conviction"
                     onClick={handlePrev}
                     disabled={isFirst}
-                    className={`w-[42px] h-[42px] xl:w-[48px] xl:h-[48px] rounded-[64px] flex items-center justify-center transition-all duration-300 outline-none ${
+                    className={`flex h-[42px] w-[42px] items-center justify-center rounded-[64px] transition-all duration-300 outline-none xl:h-[48px] xl:w-[48px] ${
                       isFirst
-                        ? 'border border-white text-white cursor-not-allowed bg-transparent'
-                        : 'bg-white text-[#0F68D6] hover:scale-105 active:scale-95 cursor-pointer border-none shadow-sm'
+                        ? 'cursor-not-allowed border border-white bg-transparent text-white'
+                        : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm hover:scale-105 active:scale-95'
                     }`}
                   >
-                    <ChevronLeft className={`w-[11px] h-[16px] xl:w-[12px] xl:h-[18px] ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`} />
+                    <ChevronLeft
+                      className={`h-[16px] w-[11px] xl:h-[18px] xl:w-[12px] ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`}
+                    />
                   </button>
 
                   {/* Next Button */}
@@ -232,27 +229,25 @@ export const WhatWeBelieveSection = () => {
                     aria-label="Next conviction"
                     onClick={handleNext}
                     disabled={isLast}
-                    className={`w-[42px] h-[42px] xl:w-[48px] xl:h-[48px] rounded-[64px] flex items-center justify-center transition-all duration-300 outline-none ${
+                    className={`flex h-[42px] w-[42px] items-center justify-center rounded-[64px] transition-all duration-300 outline-none xl:h-[48px] xl:w-[48px] ${
                       isLast
-                        ? 'border border-white text-white cursor-not-allowed bg-transparent'
-                        : 'bg-white text-[#0F68D6] hover:scale-105 active:scale-95 cursor-pointer border-none shadow-sm'
+                        ? 'cursor-not-allowed border border-white bg-transparent text-white'
+                        : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm hover:scale-105 active:scale-95'
                     }`}
                   >
-                    <ChevronRight className={`w-[11px] h-[16px] xl:w-[12px] xl:h-[18px] ${isLast ? 'text-white' : 'text-[#0F68D6]'}`} />
+                    <ChevronRight
+                      className={`h-[16px] w-[11px] xl:h-[18px] xl:w-[12px] ${isLast ? 'text-white' : 'text-[#0F68D6]'}`}
+                    />
                   </button>
                 </div>
-
               </div>
-
             </div>
-
           </div>
 
           {/* Mobile & Tablet Layout (<1024px, Figma node 3883-12296) */}
-          <div className="flex lg:hidden flex-col gap-[32px] w-full">
-            
+          <div className="flex w-full flex-col gap-[32px] lg:hidden">
             {/* Mobile Header Block */}
-            <div className="flex flex-col gap-[12px] w-full">
+            <div className="flex w-full flex-col gap-[12px]">
               <h2 className="type-h2 text-[#111111]">
                 What <span className="text-[#0F68D6]">we believe</span>
               </h2>
@@ -263,31 +258,31 @@ export const WhatWeBelieveSection = () => {
 
             {/* Mobile Combined Card */}
             <div
-              className="w-full rounded-[20px_10px_20px_20px] p-[12px] relative overflow-hidden flex flex-col gap-[12px]"
+              className="relative flex w-full flex-col gap-[12px] overflow-hidden rounded-[20px_10px_20px_20px] p-[12px]"
               style={{
                 background: 'linear-gradient(204.93deg, #63CCB7 5.28%, #0F68D6 98.54%)',
               }}
             >
               {/* Card Mobile Background Texture */}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className="pointer-events-none absolute inset-0">
                 <Image
                   src="/images/philosophy/what-we-believe/banner-mobile.png"
                   alt="Card background texture mobile"
                   fill
                   priority
-                  className="object-cover object-center mix-blend-overlay opacity-90"
+                  className="object-cover object-center opacity-90 mix-blend-overlay"
                 />
               </div>
 
               {/* Mobile Card Top Image with Smooth Cross-Fade Animation */}
-              <div className="w-full h-[190px] relative rounded-[20px_10px_20px_20px] overflow-hidden shrink-0">
+              <div className="relative h-[190px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px]">
                 {convictionsData.map((item, idx) => (
                   <div
                     key={`mobile-img-${item.id}`}
                     className={`absolute inset-0 transition-opacity duration-500 ease-in-out will-change-[opacity] ${
                       currentSlide === idx
-                        ? 'opacity-100 z-10'
-                        : 'opacity-0 z-0 pointer-events-none'
+                        ? 'z-10 opacity-100'
+                        : 'pointer-events-none z-0 opacity-0'
                     }`}
                   >
                     <Image
@@ -301,29 +296,26 @@ export const WhatWeBelieveSection = () => {
                     />
                   </div>
                 ))}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-[52.42%] to-[#0F68D6]/[0.66] to-[109.85%] pointer-events-none z-20" />
+                <div className="pointer-events-none absolute inset-0 z-20 bg-gradient-to-b from-transparent from-[52.42%] to-[#0F68D6]/[0.66] to-[109.85%]" />
               </div>
 
               {/* Mobile Card Bottom Content with Animated Track */}
-              <div className="relative z-10 w-full flex flex-col justify-between gap-[16px] min-h-[190px] flex-1 px-[4px] pb-[4px]">
-                
+              <div className="relative z-10 flex min-h-[190px] w-full flex-1 flex-col justify-between gap-[16px] px-[4px] pb-[4px]">
                 {/* Title + Subtitle Track */}
                 <div className="w-full overflow-hidden">
                   <div
-                    className="flex flex-row w-full transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                    className="flex w-full flex-row transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
                     style={{ transform: `translate3d(-${currentSlide * 100}%, 0, 0)` }}
                   >
                     {convictionsData.map((item, idx) => (
                       <div
                         key={`mobile-slide-${item.id}`}
-                        className={`w-full min-w-full shrink-0 flex flex-col gap-[10px] transition-opacity duration-500 ${
-                          currentSlide === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                        className={`flex w-full min-w-full shrink-0 flex-col gap-[10px] transition-opacity duration-500 ${
+                          currentSlide === idx ? 'opacity-100' : 'pointer-events-none opacity-0'
                         }`}
                       >
-                        <h3 className="type-h3 text-white">
-                          {item.title}
-                        </h3>
-                        <p className="type-body-xs text-[#F4F6F9] leading-relaxed">
+                        <h3 className="type-h3 text-white">{item.title}</h3>
+                        <p className="type-body-xs leading-relaxed text-[#F4F6F9]">
                           {item.description}
                         </p>
                       </div>
@@ -332,8 +324,7 @@ export const WhatWeBelieveSection = () => {
                 </div>
 
                 {/* Bottom Row: Mobile Indicators + Mobile Arrows */}
-                <div className="w-full flex flex-row justify-between items-center pt-[4px] mt-auto">
-                  
+                <div className="mt-auto flex w-full flex-row items-center justify-between pt-[4px]">
                   {/* Mobile Pill Indicators (height: 5px) */}
                   <div className="flex items-center gap-[5px]">
                     {convictionsData.map((_, idx) => {
@@ -344,12 +335,12 @@ export const WhatWeBelieveSection = () => {
                           type="button"
                           aria-label={`Slide ${idx + 1}`}
                           onClick={() => setCurrentSlide(idx)}
-                          className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer border-none outline-none ${
+                          className={`h-[5px] cursor-pointer rounded-[32px] border-none transition-all duration-300 outline-none ${
                             isActive
                               ? 'w-[32px] bg-white'
                               : idx === (currentSlide + 1) % 3
-                              ? 'w-[16px] bg-white/20 hover:bg-white/40'
-                              : 'w-[6px] bg-white/20 hover:bg-white/40'
+                                ? 'w-[16px] bg-white/20 hover:bg-white/40'
+                                : 'w-[6px] bg-white/20 hover:bg-white/40'
                           }`}
                         />
                       );
@@ -364,13 +355,15 @@ export const WhatWeBelieveSection = () => {
                       aria-label="Previous conviction"
                       onClick={handlePrev}
                       disabled={isFirst}
-                      className={`w-[34px] h-[34px] rounded-[45px] flex items-center justify-center transition-all duration-300 outline-none ${
+                      className={`flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
                         isFirst
-                          ? 'border border-white text-white cursor-not-allowed bg-transparent'
-                          : 'bg-white text-[#0F68D6] active:scale-95 cursor-pointer border-none shadow-sm'
+                          ? 'cursor-not-allowed border border-white bg-transparent text-white'
+                          : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm active:scale-95'
                       }`}
                     >
-                      <ChevronLeft className={`w-[9px] h-[14px] ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`} />
+                      <ChevronLeft
+                        className={`h-[14px] w-[9px] ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`}
+                      />
                     </button>
 
                     {/* Next */}
@@ -379,24 +372,21 @@ export const WhatWeBelieveSection = () => {
                       aria-label="Next conviction"
                       onClick={handleNext}
                       disabled={isLast}
-                      className={`w-[34px] h-[34px] rounded-[45px] flex items-center justify-center transition-all duration-300 outline-none ${
+                      className={`flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
                         isLast
-                          ? 'border border-white text-white cursor-not-allowed bg-transparent'
-                          : 'bg-white text-[#0F68D6] active:scale-95 cursor-pointer border-none shadow-sm'
+                          ? 'cursor-not-allowed border border-white bg-transparent text-white'
+                          : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm active:scale-95'
                       }`}
                     >
-                      <ChevronRight className={`w-[9px] h-[14px] ${isLast ? 'text-white' : 'text-[#0F68D6]'}`} />
+                      <ChevronRight
+                        className={`h-[14px] w-[9px] ${isLast ? 'text-white' : 'text-[#0F68D6]'}`}
+                      />
                     </button>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

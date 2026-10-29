@@ -5,7 +5,7 @@ import ManifestoSection from './manifesto-section';
 
 export const TrustAndSecurityPage = () => {
   return (
-    <main className="w-full flex flex-col">
+    <main className="flex w-full flex-col">
       <TrustHeroSection />
       <ManifestoSection />
       <InteractiveSecuritySections />

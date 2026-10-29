@@ -74,9 +74,7 @@ export const ContactUsContactForm = ({
     };
   }, [isDropdownOpen]);
 
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -91,7 +89,10 @@ export const ContactUsContactForm = ({
   };
 
   return (
-    <section id="contact-form" className="relative w-full bg-gradient-to-b from-white from-50% to-[#020c47] to-50% overflow-hidden">
+    <section
+      id="contact-form"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#020c47] to-50%"
+    >
       {/* 
         Contact Form Section:
         - Desktop: 1440px, padding: 0px 60px, bg: #F4F6F9, border-radius: 60px 0px 0px 60px
@@ -99,32 +100,27 @@ export const ContactUsContactForm = ({
         - Desktop: Two columns — left has tag + heading + image, right has form
         - Mobile: Stacked — tag + heading, image, form
       */}
-      <div className="w-full bg-ghost-white rounded-l-[30px] lg:rounded-l-[60px]">
-        <div className="w-full max-w-[1440px] mx-auto px-[20px] md:px-[40px] lg:px-[60px] py-[40px] lg:py-[80px]">
-          <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[20px] lg:gap-[32px]">
-
+      <div className="bg-ghost-white w-full rounded-l-[30px] lg:rounded-l-[60px]">
+        <div className="mx-auto w-full max-w-[1440px] px-[20px] py-[40px] md:px-[40px] lg:px-[60px] lg:py-[80px]">
+          <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] lg:flex-row lg:gap-[32px]">
             {/* Left Column (Frame 2147226540: max 516px, gap: 40px) */}
-            <div className="w-full lg:w-[40%] xl:w-[516px] lg:max-w-[516px] shrink-0 min-w-0 flex flex-col items-start gap-[12px] lg:gap-[40px]">
+            <div className="flex w-full min-w-0 shrink-0 flex-col items-start gap-[12px] lg:w-[40%] lg:max-w-[516px] lg:gap-[40px] xl:w-[516px]">
               {/* Tag + Heading (Frame 2147226533: 516px x 96px, gap: 12px) */}
-              <div className="w-full flex flex-col items-start gap-[8px] lg:gap-[12px]">
+              <div className="flex w-full flex-col items-start gap-[8px] lg:gap-[12px]">
                 {/* Text - Tag (gap: 8px, height: 24px) */}
                 {tag && (
-                  <div className="flex items-center gap-[8px] h-[24px]">
-                    <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                    <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
-                      {tag}
-                    </span>
+                  <div className="flex h-[24px] items-center gap-[8px]">
+                    <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+                    <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{tag}</span>
                   </div>
                 )}
                 {/* Heading (52px / 60px / -0.01em, #0F68D6) */}
-                <h2 className="type-h2 tracking-[-0.01em] text-electric-blue">
-                  {heading}
-                </h2>
+                <h2 className="type-h2 text-electric-blue tracking-[-0.01em]">{heading}</h2>
               </div>
 
               {/* Image Container (Frame 2147226534: max 516px x 328px) */}
               {image && (
-                <div className="w-full relative overflow-hidden rounded-[20px_10px_20px_20px] lg:rounded-[30px_15px_30px_30px] aspect-[516/328] lg:w-full">
+                <div className="relative aspect-[516/328] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:w-full lg:rounded-[30px_15px_30px_30px]">
                   <Image
                     src={image}
                     alt="Contact form illustration"
@@ -136,7 +132,8 @@ export const ContactUsContactForm = ({
                   <div
                     className="absolute inset-0"
                     style={{
-                      background: 'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
+                      background:
+                        'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
                     }}
                   />
                 </div>
@@ -144,13 +141,16 @@ export const ContactUsContactForm = ({
             </div>
 
             {/* Right Column: Form (Frame: max 772px x 464px, gap: 14px) */}
-            <form onSubmit={handleSubmit} className="w-full lg:w-[60%] xl:w-[772px] lg:flex-1 min-w-0 flex flex-col items-start gap-[16px] lg:gap-[14px]">
+            <form
+              onSubmit={handleSubmit}
+              className="flex w-full min-w-0 flex-col items-start gap-[16px] lg:w-[60%] lg:flex-1 lg:gap-[14px] xl:w-[772px]"
+            >
               {/* Input Fields Container */}
-              <div className="w-full flex flex-col items-start gap-[12px]">
+              <div className="flex w-full flex-col items-start gap-[12px]">
                 {/* Input container 1: Name & Org */}
-                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px]">
+                <div className="flex w-full flex-col items-start gap-[12px] lg:flex-row">
                   {/* Name */}
-                  <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
+                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
                       name="name"
@@ -158,11 +158,11 @@ export const ContactUsContactForm = ({
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
+                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
                   </div>
                   {/* Org */}
-                  <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
+                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
                       name="org"
@@ -170,15 +170,15 @@ export const ContactUsContactForm = ({
                       value={formData.org}
                       onChange={handleChange}
                       required
-                      className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
+                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
                   </div>
                 </div>
 
                 {/* Input container 2: Email ID & Phone number */}
-                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px]">
+                <div className="flex w-full flex-col items-start gap-[12px] lg:flex-row">
                   {/* Email ID */}
-                  <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
+                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="email"
                       name="emailId"
@@ -186,26 +186,26 @@ export const ContactUsContactForm = ({
                       value={formData.emailId}
                       onChange={handleChange}
                       required
-                      className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
+                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
                   </div>
                   {/* Phone number */}
-                  <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
+                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="tel"
                       name="phoneNumber"
                       placeholder="Phone number"
                       value={formData.phoneNumber}
                       onChange={handleChange}
-                      className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
+                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
                   </div>
                 </div>
 
                 {/* Input container 3: Company & Organization Type */}
-                <div className="w-full flex flex-col lg:flex-row items-start gap-[12px] relative z-20">
+                <div className="relative z-20 flex w-full flex-col items-start gap-[12px] lg:flex-row">
                   {/* Company */}
-                  <div className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px]">
+                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
                       name="company"
@@ -213,30 +213,30 @@ export const ContactUsContactForm = ({
                       value={formData.company}
                       onChange={handleChange}
                       required
-                      className="w-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none"
+                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
                   </div>
                   {/* Organization Type */}
                   <div
                     ref={dropdownRef}
-                    className="w-full lg:w-[380px] lg:flex-1 h-[60px] flex items-center border-b border-[#D7DCE2] px-[16px] relative"
+                    className="relative flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1"
                   >
                     <button
                       type="button"
                       onClick={() => setIsDropdownOpen((prev) => !prev)}
                       aria-haspopup="listbox"
                       aria-expanded={isDropdownOpen}
-                      className="w-full h-full flex items-center justify-between text-left outline-none cursor-pointer group"
+                      className="group flex h-full w-full cursor-pointer items-center justify-between text-left outline-none"
                     >
                       <span className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
                         {formData.orgType || 'Organization Type*'}
                       </span>
                       <div
-                        className={`transition-transform duration-200 text-[#7D8690] group-hover:text-[#0F68D6] ${
+                        className={`text-[#7D8690] transition-transform duration-200 group-hover:text-[#0F68D6] ${
                           isDropdownOpen ? '-rotate-90 text-[#0F68D6]' : 'rotate-90'
                         }`}
                       >
-                        <ChevronRight className="w-[8px] h-[12px] xl:w-[9.73px] xl:h-[14.63px] shrink-0" />
+                        <ChevronRight className="h-[12px] w-[8px] shrink-0 xl:h-[14.63px] xl:w-[9.73px]" />
                       </div>
                     </button>
 
@@ -246,7 +246,7 @@ export const ContactUsContactForm = ({
                     {/* Dropdown Menu (matching Navbar dropdown UI in Image 2 and section colors) */}
                     {isDropdownOpen && (
                       <div
-                        className="absolute top-[calc(100%+8px)] left-0 w-full bg-[#F4F6F9] backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.10)] border border-[#D7DCE2] z-50 flex flex-col gap-[4px] animate-in fade-in-0 zoom-in-95 duration-150"
+                        className="animate-in fade-in-0 zoom-in-95 absolute top-[calc(100%+8px)] left-0 z-50 flex w-full flex-col gap-[4px] rounded-[20px_10px_20px_20px] border border-[#D7DCE2] bg-[#F4F6F9] p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.10)] backdrop-blur-[20px] duration-150"
                         role="listbox"
                       >
                         {orgTypeOptions.map((opt) => {
@@ -265,7 +265,7 @@ export const ContactUsContactForm = ({
                                 setIsDropdownOpen(false);
                                 setHoveredOption(null);
                               }}
-                              className={`h-[40px] w-full flex flex-row items-center gap-[14px] px-[12px] py-[8px] body-xxs type-body-xxs transition-colors duration-150 cursor-pointer text-left ${
+                              className={`body-xxs type-body-xxs flex h-[40px] w-full cursor-pointer flex-row items-center gap-[14px] px-[12px] py-[8px] text-left transition-colors duration-150 ${
                                 isSelected || isHovered
                                   ? 'text-[#0F68D6]'
                                   : 'text-[#111111] hover:text-[#0F68D6]'
@@ -273,7 +273,7 @@ export const ContactUsContactForm = ({
                             >
                               <span className="whitespace-nowrap">{opt}</span>
                               {(isSelected || isHovered) && (
-                                <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0 text-[#0F68D6]" />
+                                <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0F68D6]" />
                               )}
                             </button>
                           );
@@ -284,21 +284,21 @@ export const ContactUsContactForm = ({
                 </div>
 
                 {/* What challenge are you looking to overcome */}
-                <div className="w-full h-[102px] border-b border-[#D7DCE2] px-[16px] pt-[18px]">
+                <div className="h-[102px] w-full border-b border-[#D7DCE2] px-[16px] pt-[18px]">
                   <textarea
                     name="challenge"
                     placeholder="What challenge are you looking to overcome"
                     value={formData.challenge}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full h-full type-body-xxs tracking-[0.01em] text-[#2A2A2A] placeholder:text-[#2A2A2A] bg-transparent outline-none resize-none"
+                    className="type-body-xxs h-full w-full resize-none bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                   />
                 </div>
               </div>
 
               {/* Consent and Submit Area */}
-              <div className="w-full flex flex-col items-start gap-[16px] pt-[8px]">
-                <div className="w-full flex flex-col items-start gap-[12px]">
+              <div className="flex w-full flex-col items-start gap-[16px] pt-[8px]">
+                <div className="flex w-full flex-col items-start gap-[12px]">
                   {/* Main heading */}
                   {newsletterHeading && (
                     <p className="type-body-xxs tracking-[0.01em] text-[#333333]">
@@ -311,7 +311,7 @@ export const ContactUsContactForm = ({
                     <button
                       type="button"
                       onClick={() => setAgreed(!agreed)}
-                      className={`w-[20px] h-[20px] rounded-[2px] flex items-center justify-center transition-colors cursor-pointer shrink-0 ${
+                      className={`flex h-[20px] w-[20px] shrink-0 cursor-pointer items-center justify-center rounded-[2px] transition-colors ${
                         agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'
                       }`}
                       aria-label="Agree to terms"
@@ -323,7 +323,7 @@ export const ContactUsContactForm = ({
                           viewBox="0 0 10 8"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="w-[10px] h-[8px]"
+                          className="h-[8px] w-[10px]"
                         >
                           <path
                             d="M1 4L3.5 6.5L9 1"
@@ -356,7 +356,6 @@ export const ContactUsContactForm = ({
                 </CTA>
               </div>
             </form>
-
           </div>
         </div>
       </div>

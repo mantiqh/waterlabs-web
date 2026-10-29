@@ -9,7 +9,8 @@ export const blogsPageSchema = defineType({
       name: 'categories',
       title: 'Filter Categories / Tabs',
       type: 'array',
-      description: 'The category filter pills shown in the tabs section (e.g. Features, Use Cases, Company News, Case Studies). Note: "All" is prepended automatically.',
+      description:
+        'The category filter pills shown in the tabs section (e.g. Features, Use Cases, Company News, Case Studies). Note: "All" is prepended automatically.',
       of: [
         defineArrayMember({
           type: 'string',

@@ -5,11 +5,14 @@ export const caseStudy5: CaseStudy = {
   slug: 'hospital-emergency-department',
   aliases: ['specialty-surgical-hospital'],
   categoryTag: 'Case Study · Emergency Department',
-  title: 'How a hospital emergency department used Waterlabs to code 90% of encounters without a coder.',
+  title:
+    'How a hospital emergency department used Waterlabs to code 90% of encounters without a coder.',
   titleHighlight: 'code 90% of encounters without a coder.',
-  subtitle: 'A high-volume ED in which every discharge produced physician, nursing, and ancillary documentation that had to be reconciled before a claim could move.',
+  subtitle:
+    'A high-volume ED in which every discharge produced physician, nursing, and ancillary documentation that had to be reconciled before a claim could move.',
   heroImage: '/images/case-study/case-study-5-hospital/Frame%202147226957.png',
-  heroImageAlt: 'Hospital emergency department command center and autonomous coding workflow with Waterlabs',
+  heroImageAlt:
+    'Hospital emergency department command center and autonomous coding workflow with Waterlabs',
   cardCategory: 'Case Studies',
   cardTag: 'Hospital Emergency Department',
   cardStat: '90% of coding volume handled autonomously',
@@ -17,7 +20,13 @@ export const caseStudy5: CaseStudy = {
   desktopImage: '/images/case-study-main-page/tabs/img_placeholder_05.png',
   mobileImage: '/images/case-study-main-page/tabs/img_placeholder_05_mobile (1).png',
   order: 5,
-  tags: ['Hospital Emergency Department', 'Emergency Medicine', 'Autonomous Coding', 'CurieCode', 'HIMER AI OS'],
+  tags: [
+    'Hospital Emergency Department',
+    'Emergency Medicine',
+    'Autonomous Coding',
+    'CurieCode',
+    'HIMER AI OS',
+  ],
   clientSummary:
     'A high-volume hospital emergency department requiring full encounter coding at discharge. Every visit generates physician notes, nursing documentation, and ancillary records that must be read and reconciled before assigning diagnosis and procedure codes.',
   statBadges: [
@@ -31,7 +40,8 @@ export const caseStudy5: CaseStudy = {
     'Waterlabs deployed CurieCode, our agentic coding engine, to read ED documentation and assign codes directly, with payer guidelines built into the work.\n\nIngestion at discharge. Our agents take in the full encounter record as documentation is finalized. Previously, a coder opened and reviewed physician, nursing, and ancillary notes in sequence.\n\nClinical extraction. Our agents identify diagnosis and procedure evidence in the documentation as written. Previously, this depended on each coder’s reading of the record.\n\nCode assignment. Our agents assign ICD-10-CM, CPT, and evaluation and management codes supported by the documentation. Previously, assignment was manual, on an encounter-by-encounter basis, at the team’s pace.\n\nPayer guideline validation. Our agents check every code against the payer’s policy for the claim. Previously, coders cross-checked payer-specific policy by hand.\n\nConfidence routing. Encounters our agents can clear are submitted. Anything flagged routes to a coder with the reasoning attached. Previously, every encounter received the same review regardless of complexity.',
   resultsBlock: {
     headline: '90% of coding volume handled autonomously',
-    subheadline: 'Nine encounters in 10 now reach billing without a coder having to open the chart.',
+    subheadline:
+      'Nine encounters in 10 now reach billing without a coder having to open the chart.',
     details:
       'The complex 10% go to specialists: Coders work only on the encounters that require judgment, achieving higher throughput per coder on the remaining work.\n\nReal-time coding replaces the backlog: Diagnosis and CPT assignment happen as documentation is finalized, so the queue that used to form between discharge and billing does not form.\n\nLower cost to code per encounter: With a faster reimbursement cycle and fewer days to bill.\n\nGuideline-validated coding, applied consistently: Payer policy is checked the same way on every encounter, reducing denial-driving errors that arose from coder-by-coder interpretation.',
   },

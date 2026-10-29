@@ -38,7 +38,12 @@ export function BoldTextInput(props: StringInputProps) {
         nextEnd = start + unwrapped.length;
       }
       // Or check if the selection is immediately surrounded by ** in the parent string
-      else if (start >= 2 && end <= value.length - 2 && value.slice(start - 2, start) === '**' && value.slice(end, end + 2) === '**') {
+      else if (
+        start >= 2 &&
+        end <= value.length - 2 &&
+        value.slice(start - 2, start) === '**' &&
+        value.slice(end, end + 2) === '**'
+      ) {
         nextValue = value.slice(0, start - 2) + selected + value.slice(end + 2);
         nextStart = start - 2;
         nextEnd = nextStart + selected.length;
@@ -76,7 +81,7 @@ export function BoldTextInput(props: StringInputProps) {
         handleToggleBold();
       }
     },
-    [handleToggleBold]
+    [handleToggleBold],
   );
 
   // Remove bold tags from a phrase
@@ -87,7 +92,7 @@ export function BoldTextInput(props: StringInputProps) {
       const nextValue = value.replaceAll(target, phrase);
       onChange(nextValue ? set(nextValue) : unset());
     },
-    [onChange, readOnly, value]
+    [onChange, readOnly, value],
   );
 
   // Add bold tags to a typed phrase found in the text
@@ -95,7 +100,9 @@ export function BoldTextInput(props: StringInputProps) {
     if (readOnly || !quickWord.trim()) return;
     const phrase = quickWord.trim();
     if (!value.includes(phrase)) {
-      alert(`The phrase "${phrase}" was not found in the description text. Please verify spelling.`);
+      alert(
+        `The phrase "${phrase}" was not found in the description text. Please verify spelling.`,
+      );
       return;
     }
 
@@ -106,7 +113,10 @@ export function BoldTextInput(props: StringInputProps) {
       return;
     }
 
-    const nextValue = value.replace(new RegExp(`(?<!\\*\\*)${escapeRegex(phrase)}(?!\\*\\*)`, 'g'), `**${phrase}**`);
+    const nextValue = value.replace(
+      new RegExp(`(?<!\\*\\*)${escapeRegex(phrase)}(?!\\*\\*)`, 'g'),
+      `**${phrase}**`,
+    );
     onChange(nextValue ? set(nextValue) : unset());
     setQuickWord('');
     setCopiedNotification(`Bolded "${phrase}"`);
@@ -228,7 +238,15 @@ export function BoldTextInput(props: StringInputProps) {
             border: '1px solid #e2e8f0',
           }}
         >
-          <div style={{ fontSize: '11px', fontWeight: 600, color: '#475569', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          <div
+            style={{
+              fontSize: '11px',
+              fontWeight: 600,
+              color: '#475569',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}
+          >
             Bold words in this section ({uniqueBoldPhrases.length}) — Click ✕ to un-bold:
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>

@@ -7,7 +7,8 @@ import { fetchSolutionBySlug } from '@/sanity/lib/solutions';
 export async function generateMetadata(): Promise<Metadata> {
   const solution = await fetchSolutionBySlug('eligibility-and-benefits-verification');
   return {
-    title: solution?.seo?.metaTitle || 'Solutions — Eligibility & Benefits Verification | Waterlabs AI',
+    title:
+      solution?.seo?.metaTitle || 'Solutions — Eligibility & Benefits Verification | Waterlabs AI',
     description:
       solution?.seo?.metaDescription ||
       solution?.hero.description ||

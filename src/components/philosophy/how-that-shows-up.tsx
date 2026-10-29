@@ -8,7 +8,8 @@ const productStatements = [
     id: 0,
     leadText: 'Because knowledge should remain within the organization,',
     highlightText: 'every resolved exception is recorded and retained.',
-    description: 'When a similar case arises, the agent is equipped with the necessary information.',
+    description:
+      'When a similar case arises, the agent is equipped with the necessary information.',
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(2).png',
     mobileImage:
@@ -28,7 +29,8 @@ const productStatements = [
     id: 2,
     leadText: 'Repetitive tasks are automated,',
     highlightText: 'while judgment calls are handled by your staff.',
-    description: 'When an agent encounters an unresolved issue, they escalate the case, providing a complete record of all attempted solutions.',
+    description:
+      'When an agent encounters an unresolved issue, they escalate the case, providing a complete record of all attempted solutions.',
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
     mobileImage:
@@ -70,7 +72,7 @@ export const HowThatShowsUpSection = () => {
         const progress = Math.min(Math.max(current / total, 0), 1);
         const index = Math.min(
           Math.floor(progress * productStatements.length),
-          productStatements.length - 1
+          productStatements.length - 1,
         );
         setActiveDesktopIndex(index);
 
@@ -100,7 +102,7 @@ export const HowThatShowsUpSection = () => {
     const scrollFraction = scrollTop / (scrollHeight - clientHeight);
     const index = Math.min(
       Math.max(Math.round(scrollFraction * (productStatements.length - 1)), 0),
-      productStatements.length - 1
+      productStatements.length - 1,
     );
     setActiveDesktopIndex(index);
   };
@@ -139,7 +141,7 @@ export const HowThatShowsUpSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative w-full overflow-hidden p-0 m-0 bg-[#F4F6F9]">
+    <section ref={sectionRef} className="relative m-0 w-full overflow-hidden bg-[#F4F6F9] p-0">
       {/* 
         Outer Container Card (Frame 2147203276 / top frame):
         - Desktop: 1440px x 764px, rounded-tr-[60px] rounded-br-[60px], padding: 80px 60px, gap: 40px
@@ -147,23 +149,21 @@ export const HowThatShowsUpSection = () => {
         - Background: linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)
       */}
       <div
-        className="w-full rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[32px] px-[20px] md:py-[60px] md:px-[40px] lg:py-[60px] lg:px-[60px] flex flex-col gap-[20px] lg:gap-[24px] overflow-hidden"
+        className="flex w-full flex-col gap-[20px] overflow-hidden rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[32px] md:px-[40px] md:py-[60px] lg:gap-[24px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]"
         style={{
           background: 'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
         }}
       >
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[20px] lg:gap-[24px]">
-          
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[20px] lg:gap-[24px]">
           {/* Main Card with Background Image (Frame 2147203302: 1320px x 500px, 16px top-left radius to eliminate corner sliver) */}
-          <div className="relative w-full h-[580px] sm:h-[640px] md:h-[700px] lg:!h-[500px] lg:max-h-[500px] rounded-[16px_10px_20px_20px] lg:rounded-[16px_16px_16px_8px] overflow-hidden flex flex-col justify-end lg:justify-start">
-            
+          <div className="relative flex h-[580px] w-full flex-col justify-end overflow-hidden rounded-[16px_10px_20px_20px] sm:h-[640px] md:h-[700px] lg:!h-[500px] lg:max-h-[500px] lg:justify-start lg:rounded-[16px_16px_16px_8px]">
             {/* Background Image - Mobile & Tablet */}
-            <div className="absolute inset-0 pointer-events-none lg:hidden">
+            <div className="pointer-events-none absolute inset-0 lg:hidden">
               {productStatements.map((statement, idx) => (
                 <div
                   key={`mobile-bg-${idx}`}
                   className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    activeMobileIndex === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    activeMobileIndex === idx ? 'opacity-100' : 'pointer-events-none opacity-0'
                   }`}
                 >
                   <Image
@@ -179,12 +179,12 @@ export const HowThatShowsUpSection = () => {
             </div>
 
             {/* Background Image - Desktop */}
-            <div className="absolute inset-0 pointer-events-none hidden lg:block">
+            <div className="pointer-events-none absolute inset-0 hidden lg:block">
               {productStatements.map((statement, idx) => (
                 <div
                   key={`desktop-bg-${idx}`}
                   className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    activeDesktopIndex === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                    activeDesktopIndex === idx ? 'opacity-100' : 'pointer-events-none opacity-0'
                   }`}
                 >
                   <Image
@@ -200,21 +200,21 @@ export const HowThatShowsUpSection = () => {
             </div>
 
             {/* Glassmorphic Card (Frame 2147203299: 537px x 500px on desktop) */}
-            <div className="relative z-10 w-full lg:w-[360px] xl:w-[537px] h-auto lg:h-[500px] lg:max-h-[500px] bg-white/[0.90] backdrop-blur-[12px] rounded-[16px_8px_20px_20px] lg:rounded-[16px_8px_16px_8px] p-[20px] sm:p-[24px] lg:p-[32px_32px_0px] flex flex-col justify-between gap-[14px] shadow-sm overflow-hidden">
-              
+            <div className="relative z-10 flex h-auto w-full flex-col justify-between gap-[14px] overflow-hidden rounded-[16px_8px_20px_20px] bg-white/[0.90] p-[20px] shadow-sm backdrop-blur-[12px] sm:p-[24px] lg:h-[500px] lg:max-h-[500px] lg:w-[360px] lg:rounded-[16px_8px_16px_8px] lg:p-[32px_32px_0px] xl:w-[537px]">
               {/* Heading Block */}
               <div className="flex flex-col gap-[10px] lg:gap-[14px]">
                 {/* Main Heading */}
                 <h2 className="type-h2 text-black">
-                  How That Shows Up<br />in the Product
+                  How That Shows Up
+                  <br />
+                  in the Product
                 </h2>
               </div>
 
               {/* Desktop Progress Bar & Vertically Scrollable Statements */}
-              <div className="hidden lg:flex flex-row items-start gap-[24px] pt-[4px] relative">
-                
+              <div className="relative hidden flex-row items-start gap-[24px] pt-[4px] lg:flex">
                 {/* Vertical Progress Bar (3px x 183px) */}
-                <div className="w-[3px] h-[183px] relative rounded-[12px] bg-[#7D8690]/40 overflow-hidden shrink-0 mt-[4px]">
+                <div className="relative mt-[4px] h-[183px] w-[3px] shrink-0 overflow-hidden rounded-[12px] bg-[#7D8690]/40">
                   <div
                     className="absolute left-0 w-full rounded-[12px] bg-[#0F68D6] transition-all duration-300 ease-out"
                     style={{
@@ -228,7 +228,7 @@ export const HowThatShowsUpSection = () => {
                 <div
                   ref={desktopScrollRef}
                   onScroll={handleDesktopScroll}
-                  className="flex flex-col gap-[20px] h-[183px] overflow-y-auto no-scrollbar snap-y snap-mandatory select-none flex-1 pr-[8px] pb-[48px]"
+                  className="no-scrollbar flex h-[183px] flex-1 snap-y snap-mandatory flex-col gap-[20px] overflow-y-auto pr-[8px] pb-[48px] select-none"
                 >
                   {productStatements.map((item, index) => {
                     const isActive = index === activeDesktopIndex;
@@ -251,25 +251,21 @@ export const HowThatShowsUpSection = () => {
                     );
                   })}
                   {/* Bottom spacer so the last statement has clear breathing room and is not blurry when scrolled to the end */}
-                  <div className="h-[28px] shrink-0 pointer-events-none" aria-hidden="true" />
+                  <div className="pointer-events-none h-[28px] shrink-0" aria-hidden="true" />
                 </div>
-
               </div>
 
               {/* Mobile Horizontal Snap Scroll / Swipe Container */}
-              <div className="flex lg:hidden flex-col gap-[14px] pt-[2px]">
+              <div className="flex flex-col gap-[14px] pt-[2px] lg:hidden">
                 <div
                   ref={mobileScrollRef}
                   onScroll={handleMobileScroll}
-                  className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar w-full"
+                  className="no-scrollbar flex w-full snap-x snap-mandatory flex-row overflow-x-auto"
                 >
                   {productStatements.map((item) => (
                     <div key={item.id} className="w-full min-w-full snap-start pr-[8px]">
                       <p className="type-h6 text-black">
-                        {item.leadText}{' '}
-                        <span className="text-[#0F68D6]">
-                          {item.highlightText}
-                        </span>{' '}
+                        {item.leadText} <span className="text-[#0F68D6]">{item.highlightText}</span>{' '}
                         {item.description}
                       </p>
                     </div>
@@ -286,12 +282,12 @@ export const HowThatShowsUpSection = () => {
                         type="button"
                         aria-label={`Slide ${idx + 1}`}
                         onClick={() => scrollToMobileCard(idx)}
-                        className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer border-none outline-none ${
+                        className={`h-[5px] cursor-pointer rounded-[32px] border-none transition-all duration-300 outline-none ${
                           isActive
                             ? 'w-[32px] bg-[#0F68D6]'
                             : idx === (activeMobileIndex + 1) % productStatements.length
-                            ? 'w-[16px] bg-[#0F68D6]/10 hover:bg-[#0F68D6]/30'
-                            : 'w-[6px] bg-[#0F68D6]/10 hover:bg-[#0F68D6]/30'
+                              ? 'w-[16px] bg-[#0F68D6]/10 hover:bg-[#0F68D6]/30'
+                              : 'w-[6px] bg-[#0F68D6]/10 hover:bg-[#0F68D6]/30'
                         }`}
                       />
                     );
@@ -300,20 +296,19 @@ export const HowThatShowsUpSection = () => {
               </div>
 
               {/* Subtle bottom gradient fade on desktop card */}
-              <div className="hidden lg:block absolute bottom-0 left-0 right-0 h-[20px] bg-gradient-to-t from-white/40 to-transparent pointer-events-none rounded-b-[8px]" />
-
+              <div className="pointer-events-none absolute right-0 bottom-0 left-0 hidden h-[20px] rounded-b-[8px] bg-gradient-to-t from-white/40 to-transparent lg:block" />
             </div>
-
           </div>
 
           {/* Bottom Tagline Row (Frame 2147226481: 1320px x 64px) */}
-          <div className="w-full flex flex-row items-start gap-[8px] lg:gap-[12px]">
-            <div className="w-[8px] h-[8px] rounded-full bg-[#63CCB7] shrink-0 mt-[10px] lg:mt-[12px]" />
-            <p className="type-h6 text-white flex-1 leading-normal">
-              HIMER AI OS runs the cycle. CurieCode handles the coding.<br className="hidden lg:inline" /> Both stay accountable for what they deliver, and we don&apos;t bill until they&apos;re live.
+          <div className="flex w-full flex-row items-start gap-[8px] lg:gap-[12px]">
+            <div className="mt-[10px] h-[8px] w-[8px] shrink-0 rounded-full bg-[#63CCB7] lg:mt-[12px]" />
+            <p className="type-h6 flex-1 leading-normal text-white">
+              HIMER AI OS runs the cycle. CurieCode handles the coding.
+              <br className="hidden lg:inline" /> Both stay accountable for what they deliver, and
+              we don&apos;t bill until they&apos;re live.
             </p>
           </div>
-
         </div>
       </div>
     </section>

@@ -31,7 +31,8 @@ export const DEFAULT_RELATED_BLOGS: RelatedBlogItem[] = [
   },
   {
     id: 'related-medical-coding',
-    title: 'Autonomous Medical Coding: Accuracy, Compliance, and What Replaces Computer-Assisted Coding',
+    title:
+      'Autonomous Medical Coding: Accuracy, Compliance, and What Replaces Computer-Assisted Coding',
     image: '/images/blogs/tabs/img_medical_coding.png',
     href: '/blogs/autonomous-medical-coding-accuracy-compliance',
     isShorter: false,
@@ -80,23 +81,20 @@ export const BlogDetailRelated = ({
         - Desktop (Figma: 5915-17085): 1440px x 721px, padding: 0px 60px, background: #F4F6F9, border-radius: 60px 0px 0px 60px
         - Mobile (Figma: 5915-17476): 402px x 554px, padding: 40px 20px, background: #F4F6F9, border-radius: 30px 0px 0px 30px
       */}
-      <div className="w-full bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto py-[40px] md:py-[64px] lg:py-[80px] flex flex-col items-start gap-[20px] lg:gap-[40px]">
-          
+      <div className="w-full rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] py-[40px] md:py-[64px] lg:gap-[40px] lg:py-[80px]">
           {/* Section Heading: Display/H2 token */}
-          <h2 className="type-h2 text-[#0F68D6]">
-            Related Blogs
-          </h2>
+          <h2 className="type-h2 text-[#0F68D6]">Related Blogs</h2>
 
           {/* =================================================================
               DESKTOP: 3-column Grid (Figma Frame 2147226524: 1320px x 461px)
              ================================================================= */}
-          <div className="hidden lg:grid lg:grid-cols-3 gap-[32px] items-start w-full">
+          <div className="hidden w-full items-start gap-[32px] lg:grid lg:grid-cols-3">
             {relatedBlogs.map((item) => (
               <Link
                 key={item.id}
                 href={item.href}
-                className="group flex flex-col items-start gap-[16px] lg:gap-[20px] w-full"
+                className="group flex w-full flex-col items-start gap-[16px] lg:gap-[20px]"
               >
                 {/* Image Card Container (Frame 2147203302)
                     - Card 1 & 3: height 357px
@@ -104,9 +102,7 @@ export const BlogDetailRelated = ({
                 */}
                 <div
                   className={`relative w-full overflow-hidden rounded-[20px] shadow-sm transition-transform duration-300 group-hover:scale-[1.01] ${
-                    item.isShorter
-                      ? 'h-[288px]'
-                      : 'h-[357px]'
+                    item.isShorter ? 'h-[288px]' : 'h-[357px]'
                   }`}
                 >
                   <Image
@@ -118,7 +114,7 @@ export const BlogDetailRelated = ({
                   />
                   {/* Exact Gradient Overlay as specified in Figma */}
                   <div
-                    className="absolute inset-0 pointer-events-none rounded-[20px]"
+                    className="pointer-events-none absolute inset-0 rounded-[20px]"
                     style={{
                       background:
                         'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
@@ -127,16 +123,14 @@ export const BlogDetailRelated = ({
                 </div>
 
                 {/* Caption Text & CTA Arrow (Frame 2147226519) */}
-                <div className="w-full flex flex-row items-center justify-between gap-[12px] pt-[4px]">
-                  <p className="type-body-s text-[#000000] flex-1 line-clamp-2">
-                    {item.title}
-                  </p>
+                <div className="flex w-full flex-row items-center justify-between gap-[12px] pt-[4px]">
+                  <p className="type-body-s line-clamp-2 flex-1 text-[#000000]">{item.title}</p>
 
                   {/* Circular Arrow Button */}
                   <CTA
                     as="div"
                     variant="fill-arrow"
-                    className="w-[48px] h-[48px] rounded-full shrink-0 shadow-sm pointer-events-none group-hover:scale-105 transition-all duration-200"
+                    className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm transition-all duration-200 group-hover:scale-105"
                     aria-label="View related blog"
                   />
                 </div>
@@ -149,12 +143,12 @@ export const BlogDetailRelated = ({
               - Card Image: Width 362px max, Height 309px, Radius 20px (Figma spec)
               - Sneak peek: Carousel bleeds to right edge showing generous 56px preview of next card
              ================================================================= */}
-          <div className="flex lg:hidden flex-col items-start gap-[20px] w-full">
+          <div className="flex w-full flex-col items-start gap-[20px] lg:hidden">
             {/* Scrollable container with snap that bleeds to the right edge */}
             <div
               ref={scrollContainerRef}
               onScroll={handleMobileScroll}
-              className="w-[calc(100%+20px)] -mr-[20px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-[4px]"
+              className="no-scrollbar -mr-[20px] w-[calc(100%+20px)] snap-x snap-mandatory overflow-x-auto pb-[4px]"
             >
               <div className="flex flex-row items-start gap-[12px]">
                 {relatedBlogs.map((item) => (
@@ -162,11 +156,11 @@ export const BlogDetailRelated = ({
                     key={`mobile-${item.id}`}
                     data-blog-card
                     href={item.href}
-                    className="group shrink-0 snap-start flex flex-col items-start gap-[12px] w-[calc(100vw-88px)] max-w-[362px]"
+                    className="group flex w-[calc(100vw-88px)] max-w-[362px] shrink-0 snap-start flex-col items-start gap-[12px]"
                   >
                     {/* Image Frame 2147226520: Width 362px max, Height 309px, Radius 20px */}
                     <div
-                      className="relative w-full h-[309px] overflow-hidden rounded-[20px] shadow-sm shrink-0 bg-gray-100"
+                      className="relative h-[309px] w-full shrink-0 overflow-hidden rounded-[20px] bg-gray-100 shadow-sm"
                       style={{ borderRadius: '20px', transform: 'translateZ(0)' }}
                     >
                       <Image
@@ -174,11 +168,11 @@ export const BlogDetailRelated = ({
                         alt={item.title}
                         fill
                         sizes="(max-width: 640px) 362px, 362px"
-                        className="object-cover object-center rounded-[20px]"
+                        className="rounded-[20px] object-cover object-center"
                       />
                       {/* Gradient Overlay matching Figma */}
                       <div
-                        className="absolute inset-0 pointer-events-none rounded-[20px]"
+                        className="pointer-events-none absolute inset-0 rounded-[20px]"
                         style={{
                           background:
                             'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
@@ -187,21 +181,22 @@ export const BlogDetailRelated = ({
                     </div>
 
                     {/* Frame 2147226519: Title Text + Arrow Button row */}
-                    <div className="w-full flex flex-row items-center justify-between gap-[8px]">
-                      <p className="type-body-s text-[#000000] flex-1 line-clamp-2">
-                        {item.title}
-                      </p>
+                    <div className="flex w-full flex-row items-center justify-between gap-[8px]">
+                      <p className="type-body-s line-clamp-2 flex-1 text-[#000000]">{item.title}</p>
                       <CTA
                         as="div"
                         variant="fill-arrow"
-                        className="w-[48px] h-[48px] rounded-full shrink-0 shadow-sm pointer-events-none"
+                        className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm"
                         aria-label="View related blog"
                       />
                     </div>
                   </Link>
                 ))}
                 {/* Trailing spacer to provide padding on the right side of the last card on small screens */}
-                <div className="w-[12px] md:w-[32px] h-[10px] shrink-0 pointer-events-none" aria-hidden="true" />
+                <div
+                  className="pointer-events-none h-[10px] w-[12px] shrink-0 md:w-[32px]"
+                  aria-hidden="true"
+                />
               </div>
             </div>
 
@@ -222,7 +217,7 @@ export const BlogDetailRelated = ({
                     type="button"
                     onClick={() => scrollToIndex(idx)}
                     aria-label={`Go to related blog slide ${idx + 1}`}
-                    className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer ${widthClass} ${
+                    className={`h-[5px] cursor-pointer rounded-[32px] transition-all duration-300 ${widthClass} ${
                       isActive ? 'bg-[#0F68D6]' : 'bg-[#0F68D6]/20 hover:bg-[#0F68D6]/40'
                     }`}
                   />
@@ -230,7 +225,6 @@ export const BlogDetailRelated = ({
               })}
             </div>
           </div>
-
         </div>
       </div>
     </section>

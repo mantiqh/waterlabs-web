@@ -44,11 +44,11 @@ export const ContactUsHeroSection = ({
         - Mobile: 402px x 490px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px
         - Background: linear-gradient overlay on hero image with decorative glassmorphic shape
       */}
-      <div className="relative w-full min-h-[490px] lg:h-[550px] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:px-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[10px]">
+      <div className="relative flex min-h-[490px] w-full flex-col justify-between gap-[10px] rounded-bl-[30px] px-[20px] pt-[20px] pb-[40px] md:px-[40px] lg:h-[550px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]">
         {/* Background Image */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
           {/* Desktop Background */}
-          <div className="hidden lg:block absolute inset-0">
+          <div className="absolute inset-0 hidden lg:block">
             <Image
               src={imageDesktop}
               alt="Contact Us Background"
@@ -59,7 +59,7 @@ export const ContactUsHeroSection = ({
             />
           </div>
           {/* Mobile/Tablet Background */}
-          <div className="block lg:hidden absolute inset-0">
+          <div className="absolute inset-0 block lg:hidden">
             <Image
               src={imageMobile}
               alt="Contact Us Background Mobile"
@@ -77,17 +77,17 @@ export const ContactUsHeroSection = ({
         </div>
 
         {/* Hero Content (Desktop: Frame 8 / Frame 12 / Frame 2147203284, Mobile: Bottom aligned) */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex-grow flex flex-col justify-end lg:justify-center items-start pt-[32px]">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-grow flex-col items-start justify-end pt-[32px] lg:justify-center">
           {/* Content Block (Mobile: gap-12, Desktop: Frame 2147226510 gap-20) */}
-          <div className="w-full max-w-[664px] flex flex-col items-start gap-[12px] lg:gap-[20px]">
+          <div className="flex w-full max-w-[664px] flex-col items-start gap-[12px] lg:gap-[20px]">
             {/* Heading + Subheading Stack (Frame 2147226524 gap-12) */}
-            <div className="w-full flex flex-col items-start gap-[12px]">
+            <div className="flex w-full flex-col items-start gap-[12px]">
               {/* Heading (Mobile: 32px / 40px, Desktop: type-h2, #111111) */}
-              <h2 className="type-h2 max-md:text-[32px] max-md:leading-[40px] tracking-[-0.01em] text-[#111111]">
+              <h2 className="type-h2 tracking-[-0.01em] text-[#111111] max-md:text-[32px] max-md:leading-[40px]">
                 {renderHeading()}
               </h2>
               {/* Subheading (20px / 28px, #2A2A2A) */}
-              <p className="type-body-s text-[#2A2A2A] max-w-[540px] lg:max-w-[664px]">
+              <p className="type-body-s max-w-[540px] text-[#2A2A2A] lg:max-w-[664px]">
                 {subheading}
               </p>
             </div>

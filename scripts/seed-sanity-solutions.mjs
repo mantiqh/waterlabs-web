@@ -231,7 +231,7 @@ async function seed() {
       platformHeading: sol.platformAndFeatures.platformHeading,
       platformDescription: sol.platformAndFeatures.platformDescription,
       platformCtaText: sol.platformAndFeatures.platformCtaText || 'Explore HIMER AI OS',
-      platformCtaLink: sol.platformAndFeatures.platformCtaLink || '/products/himer',
+      platformCtaLink: sol.platformAndFeatures.platformCtaLink || '/product/himer',
       ...(platformAssetId && {
         platformImage: {
           _type: 'image',

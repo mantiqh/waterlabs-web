@@ -90,7 +90,8 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 4,
       group: 'client',
-      description: 'Introductory summary under 02 · The Client. Use Make Bold (Ctrl+B) to bold words.',
+      description:
+        'Introductory summary under 02 · The Client. Use Make Bold (Ctrl+B) to bold words.',
       components: {
         input: BoldTextInput,
       },
@@ -100,7 +101,8 @@ export const caseStudySchema = defineType({
       title: 'Stat / Scale Badges',
       type: 'array',
       group: 'client',
-      description: 'Key statistics pills (e.g. "$2B+ net revenue", "13 specialties", "8,000 to 12,000 held claims a month")',
+      description:
+        'Key statistics pills (e.g. "$2B+ net revenue", "13 specialties", "8,000 to 12,000 held claims a month")',
       of: [
         defineArrayMember({
           type: 'object',
@@ -130,7 +132,8 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 8,
       group: 'content',
-      description: 'Detailed description of the operational and documentation challenge. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      description:
+        'Detailed description of the operational and documentation challenge. Highlight text and click Make Bold (Ctrl+B) to bold words.',
       components: {
         input: BoldTextInput,
       },
@@ -141,7 +144,8 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 10,
       group: 'content',
-      description: 'Detailed implementation story and AI agent workflow. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      description:
+        'Detailed implementation story and AI agent workflow. Highlight text and click Make Bold (Ctrl+B) to bold words.',
       components: {
         input: BoldTextInput,
       },
@@ -175,7 +179,8 @@ export const caseStudySchema = defineType({
           title: 'Detailed Result Bullets / Description',
           type: 'text',
           rows: 8,
-          description: 'Key impact takeaways. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+          description:
+            'Key impact takeaways. Highlight text and click Make Bold (Ctrl+B) to bold words.',
           components: {
             input: BoldTextInput,
           },
@@ -188,7 +193,8 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 8,
       group: 'results',
-      description: 'Operational, financial, and strategic outcomes. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      description:
+        'Operational, financial, and strategic outcomes. Highlight text and click Make Bold (Ctrl+B) to bold words.',
       components: {
         input: BoldTextInput,
       },
@@ -199,7 +205,8 @@ export const caseStudySchema = defineType({
       type: 'text',
       rows: 4,
       group: 'results',
-      description: 'Concluding synthesis and summary statement. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      description:
+        'Concluding synthesis and summary statement. Highlight text and click Make Bold (Ctrl+B) to bold words.',
       components: {
         input: BoldTextInput,
       },
@@ -209,7 +216,8 @@ export const caseStudySchema = defineType({
       title: 'Topic Tags / Filter Badges',
       type: 'array',
       group: 'results',
-      description: 'Tags shown as filter pills below The Bottom Line (e.g. Rural Health System, Multi-specialty)',
+      description:
+        'Tags shown as filter pills below The Bottom Line (e.g. Rural Health System, Multi-specialty)',
       of: [defineArrayMember({ type: 'string' })],
       options: {
         layout: 'tags',
@@ -224,7 +232,8 @@ export const caseStudySchema = defineType({
       title: 'Section Heading',
       type: 'string',
       group: 'related',
-      description: 'Heading displayed above the related case study cards (defaults to "Related Cases")',
+      description:
+        'Heading displayed above the related case study cards (defaults to "Related Cases")',
       initialValue: 'Related Cases',
     }),
     defineField({

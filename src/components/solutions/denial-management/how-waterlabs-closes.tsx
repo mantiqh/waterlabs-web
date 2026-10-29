@@ -11,8 +11,7 @@ interface VerificationStep {
 const verificationSteps: VerificationStep[] = [
   {
     title: 'Denial ingestion and classification',
-    description:
-      'Every denial is read on arrival and sorted by cause, not just by code.',
+    description: 'Every denial is read on arrival and sorted by cause, not just by code.',
   },
   {
     title: 'Root cause identification',
@@ -26,13 +25,11 @@ const verificationSteps: VerificationStep[] = [
   },
   {
     title: 'Deadline management',
-    description:
-      'Every appeal window is tracked so nothing expires waiting to be addressed.',
+    description: 'Every appeal window is tracked so nothing expires waiting to be addressed.',
   },
   {
     title: 'Full-pile coverage',
-    description:
-      'Low-value denials are worked too because our agents are not the constraint.',
+    description: 'Low-value denials are worked too because our agents are not the constraint.',
   },
   {
     title: 'Prevention feedback',
@@ -68,7 +65,7 @@ export const HowWaterlabsClosesSection = () => {
         ...step,
         originalIndex,
         uniqueIndex: setIndex * verificationSteps.length + originalIndex,
-      }))
+      })),
     );
   }, []);
 
@@ -178,7 +175,7 @@ export const HowWaterlabsClosesSection = () => {
       const scrollRatio = scrollLeft / maxScroll;
       const dotIndex = Math.min(
         TOTAL_DOTS - 1,
-        Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1)))
+        Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1))),
       );
       setActiveDotIndex(dotIndex);
     }
@@ -203,29 +200,27 @@ export const HowWaterlabsClosesSection = () => {
   };
 
   return (
-    <section className="w-full bg-white overflow-hidden">
-      <div
-        className="ml-[20px] md:ml-[40px] lg:ml-[60px] xl:ml-[max(60px,calc((100vw-1320px)/2))] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] md:py-[60px] lg:py-[80px] px-[20px] md:px-[36px] lg:px-[48px] xl:px-[60px] overflow-hidden [background:linear-gradient(180deg,#042849_16.18%,#63CCB7_178.86%)] lg:[background:linear-gradient(174.65deg,#042849_59.28%,#63CCB7_206.84%)]"
-      >
-        <div className="w-full max-w-[1320px] flex flex-col gap-[20px] lg:gap-[32px]">
+    <section className="w-full overflow-hidden bg-white">
+      <div className="ml-[20px] overflow-hidden rounded-tl-[30px] rounded-bl-[30px] px-[20px] py-[40px] [background:linear-gradient(180deg,#042849_16.18%,#63CCB7_178.86%)] md:ml-[40px] md:px-[36px] md:py-[60px] lg:ml-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[48px] lg:py-[80px] lg:[background:linear-gradient(174.65deg,#042849_59.28%,#63CCB7_206.84%)] xl:ml-[max(60px,calc((100vw-1320px)/2))] xl:px-[60px]">
+        <div className="flex w-full max-w-[1320px] flex-col gap-[20px] lg:gap-[32px]">
           {/* Heading */}
           <h3 className="type-h3 text-[#F4F6F9]">
-            How Waterlabs{' '}
-            <br className="lg:hidden" />
+            How Waterlabs <br className="lg:hidden" />
             <span className="text-[#63CCB7]">closes the gap</span>
           </h3>
 
           {/* Subheading */}
-          <p className="type-body-xs text-[#D7DCE2] max-w-[873px]">
-            Our agents work every denial regardless of value, so the pile stops being a triage problem.
+          <p className="type-body-xs max-w-[873px] text-[#D7DCE2]">
+            Our agents work every denial regardless of value, so the pile stops being a triage
+            problem.
           </p>
 
           {/* Desktop Layout: Image+Description Left, Tab List Right */}
-          <div className="hidden lg:flex flex-row items-start justify-between gap-[24px] xl:gap-[40px] pt-[20px]">
+          <div className="hidden flex-row items-start justify-between gap-[24px] pt-[20px] lg:flex xl:gap-[40px]">
             {/* Left Column: Image + Description */}
-            <div className="w-full lg:w-[44%] xl:w-[590px] lg:max-w-[590px] shrink-0 flex flex-col gap-[24px]">
+            <div className="flex w-full shrink-0 flex-col gap-[24px] lg:w-[44%] lg:max-w-[590px] xl:w-[590px]">
               {/* Image */}
-              <div className="relative w-full aspect-[590/287] rounded-[20px_10px_20px_20px] overflow-hidden">
+              <div className="relative aspect-[590/287] w-full overflow-hidden rounded-[20px_10px_20px_20px]">
                 <Image
                   src="/images/solutions/solutions-denialmanagement/how-waterlabs-closes/img_waterlab_closes_the_gap%20(3).png"
                   alt={verificationSteps[activeStep].title}
@@ -237,7 +232,7 @@ export const HowWaterlabsClosesSection = () => {
               </div>
 
               {/* Description for active step */}
-              <p className="type-body-xs text-[#D7DCE2] min-h-[48px] transition-opacity duration-300">
+              <p className="type-body-xs min-h-[48px] text-[#D7DCE2] transition-opacity duration-300">
                 {verificationSteps[activeStep].description}
               </p>
             </div>
@@ -246,7 +241,7 @@ export const HowWaterlabsClosesSection = () => {
             <div
               ref={listRef}
               onScroll={handleDesktopScroll}
-              className="flex-1 min-w-0 h-[360px] xl:h-[380px] overflow-y-auto no-scrollbar flex flex-col gap-[16px] xl:gap-[20px] pt-[8px] pr-[12px]"
+              className="no-scrollbar flex h-[360px] min-w-0 flex-1 flex-col gap-[16px] overflow-y-auto pt-[8px] pr-[12px] xl:h-[380px] xl:gap-[20px]"
             >
               {repeatedSteps.map((step) => {
                 const isActive = step.uniqueIndex === activeListIndex;
@@ -254,14 +249,14 @@ export const HowWaterlabsClosesSection = () => {
                 const opacity = isActive
                   ? 1
                   : distance > 0
-                  ? (stepOpacities[distance] ?? 0.15)
-                  : 0.15;
+                    ? (stepOpacities[distance] ?? 0.15)
+                    : 0.15;
 
                 return (
                   <button
                     key={step.uniqueIndex}
                     type="button"
-                    className={`text-left type-h4 transition-all duration-300 cursor-pointer bg-transparent border-none outline-none p-0 whitespace-normal ${
+                    className={`type-h4 cursor-pointer border-none bg-transparent p-0 text-left whitespace-normal transition-all duration-300 outline-none ${
                       isActive ? 'text-[#91C6F2]' : 'text-[#7D8690]'
                     }`}
                     style={{
@@ -277,22 +272,22 @@ export const HowWaterlabsClosesSection = () => {
           </div>
 
           {/* Mobile / Tablet: Horizontal Scroll Cards */}
-          <div className="flex lg:hidden flex-col gap-[16px]">
+          <div className="flex flex-col gap-[16px] lg:hidden">
             <div
               ref={scrollRef}
               onScroll={handleScroll}
-              className="w-full flex flex-row items-stretch gap-[12px] overflow-x-auto no-scrollbar scroll-smooth pb-[4px]"
+              className="no-scrollbar flex w-full flex-row items-stretch gap-[12px] overflow-x-auto scroll-smooth pb-[4px]"
             >
               {verificationSteps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="w-[320px] sm:w-[342px] shrink-0 flex flex-col rounded-[20px_10px_20px_20px] overflow-hidden"
+                  className="flex w-[320px] shrink-0 flex-col overflow-hidden rounded-[20px_10px_20px_20px] sm:w-[342px]"
                   style={{
                     background: 'rgba(17, 17, 17, 0.3)',
                   }}
                 >
                   {/* Card Image */}
-                  <div className="relative w-full h-[166px] rounded-[20px_10px_20px_20px] overflow-hidden shrink-0">
+                  <div className="relative h-[166px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px]">
                     <Image
                       src="/images/solutions/solutions-denialmanagement/how-waterlabs-closes/img_waterlab_closes_the_gap%20(3).png"
                       alt={step.title}
@@ -304,10 +299,10 @@ export const HowWaterlabsClosesSection = () => {
 
                   {/* Card Text */}
                   <div className="flex flex-col gap-[8px] p-[12px]">
-                    <h4 className="type-h5 text-[#91C6F2] text-[20px] leading-[28px] tracking-[-0.01em]">
+                    <h4 className="type-h5 text-[20px] leading-[28px] tracking-[-0.01em] text-[#91C6F2]">
                       {step.title}
                     </h4>
-                    <p className="type-body-xs text-[#D7DCE2] text-[14px] leading-[24px]">
+                    <p className="type-body-xs text-[14px] leading-[24px] text-[#D7DCE2]">
                       {step.description}
                     </p>
                   </div>
@@ -324,8 +319,8 @@ export const HowWaterlabsClosesSection = () => {
                 const widthClass = isActive
                   ? 'w-[32px] bg-white'
                   : diff === 1
-                  ? 'w-[16px] bg-white/20'
-                  : 'w-[6px] bg-white/20';
+                    ? 'w-[16px] bg-white/20'
+                    : 'w-[6px] bg-white/20';
 
                 return (
                   <button
@@ -333,7 +328,7 @@ export const HowWaterlabsClosesSection = () => {
                     type="button"
                     onClick={() => scrollToDot(i)}
                     aria-label={`Go to step group ${i + 1}`}
-                    className={`h-[6px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${widthClass}`}
+                    className={`h-[6px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${widthClass}`}
                   />
                 );
               })}

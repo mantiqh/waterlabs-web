@@ -45,7 +45,7 @@ export const DEFAULT_AGENTS: RcmAgentItem[] = [
     id: 'claim-submission',
     name: 'Claim Submission & Scrubbing Agent',
     description:
-      'Each claim is validated against the payer\'s current rules before it goes out, and rejections are corrected, resubmitted, and turned into a rule so the same one does not recur.',
+      "Each claim is validated against the payer's current rules before it goes out, and rejections are corrected, resubmitted, and turned into a rule so the same one does not recur.",
     link: '/solutions/claim-submission-and-scrubbing',
   },
   {
@@ -108,7 +108,7 @@ export const RcmCoverageSection = ({
 
       const activeIndex = Math.min(
         agents.length - 1,
-        Math.max(0, Math.floor(currentProgress * agents.length))
+        Math.max(0, Math.floor(currentProgress * agents.length)),
       );
 
       setActiveId(agents[activeIndex].id);
@@ -139,7 +139,7 @@ export const RcmCoverageSection = ({
         currentProgress = targetProgress;
         const initialIndex = Math.min(
           agents.length - 1,
-          Math.max(0, Math.floor(currentProgress * agents.length))
+          Math.max(0, Math.floor(currentProgress * agents.length)),
         );
         setActiveId(agents[initialIndex].id);
         return;
@@ -226,44 +226,39 @@ export const RcmCoverageSection = ({
       className="relative w-full bg-gradient-to-b from-[#000000] via-[#000000] to-[#0A4890] lg:h-[500vh]"
     >
       {/* Sticky Viewport Container on Desktop (>= 1024px) */}
-      <div className="w-full lg:sticky lg:top-0 lg:h-screen overflow-hidden">
+      <div className="w-full overflow-hidden lg:sticky lg:top-0 lg:h-screen">
         {/* 
           Curved Container:
           Desktop: border-radius 60px 0px 0px 60px, padding 80px 60px
           Mobile: border-radius 30px 0px 0px 30px, padding 40px 20px
           Background: #F4F6F9 with vector watermark texture on desktop
         */}
-        <div
-          className="w-full lg:min-h-screen lg:flex lg:flex-col lg:justify-center bg-[#F4F6F9] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] relative overflow-hidden"
-        >
+        <div className="relative w-full overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] lg:flex lg:min-h-screen lg:flex-col lg:justify-center lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:py-[80px]">
           {/* Desktop-only decorative vector watermark lines */}
           <div
             aria-hidden="true"
-            className="hidden lg:block absolute inset-0 pointer-events-none bg-cover bg-left-bottom bg-no-repeat z-0"
+            className="pointer-events-none absolute inset-0 z-0 hidden bg-cover bg-left-bottom bg-no-repeat lg:block"
             style={{
               backgroundImage:
                 "url('/images/home/end-to-end-RCM-coverage/desktop/bg_Why it matters content.png')",
             }}
           />
-          <div className="relative z-10 max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start justify-between gap-[32px] sm:gap-[40px] lg:gap-[24px]">
-            
+          <div className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[32px] sm:gap-[40px] lg:flex-row lg:gap-[24px]">
             {/* =========================================================
                 LEFT COLUMN: Heading & Subtitle
                ========================================================= */}
-            <div className="w-full lg:w-[536px] shrink-0 flex flex-col gap-[16px] lg:gap-[24px]">
+            <div className="flex w-full shrink-0 flex-col gap-[16px] lg:w-[536px] lg:gap-[24px]">
               <h2 className="type-h2 tracking-[-0.01em]">
-                <span className="text-[#000000] block">{headingLine1}</span>
-                <span className="text-[#0F68D6] block">{headingLine2}</span>
+                <span className="block text-[#000000]">{headingLine1}</span>
+                <span className="block text-[#0F68D6]">{headingLine2}</span>
               </h2>
-              <p className="type-body-s text-[#042849] max-w-[536px]">
-                {subtitle}
-              </p>
+              <p className="type-body-s max-w-[536px] text-[#042849]">{subtitle}</p>
             </div>
 
             {/* =========================================================
                 DESKTOP RIGHT COLUMN: Interactive Accordion (>= 1024px)
                ========================================================= */}
-            <div className="hidden lg:flex w-full lg:w-[760px] flex-col justify-center gap-[16px] min-h-[500px]">
+            <div className="hidden min-h-[500px] w-full flex-col justify-center gap-[16px] lg:flex lg:w-[760px]">
               {agents.map((agent, index) => {
                 const isActive = activeId === agent.id;
 
@@ -272,15 +267,15 @@ export const RcmCoverageSection = ({
                     key={agent.id}
                     className={`w-full rounded-[20px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       isActive
-                        ? 'px-[24px] lg:px-[32px] py-[24px] lg:py-[32px] bg-[rgba(145,198,242,0.1)] backdrop-blur-[15.7px] border border-[rgba(15,104,214,0.12)] shadow-[0_8px_24px_rgba(15,104,214,0.04)]'
-                        : 'px-[24px] lg:px-[32px] py-[8px] bg-transparent border border-transparent shadow-none backdrop-blur-none'
+                        ? 'border border-[rgba(15,104,214,0.12)] bg-[rgba(145,198,242,0.1)] px-[24px] py-[24px] shadow-[0_8px_24px_rgba(15,104,214,0.04)] backdrop-blur-[15.7px] lg:px-[32px] lg:py-[32px]'
+                        : 'border border-transparent bg-transparent px-[24px] py-[8px] shadow-none backdrop-blur-none lg:px-[32px]'
                     }`}
                   >
                     {/* Header Row: Title + Chevron Arrow */}
                     <button
                       type="button"
                       onClick={() => handleAgentClick(index)}
-                      className="w-full text-left flex items-center gap-[12px] cursor-pointer p-0 bg-transparent border-none outline-none group"
+                      className="group flex w-full cursor-pointer items-center gap-[12px] border-none bg-transparent p-0 text-left outline-none"
                     >
                       <h3
                         className={`type-body-xs text-[18px] leading-[26px] transition-colors duration-300 ${
@@ -292,10 +287,10 @@ export const RcmCoverageSection = ({
                         {agent.name}
                       </h3>
                       <ChevronRight
-                        className={`w-[12px] h-[18px] text-[#0F68D6] shrink-0 transition-all duration-300 ${
+                        className={`h-[18px] w-[12px] shrink-0 text-[#0F68D6] transition-all duration-300 ${
                           isActive
-                            ? 'opacity-100 translate-x-0'
-                            : 'opacity-0 -translate-x-1.5 pointer-events-none w-0 overflow-hidden'
+                            ? 'translate-x-0 opacity-100'
+                            : 'pointer-events-none w-0 -translate-x-1.5 overflow-hidden opacity-0'
                         }`}
                       />
                     </button>
@@ -305,16 +300,16 @@ export const RcmCoverageSection = ({
                       className={`grid transition-[grid-template-rows,opacity] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         isActive
                           ? 'grid-rows-[1fr] opacity-100'
-                          : 'grid-rows-[0fr] opacity-0 pointer-events-none'
+                          : 'pointer-events-none grid-rows-[0fr] opacity-0'
                       }`}
                     >
                       <div
-                        className={`overflow-hidden flex flex-col gap-[12px] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                        className={`flex flex-col gap-[12px] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                           isActive ? 'translate-y-0' : 'translate-y-4'
                         }`}
                       >
                         {/* Description Body */}
-                        <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em] max-w-[696px] pt-[12px]">
+                        <p className="type-body-xxs max-w-[696px] pt-[12px] tracking-[0.01em] text-[#2A2A2A]">
                           {agent.description}
                         </p>
 
@@ -331,75 +326,74 @@ export const RcmCoverageSection = ({
               })}
             </div>
 
-          {/* =========================================================
+            {/* =========================================================
               MOBILE / TABLET VIEW: Horizontal Carousel (< 1024px)
              ========================================================= */}
-          <div className="flex lg:hidden flex-col gap-[20px] w-full">
-            <div
-              ref={mobileScrollRef}
-              onScroll={handleMobileScroll}
-              className="flex w-[calc(100%+20px)] -mr-[20px] md:w-[calc(100%+40px)] md:-mr-[40px] pr-[20px] md:pr-[40px] overflow-x-auto snap-x snap-mandatory gap-[16px] sm:gap-[20px] pb-[8px] no-scrollbar"
-            >
-              {agents.map((agent) => (
-                <div
-                  key={`mobile-${agent.id}`}
-                  className="shrink-0 snap-start w-[calc(100vw-60px)] sm:w-[340px] max-w-[360px] min-h-[220px] p-[20px] rounded-[20px] bg-[rgba(145,198,242,0.1)] backdrop-blur-[15.7px] border border-[rgba(15,104,214,0.12)] flex flex-col justify-between gap-[12px] shadow-[0_8px_24px_rgba(15,104,214,0.04)]"
-                >
-                  {/* Card Header: Agent Title */}
-                  <h3 className="type-body-m font-medium text-[#0F68D6] text-[18px] leading-[28px]">
-                    {agent.name}
-                  </h3>
+            <div className="flex w-full flex-col gap-[20px] lg:hidden">
+              <div
+                ref={mobileScrollRef}
+                onScroll={handleMobileScroll}
+                className="no-scrollbar -mr-[20px] flex w-[calc(100%+20px)] snap-x snap-mandatory gap-[16px] overflow-x-auto pr-[20px] pb-[8px] sm:gap-[20px] md:-mr-[40px] md:w-[calc(100%+40px)] md:pr-[40px]"
+              >
+                {agents.map((agent) => (
+                  <div
+                    key={`mobile-${agent.id}`}
+                    className="flex min-h-[220px] w-[calc(100vw-60px)] max-w-[360px] shrink-0 snap-start flex-col justify-between gap-[12px] rounded-[20px] border border-[rgba(15,104,214,0.12)] bg-[rgba(145,198,242,0.1)] p-[20px] shadow-[0_8px_24px_rgba(15,104,214,0.04)] backdrop-blur-[15.7px] sm:w-[340px]"
+                  >
+                    {/* Card Header: Agent Title */}
+                    <h3 className="type-body-m text-[18px] leading-[28px] font-medium text-[#0F68D6]">
+                      {agent.name}
+                    </h3>
 
-                  {/* Card Bottom: Description & Circular Blue Arrow Button */}
-                  <div className="flex flex-row items-end justify-between gap-[12px] w-full">
-                    <p className="type-body-xxs text-[#2A2A2A] tracking-[0.01em] flex-1 line-clamp-4 text-[14px] leading-[20px]">
-                      {agent.description}
-                    </p>
-                    <div className="shrink-0 pb-[2px]">
-                      <Link href={agent.link} aria-label={`Know more about ${agent.name}`}>
-                        <CTA
-                          variant="fill-arrow"
-                          className="[&_svg]:!text-white [&_svg]:!fill-white [&_path]:!fill-white w-[44px] h-[44px] max-sm:!w-[34px] max-sm:!h-[34px] max-sm:!min-w-[34px] max-sm:!min-h-[34px] max-sm:!p-0"
-                          aria-label={`Know more about ${agent.name}`}
-                        />
-                      </Link>
+                    {/* Card Bottom: Description & Circular Blue Arrow Button */}
+                    <div className="flex w-full flex-row items-end justify-between gap-[12px]">
+                      <p className="type-body-xxs line-clamp-4 flex-1 text-[14px] leading-[20px] tracking-[0.01em] text-[#2A2A2A]">
+                        {agent.description}
+                      </p>
+                      <div className="shrink-0 pb-[2px]">
+                        <Link href={agent.link} aria-label={`Know more about ${agent.name}`}>
+                          <CTA
+                            variant="fill-arrow"
+                            className="h-[44px] w-[44px] max-sm:!h-[34px] max-sm:!min-h-[34px] max-sm:!w-[34px] max-sm:!min-w-[34px] max-sm:!p-0 [&_path]:!fill-white [&_svg]:!fill-white [&_svg]:!text-white"
+                            aria-label={`Know more about ${agent.name}`}
+                          />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-              {/* Trailing spacer for smooth edge alignment on last card */}
-              <div className="w-[4px] shrink-0 pointer-events-none" aria-hidden="true" />
-            </div>
+                ))}
+                {/* Trailing spacer for smooth edge alignment on last card */}
+                <div className="pointer-events-none w-[4px] shrink-0" aria-hidden="true" />
+              </div>
 
-            {/* Mobile Carousel Indicators */}
-            <div className="flex items-center gap-[5px] pt-[4px]">
-              {agents.map((agent, i) => {
-                const isHiddenOnMd = i >= agents.length - 2;
-                const isActive = currentIndex === i;
-                const isAdjacent = Math.abs(currentIndex - i) === 1;
-                let widthClass = 'w-[6px] bg-[rgba(15,104,214,0.2)]';
-                if (isActive) {
-                  widthClass = 'w-[32px] bg-[#0F68D6]';
-                } else if (isAdjacent) {
-                  widthClass = 'w-[16px] bg-[rgba(15,104,214,0.2)]';
-                }
-                return (
-                  <button
-                    key={`mobile-dot-${agent.id}`}
-                    type="button"
-                    onClick={() => scrollToCard(i)}
-                    aria-label={`Go to ${agent.name}`}
-                    className={`h-[5px] rounded-[32px] transition-all duration-300 cursor-pointer p-0 border-none outline-none ${widthClass} ${
-                      isHiddenOnMd ? 'md:hidden' : ''
-                    }`}
-                  />
-                );
-              })}
+              {/* Mobile Carousel Indicators */}
+              <div className="flex items-center gap-[5px] pt-[4px]">
+                {agents.map((agent, i) => {
+                  const isHiddenOnMd = i >= agents.length - 2;
+                  const isActive = currentIndex === i;
+                  const isAdjacent = Math.abs(currentIndex - i) === 1;
+                  let widthClass = 'w-[6px] bg-[rgba(15,104,214,0.2)]';
+                  if (isActive) {
+                    widthClass = 'w-[32px] bg-[#0F68D6]';
+                  } else if (isAdjacent) {
+                    widthClass = 'w-[16px] bg-[rgba(15,104,214,0.2)]';
+                  }
+                  return (
+                    <button
+                      key={`mobile-dot-${agent.id}`}
+                      type="button"
+                      onClick={() => scrollToCard(i)}
+                      aria-label={`Go to ${agent.name}`}
+                      className={`h-[5px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${widthClass} ${
+                        isHiddenOnMd ? 'md:hidden' : ''
+                      }`}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
-
         </div>
-      </div>
       </div>
     </section>
   );

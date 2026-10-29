@@ -6,7 +6,7 @@ import { CTA } from '@/components/CTA';
 
 export const ChargeCaptureHeroSection = () => {
   return (
-    <section className="relative w-full bg-white overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-white">
       {/*
         Solutions Hero Banner:
         - Desktop: 1440×653, padding: 40px 60px 80px, gap: 32px
@@ -15,15 +15,15 @@ export const ChargeCaptureHeroSection = () => {
         - Border-radius: 0 0 0 60px (desktop) / 0 0 0 60px (mobile)
       */}
       <div
-        className="relative w-full min-h-[683px] lg:h-[653px] rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[60px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[20px] lg:gap-[32px] overflow-hidden"
+        className="relative flex min-h-[683px] w-full flex-col justify-between gap-[20px] overflow-hidden rounded-bl-[60px] px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pt-[28px] md:pb-[60px] lg:h-[653px] lg:gap-[32px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]"
         style={{
           background: 'linear-gradient(180deg, #0F68D6 41.31%, #B8B1A5 108.85%)',
         }}
       >
         {/* Background Banner Graphic with abstract round lines */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[60px]">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-bl-[60px]">
           {/* Desktop & Tablet Banner Graphic */}
-          <div className="hidden md:block absolute inset-0">
+          <div className="absolute inset-0 hidden md:block">
             <Image
               src="/images/solutions/solutions-charge-capture-&-coding/hero-section/img_banner_bg%20(5).png"
               alt="Solutions Gradient Background"
@@ -33,7 +33,7 @@ export const ChargeCaptureHeroSection = () => {
             />
           </div>
           {/* Mobile Banner Graphic */}
-          <div className="block md:hidden absolute inset-0">
+          <div className="absolute inset-0 block md:hidden">
             <Image
               src="/images/solutions/solutions-charge-capture-&-coding/hero-section/img_banner_bg%20(5).png"
               alt="Solutions Gradient Background Mobile"
@@ -50,25 +50,26 @@ export const ChargeCaptureHeroSection = () => {
         </div>
 
         {/* Desktop: Two-Column Hero Content */}
-        <div className="hidden lg:flex relative z-10 w-full max-w-[1320px] mx-auto flex-row items-center justify-between gap-[20px]">
+        <div className="relative z-10 mx-auto hidden w-full max-w-[1320px] flex-row items-center justify-between gap-[20px] lg:flex">
           {/* Left Column: Text Content */}
-          <div className="w-full lg:flex-1 lg:max-w-[650px] flex flex-col justify-center gap-[20px] pt-[32px] lg:pt-0">
+          <div className="flex w-full flex-col justify-center gap-[20px] pt-[32px] lg:max-w-[650px] lg:flex-1 lg:pt-0">
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
-              <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
-              <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
+              <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
+              <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
                 Agentic RCM Solutions &middot; Charge Capture and Coding
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="type-h1 text-white tracking-[-0.01em]">
+            <h2 className="type-h1 tracking-[-0.01em] text-white">
               Coding that clears before the claim moves.
             </h2>
 
             {/* Description */}
-            <p className="type-body-s text-[#F4F6F9] max-w-[650px]">
-              Our agents read the documentation, assign the codes it supports, and check compliance before anything leaves the building.
+            <p className="type-body-s max-w-[650px] text-[#F4F6F9]">
+              Our agents read the documentation, assign the codes it supports, and check compliance
+              before anything leaves the building.
             </p>
 
             {/* CTA Button */}
@@ -82,7 +83,7 @@ export const ChargeCaptureHeroSection = () => {
           </div>
 
           {/* Right Column: Hero Image */}
-          <div className="relative w-full lg:flex-1 lg:max-w-[650px] aspect-[650/441] rounded-[20px] overflow-hidden z-[2]">
+          <div className="relative z-[2] aspect-[650/441] w-full overflow-hidden rounded-[20px] lg:max-w-[650px] lg:flex-1">
             <Image
               src="/images/solutions/solutions-charge-capture-&-coding/hero-section/img_banner%20(11).png"
               alt="Charge capture and coding digital cards"
@@ -95,23 +96,25 @@ export const ChargeCaptureHeroSection = () => {
         </div>
 
         {/* Mobile & Tablet: Stacked Hero Content */}
-        <div className="flex lg:hidden relative z-10 w-full flex-col items-start gap-[20px]">
+        <div className="relative z-10 flex w-full flex-col items-start gap-[20px] lg:hidden">
           {/* Tag */}
           <div className="flex items-center gap-[8px]">
-            <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
-            <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-              Agentic RCM Solutions &middot; Charge Capture and <br className="block sm:hidden" />Coding
+            <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
+            <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+              Agentic RCM Solutions &middot; Charge Capture and <br className="block sm:hidden" />
+              Coding
             </span>
           </div>
 
           {/* Headline */}
-          <h2 className="type-h1 text-white tracking-[-0.01em]">
+          <h2 className="type-h1 tracking-[-0.01em] text-white">
             Coding that clears before the claim moves.
           </h2>
 
           {/* Description */}
           <p className="type-body-s text-[#F4F6F9]">
-            Our agents read the documentation, assign the codes it supports, and check compliance before anything leaves the building.
+            Our agents read the documentation, assign the codes it supports, and check compliance
+            before anything leaves the building.
           </p>
 
           {/* CTA Button */}
@@ -124,7 +127,7 @@ export const ChargeCaptureHeroSection = () => {
           </div>
 
           {/* Hero Image (Mobile & Tablet) */}
-          <div className="relative w-full aspect-[362/246] rounded-[20px] overflow-hidden z-[2]">
+          <div className="relative z-[2] aspect-[362/246] w-full overflow-hidden rounded-[20px]">
             <Image
               src="/images/solutions/solutions-charge-capture-&-coding/hero-section/img_banner%20(11).png"
               alt="Charge capture and coding digital cards"

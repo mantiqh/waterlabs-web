@@ -17,15 +17,15 @@ export const CTASection = ({
   ctaLink = '/contact-us',
 }: CTASectionProps) => {
   return (
-    <section className="relative w-full bg-white overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-white">
       {/* 
         Curved Container (Figma node 7487-16986 desktop, 7487-17280 mobile):
         - Desktop: 1440x388, padding 60px, gap 48px, border-radius 0 60px 0 0
         - Mobile: 402x415, padding 40px 20px, gap 24px, border-radius 0 30px 30px 0 (preserved as rounded-tr)
       */}
-      <div className="relative w-full min-h-[415px] lg:min-h-[388px] lg:h-[388px] rounded-tr-[30px] lg:rounded-tr-[60px] p-[40px_20px] lg:p-[60px] flex flex-col justify-end overflow-hidden">
+      <div className="relative flex min-h-[415px] w-full flex-col justify-end overflow-hidden rounded-tr-[30px] p-[40px_20px] lg:h-[388px] lg:min-h-[388px] lg:rounded-tr-[60px] lg:p-[60px]">
         {/* Background Desktop */}
-        <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none">
+        <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <Image
             src="/images/home/cta-section/desktop/bg_start_automation.png"
             alt=""
@@ -37,7 +37,7 @@ export const CTASection = ({
         </div>
 
         {/* Background Mobile */}
-        <div className="block lg:hidden absolute inset-0 z-0 pointer-events-none">
+        <div className="pointer-events-none absolute inset-0 z-0 block lg:hidden">
           <Image
             src="/images/home/cta-section/mobile/bg_start_automation (1).png"
             alt=""
@@ -49,20 +49,16 @@ export const CTASection = ({
         </div>
 
         {/* Content Container (1320x268 desktop, 362x270 mobile) */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto flex flex-col gap-[12px] lg:gap-[20px]">
+        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col gap-[12px] lg:gap-[20px]">
           {/* Eyebrow / Tag */}
-          <div className="inline-flex items-center gap-[4px] lg:gap-[8px] h-[20px] lg:h-[24px]">
-            <span className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
-            <span className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-              {eyebrow}
-            </span>
+          <div className="inline-flex h-[20px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
+            <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
+            <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">{eyebrow}</span>
           </div>
 
           {/* Heading + Action Button */}
-          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[20px]">
-            <h2 className="type-h3 tracking-[-0.01em] text-white max-w-[873px]">
-              {heading}
-            </h2>
+          <div className="flex flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-end">
+            <h2 className="type-h3 max-w-[873px] tracking-[-0.01em] text-white">{heading}</h2>
 
             <div className="shrink-0">
               <Link href={ctaLink}>

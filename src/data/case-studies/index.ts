@@ -7,14 +7,7 @@ import { caseStudy4 } from './case-study-4-behavioral-health';
 import { caseStudy5 } from './case-study-5-emergency-department';
 import { caseStudy6 } from './case-study-6-multi-specialty';
 
-export {
-  caseStudy1,
-  caseStudy2,
-  caseStudy3,
-  caseStudy4,
-  caseStudy5,
-  caseStudy6,
-};
+export { caseStudy1, caseStudy2, caseStudy3, caseStudy4, caseStudy5, caseStudy6 };
 
 export const CASE_STUDIES: CaseStudy[] = [
   caseStudy1,
@@ -36,9 +29,7 @@ export function getAllCaseStudies(): CaseStudy[] {
  * Get a specific case study by slug or alias
  */
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
-  return CASE_STUDIES.find(
-    (study) => study.slug === slug || study.aliases?.includes(slug)
-  );
+  return CASE_STUDIES.find((study) => study.slug === slug || study.aliases?.includes(slug));
 }
 
 /**
@@ -46,6 +37,6 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
  */
 export function getRelatedCaseStudies(currentSlug: string, count = 3): CaseStudy[] {
   return CASE_STUDIES.filter(
-    (study) => study.slug !== currentSlug && !study.aliases?.includes(currentSlug)
+    (study) => study.slug !== currentSlug && !study.aliases?.includes(currentSlug),
   ).slice(0, count);
 }

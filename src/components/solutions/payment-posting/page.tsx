@@ -7,7 +7,7 @@ import ThisIsntJustPaymentPostingSection from './this-isnt-just-payment-posting'
 
 export const PaymentPostingPage = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <PaymentPostingHeroSection />
       <TheProblemSection />
       <HowWaterlabsClosesSection />

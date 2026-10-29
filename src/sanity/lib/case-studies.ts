@@ -6,7 +6,7 @@ import {
   caseStudyBySlugQuery,
   caseStudySlugsQuery,
 } from '@/sanity/lib/queries';
-import { CaseStudiesPageData,CaseStudy } from '@/types/case-study';
+import { CaseStudiesPageData, CaseStudy } from '@/types/case-study';
 
 interface SanityCaseStudyDoc {
   _id?: string;
@@ -79,7 +79,8 @@ function mapSanityToCaseStudy(doc: SanityCaseStudyDoc): CaseStudy {
     title: doc.title,
     titleHighlight: doc.titleHighlight || '',
     subtitle: doc.subtitle || '',
-    heroImage: doc.heroImage || '/images/case-study/case-study-1-multi-state/Frame%202147226953.png',
+    heroImage:
+      doc.heroImage || '/images/case-study/case-study-1-multi-state/Frame%202147226953.png',
     heroImageAlt: doc.heroImageAlt || doc.title,
     tags: Array.isArray(doc.tags) ? doc.tags : [],
     client: doc.client
@@ -100,16 +101,14 @@ function mapSanityToCaseStudy(doc: SanityCaseStudyDoc): CaseStudy {
     relatedCasesHeading: doc.relatedCasesHeading || 'Related Cases',
     relatedCases:
       Array.isArray(doc.relatedCases) && doc.relatedCases.length > 0
-        ? doc.relatedCases
-            .filter(Boolean)
-            .map((item) => ({
-              id: item._id || item.id || item._key || item.slug || '',
-              slug: item.slug || '',
-              title: item.title || '',
-              image: item.image || item.heroImage || '',
-              heroImage: item.heroImage || item.image || '',
-              href: item.href || (item.slug ? `/case-study/${item.slug}` : '#'),
-            }))
+        ? doc.relatedCases.filter(Boolean).map((item) => ({
+            id: item._id || item.id || item._key || item.slug || '',
+            slug: item.slug || '',
+            title: item.title || '',
+            image: item.image || item.heroImage || '',
+            heroImage: item.heroImage || item.image || '',
+            href: item.href || (item.slug ? `/case-study/${item.slug}` : '#'),
+          }))
         : undefined,
     cta: {
       headline: 'See what Waterlabs would do on your numbers.',
@@ -142,7 +141,10 @@ export async function fetchCaseStudyBySlug(slug: string): Promise<CaseStudy | un
       return mapSanityToCaseStudy(sanityDoc);
     }
   } catch (error) {
-    console.warn(`[Sanity] Failed to fetch case study '${slug}', falling back to local data:`, error);
+    console.warn(
+      `[Sanity] Failed to fetch case study '${slug}', falling back to local data:`,
+      error,
+    );
   }
 
   // Graceful fallback to static TypeScript definitions
@@ -173,11 +175,14 @@ export async function fetchAllCaseStudies(): Promise<CaseStudy[]> {
 /**
  * Returns related case studies excluding the current one.
  */
-export async function fetchRelatedCaseStudies(currentSlug: string, count = 3): Promise<CaseStudy[]> {
+export async function fetchRelatedCaseStudies(
+  currentSlug: string,
+  count = 3,
+): Promise<CaseStudy[]> {
   try {
     const all = await fetchAllCaseStudies();
     const related = all.filter(
-      (study) => study.slug !== currentSlug && !study.aliases?.includes(currentSlug)
+      (study) => study.slug !== currentSlug && !study.aliases?.includes(currentSlug),
     );
     if (related.length > 0) {
       return related.slice(0, count);

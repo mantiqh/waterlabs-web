@@ -19,7 +19,8 @@ export const blogPostSchema = defineType({
       title: 'Article Title',
       type: 'string',
       group: 'general',
-      description: 'The main headline of the blog article (e.g. What Is Agentic RCM? The Definitive Guide to the Autonomous Revenue Cycle)',
+      description:
+        'The main headline of the blog article (e.g. What Is Agentic RCM? The Definitive Guide to the Autonomous Revenue Cycle)',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -39,7 +40,8 @@ export const blogPostSchema = defineType({
       title: 'Category Tab',
       type: 'string',
       group: 'general',
-      description: 'Category for tab filtering on /blogs (e.g. Features, Use Cases, Company News, Case Studies)',
+      description:
+        'Category for tab filtering on /blogs (e.g. Features, Use Cases, Company News, Case Studies)',
       options: {
         list: [
           { title: 'Features', value: 'Features' },
@@ -88,7 +90,8 @@ export const blogPostSchema = defineType({
       title: 'Card Thumbnail Image (Desktop)',
       type: 'image',
       group: 'general',
-      description: 'Image displayed on desktop in the /blogs article card (227x188 aspect ratio recommended)',
+      description:
+        'Image displayed on desktop in the /blogs article card (227x188 aspect ratio recommended)',
       options: { hotspot: true },
       validation: (Rule) => Rule.required(),
     }),
@@ -97,7 +100,8 @@ export const blogPostSchema = defineType({
       title: 'Card Thumbnail Image (Mobile - Optional)',
       type: 'image',
       group: 'general',
-      description: 'Optional custom image displayed on mobile screens on /blogs cards (defaults to desktop image if omitted)',
+      description:
+        'Optional custom image displayed on mobile screens on /blogs cards (defaults to desktop image if omitted)',
       options: { hotspot: true },
     }),
     defineField({
@@ -115,21 +119,24 @@ export const blogPostSchema = defineType({
       title: 'Title Accent Text (Blue)',
       type: 'string',
       group: 'hero',
-      description: 'Optional first part of title highlighted in blue accent color (e.g. "What Is Agentic RCM?")',
+      description:
+        'Optional first part of title highlighted in blue accent color (e.g. "What Is Agentic RCM?")',
     }),
     defineField({
       name: 'titleRest',
       title: 'Title Remainder Text (Dark)',
       type: 'string',
       group: 'hero',
-      description: 'Optional second part of title in dark navy (e.g. " The Definitive Guide to the Autonomous Revenue Cycle")',
+      description:
+        'Optional second part of title in dark navy (e.g. " The Definitive Guide to the Autonomous Revenue Cycle")',
     }),
     defineField({
       name: 'heroBannerDesktop',
       title: 'Hero Banner Image (Desktop)',
       type: 'image',
       group: 'hero',
-      description: 'Large banner image displayed at the top of the blog detail page on desktop (1096px x 350px recommended)',
+      description:
+        'Large banner image displayed at the top of the blog detail page on desktop (1096px x 350px recommended)',
       options: { hotspot: true },
     }),
     defineField({
@@ -146,7 +153,8 @@ export const blogPostSchema = defineType({
       type: 'text',
       rows: 6,
       group: 'hero',
-      description: 'Introductory paragraphs displayed below the hero image banner. Separate multiple paragraphs with an empty line. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+      description:
+        'Introductory paragraphs displayed below the hero image banner. Separate multiple paragraphs with an empty line. Highlight text and click Make Bold (Ctrl+B) to bold words.',
       components: {
         input: BoldTextInput,
       },
@@ -158,7 +166,8 @@ export const blogPostSchema = defineType({
       title: 'Article Sections & Topics (TOC)',
       type: 'array',
       group: 'content',
-      description: 'The body sections of the blog article. Each section automatically appears in the left sticky indicator (TOC) and the article body. Highlight text and click Make Bold (Ctrl+B) to add bold emphasis.',
+      description:
+        'The body sections of the blog article. Each section automatically appears in the left sticky indicator (TOC) and the article body. Highlight text and click Make Bold (Ctrl+B) to add bold emphasis.',
       of: [
         defineArrayMember({
           type: 'object',
@@ -169,21 +178,24 @@ export const blogPostSchema = defineType({
               name: 'title',
               title: 'Section Heading (H4)',
               type: 'string',
-              description: 'e.g. "What does agentic RCM actually mean?" (displayed in heading and in the left indicator TOC)',
+              description:
+                'e.g. "What does agentic RCM actually mean?" (displayed in heading and in the left indicator TOC)',
               validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: 'id',
               title: 'Section Anchor ID (Optional)',
               type: 'string',
-              description: 'Anchor slug used for indicator links (e.g. "what-does-agentic-rcm-actually-mean"). If left blank, it is automatically derived from the heading.',
+              description:
+                'Anchor slug used for indicator links (e.g. "what-does-agentic-rcm-actually-mean"). If left blank, it is automatically derived from the heading.',
             }),
             defineField({
               name: 'content',
               title: 'Section Paragraphs',
               type: 'text',
               rows: 8,
-              description: 'Section text. Separate paragraphs with an empty line. Highlight text and click Make Bold (Ctrl+B) to bold words.',
+              description:
+                'Section text. Separate paragraphs with an empty line. Highlight text and click Make Bold (Ctrl+B) to bold words.',
               components: {
                 input: BoldTextInput,
               },
@@ -205,7 +217,8 @@ export const blogPostSchema = defineType({
       title: 'Related Blog Articles (Max 3)',
       type: 'array',
       group: 'related',
-      description: 'Optionally select up to 3 blog articles to feature in the "Related Blogs" section. If left empty, the 3 most recent articles will be displayed automatically.',
+      description:
+        'Optionally select up to 3 blog articles to feature in the "Related Blogs" section. If left empty, the 3 most recent articles will be displayed automatically.',
       of: [
         defineArrayMember({
           type: 'reference',

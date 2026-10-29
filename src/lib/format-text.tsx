@@ -23,7 +23,9 @@ export function renderFormattedText(text: string): ReactNode {
   }
 
   // Fallback: If starts with keyword (e.g. Operationally:, Financially:, Strategically:)
-  const keywordMatch = text.match(/^(Operationally[,:]?|Financially[,:]?|Strategically[,:]?)(.*)$/s);
+  const keywordMatch = text.match(
+    /^(Operationally[,:]?|Financially[,:]?|Strategically[,:]?)(.*)$/s,
+  );
   if (keywordMatch) {
     return (
       <>

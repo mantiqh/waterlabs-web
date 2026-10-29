@@ -78,10 +78,10 @@ export const InteractiveSecuritySections = () => {
         - Spans across Data Sovereignty -> Our Own Cloud -> Security & Compliance -> Certifications
         =============================================================================
       */}
-      <div className="hidden lg:block absolute top-0 bottom-[60px] lg:bottom-[100px] left-0 w-full px-[60px] pointer-events-none z-30">
-        <div className="w-full max-w-[1320px] mx-auto h-full">
+      <div className="pointer-events-none absolute top-0 bottom-[60px] left-0 z-30 hidden w-full px-[60px] lg:bottom-[100px] lg:block">
+        <div className="mx-auto h-full w-full max-w-[1320px]">
           <aside
-            className={`w-[305px] sticky top-[120px] pointer-events-auto transition-all duration-300 ease-in-out ${
+            className={`pointer-events-auto sticky top-[120px] w-[305px] transition-all duration-300 ease-in-out ${
               isDesktopSticky ? 'pt-0' : 'pt-0 lg:pt-[40px]'
             }`}
           >
@@ -91,7 +91,7 @@ export const InteractiveSecuritySections = () => {
       </div>
 
       {/* Sentinel for detecting when mobile topic indicator hits sticky position */}
-      <div ref={sentinelRef} className="block lg:hidden h-[1px] w-full pointer-events-none" />
+      <div ref={sentinelRef} className="pointer-events-none block h-[1px] w-full lg:hidden" />
 
       {/* 
         =============================================================================
@@ -101,10 +101,10 @@ export const InteractiveSecuritySections = () => {
         =============================================================================
       */}
       <div
-        className={`block lg:hidden sticky top-[60px] z-40 w-full transition-all duration-300 ${
+        className={`sticky top-[60px] z-40 block w-full transition-all duration-300 lg:hidden ${
           isSticky
-            ? 'px-0 bg-transparent'
-            : 'max-w-[1320px] mx-auto px-[20px] md:px-[40px] pt-[12px] pb-[8px]'
+            ? 'bg-transparent px-0'
+            : 'mx-auto max-w-[1320px] px-[20px] pt-[12px] pb-[8px] md:px-[40px]'
         }`}
       >
         <TopicIndicator
@@ -123,7 +123,7 @@ export const InteractiveSecuritySections = () => {
         - 4. Certifications
         =============================================================================
       */}
-      <div className="w-full flex flex-col">
+      <div className="flex w-full flex-col">
         <DataSovereigntySection />
         <OurOwnCloudSection />
         <SecurityAndComplianceSection />

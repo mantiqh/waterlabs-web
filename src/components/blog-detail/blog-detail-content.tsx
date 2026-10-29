@@ -76,7 +76,7 @@ export const DEFAULT_BLOG_SECTIONS: BlogArticleSection[] = [
     paragraphs: [
       'It sits at the center, and the reason is recent. In February 2024, a ransomware attack on Change Healthcare became the largest healthcare data breach ever reported to federal regulators, ultimately affecting 192.7 million individuals. The parent company recorded $2.457 billion in total cyberattack impacts. Because a single processor touched one in three patient records, one breach froze revenue operations for thousands of providers at once.',
       "That event reset the security bar for every RCM vendor. The lesson was concentration risk: when everything routes through one exposed point, one failure becomes everyone's failure. Any serious agentic RCM system now has to answer where patient data lives and what happens to it during processing, before it answers anything about features.",
-      'This is a founding principle at Waterlabs, not a bolt-on. Patient data never leaves the client\'s environment. The agents do the work by reading the screen in the moment, the way a person would, and the trace is gone when the task is done. Nothing is copied out, stored, or used to train a model. The agents themselves run inside a sovereign cloud that Waterlabs built and owns, housed entirely in the United States, isolated per client so no two share a space. After Change Healthcare, that architecture is not a premium feature. It is the price of working in healthcare at all.',
+      "This is a founding principle at Waterlabs, not a bolt-on. Patient data never leaves the client's environment. The agents do the work by reading the screen in the moment, the way a person would, and the trace is gone when the task is done. Nothing is copied out, stored, or used to train a model. The agents themselves run inside a sovereign cloud that Waterlabs built and owns, housed entirely in the United States, isolated per client so no two share a space. After Change Healthcare, that architecture is not a premium feature. It is the price of working in healthcare at all.",
     ],
   },
   {
@@ -171,9 +171,7 @@ export const BlogDetailContent = ({
 
       // Trigger threshold: A section activates when its heading enters the reading zone
       // (upper 55% of viewport on desktop, 50% on mobile), matching what the reader is viewing.
-      const targetY = isMobile
-        ? window.innerHeight * 0.5
-        : window.innerHeight * 0.55;
+      const targetY = isMobile ? window.innerHeight * 0.5 : window.innerHeight * 0.55;
 
       // Check sections from bottom to top to find the section currently in the reading zone
       let activeId = topics[0]?.id || '';
@@ -222,9 +220,9 @@ export const BlogDetailContent = ({
   };
 
   return (
-    <section className="relative w-full bg-white rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] pb-[80px] lg:pb-[80px]">
+    <section className="relative w-full rounded-tr-[30px] rounded-br-[30px] bg-white pb-[80px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:pb-[80px]">
       {/* Sentinel for detecting when mobile TOC hits sticky position */}
-      <div ref={sentinelRef} className="block lg:hidden h-[1px] w-full pointer-events-none" />
+      <div ref={sentinelRef} className="pointer-events-none block h-[1px] w-full lg:hidden" />
 
       {/* 
         =============================================================================
@@ -234,10 +232,10 @@ export const BlogDetailContent = ({
         =============================================================================
       */}
       <div
-        className={`block lg:hidden sticky top-[60px] z-40 w-full transition-all duration-300 ${
+        className={`sticky top-[60px] z-40 block w-full transition-all duration-300 lg:hidden ${
           isSticky
-            ? 'px-0 bg-transparent'
-            : 'max-w-[1320px] mx-auto px-[20px] md:px-[40px] pt-[16px] pb-[8px]'
+            ? 'bg-transparent px-0'
+            : 'mx-auto max-w-[1320px] px-[20px] pt-[16px] pb-[8px] md:px-[40px]'
         }`}
       >
         <BlogDetailTOC
@@ -249,14 +247,13 @@ export const BlogDetailContent = ({
       </div>
 
       <div className="w-full px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto pt-[40px] lg:pt-[60px] flex flex-col lg:flex-row items-start justify-between gap-[32px] lg:gap-[40px]">
-          
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[32px] pt-[40px] lg:flex-row lg:gap-[40px] lg:pt-[60px]">
           {/* 
             =============================================================================
             LEFT COLUMN: STICKY TABLE OF CONTENTS (Desktop: Frame 2147226736: 305px wide)
             =============================================================================
           */}
-          <aside className="hidden lg:block w-[305px] shrink-0 sticky top-[100px] z-20">
+          <aside className="sticky top-[100px] z-20 hidden w-[305px] shrink-0 lg:block">
             <BlogDetailTOC
               activeTopic={activeTopic}
               onSelectTopic={scrollToTopic}
@@ -269,20 +266,18 @@ export const BlogDetailContent = ({
             RIGHT COLUMN: BLOG ARTICLE BODY CONTENT (Frame 2147226791: 975px wide)
             =============================================================================
           */}
-          <div className="w-full lg:max-w-[975px] flex-1 flex flex-col gap-[32px] lg:gap-[60px]">
+          <div className="flex w-full flex-1 flex-col gap-[32px] lg:max-w-[975px] lg:gap-[60px]">
             {sections.map((section) => (
               <article
                 key={section.id}
                 id={section.id}
-                className="flex flex-col items-start gap-[20px] lg:gap-[32px] scroll-mt-[120px]"
+                className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
                 {/* Heading: Display/H4 */}
-                <h4 className="type-h4 text-[#111111] max-w-[975px]">
-                  {section.title}
-                </h4>
+                <h4 className="type-h4 max-w-[975px] text-[#111111]">{section.title}</h4>
 
                 {/* Paragraphs: Body/Body-XS */}
-                <div className="flex flex-col items-start gap-[16px] lg:gap-[20px] max-w-[975px]">
+                <div className="flex max-w-[975px] flex-col items-start gap-[16px] lg:gap-[20px]">
                   {section.paragraphs.map((para, pIdx) => (
                     <p key={pIdx} className="type-body-xs text-[#2A2A2A]">
                       {renderFormattedText(para)}
@@ -292,7 +287,6 @@ export const BlogDetailContent = ({
               </article>
             ))}
           </div>
-
         </div>
       </div>
     </section>

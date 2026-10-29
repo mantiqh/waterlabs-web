@@ -29,9 +29,9 @@ export const OurOwnCloudSection = () => {
   };
 
   return (
-    <section 
-      id="our-own-cloud" 
-      className="relative w-full bg-white overflow-hidden p-0 m-0 scroll-mt-[60px]"
+    <section
+      id="our-own-cloud"
+      className="relative m-0 w-full scroll-mt-[60px] overflow-hidden bg-white p-0"
     >
       {/* 
         Main Black Card with left curves:
@@ -39,25 +39,25 @@ export const OurOwnCloudSection = () => {
         - Mobile: rounded-tl-[30px] rounded-bl-[30px], py-[40px] px-[20px]
         - Background behind the curve reveals the white background (#FFFFFF) of adjacent sections.
       */}
-      <div className="w-full bg-[#000000] rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] pt-[40px] lg:pt-[80px] pb-[60px] lg:pb-[100px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col lg:flex-row items-start gap-[24px] lg:gap-[40px]">
-          
+      <div className="w-full overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#000000] px-[20px] pt-[40px] pb-[60px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[80px] lg:pb-[100px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[24px] lg:flex-row lg:gap-[40px]">
           {/* Invisible Spacer matching Data Sovereignty's left column (305px) */}
-          <div className="hidden lg:block w-[305px] shrink-0 pointer-events-none" aria-hidden="true" />
+          <div
+            className="pointer-events-none hidden w-[305px] shrink-0 lg:block"
+            aria-hidden="true"
+          />
 
           {/* Main Content Column aligned with 1st right section (Fluid responsive max 975px) */}
-          <div className="w-full lg:flex-1 min-w-0 max-w-[975px] flex flex-col gap-0 lg:gap-[48px]">
-            
+          <div className="flex w-full max-w-[975px] min-w-0 flex-col gap-0 lg:flex-1 lg:gap-[48px]">
             {/* 
               Top Feature Card with 3D Blue Sphere (Figma Frame 2147203214)
               - Mobile: 362px x 320px, img_we_didnt_rent_a_cloud_we_built_one (1).png, border-radius: 20px 10px 20px 20px
               - Desktop: 975px x 381px, img_we_didnt_rent_a_cloud_we_built_one.png, border-radius: 20px 20px 20px 10px
               - Heading: General Sans, 32px / 40px (mobile) -> 52px / 60px (desktop), -0.01em, #042849 / #0F68D6 (Bold 700)
             */}
-            <div className="relative w-full h-[320px] lg:h-[381px] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tr-[20px] lg:rounded-bl-[10px] p-[20px] sm:p-[28px] lg:p-[40px] flex flex-col justify-end items-start overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.3)] isolate mb-[12px] lg:mb-0">
-              
+            <div className="relative isolate mb-[12px] flex h-[320px] w-full flex-col items-start justify-end overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] p-[20px] shadow-[0_12px_40px_rgba(0,0,0,0.3)] sm:p-[28px] lg:mb-0 lg:h-[381px] lg:rounded-tr-[20px] lg:rounded-bl-[10px] lg:p-[40px]">
               {/* Desktop Banner Graphic Background */}
-              <div className="hidden sm:block absolute inset-0 pointer-events-none z-0">
+              <div className="pointer-events-none absolute inset-0 z-0 hidden sm:block">
                 <Image
                   src="/images/trust-and-security/our-own-cloud/img_we_didnt_rent_a_cloud_we_built_one.png"
                   alt="Our Own Cloud Sphere"
@@ -68,7 +68,7 @@ export const OurOwnCloudSection = () => {
               </div>
 
               {/* Mobile Banner Graphic Background */}
-              <div className="block sm:hidden absolute inset-0 pointer-events-none z-0">
+              <div className="pointer-events-none absolute inset-0 z-0 block sm:hidden">
                 <Image
                   src="/images/trust-and-security/our-own-cloud/img_we_didnt_rent_a_cloud_we_built_one%20(1).png"
                   alt="Our Own Cloud Sphere Mobile"
@@ -78,30 +78,32 @@ export const OurOwnCloudSection = () => {
                 />
               </div>
 
-              <h2 className="relative z-10 type-h2 max-w-[895px]">
-                <span className="text-[#042849] font-normal">
+              <h2 className="type-h2 relative z-10 max-w-[895px]">
+                <span className="font-normal text-[#042849]">
                   We didn&apos;t
                   <br />
                   rent a cloud.
                 </span>
                 <br />
-                <span className="text-[#0F68D6] font-bold">We built one.</span>
+                <span className="font-bold text-[#0F68D6]">We built one.</span>
               </h2>
             </div>
 
             {/* Intro Paragraph */}
-            <p className="type-body-xs text-white mb-[32px] lg:mb-0">
-              Most companies in this space run on someone else&apos;s cloud and trust the landlord. Waterlabs built and owns its own, a data center we run end to end, on our own hardware, housed entirely in the United States. Every agent, every model, every line that touches your workflow runs inside the infrastructure we control.
+            <p className="type-body-xs mb-[32px] text-white lg:mb-0">
+              Most companies in this space run on someone else&apos;s cloud and trust the landlord.
+              Waterlabs built and owns its own, a data center we run end to end, on our own
+              hardware, housed entirely in the United States. Every agent, every model, every line
+              that touches your workflow runs inside the infrastructure we control.
             </p>
 
             {/* =====================================================================
                 DESKTOP: 3 Alternating Cards (Figma Layout)
                ===================================================================== */}
-            <div className="hidden lg:flex flex-col gap-[36px] lg:gap-[48px] w-full">
-              
+            <div className="hidden w-full flex-col gap-[36px] lg:flex lg:gap-[48px]">
               {/* Card 1: No Shared Walls (Image on Left, Text on Right) */}
               <div className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
-                <div className="w-full lg:w-[45%] xl:w-[420px] shrink-0 relative aspect-[420/290] rounded-[16px] xl:rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+                <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-[16px] shadow-[0_8px_30px_rgba(0,0,0,0.4)] lg:w-[45%] xl:w-[420px] xl:rounded-[20px]">
                   <Image
                     src="/images/trust-and-security/our-own-cloud/img_no_shared_walls.png"
                     alt="No Shared Walls"
@@ -110,19 +112,20 @@ export const OurOwnCloudSection = () => {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="type-h5 text-white">
-                    No Shared Walls
-                  </h4>
+                <div className="flex min-w-0 flex-1 flex-col gap-[12px] lg:gap-[14px]">
+                  <h4 className="type-h5 text-white">No Shared Walls</h4>
                   <p className="type-body-xxs text-white/90">
-                    Because we own the environment, we ensure that no client shares space with another. Your agents, your data path, your sealed world. The industry&apos;s biggest fear, one breach cascading across everyone on a shared platform, is the one thing this architecture makes impossible.
+                    Because we own the environment, we ensure that no client shares space with
+                    another. Your agents, your data path, your sealed world. The industry&apos;s
+                    biggest fear, one breach cascading across everyone on a shared platform, is the
+                    one thing this architecture makes impossible.
                   </p>
                 </div>
               </div>
 
               {/* Card 2: Built to take a hit (Text on Left, Image on Right) */}
               <div className="flex flex-row-reverse items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
-                <div className="w-full lg:w-[45%] xl:w-[420px] shrink-0 relative aspect-[420/290] rounded-[16px] xl:rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+                <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-[16px] shadow-[0_8px_30px_rgba(0,0,0,0.4)] lg:w-[45%] xl:w-[420px] xl:rounded-[20px]">
                   <Image
                     src="/images/trust-and-security/our-own-cloud/img_built_to_take_a_hit.png"
                     alt="Built to take a hit"
@@ -131,19 +134,18 @@ export const OurOwnCloudSection = () => {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="type-h5 text-white">
-                    Built to take a hit
-                  </h4>
+                <div className="flex min-w-0 flex-1 flex-col gap-[12px] lg:gap-[14px]">
+                  <h4 className="type-h5 text-white">Built to take a hit</h4>
                   <p className="type-body-xxs text-white/90">
-                    The system watches itself and heals itself. Backups are continuous and mirrored. If something fails, work continues. Recovery is built in, not bolted on.
+                    The system watches itself and heals itself. Backups are continuous and mirrored.
+                    If something fails, work continues. Recovery is built in, not bolted on.
                   </p>
                 </div>
               </div>
 
               {/* Card 3: Independently tested (Image on Left, Text on Right) */}
               <div className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
-                <div className="w-full lg:w-[45%] xl:w-[420px] shrink-0 relative aspect-[420/290] rounded-[16px] xl:rounded-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+                <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-[16px] shadow-[0_8px_30px_rgba(0,0,0,0.4)] lg:w-[45%] xl:w-[420px] xl:rounded-[20px]">
                   <Image
                     src="/images/trust-and-security/our-own-cloud/img_independently_tested.png"
                     alt="Independently tested"
@@ -152,31 +154,28 @@ export const OurOwnCloudSection = () => {
                     className="object-cover"
                   />
                 </div>
-                <div className="flex flex-col gap-[12px] lg:gap-[14px] flex-1 min-w-0">
-                  <h4 className="type-h5 text-white">
-                    Independently tested
-                  </h4>
+                <div className="flex min-w-0 flex-1 flex-col gap-[12px] lg:gap-[14px]">
+                  <h4 className="type-h5 text-white">Independently tested</h4>
                   <p className="type-body-xxs text-white/90">
-                    The environment is independently penetration-tested, and we fix what the testers find. Security here is deep-rooted.
+                    The environment is independently penetration-tested, and we fix what the testers
+                    find. Security here is deep-rooted.
                   </p>
                 </div>
               </div>
-
             </div>
 
             {/* =====================================================================
                 MOBILE / TABLET: Horizontal Scrollable Cards with Dots Indicator
                ===================================================================== */}
-            <div className="flex lg:hidden flex-col gap-[16px] w-full">
-              <div 
+            <div className="flex w-full flex-col gap-[16px] lg:hidden">
+              <div
                 ref={carouselRef}
                 onScroll={handleScroll}
-                className="flex flex-row overflow-x-auto snap-x snap-mandatory no-scrollbar gap-[16px] w-full"
+                className="no-scrollbar flex w-full snap-x snap-mandatory flex-row gap-[16px] overflow-x-auto"
               >
-                
                 {/* Mobile Card 1 */}
-                <div className="w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex flex-col gap-[12px]">
-                  <div className="w-full relative aspect-[362/250] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+                <div className="flex w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex-col gap-[12px]">
+                  <div className="relative aspect-[362/250] w-full overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
                     <Image
                       src="/images/trust-and-security/our-own-cloud/img_no_shared_walls.png"
                       alt="No shared walls"
@@ -186,18 +185,19 @@ export const OurOwnCloudSection = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="type-h5 text-[#63CCB7]">
-                      No shared walls
-                    </h4>
+                    <h4 className="type-h5 text-[#63CCB7]">No shared walls</h4>
                     <p className="type-body-xxs text-white">
-                      Because we own the environment, we ensure that no client shares space with another. Your agents, your data path, your sealed world. The industry&apos;s biggest fear, one breach cascading across everyone on a shared platform, is the one thing this architecture makes impossible.
+                      Because we own the environment, we ensure that no client shares space with
+                      another. Your agents, your data path, your sealed world. The industry&apos;s
+                      biggest fear, one breach cascading across everyone on a shared platform, is
+                      the one thing this architecture makes impossible.
                     </p>
                   </div>
                 </div>
 
                 {/* Mobile Card 2 */}
-                <div className="w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex flex-col gap-[12px]">
-                  <div className="w-full relative aspect-[362/250] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+                <div className="flex w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex-col gap-[12px]">
+                  <div className="relative aspect-[362/250] w-full overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
                     <Image
                       src="/images/trust-and-security/our-own-cloud/img_built_to_take_a_hit.png"
                       alt="Built to take a hit"
@@ -207,18 +207,18 @@ export const OurOwnCloudSection = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="type-h5 text-[#63CCB7]">
-                      Built to take a hit
-                    </h4>
+                    <h4 className="type-h5 text-[#63CCB7]">Built to take a hit</h4>
                     <p className="type-body-xxs text-white">
-                      The system watches itself and heals itself. Backups are continuous and mirrored, not tapes and manual restores. If something fails, work continues. Recovery is built in, not bolted on.
+                      The system watches itself and heals itself. Backups are continuous and
+                      mirrored, not tapes and manual restores. If something fails, work continues.
+                      Recovery is built in, not bolted on.
                     </p>
                   </div>
                 </div>
 
                 {/* Mobile Card 3 */}
-                <div className="w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex flex-col gap-[12px]">
-                  <div className="w-full relative aspect-[362/250] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+                <div className="flex w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex-col gap-[12px]">
+                  <div className="relative aspect-[362/250] w-full overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
                     <Image
                       src="/images/trust-and-security/our-own-cloud/img_independently_tested.png"
                       alt="Independently tested"
@@ -228,15 +228,13 @@ export const OurOwnCloudSection = () => {
                     />
                   </div>
                   <div className="flex flex-col gap-[8px]">
-                    <h4 className="type-h5 text-[#63CCB7]">
-                      Independently tested
-                    </h4>
+                    <h4 className="type-h5 text-[#63CCB7]">Independently tested</h4>
                     <p className="type-body-xxs text-white">
-                      The environment is independently penetration-tested, and we fix what the testers find. Security here is deep-rooted.
+                      The environment is independently penetration-tested, and we fix what the
+                      testers find. Security here is deep-rooted.
                     </p>
                   </div>
                 </div>
-
               </div>
 
               {/* Dots Indicator (No scrollbar track line) */}
@@ -250,18 +248,14 @@ export const OurOwnCloudSection = () => {
                       aria-label={`Slide ${idx + 1}`}
                       onClick={() => scrollToCard(idx)}
                       className={`h-[6px] rounded-[32px] transition-all duration-300 ${
-                        isActive
-                          ? 'w-[32px] bg-white'
-                          : 'w-[16px] bg-white/30 hover:bg-white/50'
+                        isActive ? 'w-[32px] bg-white' : 'w-[16px] bg-white/30 hover:bg-white/50'
                       }`}
                     />
                   );
                 })}
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </section>

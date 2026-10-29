@@ -5,7 +5,7 @@ import WeBuildPeopleSection from './we-build-people';
 
 export const CulturePage = () => {
   return (
-    <div className="w-full flex flex-col">
+    <div className="flex w-full flex-col">
       <CultureHeroSection />
       <FourThingsSection />
       <WeBuildPeopleSection />

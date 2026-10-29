@@ -12,12 +12,11 @@ export const CareersHeroSection = () => {
         - Mobile: 402px x 659px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px
         - Background: linear-gradient(180deg, #0F68D6 2.92%, #B8B1A5 100%) with banner (1).png (desktop/tablet) / banner (2).png (mobile)
       */}
-      <div className="relative w-full min-h-[620px] md:h-[560px] lg:h-[650px] bg-gradient-to-b from-[#0F68D6] from-30% to-[#B8B1A5] rounded-bl-[30px] lg:rounded-bl-[60px] pt-[20px] px-[20px] pb-[40px] md:pt-[28px] md:px-[40px] md:pb-[40px] lg:pt-[40px] lg:px-[60px] lg:pb-[80px] flex flex-col justify-between gap-[20px] md:gap-0">
-        
+      <div className="relative flex min-h-[620px] w-full flex-col justify-between gap-[20px] rounded-bl-[30px] bg-gradient-to-b from-[#0F68D6] from-30% to-[#B8B1A5] px-[20px] pt-[20px] pb-[40px] md:h-[560px] md:gap-0 md:px-[40px] md:pt-[28px] md:pb-[40px] lg:h-[650px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]">
         {/* Background Banner Graphic anchored to bottom */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
           {/* Desktop & Tablet Banner Graphic */}
-          <div className="hidden md:block absolute inset-0">
+          <div className="absolute inset-0 hidden md:block">
             <Image
               src="/images/careers/hero-section/banner%20(1).png"
               alt="Careers Background Banner"
@@ -27,7 +26,7 @@ export const CareersHeroSection = () => {
             />
           </div>
           {/* Mobile Banner Graphic */}
-          <div className="block md:hidden absolute inset-0">
+          <div className="absolute inset-0 block md:hidden">
             <Image
               src="/images/careers/hero-section/banner%20(2).png"
               alt="Careers Background Banner Mobile"
@@ -52,20 +51,20 @@ export const CareersHeroSection = () => {
               - Heading: General Sans 48px / 56px, max-w-[650px]
             - Right (Rectangle 131): 650px x 441px team image card, rounded-tl-[80px] rounded-tr-[20px] rounded-br-[80px] rounded-bl-[20px]
            ===================================================================== */}
-        <div className="hidden md:flex relative z-10 w-full max-w-[1320px] mx-auto flex-row md:items-center lg:items-end justify-between gap-[20px] md:my-auto lg:my-0 h-auto lg:h-[470px]">
-          
+        <div className="relative z-10 mx-auto hidden h-auto w-full max-w-[1320px] flex-row justify-between gap-[20px] md:my-auto md:flex md:items-center lg:my-0 lg:h-[470px] lg:items-end">
           {/* Left Column (Frame 12 -> Frame 2147203284): Heading */}
-          <div className="w-full md:w-1/2 max-w-[650px] h-auto lg:h-full pt-0 lg:pt-[32px] flex flex-col justify-center items-start">
-            <div className="w-full h-auto lg:h-[438px] flex flex-col justify-center items-start">
-              <h2 className="type-h3 tracking-[-0.01em] text-white max-w-[650px]">
-                We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
+          <div className="flex h-auto w-full max-w-[650px] flex-col items-start justify-center pt-0 md:w-1/2 lg:h-full lg:pt-[32px]">
+            <div className="flex h-auto w-full flex-col items-start justify-center lg:h-[438px]">
+              <h2 className="type-h3 max-w-[650px] tracking-[-0.01em] text-white">
+                We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare
+                gets paid.
               </h2>
             </div>
           </div>
 
           {/* Right Column: Team Image Card (Rectangle 131) */}
-          <div className="w-full md:w-1/2 max-w-[650px] shrink-0">
-            <div className="relative w-full h-[300px] md:h-[340px] lg:h-[441px] rounded-tl-[60px] lg:rounded-tl-[80px] rounded-tr-[20px] rounded-br-[60px] lg:rounded-br-[80px] rounded-bl-[20px] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.15)]">
+          <div className="w-full max-w-[650px] shrink-0 md:w-1/2">
+            <div className="relative h-[300px] w-full overflow-hidden rounded-tl-[60px] rounded-tr-[20px] rounded-br-[60px] rounded-bl-[20px] shadow-[0_12px_40px_rgba(0,0,0,0.15)] md:h-[340px] lg:h-[441px] lg:rounded-tl-[80px] lg:rounded-br-[80px]">
               <Image
                 src="/images/careers/hero-section/img_banner%20(8).png"
                 alt="Waterlabs Team"
@@ -76,7 +75,6 @@ export const CareersHeroSection = () => {
               />
             </div>
           </div>
-
         </div>
 
         {/* =====================================================================
@@ -84,17 +82,17 @@ export const CareersHeroSection = () => {
             - Top: Heading (General Sans 36px / 48px)
             - Bottom: Team image card (362px x 246px, rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px])
            ===================================================================== */}
-        <div className="flex md:hidden relative z-10 w-full flex-col justify-end items-start gap-[20px] mt-auto">
-          
+        <div className="relative z-10 mt-auto flex w-full flex-col items-start justify-end gap-[20px] md:hidden">
           {/* Top: Heading */}
           <div className="w-full">
             <h2 className="type-h1 tracking-[-0.01em] text-white">
-              We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare gets paid.
+              We are tackling one of healthcare&apos;s hardest problems: rebuilding how healthcare
+              gets paid.
             </h2>
           </div>
 
           {/* Bottom: Team Image Card (Rectangle 132) */}
-          <div className="w-full relative aspect-[362/246] rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
+          <div className="relative aspect-[362/246] w-full overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
             <Image
               src="/images/careers/hero-section/img_banner%20(8).png"
               alt="Waterlabs Team"
@@ -104,9 +102,7 @@ export const CareersHeroSection = () => {
               className="object-cover object-center"
             />
           </div>
-
         </div>
-
       </div>
     </section>
   );

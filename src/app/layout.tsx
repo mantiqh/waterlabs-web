@@ -43,11 +43,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable}`}>
-      <body className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable} antialiased bg-[#F4F6F9]`}>
-        <div className="flex flex-col min-h-screen">
-          <main className="flex-grow flex flex-col">
-            {children}
-          </main>
+      <body
+        className={`${inter.variable} ${generalSans.variable} ${ibmPlexSans.variable} bg-[#F4F6F9] antialiased`}
+      >
+        <div className="flex min-h-screen flex-col">
+          <main className="flex flex-grow flex-col">{children}</main>
           <Footer />
         </div>
       </body>

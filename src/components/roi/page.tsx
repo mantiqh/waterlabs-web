@@ -7,7 +7,7 @@ import ROISampleReportSection from './sample-report-section';
 
 export const ROIPage = () => {
   return (
-    <main className="w-full flex flex-col">
+    <main className="flex w-full flex-col">
       <ROIHeroSection />
       <ROIProofBand />
       <ROICalculatorSection />

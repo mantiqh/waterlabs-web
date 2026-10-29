@@ -5,11 +5,14 @@ export const caseStudy6: CaseStudy = {
   slug: 'multi-specialty-outpatient-practice',
   aliases: ['ambulatory-infusion-center'],
   categoryTag: 'Case Study · Multi-Specialty Practice',
-  title: 'How a multi-specialty practice used Waterlabs to give every patient a cost estimate before the visit, not after.',
+  title:
+    'How a multi-specialty practice used Waterlabs to give every patient a cost estimate before the visit, not after.',
   titleHighlight: 'cost estimate before the visit, not after.',
-  subtitle: 'Scheduled visits across multiple specialties, each having its own contracted fee schedule, and no practical way to produce an estimate by hand.',
+  subtitle:
+    'Scheduled visits across multiple specialties, each having its own contracted fee schedule, and no practical way to produce an estimate by hand.',
   heroImage: '/images/case-study/case-study-6-multi-specialty/Frame%202147226958.png',
-  heroImageAlt: 'Multi-specialty practice patient access and automated estimation team with Waterlabs',
+  heroImageAlt:
+    'Multi-specialty practice patient access and automated estimation team with Waterlabs',
   cardCategory: 'Case Studies',
   cardTag: 'Multi-Specialty Practice',
   cardStat: 'Zero manual benefit lookups per estimate',

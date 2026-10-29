@@ -127,9 +127,12 @@ function mapSanityToSolution(doc: SanitySolutionDoc): SolutionPageData {
       stats: Array.isArray(doc.stats) ? doc.stats : [],
       humanHeading: doc.humanHeading || 'Human in the loop, by design',
       humanHeadingHighlight: doc.humanHeadingHighlight || 'Human in the loop,',
-      humanParagraphs: Array.isArray(doc.humanParagraphs) && doc.humanParagraphs.length > 0
-        ? doc.humanParagraphs
-        : ['When an issue requires clinical judgment, our agents route it to your team with all background context prepared.'],
+      humanParagraphs:
+        Array.isArray(doc.humanParagraphs) && doc.humanParagraphs.length > 0
+          ? doc.humanParagraphs
+          : [
+              'When an issue requires clinical judgment, our agents route it to your team with all background context prepared.',
+            ],
       humanImage: doc.humanImage,
       humanImageMobile: doc.humanImageMobile,
       humanImageAlt: doc.humanImageAlt,
@@ -137,29 +140,42 @@ function mapSanityToSolution(doc: SanitySolutionDoc): SolutionPageData {
 
     platformAndFeatures: {
       platformEyebrow: doc.platformEyebrow || `This isn't just a ${doc.title.toLowerCase()} tool`,
-      platformHeading: doc.platformHeading || 'It is one application within an operating system that manages the full revenue cycle.',
-      platformDescription: doc.platformDescription || `${doc.title} runs on our proprietary HIMER AI OS, which also manages eligibility, denials, accounts receivable, cash posting, and coding.`,
+      platformHeading:
+        doc.platformHeading ||
+        'It is one application within an operating system that manages the full revenue cycle.',
+      platformDescription:
+        doc.platformDescription ||
+        `${doc.title} runs on our proprietary HIMER AI OS, which also manages eligibility, denials, accounts receivable, cash posting, and coding.`,
       platformCtaText: doc.platformCtaText || 'Explore HIMER AI OS',
-      platformCtaLink: doc.platformCtaLink || '/products/himer',
+      platformCtaLink:
+        !doc.platformCtaLink ||
+        ['/himer-ai-os', '/products/himer', '/himer'].includes(doc.platformCtaLink)
+          ? '/product/himer'
+          : doc.platformCtaLink,
       platformImage: doc.platformImage,
-      threeThingsHeading: doc.threeThingsHeading || 'The three things that usually stop people. None of them apply here.',
-      threeThingsHeadingHighlight: doc.threeThingsHeadingHighlight || 'The three things that usually',
-      threeThingsCards: Array.isArray(doc.threeThingsCards) && doc.threeThingsCards.length > 0
-        ? doc.threeThingsCards
-        : [
-            {
-              title: 'Start small',
-              description: `You may begin with ${doc.title.toLowerCase()} only and add additional stages when ready.`,
-            },
-            {
-              title: 'Go live fast',
-              description: 'Your agents will be live within 14 days.',
-            },
-            {
-              title: 'Data remains secure',
-              description: 'Our agents run on infrastructure Waterlabs owns and operates in the United States, under a BAA, on servers we control end to end.',
-            },
-          ],
+      threeThingsHeading:
+        doc.threeThingsHeading ||
+        'The three things that usually stop people. None of them apply here.',
+      threeThingsHeadingHighlight:
+        doc.threeThingsHeadingHighlight || 'The three things that usually',
+      threeThingsCards:
+        Array.isArray(doc.threeThingsCards) && doc.threeThingsCards.length > 0
+          ? doc.threeThingsCards
+          : [
+              {
+                title: 'Start small',
+                description: `You may begin with ${doc.title.toLowerCase()} only and add additional stages when ready.`,
+              },
+              {
+                title: 'Go live fast',
+                description: 'Your agents will be live within 14 days.',
+              },
+              {
+                title: 'Data remains secure',
+                description:
+                  'Our agents run on infrastructure Waterlabs owns and operates in the United States, under a BAA, on servers we control end to end.',
+              },
+            ],
     },
 
     cta: {
@@ -191,7 +207,10 @@ export async function fetchSolutionBySlug(slug: string): Promise<SolutionPageDat
       return mapSanityToSolution(sanityDoc);
     }
   } catch (error) {
-    console.warn(`[Sanity] Failed to fetch solution page '${slug}', falling back to local data:`, error);
+    console.warn(
+      `[Sanity] Failed to fetch solution page '${slug}', falling back to local data:`,
+      error,
+    );
   }
 
   // Fallback to static TypeScript definitions
@@ -233,7 +252,9 @@ export async function fetchSolutionNavItems(): Promise<SolutionNavItem[]> {
 
   // 2. Fetch published solutions from Sanity
   try {
-    const sanityNav = await sanityFetch<{ title: string; navLabel?: string; slug: string; order?: number }[]>({
+    const sanityNav = await sanityFetch<
+      { title: string; navLabel?: string; slug: string; order?: number }[]
+    >({
       query: solutionNavQuery,
       tags: ['solutionPage'],
       revalidate: 60,
@@ -242,11 +263,14 @@ export async function fetchSolutionNavItems(): Promise<SolutionNavItem[]> {
     if (Array.isArray(sanityNav) && sanityNav.length > 0) {
       sanityNav.forEach((item) => {
         // Special case for eligibility which points to /solutions
-        const href = item.slug === 'eligibility-and-benefits-verification' ? '/solutions' : `/solutions/${item.slug}`;
+        const href =
+          item.slug === 'eligibility-and-benefits-verification'
+            ? '/solutions'
+            : `/solutions/${item.slug}`;
         navMap.set(href, {
           label: item.navLabel || item.title,
           href,
-          order: item.order ?? (navMap.get(href)?.order ?? 99),
+          order: item.order ?? navMap.get(href)?.order ?? 99,
         });
       });
     }

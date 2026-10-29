@@ -19,13 +19,7 @@ interface BlogArticle {
   mobileImage: string;
 }
 
-const BLOG_CATEGORIES = [
-  'All',
-  'Features',
-  'Use Cases',
-  'Company News',
-  'Case Studies',
-] as const;
+const BLOG_CATEGORIES = ['All', 'Features', 'Use Cases', 'Company News', 'Case Studies'] as const;
 
 const CARDS_PER_PAGE = 6;
 
@@ -43,9 +37,9 @@ const BLOG_ARTICLES: BlogArticle[] = [
     subTag: 'Jun 26, 2025',
     title: (
       <>
-        Denial Management in Revenue<br className="hidden md:inline" />{' '}
-        Cycle Management:<br className="hidden md:inline" />{' '}
-        The Complete Guide
+        Denial Management in Revenue
+        <br className="hidden md:inline" /> Cycle Management:
+        <br className="hidden md:inline" /> The Complete Guide
       </>
     ),
     rawTitle: 'Denial Management in Revenue Cycle Management: The Complete Guide',
@@ -60,13 +54,14 @@ const BLOG_ARTICLES: BlogArticle[] = [
     subTag: 'Jun 24, 2025',
     title: (
       <>
-        Autonomous Medical Coding:<br className="hidden md:inline" />{' '}
-        Accuracy, Compliance, and What<br className="hidden md:inline" />{' '}
-        Replaces Computer-Assisted<br className="hidden md:inline" />{' '}
-        Coding
+        Autonomous Medical Coding:
+        <br className="hidden md:inline" /> Accuracy, Compliance, and What
+        <br className="hidden md:inline" /> Replaces Computer-Assisted
+        <br className="hidden md:inline" /> Coding
       </>
     ),
-    rawTitle: 'Autonomous Medical Coding: Accuracy, Compliance, and What Replaces Computer-Assisted Coding',
+    rawTitle:
+      'Autonomous Medical Coding: Accuracy, Compliance, and What Replaces Computer-Assisted Coding',
     slug: 'autonomous-medical-coding-accuracy-compliance',
     desktopImage: '/images/blogs/tabs/img_medical_coding.png',
     mobileImage: '/images/blogs/tabs/img_medical_coding_mobile (1).png',
@@ -78,12 +73,13 @@ const BLOG_ARTICLES: BlogArticle[] = [
     subTag: 'Jun 23, 2025',
     title: (
       <>
-        The Economics of the Revenue Cycle:<br className="hidden md:inline" />{' '}
-        Cost to Collect, KPIs, and Why Most<br className="hidden md:inline" />{' '}
-        RCM AI Never Shows ROI
+        The Economics of the Revenue Cycle:
+        <br className="hidden md:inline" /> Cost to Collect, KPIs, and Why Most
+        <br className="hidden md:inline" /> RCM AI Never Shows ROI
       </>
     ),
-    rawTitle: 'The Economics of the Revenue Cycle: Cost to Collect, KPIs, and Why Most RCM AI Never Shows ROI',
+    rawTitle:
+      'The Economics of the Revenue Cycle: Cost to Collect, KPIs, and Why Most RCM AI Never Shows ROI',
     slug: 'economics-of-revenue-cycle-cost-to-collect-kpis',
     desktopImage: '/images/blogs/tabs/img_economics_of_revenue_cyle_mobile.png',
     mobileImage: '/images/blogs/tabs/img_economics_of_revenue_cyle_mobile (1).png',
@@ -139,7 +135,7 @@ export const BlogsTabsSection = ({
             'testing-blog',
             'testing-blog2',
             'prior-authorization-automation-broken-process-healthcare',
-          ].includes(item.slug)
+          ].includes(item.slug),
       )
       .map((item, idx) => {
         const category = item.category || 'Features';
@@ -167,8 +163,7 @@ export const BlogsTabsSection = ({
 
   const filteredArticles = useMemo(() => {
     return articlesList.filter((article) => {
-      const matchesCategory =
-        selectedCategory === 'All' || article.category === selectedCategory;
+      const matchesCategory = selectedCategory === 'All' || article.category === selectedCategory;
       const matchesSearch =
         searchQuery.trim() === '' ||
         article.rawTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -220,377 +215,394 @@ export const BlogsTabsSection = ({
 
   return (
     <section
-      className="relative w-full overflow-hidden p-0 m-0"
+      className="relative m-0 w-full overflow-hidden p-0"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 50%, #0F68D6 50%)',
       }}
     >
-      <div className="w-full bg-[#F4F6F9] rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] py-[40px] md:py-[60px] lg:py-[80px] px-[20px] md:px-[40px] lg:px-[60px] overflow-hidden">
-        <div className="w-full max-w-[1320px] mx-auto flex flex-col gap-[32px] md:gap-[40px] lg:gap-[48px]">
-        
-        {/* ========================================================================= */}
-        {/* Filter & Search Bar                                                       */}
-        {/* ========================================================================= */}
-        
-        {/* Desktop Filter Bar (Figma: Frame 2147226517) */}
-        <div className="hidden lg:flex flex-row items-center justify-between gap-[32px] w-full">
-          {/* Category Tabs */}
-          <div className="flex flex-row items-center gap-[12px] xl:gap-[16px] flex-wrap">
-            {categoriesList.map((category) => {
-              const isSelected = selectedCategory === category;
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => handleCategorySelect(category)}
-                  className={`h-[40px] px-[16px] py-[8px] rounded-[64px] body-cta font-medium transition-all duration-300 cursor-pointer ${
-                    isSelected
-                      ? 'bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] text-white shadow-sm'
-                      : 'bg-[#91C6F2]/[0.09] text-[#7D8690] hover:text-[#042849] hover:bg-[#91C6F2]/[0.18]'
-                  }`}
-                >
-                  {category}
-                </button>
-              );
-            })}
-          </div>
+      <div className="w-full overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[32px] md:gap-[40px] lg:gap-[48px]">
+          {/* ========================================================================= */}
+          {/* Filter & Search Bar                                                       */}
+          {/* ========================================================================= */}
 
-          {/* Search Input */}
-          <div className="w-[280px] xl:w-[313px] h-[40px] bg-white/70 border border-white rounded-[64px] px-[16px] py-[8px] flex items-center gap-[10px] focus-within:bg-white focus-within:border-[#0F68D6] transition-all">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-[#7D8690] shrink-0"
-            >
-              <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => handleSearchChange(e.target.value)}
-              placeholder={settings?.searchPlaceholder || 'Search'}
-              className="w-full bg-transparent border-none outline-none type-body-xs text-[#2A2A2A] placeholder:text-[#7D8690]"
-            />
-          </div>
-        </div>
+          {/* Desktop Filter Bar (Figma: Frame 2147226517) */}
+          <div className="hidden w-full flex-row items-center justify-between gap-[32px] lg:flex">
+            {/* Category Tabs */}
+            <div className="flex flex-row flex-wrap items-center gap-[12px] xl:gap-[16px]">
+              {categoriesList.map((category) => {
+                const isSelected = selectedCategory === category;
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => handleCategorySelect(category)}
+                    className={`body-cta h-[40px] cursor-pointer rounded-[64px] px-[16px] py-[8px] font-medium transition-all duration-300 ${
+                      isSelected
+                        ? 'bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] text-white shadow-sm'
+                        : 'bg-[#91C6F2]/[0.09] text-[#7D8690] hover:bg-[#91C6F2]/[0.18] hover:text-[#042849]'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
 
-        {/* Mobile & Tablet Filter Bar (Figma: Frame 2147226778) */}
-        <div className="flex lg:hidden flex-col gap-[16px] w-full">
-          {/* Top Search & Filter by Row */}
-          <div className="flex flex-row items-center gap-[12px] w-full">
             {/* Search Input */}
-            <div className="flex-1 h-[39px] bg-white rounded-[12px_6px_12px_12px] px-[12px] flex items-center gap-[8px] border border-transparent focus-within:border-[#0F68D6]">
+            <div className="flex h-[40px] w-[280px] items-center gap-[10px] rounded-[64px] border border-white bg-white/70 px-[16px] py-[8px] transition-all focus-within:border-[#0F68D6] focus-within:bg-white xl:w-[313px]">
               <svg
                 width="14"
                 height="14"
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-[#042849] shrink-0"
+                className="shrink-0 text-[#7D8690]"
               >
                 <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path
+                  d="M11 11L14.5 14.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder={settings?.searchPlaceholder || 'Search'}
-                className="w-full bg-transparent border-none outline-none type-body-xxs text-[#2A2A2A] placeholder:text-[#D7DCE2]"
+                className="type-body-xs w-full border-none bg-transparent text-[#2A2A2A] outline-none placeholder:text-[#7D8690]"
               />
-            </div>
-
-            {/* Filter by Dropdown Trigger */}
-            <div className="relative">
-              <button
-                type="button"
-                onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
-                className="h-[39px] px-[12px] bg-white border border-[#F4F6F9] rounded-[8px_2px_8px_8px] flex items-center gap-[8px] cursor-pointer"
-              >
-                <span className="type-body-xxs text-[#2A2A2A]">
-                  {settings?.filterByLabel || 'Filter by'}
-                </span>
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="text-black shrink-0"
-                >
-                  <path d="M3.5 5.25L7 8.75L10.5 5.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-
-              {/* Dropdown Menu */}
-              {isFilterDropdownOpen && (
-                <div className="absolute right-0 top-[45px] z-30 w-[180px] bg-white rounded-[12px] shadow-lg border border-[#D7DCE2] py-[6px] overflow-hidden">
-                  {categoriesList.map((category) => (
-                    <button
-                      key={category}
-                      type="button"
-                      onClick={() => {
-                        handleCategorySelect(category);
-                        setIsFilterDropdownOpen(false);
-                      }}
-                      className={`w-full text-left px-[14px] py-[8px] type-body-xxs transition-colors ${
-                        selectedCategory === category
-                          ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
-                          : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
 
-        </div>
-
-        {/* ========================================================================= */}
-        {/* Blog Articles Grid (Figma: Frame 2147226515 / 2147226523)                  */}
-        {/* ========================================================================= */}
-        <div
-          ref={gridRef}
-          className="w-full grid grid-cols-1 lg:grid-cols-2 gap-x-[32px] gap-y-[32px] lg:gap-y-[40px]"
-        >
-          {paginatedArticles.map((article) => (
-            <div
-              key={article.id}
-              className="w-full border-b border-[#D7DCE2] pb-[20px] md:pb-[32px] flex flex-col gap-[8px] md:gap-[12px]"
-            >
-              {/* Tag / Eyebrow (Text - Tag) */}
-              <div className="flex items-center gap-[6px] lg:gap-[8px]">
-                <span className="type-caption text-[#7D8690]">{article.tag}</span>
-                {article.subTag && (
-                  <>
-                    <span className="h-[12px] lg:h-[14px] w-[1px] bg-[#7D8690]/40" />
-                    <span className="type-caption text-[#7D8690]">{article.subTag}</span>
-                  </>
-                )}
+          {/* Mobile & Tablet Filter Bar (Figma: Frame 2147226778) */}
+          <div className="flex w-full flex-col gap-[16px] lg:hidden">
+            {/* Top Search & Filter by Row */}
+            <div className="flex w-full flex-row items-center gap-[12px]">
+              {/* Search Input */}
+              <div className="flex h-[39px] flex-1 items-center gap-[8px] rounded-[12px_6px_12px_12px] border border-transparent bg-white px-[12px] focus-within:border-[#0F68D6]">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="shrink-0 text-[#042849]"
+                >
+                  <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
+                  <path
+                    d="M11 11L14.5 14.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => handleSearchChange(e.target.value)}
+                  placeholder={settings?.searchPlaceholder || 'Search'}
+                  className="type-body-xxs w-full border-none bg-transparent text-[#2A2A2A] outline-none placeholder:text-[#D7DCE2]"
+                />
               </div>
 
-              {/* Desktop Article Layout (Side-by-side) */}
-              <div className="hidden md:flex flex-row items-stretch justify-between gap-[20px] w-full">
-                {/* Left Text & CTA (Frame 2147226512) */}
-                <div className="flex-1 min-w-0 flex flex-col items-start gap-[16px]">
-                  <h6 className="type-h6 text-black tracking-[-0.01em]">
-                    {article.title}
-                  </h6>
+              {/* Filter by Dropdown Trigger */}
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
+                  className="flex h-[39px] cursor-pointer items-center gap-[8px] rounded-[8px_2px_8px_8px] border border-[#F4F6F9] bg-white px-[12px]"
+                >
+                  <span className="type-body-xxs text-[#2A2A2A]">
+                    {settings?.filterByLabel || 'Filter by'}
+                  </span>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="shrink-0 text-black"
+                  >
+                    <path
+                      d="M3.5 5.25L7 8.75L10.5 5.25"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
 
-                  <Link href={`/blogs/${article.slug}`} className="inline-block">
-                    <div className="h-[44px] px-[20px] py-[10px] rounded-[64px] bg-[rgba(214,214,214,0.21)] border border-[#F4F6F9] backdrop-blur-[12px] flex items-center gap-[10px] cursor-pointer hover:bg-white/60 hover:border-[#0F68D6]/30 transition-all duration-300">
-                      <span className="type-body-xxs text-[#2A2A2A] font-medium">
-                        {settings?.readBlogButtonText || 'Read blog'}
-                      </span>
-                      <ChevronRight className="text-[#2A2A2A] opacity-60" />
+                {/* Dropdown Menu */}
+                {isFilterDropdownOpen && (
+                  <div className="absolute top-[45px] right-0 z-30 w-[180px] overflow-hidden rounded-[12px] border border-[#D7DCE2] bg-white py-[6px] shadow-lg">
+                    {categoriesList.map((category) => (
+                      <button
+                        key={category}
+                        type="button"
+                        onClick={() => {
+                          handleCategorySelect(category);
+                          setIsFilterDropdownOpen(false);
+                        }}
+                        className={`type-body-xxs w-full px-[14px] py-[8px] text-left transition-colors ${
+                          selectedCategory === category
+                            ? 'bg-[#0F68D6]/10 font-medium text-[#0F68D6]'
+                            : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* Blog Articles Grid (Figma: Frame 2147226515 / 2147226523)                  */}
+          {/* ========================================================================= */}
+          <div
+            ref={gridRef}
+            className="grid w-full grid-cols-1 gap-x-[32px] gap-y-[32px] lg:grid-cols-2 lg:gap-y-[40px]"
+          >
+            {paginatedArticles.map((article) => (
+              <div
+                key={article.id}
+                className="flex w-full flex-col gap-[8px] border-b border-[#D7DCE2] pb-[20px] md:gap-[12px] md:pb-[32px]"
+              >
+                {/* Tag / Eyebrow (Text - Tag) */}
+                <div className="flex items-center gap-[6px] lg:gap-[8px]">
+                  <span className="type-caption text-[#7D8690]">{article.tag}</span>
+                  {article.subTag && (
+                    <>
+                      <span className="h-[12px] w-[1px] bg-[#7D8690]/40 lg:h-[14px]" />
+                      <span className="type-caption text-[#7D8690]">{article.subTag}</span>
+                    </>
+                  )}
+                </div>
+
+                {/* Desktop Article Layout (Side-by-side) */}
+                <div className="hidden w-full flex-row items-stretch justify-between gap-[20px] md:flex">
+                  {/* Left Text & CTA (Frame 2147226512) */}
+                  <div className="flex min-w-0 flex-1 flex-col items-start gap-[16px]">
+                    <h6 className="type-h6 tracking-[-0.01em] text-black">{article.title}</h6>
+
+                    <Link href={`/blogs/${article.slug}`} className="inline-block">
+                      <div className="flex h-[44px] cursor-pointer items-center gap-[10px] rounded-[64px] border border-[#F4F6F9] bg-[rgba(214,214,214,0.21)] px-[20px] py-[10px] backdrop-blur-[12px] transition-all duration-300 hover:border-[#0F68D6]/30 hover:bg-white/60">
+                        <span className="type-body-xxs font-medium text-[#2A2A2A]">
+                          {settings?.readBlogButtonText || 'Read blog'}
+                        </span>
+                        <ChevronRight className="text-[#2A2A2A] opacity-60" />
+                      </div>
+                    </Link>
+                  </div>
+
+                  {/* Right Image (Frame 2147203302) */}
+                  <div className="relative min-h-[144px] w-[227px] shrink-0 self-stretch overflow-hidden rounded-[20px] shadow-sm">
+                    <Image
+                      src={article.desktopImage}
+                      alt={article.rawTitle}
+                      fill
+                      className="object-cover object-center"
+                      sizes="227px"
+                    />
+                    {/* Subtle Gradient Overlay */}
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background:
+                          'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
+                      }}
+                    />
+                  </div>
+                </div>
+
+                {/* Mobile Article Layout (Image Top / Title + Circular Arrow Bottom) */}
+                <div className="flex w-full flex-col items-start gap-[12px] md:hidden">
+                  {/* Mobile Top Image (Frame 2147203302) */}
+                  <div className="relative h-[217px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-sm">
+                    <Image
+                      src={article.mobileImage}
+                      alt={article.rawTitle}
+                      fill
+                      className="object-cover object-center"
+                      sizes="100vw"
+                    />
+                    {/* Subtle Gradient Overlay */}
+                    <div
+                      className="pointer-events-none absolute inset-0"
+                      style={{
+                        background:
+                          'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
+                      }}
+                    />
+                  </div>
+
+                  {/* Mobile Bottom Row (Title + Circular Arrow Indicator) */}
+                  <Link
+                    href={`/blogs/${article.slug}`}
+                    className="flex w-full flex-row items-end justify-between gap-[12px] pt-[4px]"
+                  >
+                    <h6 className="type-h6 flex-1 text-[18px] leading-[26px] text-black">
+                      {article.title}
+                    </h6>
+
+                    {/* Circular Arrow Indicator (Fill - arrow - indicator) */}
+                    <div className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm">
+                      <svg
+                        width="10"
+                        height="14"
+                        viewBox="0 0 13 19"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="shrink-0"
+                      >
+                        <path
+                          d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M1.62891 2.17594C1.66288 1.75624 2.05784 1.5463 2.44778 1.59269C3.61166 1.73087 5.52127 2.60163 6.47222 3.28958L7.31844 3.90074L8.09486 4.55552C8.69238 5.05934 9.22065 5.62542 9.72473 6.20347C10.5812 7.18487 11.4347 8.68933 11.2448 9.91955C11.1328 10.6459 10.4159 11.272 9.65563 11.2678C8.53294 11.2612 7.45171 10.7455 6.58992 10.0102L6.23806 9.70934L5.83479 9.4162L4.77401 8.36857C4.77401 8.36857 4.69141 8.26712 4.63879 8.20628L3.92829 7.32231C2.99243 6.14976 2.3026 4.82543 1.82908 3.43141C1.68887 3.01834 1.59641 2.61685 1.63147 2.17687L1.62891 2.17594Z"
+                          fill="currentColor"
+                        />
+                      </svg>
                     </div>
                   </Link>
                 </div>
-
-                {/* Right Image (Frame 2147203302) */}
-                <div className="w-[227px] shrink-0 self-stretch min-h-[144px] rounded-[20px] overflow-hidden relative shadow-sm">
-                  <Image
-                    src={article.desktopImage}
-                    alt={article.rawTitle}
-                    fill
-                    className="object-cover object-center"
-                    sizes="227px"
-                  />
-                  {/* Subtle Gradient Overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
-                    }}
-                  />
-                </div>
               </div>
-
-              {/* Mobile Article Layout (Image Top / Title + Circular Arrow Bottom) */}
-              <div className="flex md:hidden flex-col items-start gap-[12px] w-full">
-                {/* Mobile Top Image (Frame 2147203302) */}
-                <div className="w-full h-[217px] rounded-[20px] overflow-hidden relative shrink-0 shadow-sm">
-                  <Image
-                    src={article.mobileImage}
-                    alt={article.rawTitle}
-                    fill
-                    className="object-cover object-center"
-                    sizes="100vw"
-                  />
-                  {/* Subtle Gradient Overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background:
-                        'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
-                    }}
-                  />
-                </div>
-
-                {/* Mobile Bottom Row (Title + Circular Arrow Indicator) */}
-                <Link
-                  href={`/blogs/${article.slug}`}
-                  className="w-full flex flex-row items-end justify-between gap-[12px] pt-[4px]"
-                >
-                  <h6 className="type-h6 text-black text-[18px] leading-[26px] flex-1">
-                    {article.title}
-                  </h6>
-
-                  {/* Circular Arrow Indicator (Fill - arrow - indicator) */}
-                  <div className="w-[34px] h-[34px] bg-[#0F68D6] rounded-full flex items-center justify-center text-white shrink-0 shadow-sm">
-                    <svg
-                      width="10"
-                      height="14"
-                      viewBox="0 0 13 19"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="shrink-0"
-                    >
-                      <path
-                        d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z"
-                        fill="currentColor"
-                      />
-                      <path
-                        d="M1.62891 2.17594C1.66288 1.75624 2.05784 1.5463 2.44778 1.59269C3.61166 1.73087 5.52127 2.60163 6.47222 3.28958L7.31844 3.90074L8.09486 4.55552C8.69238 5.05934 9.22065 5.62542 9.72473 6.20347C10.5812 7.18487 11.4347 8.68933 11.2448 9.91955C11.1328 10.6459 10.4159 11.272 9.65563 11.2678C8.53294 11.2612 7.45171 10.7455 6.58992 10.0102L6.23806 9.70934L5.83479 9.4162L4.77401 8.36857C4.77401 8.36857 4.69141 8.26712 4.63879 8.20628L3.92829 7.32231C2.99243 6.14976 2.3026 4.82543 1.82908 3.43141C1.68887 3.01834 1.59641 2.61685 1.63147 2.17687L1.62891 2.17594Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Empty Search State */}
-        {filteredArticles.length === 0 && (
-          <div className="w-full py-[60px] text-center flex flex-col items-center gap-[12px]">
-            <p className="type-body-s text-[#7D8690]">No articles found matching your criteria.</p>
-            <button
-              type="button"
-              onClick={() => {
-                setSelectedCategory('All');
-                setSearchQuery('');
-              }}
-              className="type-body-xxs text-[#0F68D6] underline cursor-pointer"
-            >
-              Reset filters
-            </button>
+            ))}
           </div>
-        )}
 
-        {/* ========================================================================= */}
-        {/* Pagination Bar (Figma: Frame 2147226742)                                  */}
-        {/* ========================================================================= */}
-        {filteredArticles.length > 0 && (
-          <div className="w-full flex flex-row justify-end items-center gap-[16px] md:gap-[24px] lg:gap-[32px] pt-[16px]">
-            {/* Previous Page Button */}
-            {totalPages > 1 && (
+          {/* Empty Search State */}
+          {filteredArticles.length === 0 && (
+            <div className="flex w-full flex-col items-center gap-[12px] py-[60px] text-center">
+              <p className="type-body-s text-[#7D8690]">
+                No articles found matching your criteria.
+              </p>
               <button
                 type="button"
-                aria-label="Previous page"
-                onClick={() => handlePageChange(safeCurrentPage - 1)}
-                disabled={safeCurrentPage === 1}
-                className={`w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] transition-opacity ${
-                  safeCurrentPage === 1 ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-75 cursor-pointer'
-                }`}
+                onClick={() => {
+                  setSelectedCategory('All');
+                  setSearchQuery('');
+                }}
+                className="type-body-xxs cursor-pointer text-[#0F68D6] underline"
               >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="shrink-0"
-                >
-                  <path
-                    d="M8.75 2.625L4.375 7L8.75 11.375"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                Reset filters
               </button>
-            )}
+            </div>
+          )}
 
-            {/* Page Numbers */}
-            <div className="flex flex-row items-center gap-[16px] md:gap-[24px] lg:gap-[32px]">
-              {pageNumbers.map((page, idx) => {
-                if (page === '...') {
-                  return (
-                    <span
-                      key={`dots-${idx}`}
-                      className="type-body-xxs text-[#7D8690] tracking-[0.2em] select-none"
-                    >
-                      ....
-                    </span>
-                  );
-                }
-
-                const isSelected = page === safeCurrentPage;
-                const pageNum = page as number;
-                return (
-                  <button
-                    key={`page-${pageNum}`}
-                    type="button"
-                    onClick={() => handlePageChange(pageNum)}
-                    className={`type-body-xxs transition-colors cursor-pointer bg-transparent border-none p-0 outline-none ${
-                      isSelected
-                        ? 'text-[#0F68D6] font-medium'
-                        : 'text-[#7D8690] hover:text-[#0F68D6]'
-                    }`}
+          {/* ========================================================================= */}
+          {/* Pagination Bar (Figma: Frame 2147226742)                                  */}
+          {/* ========================================================================= */}
+          {filteredArticles.length > 0 && (
+            <div className="flex w-full flex-row items-center justify-end gap-[16px] pt-[16px] md:gap-[24px] lg:gap-[32px]">
+              {/* Previous Page Button */}
+              {totalPages > 1 && (
+                <button
+                  type="button"
+                  aria-label="Previous page"
+                  onClick={() => handlePageChange(safeCurrentPage - 1)}
+                  disabled={safeCurrentPage === 1}
+                  className={`flex h-[24px] w-[24px] items-center justify-center text-[#0F68D6] transition-opacity ${
+                    safeCurrentPage === 1
+                      ? 'cursor-not-allowed opacity-30'
+                      : 'cursor-pointer hover:opacity-75'
+                  }`}
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="shrink-0"
                   >
-                    {String(page).padStart(2, '0')}
-                  </button>
-                );
-              })}
-            </div>
+                    <path
+                      d="M8.75 2.625L4.375 7L8.75 11.375"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
 
-            {/* Next Page Button */}
-            {totalPages > 1 && (
-              <button
-                type="button"
-                aria-label="Next page"
-                onClick={() => handlePageChange(safeCurrentPage + 1)}
-                disabled={safeCurrentPage === totalPages}
-                className={`w-[24px] h-[24px] flex items-center justify-center text-[#0F68D6] transition-opacity ${
-                  safeCurrentPage === totalPages ? 'opacity-30 cursor-not-allowed' : 'hover:opacity-75 cursor-pointer'
-                }`}
-              >
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="shrink-0"
+              {/* Page Numbers */}
+              <div className="flex flex-row items-center gap-[16px] md:gap-[24px] lg:gap-[32px]">
+                {pageNumbers.map((page, idx) => {
+                  if (page === '...') {
+                    return (
+                      <span
+                        key={`dots-${idx}`}
+                        className="type-body-xxs tracking-[0.2em] text-[#7D8690] select-none"
+                      >
+                        ....
+                      </span>
+                    );
+                  }
+
+                  const isSelected = page === safeCurrentPage;
+                  const pageNum = page as number;
+                  return (
+                    <button
+                      key={`page-${pageNum}`}
+                      type="button"
+                      onClick={() => handlePageChange(pageNum)}
+                      className={`type-body-xxs cursor-pointer border-none bg-transparent p-0 transition-colors outline-none ${
+                        isSelected
+                          ? 'font-medium text-[#0F68D6]'
+                          : 'text-[#7D8690] hover:text-[#0F68D6]'
+                      }`}
+                    >
+                      {String(page).padStart(2, '0')}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Next Page Button */}
+              {totalPages > 1 && (
+                <button
+                  type="button"
+                  aria-label="Next page"
+                  onClick={() => handlePageChange(safeCurrentPage + 1)}
+                  disabled={safeCurrentPage === totalPages}
+                  className={`flex h-[24px] w-[24px] items-center justify-center text-[#0F68D6] transition-opacity ${
+                    safeCurrentPage === totalPages
+                      ? 'cursor-not-allowed opacity-30'
+                      : 'cursor-pointer hover:opacity-75'
+                  }`}
                 >
-                  <path
-                    d="M5.25 2.625L9.625 7L5.25 11.375"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            )}
-          </div>
-        )}
-
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 14 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="shrink-0"
+                  >
+                    <path
+                      d="M5.25 2.625L9.625 7L5.25 11.375"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 };
 
 export default BlogsTabsSection;

@@ -35,7 +35,7 @@ export const CaseStudyTOC = ({
   useEffect(() => {
     if (mobileContainerRef.current) {
       const activeButton = mobileContainerRef.current.querySelector(
-        `[data-topic-id="${activeTopic}"]`
+        `[data-topic-id="${activeTopic}"]`,
       ) as HTMLElement;
       if (activeButton) {
         const container = mobileContainerRef.current;
@@ -61,21 +61,21 @@ export const CaseStudyTOC = ({
         - Border: 1px solid rgba(255, 255, 255, 0.6)
         =============================================================================
       */}
-      <div className="hidden lg:flex flex-col w-[305px] p-[32px_24px] bg-[#F4F6F9] backdrop-blur-[20px] rounded-[16px] border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.03)]">
-        <nav className="flex flex-col justify-start items-start w-full gap-[20px]">
+      <div className="hidden w-[305px] flex-col rounded-[16px] border border-white/60 bg-[#F4F6F9] p-[32px_24px] shadow-[0_8px_30px_rgba(0,0,0,0.03)] backdrop-blur-[20px] lg:flex">
+        <nav className="flex w-full flex-col items-start justify-start gap-[20px]">
           {topics.map((topic, index) => {
             const isActive = activeTopic === topic.id;
             const isLast = index === topics.length - 1;
 
             return (
-              <div key={topic.id} className="flex flex-col w-full">
+              <div key={topic.id} className="flex w-full flex-col">
                 <button
                   type="button"
                   onClick={() => onSelectTopic(topic.id)}
-                  className={`w-full text-left type-body-xxs tracking-[0.01em] pb-[16px] transition-colors duration-200 cursor-pointer ${
+                  className={`type-body-xxs w-full cursor-pointer pb-[16px] text-left tracking-[0.01em] transition-colors duration-200 ${
                     isActive
-                      ? 'text-[#0F68D6] font-medium'
-                      : 'text-[#2A2A2A] hover:text-[#0F68D6] font-normal'
+                      ? 'font-medium text-[#0F68D6]'
+                      : 'font-normal text-[#2A2A2A] hover:text-[#0F68D6]'
                   }`}
                 >
                   {topic.label}
@@ -84,7 +84,7 @@ export const CaseStudyTOC = ({
                 {/* Divider Line */}
                 {!isLast && (
                   <div
-                    className={`w-full h-[0px] border-t transition-colors duration-300 ${
+                    className={`h-[0px] w-full border-t transition-colors duration-300 ${
                       isActive ? 'border-[#0F68D6]' : 'border-[#D7DCE2]'
                     }`}
                   />
@@ -106,10 +106,10 @@ export const CaseStudyTOC = ({
       */}
       <div
         ref={mobileContainerRef}
-        className={`flex lg:hidden w-full overflow-x-auto no-scrollbar gap-[20px] scroll-smooth transition-all duration-300 ${
+        className={`no-scrollbar flex w-full gap-[20px] overflow-x-auto scroll-smooth transition-all duration-300 lg:hidden ${
           isSticky
-            ? 'bg-white/95 backdrop-blur-[20px] rounded-none py-[12px] px-[20px] md:px-[40px] border-y border-[#D7DCE2] shadow-[0_4px_20px_rgba(0,0,0,0.04)]'
-            : 'bg-[#F4F6F9] rounded-[16px] py-[14px] px-[20px] border border-[#D7DCE2]/50'
+            ? 'rounded-none border-y border-[#D7DCE2] bg-white/95 px-[20px] py-[12px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] backdrop-blur-[20px] md:px-[40px]'
+            : 'rounded-[16px] border border-[#D7DCE2]/50 bg-[#F4F6F9] px-[20px] py-[14px]'
         }`}
       >
         {topics.map((topic) => {
@@ -121,11 +121,11 @@ export const CaseStudyTOC = ({
               data-topic-id={topic.id}
               type="button"
               onClick={() => onSelectTopic(topic.id)}
-              className={`shrink-0 type-body-xs transition-all duration-200 whitespace-nowrap cursor-pointer ${
-                isSticky ? 'pb-[6px] border-b-2' : 'pb-[2px]'
+              className={`type-body-xs shrink-0 cursor-pointer whitespace-nowrap transition-all duration-200 ${
+                isSticky ? 'border-b-2 pb-[6px]' : 'pb-[2px]'
               } ${
                 isActive
-                  ? `text-[#0F68D6] font-medium ${isSticky ? 'border-[#0F68D6]' : ''}`
+                  ? `font-medium text-[#0F68D6] ${isSticky ? 'border-[#0F68D6]' : ''}`
                   : `text-[#2A2A2A] opacity-80 ${isSticky ? 'border-transparent' : ''}`
               }`}
             >

@@ -24,7 +24,12 @@ interface NavItem {
   children?: NavSubItem[];
 }
 
-const Navbar = () => {
+export interface NavbarProps {
+  theme?: 'light' | 'dark';
+  mobileVariant?: 'default' | 'hero';
+}
+
+const Navbar = ({ theme = 'light', mobileVariant = 'default' }: NavbarProps) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,17 +72,14 @@ const Navbar = () => {
         label: 'Products',
         header: 'Products',
         children: [
-          { label: 'Himer AI OS', href: '/solutions/prior-authorization' },
+          { label: 'Himer AI OS', href: '/product/himer' },
           { label: 'CurieCode', href: '/solutions/charge-capture-and-coding' },
         ],
       },
       {
         label: 'Agentic RCM Solutions',
         header: 'Agentic RCM Solutions',
-        columns: [
-          { items: col1 },
-          { items: col2 },
-        ],
+        columns: [{ items: col1 }, { items: col2 }],
         children: solutionsNav,
       },
       { label: 'Case Studies', href: '/case-studies' },
@@ -143,24 +145,32 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="w-full h-[60px] lg:h-auto relative max-w-[1320px] mx-auto z-50 lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)]">
+    <div
+      className={`relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)] ${mobileVariant === 'hero' ? 'himer-mobile-nav' : ''}`}
+    >
       <div
         ref={menuRef}
-        className={`fixed top-0 left-0 right-0 z-50 lg:relative lg:top-0 lg:left-auto lg:right-auto lg:px-0 w-full max-w-[1320px] mx-auto transition-all duration-300 ease-out ${isScrolled
-            ? 'px-0 translate-y-0 opacity-100'
-            : 'px-[20px] md:px-[40px] translate-y-[20px] opacity-100 lg:translate-y-0'
-          }`}
+        className={`fixed top-0 right-0 left-0 z-50 mx-auto w-full max-w-[1320px] transition-all duration-300 ease-out lg:relative lg:top-0 lg:right-auto lg:left-auto lg:px-0 ${
+          isScrolled
+            ? 'translate-y-0 px-0 opacity-100'
+            : 'translate-y-[20px] px-[20px] opacity-100 md:px-[40px] lg:translate-y-0'
+        }`}
       >
         <header
-          className={`lg:relative flex flex-row items-center justify-between w-full h-[60px] backdrop-blur-[13.2px] py-[8px] transition-all duration-300 shadow-[0_4px_24px_rgba(4,40,73,0.06)] ${isScrolled
-              ? 'bg-white rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pl-[12px] lg:pr-[6px] xl:pl-[24px] xl:pr-[12px]'
-              : 'bg-white/70 rounded-[30px] border border-white/24 pl-[16px] md:pl-[20px] lg:pl-[12px] xl:pl-[24px] pr-[8px] md:pr-[12px] lg:pr-[6px] xl:pr-[12px]'
-            }`}
+          className={`flex h-[60px] w-full flex-row items-center justify-between py-[8px] backdrop-blur-[13.2px] transition-all duration-300 lg:relative ${
+            theme === 'dark'
+              ? isScrolled
+                ? 'rounded-none border-x-0 border-t-0 border-b border-white/10 bg-black/85 px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/10 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+                : 'rounded-[30px] border border-white/10 bg-white/[0.05] pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.3)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+              : isScrolled
+                ? 'rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] bg-white px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+                : 'rounded-[30px] border border-white/24 bg-white/70 pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+          }`}
         >
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center shrink-0 mr-[6px] lg:max-xl:mr-[2px] xl:mr-0"
+            className="mr-[6px] flex shrink-0 items-center lg:max-xl:mr-[2px] xl:mr-0"
             onClick={() => {
               setIsOpen(false);
               setActiveDropdown(null);
@@ -170,12 +180,14 @@ const Navbar = () => {
             <img
               src="/images/common/logo.svg"
               alt="Waterlabs AI"
-              className="h-[22px] lg:h-[22px] xl:h-[30px] 2xl:h-[36px] w-auto"
+              className={`h-[22px] w-auto lg:h-[22px] xl:h-[30px] 2xl:h-[36px] ${
+                theme === 'dark' ? 'brightness-0 invert' : ''
+              }`}
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex flex-row gap-[12px] xl:gap-[24px] items-center h-[60px] -my-[8px]">
+          <nav className="-my-[8px] hidden h-[60px] flex-row items-center gap-[12px] lg:flex xl:gap-[24px]">
             {navItems.map((item) => {
               const hasChildren = Boolean(item.children && item.children.length > 0);
               const isDropdownOpen = activeDropdown === item.label;
@@ -184,7 +196,7 @@ const Navbar = () => {
               return (
                 <div
                   key={item.label}
-                  className={`h-full flex items-center ${
+                  className={`flex h-full items-center ${
                     item.columns && item.columns.length > 1
                       ? 'relative lg:max-xl:static xl:relative'
                       : 'relative'
@@ -196,21 +208,31 @@ const Navbar = () => {
                     <Link
                       href={item.href}
                       onClick={() => setActiveDropdown(null)}
-                      className={`group flex items-center gap-[6px] xl:gap-[8px] body-xxs type-body-xxs transition-colors py-[8px] whitespace-nowrap ${
+                      className={`group body-xxs type-body-xxs flex items-center gap-[6px] py-[8px] whitespace-nowrap transition-colors xl:gap-[8px] ${
                         isDropdownOpen || isCurrentPage
-                          ? 'text-[#0F68D6]'
-                          : 'text-[#111111] hover:text-[#0F68D6]'
+                          ? theme === 'dark'
+                            ? 'text-[#91C6F2]'
+                            : 'text-[#0F68D6]'
+                          : theme === 'dark'
+                            ? 'text-white hover:text-[#91C6F2]'
+                            : 'text-[#111111] hover:text-[#0F68D6]'
                       }`}
                     >
                       <span>{item.label}</span>
                       {hasChildren && (
                         <ChevronRight
-                          className={`w-[8px] h-[12px] xl:w-[9.73px] xl:h-[14.63px] shrink-0 transition-transform duration-200 ${
+                          className={`h-[12px] w-[8px] shrink-0 transition-transform duration-200 xl:h-[14.63px] xl:w-[9.73px] ${
                             isDropdownOpen
-                              ? '-rotate-90 text-[#0F68D6]'
+                              ? theme === 'dark'
+                                ? '-rotate-90 text-[#91C6F2]'
+                                : '-rotate-90 text-[#0F68D6]'
                               : isCurrentPage
-                                ? 'rotate-90 text-[#0F68D6]'
-                                : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
+                                ? theme === 'dark'
+                                  ? 'rotate-90 text-[#91C6F2]'
+                                  : 'rotate-90 text-[#0F68D6]'
+                                : theme === 'dark'
+                                  ? 'rotate-90 text-white/70 group-hover:text-[#91C6F2]'
+                                  : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
                           }`}
                         />
                       )}
@@ -221,19 +243,27 @@ const Navbar = () => {
                       onClick={() =>
                         setActiveDropdown(activeDropdown === item.label ? null : item.label)
                       }
-                      className={`group flex items-center gap-[6px] xl:gap-[8px] body-xxs type-body-xxs transition-colors py-[8px] whitespace-nowrap cursor-pointer ${
+                      className={`group body-xxs type-body-xxs flex cursor-pointer items-center gap-[6px] py-[8px] whitespace-nowrap transition-colors xl:gap-[8px] ${
                         isDropdownOpen
-                          ? 'text-[#0F68D6]'
-                          : 'text-[#111111] hover:text-[#0F68D6]'
+                          ? theme === 'dark'
+                            ? 'text-[#91C6F2]'
+                            : 'text-[#0F68D6]'
+                          : theme === 'dark'
+                            ? 'text-white hover:text-[#91C6F2]'
+                            : 'text-[#111111] hover:text-[#0F68D6]'
                       }`}
                     >
                       <span>{item.label}</span>
                       {hasChildren && (
                         <ChevronRight
-                          className={`w-[8px] h-[12px] xl:w-[9.73px] xl:h-[14.63px] shrink-0 transition-transform duration-200 ${
+                          className={`h-[12px] w-[8px] shrink-0 transition-transform duration-200 xl:h-[14.63px] xl:w-[9.73px] ${
                             isDropdownOpen
-                              ? '-rotate-90 text-[#0F68D6]'
-                              : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
+                              ? theme === 'dark'
+                                ? '-rotate-90 text-[#91C6F2]'
+                                : '-rotate-90 text-[#0F68D6]'
+                              : theme === 'dark'
+                                ? 'rotate-90 text-white/70 group-hover:text-[#91C6F2]'
+                                : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
                           }`}
                         />
                       )}
@@ -243,30 +273,33 @@ const Navbar = () => {
                   {/* Dropdown Card - Exact 30px gap below navbar capsule */}
                   {hasChildren && item.children && (
                     <div
-                      className={`absolute top-full pt-[30px] z-50 origin-top transition-all duration-200 ease-out ${
+                      className={`absolute top-full z-50 origin-top pt-[30px] transition-all duration-200 ease-out ${
                         item.columns && item.columns.length > 1
-                          ? 'left-0 lg:max-xl:left-auto lg:max-xl:right-0 xl:left-0 xl:right-auto'
+                          ? 'left-0 lg:max-xl:right-0 lg:max-xl:left-auto xl:right-auto xl:left-0'
                           : 'left-0'
                       } ${
                         isDropdownOpen
-                          ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto visible'
-                          : 'opacity-0 -translate-y-2 scale-[0.97] pointer-events-none invisible'
+                          ? 'pointer-events-auto visible translate-y-0 scale-100 opacity-100'
+                          : 'pointer-events-none invisible -translate-y-2 scale-[0.97] opacity-0'
                       }`}
                     >
                       {item.columns && item.columns.length > 1 ? (
                         /* 2-Column Dropdown (Agentic RCM Solutions: 746px x 284px) */
                         <div
-                          className="w-[746px] max-w-[calc(100vw-32px)] bg-white/85 backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] border border-white/70 flex flex-col"
+                          className="flex w-[746px] max-w-[calc(100vw-32px)] flex-col rounded-[20px_10px_20px_20px] border border-white/70 bg-white/85 p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] backdrop-blur-[20px]"
                           onMouseLeave={() => setHoveredSubItem(null)}
                         >
-
-
                           {/* Columns Frame 2147227097 */}
-                          <div className="flex flex-row gap-[24px] items-start w-full">
+                          <div className="flex w-full flex-row items-start gap-[24px]">
                             {item.columns.map((col, colIdx) => (
-                              <div key={colIdx} className="w-[337px] flex-1 flex flex-col gap-[8px]">
+                              <div
+                                key={colIdx}
+                                className="flex w-[337px] flex-1 flex-col gap-[8px]"
+                              >
                                 {col.items.map((subItem, subIdx) => {
-                                  const allHrefs = item.children ? item.children.map((c) => c.href) : [];
+                                  const allHrefs = item.children
+                                    ? item.children.map((c) => c.href)
+                                    : [];
                                   const isFirst = colIdx === 0 && subIdx === 0;
                                   const isActive = hoveredSubItem
                                     ? hoveredSubItem === subItem.href
@@ -283,7 +316,7 @@ const Navbar = () => {
                                         setActiveDropdown(null);
                                         setHoveredSubItem(null);
                                       }}
-                                      className={`h-[40px] flex flex-row items-center gap-[14px] py-[8px] body-xxs type-body-xxs transition-colors duration-150 ${
+                                      className={`body-xxs type-body-xxs flex h-[40px] flex-row items-center gap-[14px] py-[8px] transition-colors duration-150 ${
                                         isActive
                                           ? 'text-[#0F68D6]'
                                           : 'text-[#111111] hover:text-[#0F68D6]'
@@ -291,7 +324,7 @@ const Navbar = () => {
                                     >
                                       <span className="whitespace-nowrap">{subItem.label}</span>
                                       {isActive && (
-                                        <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0 text-[#0F68D6]" />
+                                        <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0F68D6]" />
                                       )}
                                     </Link>
                                   );
@@ -303,15 +336,15 @@ const Navbar = () => {
                       ) : (
                         /* 1-Column Dropdown (About us / Products: 218px x 188px) */
                         <div
-                          className="w-[218px] bg-white/85 backdrop-blur-[20px] rounded-[20px_10px_20px_20px] p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] border border-white/70 flex flex-col"
+                          className="flex w-[218px] flex-col rounded-[20px_10px_20px_20px] border border-white/70 bg-white/85 p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] backdrop-blur-[20px]"
                           onMouseLeave={() => setHoveredSubItem(null)}
                         >
-
-
                           {/* Items Frame 2147227091 */}
-                          <div className="flex flex-col gap-[8px] w-full">
+                          <div className="flex w-full flex-col gap-[8px]">
                             {item.children.map((subItem, subIdx) => {
-                              const allHrefs = item.children ? item.children.map((c) => c.href) : [];
+                              const allHrefs = item.children
+                                ? item.children.map((c) => c.href)
+                                : [];
                               const isFirst = subIdx === 0;
                               const isActive = hoveredSubItem
                                 ? hoveredSubItem === subItem.href
@@ -328,7 +361,7 @@ const Navbar = () => {
                                     setActiveDropdown(null);
                                     setHoveredSubItem(null);
                                   }}
-                                  className={`h-[40px] flex flex-row items-center gap-[12px] py-[8px] body-xxs type-body-xxs transition-colors duration-150 ${
+                                  className={`body-xxs type-body-xxs flex h-[40px] flex-row items-center gap-[12px] py-[8px] transition-colors duration-150 ${
                                     isActive
                                       ? 'text-[#0F68D6]'
                                       : 'text-[#111111] hover:text-[#0F68D6]'
@@ -336,7 +369,7 @@ const Navbar = () => {
                                 >
                                   <span className="whitespace-nowrap">{subItem.label}</span>
                                   {isActive && (
-                                    <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0 text-[#0F68D6]" />
+                                    <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0F68D6]" />
                                   )}
                                 </Link>
                               );
@@ -352,11 +385,11 @@ const Navbar = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:block shrink-0 ml-[6px] lg:max-xl:ml-[2px] xl:ml-0">
+          <div className="ml-[6px] hidden shrink-0 lg:block lg:max-xl:ml-[2px] xl:ml-0">
             <Link href="/contact-us">
               <CTA
                 variant="light-bg"
-                className="lg:max-xl:!h-[38px] lg:max-xl:!px-[12px] lg:max-xl:!gap-[6px] xl:h-[44px] xl:px-[20px] xl:gap-[10px] body-cta type-cta"
+                className="body-cta type-cta lg:max-xl:!h-[38px] lg:max-xl:!gap-[6px] lg:max-xl:!px-[12px] xl:h-[44px] xl:gap-[10px] xl:px-[20px]"
               >
                 Contact Us
               </CTA>
@@ -364,11 +397,15 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Actions */}
-          <div className="flex lg:hidden flex-row items-center gap-ds-12 md:gap-ds-20 shrink-0">
+          <div className="gap-ds-12 md:gap-ds-20 flex shrink-0 flex-row items-center lg:hidden">
             <button
               type="button"
               aria-label="Search"
-              className="text-midnight-blue hover:text-electric-blue transition-colors p-1"
+              className={`${
+                theme === 'dark'
+                  ? 'hover:text-sky-blue text-white'
+                  : 'text-midnight-blue hover:text-electric-blue'
+              } p-1 transition-colors`}
             >
               <svg
                 width="24"
@@ -379,7 +416,7 @@ const Navbar = () => {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="w-[18px] h-[18px]"
+                className="h-[18px] w-[18px]"
               >
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -391,11 +428,16 @@ const Navbar = () => {
               aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
               aria-expanded={isOpen}
               onClick={() => setIsOpen(!isOpen)}
-              className="relative flex items-center justify-center w-[32px] h-[32px] text-midnight-blue hover:text-electric-blue transition-colors p-1 focus:outline-none"
+              className={`${
+                theme === 'dark'
+                  ? 'hover:text-sky-blue text-white'
+                  : 'text-midnight-blue hover:text-electric-blue'
+              } relative flex h-[32px] w-[32px] items-center justify-center p-1 transition-colors focus:outline-none`}
             >
               <span
-                className={`absolute transition-all duration-300 transform ${isOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
-                  }`}
+                className={`absolute transform transition-all duration-300 ${
+                  isOpen ? 'scale-100 rotate-0 opacity-100' : 'scale-75 -rotate-90 opacity-0'
+                }`}
               >
                 <svg
                   width="24"
@@ -406,21 +448,24 @@ const Navbar = () => {
                   strokeWidth="2.2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="w-[20px] h-[20px]"
+                  className="h-[20px] w-[20px]"
                 >
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
               </span>
               <span
-                className={`absolute transition-all duration-300 transform ${isOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'
-                  }`}
+                className={`absolute transform transition-all duration-300 ${
+                  isOpen ? 'scale-75 rotate-90 opacity-0' : 'scale-100 rotate-0 opacity-100'
+                }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/images/common/menu.svg"
                   alt="Menu"
-                  className="w-[29px] h-[19px] text-midnight-blue hover:opacity-80 transition-opacity"
+                  className={`h-[19px] w-[29px] transition-opacity hover:opacity-80 ${
+                    theme === 'dark' ? 'brightness-0 invert' : ''
+                  }`}
                 />
               </span>
             </button>
@@ -429,10 +474,11 @@ const Navbar = () => {
 
         {/* Mobile Menu Dropdown overlay */}
         <div
-          className={`lg:hidden absolute top-[calc(100%+10px)] left-[20px] right-[20px] md:left-[40px] md:right-[40px] bg-white/85 backdrop-blur-[13.2px] border border-white/30 rounded-[30px] p-[20px] md:p-[24px] flex flex-col gap-[16px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] origin-top max-h-[calc(100vh-100px)] overflow-y-auto ${isOpen
-              ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto visible'
-              : 'opacity-0 -translate-y-4 scale-[0.98] pointer-events-none invisible'
-            }`}
+          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-white/30 bg-white/85 p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] backdrop-blur-[13.2px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
+            isOpen
+              ? 'pointer-events-auto visible translate-y-0 scale-100 opacity-100'
+              : 'pointer-events-none invisible -translate-y-4 scale-[0.98] opacity-0'
+          }`}
           aria-hidden={!isOpen}
         >
           <nav className="flex flex-col gap-[4px]">
@@ -447,29 +493,34 @@ const Navbar = () => {
                     style={{
                       transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                     }}
-                    className={`flex flex-col border-b border-white/30 last:border-b-0 py-[4px] transition-all duration-300 transform ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
-                      }`}
+                    className={`flex transform flex-col border-b border-white/30 py-[4px] transition-all duration-300 last:border-b-0 ${
+                      isOpen ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
+                    }`}
                   >
                     <button
                       type="button"
                       onClick={() => toggleMobileItem(item.label)}
-                      className="flex items-center justify-between w-full py-[8px] body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transition-colors cursor-pointer text-left"
+                      className="body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue flex w-full cursor-pointer items-center justify-between py-[8px] text-left transition-colors"
                     >
                       <span className="font-medium">{item.label}</span>
                       <ChevronRight
-                        className={`w-[8px] h-[12px] shrink-0 transition-transform duration-300 ${isExpanded ? '-rotate-90 text-electric-blue' : 'rotate-90 text-midnight-blue/60'
-                          }`}
+                        className={`h-[12px] w-[8px] shrink-0 transition-transform duration-300 ${
+                          isExpanded
+                            ? 'text-electric-blue -rotate-90'
+                            : 'text-midnight-blue/60 rotate-90'
+                        }`}
                       />
                     </button>
 
                     {/* Accordion Sub-items */}
                     <div
-                      className={`grid transition-all duration-300 ease-in-out overflow-hidden ${isExpanded
-                          ? 'grid-rows-[1fr] opacity-100 mt-[2px]'
-                          : 'grid-rows-[0fr] opacity-0 mt-0'
-                        }`}
+                      className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
+                        isExpanded
+                          ? 'mt-[2px] grid-rows-[1fr] opacity-100'
+                          : 'mt-0 grid-rows-[0fr] opacity-0'
+                      }`}
                     >
-                      <div className="min-h-0 flex flex-col gap-[2px] pl-[12px] border-l-2 border-[#0F68D6]/25 ml-[4px] pb-[8px]">
+                      <div className="ml-[4px] flex min-h-0 flex-col gap-[2px] border-l-2 border-[#0F68D6]/25 pb-[8px] pl-[12px]">
                         {item.children.map((subItem, subIdx) => {
                           const isCurrent = pathname === subItem.href;
                           return (
@@ -480,14 +531,15 @@ const Navbar = () => {
                                 setIsOpen(false);
                                 setExpandedMobileItem(null);
                               }}
-                              className={`py-[8px] px-[10px] rounded-[10px] body-xxs type-body-xxs flex items-center justify-between transition-all duration-150 ${isCurrent
-                                  ? 'text-[#0F68D6] font-medium bg-white/40'
-                                  : 'text-midnight-blue/80 hover:text-[#0F68D6] hover:bg-white/60'
-                                }`}
+                              className={`body-xxs type-body-xxs flex items-center justify-between rounded-[10px] px-[10px] py-[8px] transition-all duration-150 ${
+                                isCurrent
+                                  ? 'bg-white/40 font-medium text-[#0F68D6]'
+                                  : 'text-midnight-blue/80 hover:bg-white/60 hover:text-[#0F68D6]'
+                              }`}
                             >
                               <span>{subItem.label}</span>
                               {isCurrent && (
-                                <ChevronRight className="w-[10px] h-[15px] shrink-0 text-[#0F68D6]" />
+                                <ChevronRight className="h-[15px] w-[10px] shrink-0 text-[#0F68D6]" />
                               )}
                             </Link>
                           );
@@ -506,8 +558,9 @@ const Navbar = () => {
                   style={{
                     transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                   }}
-                  className={`body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transition-all duration-300 py-[10px] border-b border-white/30 last:border-b-0 transform ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'
-                    }`}
+                  className={`body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transform border-b border-white/30 py-[10px] transition-all duration-300 last:border-b-0 ${
+                    isOpen ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
+                  }`}
                 >
                   {item.label}
                 </Link>
@@ -519,8 +572,9 @@ const Navbar = () => {
             style={{
               transitionDelay: isOpen ? '300ms' : '0ms',
             }}
-            className={`pt-[12px] border-t border-white/40 flex flex-col transition-all duration-300 transform ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
-              }`}
+            className={`flex transform flex-col border-t border-white/40 pt-[12px] transition-all duration-300 ${
+              isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+            }`}
           >
             <Link href="/contact-us" onClick={() => setIsOpen(false)} className="w-full">
               <CTA variant="light-bg" className="w-full justify-center">

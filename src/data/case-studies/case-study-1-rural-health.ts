@@ -4,9 +4,11 @@ export const caseStudy1: CaseStudy = {
   id: 'case-study-1',
   slug: 'multi-state-rural-health-system',
   categoryTag: 'Case Study · Rural Health System',
-  title: 'How a multi-state rural health system used Waterlabs to cut claim release from 10 days to under 24 hours.',
+  title:
+    'How a multi-state rural health system used Waterlabs to cut claim release from 10 days to under 24 hours.',
   titleHighlight: 'release from 10 days to under 24 hours.',
-  subtitle: 'Hospitals and physician groups across the United States, running 13 specialties on a single revenue cycle.',
+  subtitle:
+    'Hospitals and physician groups across the United States, running 13 specialties on a single revenue cycle.',
   heroImage: '/images/case-study/case-study-1-multi-state/Frame%202147226953.png',
   heroImageAlt: 'Rural health system command center monitoring claims with Waterlabs',
   cardCategory: 'Features',
@@ -47,7 +49,11 @@ export const caseStudy1: CaseStudy = {
   metrics: [
     { value: '24 hrs', label: 'Claim release turnaround down from 10 days', change: '-90%' },
     { value: '98.6%', label: 'First-pass clean claim rate across all facilities', change: '+14%' },
-    { value: '$3.4M', label: 'Cash flow acceleration unlocked in first 90 days', change: 'Accelerated' },
+    {
+      value: '$3.4M',
+      label: 'Cash flow acceleration unlocked in first 90 days',
+      change: 'Accelerated',
+    },
   ],
   cta: {
     tagText: 'Talk to us.',

@@ -12,11 +12,7 @@ import {
 import { BLOG_DETAIL_TOPICS, TOCItem } from '@/components/blog-detail/blog-detail-toc';
 import { BlogDetailHeroProps } from '@/components/blog-detail/hero-section';
 import BlogDetailPage from '@/components/blog-detail/page';
-import {
-  fetchAllBlogArticles,
-  fetchAllBlogSlugs,
-  fetchBlogPostBySlug,
-} from '@/sanity/lib/blogs';
+import { fetchAllBlogArticles, fetchAllBlogSlugs, fetchBlogPostBySlug } from '@/sanity/lib/blogs';
 
 export const revalidate = 60;
 
@@ -198,7 +194,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (slug === 'what-is-agentic-rcm') {
     return {
-      title: 'What Is Agentic RCM? The Definitive Guide to the Autonomous Revenue Cycle | Waterlabs AI',
+      title:
+        'What Is Agentic RCM? The Definitive Guide to the Autonomous Revenue Cycle | Waterlabs AI',
       description:
         'Agentic RCM is revenue cycle management run by autonomous AI agents that do the work themselves, reading payer rules, submitting claims, resolving denials, and following up.',
     };
@@ -214,7 +211,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (slug === 'autonomous-medical-coding-accuracy-compliance') {
     return {
-      title: 'Autonomous Medical Coding: Accuracy, Compliance, and What Replaces Computer-Assisted Coding | Waterlabs AI',
+      title:
+        'Autonomous Medical Coding: Accuracy, Compliance, and What Replaces Computer-Assisted Coding | Waterlabs AI',
       description:
         'Understanding accuracy, compliance, and why autonomous AI is replacing traditional CAC tools.',
     };
@@ -380,16 +378,14 @@ export default async function Page({ params }: Props) {
     try {
       const allArticles = await fetchAllBlogArticles();
       const otherArticles = allArticles.filter(
-        (a) => a.slug !== slug && a.slug && !EXCLUDED_SLUGS.has(a.slug)
+        (a) => a.slug !== slug && a.slug && !EXCLUDED_SLUGS.has(a.slug),
       );
 
       if (otherArticles.length >= 3) {
         relatedBlogs = otherArticles.slice(0, 3).map((a, idx) => ({
           id: a.id || a._id || `rel-${idx}`,
           title: a.title,
-          image:
-            a.desktopImage ||
-            DEFAULT_RELATED_BLOGS[idx % DEFAULT_RELATED_BLOGS.length].image,
+          image: a.desktopImage || DEFAULT_RELATED_BLOGS[idx % DEFAULT_RELATED_BLOGS.length].image,
           href: `/blogs/${a.slug}`,
           isShorter: idx === 1,
         }));

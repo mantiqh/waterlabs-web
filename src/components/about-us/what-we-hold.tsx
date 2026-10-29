@@ -55,10 +55,7 @@ export const WhatWeHoldSection = () => {
     const { scrollLeft } = scrollContainerRef.current;
     // Card width 269px + gap 20px = 289px
     const cardWidth = 289;
-    const newIndex = Math.min(
-      VALUES.length - 1,
-      Math.max(0, Math.round(scrollLeft / cardWidth))
-    );
+    const newIndex = Math.min(VALUES.length - 1, Math.max(0, Math.round(scrollLeft / cardWidth)));
     setActiveIndex(newIndex);
   };
 
@@ -87,44 +84,45 @@ export const WhatWeHoldSection = () => {
         - Top-right corner rounded (rounded-tr-[60px]) exposing the teal gradient of Our story above
         - Bottom-right corner rounded (rounded-br-[60px]) exposing pure white of The Founders below
       */}
-      <div className="w-full bg-[#F4F6F9] bg-[url('/images/about-us/what-we-hold/bg_what_we_hold_ourselves.png')] bg-cover bg-left-bottom bg-no-repeat rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px] pt-[40px] pb-[40px] px-[20px] md:pt-[60px] md:pb-[60px] md:px-[40px] lg:pt-[80px] lg:pb-[80px] lg:px-[60px]">
-        <div className="w-full max-w-[1320px] mx-auto">
+      <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-[#F4F6F9] bg-[url('/images/about-us/what-we-hold/bg_what_we_hold_ourselves.png')] bg-cover bg-left-bottom bg-no-repeat px-[20px] pt-[40px] pb-[40px] md:px-[40px] md:pt-[60px] md:pb-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:pt-[80px] lg:pb-[80px]">
+        <div className="mx-auto w-full max-w-[1320px]">
           {/* ========================================================================= */}
           {/* Desktop Layout (lg+): Left Heading (35% / 537px) + Right Cards (62% / 769px)*/}
           {/* ========================================================================= */}
-          <div className="hidden lg:flex flex-row items-start justify-between gap-[20px] w-full">
+          <div className="hidden w-full flex-row items-start justify-between gap-[20px] lg:flex">
             {/* Left Column: Heading (Sticky on Desktop) */}
-            <div className="w-full lg:w-[35%] xl:w-[537px] pt-[32px] shrink-0 lg:sticky lg:top-[120px] self-start">
-              <h2 className="type-h2 text-[#111111] tracking-[-0.01em] text-[36px] leading-[44px] xl:text-[52px] xl:leading-[60px]">
-                What we hold<br />
+            <div className="w-full shrink-0 self-start pt-[32px] lg:sticky lg:top-[120px] lg:w-[35%] xl:w-[537px]">
+              <h2 className="type-h2 text-[36px] leading-[44px] tracking-[-0.01em] text-[#111111] xl:text-[52px] xl:leading-[60px]">
+                What we hold
+                <br />
                 ourselves to
               </h2>
             </div>
 
             {/* Right Column: 4 Value Cards with Icons */}
-            <div className="w-full lg:w-[62%] xl:w-[769px] flex flex-col gap-[20px] xl:gap-[32px] pt-[32px]">
+            <div className="flex w-full flex-col gap-[20px] pt-[32px] lg:w-[62%] xl:w-[769px] xl:gap-[32px]">
               {VALUES.map((item, index) => (
                 <div
                   key={index}
-                  className="w-full flex flex-row items-start gap-[16px] xl:gap-[24px] pb-[20px] xl:pb-[24px] border-b border-[#91C6F2]"
+                  className="flex w-full flex-row items-start gap-[16px] border-b border-[#91C6F2] pb-[20px] xl:gap-[24px] xl:pb-[24px]"
                 >
                   {/* 3D Glass Icon */}
-                  <div className="w-[80px] h-[78px] xl:w-[102px] xl:h-[100px] shrink-0 flex items-start justify-center">
+                  <div className="flex h-[78px] w-[80px] shrink-0 items-start justify-center xl:h-[100px] xl:w-[102px]">
                     <Image
                       src={item.icon}
                       alt=""
                       width={item.width}
                       height={item.height}
-                      className="w-auto h-[78px] xl:h-[100px] object-contain"
+                      className="h-[78px] w-auto object-contain xl:h-[100px]"
                     />
                   </div>
 
                   {/* Text Container */}
-                  <div className="flex-1 flex flex-col items-start gap-[10px] xl:gap-[14px]">
-                    <h5 className="type-h5 text-[#0F68D6] tracking-[-0.01em] text-[22px] leading-[30px] xl:text-[32px] xl:leading-[40px]">
+                  <div className="flex flex-1 flex-col items-start gap-[10px] xl:gap-[14px]">
+                    <h5 className="type-h5 text-[22px] leading-[30px] tracking-[-0.01em] text-[#0F68D6] xl:text-[32px] xl:leading-[40px]">
                       {item.title}
                     </h5>
-                    <p className="type-body-xs text-[#2A2A2A] text-[15px] leading-[22px] xl:text-[18px] xl:leading-[26px]">
+                    <p className="type-body-xs text-[15px] leading-[22px] text-[#2A2A2A] xl:text-[18px] xl:leading-[26px]">
                       {item.description}
                     </p>
                   </div>
@@ -136,10 +134,11 @@ export const WhatWeHoldSection = () => {
           {/* ========================================================================= */}
           {/* Mobile Layout (< lg): Title -> Horizontal Scrollable Cards -> Indicators */}
           {/* ========================================================================= */}
-          <div className="flex lg:hidden flex-col items-start gap-[20px] w-full">
+          <div className="flex w-full flex-col items-start gap-[20px] lg:hidden">
             {/* Heading */}
-            <h2 className="type-h2 text-[#111111] tracking-[-0.01em] text-[32px] leading-[40px]">
-              What we hold<br />
+            <h2 className="type-h2 text-[32px] leading-[40px] tracking-[-0.01em] text-[#111111]">
+              What we hold
+              <br />
               ourselves to
             </h2>
 
@@ -147,7 +146,7 @@ export const WhatWeHoldSection = () => {
             <div
               ref={scrollContainerRef}
               onScroll={handleScroll}
-              className="w-full flex flex-row items-stretch gap-[20px] overflow-x-auto scrollbar-none snap-x snap-mandatory pt-[8px] pb-[8px]"
+              className="scrollbar-none flex w-full snap-x snap-mandatory flex-row items-stretch gap-[20px] overflow-x-auto pt-[8px] pb-[8px]"
               style={{
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
@@ -156,28 +155,28 @@ export const WhatWeHoldSection = () => {
               {VALUES.map((item, index) => (
                 <div
                   key={index}
-                  className="w-[269px] shrink-0 flex flex-col items-start justify-start gap-[14px] pb-[20px] border-b border-[#91C6F2] snap-start"
+                  className="flex w-[269px] shrink-0 snap-start flex-col items-start justify-start gap-[14px] border-b border-[#91C6F2] pb-[20px]"
                 >
                   {/* Icon on Top for Mobile */}
-                  <div className="w-[64px] h-[62px] flex items-center justify-start shrink-0">
+                  <div className="flex h-[62px] w-[64px] shrink-0 items-center justify-start">
                     <Image
                       src={item.icon}
                       alt=""
                       width={64}
                       height={62}
-                      className="w-auto h-[62px] object-contain"
+                      className="h-[62px] w-auto object-contain"
                     />
                   </div>
 
                   {/* Text Container */}
-                  <div className="flex flex-col gap-[14px] flex-1">
+                  <div className="flex flex-1 flex-col gap-[14px]">
                     {/* Title */}
-                    <h5 className="type-h5 text-[#0F68D6] tracking-[-0.01em] text-[20px] leading-[28px]">
+                    <h5 className="type-h5 text-[20px] leading-[28px] tracking-[-0.01em] text-[#0F68D6]">
                       {item.title}
                     </h5>
 
                     {/* Description */}
-                    <p className="type-body-xs text-[#2A2A2A] text-[14px] leading-[24px]">
+                    <p className="type-body-xs text-[14px] leading-[24px] text-[#2A2A2A]">
                       {item.description}
                     </p>
                   </div>
@@ -186,7 +185,7 @@ export const WhatWeHoldSection = () => {
             </div>
 
             {/* Carousel Indicators */}
-            <div className="flex flex-row items-center gap-[5px] h-[5px] pt-[4px]">
+            <div className="flex h-[5px] flex-row items-center gap-[5px] pt-[4px]">
               {VALUES.map((_, index) => {
                 const isActive = index === activeIndex;
                 const isNext = index === (activeIndex + 1) % VALUES.length;
@@ -199,8 +198,8 @@ export const WhatWeHoldSection = () => {
                       isActive
                         ? 'w-[32px] bg-[#0F68D6]'
                         : isNext
-                        ? 'w-[16px] bg-[#0F68D6]/20'
-                        : 'w-[6px] bg-[#0F68D6]/20'
+                          ? 'w-[16px] bg-[#0F68D6]/20'
+                          : 'w-[6px] bg-[#0F68D6]/20'
                     }`}
                   />
                 );

@@ -1,27 +1,27 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Colors - Neutral */
-  --color-white: #FFFFFF;
-  --color-ghost-white: #F4F6F9;
-  --color-light-gray: #D7DCE2;
-  --color-medium-gray: #7D8690;
-  --color-charcoal: #2A2A2A;
+  --color-white: #ffffff;
+  --color-ghost-white: #f4f6f9;
+  --color-light-gray: #d7dce2;
+  --color-medium-gray: #7d8690;
+  --color-charcoal: #2a2a2a;
   --color-gray-black: #111111;
   --color-black: #000000;
 
   /* Colors - Primary */
-  --color-electric-blue: #0F68D6;
-  --color-sky-blue: #91C6F2;
+  --color-electric-blue: #0f68d6;
+  --color-sky-blue: #91c6f2;
   --color-midnight-blue: #042849;
 
   /* Colors - Secondary */
-  --color-aqua-mint: #63CCB7;
-  --color-lime-green: #A9D154;
-  --color-golden-ochre: #D6A85F;
-  --color-coral-pink: #F3838C;
-  --color-lavender-purple: #AE87E4;
-  --color-warm-stone: #B8B1A5;
+  --color-aqua-mint: #63ccb7;
+  --color-lime-green: #a9d154;
+  --color-golden-ochre: #d6a85f;
+  --color-coral-pink: #f3838c;
+  --color-lavender-purple: #ae87e4;
+  --color-warm-stone: #b8b1a5;
 
   /* ============================================================
      FONT FAMILIES — Figma Design System
@@ -505,7 +505,7 @@ body {
 select,
 select option {
   color: #000000;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 @theme {
@@ -518,5 +518,186 @@ select option {
     100% {
       transform: translateX(-100%);
     }
+  }
+}
+
+/* HIMER OS: scoped styles and responsive media. */
+.himer-video {
+  aspect-ratio: var(--video-mobile-ratio);
+}
+
+.himer-page button:focus-visible,
+.himer-page a:focus-visible {
+  outline: 2px solid var(--color-electric-blue);
+  outline-offset: 4px;
+}
+
+.himer-lifecycle-stage {
+  scroll-margin-top: 80px;
+  transition: opacity 300ms ease-in-out;
+}
+
+@media (width < 720px) {
+  .himer-page .himer-surface {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+@media (width >= 720px) {
+  .himer-video {
+    aspect-ratio: var(--video-desktop-ratio);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .himer-page *,
+  .himer-page *::before,
+  .himer-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Apply the hero gradient to each animated glyph so nested text remains visible. */
+.himer-page .himer-metric-gradient {
+  background-image: linear-gradient(to bottom, var(--color-sky-blue), var(--color-aqua-mint));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Numbers settle after entering view, even when the visitor stops scrolling. */
+.himer-page [data-metric-reveal='pending'] .himer-metric-character {
+  opacity: 0;
+  transform: translateY(110%);
+}
+
+.himer-page [data-metric-reveal='entered'] .himer-metric-character {
+  animation: himer-metric-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--metric-delay) both;
+}
+
+@keyframes himer-metric-enter {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .himer-page .himer-metric-character {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Claim carousel */
+
+.himer-page .himer-carousel-arrow {
+  width: 34px;
+  height: 34px;
+}
+
+.himer-page .himer-carousel-arrow svg {
+  width: 9px;
+  height: 13px;
+  color: var(--color-white);
+}
+
+@media (width >= 720px) {
+  .himer-page .himer-carousel-arrow {
+    width: 48px;
+    height: 48px;
+  }
+
+  .himer-page .himer-carousel-arrow svg {
+    width: 13px;
+    height: 19px;
+    color: var(--color-sky-blue);
+  }
+}
+
+@media (width < 720px) {
+  .himer-mobile-nav {
+    height: 54px;
+  }
+  .himer-mobile-nav > div {
+    position: relative;
+    inset: auto;
+    transform: none;
+    padding: 0;
+  }
+  .himer-mobile-nav header {
+    height: 54px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 24%);
+    background: rgb(255 255 255 / 70%);
+    padding: 8px 20px;
+    box-shadow: none;
+  }
+  .himer-mobile-nav header img {
+    filter: none;
+  }
+  .himer-mobile-nav header button {
+    color: var(--color-midnight-blue);
+  }
+
+  .himer-footer {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .himer-footer li {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .himer-footer img {
+    height: 29px;
+  }
+  .himer-footer > div > div:first-child {
+    margin-bottom: 32px;
+    column-gap: 20px;
+    row-gap: 32px;
+  }
+  .himer-footer > div > div:first-child > div {
+    gap: 16px;
+  }
+  .himer-footer > div > div:first-child > div:first-child {
+    gap: 20px;
+  }
+  .himer-footer > div > div:nth-child(2) {
+    margin-bottom: 16px;
+  }
+  .himer-footer > div > div:last-child {
+    gap: 20px;
+  }
+  .himer-footer > div > div:last-child > div:last-child {
+    gap: 12px;
+  }
+}
+
+/* Metric bars reveal once to their labelled value, independent of scroll direction. */
+.himer-page [data-bar-reveal='pending'] .himer-bar-fill {
+  transform: scaleX(0);
+}
+.himer-page [data-bar-reveal='entered'] .himer-bar-fill {
+  animation: himer-bar-enter 1100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes himer-bar-enter {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .himer-page .himer-bar-fill {
+    animation: none !important;
+    transform: none !important;
   }
 }

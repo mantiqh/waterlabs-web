@@ -16,546 +16,546 @@ export const ROI_CONSTANTS = {
 } as const;
 
 export const ROI_BENCHMARKS: Record<string, SpecialtyBenchmark> = {
-  "Primary Care (Family/Internal Medicine)": {
+  'Primary Care (Family/Internal Medicine)': {
     chargePerClaim: 180,
     denialRate: 0.07,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Pediatrics": {
+  Pediatrics: {
     chargePerClaim: 150,
     denialRate: 0.06,
     cleanClaimRate: 0.97,
     writeOffRate: 0.025,
     dsoTarget: 28,
   },
-  "Cardiology": {
+  Cardiology: {
     chargePerClaim: 450,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Orthopedics": {
+  Orthopedics: {
     chargePerClaim: 500,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 38,
   },
-  "Dermatology": {
+  Dermatology: {
     chargePerClaim: 180,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 28,
   },
-  "Gastroenterology": {
+  Gastroenterology: {
     chargePerClaim: 900,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 33,
   },
-  "Neurology": {
+  Neurology: {
     chargePerClaim: 300,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Oncology": {
+  Oncology: {
     chargePerClaim: 3000,
     denialRate: 0.12,
     cleanClaimRate: 0.92,
     writeOffRate: 0.06,
     dsoTarget: 42,
   },
-  "Radiology (Diagnostic)": {
+  'Radiology (Diagnostic)': {
     chargePerClaim: 250,
     denialRate: 0.07,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Interventional Radiology": {
+  'Interventional Radiology': {
     chargePerClaim: 2000,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 38,
   },
-  "Emergency Medicine": {
+  'Emergency Medicine': {
     chargePerClaim: 700,
     denialRate: 0.12,
     cleanClaimRate: 0.91,
     writeOffRate: 0.07,
     dsoTarget: 45,
   },
-  "Anesthesiology": {
+  Anesthesiology: {
     chargePerClaim: 800,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "OB/GYN": {
+  'OB/GYN': {
     chargePerClaim: 300,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 33,
   },
-  "Urology": {
+  Urology: {
     chargePerClaim: 500,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Ophthalmology": {
+  Ophthalmology: {
     chargePerClaim: 300,
     denialRate: 0.06,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Physical Therapy": {
+  'Physical Therapy': {
     chargePerClaim: 120,
     denialRate: 0.05,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Behavioral Health": {
+  'Behavioral Health': {
     chargePerClaim: 120,
     denialRate: 0.04,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 22,
   },
-  "Endocrinology": {
+  Endocrinology: {
     chargePerClaim: 200,
     denialRate: 0.06,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Pulmonology": {
+  Pulmonology: {
     chargePerClaim: 350,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 34,
   },
-  "General Surgery": {
+  'General Surgery': {
     chargePerClaim: 2500,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 38,
   },
-  "Urgent Care": {
+  'Urgent Care': {
     chargePerClaim: 150,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Allergy & Immunology": {
+  'Allergy & Immunology': {
     chargePerClaim: 180,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 28,
   },
-  "Rheumatology": {
+  Rheumatology: {
     chargePerClaim: 250,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 34,
   },
-  "Nephrology": {
+  Nephrology: {
     chargePerClaim: 350,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Infectious Disease": {
+  'Infectious Disease': {
     chargePerClaim: 250,
     denialRate: 0.07,
     cleanClaimRate: 0.95,
     writeOffRate: 0.03,
     dsoTarget: 32,
   },
-  "Hematology": {
+  Hematology: {
     chargePerClaim: 800,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 38,
   },
-  "Vascular Surgery": {
+  'Vascular Surgery': {
     chargePerClaim: 3000,
     denialRate: 0.11,
     cleanClaimRate: 0.92,
     writeOffRate: 0.05,
     dsoTarget: 40,
   },
-  "Plastic & Reconstructive Surgery": {
+  'Plastic & Reconstructive Surgery': {
     chargePerClaim: 2000,
     denialRate: 0.08,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Neurosurgery": {
+  Neurosurgery: {
     chargePerClaim: 10000,
     denialRate: 0.12,
     cleanClaimRate: 0.91,
     writeOffRate: 0.06,
     dsoTarget: 45,
   },
-  "Cardiothoracic Surgery": {
+  'Cardiothoracic Surgery': {
     chargePerClaim: 20000,
     denialRate: 0.12,
     cleanClaimRate: 0.91,
     writeOffRate: 0.06,
     dsoTarget: 45,
   },
-  "Colorectal Surgery": {
+  'Colorectal Surgery': {
     chargePerClaim: 2500,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 38,
   },
-  "Bariatric Surgery": {
+  'Bariatric Surgery': {
     chargePerClaim: 12000,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 40,
   },
-  "Trauma Surgery": {
+  'Trauma Surgery': {
     chargePerClaim: 8000,
     denialRate: 0.13,
     cleanClaimRate: 0.9,
     writeOffRate: 0.07,
     dsoTarget: 48,
   },
-  "Pain Management": {
+  'Pain Management': {
     chargePerClaim: 500,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 32,
   },
-  "Physical Medicine & Rehabilitation": {
+  'Physical Medicine & Rehabilitation': {
     chargePerClaim: 250,
     denialRate: 0.06,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Occupational Therapy": {
+  'Occupational Therapy': {
     chargePerClaim: 120,
     denialRate: 0.05,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Speech-Language Pathology": {
+  'Speech-Language Pathology': {
     chargePerClaim: 120,
     denialRate: 0.05,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Podiatry": {
+  Podiatry: {
     chargePerClaim: 250,
     denialRate: 0.06,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Otolaryngology (ENT)": {
+  'Otolaryngology (ENT)': {
     chargePerClaim: 350,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 33,
   },
-  "Sleep Medicine": {
+  'Sleep Medicine': {
     chargePerClaim: 1000,
     denialRate: 0.08,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 34,
   },
-  "Nuclear Medicine": {
+  'Nuclear Medicine': {
     chargePerClaim: 800,
     denialRate: 0.08,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Pathology": {
+  Pathology: {
     chargePerClaim: 150,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.03,
     dsoTarget: 28,
   },
-  "Hospice & Palliative Care": {
+  'Hospice & Palliative Care': {
     chargePerClaim: 200,
     denialRate: 0.03,
     cleanClaimRate: 0.99,
     writeOffRate: 0.01,
     dsoTarget: 20,
   },
-  "Geriatrics": {
+  Geriatrics: {
     chargePerClaim: 180,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 26,
   },
-  "Neonatology": {
+  Neonatology: {
     chargePerClaim: 2000,
     denialRate: 0.1,
     cleanClaimRate: 0.92,
     writeOffRate: 0.05,
     dsoTarget: 40,
   },
-  "Maternal-Fetal Medicine": {
+  'Maternal-Fetal Medicine': {
     chargePerClaim: 500,
     denialRate: 0.08,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 34,
   },
-  "Reproductive Endocrinology & Infertility": {
+  'Reproductive Endocrinology & Infertility': {
     chargePerClaim: 1500,
     denialRate: 0.07,
     cleanClaimRate: 0.95,
     writeOffRate: 0.03,
     dsoTarget: 32,
   },
-  "Genetics / Medical Genetics": {
+  'Genetics / Medical Genetics': {
     chargePerClaim: 400,
     denialRate: 0.05,
     cleanClaimRate: 0.96,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Addiction Medicine": {
+  'Addiction Medicine': {
     chargePerClaim: 150,
     denialRate: 0.04,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 22,
   },
-  "Sports Medicine": {
+  'Sports Medicine': {
     chargePerClaim: 250,
     denialRate: 0.07,
     cleanClaimRate: 0.95,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Hand Surgery": {
+  'Hand Surgery': {
     chargePerClaim: 2500,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.05,
     dsoTarget: 36,
   },
-  "Oral & Maxillofacial Surgery": {
+  'Oral & Maxillofacial Surgery': {
     chargePerClaim: 1500,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Dental (Medical Claims)": {
+  'Dental (Medical Claims)': {
     chargePerClaim: 250,
     denialRate: 0.07,
     cleanClaimRate: 0.95,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Chiropractic": {
+  Chiropractic: {
     chargePerClaim: 75,
     denialRate: 0.03,
     cleanClaimRate: 0.99,
     writeOffRate: 0.01,
     dsoTarget: 20,
   },
-  "Acupuncture": {
+  Acupuncture: {
     chargePerClaim: 80,
     denialRate: 0.03,
     cleanClaimRate: 0.99,
     writeOffRate: 0.01,
     dsoTarget: 20,
   },
-  "Integrative Medicine": {
+  'Integrative Medicine': {
     chargePerClaim: 150,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Clinical Psychology": {
+  'Clinical Psychology': {
     chargePerClaim: 120,
     denialRate: 0.04,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 22,
   },
-  "Psychiatry": {
+  Psychiatry: {
     chargePerClaim: 180,
     denialRate: 0.04,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 22,
   },
-  "Home Health": {
+  'Home Health': {
     chargePerClaim: 150,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.03,
     dsoTarget: 35,
   },
-  "Skilled Nursing Facility (SNF)": {
+  'Skilled Nursing Facility (SNF)': {
     chargePerClaim: 500,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 40,
   },
-  "Dialysis Center": {
+  'Dialysis Center': {
     chargePerClaim: 1000,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 36,
   },
-  "Infusion Therapy": {
+  'Infusion Therapy': {
     chargePerClaim: 1000,
     denialRate: 0.1,
     cleanClaimRate: 0.93,
     writeOffRate: 0.05,
     dsoTarget: 38,
   },
-  "Ambulatory Surgery Center (ASC)": {
+  'Ambulatory Surgery Center (ASC)': {
     chargePerClaim: 2500,
     denialRate: 0.09,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 36,
   },
-  "Hospitalist Medicine": {
+  'Hospitalist Medicine': {
     chargePerClaim: 300,
     denialRate: 0.07,
     cleanClaimRate: 0.95,
     writeOffRate: 0.03,
     dsoTarget: 30,
   },
-  "Critical Care Medicine": {
+  'Critical Care Medicine': {
     chargePerClaim: 1500,
     denialRate: 0.11,
     cleanClaimRate: 0.92,
     writeOffRate: 0.05,
     dsoTarget: 40,
   },
-  "Preventive Medicine": {
+  'Preventive Medicine': {
     chargePerClaim: 180,
     denialRate: 0.04,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Occupational Medicine": {
+  'Occupational Medicine': {
     chargePerClaim: 180,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Telemedicine": {
+  Telemedicine: {
     chargePerClaim: 80,
     denialRate: 0.03,
     cleanClaimRate: 0.99,
     writeOffRate: 0.01,
     dsoTarget: 20,
   },
-  "Clinical Laboratory": {
+  'Clinical Laboratory': {
     chargePerClaim: 50,
     denialRate: 0.02,
     cleanClaimRate: 0.99,
     writeOffRate: 0.01,
     dsoTarget: 18,
   },
-  "Fertility Clinic": {
+  'Fertility Clinic': {
     chargePerClaim: 2000,
     denialRate: 0.08,
     cleanClaimRate: 0.94,
     writeOffRate: 0.04,
     dsoTarget: 35,
   },
-  "Wound Care": {
+  'Wound Care': {
     chargePerClaim: 500,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 34,
   },
-  "Hepatology": {
+  Hepatology: {
     chargePerClaim: 350,
     denialRate: 0.08,
     cleanClaimRate: 0.95,
     writeOffRate: 0.04,
     dsoTarget: 34,
   },
-  "Electrophysiology": {
+  Electrophysiology: {
     chargePerClaim: 5000,
     denialRate: 0.11,
     cleanClaimRate: 0.92,
     writeOffRate: 0.05,
     dsoTarget: 40,
   },
-  "Cardiac Rehabilitation": {
+  'Cardiac Rehabilitation': {
     chargePerClaim: 150,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Respiratory Therapy": {
+  'Respiratory Therapy': {
     chargePerClaim: 150,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Clinical Nutrition / Dietetics": {
+  'Clinical Nutrition / Dietetics': {
     chargePerClaim: 100,
     denialRate: 0.04,
     cleanClaimRate: 0.98,
     writeOffRate: 0.02,
     dsoTarget: 22,
   },
-  "Audiology": {
+  Audiology: {
     chargePerClaim: 150,
     denialRate: 0.05,
     cleanClaimRate: 0.97,
     writeOffRate: 0.02,
     dsoTarget: 25,
   },
-  "Prosthetics & Orthotics": {
+  'Prosthetics & Orthotics': {
     chargePerClaim: 500,
     denialRate: 0.07,
     cleanClaimRate: 0.95,
@@ -564,9 +564,7 @@ export const ROI_BENCHMARKS: Record<string, SpecialtyBenchmark> = {
   },
 };
 
-export const SORTED_SPECIALTIES = Object.keys(ROI_BENCHMARKS).sort((a, b) =>
-  a.localeCompare(b),
-);
+export const SORTED_SPECIALTIES = Object.keys(ROI_BENCHMARKS).sort((a, b) => a.localeCompare(b));
 
 export interface CalculatorInputs {
   specialty: string;
@@ -587,9 +585,7 @@ export interface CalculatorResults {
   benchmarkDenialRate: number;
 }
 
-export function calculateROI(
-  inputs: CalculatorInputs,
-): CalculatorResults | null {
+export function calculateROI(inputs: CalculatorInputs): CalculatorResults | null {
   if (
     !inputs.specialty ||
     !ROI_BENCHMARKS[inputs.specialty] ||
@@ -612,8 +608,7 @@ export function calculateROI(
     ROI_CONSTANTS.conversionRate * ROI_CONSTANTS.agentCostPerFTE +
     (1 - ROI_CONSTANTS.conversionRate) * blendedCostNow;
 
-  const annualSaving =
-    inputs.headcount * (blendedCostNow - revisedCost) * 12;
+  const annualSaving = inputs.headcount * (blendedCostNow - revisedCost) * 12;
 
   const monthlySaving = annualSaving / 12;
 
@@ -625,16 +620,14 @@ export function calculateROI(
   const benchmarkDenial = benchmark.denialRate;
 
   const denialPoolRaw = annualClaims * denialRate * claimValue;
-  const denialPoolMax =
-    denialRate < 1 ? (annualRevenue * denialRate) / (1 - denialRate) : 0;
+  const denialPoolMax = denialRate < 1 ? (annualRevenue * denialRate) / (1 - denialRate) : 0;
   const denialPool = Math.min(denialPoolRaw, denialPoolMax);
 
   const gap = Math.max(0, denialRate - benchmarkDenial);
 
   const captureShare = denialRate > 0 ? gap / denialRate : 0;
 
-  const recovered =
-    denialPool * captureShare * ROI_CONSTANTS.denialRecoveryRate;
+  const recovered = denialPool * captureShare * ROI_CONSTANTS.denialRecoveryRate;
 
   const uplift = annualRevenue * ROI_CONSTANTS.efficiencyUplift;
 
@@ -642,10 +635,7 @@ export function calculateROI(
 
   // Supporting percentage line:
   // If annualRevenue === 0: HIDE this supporting line completely (null)
-  const pctOfCollections =
-    annualRevenue > 0
-      ? (revenueOpportunity / annualRevenue) * 100
-      : null;
+  const pctOfCollections = annualRevenue > 0 ? (revenueOpportunity / annualRevenue) * 100 : null;
 
   const atBenchmark = gap <= 0.001;
 
@@ -675,14 +665,11 @@ export function formatMoney(val: number): string {
 }
 
 export function formatThousands(val: number): string {
-  return Math.round(val).toLocaleString("en-US");
+  return Math.round(val).toLocaleString('en-US');
 }
 
-export function sanitizeNumberInput(
-  raw: string,
-  max: number = Number.MAX_SAFE_INTEGER,
-): number {
-  const cleaned = raw.replace(/[^0-9]/g, "");
+export function sanitizeNumberInput(raw: string, max: number = Number.MAX_SAFE_INTEGER): number {
+  const cleaned = raw.replace(/[^0-9]/g, '');
   if (!cleaned) return 0;
   const parsed = parseInt(cleaned, 10);
   if (isNaN(parsed) || parsed < 0) return 0;

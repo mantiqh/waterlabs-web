@@ -60,7 +60,7 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
       const scrollRatio = scrollLeft / maxScroll;
       const dotIndex = Math.min(
         TOTAL_DOTS - 1,
-        Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1)))
+        Math.max(0, Math.round(scrollRatio * (TOTAL_DOTS - 1))),
       );
       setActiveDotIndex(dotIndex);
     }
@@ -91,52 +91,52 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
         background: 'linear-gradient(180deg, #FFFFFF 0%, #0F68D6 100%)',
       }}
     >
-      <div className="w-full bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] px-[20px] md:px-[40px] lg:px-[60px] py-[40px] md:py-[60px] lg:py-[60px]">
-        <div className="max-w-[1320px] mx-auto flex flex-col gap-[32px] lg:gap-[60px]">
-
+      <div className="bg-ghost-white w-full rounded-tl-[30px] rounded-bl-[30px] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:py-[60px]">
+        <div className="mx-auto flex max-w-[1320px] flex-col gap-[32px] lg:gap-[60px]">
           {/* ── GRADIENT CARD: HIMER AI OS ── */}
 
           {/* Desktop Layout */}
           <div
-            className="hidden lg:flex w-full rounded-[20px] overflow-hidden flex-row items-center"
+            className="hidden w-full flex-row items-center overflow-hidden rounded-[20px] lg:flex"
             style={{
               background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
             }}
           >
             {/* Left Column: Text Content */}
-            <div className="w-full lg:w-[45%] xl:w-1/2 flex flex-col items-start gap-[12px] xl:gap-[20px] p-[24px] lg:p-[32px] xl:p-[60px] justify-center">
+            <div className="flex w-full flex-col items-start justify-center gap-[12px] p-[24px] lg:w-[45%] lg:p-[32px] xl:w-1/2 xl:gap-[20px] xl:p-[60px]">
               <div className="flex items-center gap-[8px]">
-                <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
-                <span className="type-body-xxs text-[#F4F6F9] tracking-[0.01em]">
+                <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
+                <span className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]">
                   This isn&apos;t just a prior authorization tool
                 </span>
               </div>
 
-              <h3 className="type-h3 text-white tracking-[-0.01em]">
-                It is one application within an operating system that manages the full revenue cycle.
+              <h3 className="type-h3 tracking-[-0.01em] text-white">
+                It is one application within an operating system that manages the full revenue
+                cycle.
               </h3>
 
               <p className="type-body-xs text-[#F4F6F9]">
-                Prior authorization runs on our proprietary HIMER AI OS, which also manages eligibility, denials, accounts receivable, cash posting, and coding. The unified system enables seamless knowledge sharing across all functions.
+                Prior authorization runs on our proprietary HIMER AI OS, which also manages
+                eligibility, denials, accounts receivable, cash posting, and coding. The unified
+                system enables seamless knowledge sharing across all functions.
               </p>
 
-              <Link href="/products/himer">
-                <CTA variant="dark-bg">
-                  Explore HIMER AI OS
-                </CTA>
+              <Link href="/product/himer">
+                <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
 
             {/* Right Column: Image */}
-            <div className="w-full lg:w-[55%] xl:w-1/2 self-stretch flex items-center justify-end overflow-hidden">
-              <div className="relative w-full h-full min-h-[380px] xl:min-h-[500px]">
+            <div className="flex w-full items-center justify-end self-stretch overflow-hidden lg:w-[55%] xl:w-1/2">
+              <div className="relative h-full min-h-[380px] w-full xl:min-h-[500px]">
                 <Image
                   src="/images/solutions/solutions-priorauthorization/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png"
                   alt="HIMER AI OS platform overview"
                   fill
                   priority
                   sizes="(max-width: 1440px) 55vw, 653px"
-                  className="object-cover object-[48%_center] rounded-r-[20px]"
+                  className="rounded-r-[20px] object-cover object-[48%_center]"
                 />
               </div>
             </div>
@@ -144,42 +144,43 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
 
           {/* Mobile / Tablet Layout */}
           <div
-            className="flex lg:hidden w-full rounded-[20px] overflow-hidden flex-col"
+            className="flex w-full flex-col overflow-hidden rounded-[20px] lg:hidden"
             style={{
               background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
             }}
           >
-            <div className="w-full overflow-hidden rounded-[20px] md:h-[380px] md:relative">
+            <div className="w-full overflow-hidden rounded-[20px] md:relative md:h-[380px]">
               <Image
                 src="/images/solutions/solutions-priorauthorization/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(2).png"
                 alt="HIMER AI OS platform overview"
                 width={724}
                 height={596}
                 priority
-                className="w-full h-auto md:h-full object-cover object-center rounded-[20px]"
+                className="h-auto w-full rounded-[20px] object-cover object-center md:h-full"
               />
             </div>
 
-            <div className="flex flex-col items-start p-[24px] sm:p-[32px] gap-[14px]">
+            <div className="flex flex-col items-start gap-[14px] p-[24px] sm:p-[32px]">
               <div className="flex items-center gap-[4px]">
-                <div className="w-[8px] h-[8px] rounded-full bg-[#91C6F2] shrink-0" />
-                <span className="type-body-xxs text-[#F4F6F9] tracking-[0.01em]">
+                <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
+                <span className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]">
                   This isn&apos;t just a prior authorization tool
                 </span>
               </div>
 
-              <h3 className="type-h3 text-white tracking-[-0.01em]">
-                It is one application within an operating system that manages the full revenue cycle.
+              <h3 className="type-h3 tracking-[-0.01em] text-white">
+                It is one application within an operating system that manages the full revenue
+                cycle.
               </h3>
 
-              <p className="type-body-xxs text-[#D7DCE2] tracking-[0.01em]">
-                Prior authorization runs on our proprietary HIMER AI OS, which also manages eligibility, denials, accounts receivable, cash posting, and coding. The unified system enables seamless knowledge sharing across all functions.
+              <p className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+                Prior authorization runs on our proprietary HIMER AI OS, which also manages
+                eligibility, denials, accounts receivable, cash posting, and coding. The unified
+                system enables seamless knowledge sharing across all functions.
               </p>
 
-              <Link href="/products/himer">
-                <CTA variant="dark-bg">
-                  Explore HIMER AI OS
-                </CTA>
+              <Link href="/product/himer">
+                <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
           </div>
@@ -193,13 +194,13 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
             </h3>
 
             {/* Desktop: 3 cards */}
-            <div className="hidden lg:flex flex-row gap-[20px]">
+            <div className="hidden flex-row gap-[20px] lg:flex">
               {threeThingsCards.map((card, idx) => (
                 <div
                   key={idx}
-                  className="flex-1 bg-white rounded-[16px] p-[32px] flex flex-col gap-[24px] min-h-[320px]"
+                  className="flex min-h-[320px] flex-1 flex-col gap-[24px] rounded-[16px] bg-white p-[32px]"
                 >
-                  <div className="w-[60px] h-[60px] relative shrink-0">
+                  <div className="relative h-[60px] w-[60px] shrink-0">
                     <Image
                       src={card.icon}
                       alt={card.title}
@@ -218,18 +219,18 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
             </div>
 
             {/* Mobile / Tablet: Carousel with pagination dots */}
-            <div className="flex lg:hidden flex-col gap-[16px]">
+            <div className="flex flex-col gap-[16px] lg:hidden">
               <div
                 ref={scrollRef}
                 onScroll={handleScroll}
-                className="w-full flex flex-row items-stretch gap-[16px] overflow-x-auto no-scrollbar scroll-smooth pb-[4px]"
+                className="no-scrollbar flex w-full flex-row items-stretch gap-[16px] overflow-x-auto scroll-smooth pb-[4px]"
               >
                 {threeThingsCards.map((card, idx) => (
                   <div
                     key={idx}
-                    className="w-[280px] sm:w-[320px] shrink-0 bg-white rounded-[16px] p-[24px] flex flex-col gap-[20px]"
+                    className="flex w-[280px] shrink-0 flex-col gap-[20px] rounded-[16px] bg-white p-[24px] sm:w-[320px]"
                   >
-                    <div className="w-[48px] h-[48px] relative shrink-0">
+                    <div className="relative h-[48px] w-[48px] shrink-0">
                       <Image
                         src={card.icon}
                         alt={card.title}
@@ -259,7 +260,7 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
                       type="button"
                       aria-label={`Go to slide ${dotIdx + 1}`}
                       onClick={() => scrollToDot(dotIdx)}
-                      className={`h-[6px] rounded-full transition-all duration-300 cursor-pointer ${
+                      className={`h-[6px] cursor-pointer rounded-full transition-all duration-300 ${
                         isDotActive
                           ? 'w-[32px] bg-[#0F68D6]'
                           : 'w-[6px] bg-[#D7DCE2] hover:bg-[#91C6F2]'
@@ -270,7 +271,6 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>

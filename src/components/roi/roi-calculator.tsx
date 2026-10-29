@@ -3,12 +3,8 @@
 import { FileSliders } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 
-import { ChevronRight,CTA } from '@/components/CTA';
-import {
-  calculateROI,
-  formatMoney,
-  SORTED_SPECIALTIES,
-} from '@/data/roi-calculator';
+import { ChevronRight, CTA } from '@/components/CTA';
+import { calculateROI, formatMoney, SORTED_SPECIALTIES } from '@/data/roi-calculator';
 
 import styles from './calculator.module.css';
 
@@ -149,21 +145,10 @@ export const InfoButton = ({
           viewBox="0 0 18 18"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="w-[18px] h-[18px] shrink-0 pointer-events-none"
+          className="pointer-events-none h-[18px] w-[18px] shrink-0"
         >
-          <circle
-            cx="9"
-            cy="9"
-            r="8.1"
-            strokeWidth="1.5"
-            className={styles.infoButtonCircle}
-          />
-          <circle
-            cx="9"
-            cy="5.4"
-            r="0.85"
-            className={styles.infoButtonDot}
-          />
+          <circle cx="9" cy="9" r="8.1" strokeWidth="1.5" className={styles.infoButtonCircle} />
+          <circle cx="9" cy="5.4" r="0.85" className={styles.infoButtonDot} />
           <path
             d="M9 8.2V12.6"
             strokeWidth="1.5"
@@ -179,9 +164,9 @@ export const InfoButton = ({
           style={{
             left: `${tooltipLeft ?? -153}px`,
           }}
-          className="absolute top-[calc(100%+10px)] z-50 w-[266px] max-w-[calc(100vw-32px)] bg-[#2A2A2A] text-white rounded-[12px] px-[14px] py-[10px] shadow-[0_8px_24px_rgba(0,0,0,0.2)] animate-in fade-in-0 duration-150 pointer-events-auto"
+          className="animate-in fade-in-0 pointer-events-auto absolute top-[calc(100%+10px)] z-50 w-[266px] max-w-[calc(100vw-32px)] rounded-[12px] bg-[#2A2A2A] px-[14px] py-[10px] text-white shadow-[0_8px_24px_rgba(0,0,0,0.2)] duration-150"
         >
-          <p className="type-caption text-white text-left font-normal m-0 leading-[16px]">
+          <p className="type-caption m-0 text-left leading-[16px] font-normal text-white">
             {content}
           </p>
         </div>
@@ -279,9 +264,7 @@ export const ROICalculator = () => {
     const cursorPosition = input.selectionStart ?? rawValue.length;
 
     // Count how many numeric digits occurred before the cursor in raw input
-    const digitsBeforeCursor = rawValue
-      .slice(0, cursorPosition)
-      .replace(/[^0-9]/g, '').length;
+    const digitsBeforeCursor = rawValue.slice(0, cursorPosition).replace(/[^0-9]/g, '').length;
 
     // Extract all digits (limit to 12 digits to prevent overflowing safe numbers)
     const digits = rawValue.replace(/[^0-9]/g, '').slice(0, 12);
@@ -322,27 +305,24 @@ export const ROICalculator = () => {
       {/* Main Single Panel Container (Figma: LeftFormPanel + RightResultsPanel) */}
       <div
         id="roi-calculator"
-        className="w-full max-w-[1320px] mx-auto rounded-[30px_15px_30px_30px] p-[20px] sm:p-[28px] lg:p-[32px] xl:p-[40px]"
+        className="mx-auto w-full max-w-[1320px] rounded-[30px_15px_30px_30px] p-[20px] sm:p-[28px] lg:p-[32px] xl:p-[40px]"
         style={{
           background: 'rgba(145, 198, 242, 0.2)',
         }}
       >
-        <div className="w-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[24px] lg:gap-[32px] xl:gap-[40px]">
+        <div className="flex w-full flex-col items-start justify-between gap-[24px] lg:flex-row lg:items-end lg:gap-[32px] xl:gap-[40px]">
           {/* ============================================================
               LEFT COLUMN — 6 INPUTS (Figma: Frame 2147227119, width: 512px)
               ============================================================ */}
           <div
             data-tooltip-boundary="card"
-            className="w-full lg:w-[48%] xl:w-[512px] lg:shrink-0 flex flex-col gap-[20px]"
+            className="flex w-full flex-col gap-[20px] lg:w-[48%] lg:shrink-0 xl:w-[512px]"
           >
             {/* Input 1: Specialty Dropdown */}
-            <div className="pb-[20px] border-b border-[#D7DCE2]">
+            <div className="border-b border-[#D7DCE2] pb-[20px]">
               <div className="flex flex-col gap-[8px]">
                 <div className="flex items-center gap-[6px]">
-                  <label
-                    htmlFor={specialtyId}
-                    className="type-h6 text-black block cursor-pointer"
-                  >
+                  <label htmlFor={specialtyId} className="type-h6 block cursor-pointer text-black">
                     Which specialty do you run?
                   </label>
                   <InfoButton
@@ -351,7 +331,8 @@ export const ROICalculator = () => {
                   />
                 </div>
                 <p className="type-body-xxs text-charcoal">
-                  Denial rates differ sharply by specialty.<br className="hidden lg:inline" /> We work from yours, not an industry average.
+                  Denial rates differ sharply by specialty.
+                  <br className="hidden lg:inline" /> We work from yours, not an industry average.
                 </p>
               </div>
 
@@ -362,31 +343,32 @@ export const ROICalculator = () => {
                   onClick={() => setIsDropdownOpen((prev) => !prev)}
                   aria-haspopup="listbox"
                   aria-expanded={isDropdownOpen}
-                  className={`w-full bg-[#FCFDFE] border rounded-[12px_8px_12px_12px] h-[52px] px-[18px] flex items-center justify-between cursor-pointer transition-colors outline-none ${isDropdownOpen
-                      ? 'border-electric-blue ring-2 ring-electric-blue/20'
+                  className={`flex h-[52px] w-full cursor-pointer items-center justify-between rounded-[12px_8px_12px_12px] border bg-[#FCFDFE] px-[18px] transition-colors outline-none ${
+                    isDropdownOpen
+                      ? 'border-electric-blue ring-electric-blue/20 ring-2'
                       : 'border-[#D7DCE2] hover:border-[#91C6F2]'
-                    }`}
+                  }`}
                 >
                   <span
                     className={`type-caption truncate ${
-                      specialty ? 'text-[#111111] font-medium' : 'text-[#7D8690]'
+                      specialty ? 'font-medium text-[#111111]' : 'text-[#7D8690]'
                     }`}
                   >
                     {specialty || 'Select Your Speciality'}
                   </span>
                   <div
-                    className={`transition-transform duration-200 text-[#111111] ${
+                    className={`text-[#111111] transition-transform duration-200 ${
                       isDropdownOpen ? '-rotate-90 text-[#0F68D6]' : 'rotate-90'
                     }`}
                   >
-                    <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0" />
+                    <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0" />
                   </div>
                 </button>
 
                 {/* Dropdown Menu (Navbar Dropdown UI style with solid white background) */}
                 {isDropdownOpen && (
                   <div
-                    className="absolute top-[calc(100%+8px)] left-0 w-full max-h-[320px] overflow-y-auto bg-white rounded-[20px_10px_20px_20px] p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.12)] border border-[#D7DCE2] z-50 flex flex-col gap-[4px] animate-in fade-in-0 zoom-in-95 duration-150"
+                    className="animate-in fade-in-0 zoom-in-95 absolute top-[calc(100%+8px)] left-0 z-50 flex max-h-[320px] w-full flex-col gap-[4px] overflow-y-auto rounded-[20px_10px_20px_20px] border border-[#D7DCE2] bg-white p-[16px] shadow-[0_16px_40px_rgba(4,40,73,0.12)] duration-150"
                     role="listbox"
                     style={{ scrollbarWidth: 'thin' }}
                   >
@@ -408,15 +390,15 @@ export const ROICalculator = () => {
                             setIsDropdownOpen(false);
                             setHoveredOption(null);
                           }}
-                          className={`min-h-[40px] w-full flex flex-row items-center justify-between gap-[14px] px-[12px] py-[8px] rounded-[8px] type-caption transition-colors duration-150 cursor-pointer text-left ${
+                          className={`type-caption flex min-h-[40px] w-full cursor-pointer flex-row items-center justify-between gap-[14px] rounded-[8px] px-[12px] py-[8px] text-left transition-colors duration-150 ${
                             isActive
-                              ? 'text-[#0F68D6] bg-[#0F68D6]/5 font-medium'
-                              : 'text-[#111111] hover:text-[#0F68D6] hover:bg-[#F4F6F9]'
+                              ? 'bg-[#0F68D6]/5 font-medium text-[#0F68D6]'
+                              : 'text-[#111111] hover:bg-[#F4F6F9] hover:text-[#0F68D6]'
                           }`}
                         >
                           <span className="truncate">{spec}</span>
                           {isActive && (
-                            <ChevronRight className="w-[9.73px] h-[14.63px] shrink-0 text-[#0F68D6]" />
+                            <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0F68D6]" />
                           )}
                         </button>
                       );
@@ -427,15 +409,15 @@ export const ROICalculator = () => {
             </div>
 
             {/* Input 2 & 3: Monthly Collected Revenue & Monthly Claims Volume */}
-            <div className="pb-[20px] border-b border-[#D7DCE2]">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-[16px]">
+            <div className="border-b border-[#D7DCE2] pb-[20px]">
+              <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2">
                 {/* Revenue */}
                 <div className="flex flex-col justify-between gap-[16px]">
                   <div className="flex flex-col gap-[4px]">
                     <div className="flex items-center gap-[6px]">
                       <label
                         htmlFor={revenueId}
-                        className="type-body-xxs font-medium text-black cursor-pointer block"
+                        className="type-body-xxs block cursor-pointer font-medium text-black"
                       >
                         Monthly collected revenue
                       </label>
@@ -444,12 +426,10 @@ export const ROICalculator = () => {
                         content="Cash actually received in an average month, after contractual adjustments and write-offs. Not what you billed. If you only have an annual figure, divide it by twelve."
                       />
                     </div>
-                    <span className="type-caption text-charcoal block">
-                      What lands in the bank
-                    </span>
+                    <span className="type-caption text-charcoal block">What lands in the bank</span>
                   </div>
-                  <div className="bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[64px] px-[16px] flex items-center focus-within:border-electric-blue focus-within:ring-2 focus-within:ring-electric-blue/20 transition-all">
-                    <div className="w-full flex items-baseline gap-[6px]">
+                  <div className="focus-within:border-electric-blue focus-within:ring-electric-blue/20 flex h-[64px] items-center rounded-[12px_8px_12px_12px] border border-[#D7DCE2] bg-[#FCFDFE] px-[16px] transition-all focus-within:ring-2">
+                    <div className="flex w-full items-baseline gap-[6px]">
                       <span className="type-body-xs text-gray-black">$</span>
                       <input
                         id={revenueId}
@@ -459,7 +439,7 @@ export const ROICalculator = () => {
                         onChange={(e) =>
                           handleNumberInputChange(e, setMonthlyRevenue, setMonthlyRevenueStr)
                         }
-                        className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
+                        className="type-h6 text-midnight-blue w-full min-w-0 bg-transparent tabular-nums outline-none"
                         aria-label="Monthly collected revenue in USD"
                       />
                     </div>
@@ -472,7 +452,7 @@ export const ROICalculator = () => {
                     <div className="flex items-center gap-[6px]">
                       <label
                         htmlFor={claimsId}
-                        className="type-body-xxs font-medium text-black cursor-pointer block"
+                        className="type-body-xxs block cursor-pointer font-medium text-black"
                       >
                         Monthly claims volume
                       </label>
@@ -485,8 +465,8 @@ export const ROICalculator = () => {
                       Claims submitted in an average month
                     </span>
                   </div>
-                  <div className="bg-[#FCFDFE] border border-[#D7DCE2] rounded-[12px_8px_12px_12px] h-[64px] px-[16px] flex items-center focus-within:border-electric-blue focus-within:ring-2 focus-within:ring-electric-blue/20 transition-all">
-                    <div className="w-full flex items-baseline justify-between gap-[6px]">
+                  <div className="focus-within:border-electric-blue focus-within:ring-electric-blue/20 flex h-[64px] items-center rounded-[12px_8px_12px_12px] border border-[#D7DCE2] bg-[#FCFDFE] px-[16px] transition-all focus-within:ring-2">
+                    <div className="flex w-full items-baseline justify-between gap-[6px]">
                       <input
                         id={claimsId}
                         type="text"
@@ -495,12 +475,10 @@ export const ROICalculator = () => {
                         onChange={(e) =>
                           handleNumberInputChange(e, setMonthlyClaims, setMonthlyClaimsStr)
                         }
-                        className="w-full bg-transparent outline-none type-h6 text-midnight-blue tabular-nums min-w-0"
+                        className="type-h6 text-midnight-blue w-full min-w-0 bg-transparent tabular-nums outline-none"
                         aria-label="Monthly claims volume"
                       />
-                      <span className="type-caption text-medium-gray shrink-0">
-                        claims
-                      </span>
+                      <span className="type-caption text-medium-gray shrink-0">claims</span>
                     </div>
                   </div>
                 </div>
@@ -508,13 +486,13 @@ export const ROICalculator = () => {
             </div>
 
             {/* Input 4: Denial Rate Slider */}
-            <div className="pb-[20px] border-b border-[#D7DCE2]">
-              <div className="flex flex-col gap-[6px] mb-[12px]">
+            <div className="border-b border-[#D7DCE2] pb-[20px]">
+              <div className="mb-[12px] flex flex-col gap-[6px]">
                 <div className="flex items-center justify-between gap-[16px]">
                   <div className="flex items-center gap-[6px]">
                     <label
                       htmlFor={denialId}
-                      className="type-body-xxs font-medium text-black cursor-pointer block"
+                      className="type-body-xxs block cursor-pointer font-medium text-black"
                     >
                       What share of your claims gets denied?
                     </label>
@@ -523,13 +501,11 @@ export const ROICalculator = () => {
                       content="The share of claims denied on first submission, before any rework or appeal. This runs higher than the final denial rate most teams report at month end, so use the first-pass figure if you have it."
                     />
                   </div>
-                  <div className="hidden sm:flex items-baseline gap-[4px] whitespace-nowrap">
-                    <span className="type-body-l font-bold text-gray-black tabular-nums">
+                  <div className="hidden items-baseline gap-[4px] whitespace-nowrap sm:flex">
+                    <span className="type-body-l text-gray-black font-bold tabular-nums">
                       {denialRatePct.toFixed(1)}
                     </span>
-                    <span className="type-body-xxs font-bold font-primary text-gray-black">
-                      %
-                    </span>
+                    <span className="type-body-xxs font-primary text-gray-black font-bold">%</span>
                   </div>
                 </div>
 
@@ -537,13 +513,11 @@ export const ROICalculator = () => {
                   First-pass denials, before rework
                 </span>
 
-                <div className="flex sm:hidden items-baseline gap-[4px] whitespace-nowrap">
-                  <span className="type-body-l font-bold text-gray-black tabular-nums">
+                <div className="flex items-baseline gap-[4px] whitespace-nowrap sm:hidden">
+                  <span className="type-body-l text-gray-black font-bold tabular-nums">
                     {denialRatePct.toFixed(1)}
                   </span>
-                  <span className="type-body-xxs font-bold font-primary text-gray-black">
-                    %
-                  </span>
+                  <span className="type-body-xxs font-primary text-gray-black font-bold">%</span>
                 </div>
               </div>
 
@@ -566,20 +540,20 @@ export const ROICalculator = () => {
                 aria-valuetext={`${denialRatePct.toFixed(1)} percent`}
               />
 
-              <div className="flex justify-between items-center mt-[8px] type-caption text-medium-gray tabular-nums">
+              <div className="type-caption text-medium-gray mt-[8px] flex items-center justify-between tabular-nums">
                 <span>0%</span>
                 <span>35%</span>
               </div>
             </div>
 
             {/* Input 5: Total RCM Headcount Slider */}
-            <div className="pb-[20px] border-b border-[#D7DCE2]">
-              <div className="flex items-end justify-between gap-[16px] mb-[12px]">
+            <div className="border-b border-[#D7DCE2] pb-[20px]">
+              <div className="mb-[12px] flex items-end justify-between gap-[16px]">
                 <div className="flex flex-col gap-[6px]">
                   <div className="flex items-center gap-[6px]">
                     <label
                       htmlFor={headcountId}
-                      className="type-body-xxs font-medium text-black block cursor-pointer"
+                      className="type-body-xxs block cursor-pointer font-medium text-black"
                     >
                       Total RCM headcount
                     </label>
@@ -593,12 +567,10 @@ export const ROICalculator = () => {
                   </span>
                 </div>
                 <div className="flex items-baseline gap-[4px] whitespace-nowrap">
-                  <span className="type-body-l font-bold text-gray-black tabular-nums">
+                  <span className="type-body-l text-gray-black font-bold tabular-nums">
                     {headcount}
                   </span>
-                  <span className="type-caption text-medium-gray uppercase">
-                    FTE
-                  </span>
+                  <span className="type-caption text-medium-gray uppercase">FTE</span>
                 </div>
               </div>
 
@@ -621,7 +593,7 @@ export const ROICalculator = () => {
                 aria-valuetext={`${headcount} full-time equivalents`}
               />
 
-              <div className="flex justify-between items-center mt-[8px] type-caption text-medium-gray tabular-nums">
+              <div className="type-caption text-medium-gray mt-[8px] flex items-center justify-between tabular-nums">
                 <span>3</span>
                 <span>400+</span>
               </div>
@@ -629,11 +601,11 @@ export const ROICalculator = () => {
 
             {/* Input 6: Delivery Model Slider */}
             <div className="pt-[4px]">
-              <div className="flex flex-col gap-[4px] mb-[12px]">
+              <div className="mb-[12px] flex flex-col gap-[4px]">
                 <div className="flex items-center gap-[6px]">
                   <label
                     htmlFor={outsourcedId}
-                    className="type-body-xxs font-medium text-black block cursor-pointer"
+                    className="type-body-xxs block cursor-pointer font-medium text-black"
                   >
                     Delivery model
                   </label>
@@ -643,9 +615,13 @@ export const ROICalculator = () => {
                   />
                 </div>
 
-                <div className="flex justify-between items-center type-caption">
-                  <span className="text-electric-blue font-medium">{100 - outsourcedPct}% in-house</span>
-                  <span className="text-midnight-blue font-medium">{outsourcedPct}% outsourced</span>
+                <div className="type-caption flex items-center justify-between">
+                  <span className="text-electric-blue font-medium">
+                    {100 - outsourcedPct}% in-house
+                  </span>
+                  <span className="text-midnight-blue font-medium">
+                    {outsourcedPct}% outsourced
+                  </span>
                 </div>
               </div>
 
@@ -674,34 +650,36 @@ export const ROICalculator = () => {
               RIGHT COLUMN — RESULTS PANEL (Figma: RightResultsPanel, width: 688px)
               ============================================================ */}
           <div
-            className="w-full lg:w-[52%] xl:w-[688px] lg:flex-1 lg:min-h-[668px] bg-white rounded-[24px] p-[24px] sm:p-[28px] lg:p-[32px] xl:p-[36px] shadow-sm flex flex-col justify-between gap-[24px]"
+            className="flex w-full flex-col justify-between gap-[24px] rounded-[24px] bg-white p-[24px] shadow-sm sm:p-[28px] lg:min-h-[668px] lg:w-[52%] lg:flex-1 lg:p-[32px] xl:w-[688px] xl:p-[36px]"
             aria-live="polite"
           >
             {!results ? (
               /* BEFORE INPUTS STATE (Image 1) */
               <>
-                <div className="w-full flex-1 min-h-[360px] sm:min-h-[400px] lg:min-h-[440px] bg-[#F8FAFC] rounded-[16px] sm:rounded-[20px] p-[24px] sm:p-[32px] flex flex-col items-center justify-center text-center">
+                <div className="flex min-h-[360px] w-full flex-1 flex-col items-center justify-center rounded-[16px] bg-[#F8FAFC] p-[24px] text-center sm:min-h-[400px] sm:rounded-[20px] sm:p-[32px] lg:min-h-[440px]">
                   <div
-                    className="w-[40px] h-[40px] p-[8px] rounded-[20px] mb-[16px] flex items-center justify-center text-[#2A2A2A] shrink-0"
+                    className="mb-[16px] flex h-[40px] w-[40px] shrink-0 items-center justify-center rounded-[20px] p-[8px] text-[#2A2A2A]"
                     style={{
                       background: 'rgba(17, 17, 17, 0.05)',
                       backdropFilter: 'blur(9.8px)',
                       WebkitBackdropFilter: 'blur(9.8px)',
                     }}
                   >
-                    <FileSliders className="w-[18px] h-[18px] shrink-0" strokeWidth={1.5} />
+                    <FileSliders className="h-[18px] w-[18px] shrink-0" strokeWidth={1.5} />
                   </div>
-                  <h3 className="type-h5 sm:type-h4 font-medium text-[#0F68D6] mb-[8px]">
-                    Pick your  Speciality
+                  <h3 className="type-h5 sm:type-h4 mb-[8px] font-medium text-[#0F68D6]">
+                    Pick your Speciality
                   </h3>
-                  <p className="type-caption text-[#7D8690] text-center max-w-[340px]">
+                  <p className="type-caption max-w-[340px] text-center text-[#7D8690]">
                     Your numbers appear here and update as you move the sliders.
                   </p>
                 </div>
 
                 {/* Disclaimer */}
-                <p className="type-caption text-[#7D8690] leading-[18px]">
-                  Estimates are illustrative and based on applied to the inputs above. They do not account for every circumstance and are not a guarantee of results. Your assessment uses your actual claim, remit and denial data.
+                <p className="type-caption leading-[18px] text-[#7D8690]">
+                  Estimates are illustrative and based on applied to the inputs above. They do not
+                  account for every circumstance and are not a guarantee of results. Your assessment
+                  uses your actual claim, remit and denial data.
                 </p>
               </>
             ) : (
@@ -710,7 +688,7 @@ export const ROICalculator = () => {
                 <div className="flex flex-col gap-[20px]">
                   {/* Header: Dot + Label */}
                   <div className="flex items-center gap-[8px]">
-                    <div className="w-[8px] h-[8px] rounded-full bg-electric-blue shrink-0" />
+                    <div className="bg-electric-blue h-[8px] w-[8px] shrink-0 rounded-full" />
                     <span className="type-body-xxs text-medium-gray font-normal">
                       Your Estimated Opportunity
                     </span>
@@ -721,7 +699,7 @@ export const ROICalculator = () => {
                     {/* DetailBox1: Estimated Annual Savings */}
                     <div
                       data-tooltip-boundary="card"
-                      className="rounded-[16px_8px_16px_16px] p-[20px] flex flex-col gap-[12px] border border-[#F4F6F9]"
+                      className="flex flex-col gap-[12px] rounded-[16px_8px_16px_16px] border border-[#F4F6F9] p-[20px]"
                       style={{
                         background: 'rgba(145, 198, 242, 0.05)',
                       }}
@@ -737,26 +715,29 @@ export const ROICalculator = () => {
                       </div>
                       <div
                         style={GRADIENT_STYLE}
-                        className="type-h1 tabular-nums whitespace-nowrap w-fit"
+                        className="type-h1 w-fit whitespace-nowrap tabular-nums"
                       >
                         {formatMoney(results.annualSaving)}
                       </div>
                       <p className="type-caption text-charcoal">
-                        {formatMoney(results.monthlySaving)} a month, across the {headcount} people working your cycle today.
+                        {formatMoney(results.monthlySaving)} a month, across the {headcount} people
+                        working your cycle today.
                       </p>
                     </div>
 
                     {/* DetailBox2: Estimated Revenue Opportunity */}
                     <div
                       data-tooltip-boundary="card"
-                      className="rounded-[16px_8px_16px_16px] p-[20px] flex flex-col gap-[12px] border border-[#F4F6F9]"
+                      className="flex flex-col gap-[12px] rounded-[16px_8px_16px_16px] border border-[#F4F6F9] p-[20px]"
                       style={{
                         background: 'rgba(145, 198, 242, 0.05)',
                       }}
                     >
                       {results.atBenchmark ? (
                         <p className="type-caption text-charcoal">
-                          Your denial performance is already at or better than benchmark. We would review how your current processes run for opportunities to lift revenue by a further 1 to 2%.
+                          Your denial performance is already at or better than benchmark. We would
+                          review how your current processes run for opportunities to lift revenue by
+                          a further 1 to 2%.
                         </p>
                       ) : (
                         <>
@@ -771,7 +752,7 @@ export const ROICalculator = () => {
                           </div>
                           <div
                             style={GRADIENT_STYLE}
-                            className="type-h1 tabular-nums whitespace-nowrap w-fit"
+                            className="type-h1 w-fit whitespace-nowrap tabular-nums"
                           >
                             {formatMoney(results.revenueOpportunity)}
                           </div>
@@ -788,8 +769,10 @@ export const ROICalculator = () => {
 
                 <div className="flex flex-col gap-[20px]">
                   {/* Disclaimer */}
-                  <p className="type-caption text-[#7D8690] leading-[18px]">
-                    Estimates are illustrative and based on applied to the inputs above. They do not account for every circumstance and are not a guarantee of results. Your assessment uses your actual claim, remit and denial data.
+                  <p className="type-caption leading-[18px] text-[#7D8690]">
+                    Estimates are illustrative and based on applied to the inputs above. They do not
+                    account for every circumstance and are not a guarantee of results. Your
+                    assessment uses your actual claim, remit and denial data.
                   </p>
 
                   {/* Start again button */}

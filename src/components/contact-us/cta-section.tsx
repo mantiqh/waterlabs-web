@@ -24,7 +24,7 @@ export const ContactUsCTASection = ({
     '/images/contact-us/cta-section/img_start_building_waterlas_today_mobile.png',
 }: ContactUsCTASectionProps) => {
   return (
-    <section className="relative w-full bg-gradient-to-b from-ghost-white from-50% to-[#111111] to-50% overflow-hidden">
+    <section className="from-ghost-white relative w-full overflow-hidden bg-gradient-to-b from-50% to-[#111111] to-50%">
       {/* 
         Start Building CTA Section:
         - Desktop: 1440px, padding: 80px 60px, gap: 48px, border-radius: 0px 20px 20px 0px
@@ -33,12 +33,12 @@ export const ContactUsCTASection = ({
         - Heading: "Start Building on Waterlabs today"
         - CTA: White button with dark text
       */}
-      <div className="relative w-full rounded-r-[30px] lg:rounded-r-[20px] py-[40px] px-[20px] md:px-[40px] lg:py-[80px] lg:px-[60px] overflow-hidden">
+      <div className="relative w-full overflow-hidden rounded-r-[30px] px-[20px] py-[40px] md:px-[40px] lg:rounded-r-[20px] lg:px-[60px] lg:py-[80px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           {/* Desktop Background */}
           {imageDesktop && (
-            <div className="hidden lg:block absolute inset-0">
+            <div className="absolute inset-0 hidden lg:block">
               <Image
                 src={imageDesktop}
                 alt="Start Building on Waterlabs today"
@@ -50,7 +50,7 @@ export const ContactUsCTASection = ({
           )}
           {/* Mobile Background */}
           {imageMobile && (
-            <div className="block lg:hidden absolute inset-0">
+            <div className="absolute inset-0 block lg:hidden">
               <Image
                 src={imageMobile}
                 alt="Start Building on Waterlabs today"
@@ -63,20 +63,16 @@ export const ContactUsCTASection = ({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 w-full max-w-[1320px] mx-auto">
-          <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-[20px]">
+        <div className="relative z-10 mx-auto w-full max-w-[1320px]">
+          <div className="flex flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-end">
             {/* Heading */}
-            <div className="flex flex-col justify-center items-start gap-[20px]">
-              <h2 className="type-h3 tracking-[-0.01em] max-w-[873px]">
+            <div className="flex flex-col items-start justify-center gap-[20px]">
+              <h2 className="type-h3 max-w-[873px] tracking-[-0.01em]">
                 <span className="text-white">
                   {heading}
                   {headingHighlight ? <br /> : null}
                 </span>
-                {headingHighlight && (
-                  <span className="text-[#91C6F2]">
-                    {headingHighlight}
-                  </span>
-                )}
+                {headingHighlight && <span className="text-[#91C6F2]">{headingHighlight}</span>}
               </h2>
             </div>
 

@@ -239,7 +239,7 @@ export const homePageSchema = defineType({
           name: 'ctaLink',
           title: 'CTA Link',
           type: 'string',
-          initialValue: '/solutions/prior-authorization',
+          initialValue: '/product/himer',
         }),
       ],
     }),
