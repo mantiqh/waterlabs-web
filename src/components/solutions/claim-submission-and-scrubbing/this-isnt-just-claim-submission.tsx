@@ -120,7 +120,7 @@ export const ThisIsntJustClaimSubmissionSection = () => {
                 Each rejection our submission agent resolves becomes a rule for future coding.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
@@ -176,7 +176,7 @@ export const ThisIsntJustClaimSubmissionSection = () => {
                 Each rejection our submission agent resolves becomes a rule for future coding.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>

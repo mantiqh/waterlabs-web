@@ -24,7 +24,12 @@ interface NavItem {
   children?: NavSubItem[];
 }
 
-const Navbar = () => {
+export interface NavbarProps {
+  theme?: 'light' | 'dark';
+  mobileVariant?: 'default' | 'hero';
+}
+
+const Navbar = ({ theme = 'light', mobileVariant = 'default' }: NavbarProps) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,7 +72,7 @@ const Navbar = () => {
         label: 'Products',
         header: 'Products',
         children: [
-          { label: 'Himer AI OS', href: '/solutions/prior-authorization' },
+          { label: 'Himer AI OS', href: '/product/himer' },
           { label: 'CurieCode', href: '/solutions/charge-capture-and-coding' },
         ],
       },
@@ -140,7 +145,9 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div className="relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)]">
+    <div
+      className={`relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)] ${mobileVariant === 'hero' ? 'himer-mobile-nav' : ''}`}
+    >
       <div
         ref={menuRef}
         className={`fixed top-0 right-0 left-0 z-50 mx-auto w-full max-w-[1320px] transition-all duration-300 ease-out lg:relative lg:top-0 lg:right-auto lg:left-auto lg:px-0 ${
@@ -150,10 +157,14 @@ const Navbar = () => {
         }`}
       >
         <header
-          className={`flex h-[60px] w-full flex-row items-center justify-between py-[8px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] backdrop-blur-[13.2px] transition-all duration-300 lg:relative ${
-            isScrolled
-              ? 'rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] bg-white px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
-              : 'rounded-[30px] border border-white/24 bg-white/70 pr-[8px] pl-[16px] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+          className={`flex h-[60px] w-full flex-row items-center justify-between py-[8px] backdrop-blur-[13.2px] transition-all duration-300 lg:relative ${
+            theme === 'dark'
+              ? isScrolled
+                ? 'rounded-none border-x-0 border-t-0 border-b border-white/10 bg-black/85 px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/10 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+                : 'rounded-[30px] border border-white/10 bg-white/[0.05] pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.3)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+              : isScrolled
+                ? 'rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] bg-white px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+                : 'rounded-[30px] border border-white/24 bg-white/70 pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
           }`}
         >
           {/* Logo */}
@@ -169,7 +180,9 @@ const Navbar = () => {
             <img
               src="/images/common/logo.svg"
               alt="Waterlabs AI"
-              className="h-[22px] w-auto lg:h-[22px] xl:h-[30px] 2xl:h-[36px]"
+              className={`h-[22px] w-auto lg:h-[22px] xl:h-[30px] 2xl:h-[36px] ${
+                theme === 'dark' ? 'brightness-0 invert' : ''
+              }`}
             />
           </Link>
 
@@ -197,8 +210,12 @@ const Navbar = () => {
                       onClick={() => setActiveDropdown(null)}
                       className={`group body-xxs type-body-xxs flex items-center gap-[6px] py-[8px] whitespace-nowrap transition-colors xl:gap-[8px] ${
                         isDropdownOpen || isCurrentPage
-                          ? 'text-[#0F68D6]'
-                          : 'text-[#111111] hover:text-[#0F68D6]'
+                          ? theme === 'dark'
+                            ? 'text-[#91C6F2]'
+                            : 'text-[#0F68D6]'
+                          : theme === 'dark'
+                            ? 'text-white hover:text-[#91C6F2]'
+                            : 'text-[#111111] hover:text-[#0F68D6]'
                       }`}
                     >
                       <span>{item.label}</span>
@@ -206,10 +223,16 @@ const Navbar = () => {
                         <ChevronRight
                           className={`h-[12px] w-[8px] shrink-0 transition-transform duration-200 xl:h-[14.63px] xl:w-[9.73px] ${
                             isDropdownOpen
-                              ? '-rotate-90 text-[#0F68D6]'
+                              ? theme === 'dark'
+                                ? '-rotate-90 text-[#91C6F2]'
+                                : '-rotate-90 text-[#0F68D6]'
                               : isCurrentPage
-                                ? 'rotate-90 text-[#0F68D6]'
-                                : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
+                                ? theme === 'dark'
+                                  ? 'rotate-90 text-[#91C6F2]'
+                                  : 'rotate-90 text-[#0F68D6]'
+                                : theme === 'dark'
+                                  ? 'rotate-90 text-white/70 group-hover:text-[#91C6F2]'
+                                  : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
                           }`}
                         />
                       )}
@@ -221,7 +244,13 @@ const Navbar = () => {
                         setActiveDropdown(activeDropdown === item.label ? null : item.label)
                       }
                       className={`group body-xxs type-body-xxs flex cursor-pointer items-center gap-[6px] py-[8px] whitespace-nowrap transition-colors xl:gap-[8px] ${
-                        isDropdownOpen ? 'text-[#0F68D6]' : 'text-[#111111] hover:text-[#0F68D6]'
+                        isDropdownOpen
+                          ? theme === 'dark'
+                            ? 'text-[#91C6F2]'
+                            : 'text-[#0F68D6]'
+                          : theme === 'dark'
+                            ? 'text-white hover:text-[#91C6F2]'
+                            : 'text-[#111111] hover:text-[#0F68D6]'
                       }`}
                     >
                       <span>{item.label}</span>
@@ -229,8 +258,12 @@ const Navbar = () => {
                         <ChevronRight
                           className={`h-[12px] w-[8px] shrink-0 transition-transform duration-200 xl:h-[14.63px] xl:w-[9.73px] ${
                             isDropdownOpen
-                              ? '-rotate-90 text-[#0F68D6]'
-                              : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
+                              ? theme === 'dark'
+                                ? '-rotate-90 text-[#91C6F2]'
+                                : '-rotate-90 text-[#0F68D6]'
+                              : theme === 'dark'
+                                ? 'rotate-90 text-white/70 group-hover:text-[#91C6F2]'
+                                : 'rotate-90 text-[#111111]/70 group-hover:text-[#0F68D6]'
                           }`}
                         />
                       )}
@@ -368,7 +401,11 @@ const Navbar = () => {
             <button
               type="button"
               aria-label="Search"
-              className="text-midnight-blue hover:text-electric-blue p-1 transition-colors"
+              className={`${
+                theme === 'dark'
+                  ? 'hover:text-sky-blue text-white'
+                  : 'text-midnight-blue hover:text-electric-blue'
+              } p-1 transition-colors`}
             >
               <svg
                 width="24"
@@ -391,7 +428,11 @@ const Navbar = () => {
               aria-label={isOpen ? 'Close Menu' : 'Open Menu'}
               aria-expanded={isOpen}
               onClick={() => setIsOpen(!isOpen)}
-              className="text-midnight-blue hover:text-electric-blue relative flex h-[32px] w-[32px] items-center justify-center p-1 transition-colors focus:outline-none"
+              className={`${
+                theme === 'dark'
+                  ? 'hover:text-sky-blue text-white'
+                  : 'text-midnight-blue hover:text-electric-blue'
+              } relative flex h-[32px] w-[32px] items-center justify-center p-1 transition-colors focus:outline-none`}
             >
               <span
                 className={`absolute transform transition-all duration-300 ${
@@ -422,7 +463,9 @@ const Navbar = () => {
                 <img
                   src="/images/common/menu.svg"
                   alt="Menu"
-                  className="text-midnight-blue h-[19px] w-[29px] transition-opacity hover:opacity-80"
+                  className={`h-[19px] w-[29px] transition-opacity hover:opacity-80 ${
+                    theme === 'dark' ? 'brightness-0 invert' : ''
+                  }`}
                 />
               </span>
             </button>

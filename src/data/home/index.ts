@@ -84,7 +84,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
     description: 'Orchestrate and build through commands. Just describe your task.',
     image: '/images/home/products-images/img_himer_ai_os.png',
     ctaText: 'Explore HIMER',
-    ctaLink: '/solutions/prior-authorization',
+    ctaLink: '/product/himer',
   },
   product2: {
     name: 'CurieCode',

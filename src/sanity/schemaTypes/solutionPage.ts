@@ -385,7 +385,7 @@ export const solutionPageSchema = defineType({
       title: 'Platform CTA Button Link',
       type: 'string',
       group: 'platformAndFeatures',
-      initialValue: '/products/himer',
+      initialValue: '/product/himer',
     }),
     defineField({
       name: 'platformImage',

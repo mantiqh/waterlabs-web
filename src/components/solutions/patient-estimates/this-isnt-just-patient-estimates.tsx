@@ -121,7 +121,7 @@ export const ThisIsntJustPatientEstimatesSection = () => {
                 verification agent later in the cycle.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
@@ -178,7 +178,7 @@ export const ThisIsntJustPatientEstimatesSection = () => {
                 verification agent later in the cycle.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>

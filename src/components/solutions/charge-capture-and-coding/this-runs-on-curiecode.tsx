@@ -135,7 +135,7 @@ export const ThisRunsOnCurieCodeSection = () => {
                 <Link href="/products/curiecode">
                   <CTA variant="dark-bg">Explore CurieCode</CTA>
                 </Link>
-                <Link href="/products/himer">
+                <Link href="/product/himer">
                   <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
                 </Link>
               </div>
@@ -201,7 +201,7 @@ export const ThisRunsOnCurieCodeSection = () => {
                 <Link href="/products/curiecode">
                   <CTA variant="dark-bg">Explore CurieCode</CTA>
                 </Link>
-                <Link href="/products/himer">
+                <Link href="/product/himer">
                   <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
                 </Link>
               </div>

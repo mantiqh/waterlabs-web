@@ -22,7 +22,7 @@ const DEFAULT_PRODUCTS: PlatformProduct[] = [
     description:
       'The Agentic Operating System for RCM, powered by patented technology to create, deploy, orchestrate and manage AI agents across the revenue cycle.',
     image: '/images/home/the-waterlabs-platform-engine/desktop/img_himer_ai_os.png',
-    href: '/solutions/prior-authorization',
+    href: '/product/himer',
     ctaText: 'Explore HIMER AI OS',
   },
   {

@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 
+import { CarouselIndicators } from '@/components/ui/carousel-indicators';
+
 interface ComplianceItem {
   id: string;
   logo: string;
@@ -226,25 +228,14 @@ export const CertificationsSection = () => {
 
                 {/* Carousel Indicators (Figma node 3883-11307) */}
                 <div className="flex flex-row items-center gap-[5px] self-start pt-[4px]">
-                  {complianceList.map((_, idx) => {
-                    const isActive = activeCardIndex === idx;
-                    const isAdjacent = Math.abs(activeCardIndex - idx) === 1;
-                    return (
-                      <button
-                        key={`compliance-dot-${idx}`}
-                        type="button"
-                        aria-label={`Slide ${idx + 1}`}
-                        onClick={() => scrollToCard(idx)}
-                        className={`h-[5px] rounded-[32px] transition-all duration-300 ${
-                          isActive
-                            ? 'w-[32px] bg-[#0F68D6]'
-                            : isAdjacent
-                              ? 'w-[16px] bg-[#0F68D6]/20 hover:bg-[#0F68D6]/40'
-                              : 'w-[6px] bg-[#0F68D6]/20 hover:bg-[#0F68D6]/40'
-                        }`}
-                      />
-                    );
-                  })}
+                  <CarouselIndicators
+                    current={activeCardIndex}
+                    total={complianceList.length}
+                    maxVisible={complianceList.length}
+                    onSelect={scrollToCard}
+                    label="Certification slides"
+                    getItemLabel={(index) => `Slide ${index + 1}`}
+                  />
                 </div>
               </div>
             </div>

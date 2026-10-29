@@ -755,7 +755,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   {data.platformAndFeatures.platformDescription}
                 </p>
 
-                <Link href={data.platformAndFeatures.platformCtaLink || '/products/himer'}>
+                <Link href={data.platformAndFeatures.platformCtaLink || '/product/himer'}>
                   <CTA variant="dark-bg">
                     {data.platformAndFeatures.platformCtaText || 'Explore HIMER AI OS'}
                   </CTA>
@@ -816,7 +816,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   {data.platformAndFeatures.platformDescription}
                 </p>
 
-                <Link href={data.platformAndFeatures.platformCtaLink || '/products/himer'}>
+                <Link href={data.platformAndFeatures.platformCtaLink || '/product/himer'}>
                   <CTA variant="dark-bg">
                     {data.platformAndFeatures.platformCtaText || 'Explore HIMER AI OS'}
                   </CTA>

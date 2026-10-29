@@ -99,7 +99,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Prior authorization runs on our proprietary HIMER AI OS, which also manages eligibility, denials, accounts receivable, cash posting, and coding. The unified system enables seamless knowledge sharing across all functions.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-priorauthorization/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:
@@ -223,7 +223,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Eligibility runs on HIMER AI OS, which also manages prior authorization, denials, AR follow-up, payment posting, and coding. The same patient context flows across every stage.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-eligibility/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool.png",
       platformImageMobile:
@@ -353,7 +353,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Denial management runs on HIMER AI OS, which also manages eligibility, prior authorization, AR follow-up, payment posting, and coding. Denial learnings immediately inform front-end workflows.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-denialmanagement/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:
@@ -475,7 +475,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'AR follow-up runs on HIMER AI OS, which also manages eligibility, prior authorization, denials, payment posting, and coding. Aging trends feed back into upstream scrubbing and denial appeals.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-AR-follow-up/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:
@@ -600,7 +600,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Coding runs on HIMER AI OS, which connects directly with clinical documentation, claim submission, and prior authorization to ensure documentation accuracy from start to finish.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-charge-capture-&-coding/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:
@@ -726,7 +726,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Payment posting on HIMER AI OS ensures that posting data triggers secondary billing, balances patient AR, and feeds accurate real-time cash analytics.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-payment-posting/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:
@@ -856,7 +856,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Claim submission on HIMER AI OS communicates directly with charge capture and prior auth, ensuring clean claims reach clearinghouses without manual rekeying.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-claim-submission/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:
@@ -982,7 +982,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       platformDescription:
         'Patient estimates on HIMER AI OS connect directly with eligibility verification and post-visit billing, reducing downstream bad debt and disputed statements.',
       platformCtaText: 'Explore HIMER AI OS',
-      platformCtaLink: '/products/himer',
+      platformCtaLink: '/product/himer',
       platformImage:
         "/images/solutions/solutions-patient-estimates/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png",
       platformImageMobile:

@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 export const Footer = () => {
   const pathname = usePathname();
   const isAboutUs = pathname === '/about-us';
+  const isHimer = pathname === '/product/himer';
 
   return (
     <div
@@ -17,7 +18,7 @@ export const Footer = () => {
       }}
     >
       <footer
-        className={`w-full bg-[#111111] px-[20px] pt-16 pb-8 text-white md:px-[40px] lg:px-[60px] ${
+        className={`${isHimer ? 'himer-footer' : ''} w-full bg-[#111111] px-[20px] pt-16 pb-8 text-white md:px-[40px] lg:px-[60px] ${
           isAboutUs ? 'rounded-tl-[30px] lg:rounded-tl-[60px]' : ''
         }`}
       >
@@ -34,21 +35,37 @@ export const Footer = () => {
                   className="h-8 w-auto md:h-10"
                 />
               </Link>
-              <p className="type-body-xxs max-w-sm text-white/70">
-                Agentic AI built to own your revenue
-                <br />
-                cycle, not just automate it.
+              <p
+                className={`type-body-xxs max-w-sm text-white/70 ${isHimer ? 'max-md:text-sm max-md:leading-6' : ''}`}
+              >
+                {isHimer ? (
+                  <>
+                    Don&apos;t just automate your
+                    <br />
+                    revenue cycle. Apply intelligence to it.
+                  </>
+                ) : (
+                  <>
+                    Agentic AI built to own your revenue
+                    <br />
+                    cycle, not just automate it.
+                  </>
+                )}
               </p>
             </div>
 
             {/* Platform Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4 className="type-body-xxs font-medium text-white">Platform</h4>
+              <h4
+                className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
+              >
+                Platform
+              </h4>
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
                     href="#"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Solutions
                   </Link>
@@ -56,7 +73,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Results
                   </Link>
@@ -64,7 +81,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Resources
                   </Link>
@@ -74,12 +91,16 @@ export const Footer = () => {
 
             {/* Products Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4 className="type-body-xxs font-medium text-white">Products</h4>
+              <h4
+                className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
+              >
+                Products
+              </h4>
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
-                    href="#"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    href="/product/himer"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     HIMER AI OS
                   </Link>
@@ -87,7 +108,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="#"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     CurieCode
                   </Link>
@@ -97,12 +118,16 @@ export const Footer = () => {
 
             {/* Company Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4 className="type-body-xxs font-medium text-white">Company</h4>
+              <h4
+                className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
+              >
+                Company
+              </h4>
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
                     href="/about-us"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     About Us
                   </Link>
@@ -110,7 +135,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/contact-us"
-                    className="type-body-xxs hover:text-electric-blue text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Contact Us
                   </Link>
@@ -120,14 +145,18 @@ export const Footer = () => {
 
             {/* Social Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4 className="type-body-xxs font-medium text-white">Social</h4>
+              <h4
+                className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
+              >
+                Social
+              </h4>
               <ul className="flex flex-col gap-4">
                 <li>
                   <a
                     href="#"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="type-body-xxs hover:text-electric-blue group flex items-center gap-2 text-white/70 transition-colors"
+                    className={`type-body-xxs hover:text-electric-blue group flex items-center gap-2 text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     LinkedIn
                     <svg
@@ -155,19 +184,21 @@ export const Footer = () => {
 
           {/* Bottom Bar */}
           <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center lg:gap-0">
-            <div className="type-body-xxs order-2 text-white/70 lg:order-1">
+            <div
+              className={`type-body-xxs order-2 text-white/70 lg:order-1 ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
+            >
               © 2026 Waterlabs AI LLC. All rights reserved.
             </div>
             <div className="order-1 flex flex-row gap-6 lg:order-2">
               <Link
                 href="#"
-                className="type-body-xxs text-white/70 transition-colors hover:text-white"
+                className={`type-body-xxs text-white/70 transition-colors hover:text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
               >
                 Terms & Conditions
               </Link>
               <Link
                 href="#"
-                className="type-body-xxs text-white/70 transition-colors hover:text-white"
+                className={`type-body-xxs text-white/70 transition-colors hover:text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
               >
                 Privacy Policy
               </Link>

@@ -121,7 +121,7 @@ export const ThisIsntJustARSection = () => {
                 learns about payer stalls is used by our submission agent to prevent them.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
@@ -178,7 +178,7 @@ export const ThisIsntJustARSection = () => {
                 learns about payer stalls is used by our submission agent to prevent them.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>

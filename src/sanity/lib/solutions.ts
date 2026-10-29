@@ -147,7 +147,11 @@ function mapSanityToSolution(doc: SanitySolutionDoc): SolutionPageData {
         doc.platformDescription ||
         `${doc.title} runs on our proprietary HIMER AI OS, which also manages eligibility, denials, accounts receivable, cash posting, and coding.`,
       platformCtaText: doc.platformCtaText || 'Explore HIMER AI OS',
-      platformCtaLink: doc.platformCtaLink || '/products/himer',
+      platformCtaLink:
+        !doc.platformCtaLink ||
+        ['/himer-ai-os', '/products/himer', '/himer'].includes(doc.platformCtaLink)
+          ? '/product/himer'
+          : doc.platformCtaLink,
       platformImage: doc.platformImage,
       threeThingsHeading:
         doc.threeThingsHeading ||

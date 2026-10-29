@@ -122,7 +122,7 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
                 system enables seamless knowledge sharing across all functions.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
@@ -179,7 +179,7 @@ export const ThisIsntJustPriorAuthorizationSection = () => {
                 system enables seamless knowledge sharing across all functions.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>

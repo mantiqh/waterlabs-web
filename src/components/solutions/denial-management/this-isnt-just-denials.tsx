@@ -122,7 +122,7 @@ export const ThisIsntJustDenialsSection = () => {
                 it learns goes back into the system.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
@@ -180,7 +180,7 @@ export const ThisIsntJustDenialsSection = () => {
                 it learns goes back into the system.
               </p>
 
-              <Link href="/products/himer">
+              <Link href="/product/himer">
                 <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
               </Link>
             </div>
