@@ -27,7 +27,7 @@ export const HIMER_HERO_DATA = {
 export const HIMER_METRICS_DATA = {
   headline: 'Returns that compound.',
   subtext:
-    'Lower cost to collect, faster cash and cleaner claims, with your team spending its day on the work that needs judgment.',
+    'Lower cost to collect, faster cash and cleaner claims,\nwith your team spending its day on the work that needs judgment.',
   metrics: [
     { value: '30–70%', label: 'Lower cost to collect' },
     { value: '40%', label: 'Reduction in days in AR' },
@@ -246,21 +246,33 @@ export const HIMER_TRUST_SECURITY_DATA = {
   seals: [
     {
       name: 'HIPAA Compliant',
-      src: '/images/trust-and-security/certifications/Hippa_logo.png',
+      width: 110,
+      height: 68,
+      fit: 'cover',
+      src: '/images/himer/certifications/hipaa.png',
       alt: 'HIPAA Compliant',
     },
     {
       name: 'SOC 2 Type 2',
+      width: 57,
+      height: 72,
+      fit: 'contain',
       src: '/images/trust-and-security/certifications/image 98.png',
       alt: 'SOC 2 Type 2 Certified',
     },
     {
       name: 'ISO 27001',
-      src: '/images/trust-and-security/certifications/Iso_27001_logo.png',
+      width: 65,
+      height: 65,
+      fit: 'contain',
+      src: '/images/himer/certifications/iso-27001.png',
       alt: 'ISO 27001 Information Security Management',
     },
     {
       name: 'ISO 27017 & 27018',
+      width: 147,
+      height: 73,
+      fit: 'contain',
       src: '/images/trust-and-security/certifications/ISO_27017_27018_logo.png',
       alt: 'ISO 27017 Cloud Security & ISO 27018 Privacy',
     },
