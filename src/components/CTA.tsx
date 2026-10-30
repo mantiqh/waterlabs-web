@@ -19,6 +19,7 @@ export type CTAVariant =
 export interface CTAProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant: CTAVariant;
   size?: 'default' | 'compact-mobile';
+  iconDirection?: 'left' | 'right';
   children?: ReactNode;
   as?: 'button' | 'div' | 'span';
 }
@@ -44,7 +45,18 @@ export const ChevronRight = ({ className }: { className?: string }) => (
 );
 
 export const CTA = forwardRef<HTMLElement, CTAProps>(
-  ({ variant, size = 'default', children, as = 'button', className = '', ...props }, ref) => {
+  (
+    {
+      variant,
+      size = 'default',
+      iconDirection = 'right',
+      children,
+      as = 'button',
+      className = '',
+      ...props
+    },
+    ref,
+  ) => {
     // Base classes for typography conforming to Figma specs (default height 44px with py-[10px])
     const typographyClass = `type-cta ${size === 'compact-mobile' ? 'max-md:h-[38px] max-md:px-3 max-md:py-[7px] max-md:text-sm' : ''}`;
     const hasCustomHeight = className.includes('h-');
@@ -120,6 +132,8 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(
         break;
     }
 
+    const iconClassName = `${iconClasses} ${iconDirection === 'left' ? 'rotate-180' : ''} ${size === 'compact-mobile' ? 'max-md:h-[13px] max-md:w-[9px]' : ''}`;
+
     if (as === 'div') {
       return (
         <div
@@ -128,9 +142,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(
           {...(props as unknown as HTMLAttributes<HTMLDivElement>)}
         >
           {!isArrowOnly && children && <span>{children}</span>}
-          <ChevronRight
-            className={`${iconClasses} ${size === 'compact-mobile' ? 'max-md:h-[13px] max-md:w-[9px]' : ''}`}
-          />
+          <ChevronRight className={iconClassName} />
         </div>
       );
     }
@@ -143,9 +155,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(
           {...(props as unknown as HTMLAttributes<HTMLSpanElement>)}
         >
           {!isArrowOnly && children && <span>{children}</span>}
-          <ChevronRight
-            className={`${iconClasses} ${size === 'compact-mobile' ? 'max-md:h-[13px] max-md:w-[9px]' : ''}`}
-          />
+          <ChevronRight className={iconClassName} />
         </span>
       );
     }
@@ -157,9 +167,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(
         {...props}
       >
         {!isArrowOnly && children && <span>{children}</span>}
-        <ChevronRight
-          className={`${iconClasses} ${size === 'compact-mobile' ? 'max-md:h-[13px] max-md:w-[9px]' : ''}`}
-        />
+        <ChevronRight className={iconClassName} />
       </button>
     );
   },

@@ -35,7 +35,7 @@ function LifecycleStage({
         pinned && !active && 'invisible opacity-0',
       )}
     >
-      <div className="contents md:block md:min-w-0">
+      <div className="himer-lifecycle-copy contents md:block md:min-w-0">
         <h3 className="type-h5 text-aqua-mint max-md:order-1 max-md:text-xl max-md:leading-7">
           {tab.badge}
         </h3>
@@ -88,7 +88,7 @@ function LifecycleStage({
               />
               <span
                 className="type-body-xxs text-light-gray max-md:text-sm max-md:leading-5"
-                style={{ opacity: 0.5 + 0.5 * clampProgress(bulletProgress - index + 1) }}
+                style={{ opacity: 0.6 + 0.4 * clampProgress(bulletProgress - index + 1) }}
               >
                 {bullet}
               </span>
@@ -111,7 +111,7 @@ function LifecycleStage({
         mobileSrc={tab.mobileVideo}
         aspectRatio="787 / 580"
         fit="cover"
-        containerClassName="max-md:order-2 border border-light-gray rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[30px] lg:rounded-tr-[20px] lg:rounded-br-[30px] lg:rounded-bl-[30px]"
+        containerClassName="himer-lifecycle-media lg:justify-self-end max-md:order-2 border border-light-gray rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] lg:rounded-tl-[30px] lg:rounded-tr-[20px] lg:rounded-br-[30px] lg:rounded-bl-[30px]"
         mobileAspectRatio="362 / 350"
         ariaLabel={`${tab.badge} demonstration`}
       />
@@ -158,9 +158,9 @@ export const HimerPlatformLifecycleSection = () => {
   const { ref, progress } = useScrollProgress<HTMLDivElement>('travel');
   const sceneRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const [canPin, setCanPin] = useState(false);
+  const [desktop, setDesktop] = useState(false);
   const reducedMotion = useReducedMotion();
-  const pinned = canPin && !reducedMotion;
+  const pinned = desktop && !reducedMotion;
   const stagePosition = Math.min(
     progress * HIMER_LIFECYCLE_DATA.tabs.length,
     HIMER_LIFECYCLE_DATA.tabs.length - Number.EPSILON * 4,
@@ -171,19 +171,19 @@ export const HimerPlatformLifecycleSection = () => {
     let frame = 0;
     const measure = () => {
       frame = 0;
-      const stages = sceneRef.current?.querySelectorAll<HTMLElement>('[data-lifecycle-stage]');
-      const height = Math.max(
-        0,
-        ...Array.from(stages ?? [], (stage) => stage.getBoundingClientRect().height),
-      );
       const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 0;
-      setCanPin(window.innerWidth >= 1024 && height + headerHeight + 120 <= window.innerHeight);
+      const spacing = window.innerHeight <= 800 ? 72 : 120;
+      sceneRef.current?.style.setProperty(
+        '--lifecycle-stage-height',
+        `${Math.max(200, window.innerHeight - headerHeight - spacing)}px`,
+      );
+      setDesktop(window.innerWidth >= 1024);
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(measure);
     };
     const observer = new ResizeObserver(schedule);
-    if (sceneRef.current) observer.observe(sceneRef.current);
+    if (headerRef.current) observer.observe(headerRef.current);
     window.addEventListener('resize', schedule);
     void document.fonts.ready.then(schedule);
     schedule();
@@ -195,7 +195,11 @@ export const HimerPlatformLifecycleSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-black text-white">
+    <section
+      className="relative w-full bg-black text-white"
+      aria-label="Build, manage and govern"
+      data-lifecycle-mode={pinned ? 'scroll' : 'stack'}
+    >
       <div
         ref={ref}
         className="from-electric-blue relative bg-gradient-to-r to-black"
@@ -204,11 +208,11 @@ export const HimerPlatformLifecycleSection = () => {
         <div
           className={cn(
             'rounded-bl-[30px] bg-black py-10 lg:rounded-bl-[60px]',
-            pinned && 'sticky top-0 flex h-svh items-center',
+            pinned && 'himer-lifecycle-scene sticky top-0 flex h-svh overflow-y-auto',
           )}
         >
           <div ref={sceneRef} className="layout-container min-w-0">
-            <div ref={headerRef} className="mb-5 lg:mb-10">
+            <div ref={headerRef} className="himer-lifecycle-header mb-5 lg:mb-10">
               <h2 className="type-h2 max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]">
                 {HIMER_LIFECYCLE_DATA.headline}
               </h2>

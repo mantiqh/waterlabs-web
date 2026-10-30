@@ -9,21 +9,23 @@ import { HimerVideo } from './himer-video';
 
 export const HimerHeroSection = () => (
   <section className="bg-ghost-white relative w-full text-white">
-    <div className="relative w-full overflow-hidden rounded-br-[30px] bg-black pt-5 pb-10 md:pt-8 md:pb-20 lg:rounded-br-[60px] lg:pt-10">
+    <div className="relative flex w-full flex-col overflow-hidden rounded-br-[30px] bg-black pt-5 pb-10 md:pt-8 md:pb-20 lg:rounded-br-[60px] lg:pt-10">
       <div className="layout-container relative z-50 mb-5 md:mb-12 lg:mb-16">
         <Navbar theme="dark" mobileVariant="hero" />
       </div>
-      <div className="mb-5 w-full md:hidden">
+      <div className="order-1 mb-5 w-full md:order-3 md:mx-auto md:mt-8 md:mb-0 md:max-w-[1440px] lg:mt-12">
         <HimerVideo
           desktopSrc={HIMER_HERO_DATA.desktopVideo}
           mobileSrc={HIMER_HERO_DATA.mobileVideo}
+          aspectRatio="1672 / 941"
           mobileAspectRatio="402 / 222"
+          priority
           fit="cover"
-          className="object-[center_20%]"
+          className="max-md:object-[center_20%]"
           containerClassName="rounded-none"
         />
       </div>
-      <div className="layout-container flex flex-col items-start text-left md:items-center md:text-center">
+      <div className="layout-container order-2 flex flex-col items-start text-left md:items-center md:text-center">
         <h1 className="type-h2 max-w-[916px] max-md:text-[36px] max-md:leading-[48px] max-md:tracking-[-0.01em]">
           <span className="text-aqua-mint">An agentic operating system</span> with{' '}
           <br className="hidden sm:inline" />
@@ -38,15 +40,7 @@ export const HimerHeroSection = () => (
           </CTA>
         </Link>
       </div>
-      <div className="mx-auto mt-8 hidden w-full max-w-[1440px] md:block lg:mt-12">
-        <HimerVideo
-          desktopSrc={HIMER_HERO_DATA.desktopVideo}
-          mobileSrc={HIMER_HERO_DATA.mobileVideo}
-          aspectRatio="1672 / 941"
-          containerClassName="rounded-none"
-        />
-      </div>
-      <div className="layout-container mt-[60px] md:mt-16 lg:mt-20">
+      <div className="layout-container order-4 mt-[60px] md:mt-16 lg:mt-20">
         <div
           role="region"
           aria-label="Platform metrics"

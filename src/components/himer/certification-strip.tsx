@@ -13,6 +13,7 @@ export function CertificationStrip() {
   const [current, setCurrent] = useState(0);
   const reducedMotion = useReducedMotion();
   const seals = HIMER_TRUST_SECURITY_DATA.seals;
+  const totalSlides = 3;
   return (
     <div className="min-w-0 pt-2 lg:col-start-1 lg:row-start-2 lg:pt-8">
       <div
@@ -20,46 +21,43 @@ export function CertificationStrip() {
         role="region"
         aria-label="Security certifications"
         tabIndex={0}
-        className="no-scrollbar flex snap-x snap-mandatory gap-10 overflow-x-auto lg:flex-wrap lg:gap-6"
+        className="no-scrollbar flex items-center gap-[max(20px,calc((100%_-_232px)/2))] overflow-x-auto lg:gap-[clamp(20px,calc(14.423vw-127.69px),80px)]"
         onScroll={() => {
           const track = ref.current;
           if (!track) return;
-          const first = track.children[0] as HTMLElement;
-          const second = track.children[1] as HTMLElement;
+          const maxScroll = track.scrollWidth - track.clientWidth;
           setCurrent(
-            Math.min(
-              seals.length - 1,
-              Math.round(track.scrollLeft / (second.offsetLeft - first.offsetLeft)),
-            ),
+            maxScroll > 0 ? Math.round((track.scrollLeft / maxScroll) * (totalSlides - 1)) : 0,
           );
         }}
       >
         {seals.map((seal) => (
           <div
             key={seal.name}
-            className="relative flex h-[76px] w-[calc((100%-80px)/3)] shrink-0 snap-start items-center justify-center lg:h-12 lg:w-24"
+            className="flex h-[76px] shrink-0 items-center justify-center lg:h-[73px]"
           >
-            <Image
-              src={seal.src}
-              alt={seal.alt}
-              width={96}
-              height={76}
-              className="max-h-[76px] w-auto object-contain lg:max-h-12"
-            />
+            <div className="relative" style={{ width: seal.width, height: seal.height }}>
+              <Image
+                src={seal.src}
+                alt={seal.alt}
+                fill
+                sizes={seal.fit === 'cover' ? '170px' : `${seal.width}px`}
+                className={seal.fit === 'cover' ? 'object-cover' : 'object-contain'}
+              />
+            </div>
           </div>
         ))}
       </div>
       <div className="mt-5 lg:hidden">
         <CarouselIndicators
           current={current}
-          total={seals.length - 2}
+          total={totalSlides}
           label="Certification groups"
           onSelect={(index) => {
             const track = ref.current;
-            const item = track?.children[index] as HTMLElement | undefined;
-            if (track && item)
+            if (track)
               track.scrollTo({
-                left: item.offsetLeft - (track.firstElementChild as HTMLElement).offsetLeft,
+                left: ((track.scrollWidth - track.clientWidth) * index) / (totalSlides - 1),
                 behavior: reducedMotion ? 'instant' : 'smooth',
               });
           }}

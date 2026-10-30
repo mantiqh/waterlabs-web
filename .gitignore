@@ -37,3 +37,10 @@ yarn-error.log*
 .DS_Store
 *.pem
 *.tsbuildinfo
+.playwright-mcp
+
+#agents
+.agents/
+AGENTS.md
+docs
+HIMER_QA.md

@@ -64,7 +64,7 @@ export const Footer = () => {
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
-                    href="#"
+                    href="/solutions"
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Solutions
@@ -72,7 +72,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/case-studies"
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Results
@@ -80,7 +80,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/blogs"
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Resources
@@ -107,7 +107,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="#"
+                    href="/solutions/charge-capture-and-coding"
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     CurieCode

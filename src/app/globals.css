@@ -532,6 +532,33 @@ select option {
   outline-offset: 4px;
 }
 
+.himer-lifecycle-scene {
+  align-items: safe center;
+}
+
+@media (width >= 1024px) {
+  [data-lifecycle-mode='scroll'] .himer-lifecycle-media {
+    max-height: var(--lifecycle-stage-height);
+    max-width: calc(var(--lifecycle-stage-height) * 787 / 580);
+  }
+}
+
+/* Keep the original scroll sequence when browser chrome or DevTools reduces height. */
+@media (width >= 1024px) and (height <= 800px) {
+  .himer-lifecycle-scene {
+    padding-block: 24px;
+  }
+  .himer-lifecycle-header {
+    margin-bottom: 24px;
+  }
+  .himer-lifecycle-copy li:not(:last-child) {
+    padding-bottom: 12px;
+  }
+  .himer-lifecycle-copy > div:last-child {
+    margin-top: 16px;
+  }
+}
+
 .himer-lifecycle-stage {
   scroll-margin-top: 80px;
   transition: opacity 300ms ease-in-out;
@@ -603,22 +630,10 @@ select option {
   height: 34px;
 }
 
-.himer-page .himer-carousel-arrow svg {
-  width: 9px;
-  height: 13px;
-  color: var(--color-white);
-}
-
 @media (width >= 720px) {
   .himer-page .himer-carousel-arrow {
     width: 48px;
     height: 48px;
-  }
-
-  .himer-page .himer-carousel-arrow svg {
-    width: 13px;
-    height: 19px;
-    color: var(--color-sky-blue);
   }
 }
 

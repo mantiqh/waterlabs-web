@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRef, useState, useSyncExternalStore } from 'react';
 
-import { ChevronRight, CTA } from '@/components/CTA';
+import { CTA } from '@/components/CTA';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HIMER_CLAIM_JOURNEY_DATA } from '@/data/himer';
 
@@ -61,7 +61,7 @@ export const HimerClaimJourneySection = () => {
               </h2>
             </div>
             <div className="min-w-0 lg:w-1/2">
-              <p className="type-body-xxs text-charcoal max-md:text-sm max-md:leading-5">
+              <p className="type-body-xxs text-charcoal max-md:text-sm max-md:leading-5 lg:max-w-[560px]">
                 {HIMER_CLAIM_JOURNEY_DATA.subtext}
               </p>
             </div>
@@ -117,7 +117,7 @@ export const HimerClaimJourneySection = () => {
                   key={card.title}
                   className="bg-sky-blue/10 flex w-[calc(100%-52px)] shrink-0 snap-start flex-col rounded-[20px] p-5 md:w-[calc((100%-20px)/2)] md:p-8"
                 >
-                  <h3 className="type-h6 text-electric-blue mb-3 truncate leading-7 md:whitespace-normal">
+                  <h3 className="type-h6 text-electric-blue mb-3 leading-7 whitespace-normal">
                     {card.title}
                   </h3>
                   <div className="grid grid-cols-[minmax(0,1fr)_34px] items-end gap-3 md:grid-cols-[minmax(0,1fr)_48px]">
@@ -130,7 +130,12 @@ export const HimerClaimJourneySection = () => {
                         aria-label={`Learn more about ${card.title}`}
                         className="shrink-0"
                       >
-                        <CTA variant="fill-arrow" as="span" className="himer-carousel-arrow" />
+                        <CTA
+                          variant="fill-arrow"
+                          size="compact-mobile"
+                          as="span"
+                          className="himer-carousel-arrow"
+                        />
                       </Link>
                     )}
                   </div>
@@ -151,29 +156,22 @@ export const HimerClaimJourneySection = () => {
 
               {/* Prev / Next buttons */}
               <div className="hidden items-center gap-[14px] md:flex">
-                {/* Left Button */}
-                <button
+                <CTA
+                  variant="light-arrow"
+                  iconDirection="left"
                   type="button"
                   onClick={prevSlide}
-                  className="border-electric-blue hover:bg-electric-blue group focus-visible:outline-electric-blue flex h-12 w-12 items-center justify-center rounded-full border bg-white transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4"
+                  className="md:h-12 md:w-12"
                   aria-label="Previous card"
-                >
-                  <span className="text-sky-blue rotate-180 transition-colors duration-300 group-hover:text-white">
-                    <ChevronRight />
-                  </span>
-                </button>
+                />
 
-                {/* Right Button */}
-                <button
+                <CTA
+                  variant="fill-arrow"
                   type="button"
                   onClick={nextSlide}
-                  className="bg-electric-blue hover:bg-electric-blue/90 group focus-visible:outline-electric-blue flex h-12 w-12 items-center justify-center rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4"
+                  className="md:h-12 md:w-12"
                   aria-label="Next card"
-                >
-                  <span className="text-sky-blue transition-colors duration-300 group-hover:text-white">
-                    <ChevronRight />
-                  </span>
-                </button>
+                />
               </div>
             </div>
           </div>

@@ -23,7 +23,7 @@ export const HimerCTASection = () => {
                 <br className="hidden sm:inline" />
                 <span>you want running itself.</span>
               </h2>
-              <p className="type-body-xxs text-charcoal max-w-2xl max-md:text-sm max-md:leading-6">
+              <p className="type-body-xxs text-charcoal max-w-2xl max-md:text-sm max-md:leading-6 lg:max-w-[505px]">
                 {HIMER_FINAL_CTA_DATA.subtext}
               </p>
             </div>

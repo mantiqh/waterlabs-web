@@ -19,7 +19,7 @@ export const HimerMemoryKnowledgeSection = () => {
         <div className="layout-container">
           <div className="mb-3 flex items-center gap-1">
             <span className="bg-electric-blue size-2 rounded-full" />
-            <span className="type-body-xxs text-medium-gray max-md:text-sm max-md:leading-5">
+            <span className="type-body-xxs text-[#68727d] max-md:text-sm max-md:leading-5">
               {HIMER_MEMORY_DATA.tag}
             </span>
           </div>
@@ -51,7 +51,7 @@ export const HimerMemoryKnowledgeSection = () => {
                 <h3 className="type-h4 text-electric-blue max-md:text-2xl max-md:leading-8">
                   {tab.label}
                 </h3>
-                <p className="type-body-xxs text-charcoal max-md:text-sm max-md:leading-5">
+                <p className="type-body-xxs text-charcoal tracking-[0.01em] max-md:text-sm max-md:leading-5">
                   {tab.description}
                 </p>
                 <HimerVideo
@@ -65,8 +65,8 @@ export const HimerMemoryKnowledgeSection = () => {
             ))}
           </div>
           <div className="mb-8 hidden rounded-[32px] bg-white p-8 md:block">
-            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12">
-              <div className="flex flex-col gap-6 lg:col-span-5">
+            <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,556fr)_minmax(0,660fr)] lg:gap-10">
+              <div className="flex flex-col gap-6">
                 {HIMER_MEMORY_DATA.tabs.map((tab) => (
                   <button
                     key={tab.id}
@@ -76,20 +76,20 @@ export const HimerMemoryKnowledgeSection = () => {
                     className="cursor-pointer text-left"
                   >
                     <span
-                      className={`type-h6 flex items-center gap-2.5 ${tab.id === activeTabId ? 'text-electric-blue' : 'text-medium-gray'}`}
+                      className={`type-h6 flex items-center gap-2.5 ${tab.id === activeTabId ? 'text-electric-blue' : 'text-[#68727d]'}`}
                     >
                       {tab.label}
                       {tab.id === activeTabId && <ChevronRight className="h-[15px] w-[10px]" />}
                     </span>
                     {tab.id === activeTabId && (
-                      <p className="type-body-xxs text-charcoal mt-3 max-md:text-sm max-md:leading-5">
+                      <p className="type-body-xxs text-charcoal mt-3 tracking-[0.01em] max-md:text-sm max-md:leading-5">
                         {tab.description}
                       </p>
                     )}
                   </button>
                 ))}
               </div>
-              <div className="lg:col-span-7">
+              <div>
                 <HimerVideo
                   key={activeTab.id}
                   desktopSrc={activeTab.desktopVideo}
