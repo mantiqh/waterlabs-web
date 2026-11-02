@@ -158,9 +158,9 @@ export const HimerPlatformLifecycleSection = () => {
   const { ref, progress } = useScrollProgress<HTMLDivElement>('travel');
   const sceneRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const [desktop, setDesktop] = useState(false);
+  const [canPin, setCanPin] = useState(false);
   const reducedMotion = useReducedMotion();
-  const pinned = desktop && !reducedMotion;
+  const pinned = canPin && !reducedMotion;
   const stagePosition = Math.min(
     progress * HIMER_LIFECYCLE_DATA.tabs.length,
     HIMER_LIFECYCLE_DATA.tabs.length - Number.EPSILON * 4,
@@ -172,18 +172,37 @@ export const HimerPlatformLifecycleSection = () => {
     const measure = () => {
       frame = 0;
       const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 0;
-      const spacing = window.innerHeight <= 800 ? 72 : 120;
+      const spacing = window.innerHeight <= 800 ? 224 : 240;
       sceneRef.current?.style.setProperty(
         '--lifecycle-stage-height',
         `${Math.max(200, window.innerHeight - headerHeight - spacing)}px`,
       );
-      setDesktop(window.innerWidth >= 1024);
+      const scene = sceneRef.current?.parentElement;
+      const header = headerRef.current;
+      const copies = sceneRef.current?.querySelectorAll<HTMLElement>('.himer-lifecycle-copy');
+      if (!scene || !header || !copies?.length || window.innerWidth < 1024) {
+        setCanPin(false);
+        return;
+      }
+
+      const sceneStyle = getComputedStyle(scene);
+      const headerStyle = getComputedStyle(header);
+      const requiredHeight =
+        parseFloat(sceneStyle.paddingTop) +
+        parseFloat(sceneStyle.paddingBottom) +
+        headerHeight +
+        parseFloat(headerStyle.marginBottom) +
+        Math.max(200, ...Array.from(copies, (copy) => copy.getBoundingClientRect().height));
+      setCanPin(requiredHeight <= window.innerHeight);
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(measure);
     };
     const observer = new ResizeObserver(schedule);
     if (headerRef.current) observer.observe(headerRef.current);
+    sceneRef.current?.querySelectorAll('.himer-lifecycle-copy').forEach((copy) => {
+      observer.observe(copy);
+    });
     window.addEventListener('resize', schedule);
     void document.fonts.ready.then(schedule);
     schedule();
@@ -207,18 +226,14 @@ export const HimerPlatformLifecycleSection = () => {
       >
         <div
           className={cn(
-            'rounded-bl-[30px] bg-black py-10 lg:rounded-bl-[60px]',
+            'rounded-bl-[30px] bg-black py-10 lg:rounded-bl-[60px] lg:pt-[80px] lg:pb-20',
             pinned && 'himer-lifecycle-scene sticky top-0 flex h-svh overflow-y-auto',
           )}
         >
           <div ref={sceneRef} className="layout-container min-w-0">
             <div ref={headerRef} className="himer-lifecycle-header mb-5 lg:mb-10">
-              <h2 className="type-h2 max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]">
-                {HIMER_LIFECYCLE_DATA.headline}
-              </h2>
-              <p className="type-body-xxs text-light-gray mt-5 max-md:text-sm max-md:leading-5">
-                {HIMER_LIFECYCLE_DATA.subtext}
-              </p>
+              <h2 className="type-h2 tracking-[-0.01em]">{HIMER_LIFECYCLE_DATA.headline}</h2>
+              <p className="type-body-xxs text-light-gray mt-5">{HIMER_LIFECYCLE_DATA.subtext}</p>
             </div>
             <div className={cn('grid gap-y-[60px]', pinned && 'gap-y-0')}>
               {HIMER_LIFECYCLE_DATA.tabs.map((tab, index) => (
