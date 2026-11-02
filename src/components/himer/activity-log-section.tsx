@@ -92,6 +92,7 @@ export const HimerActivityLogSection = () => {
               <HimerVideo
                 desktopSrc={HIMER_ACTIVITY_LOG_DATA.desktopVideo}
                 mobileSrc={HIMER_ACTIVITY_LOG_DATA.mobileVideo}
+                preloadDistance={1400}
                 aspectRatio="1680 / 960"
                 mobileAspectRatio="362 / 350"
                 containerClassName=" w-full border border-[#D7DCE2] rounded-[20px] md:rounded-tl-[30px] md:rounded-tr-[10px] md:rounded-br-[30px] md:rounded-bl-[30px]"
