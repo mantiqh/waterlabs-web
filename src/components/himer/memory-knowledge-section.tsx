@@ -11,8 +11,13 @@ import { MetricBar } from './metric-bar';
 
 export const HimerMemoryKnowledgeSection = () => {
   const [activeTabId, setActiveTabId] = useState(HIMER_MEMORY_DATA.tabs[0].id);
-  const activeTab =
-    HIMER_MEMORY_DATA.tabs.find((tab) => tab.id === activeTabId) ?? HIMER_MEMORY_DATA.tabs[0];
+  const [hoveredTabId, setHoveredTabId] = useState<string | null>(null);
+  const [focusedTabId, setFocusedTabId] = useState<string | null>(null);
+  const [visitedTabIds, setVisitedTabIds] = useState<Set<string>>(
+    () => new Set([HIMER_MEMORY_DATA.tabs[0].id]),
+  );
+  const preloadTabId =
+    focusedTabId && focusedTabId !== activeTabId ? focusedTabId : hoveredTabId;
   return (
     <section className="relative w-full bg-gradient-to-b from-white to-black">
       <div className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 md:py-20 lg:rounded-tl-[60px] lg:rounded-bl-[60px]">
@@ -72,7 +77,14 @@ export const HimerMemoryKnowledgeSection = () => {
                     key={tab.id}
                     type="button"
                     aria-pressed={tab.id === activeTabId}
-                    onClick={() => setActiveTabId(tab.id)}
+                    onClick={() => {
+                      setActiveTabId(tab.id);
+                      setVisitedTabIds((current) => new Set(current).add(tab.id));
+                    }}
+                    onPointerEnter={() => setHoveredTabId(tab.id)}
+                    onPointerLeave={() => setHoveredTabId(null)}
+                    onFocus={() => setFocusedTabId(tab.id)}
+                    onBlur={() => setFocusedTabId(null)}
                     className="cursor-pointer text-left"
                   >
                     <span
@@ -89,13 +101,28 @@ export const HimerMemoryKnowledgeSection = () => {
                   </button>
                 ))}
               </div>
-              <div>
-                <HimerVideo
-                  key={activeTab.id}
-                  desktopSrc={activeTab.desktopVideo}
-                  mobileSrc={activeTab.mobileVideo}
-                  aspectRatio={activeTab.aspectRatio}
-                />
+              <div className="grid">
+                {HIMER_MEMORY_DATA.tabs
+                  .filter((tab) => visitedTabIds.has(tab.id) || tab.id === preloadTabId)
+                  .map((tab) => (
+                    <div
+                      key={tab.id}
+                      aria-hidden={tab.id !== activeTabId ? true : undefined}
+                      className={
+                        tab.id === activeTabId
+                          ? 'col-start-1 row-start-1'
+                          : 'invisible col-start-1 row-start-1'
+                      }
+                    >
+                      <HimerVideo
+                        active={tab.id === activeTabId}
+                        preloadInactive={tab.id === preloadTabId}
+                        desktopSrc={tab.desktopVideo}
+                        mobileSrc={tab.mobileVideo}
+                        aspectRatio={tab.aspectRatio}
+                      />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

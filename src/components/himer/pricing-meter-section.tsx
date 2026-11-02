@@ -74,6 +74,7 @@ export const HimerPricingMeterSection = () => {
               <HimerVideo
                 desktopSrc={HIMER_PRICING_DATA.desktopVideo}
                 mobileSrc={HIMER_PRICING_DATA.mobileVideo}
+                preloadDistance={1000}
                 aspectRatio="733 / 379"
                 mobileAspectRatio="362 / 337"
                 fit="cover"

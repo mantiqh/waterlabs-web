@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { HIMER_LIFECYCLE_DATA } from '@/data/himer';
 import { cn } from '@/lib/utils';
@@ -15,11 +15,15 @@ function LifecycleStage({
   progress,
   pinned,
   active,
+  preloadNext,
+  onVideoReady,
 }: {
   tab: LifecycleTab;
   progress: number;
   pinned: boolean;
   active: boolean;
+  preloadNext: boolean;
+  onVideoReady: (desktopSrc: string) => void;
 }) {
   const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus');
   const value = pinned ? progress : entryProgress;
@@ -107,6 +111,8 @@ function LifecycleStage({
       </div>
       <HimerVideo
         active={!pinned || active}
+        preloadInactive={preloadNext}
+        onVideoReady={onVideoReady}
         desktopSrc={tab.desktopVideo}
         mobileSrc={tab.mobileVideo}
         aspectRatio="787 / 580"
@@ -159,6 +165,15 @@ export const HimerPlatformLifecycleSection = () => {
   const sceneRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [canPin, setCanPin] = useState(false);
+  const [readyVideos, setReadyVideos] = useState<Set<string>>(() => new Set());
+  const onVideoReady = useCallback((src: string) => {
+    setReadyVideos((current) => {
+      if (current.has(src)) return current;
+      const next = new Set(current);
+      next.add(src);
+      return next;
+    });
+  }, []);
   const reducedMotion = useReducedMotion();
   const pinned = canPin && !reducedMotion;
   const stagePosition = Math.min(
@@ -242,6 +257,12 @@ export const HimerPlatformLifecycleSection = () => {
                   tab={tab}
                   pinned={pinned}
                   active={index === activeStage}
+                  preloadNext={
+                    pinned &&
+                    index === activeStage + 1 &&
+                    readyVideos.has(HIMER_LIFECYCLE_DATA.tabs[activeStage].desktopVideo)
+                  }
+                  onVideoReady={onVideoReady}
                   progress={clampProgress(stagePosition - index)}
                 />
               ))}
