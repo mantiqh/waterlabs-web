@@ -26,10 +26,9 @@ interface NavItem {
 
 export interface NavbarProps {
   theme?: 'light' | 'dark';
-  mobileVariant?: 'default' | 'hero';
 }
 
-const Navbar = ({ theme = 'light', mobileVariant = 'default' }: NavbarProps) => {
+const Navbar = ({ theme = 'light' }: NavbarProps) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -145,9 +144,7 @@ const Navbar = ({ theme = 'light', mobileVariant = 'default' }: NavbarProps) => 
   }, []);
 
   return (
-    <div
-      className={`relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)] ${mobileVariant === 'hero' ? 'himer-mobile-nav' : ''}`}
-    >
+    <div className="relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)]">
       <div
         ref={menuRef}
         className={`fixed top-0 right-0 left-0 z-50 mx-auto w-full max-w-[1320px] transition-all duration-300 ease-out lg:relative lg:top-0 lg:right-auto lg:left-auto lg:px-0 ${

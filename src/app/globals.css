@@ -545,9 +545,6 @@ select option {
 
 /* Keep the original scroll sequence when browser chrome or DevTools reduces height. */
 @media (width >= 1024px) and (height <= 800px) {
-  .himer-lifecycle-scene {
-    padding-block: 24px;
-  }
   .himer-lifecycle-header {
     margin-bottom: 24px;
   }
@@ -638,30 +635,6 @@ select option {
 }
 
 @media (width < 720px) {
-  .himer-mobile-nav {
-    height: 54px;
-  }
-  .himer-mobile-nav > div {
-    position: relative;
-    inset: auto;
-    transform: none;
-    padding: 0;
-  }
-  .himer-mobile-nav header {
-    height: 54px;
-    border-radius: 999px;
-    border: 1px solid rgb(255 255 255 / 24%);
-    background: rgb(255 255 255 / 70%);
-    padding: 8px 20px;
-    box-shadow: none;
-  }
-  .himer-mobile-nav header img {
-    filter: none;
-  }
-  .himer-mobile-nav header button {
-    color: var(--color-midnight-blue);
-  }
-
   .himer-footer {
     padding-top: 24px;
     padding-bottom: 24px;

@@ -50,6 +50,7 @@ export const HimerVideo = ({
   const [ready, setReady] = useState(false);
   const reducedMotion = useReducedMotion();
 
+  // 1. Source Loading & Preload Management
   useEffect(() => {
     const container = containerRef.current;
     const video = videoRef.current;
@@ -58,6 +59,73 @@ export const HimerVideo = ({
     let nearViewport = false;
     let disposed = false;
     const breakpoint = window.matchMedia('(max-width: 719px)');
+
+    const loadSource = () => {
+      if (!nearViewport || reducedMotion || !active || container.getBoundingClientRect().width === 0)
+        return;
+      const src = breakpoint.matches && mobileSrc ? mobileSrc : desktopSrc;
+      if (video.getAttribute('src') !== src) {
+        setReady(false);
+        video.src = src;
+        video.preload = 'auto';
+        video.load();
+      }
+    };
+
+    const onReady = () => {
+      if (disposed) return;
+      setReady(true);
+    };
+
+    const onError = () => {
+      if (disposed) return;
+      setReady(false);
+    };
+
+    // Preload within 800px margin of viewport to ensure seamless playback when scrolled into view
+    const preloadObserver = new IntersectionObserver(
+      ([entry]) => {
+        nearViewport = entry.isIntersecting && entry.boundingClientRect.width > 0;
+        loadSource();
+      },
+      { rootMargin: '800px 0px' },
+    );
+
+    preloadObserver.observe(container);
+    breakpoint.addEventListener('change', loadSource);
+    video.addEventListener('loadeddata', onReady);
+    video.addEventListener('canplay', onReady);
+    video.addEventListener('error', onError);
+
+    return () => {
+      disposed = true;
+      preloadObserver.disconnect();
+      breakpoint.removeEventListener('change', loadSource);
+      video.removeEventListener('loadeddata', onReady);
+      video.removeEventListener('canplay', onReady);
+      video.removeEventListener('error', onError);
+    };
+  }, [active, desktopSrc, mobileSrc, reducedMotion]);
+
+  // Retain buffered media when only the active stage changes.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    return () => {
+      video.pause();
+      video.removeAttribute('src');
+      video.load();
+      setReady(false);
+    };
+  }, [desktopSrc, mobileSrc, reducedMotion]);
+
+  // 2. Playback Control (Decoupled from loading/source teardown)
+  useEffect(() => {
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container || !video) return;
+
     const visible = () => {
       const rect = container.getBoundingClientRect();
       return (
@@ -68,66 +136,31 @@ export const HimerVideo = ({
         getComputedStyle(container).visibility !== 'hidden'
       );
     };
+
     const updatePlayback = () => {
       if (active && !reducedMotion && !document.hidden && visible() && video.src) {
         void video.play().catch(() => {
-          /* Keep the poster when the browser cannot autoplay. */
+          /* Fallback: Keep poster visible if autoplay is unavailable or blocked */
         });
-      } else video.pause();
-    };
-    const loadSource = () => {
-      if (
-        !nearViewport ||
-        !active ||
-        reducedMotion ||
-        container.getBoundingClientRect().width === 0
-      )
-        return;
-      const src = breakpoint.matches && mobileSrc ? mobileSrc : desktopSrc;
-      if (video.getAttribute('src') !== src) {
-        setReady(false);
-        video.src = src;
-        video.preload = 'auto';
-        video.load();
+      } else {
+        video.pause();
       }
-      updatePlayback();
     };
-    const onReady = () => {
-      if (disposed) return;
-      setReady(true);
-      updatePlayback();
-    };
-    const onError = () => setReady(false);
-    const preloadObserver = new IntersectionObserver(
-      ([entry]) => {
-        nearViewport = entry.isIntersecting && entry.boundingClientRect.width > 0;
-        loadSource();
-      },
-      { rootMargin: '400px 0px' },
-    );
-    const playbackObserver = new IntersectionObserver(updatePlayback, { threshold: [0, 0.1] });
 
-    preloadObserver.observe(container);
+    const playbackObserver = new IntersectionObserver(updatePlayback, {
+      threshold: [0, 0.1],
+    });
+
     playbackObserver.observe(container);
-    breakpoint.addEventListener('change', loadSource);
     document.addEventListener('visibilitychange', updatePlayback);
-    video.addEventListener('loadeddata', onReady);
-    video.addEventListener('error', onError);
+    updatePlayback();
 
     return () => {
-      disposed = true;
-      preloadObserver.disconnect();
       playbackObserver.disconnect();
-      breakpoint.removeEventListener('change', loadSource);
       document.removeEventListener('visibilitychange', updatePlayback);
-      video.removeEventListener('loadeddata', onReady);
-      video.removeEventListener('error', onError);
       video.pause();
-      video.removeAttribute('src');
-      video.load();
-      setReady(false);
     };
-  }, [desktopSrc, mobileSrc, reducedMotion, active]);
+  }, [active, reducedMotion, ready]);
 
   const style: VideoStyle = {
     '--video-desktop-ratio': aspectRatio,
@@ -151,7 +184,10 @@ export const HimerVideo = ({
     >
       <picture
         aria-hidden="true"
-        className={cn('absolute inset-0 block h-full w-full', ready && 'invisible')}
+        className={cn(
+          'absolute inset-0 block h-full w-full transition-opacity duration-300',
+          ready ? 'pointer-events-none opacity-0' : 'opacity-100',
+        )}
       >
         <source media="(max-width: 719px)" srcSet={posterFor(mobileSrc || desktopSrc)} />
         <Image
@@ -161,6 +197,7 @@ export const HimerVideo = ({
           unoptimized
           loading={priority ? 'eager' : 'lazy'}
           fetchPriority={priority ? 'high' : 'auto'}
+          decoding="async"
           sizes="(min-width: 1440px) 1320px, 100vw"
           className={mediaClass}
         />
@@ -172,7 +209,7 @@ export const HimerVideo = ({
         playsInline
         preload="none"
         aria-label={ariaLabel}
-        className={cn(mediaClass, !ready && 'opacity-0')}
+        className={cn(mediaClass, 'transition-opacity duration-300', !ready && 'opacity-0')}
       />
     </div>
   );
