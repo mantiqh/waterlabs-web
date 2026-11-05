@@ -521,10 +521,43 @@ select option {
   }
 }
 
-/* HIMER OS: scoped styles and responsive media. */
-.himer-video {
-  aspect-ratio: var(--video-mobile-ratio);
+/* Shared metric reveal: scoped to AnimatedMetric on any product page. */
+.animated-metric .metric-gradient {
+  background-image: linear-gradient(to bottom, var(--color-sky-blue), var(--color-aqua-mint));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
+
+.animated-metric[data-metric-reveal='pending'] .metric-character {
+  opacity: 0;
+  transform: translateY(110%);
+}
+
+.animated-metric[data-metric-reveal='entered'] .metric-character {
+  animation: metric-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--metric-delay) both;
+}
+
+@keyframes metric-enter {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-metric .metric-character {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* HIMER OS: scoped page styles. */
 
 .himer-page button:focus-visible,
 .himer-page a:focus-visible {
@@ -537,6 +570,11 @@ select option {
 }
 
 @media (width >= 1024px) {
+  [data-workflow-mode='scroll'] .curiecode-workflow-media {
+    max-height: var(--workflow-stage-height);
+    max-width: calc(var(--workflow-stage-height) * (var(--video-desktop-ratio)));
+  }
+
   [data-lifecycle-mode='scroll'] .himer-lifecycle-media {
     max-height: var(--lifecycle-stage-height);
     max-width: calc(var(--lifecycle-stage-height) * 787 / 580);
@@ -545,6 +583,23 @@ select option {
 
 /* Keep the original scroll sequence when browser chrome or DevTools reduces height. */
 @media (width >= 1024px) and (height <= 800px) {
+  .curiecode-workflow-scene {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .curiecode-workflow-header {
+    margin-bottom: 24px;
+  }
+  .curiecode-workflow-header h2,
+  .curiecode-workflow-header p {
+    margin-top: 12px;
+  }
+  .curiecode-workflow-copy h3,
+  .curiecode-workflow-copy [data-connected-timeline],
+  .curiecode-workflow-copy > div:last-child {
+    margin-top: 24px;
+  }
+
   .himer-lifecycle-header {
     margin-bottom: 24px;
   }
@@ -568,12 +623,6 @@ select option {
   }
 }
 
-@media (width >= 720px) {
-  .himer-video {
-    aspect-ratio: var(--video-desktop-ratio);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .himer-page *,
   .himer-page *::before,
@@ -581,42 +630,6 @@ select option {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
-  }
-}
-
-/* Apply the hero gradient to each animated glyph so nested text remains visible. */
-.himer-page .himer-metric-gradient {
-  background-image: linear-gradient(to bottom, var(--color-sky-blue), var(--color-aqua-mint));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-/* Numbers settle after entering view, even when the visitor stops scrolling. */
-.himer-page [data-metric-reveal='pending'] .himer-metric-character {
-  opacity: 0;
-  transform: translateY(110%);
-}
-
-.himer-page [data-metric-reveal='entered'] .himer-metric-character {
-  animation: himer-metric-enter 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--metric-delay) both;
-}
-
-@keyframes himer-metric-enter {
-  from {
-    opacity: 0;
-    transform: translateY(110%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .himer-page .himer-metric-character {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }
 

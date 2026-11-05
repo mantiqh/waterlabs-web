@@ -16,8 +16,7 @@ export const HimerMemoryKnowledgeSection = () => {
   const [visitedTabIds, setVisitedTabIds] = useState<Set<string>>(
     () => new Set([HIMER_MEMORY_DATA.tabs[0].id]),
   );
-  const preloadTabId =
-    focusedTabId && focusedTabId !== activeTabId ? focusedTabId : hoveredTabId;
+  const preloadTabId = focusedTabId && focusedTabId !== activeTabId ? focusedTabId : hoveredTabId;
   return (
     <section className="relative w-full bg-gradient-to-b from-white to-black">
       <div className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 md:py-20 lg:rounded-tl-[60px] lg:rounded-bl-[60px]">

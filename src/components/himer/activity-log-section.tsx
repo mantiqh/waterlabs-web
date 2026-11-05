@@ -1,10 +1,10 @@
 'use client';
 
 import { HIMER_ACTIVITY_LOG_DATA } from '@/data/himer';
+import { useScrollProgress } from '@/lib/hooks/use-scroll-progress';
 import { cn } from '@/lib/utils';
 
 import { HimerVideo } from './himer-video';
-import { useScrollProgress } from './use-scroll-progress';
 
 const FIRST_PHRASE = 'Our agents handle';
 const REMAINING_WORDS_SENTENCE_1 = ['the', 'volume.'];

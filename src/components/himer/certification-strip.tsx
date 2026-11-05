@@ -5,8 +5,7 @@ import { useRef, useState } from 'react';
 
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HIMER_TRUST_SECURITY_DATA } from '@/data/himer';
-
-import { useReducedMotion } from './use-scroll-progress';
+import { useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 
 export function CertificationStrip() {
   const ref = useRef<HTMLDivElement>(null);

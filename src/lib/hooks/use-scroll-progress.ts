@@ -63,12 +63,14 @@ export const clampProgress = (value: number) => Math.min(1, Math.max(0, value));
 /** Entry settles early; travel maps a sticky runway; focus follows the visible content itself. */
 export function useScrollProgress<T extends HTMLElement>(
   mode: 'entry' | 'travel' | 'focus' = 'entry',
+  enabled = true,
 ) {
   const ref = useRef<T>(null);
   const [progress, setProgress] = useState(0);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (!enabled || reducedMotion) return;
     let frame = 0;
     const measure = () => {
       frame = 0;
@@ -98,7 +100,7 @@ export function useScrollProgress<T extends HTMLElement>(
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
     };
-  }, [mode]);
+  }, [enabled, mode, reducedMotion]);
 
   return { ref, progress: reducedMotion ? 1 : progress };
 }

@@ -1,9 +1,8 @@
 'use client';
 
 import { Progress } from '@/components/ui/progress';
+import { useViewportReveal } from '@/lib/hooks/use-scroll-progress';
 import { cn } from '@/lib/utils';
-
-import { useViewportReveal } from './use-scroll-progress';
 
 /** Reveal the reported value once, then retain it regardless of scroll direction. */
 export function MetricBar({

@@ -31,7 +31,7 @@ const DEFAULT_PRODUCTS: PlatformProduct[] = [
     description:
       'An AI-powered, AHIMA-certified coding platform with predictive algorithms trained on millions of processed claims. It learns from real-world coding patterns to deliver accurate, consistent coding at scale.',
     image: '/images/home/the-waterlabs-platform-engine/desktop/ing_curie_code.png',
-    href: '/solutions/charge-capture-and-coding',
+    href: '/product/curiecode',
     ctaText: 'Explore CurieCode',
     hasBorder: true,
   },

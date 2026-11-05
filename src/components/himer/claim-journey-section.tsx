@@ -6,9 +6,9 @@ import { useRef, useState, useSyncExternalStore } from 'react';
 import { CTA } from '@/components/CTA';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HIMER_CLAIM_JOURNEY_DATA } from '@/data/himer';
+import { useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 
 import { HimerVideo } from './himer-video';
-import { useReducedMotion } from './use-scroll-progress';
 
 const subscribeViewport = (notify: () => void) => {
   const query = window.matchMedia('(min-width: 720px)');

@@ -1,6 +1,5 @@
+import { AnimatedMetric } from '@/components/ui/animated-metric';
 import { HIMER_METRICS_DATA } from '@/data/himer';
-
-import { AnimatedMetric } from './animated-metric';
 
 function Metric({ value, label }: { value: string; label: string }) {
   return (

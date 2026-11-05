@@ -91,7 +91,7 @@ export const DEFAULT_HOME_DATA: HomePageData = {
     description: 'Optimize reimbursements through automated, intelligent coding.',
     image: '/images/home/products-images/img_curiecode.png',
     ctaText: 'Explore CurieCode',
-    ctaLink: '/solutions/charge-capture-and-coding',
+    ctaLink: '/product/curiecode',
   },
 
   // 05 · Eligibility to Coding
