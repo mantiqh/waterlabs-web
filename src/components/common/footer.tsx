@@ -7,6 +7,7 @@ export const Footer = () => {
   const pathname = usePathname();
   const isAboutUs = pathname === '/about-us';
   const isHimer = pathname === '/product/himer';
+  const isCuriecode = pathname === '/product/curiecode';
 
   return (
     <div
@@ -38,7 +39,12 @@ export const Footer = () => {
               <p
                 className={`type-body-xxs max-w-sm text-white/70 ${isHimer ? 'max-md:text-sm max-md:leading-6' : ''}`}
               >
-                {isHimer ? (
+                {isCuriecode ? (
+                  <>
+                    CPT is a registered trademark of the American Medical Association. All clinical
+                    examples shown are illustrative and de-identified.
+                  </>
+                ) : isHimer ? (
                   <>
                     Don&apos;t just automate your
                     <br />
@@ -107,7 +113,7 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/solutions/charge-capture-and-coding"
+                    href="/product/curiecode"
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     CurieCode

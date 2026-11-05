@@ -2,16 +2,22 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { ConnectedTimeline } from '@/components/ui/connected-timeline';
 import { HIMER_LIFECYCLE_DATA } from '@/data/himer';
+import {
+  clampProgress,
+  useReducedMotion,
+  useScrollProgress,
+} from '@/lib/hooks/use-scroll-progress';
 import { cn } from '@/lib/utils';
 import type { LifecycleTab } from '@/types/himer';
 
 import { HimerVideo } from './himer-video';
 import { MetricBar } from './metric-bar';
-import { clampProgress, useReducedMotion, useScrollProgress } from './use-scroll-progress';
 
 function LifecycleStage({
   tab,
+  index,
   progress,
   pinned,
   active,
@@ -19,15 +25,15 @@ function LifecycleStage({
   onVideoReady,
 }: {
   tab: LifecycleTab;
+  index: number;
   progress: number;
   pinned: boolean;
   active: boolean;
   preloadNext: boolean;
   onVideoReady: (desktopSrc: string) => void;
 }) {
-  const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus');
+  const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus', !pinned);
   const value = pinned ? progress : entryProgress;
-  const bulletProgress = value * (tab.bullets.length - 1);
   return (
     <div
       id={`himer-${tab.id}`}
@@ -54,58 +60,20 @@ function LifecycleStage({
         >
           {tab.description}
         </p>
-        <ul ref={ref} className="himer-bullets relative mt-6 max-md:order-5 max-md:mt-0 lg:mt-8">
-          {tab.bullets.map((bullet, index) => (
-            <li
-              key={bullet}
-              className="group relative pb-[18px] pl-3.5 text-sm leading-5 last:pb-0 md:pb-5 md:text-base"
-            >
-              <span
-                aria-hidden="true"
-                className="bg-aqua-mint/25 absolute top-[9px] bottom-[-9px] left-px w-px group-last:hidden"
-              />
-              <span
-                aria-hidden="true"
-                className="bg-aqua-mint absolute top-[9px] bottom-[-9px] left-px w-px origin-top shadow-[0_0_8px_#63ccb7] group-last:hidden"
-                style={{ transform: `scaleY(${clampProgress(bulletProgress - index)})` }}
-              />
-              <span
-                aria-hidden="true"
-                className="absolute top-[9px] bottom-[-9px] left-px w-px group-last:hidden"
-              >
-                <span
-                  className="bg-aqua-mint absolute -left-[2px] size-[5px] -translate-y-1/2 rounded-full shadow-[0_0_10px_3px_#63ccb780]"
-                  style={{
-                    top: `${clampProgress(bulletProgress - index) * 100}%`,
-                    opacity: bulletProgress >= index && bulletProgress < index + 1 ? 1 : 0,
-                  }}
-                />
-              </span>
-              <span
-                aria-hidden="true"
-                className="bg-light-gray absolute top-[7px] -left-px size-[5px] rounded-full"
-                style={{
-                  backgroundColor: bulletProgress >= index ? 'var(--color-aqua-mint)' : undefined,
-                  boxShadow:
-                    Math.abs(bulletProgress - index) < 0.55 ? '0 0 10px 3px #63ccb780' : undefined,
-                }}
-              />
-              <span
-                className="type-body-xxs text-light-gray max-md:text-sm max-md:leading-5"
-                style={{ opacity: 0.6 + 0.4 * clampProgress(bulletProgress - index + 1) }}
-              >
-                {bullet}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <ConnectedTimeline
+          listRef={ref}
+          items={tab.bullets.map((label) => ({ label }))}
+          progress={value}
+          className="himer-bullets mt-6 max-md:order-5 max-md:mt-0 lg:mt-8"
+        />
         <div
           aria-hidden="true"
           className="mt-8 hidden h-[3px] overflow-hidden rounded-full bg-white/20 md:block lg:mt-10"
         >
           <div
+            data-lifecycle-progress
             className="bg-aqua-mint h-full origin-left rounded-full"
-            style={{ transform: `scaleX(${value})` }}
+            style={{ transform: `scaleX(${(index + value) / HIMER_LIFECYCLE_DATA.tabs.length})` }}
           />
         </div>
       </div>
@@ -255,6 +223,7 @@ export const HimerPlatformLifecycleSection = () => {
                 <LifecycleStage
                   key={tab.id}
                   tab={tab}
+                  index={index}
                   pinned={pinned}
                   active={index === activeStage}
                   preloadNext={

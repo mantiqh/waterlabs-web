@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
+import { AnimatedMetric } from '@/components/ui/animated-metric';
 import { HIMER_HERO_DATA } from '@/data/himer';
 
-import { AnimatedMetric } from './animated-metric';
 import { HimerVideo } from './himer-video';
 
 export const HimerHeroSection = () => (

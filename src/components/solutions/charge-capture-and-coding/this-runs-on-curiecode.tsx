@@ -132,7 +132,7 @@ export const ThisRunsOnCurieCodeSection = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap items-center gap-[12px] pt-[4px]">
-                <Link href="/products/curiecode">
+                <Link href="/product/curiecode">
                   <CTA variant="dark-bg">Explore CurieCode</CTA>
                 </Link>
                 <Link href="/product/himer">
@@ -198,7 +198,7 @@ export const ThisRunsOnCurieCodeSection = () => {
 
               {/* CTAs */}
               <div className="flex flex-wrap items-center gap-[10px] pt-[4px]">
-                <Link href="/products/curiecode">
+                <Link href="/product/curiecode">
                   <CTA variant="dark-bg">Explore CurieCode</CTA>
                 </Link>
                 <Link href="/product/himer">

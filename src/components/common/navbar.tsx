@@ -72,7 +72,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
         header: 'Products',
         children: [
           { label: 'Himer AI OS', href: '/product/himer' },
-          { label: 'CurieCode', href: '/solutions/charge-capture-and-coding' },
+          { label: 'CurieCode', href: '/product/curiecode' },
         ],
       },
       {

@@ -11,15 +11,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: '/products/curiecode',
-        destination: '/solutions/charge-capture-and-coding',
-        permanent: false,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
