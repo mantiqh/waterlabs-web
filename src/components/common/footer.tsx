@@ -62,15 +62,16 @@ export const Footer = () => {
 
             {/* Platform Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4
+              <h3
                 className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
               >
                 Platform
-              </h4>
+              </h3>
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
                     href="/solutions"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Solutions
@@ -79,6 +80,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/case-studies"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Results
@@ -87,6 +89,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/blogs"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Resources
@@ -97,15 +100,16 @@ export const Footer = () => {
 
             {/* Products Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4
+              <h3
                 className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
               >
                 Products
-              </h4>
+              </h3>
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
                     href="/product/himer"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     HIMER AI OS
@@ -114,6 +118,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/product/curiecode"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     CurieCode
@@ -124,15 +129,16 @@ export const Footer = () => {
 
             {/* Company Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4
+              <h3
                 className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
               >
                 Company
-              </h4>
+              </h3>
               <ul className="flex flex-col gap-4">
                 <li>
                   <Link
                     href="/about-us"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     About Us
@@ -141,6 +147,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/contact-us"
+                    prefetch={false}
                     className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
                   >
                     Contact Us
@@ -151,11 +158,11 @@ export const Footer = () => {
 
             {/* Social Links */}
             <div className="col-span-1 flex flex-col gap-6">
-              <h4
+              <h3
                 className={`type-body-xxs font-medium text-white ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
               >
                 Social
-              </h4>
+              </h3>
               <ul className="flex flex-col gap-4">
                 <li>
                   <a

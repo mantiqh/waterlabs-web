@@ -81,7 +81,7 @@ export function ConnectedTimeline({
                 'type-body-xxs max-md:text-sm max-md:leading-5',
                 tone === 'mint'
                   ? grayLabels
-                    ? 'text-medium-gray tracking-[0.01em]'
+                    ? 'text-light-gray tracking-[0.01em]'
                     : 'text-white'
                   : position >= index
                     ? 'text-electric-blue'
@@ -94,8 +94,8 @@ export function ConnectedTimeline({
                         color:
                           highlight === 0
                             ? undefined
-                            : `color-mix(in srgb, var(--color-medium-gray) ${(1 - highlight) * 100}%, var(--color-white))`,
-                        opacity: 0.5 + 0.5 * highlight,
+                            : `color-mix(in srgb, var(--color-light-gray) ${(1 - highlight) * 100}%, var(--color-white))`,
+                        opacity: 0.75 + 0.25 * highlight,
                       }
                     : { opacity: 0.6 + 0.4 * highlight }
                   : undefined

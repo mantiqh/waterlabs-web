@@ -28,6 +28,8 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title, description, images: [image] },
 };
 
+export const dynamic = 'force-static';
+
 export default async function Page() {
   return <CurieCodePage />;
 }

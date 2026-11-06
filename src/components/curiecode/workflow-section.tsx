@@ -16,18 +16,21 @@ import { SectionLabel } from './section-label';
 
 const data = CURIECODE_PAGE_DATA.workflow;
 const steps = data.steps;
+const stepTimelineItems = steps.map((s) => s.details.map((label) => ({ label })));
 
 const WorkflowStage = memo(function WorkflowStage({
   step,
   index,
   pinned,
   active,
+  preloadNext,
   progress,
 }: {
   step: (typeof steps)[number];
   index: number;
   pinned: boolean;
   active: boolean;
+  preloadNext?: boolean;
   progress: number;
 }) {
   const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus', !pinned);
@@ -54,7 +57,7 @@ const WorkflowStage = memo(function WorkflowStage({
         <ConnectedTimeline
           inactiveLabelColor="medium-gray"
           listRef={ref}
-          items={step.details.map((label) => ({ label }))}
+          items={stepTimelineItems[index]}
           progress={value}
           className="order-3 lg:mt-8"
         />
@@ -74,6 +77,7 @@ const WorkflowStage = memo(function WorkflowStage({
           id={step.media}
           label={step.title}
           active={!pinned || active}
+          preloadInactive={preloadNext}
           className="curiecode-workflow-media"
         />
       </div>
@@ -166,6 +170,7 @@ export default function WorkflowSection() {
                   index={index}
                   pinned={pinned}
                   active={index === active}
+                  preloadNext={pinned && index === active + 1}
                   progress={clampProgress(position - index)}
                 />
               ))}

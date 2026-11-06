@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import { ChevronRight, CTA } from '@/components/CTA';
 import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
+import { cn } from '@/lib/utils';
 
 import { ProductVideo } from './product-video';
 import { SectionLabel } from './section-label';
@@ -18,11 +19,11 @@ export default function CapabilitiesSection() {
     <section className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
       <div className="layout-container">
         <SectionLabel>{data.eyebrow}</SectionLabel>
-        <div className="mt-5 grid gap-5 lg:grid-cols-2 lg:gap-10">
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
           <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
             {data.title}
           </h2>
-          <p className="type-body-xxs text-charcoal tracking-[0.01em] max-md:text-sm max-md:leading-5">
+          <p className="type-body-xxs text-charcoal max-w-[530px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
             {data.description}
           </p>
         </div>
@@ -49,7 +50,7 @@ export default function CapabilitiesSection() {
                   className="focus-visible:outline-electric-blue w-full cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-4"
                 >
                   <span
-                    className={`type-h6 flex items-center gap-3 tracking-[-0.01em] ${index === active ? 'text-electric-blue' : 'text-medium-gray'}`}
+                    className={`type-h6 flex items-center gap-3 tracking-[-0.01em] ${index === active ? 'text-electric-blue' : 'text-[#5A626A]'}`}
                   >
                     {item.title}
                     {index === active && <ChevronRight className="h-[15px] w-[10px]" />}
@@ -63,20 +64,30 @@ export default function CapabilitiesSection() {
               </div>
             ))}
           </div>
-          <div>
+          <div className="grid">
             {capabilities.map((item, index) => (
-              <div key={item.media} hidden={active !== index}>
+              <div
+                key={item.media}
+                id={`capability-video-panel-${index}`}
+                aria-hidden={active !== index ? true : undefined}
+                inert={active !== index ? true : undefined}
+                className={cn(
+                  'col-start-1 row-start-1',
+                  active !== index && 'pointer-events-none invisible',
+                )}
+              >
                 <ProductVideo
                   id={item.media}
                   label={`${item.title} demonstration`}
                   active={active === index}
+                  preloadInactive={index === active + 1}
                 />
               </div>
             ))}
           </div>
         </div>
         <div className="mt-5 flex flex-col items-start justify-between gap-5 md:mt-10 lg:flex-row lg:gap-20">
-          <p className="type-body-xxs text-charcoal max-w-[840px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
+          <p className="type-body-xxs text-charcoal max-w-[680px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
             {data.platformDescription}
           </p>
           <Link href={data.platformCta.href} className="shrink-0">

@@ -9,12 +9,18 @@ interface AnimatedMetricProps {
   value: string;
   className?: string;
   gradient?: boolean;
+  revealOnEntry?: boolean;
 }
 
 type CharacterStyle = CSSProperties & { '--metric-delay': string };
 
-export function AnimatedMetric({ value, className, gradient = false }: AnimatedMetricProps) {
-  const ref = useViewportReveal<HTMLSpanElement>('data-metric-reveal');
+export function AnimatedMetric({
+  value,
+  className,
+  gradient = false,
+  revealOnEntry = false,
+}: AnimatedMetricProps) {
+  const ref = useViewportReveal<HTMLSpanElement>('data-metric-reveal', revealOnEntry);
 
   return (
     <span

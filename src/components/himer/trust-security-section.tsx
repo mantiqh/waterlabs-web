@@ -7,7 +7,7 @@ import { HIMER_TRUST_SECURITY_DATA } from '@/data/himer';
 import { CertificationStrip } from './certification-strip';
 
 export const HimerTrustSecuritySection = () => (
-  <section className="bg-ghost-white text-gray-black relative w-full rounded-bl-[30px] pt-[60px] pb-10 md:py-20 lg:rounded-bl-[60px] lg:py-20">
+  <section className="bg-ghost-white section-deferred text-gray-black relative w-full rounded-bl-[30px] pt-[60px] pb-10 md:py-20 lg:rounded-bl-[60px] lg:py-20">
     <div className="layout-container">
       <div className="mb-3 flex items-center gap-1">
         <span className="bg-electric-blue size-2 rounded-full" />

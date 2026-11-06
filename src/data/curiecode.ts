@@ -263,7 +263,7 @@ export type { CurieCodeMediaId } from '@/types/curiecode';
 
 export const CURIECODE_PAGE_DATA = {
   hero: {
-    title: 'Every chart coded. Every claim checked against how your payers actually pay.',
+    title: 'Every chart coded. Every claim\nchecked against how your\npayers actually pay.',
     description:
       'CurieCode codes autonomously in your specialty and ties every code to the line of the record that supports it. Before anything is billed, each claim is held to the payment behavior mapped from your own paid and denied claims, to current policy and to the terms of your contract. Autonomy is earned one specialty at a time, at the bar your coders set.',
     cta: {
@@ -458,7 +458,7 @@ export const CURIECODE_PAGE_DATA = {
       rest: 'Against the computer-assisted coding you have seen.',
     },
     description:
-      'Computer-assisted coding suggests, and a coder still touches every line in the same ten tabs. CurieCode changes who does the work, where it happens, and whether the claim gets paid.',
+      'Computer-assisted coding suggests, and a coder still touches every line in the same ten tabs.\nCurieCode changes who does the work, where it happens, and whether the claim gets paid.',
   },
   impact: {
     eyebrow: 'The Impact',

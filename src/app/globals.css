@@ -176,6 +176,7 @@
 @utility type-dis-1 {
   font-family: var(--font-primary);
   font-weight: 500;
+  text-wrap: balance;
   font-size: clamp(36px, calc(26.4px + 3vw), 48px);
   line-height: clamp(44px, calc(34.4px + 3vw), 56px);
   letter-spacing: 0em;
@@ -193,6 +194,7 @@
 @utility type-h1 {
   font-family: var(--font-primary);
   font-weight: 400;
+  text-wrap: balance;
   font-size: clamp(32px, calc(25.6px + 2vw), 40px);
   line-height: clamp(40px, calc(33.6px + 2vw), 48px);
   letter-spacing: 0em;
@@ -210,6 +212,7 @@
 @utility type-h2 {
   font-family: var(--font-primary);
   font-weight: 400;
+  text-wrap: balance;
   font-size: clamp(26px, calc(21.2px + 1.5vw), 32px);
   line-height: clamp(34px, calc(29.2px + 1.5vw), 40px);
   letter-spacing: 0em;
@@ -227,6 +230,7 @@
 @utility type-h3 {
   font-family: var(--font-primary);
   font-weight: 400;
+  text-wrap: balance;
   font-size: clamp(24px, calc(20.8px + 1vw), 28px);
   line-height: clamp(32px, calc(28.8px + 1vw), 36px);
   letter-spacing: 0em;
@@ -244,6 +248,7 @@
 @utility type-h4 {
   font-family: var(--font-primary);
   font-weight: 400;
+  text-wrap: balance;
   font-size: clamp(20px, calc(16.8px + 1vw), 24px);
   line-height: clamp(28px, calc(24.8px + 1vw), 32px);
   letter-spacing: 0em;
@@ -261,6 +266,7 @@
 @utility type-h5 {
   font-family: var(--font-primary);
   font-weight: 400;
+  text-wrap: balance;
   font-size: clamp(18px, calc(16.4px + 0.5vw), 20px);
   line-height: clamp(26px, calc(24.4px + 0.5vw), 28px);
   letter-spacing: 0em;
@@ -278,6 +284,7 @@
 @utility type-h6 {
   font-family: var(--font-primary);
   font-weight: 400;
+  text-wrap: balance;
   font-size: clamp(16px, calc(14.4px + 0.5vw), 18px);
   line-height: clamp(24px, calc(22.4px + 0.5vw), 26px);
   letter-spacing: 0em;
@@ -701,4 +708,10 @@ select option {
     animation: none !important;
     transform: none !important;
   }
+}
+
+/* Defer rendering of deep off-screen sections (modern-web-guidance: defer-rendering-heavy-content) */
+@utility section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
 }

@@ -40,7 +40,7 @@ export const HimerActivityLogSection = () => {
                       key={`w1-${idx}`}
                       className={cn(
                         'inline transition-colors duration-300',
-                        isLit ? 'text-gray-black' : 'text-light-gray',
+                        isLit ? 'text-gray-black' : 'text-[#848E9C]',
                       )}
                     >
                       {word}{' '}
@@ -58,7 +58,7 @@ export const HimerActivityLogSection = () => {
                       key={`w2-${idx}`}
                       className={cn(
                         'inline transition-colors duration-300',
-                        isLit ? 'text-gray-black' : 'text-light-gray',
+                        isLit ? 'text-gray-black' : 'text-[#848E9C]',
                       )}
                     >
                       {word}{' '}
@@ -77,7 +77,7 @@ export const HimerActivityLogSection = () => {
                       key={`w3-${idx}`}
                       className={cn(
                         'inline transition-colors duration-300',
-                        isLit ? 'text-gray-black' : 'text-light-gray',
+                        isLit ? 'text-gray-black' : 'text-[#848E9C]',
                       )}
                     >
                       {word}{' '}
@@ -92,7 +92,6 @@ export const HimerActivityLogSection = () => {
               <HimerVideo
                 desktopSrc={HIMER_ACTIVITY_LOG_DATA.desktopVideo}
                 mobileSrc={HIMER_ACTIVITY_LOG_DATA.mobileVideo}
-                preloadDistance={1400}
                 aspectRatio="1680 / 960"
                 mobileAspectRatio="362 / 350"
                 containerClassName=" w-full border border-[#D7DCE2] rounded-[20px] md:rounded-tl-[30px] md:rounded-tr-[10px] md:rounded-br-[30px] md:rounded-bl-[30px]"

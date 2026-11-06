@@ -17,7 +17,7 @@ export default function GettingStartedSection() {
   const [active, setActive] = useState(0);
   const [seekTo, setSeekTo] = useState<{ seconds: number }>();
   return (
-    <section className="relative overflow-hidden rounded-tl-[30px] rounded-tr-[30px] rounded-bl-[30px] bg-white py-10 lg:rounded-tl-[60px] lg:rounded-tr-[60px] lg:rounded-bl-[60px] lg:py-20">
+    <section className="section-deferred relative overflow-hidden rounded-tl-[30px] rounded-tr-[30px] rounded-bl-[30px] bg-white py-10 lg:rounded-tl-[60px] lg:rounded-tr-[60px] lg:rounded-bl-[60px] lg:py-20">
       <Image
         src={data.backgroundImage}
         alt=""
@@ -28,13 +28,13 @@ export default function GettingStartedSection() {
       />
       <div className="layout-container relative">
         <SectionLabel>{data.eyebrow}</SectionLabel>
-        <div className="mt-5 grid gap-5 lg:grid-cols-2 lg:gap-10">
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
           <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
             {data.titleLines[0]} <br />
             <span className="text-electric-blue">{data.titleLines[1]}</span>
           </h2>
           <div>
-            <p className="type-body-xxs max-w-[460px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
+            <p className="type-body-xs max-w-[430px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
               {data.description}
             </p>
             <Link href={data.cta.href} className="mt-5 inline-block">
@@ -75,7 +75,7 @@ export default function GettingStartedSection() {
                   className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none ${active === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
                   <div className="min-h-0 overflow-hidden">
-                    <p className="type-body-xxs text-charcoal mt-4 tracking-[0.01em] max-md:text-sm max-md:leading-5">
+                    <p className="type-body-xxs text-charcoal mt-4 max-w-[420px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
                       {step.description}
                     </p>
                   </div>
