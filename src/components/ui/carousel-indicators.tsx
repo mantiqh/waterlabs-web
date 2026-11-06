@@ -29,12 +29,12 @@ export function CarouselIndicators({
             aria-label={getItemLabel?.(index) ?? `${label}: ${index + 1}`}
             aria-current={current === index ? 'true' : undefined}
             onClick={() => onSelect(index)}
-            className="relative flex h-6 shrink-0 cursor-pointer items-center rounded transition-[width] duration-300"
-            style={{ width: distance === 0 ? 32 : distance === 1 ? 16 : 6 }}
+            className="relative flex h-6 min-w-6 shrink-0 cursor-pointer items-center justify-center rounded p-0.5"
           >
             <span
               aria-hidden="true"
-              className={`h-[5px] w-full rounded-full ${distance === 0 ? 'bg-electric-blue' : 'bg-electric-blue/20'}`}
+              className={`h-[5px] rounded-full transition-[width] duration-300 ${distance === 0 ? 'bg-electric-blue' : 'bg-electric-blue/20'}`}
+              style={{ width: distance === 0 ? 32 : distance === 1 ? 16 : 6 }}
             />
           </button>
         );

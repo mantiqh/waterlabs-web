@@ -125,10 +125,11 @@ export const ProductVideo = memo(function ProductVideo({
     const video = videoRef.current;
     if (!container || !video) return;
 
-    let nearViewport = false;
+    let nearViewport = priority;
     let disposed = false;
     let retries = 0;
     let retryTimer: ReturnType<typeof setTimeout> | undefined;
+    let resizeObserver: ResizeObserver | undefined;
     const breakpoint = window.matchMedia('(max-width: 719px)');
 
     const scheduleRetry = () => {
@@ -153,13 +154,29 @@ export const ProductVideo = memo(function ProductVideo({
     };
 
     const loadSource = () => {
-      if (
-        !nearViewport ||
-        reducedMotion ||
-        (!active && !preloadInactive) ||
-        container.getBoundingClientRect().width === 0
-      )
+      if (disposed || reducedMotion || (!active && !preloadInactive)) return;
+
+      const rect = container.getBoundingClientRect();
+      if (rect.width === 0) {
+        // Wait for container to receive layout dimensions before loading
+        if (!resizeObserver && typeof ResizeObserver !== 'undefined') {
+          resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+              if (entry.contentRect.width > 0) {
+                resizeObserver?.disconnect();
+                resizeObserver = undefined;
+                loadSource();
+                break;
+              }
+            }
+          });
+          resizeObserver.observe(container);
+        }
         return;
+      }
+
+      if (!nearViewport) return;
+
       const src = breakpoint.matches && mobileSrc ? mobileSrc : desktopSrc;
       if (video.getAttribute('src') !== src) {
         retries = 0;
@@ -167,8 +184,7 @@ export const ProductVideo = memo(function ProductVideo({
         video.defaultMuted = true;
         video.muted = true;
         video.src = src;
-        // Nearby clips fetch metadata; visible playback requests the media data.
-        video.preload = 'metadata';
+        video.preload = priority ? 'auto' : 'metadata';
         video.load();
       } else {
         video.defaultMuted = true;
@@ -211,9 +227,14 @@ export const ProductVideo = memo(function ProductVideo({
     window.addEventListener('online', onOnline);
     document.addEventListener('visibilitychange', scheduleRetry);
 
+    if (priority) {
+      loadSource();
+    }
+
     return () => {
       disposed = true;
       clearTimeout(retryTimer);
+      resizeObserver?.disconnect();
       preloadObserver.disconnect();
       breakpoint.removeEventListener('change', loadSource);
       video.removeEventListener('loadeddata', onReady);
@@ -229,6 +250,7 @@ export const ProductVideo = memo(function ProductVideo({
     onVideoReady,
     preloadDistance,
     preloadInactive,
+    priority,
     reducedMotion,
   ]);
 
@@ -269,6 +291,28 @@ export const ProductVideo = memo(function ProductVideo({
     let retried = false;
     const shouldPlay = () =>
       active && !reducedMotion && !document.hidden && visible() && !!video.src;
+    let userUnlockAttached = false;
+    const detachUserUnlock = () => {
+      if (!userUnlockAttached) return;
+      userUnlockAttached = false;
+      window.removeEventListener('pointerdown', onUserInteraction);
+      window.removeEventListener('touchstart', onUserInteraction);
+      window.removeEventListener('keydown', onUserInteraction);
+    };
+    const onUserInteraction = () => {
+      detachUserUnlock();
+      if (!disposed && shouldPlay()) {
+        updatePlayback();
+      }
+    };
+    const attachUserUnlock = () => {
+      if (userUnlockAttached || disposed) return;
+      userUnlockAttached = true;
+      window.addEventListener('pointerdown', onUserInteraction, { once: true, passive: true });
+      window.addEventListener('touchstart', onUserInteraction, { once: true, passive: true });
+      window.addEventListener('keydown', onUserInteraction, { once: true, passive: true });
+    };
+
     const updatePlayback = () => {
       if (!shouldPlay()) {
         video.pause();
@@ -280,15 +324,17 @@ export const ProductVideo = memo(function ProductVideo({
       video.muted = true;
       void video
         .play()
+        .then(() => {
+          detachUserUnlock();
+        })
         .catch((error: unknown) => {
-          if (
-            !disposed &&
-            error instanceof DOMException &&
-            error.name === 'AbortError' &&
-            !retried
-          ) {
+          if (disposed) return;
+          if (error instanceof DOMException && error.name === 'AbortError' && !retried) {
             retried = true;
             retryTimer = setTimeout(updatePlayback, 150);
+          } else if (error instanceof DOMException && error.name === 'NotAllowedError') {
+            // Autoplay blocked by browser policy: unlock on first interaction
+            attachUserUnlock();
           }
         })
         .finally(() => {
@@ -316,6 +362,7 @@ export const ProductVideo = memo(function ProductVideo({
     return () => {
       disposed = true;
       clearTimeout(retryTimer);
+      detachUserUnlock();
       playbackObserver.disconnect();
       document.removeEventListener('visibilitychange', updatePlayback);
       video.removeEventListener('canplay', updatePlayback);
@@ -372,7 +419,8 @@ export const ProductVideo = memo(function ProductVideo({
         loop
         muted
         playsInline
-        preload="none"
+        autoPlay={priority}
+        preload={priority ? 'auto' : 'none'}
         onTimeUpdate={
           onPlaybackTime ? (event) => onPlaybackTime(event.currentTarget.currentTime) : undefined
         }

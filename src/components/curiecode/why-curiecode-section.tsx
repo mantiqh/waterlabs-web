@@ -16,7 +16,7 @@ export default function WhyCurieCodeSection() {
           <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
             <span className="text-electric-blue">{data.title.accent}</span> {data.title.rest}
           </h2>
-          <p className="type-body-xxs max-w-[620px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
+          <p className="type-body-xxs text-gray-black max-w-[620px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
             {data.description}
           </p>
         </div>

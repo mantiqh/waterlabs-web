@@ -15,6 +15,10 @@ import type { LifecycleTab } from '@/types/himer';
 import { HimerVideo } from './himer-video';
 import { MetricBar } from './metric-bar';
 
+const lifecycleBullets = HIMER_LIFECYCLE_DATA.tabs.map((tab) =>
+  tab.bullets.map((label) => ({ label })),
+);
+
 function LifecycleStage({
   tab,
   index,
@@ -62,7 +66,7 @@ function LifecycleStage({
         </p>
         <ConnectedTimeline
           listRef={ref}
-          items={tab.bullets.map((label) => ({ label }))}
+          items={lifecycleBullets[index]}
           progress={value}
           className="himer-bullets mt-6 max-md:order-5 max-md:mt-0 lg:mt-8"
         />

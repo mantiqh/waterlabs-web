@@ -9,14 +9,14 @@ const cards = data.cards;
 
 export default function ImpactSection() {
   return (
-    <section className="rounded-tr-[30px] rounded-br-[30px] bg-black py-10 text-white lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:py-20">
+    <section className="section-deferred rounded-tr-[30px] rounded-br-[30px] bg-black py-10 text-white lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:py-20">
       <div className="layout-container">
         <SectionLabel dark>{data.eyebrow}</SectionLabel>
-        <div className="mt-5 grid gap-5 lg:grid-cols-2 lg:gap-10">
-          <h2 className="type-h2 tracking-[-0.01em] max-md:text-2xl max-md:leading-8">
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
+          <h2 className="type-h4 tracking-[-0.01em] max-md:text-2xl max-md:leading-8">
             {data.title}
           </h2>
-          <p className="type-body-xxs text-light-gray tracking-[0.01em] max-md:text-sm max-md:leading-5">
+          <p className="type-body-xxs text-light-gray max-w-[571px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
             {data.description}
           </p>
         </div>

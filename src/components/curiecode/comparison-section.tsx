@@ -7,7 +7,7 @@ const data = CURIECODE_PAGE_DATA.comparison;
 
 export default function ComparisonSection() {
   return (
-    <section className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
+    <section className="bg-ghost-white section-deferred rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
       <div className="layout-container">
         <div className="grid gap-5 lg:grid-cols-[minmax(0,372fr)_minmax(0,928fr)] lg:gap-5">
           <SectionLabel>{data.eyebrow}</SectionLabel>
@@ -16,7 +16,7 @@ export default function ComparisonSection() {
               <span className="text-electric-blue">{data.title.accent}</span> <br />
               {data.title.rest}
             </h2>
-            <p className="type-body-xxs text-charcoal mt-5 tracking-[0.01em] max-md:text-sm max-md:leading-5">
+            <p className="type-body-xxs text-charcoal mt-5 tracking-[0.01em] max-md:text-sm max-md:leading-5 lg:whitespace-pre-line">
               {data.description}
             </p>
           </div>

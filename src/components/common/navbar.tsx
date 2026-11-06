@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ChevronRight, CTA } from '@/components/CTA';
@@ -30,12 +30,19 @@ export interface NavbarProps {
 
 const Navbar = ({ theme = 'light' }: NavbarProps) => {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredSubItem, setHoveredSubItem] = useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = useState<string | null>(null);
   const [solutionsNav, setSolutionsNav] = useState<NavSubItem[]>(DEFAULT_SOLUTIONS_NAV);
+
+  const prefetchRoute = (href?: string) => {
+    if (href && href.startsWith('/')) {
+      router.prefetch(href);
+    }
+  };
 
   useEffect(() => {
     fetch('/api/solutions/nav')
@@ -167,6 +174,9 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
           {/* Logo */}
           <Link
             href="/"
+            prefetch={false}
+            onPointerEnter={() => prefetchRoute('/')}
+            onFocus={() => prefetchRoute('/')}
             className="mr-[6px] flex shrink-0 items-center lg:max-xl:mr-[2px] xl:mr-0"
             onClick={() => {
               setIsOpen(false);
@@ -204,6 +214,9 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                   {item.href ? (
                     <Link
                       href={item.href}
+                      prefetch={false}
+                      onPointerEnter={() => prefetchRoute(item.href)}
+                      onFocus={() => prefetchRoute(item.href)}
                       onClick={() => setActiveDropdown(null)}
                       className={`group body-xxs type-body-xxs flex items-center gap-[6px] py-[8px] whitespace-nowrap transition-colors xl:gap-[8px] ${
                         isDropdownOpen || isCurrentPage
@@ -308,7 +321,15 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                     <Link
                                       key={subItem.href}
                                       href={subItem.href}
-                                      onMouseEnter={() => setHoveredSubItem(subItem.href)}
+                                      prefetch={false}
+                                      onPointerEnter={() => {
+                                        setHoveredSubItem(subItem.href);
+                                        prefetchRoute(subItem.href);
+                                      }}
+                                      onFocus={() => {
+                                        setHoveredSubItem(subItem.href);
+                                        prefetchRoute(subItem.href);
+                                      }}
                                       onClick={() => {
                                         setActiveDropdown(null);
                                         setHoveredSubItem(null);
@@ -353,7 +374,15 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                 <Link
                                   key={subItem.href}
                                   href={subItem.href}
-                                  onMouseEnter={() => setHoveredSubItem(subItem.href)}
+                                  prefetch={false}
+                                  onPointerEnter={() => {
+                                    setHoveredSubItem(subItem.href);
+                                    prefetchRoute(subItem.href);
+                                  }}
+                                  onFocus={() => {
+                                    setHoveredSubItem(subItem.href);
+                                    prefetchRoute(subItem.href);
+                                  }}
                                   onClick={() => {
                                     setActiveDropdown(null);
                                     setHoveredSubItem(null);
@@ -383,7 +412,12 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
 
           {/* Desktop CTA */}
           <div className="ml-[6px] hidden shrink-0 lg:block lg:max-xl:ml-[2px] xl:ml-0">
-            <Link href="/contact-us">
+            <Link
+              href="/contact-us"
+              prefetch={false}
+              onPointerEnter={() => prefetchRoute('/contact-us')}
+              onFocus={() => prefetchRoute('/contact-us')}
+            >
               <CTA
                 variant="light-bg"
                 className="body-cta type-cta lg:max-xl:!h-[38px] lg:max-xl:!gap-[6px] lg:max-xl:!px-[12px] xl:h-[44px] xl:gap-[10px] xl:px-[20px]"
@@ -524,6 +558,10 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                             <Link
                               key={`${subItem.label}-${subIdx}`}
                               href={subItem.href}
+                              prefetch={false}
+                              onPointerEnter={() => prefetchRoute(subItem.href)}
+                              onFocus={() => prefetchRoute(subItem.href)}
+                              onTouchStart={() => prefetchRoute(subItem.href)}
                               onClick={() => {
                                 setIsOpen(false);
                                 setExpandedMobileItem(null);
@@ -551,6 +589,10 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                 <Link
                   key={item.label}
                   href={item.href || '#'}
+                  prefetch={false}
+                  onPointerEnter={() => prefetchRoute(item.href)}
+                  onFocus={() => prefetchRoute(item.href)}
+                  onTouchStart={() => prefetchRoute(item.href)}
                   onClick={() => setIsOpen(false)}
                   style={{
                     transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
@@ -573,7 +615,15 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
               isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
             }`}
           >
-            <Link href="/contact-us" onClick={() => setIsOpen(false)} className="w-full">
+            <Link
+              href="/contact-us"
+              prefetch={false}
+              onPointerEnter={() => prefetchRoute('/contact-us')}
+              onFocus={() => prefetchRoute('/contact-us')}
+              onTouchStart={() => prefetchRoute('/contact-us')}
+              onClick={() => setIsOpen(false)}
+              className="w-full"
+            >
               <CTA variant="light-bg" className="w-full justify-center">
                 Contact Us
               </CTA>

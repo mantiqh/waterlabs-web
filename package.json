@@ -66,5 +66,8 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "browserslist": [
+    "defaults and fully supports es6-module"
+  ]
 }

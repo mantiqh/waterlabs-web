@@ -20,6 +20,7 @@ export function useReducedMotion() {
 /** Reveal once after the labelled card settles inside the viewport. */
 export function useViewportReveal<T extends HTMLElement>(
   attribute: 'data-metric-reveal' | 'data-bar-reveal',
+  revealOnEntry = false,
 ) {
   const ref = useRef<T>(null);
   const revealed = useRef(false);
@@ -39,21 +40,24 @@ export function useViewportReveal<T extends HTMLElement>(
     const observer = new IntersectionObserver(
       ([entry]) => {
         clearTimeout(timer);
-        if (!entry.isIntersecting || entry.intersectionRatio < 0.75) return;
+        if (!entry.isIntersecting || entry.intersectionRatio < (revealOnEntry ? 0.01 : 0.75))
+          return;
         timer = setTimeout(() => {
           revealed.current = true;
           element.setAttribute(attribute, 'entered');
           observer.disconnect();
         }, 180);
       },
-      { threshold: 0.75, rootMargin: '0px 0px -120px 0px' },
+      revealOnEntry
+        ? { threshold: 0.01 }
+        : { threshold: 0.75, rootMargin: '0px 0px -120px 0px' },
     );
     observer.observe(element.closest('[data-metric-card]') ?? element);
     return () => {
       clearTimeout(timer);
       observer.disconnect();
     };
-  }, [attribute, reducedMotion]);
+  }, [attribute, reducedMotion, revealOnEntry]);
 
   return ref;
 }

@@ -6,7 +6,7 @@ import { HimerVideo } from './himer-video';
 
 export const HimerPricingMeterSection = () => {
   return (
-    <section className="bg-ghost-white relative w-full overflow-hidden">
+    <section className="bg-ghost-white section-deferred relative w-full overflow-hidden">
       {/*
         Signature Waterlabs Curved Container (Figma: radii [0, 60, 60, 0] node 8301:11840):
         - Background: White (#FFFFFF)

@@ -9,6 +9,8 @@ export const ProductVideo = memo(function ProductVideo({
   className,
   active = true,
   priority = false,
+  preloadInactive = false,
+  preloadDistance,
   onPlaybackTime,
   onPlaybackFrame,
   aspectRatio,
@@ -21,6 +23,8 @@ export const ProductVideo = memo(function ProductVideo({
   className?: string;
   active?: boolean;
   priority?: boolean;
+  preloadInactive?: boolean;
+  preloadDistance?: number;
   onPlaybackTime?: (seconds: number) => void;
   onPlaybackFrame?: (seconds: number) => void;
   aspectRatio?: string;
@@ -42,6 +46,8 @@ export const ProductVideo = memo(function ProductVideo({
       containerClassName={className}
       active={active}
       priority={priority}
+      preloadInactive={preloadInactive}
+      preloadDistance={preloadDistance}
       onPlaybackTime={onPlaybackTime}
       onPlaybackFrame={onPlaybackFrame}
       seekTo={seekTo}

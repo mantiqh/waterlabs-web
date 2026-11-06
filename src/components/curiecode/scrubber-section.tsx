@@ -44,7 +44,7 @@ export default function ScrubberSection() {
     <section className="rounded-tr-[30px] rounded-br-[30px] bg-white py-10 lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:py-20">
       <div className="layout-container">
         <SectionLabel>{data.eyebrow}</SectionLabel>
-        <div className="mt-5 grid gap-5 lg:grid-cols-2 lg:gap-10">
+        <div className="mt-5 grid gap-5 lg:grid-cols-2">
           <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
             {data.title}
           </h2>
