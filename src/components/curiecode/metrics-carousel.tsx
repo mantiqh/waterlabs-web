@@ -32,6 +32,9 @@ export function MetricsCarousel() {
     <>
       <div
         ref={ref}
+        role="region"
+        aria-label="Coding metrics"
+        tabIndex={0}
         onScroll={(event) => {
           const container = event.currentTarget;
           const distance = container.scrollWidth - container.clientWidth;
@@ -39,7 +42,7 @@ export function MetricsCarousel() {
             distance > 0 ? Math.round((container.scrollLeft / distance) * (pages - 1)) : 0,
           );
         }}
-        className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible"
+        className="no-scrollbar mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:overflow-visible"
       >
         {metrics.map(({ value, description }) => (
           <div
