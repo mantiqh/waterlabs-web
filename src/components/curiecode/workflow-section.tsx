@@ -1,9 +1,9 @@
 'use client';
 
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import { ConnectedTimeline } from '@/components/ui/connected-timeline';
-import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
+import { CURIECODE_MEDIA, CURIECODE_PAGE_DATA } from '@/data/curiecode';
 import {
   clampProgress,
   useReducedMotion,
@@ -24,6 +24,7 @@ const WorkflowStage = memo(function WorkflowStage({
   pinned,
   active,
   preloadNext,
+  onVideoReady,
   progress,
 }: {
   step: (typeof steps)[number];
@@ -31,6 +32,7 @@ const WorkflowStage = memo(function WorkflowStage({
   pinned: boolean;
   active: boolean;
   preloadNext?: boolean;
+  onVideoReady: (desktopSrc: string) => void;
   progress: number;
 }) {
   const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus', !pinned);
@@ -78,6 +80,7 @@ const WorkflowStage = memo(function WorkflowStage({
           label={step.title}
           active={!pinned || active}
           preloadInactive={preloadNext}
+          onVideoReady={onVideoReady}
           className="curiecode-workflow-media"
         />
       </div>
@@ -87,6 +90,10 @@ const WorkflowStage = memo(function WorkflowStage({
 
 export default function WorkflowSection() {
   const [canPin, setCanPin] = useState(false);
+  const [readyVideos, setReadyVideos] = useState<Set<string>>(() => new Set());
+  const onVideoReady = useCallback((source: string) => {
+    setReadyVideos((current) => (current.has(source) ? current : new Set(current).add(source)));
+  }, []);
   const { ref, progress } = useScrollProgress<HTMLElement>('travel', canPin);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -170,7 +177,12 @@ export default function WorkflowSection() {
                   index={index}
                   pinned={pinned}
                   active={index === active}
-                  preloadNext={pinned && index === active + 1}
+                  preloadNext={
+                    pinned &&
+                    index === active + 1 &&
+                    readyVideos.has(CURIECODE_MEDIA[steps[active].media].desktop.src)
+                  }
+                  onVideoReady={onVideoReady}
                   progress={clampProgress(position - index)}
                 />
               ))}

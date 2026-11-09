@@ -5,6 +5,7 @@ import type { CSSProperties } from 'react';
 import { memo, useEffect, useRef, useState } from 'react';
 
 import { useReducedMotion } from '@/lib/hooks/use-scroll-progress';
+import { type VideoRecoveryState, watchVideoRecovery } from '@/lib/product-video-recovery';
 import { cn } from '@/lib/utils';
 
 export interface ProductVideoProps {
@@ -21,6 +22,7 @@ export interface ProductVideoProps {
   active?: boolean;
   preloadInactive?: boolean;
   preloadDistance?: number;
+  preloadMode?: 'metadata' | 'auto';
   onVideoReady?: (desktopSrc: string) => void;
   priority?: boolean;
   onPlaybackTime?: (seconds: number) => void;
@@ -46,6 +48,7 @@ export const ProductVideo = memo(function ProductVideo({
   active = true,
   preloadInactive = false,
   preloadDistance = 800,
+  preloadMode = 'metadata',
   onVideoReady,
   priority = false,
   onPlaybackTime,
@@ -55,6 +58,7 @@ export const ProductVideo = memo(function ProductVideo({
 }: ProductVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const recoveryState = useRef<VideoRecoveryState>({ source: '', attempted: false });
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -62,6 +66,9 @@ export const ProductVideo = memo(function ProductVideo({
   useEffect(() => {
     const video = videoRef.current;
     if (!video || seekTo === undefined) return;
+    if (recoveryState.current.resumeTime !== undefined) {
+      recoveryState.current.resumeTime = seekTo.seconds;
+    }
     const seek = () => {
       video.currentTime = Math.max(
         0,
@@ -127,31 +134,8 @@ export const ProductVideo = memo(function ProductVideo({
 
     let nearViewport = priority;
     let disposed = false;
-    let retries = 0;
-    let retryTimer: ReturnType<typeof setTimeout> | undefined;
     let resizeObserver: ResizeObserver | undefined;
     const breakpoint = window.matchMedia('(max-width: 719px)');
-
-    const scheduleRetry = () => {
-      if (
-        disposed ||
-        retryTimer ||
-        retries >= 1 ||
-        !video.error ||
-        !nearViewport ||
-        (!active && !preloadInactive) ||
-        reducedMotion ||
-        document.hidden ||
-        !navigator.onLine
-      )
-        return;
-      retryTimer = setTimeout(() => {
-        retryTimer = undefined;
-        if (disposed || !nearViewport || document.hidden || !navigator.onLine) return;
-        retries += 1;
-        video.load();
-      }, 1000);
-    };
 
     const loadSource = () => {
       if (disposed || reducedMotion || (!active && !preloadInactive)) return;
@@ -179,17 +163,20 @@ export const ProductVideo = memo(function ProductVideo({
 
       const src = breakpoint.matches && mobileSrc ? mobileSrc : desktopSrc;
       if (video.getAttribute('src') !== src) {
-        retries = 0;
+        if (recoveryState.current.source !== src) {
+          recoveryState.current.source = src;
+          recoveryState.current.attempted = false;
+          recoveryState.current.resumeTime = undefined;
+        }
         setReady(false);
         video.defaultMuted = true;
         video.muted = true;
+        video.preload = priority ? 'auto' : preloadMode;
         video.src = src;
-        video.preload = priority ? 'auto' : 'metadata';
         video.load();
       } else {
         video.defaultMuted = true;
         video.muted = true;
-        scheduleRetry();
       }
     };
 
@@ -203,12 +190,6 @@ export const ProductVideo = memo(function ProductVideo({
       if (disposed) return;
       setReady(false);
       setPlaying(false);
-      scheduleRetry();
-    };
-
-    const onOnline = () => {
-      retries = 0;
-      scheduleRetry();
     };
 
     const preloadObserver = new IntersectionObserver(
@@ -224,8 +205,6 @@ export const ProductVideo = memo(function ProductVideo({
     video.addEventListener('loadeddata', onReady);
     video.addEventListener('canplay', onReady);
     video.addEventListener('error', onError);
-    window.addEventListener('online', onOnline);
-    document.addEventListener('visibilitychange', scheduleRetry);
 
     if (priority) {
       loadSource();
@@ -233,15 +212,12 @@ export const ProductVideo = memo(function ProductVideo({
 
     return () => {
       disposed = true;
-      clearTimeout(retryTimer);
       resizeObserver?.disconnect();
       preloadObserver.disconnect();
       breakpoint.removeEventListener('change', loadSource);
       video.removeEventListener('loadeddata', onReady);
       video.removeEventListener('canplay', onReady);
       video.removeEventListener('error', onError);
-      window.removeEventListener('online', onOnline);
-      document.removeEventListener('visibilitychange', scheduleRetry);
     };
   }, [
     active,
@@ -249,6 +225,7 @@ export const ProductVideo = memo(function ProductVideo({
     mobileSrc,
     onVideoReady,
     preloadDistance,
+    preloadMode,
     preloadInactive,
     priority,
     reducedMotion,
@@ -287,6 +264,8 @@ export const ProductVideo = memo(function ProductVideo({
 
     let disposed = false;
     let pending = false;
+    let generation = 0;
+    let autoplayBlocked = false;
     let retryTimer: ReturnType<typeof setTimeout> | undefined;
     let retried = false;
     const shouldPlay = () =>
@@ -301,6 +280,7 @@ export const ProductVideo = memo(function ProductVideo({
     };
     const onUserInteraction = () => {
       detachUserUnlock();
+      autoplayBlocked = false;
       if (!disposed && shouldPlay()) {
         updatePlayback();
       }
@@ -314,34 +294,57 @@ export const ProductVideo = memo(function ProductVideo({
     };
 
     const updatePlayback = () => {
+      recovery.sync();
       if (!shouldPlay()) {
         video.pause();
         return;
       }
-      if (pending || !video.paused) return;
+      if (autoplayBlocked || pending || !video.paused) return;
       pending = true;
+      const attempt = generation;
       video.defaultMuted = true;
       video.muted = true;
       void video
         .play()
         .then(() => {
+          if (disposed || generation !== attempt) return;
           detachUserUnlock();
         })
         .catch((error: unknown) => {
-          if (disposed) return;
+          if (disposed || generation !== attempt) return;
           if (error instanceof DOMException && error.name === 'AbortError' && !retried) {
             retried = true;
             retryTimer = setTimeout(updatePlayback, 150);
           } else if (error instanceof DOMException && error.name === 'NotAllowedError') {
+            autoplayBlocked = true;
+            recovery.sync();
             // Autoplay blocked by browser policy: unlock on first interaction
             attachUserUnlock();
           }
         })
         .finally(() => {
-          pending = false;
+          if (generation === attempt) pending = false;
         });
     };
+    const invalidatePlayback = () => {
+      generation += 1;
+      pending = false;
+      clearTimeout(retryTimer);
+      setPlaying(false);
+    };
+    const recovery = watchVideoRecovery(video, {
+      state: recoveryState.current,
+      canRecover: () => shouldPlay() && !autoplayBlocked && navigator.onLine,
+      onRecover: () => {
+        invalidatePlayback();
+        setReady(false);
+      },
+    });
     const onPlaying = () => {
+      if (!shouldPlay()) {
+        video.pause();
+        return;
+      }
       retried = false;
       setPlaying(true);
     };
@@ -353,6 +356,9 @@ export const ProductVideo = memo(function ProductVideo({
 
     playbackObserver.observe(container);
     document.addEventListener('visibilitychange', updatePlayback);
+    window.addEventListener('online', updatePlayback);
+    window.addEventListener('offline', updatePlayback);
+    video.addEventListener('emptied', invalidatePlayback);
     video.addEventListener('canplay', updatePlayback);
     video.addEventListener('loadedmetadata', updatePlayback);
     video.addEventListener('playing', onPlaying);
@@ -361,10 +367,14 @@ export const ProductVideo = memo(function ProductVideo({
 
     return () => {
       disposed = true;
+      recovery.dispose();
       clearTimeout(retryTimer);
       detachUserUnlock();
       playbackObserver.disconnect();
       document.removeEventListener('visibilitychange', updatePlayback);
+      window.removeEventListener('online', updatePlayback);
+      window.removeEventListener('offline', updatePlayback);
+      video.removeEventListener('emptied', invalidatePlayback);
       video.removeEventListener('canplay', updatePlayback);
       video.removeEventListener('loadedmetadata', updatePlayback);
       video.removeEventListener('playing', onPlaying);

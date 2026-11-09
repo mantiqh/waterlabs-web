@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { ChevronRight, CTA } from '@/components/CTA';
-import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
+import { CURIECODE_MEDIA, CURIECODE_PAGE_DATA } from '@/data/curiecode';
 import { cn } from '@/lib/utils';
 
 import { ProductVideo } from './product-video';
@@ -15,6 +15,10 @@ const capabilities = data.items;
 
 export default function CapabilitiesSection() {
   const [active, setActive] = useState(0);
+  const [readyVideos, setReadyVideos] = useState<Set<string>>(() => new Set());
+  const onVideoReady = useCallback((source: string) => {
+    setReadyVideos((current) => (current.has(source) ? current : new Set(current).add(source)));
+  }, []);
   return (
     <section className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
       <div className="layout-container">
@@ -80,7 +84,11 @@ export default function CapabilitiesSection() {
                   id={item.media}
                   label={`${item.title} demonstration`}
                   active={active === index}
-                  preloadInactive={index === active + 1}
+                  preloadInactive={
+                    index === active + 1 &&
+                    readyVideos.has(CURIECODE_MEDIA[capabilities[active].media].desktop.src)
+                  }
+                  onVideoReady={onVideoReady}
                 />
               </div>
             ))}

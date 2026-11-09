@@ -55,16 +55,20 @@ export default function CurieCodePage() {
             className="pointer-events-none absolute -bottom-[45px] left-1/2 h-[160px] w-[541px] -translate-x-1/2 bg-linear-to-b from-black/0 via-black/85 to-black to-75% blur-[18.15px] md:bottom-[8%] md:h-[192px] md:w-[115.6%] md:to-100%"
           />
         </div>
-        <div className="layout-container order-4 flex gap-10 overflow-x-auto pt-10 pb-20 md:grid md:grid-cols-4 md:gap-10 md:overflow-visible">
+        <div
+          role="region"
+          aria-label="Platform metrics"
+          tabIndex={0}
+          className="layout-container no-scrollbar order-4 flex snap-x snap-mandatory scroll-px-5 gap-10 overflow-x-auto pt-10 pb-10 md:grid md:grid-cols-4 md:gap-10 md:overflow-visible md:pb-20"
+        >
           {data.metrics.map(({ value, description }) => (
             <div
               key={value}
               data-metric-card
-              className="flex w-[240px] shrink-0 flex-col gap-3 md:w-auto"
+              className="flex w-[240px] shrink-0 snap-start flex-col gap-3 md:w-auto"
             >
               <AnimatedMetric
                 value={value}
-                revealOnEntry
                 className="type-h5 text-aqua-mint tracking-[-0.01em]"
               />
               <p className="type-body-xxs text-ghost-white max-w-[220px] tracking-[0.01em]">
