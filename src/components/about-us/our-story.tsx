@@ -7,7 +7,7 @@ const STORY_PARAGRAPHS = [
 
 export const OurStorySection = () => {
   return (
-    <section className="w-full overflow-hidden bg-white pl-[20px] min-[1440px]:pl-[calc((100vw-1320px)/2)] md:pl-[40px] lg:pl-[60px]">
+    <section className="w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#F4F6F9] to-50% pl-[20px] min-[1440px]:pl-[calc((100vw-1320px)/2)] md:pl-[40px] lg:pl-[60px]">
       {/* 
         Our story Section:
         - Background container aligned on the left with the 1320px content grid
@@ -27,19 +27,14 @@ export const OurStorySection = () => {
           {/* ========================================================================= */}
           <div className="hidden w-full flex-col items-start gap-[24px] min-[1440px]:gap-[40px] lg:flex">
             {/* Heading: General Sans, responsive scaling */}
-            <h2 className="type-h1 w-full text-[40px] leading-[48px] tracking-[-0.01em] text-[#F4F6F9] min-[1440px]:text-[68px] min-[1440px]:leading-[76px] xl:text-[48px] xl:leading-[56px]">
-              Our story
-            </h2>
+            <h2 className="type-h1 w-full tracking-[-0.01em] text-[#F4F6F9]">Our story</h2>
 
             {/* Row: Left paragraphs (536px) + Right photo (704px x 417px) */}
             <div className="flex w-full flex-row items-center justify-between gap-[20px]">
               {/* Left Column: 4 story paragraphs */}
               <div className="flex w-full shrink-0 flex-col justify-between gap-[16px] min-[1440px]:h-[417px] min-[1440px]:w-[536px] min-[1440px]:gap-[24px] lg:w-[48%] xl:gap-[20px]">
                 {STORY_PARAGRAPHS.map((paragraph, index) => (
-                  <p
-                    key={index}
-                    className="type-body-s text-[16px] leading-[24px] text-white min-[1440px]:text-[20px] min-[1440px]:leading-[28px] xl:text-[17px] xl:leading-[25px]"
-                  >
+                  <p key={index} className="type-body-s text-white">
                     {paragraph}
                   </p>
                 ))}
@@ -57,17 +52,15 @@ export const OurStorySection = () => {
           {/* ========================================================================= */}
           {/* Mobile Layout (< lg): Stacked Column (Title -> Photo -> Paragraphs)       */}
           {/* ========================================================================= */}
-          <div className="mx-auto flex w-full max-w-[342px] flex-col items-start gap-[20px] lg:hidden">
-            {/* Heading: General Sans, 36px/48px, -0.01em, #F4F6F9 */}
-            <h2 className="type-h1 text-[36px] leading-[48px] tracking-[-0.01em] text-[#F4F6F9]">
-              Our story
-            </h2>
+          <div className="mx-auto flex w-full max-w-[342px] flex-col items-start gap-[20px] md:max-w-none lg:hidden">
+            {/* Heading: General Sans */}
+            <h2 className="type-h1 tracking-[-0.01em] text-[#F4F6F9]">Our story</h2>
 
             {/* Content Frame (Figma: Frame 2147203294, gap: 12px) */}
             <div className="flex w-full flex-col items-start gap-[12px]">
               {/* Middle: Photo (342px x 203px, border-radius: 20px 10px 20px 20px) */}
               <div
-                className="h-[203px] w-full rounded-[20px_10px_20px_20px] bg-[url('/images/about-us/our-story/img_our_Story_mob%20(3).png')] bg-cover bg-center bg-no-repeat"
+                className="aspect-[342/203] w-full rounded-[20px_10px_20px_20px] bg-[url('/images/about-us/our-story/img_our_Story_mob%20(3).png')] bg-cover bg-center bg-no-repeat"
                 role="img"
                 aria-label="Waterlabs vision - architectural courtyard at sunrise"
               />
@@ -75,7 +68,7 @@ export const OurStorySection = () => {
               {/* Bottom Content: Story Paragraphs (Figma: Frame 2147203307, gap: 24px) */}
               <div className="flex w-full flex-col items-start gap-[16px] pt-[4px]">
                 {STORY_PARAGRAPHS.map((paragraph, index) => (
-                  <p key={index} className="type-body-s text-[16px] leading-[26px] text-white">
+                  <p key={index} className="type-body-s text-white">
                     {paragraph}
                   </p>
                 ))}

@@ -10,7 +10,7 @@ export const HeroSection = () => {
         - Background: CSS background image with linear-gradient and vector artwork
         - Layout: Flex column justify-between, Navbar at top, Frame 2147203192 at bottom
       */}
-      <div className="flex min-h-[581px] w-full flex-col items-start justify-between gap-[40px] rounded-bl-[30px] bg-[#042849] bg-[url('/images/about-us/hero-section/img_banner_mob.png')] bg-cover bg-center bg-no-repeat px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pt-[32px] md:pb-[60px] lg:min-h-[726px] lg:gap-[10px] lg:rounded-bl-[60px] lg:bg-[url('/images/about-us/hero-section/img_banner.png')] lg:px-[60px] lg:pt-[40px] lg:pb-[80px] xl:h-[726px]">
+      <div className="flex min-h-[581px] w-full flex-col items-start justify-start gap-[80px] rounded-bl-[30px] bg-[#042849] bg-[url('/images/about-us/hero-section/img_banner_mob.png')] bg-cover bg-center bg-no-repeat px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pt-[32px] md:pb-[60px] lg:min-h-[726px] lg:justify-between lg:gap-[10px] lg:rounded-bl-[60px] lg:bg-[url('/images/about-us/hero-section/img_banner.png')] lg:px-[60px] lg:pt-[40px] lg:pb-[80px] xl:h-[726px]">
         {/* Navbar */}
         <Navbar />
 

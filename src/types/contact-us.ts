@@ -27,6 +27,7 @@ export interface ContactUsPageData {
   formTag?: string;
   formHeading: string;
   formImage?: string;
+  formImageMobile?: string;
   orgTypeOptions?: string[];
   newsletterHeading?: string;
   consentText?: string;

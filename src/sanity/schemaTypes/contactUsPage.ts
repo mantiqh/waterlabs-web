@@ -163,7 +163,14 @@ export const contactUsPageSchema = defineType({
     }),
     defineField({
       name: 'formImage',
-      title: 'Form Left-side Illustration Image',
+      title: 'Form Left-side Illustration Image (Desktop)',
+      type: 'image',
+      group: 'contactForm',
+      options: { hotspot: true },
+    }),
+    defineField({
+      name: 'formImageMobile',
+      title: 'Form Illustration Image (Mobile)',
       type: 'image',
       group: 'contactForm',
       options: { hotspot: true },

@@ -94,7 +94,9 @@ export const ContactUsHeroSection = ({
 
             {/* CTA Button */}
             <a href={ctaLink}>
-              <CTA variant="light-bg">{ctaText}</CTA>
+              <CTA variant="light-bg" size="compact-mobile">
+                {ctaText}
+              </CTA>
             </a>
           </div>
         </div>

@@ -715,7 +715,7 @@ export const ROICalculator = () => {
                       </div>
                       <div
                         style={GRADIENT_STYLE}
-                        className="type-h1 w-fit whitespace-nowrap tabular-nums"
+                        className="type-h1 w-fit whitespace-nowrap tabular-nums max-md:text-[40px] max-md:leading-[48px] max-md:tracking-[-0.01em]"
                       >
                         {formatMoney(results.annualSaving)}
                       </div>
@@ -752,7 +752,7 @@ export const ROICalculator = () => {
                           </div>
                           <div
                             style={GRADIENT_STYLE}
-                            className="type-h1 w-fit whitespace-nowrap tabular-nums"
+                            className="type-h1 w-fit whitespace-nowrap tabular-nums max-md:text-[40px] max-md:leading-[48px] max-md:tracking-[-0.01em]"
                           >
                             {formatMoney(results.revenueOpportunity)}
                           </div>
@@ -777,7 +777,7 @@ export const ROICalculator = () => {
 
                   {/* Start again button */}
                   <div>
-                    <CTA variant="light-bg" onClick={handleReset}>
+                    <CTA variant="light-bg" size="compact-mobile" onClick={handleReset}>
                       Start again
                     </CTA>
                   </div>

@@ -441,7 +441,7 @@ export const CaseStudiesTabsSection = ({
                       aria-label={settings?.readStoryButtonText || 'Read the story'}
                       className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm transition-colors hover:bg-[#042849]"
                     >
-                      <ChevronRight className="h-[14px] w-[10px] text-white" />
+                      <ChevronRight className="h-[13px] w-[9px] text-white" />
                     </Link>
                   </div>
                 </div>
@@ -469,33 +469,28 @@ export const CaseStudiesTabsSection = ({
           )}
 
           {/* ========================================================================= */}
-          {/* Pagination (Figma: Frame 2147226503)                                      */}
+          {/* Pagination (Figma: Frame 2147226742 / Frame 2147226503)                   */}
           {/* ========================================================================= */}
           {filteredItems.length > 0 && (
-            <div className="flex w-full flex-row items-center justify-end gap-[16px] pt-[16px] md:gap-[24px] lg:gap-[32px]">
-              {/* Prev Page Button */}
-              {totalPages > 1 && (
+            <div className="flex w-full flex-row items-center justify-end gap-[24px] pt-[16px] md:pt-[24px] lg:gap-[32px]">
+              {/* Prev Page Button (Hidden on first page matching Figma) */}
+              {safeCurrentPage > 1 && (
                 <button
                   type="button"
                   aria-label="Previous page"
                   onClick={() => handlePageChange(safeCurrentPage - 1)}
-                  disabled={safeCurrentPage === 1}
-                  className={`flex h-[24px] w-[24px] items-center justify-center text-[#0F68D6] transition-opacity ${
-                    safeCurrentPage === 1
-                      ? 'cursor-not-allowed opacity-30'
-                      : 'cursor-pointer hover:opacity-75'
-                  }`}
+                  className="flex h-[24px] w-[20px] cursor-pointer items-center justify-center text-[#0F68D6] transition-opacity hover:opacity-75"
                 >
                   <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className="shrink-0"
                   >
                     <path
-                      d="M8.75 2.625L4.375 7L8.75 11.375"
+                      d="M12.5 15L7.5 10L12.5 5"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
@@ -506,13 +501,13 @@ export const CaseStudiesTabsSection = ({
               )}
 
               {/* Page Numbers */}
-              <div className="flex flex-row items-center gap-[16px] md:gap-[24px] lg:gap-[32px]">
+              <div className="flex flex-row items-center gap-[24px] lg:gap-[32px]">
                 {pageNumbers.map((page, idx) => {
                   if (page === '...') {
                     return (
                       <span
                         key={`dots-${idx}`}
-                        className="type-body-xxs tracking-[0.2em] text-[#7D8690] select-none"
+                        className="type-body-xxs text-[#7D8690] select-none"
                       >
                         ....
                       </span>
@@ -538,29 +533,24 @@ export const CaseStudiesTabsSection = ({
                 })}
               </div>
 
-              {/* Next Page Button */}
-              {totalPages > 1 && (
+              {/* Next Page Button (Hidden on last page matching Figma) */}
+              {safeCurrentPage < totalPages && (
                 <button
                   type="button"
                   aria-label="Next page"
                   onClick={() => handlePageChange(safeCurrentPage + 1)}
-                  disabled={safeCurrentPage === totalPages}
-                  className={`flex h-[24px] w-[24px] items-center justify-center text-[#0F68D6] transition-opacity ${
-                    safeCurrentPage === totalPages
-                      ? 'cursor-not-allowed opacity-30'
-                      : 'cursor-pointer hover:opacity-75'
-                  }`}
+                  className="flex h-[24px] w-[20px] cursor-pointer items-center justify-center text-[#0F68D6] transition-opacity hover:opacity-75"
                 >
                   <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     className="shrink-0"
                   >
                     <path
-                      d="M5.25 2.625L9.625 7L5.25 11.375"
+                      d="M7.5 15L12.5 10L7.5 5"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"

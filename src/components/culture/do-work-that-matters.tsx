@@ -61,7 +61,14 @@ export const DoWorkThatMattersSection = () => {
             {/* CTA Button: Frame 7 (gap 24px from Frame 2147203133) */}
             <div>
               <Link href="/careers#where-you-would-fit">
-                <CTA variant="light-bg">See Open Roles</CTA>
+                <CTA
+                  variant="light-bg"
+                  size="compact-mobile"
+                  as="span"
+                  className="md:h-[44px] lg:h-[40px]"
+                >
+                  See Open Roles
+                </CTA>
               </Link>
             </div>
           </div>

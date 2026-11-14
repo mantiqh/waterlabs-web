@@ -25,8 +25,9 @@ export default function ComparisonSection() {
           <ProductVideo
             id="against-manual-coding"
             label="Manual coding, computer-assisted coding and CurieCode comparison"
-            aspectRatio="1320 / 544"
+            aspectRatio="1320 / 545"
             className="rounded-none"
+            mediaClassName="md:scale-[1.10]"
           />
           <div
             aria-hidden="true"

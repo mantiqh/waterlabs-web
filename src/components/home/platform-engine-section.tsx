@@ -114,7 +114,7 @@ export const PlatformEngineSection = ({
                 </div>
 
                 {/* Mobile / Tablet Text & Action (< 1024px) */}
-                <div className="flex w-full flex-col gap-[8px] sm:gap-[12px] lg:hidden">
+                <div className="flex w-full flex-col gap-[14px] lg:hidden">
                   <h3 className="type-h5 bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] bg-clip-text tracking-[-0.01em] text-transparent">
                     {item.title}
                   </h3>
@@ -127,7 +127,7 @@ export const PlatformEngineSection = ({
                         <CTA
                           variant="dark-bg"
                           aria-label={item.ctaText}
-                          className="h-[44px] w-[44px] max-sm:!h-[34px] max-sm:!min-h-[34px] max-sm:!w-[34px] max-sm:!min-w-[34px] max-sm:!p-0"
+                          className="h-[44px] w-[44px] max-sm:!h-[34px] max-sm:!min-h-[34px] max-sm:!w-[34px] max-sm:!min-w-[34px] max-sm:!p-0 max-sm:[&_svg]:!h-[13.19px] max-sm:[&_svg]:!w-[8.78px]"
                         />
                       </Link>
                     </div>

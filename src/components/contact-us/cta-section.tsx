@@ -79,7 +79,9 @@ export const ContactUsCTASection = ({
             {/* CTA Button */}
             <div className="shrink-0">
               <Link href={buttonLink}>
-                <CTA variant="dark-bg">{buttonText}</CTA>
+                <CTA variant="dark-bg" size="compact-mobile">
+                  {buttonText}
+                </CTA>
               </Link>
             </div>
           </div>

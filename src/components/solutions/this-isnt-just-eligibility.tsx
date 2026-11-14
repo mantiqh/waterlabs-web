@@ -220,7 +220,7 @@ export const ThisIsntJustEligibilitySection = () => {
                   className="flex min-h-[320px] flex-1 flex-col gap-[24px] rounded-[16px] bg-white p-[32px]"
                 >
                   {/* Icon */}
-                  <div className="relative h-[80px] w-[80px] shrink-0">
+                  <div className="relative h-[80px] w-[80px] shrink-0 xl:h-[102px] xl:w-[102px]">
                     <Image
                       src={card.icon}
                       alt={card.title}

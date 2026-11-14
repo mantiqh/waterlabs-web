@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface CultureCard {
   id: string;
@@ -99,204 +99,396 @@ const CULTURE_CARDS: CultureCard[] = [
   },
 ];
 
+const LAST_CARD = CULTURE_CARDS.length - 1;
+const BACKING_COLORS = ['#63CCB7', '#A9D154', '#D6A85F', '#AE87E4', '#D7DCE2', '#FFFFFF'];
+
+const cardFrame = (depth: number) => ({
+  transform: `translate3d(0px, ${Math.max(0, depth) * 8}px, 0) rotate(0deg) scaleX(${1 - Math.max(0, depth) * 0.045})`,
+  opacity: depth < 0 ? 0 : 1,
+});
+// Preserve the original lift, sideways tilt, and reveal poses from the existing stack.
+const LIFTED_AWAY = 'translate3d(28px, -90px, 0) rotate(2.5deg) scale(0.97)';
+const REVEAL_START = 'translate3d(0px, 24px, 0) rotate(0deg) scale(0.96)';
+
 export const WeBuildPeopleSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  const getCardStage = useCallback((progress: number) => {
-    const totalTransitions = CULTURE_CARDS.length - 1; // 5 transitions
-    if (progress <= 0) return 0;
-    if (progress >= 1) return totalTransitions;
-
-    const segment = Math.min(Math.floor(progress * totalTransitions), totalTransitions - 1);
-    const progressInSegment = (progress - segment / totalTransitions) * totalTransitions;
-
-    const smoothstep = (min: number, max: number, value: number) => {
-      const x = Math.min(Math.max((value - min) / (max - min), 0), 1);
-      return x * x * (3 - 2 * x);
-    };
-
-    // For segment 0 (Card 1), start animating immediately as user scrolls without dead zone
-    const startRest = segment === 0 ? 0.0 : 0.06;
-    const endRest = segment === 0 ? 0.88 : 0.94;
-    const t = smoothstep(startRest, endRest, progressInSegment);
-    return segment + t;
-  }, []);
-
-  const handleScroll = useCallback(() => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    const stickyHeight = stickyRef.current?.offsetHeight || window.innerHeight;
-    const scrollDistance = rect.height - stickyHeight;
-
-    if (scrollDistance <= 0) return;
-
-    // How far the top of the section has scrolled past the top of the viewport
-    const scrolled = -rect.top;
-    const rawProgress = scrolled / scrollDistance;
-    const clampedProgress = Math.min(Math.max(rawProgress, 0), 1);
-
-    setScrollProgress(clampedProgress);
-  }, []);
+  const [announcement, setAnnouncement] = useState('');
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    handleScroll();
+    const section = sectionRef.current;
+    if (!section) return;
+    const track = section.querySelector<HTMLElement>('[data-card-track]');
+    const deck = section.querySelector<HTMLElement>('[data-deck]');
+    if (!track || !deck) return;
+    const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-culture-card]'));
+    const covers = Array.from(section.querySelectorAll<HTMLElement>('[data-card-cover]'));
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let active = 0;
+    let settled = 0;
+    let frame = 0;
+    let settleTimer: ReturnType<typeof setTimeout> | undefined;
+    let animations: Animation[] = [];
+    let stepHeight = 1;
+    let wheelTotal = 0;
+    let wheelLocked = false;
+    let wheelDirection = 0;
+    let wheelPeak = 0;
+    let wheelValley = Infinity;
+    let wheelLastMagnitude = 0;
+    let wheelRises = 0;
+    let wheelPush = 0;
+    let wheelSelectedAt = 0;
+    let wheelTimer: ReturnType<typeof setTimeout> | undefined;
+    let pageTouch: { x: number; y: number; handled: boolean } | null = null;
+    const showCard = (index: number, animate: boolean) => {
+      if (index === active && animate) return;
+      const previous = active;
+      const interrupted = new Map<HTMLElement, { transform: string; opacity: string }>();
+      cards.forEach((card) => {
+        if (!card.getAnimations().some((animation) => animation.playState === 'running')) return;
+        const style = getComputedStyle(card);
+        interrupted.set(card, { transform: style.transform, opacity: style.opacity });
+      });
+      animations.forEach((animation) => animation.cancel());
+      animations = [];
+      cards.forEach((card, position) => {
+        Object.assign(card.style, cardFrame(position - index));
+        card.style.zIndex = String(CULTURE_CARDS.length - position);
+        // Parked cards cannot cover selected text or enter the accessibility tree.
+        card.inert = position !== index;
+        card.setAttribute('aria-hidden', String(position !== index));
+        covers[position].style.opacity = position > index ? '1' : '0';
+      });
+      active = index;
+      if (!animate || motion.matches) return;
+      const options = { duration: 440, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' };
+      const turningCard = index > previous ? cards[previous] : cards[index];
+      turningCard.style.zIndex = '20';
+      const front = cardFrame(0).transform;
+      // Complete the original motion rather than leaving it tied to a partial scroll.
+      animations.push(
+        turningCard.animate(
+          index > previous
+            ? [
+                interrupted.get(turningCard) ?? { transform: front, opacity: 1 },
+                { transform: LIFTED_AWAY, opacity: 0 },
+              ]
+            : [
+                interrupted.get(turningCard) ?? { transform: LIFTED_AWAY, opacity: 0 },
+                { transform: front, opacity: 1 },
+              ],
+          options,
+        ),
+      );
+      if (index > previous) {
+        animations.push(
+          cards[index].animate(
+            [
+              interrupted.get(cards[index]) ?? { transform: REVEAL_START, opacity: 0.88 },
+              { transform: front, opacity: 1 },
+            ],
+            options,
+          ),
+        );
+      } else {
+        // The card beneath the returning one must also continue from its visible pose.
+        animations.push(
+          cards[previous].animate(
+            [
+              interrupted.get(cards[previous]) ?? { transform: front, opacity: 1 },
+              cardFrame(previous - index),
+            ],
+            options,
+          ),
+          covers[previous].animate([{ opacity: 0 }, { opacity: 1 }], options),
+        );
+      }
+    };
+    const nearest = () =>
+      Math.min(LAST_CARD, Math.max(0, Math.round(track.scrollTop / stepHeight)));
+    const settle = () => {
+      if (!section.dataset.animated) return;
+      const index = nearest();
+      showCard(index, true);
+      if (index !== settled) {
+        settled = index;
+        setAnnouncement(
+          `${CULTURE_CARDS[index].title} Card ${index + 1} of ${CULTURE_CARDS.length}.`,
+        );
+      }
+    };
+    const settleEvent = 'onscrollend' in track ? 'scrollend' : null;
+    const onScroll = () => {
+      if (!section.dataset.animated) return;
+      if (!frame) {
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          showCard(nearest(), true);
+        });
+      }
+      if (!settleEvent) {
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(settle, 150);
+      }
+    };
+    const goTo = (index: number) => {
+      const target = Math.min(LAST_CARD, Math.max(0, index));
+      // This track is invisible: only the card animation should move over time.
+      // Keeping its snap position synchronous avoids a second, interruptible animation.
+      track.scrollTo({ top: target * stepHeight, behavior: 'instant' });
+      showCard(target, true);
+    };
+    const resetWheelGesture = () => {
+      wheelLocked = false;
+      wheelTotal = 0;
+      wheelPeak = 0;
+      wheelValley = Infinity;
+      wheelLastMagnitude = 0;
+      wheelRises = 0;
+      wheelPush = 0;
+    };
+    const lockWheelGesture = (magnitude: number) => {
+      wheelLocked = true;
+      wheelPeak = magnitude;
+      wheelValley = magnitude;
+      wheelLastMagnitude = magnitude;
+      wheelRises = 0;
+      wheelPush = 0;
+      wheelSelectedAt = performance.now();
+    };
+    const extendWheelGesture = () => {
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(resetWheelGesture, 180);
+    };
+    const onWheel = (event: WheelEvent) => {
+      if (
+        !section.dataset.animated ||
+        event.defaultPrevented ||
+        !event.cancelable ||
+        event.ctrlKey ||
+        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+      )
+        return;
+      const direction = Math.sign(event.deltaY);
+      if (!direction) return;
+      const target = event.target instanceof Element ? event.target : null;
+      if (
+        target?.closest(
+          'input, textarea, select, [contenteditable="true"], dialog, [role="dialog"]',
+        )
+      )
+        return;
+      const delta =
+        event.deltaY *
+        (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
+      const rect = section.getBoundingClientRect();
+      const readingTop = Math.min(120, Math.max(72, (window.innerHeight - rect.height) / 2));
+      const inReadingArea = rect.top >= 72 && rect.bottom <= window.innerHeight;
+      const enteringFromAbove =
+        direction > 0 && rect.top > readingTop && rect.top - delta <= readingTop;
+      const enteringFromBelow =
+        direction < 0 && rect.top < readingTop && rect.top - delta >= readingTop;
+      if (!track.contains(target) && !inReadingArea && !enteringFromAbove && !enteringFromBelow)
+        return;
+      // An intentional reversal must not wait for the previous gesture's inertia timer.
+      if (direction !== wheelDirection) {
+        resetWheelGesture();
+      }
+      wheelDirection = direction;
+      if (!inReadingArea && (enteringFromAbove || enteringFromBelow)) {
+        // A large page scroll must land on the stack rather than skip its cards.
+        event.preventDefault();
+        window.scrollBy({ top: rect.top - readingTop, behavior: 'instant' });
+        const index = enteringFromAbove ? 0 : LAST_CARD;
+        track.scrollTo({ top: index * stepHeight, behavior: 'instant' });
+        showCard(index, false);
+        lockWheelGesture(Math.abs(delta));
+        wheelTotal = 0;
+        extendWheelGesture();
+        return;
+      }
+      const current = nearest();
+      if (
+        !wheelLocked &&
+        ((current === 0 && direction < 0) || (current === LAST_CARD && direction > 0))
+      )
+        return;
+      // One trackpad/wheel gesture selects one full card; momentum cannot skip the deck.
+      if (wheelLocked) {
+        const magnitude = Math.abs(delta);
+        // Trackpads can start a new push before the old momentum tail goes quiet.
+        // Accept renewed acceleration after a valley, never elapsed time alone.
+        if (wheelValley <= Math.max(2, wheelPeak * 0.25)) {
+          if (magnitude > wheelLastMagnitude * 1.15) {
+            wheelRises += 1;
+            wheelPush += magnitude;
+          } else if (magnitude < wheelLastMagnitude * 0.85) {
+            wheelRises = 0;
+            wheelPush = 0;
+          } else if (wheelRises > 0) {
+            wheelPush += magnitude;
+          }
+        }
+        const renewedPush =
+          performance.now() - wheelSelectedAt >= 240 &&
+          wheelRises >= 2 &&
+          wheelPush >= 24 &&
+          magnitude >= 4 &&
+          magnitude >= wheelValley * 2.5;
+        wheelPeak = Math.max(wheelPeak, magnitude);
+        wheelValley = Math.min(wheelValley, magnitude);
+        wheelLastMagnitude = magnitude;
+        if (!renewedPush) {
+          event.preventDefault();
+          extendWheelGesture();
+          return;
+        }
+        wheelLocked = false;
+        wheelTotal = direction * (wheelPush - magnitude);
+        if ((current === 0 && direction < 0) || (current === LAST_CARD && direction > 0)) {
+          resetWheelGesture();
+          return;
+        }
+      }
+      event.preventDefault();
+      extendWheelGesture();
+      wheelTotal = Math.sign(wheelTotal) === direction ? wheelTotal + delta : delta;
+      if (Math.abs(wheelTotal) < 24) return;
+      lockWheelGesture(Math.abs(delta));
+      goTo(current + direction);
+    };
+    const onTouchStart = (event: TouchEvent) => {
+      pageTouch = null;
+      const target = event.target instanceof Element ? event.target : null;
+      if (
+        !section.dataset.animated ||
+        event.touches.length !== 1 ||
+        track.contains(target) ||
+        target?.closest(
+          'input, textarea, select, [contenteditable="true"], dialog, [role="dialog"]',
+        )
+      )
+        return;
+      const rect = section.getBoundingClientRect();
+      if (rect.top < 72 || rect.bottom > window.innerHeight) return;
+      const touch = event.touches[0];
+      pageTouch = { x: touch.clientX, y: touch.clientY, handled: false };
+    };
+    const onTouchMove = (event: TouchEvent) => {
+      if (!pageTouch || event.touches.length !== 1 || !event.cancelable) return;
+      const touch = event.touches[0];
+      const delta = pageTouch.y - touch.clientY;
+      if (Math.abs(touch.clientX - pageTouch.x) > Math.abs(delta)) {
+        pageTouch = null;
+        return;
+      }
+      if (pageTouch.handled) {
+        event.preventDefault();
+        return;
+      }
+      const current = nearest();
+      const direction = Math.sign(delta);
+      if ((current === 0 && direction < 0) || (current === LAST_CARD && direction > 0)) {
+        pageTouch = null;
+        return;
+      }
+      // Outside-card swipes have the same page-level selection as wheel input.
+      event.preventDefault();
+      if (Math.abs(delta) < 24) return;
+      pageTouch.handled = true;
+      goTo(current + direction);
+    };
+    const onTouchEnd = () => {
+      pageTouch = null;
+    };
+    const setup = () => {
+      pageTouch = null;
+      resetWheelGesture();
+      clearTimeout(wheelTimer);
+      animations.forEach((animation) => animation.cancel());
+      animations = [];
+      if (!motion.matches) section.dataset.animated = 'true';
+      // Keep ordinary page scrolling when a whole card cannot fit on screen.
+      if (motion.matches || deck.offsetHeight > window.innerHeight - 72) {
+        delete section.dataset.animated;
+        cards.forEach((card, index) => {
+          card.removeAttribute('style');
+          card.inert = false;
+          card.removeAttribute('aria-hidden');
+          covers[index].style.removeProperty('opacity');
+        });
+        return;
+      }
+      stepHeight = deck.offsetHeight;
+      section.style.setProperty('--deck-height', `${stepHeight}px`);
+      track.scrollTo({ top: active * stepHeight, behavior: 'instant' });
+      showCard(active, false);
+    };
+    const observer = new ResizeObserver(setup);
+    observer.observe(deck);
+    motion.addEventListener('change', setup);
+    window.addEventListener('resize', setup);
+    track.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd);
+    window.addEventListener('touchcancel', onTouchEnd);
+    if (settleEvent) track.addEventListener(settleEvent, settle);
+    setup();
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+      clearTimeout(settleTimer);
+      clearTimeout(wheelTimer);
+      animations.forEach((animation) => animation.cancel());
+      motion.removeEventListener('change', setup);
+      window.removeEventListener('resize', setup);
+      track.removeEventListener('scroll', onScroll);
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
+      if (settleEvent) track.removeEventListener(settleEvent, settle);
+      delete section.dataset.animated;
     };
-  }, [handleScroll]);
-
-  const scrollToCard = (index: number) => {
-    if (!sectionRef.current) return;
-    const rect = sectionRef.current.getBoundingClientRect();
-    const stickyHeight = stickyRef.current?.offsetHeight || window.innerHeight;
-    const scrollDistance = rect.height - stickyHeight;
-    const totalTransitions = CULTURE_CARDS.length - 1; // 5
-    const targetProgress =
-      index === 0
-        ? 0.02
-        : index === totalTransitions
-          ? 0.98
-          : (index + 0.5) / (totalTransitions + 1);
-    const targetScrollY = window.scrollY + rect.top + targetProgress * scrollDistance;
-    window.scrollTo({ top: targetScrollY, behavior: 'smooth' });
-  };
-
-  /**
-   * Scroll-scrubbed physical card stack animation:
-   * - The current active card is at the front.
-   * - When scrolling down, the CURRENT card moves UP, slightly SIDEWAYS, TILTS, and FADES OUT.
-   * - At the same time, the card underneath is revealed and moves into the front position.
-   * - The interaction is strictly scroll-driven and fully reversible on scroll up.
-   */
-  const getCardStyle = (index: number) => {
-    const stage = getCardStage(scrollProgress);
-    const diff = index - stage;
-
-    // Case 1: Card has already completed its exit
-    if (diff <= -1.0) {
-      return {
-        transform: 'translate3d(28px, -90px, 0) rotate(2.5deg) scale(0.97)',
-        opacity: 0,
-        zIndex: 5,
-        pointerEvents: 'none' as const,
-      };
-    }
-
-    // Case 2: Outgoing card — visibly moving UP + SIDEWAYS + TILT + FADE
-    if (diff < 0) {
-      const exitProgress = -diff; // 0 -> 1 as stage moves from index to index + 1
-      const translateY = -90 * exitProgress;
-      const translateX = 28 * exitProgress;
-      const rotate = 2.5 * exitProgress;
-      const scale = 1 - 0.03 * exitProgress;
-      const opacity = Math.max(0, 1 - exitProgress);
-
-      return {
-        transform: `translate3d(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px, 0) rotate(${rotate.toFixed(2)}deg) scale(${scale.toFixed(3)})`,
-        opacity,
-        zIndex: 50 - index, // Stays above upcoming card while lifting off
-      };
-    }
-
-    // Case 3: Front active card (at rest)
-    if (diff <= 0.001) {
-      return {
-        transform: 'translate3d(0px, 0px, 0) rotate(0deg) scale(1)',
-        opacity: 1,
-        zIndex: 40 - index,
-      };
-    }
-
-    // Case 4: Card underneath being revealed into the front position
-    if (diff <= 1.0) {
-      const revealProgress = 1 - diff; // 0 -> 1 as stage moves from index - 1 to index
-      const translateY = 24 * (1 - revealProgress);
-      const scale = 0.96 + 0.04 * revealProgress;
-      const opacity = 0.88 + 0.12 * revealProgress;
-
-      return {
-        transform: `translate3d(0px, ${translateY.toFixed(2)}px, 0) rotate(0deg) scale(${scale.toFixed(3)})`,
-        opacity,
-        zIndex: 40 - index,
-      };
-    }
-
-    // Case 5: Second card underneath in the stack
-    if (diff <= 2.0) {
-      const t = 2 - diff; // 0 -> 1 as stage moves towards index - 1
-      const translateY = 48 - 24 * t;
-      const scale = 0.92 + 0.04 * t;
-      const opacity = 0.6 + 0.28 * t;
-
-      return {
-        transform: `translate3d(0px, ${translateY.toFixed(2)}px, 0) rotate(0deg) scale(${scale.toFixed(3)})`,
-        opacity,
-        zIndex: 30 - index,
-      };
-    }
-
-    // Case 6: Waiting deep in the stack
-    return {
-      transform: 'translate3d(0px, 48px, 0) rotate(0deg) scale(0.92)',
-      opacity: 0,
-      zIndex: 10,
-    };
-  };
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-[#F4F6F9] px-[20px] md:px-[40px] lg:px-[60px]"
-      style={{
-        // 500vh provides a comfortable, responsive scroll journey across all 6 stacked cards
-        minHeight: '500vh',
-      }}
+      className="culture-card-stack layout-margin bg-ghost-white"
       aria-label="Culture at Waterlabs - How we work"
+      aria-roledescription="carousel"
     >
-      {/* Sticky Viewport Container */}
-      <div
-        ref={stickyRef}
-        className="sticky top-0 flex w-full flex-col justify-start overflow-visible pt-[16px] pb-0 sm:pt-[20px] lg:pt-[24px]"
-      >
-        {/* =================================================================
-            SECTION HEADER: Tag + Eyebrow + Section Title
-           ================================================================= */}
-        <div className="mx-auto mb-[12px] flex w-full max-w-[1320px] shrink-0 flex-col gap-[8px] sm:mb-[16px] sm:gap-[10px] lg:mb-[20px]">
-          {/* Tag / Eyebrow */}
-          <div className="flex items-center gap-[8px]">
-            <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">How we work</span>
+      <div className="relative mx-auto max-w-[1320px]">
+        <div
+          data-card-track
+          className="focus-visible:outline-electric-blue hidden rounded-[30px] focus-visible:outline-2 focus-visible:outline-offset-4"
+          tabIndex={0}
+          role="group"
+          aria-label="Culture cards. Scroll or swipe vertically to change cards."
+        >
+          <div data-card-rail>
+            <div data-card-snap-points aria-hidden="true">
+              {CULTURE_CARDS.map((card) => (
+                <div key={card.id} data-card-snap-point />
+              ))}
+            </div>
           </div>
-
-          {/* Main Section Heading */}
-          <h2 className="type-h2 tracking-[-0.01em] text-[#111111] uppercase">
-            CULTURE AT WATERLABS
-          </h2>
         </div>
-
-        {/* =================================================================
-            STACKED CARDS DECK: 6 Stacking Cards
-           ================================================================= */}
-        <div className="relative mx-auto h-[500px] w-full max-w-[1320px] sm:h-[540px] lg:h-[433px]">
+        <div data-deck className="mx-auto grid max-w-[1320px] gap-6">
           {CULTURE_CARDS.map((card, index) => {
-            const dynamicStyle = getCardStyle(index);
-
             return (
               <div
                 key={card.id}
-                style={{
-                  ...dynamicStyle,
-                  transformOrigin: '50% 100%',
-                  transition:
-                    'transform 0.12s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.12s ease-out',
-                }}
-                className="absolute inset-x-0 top-0 flex h-[500px] w-full cursor-pointer flex-col overflow-hidden rounded-[30px_0px_30px_30px] border border-black/5 bg-white shadow-[0_16px_40px_rgba(4,40,73,0.08)] will-change-transform sm:h-[540px] lg:h-[433px] lg:flex-row lg:rounded-[30px_10px_30px_30px]"
-                onClick={() => scrollToCard(index)}
+                data-culture-card
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${index + 1} of ${CULTURE_CARDS.length}`}
+                style={{ zIndex: CULTURE_CARDS.length - index }}
+                className="relative flex w-full flex-col overflow-hidden rounded-[30px_10px_30px_30px] bg-white lg:h-[433px] lg:flex-row"
               >
                 {/* Desktop Full-Span Image (Transparent Left, Photo on Right) */}
                 <div className="pointer-events-none absolute inset-0 z-0 hidden h-full w-full overflow-hidden lg:block">
@@ -310,9 +502,9 @@ export const WeBuildPeopleSection = () => {
                   />
                 </div>
 
-                {/* Mint/Lime/Gold Left Content Box (Frame 2147226448 geometry) */}
+                {/* Mint/Lime/Gold Content Box */}
                 <div
-                  className="no-scrollbar relative z-10 flex min-h-0 w-full flex-1 shrink-0 flex-col items-start justify-center overflow-y-auto rounded-[30px_0px_0px_0px] p-[24px] sm:p-[32px] lg:h-full lg:w-[480px] lg:flex-none lg:!rounded-[30px_0px_60px_0px] lg:p-[36px] xl:w-[539px] xl:p-[40px]"
+                  className="relative z-10 flex w-full flex-1 shrink-0 flex-col items-start justify-center rounded-[30px_0px_0px_0px] p-[24px] sm:p-[32px] lg:h-full lg:w-[480px] lg:flex-none lg:!rounded-[30px_0px_60px_0px] lg:p-[36px] xl:w-[539px] xl:p-[40px]"
                   style={{
                     backgroundColor: card.bgColor,
                   }}
@@ -347,11 +539,20 @@ export const WeBuildPeopleSection = () => {
                     className="object-cover object-center"
                   />
                 </div>
+                <div
+                  data-card-cover
+                  aria-hidden="true"
+                  className="hidden"
+                  style={{ backgroundColor: BACKING_COLORS[index] }}
+                />
               </div>
             );
           })}
         </div>
       </div>
+      <span className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+        {announcement}
+      </span>
     </section>
   );
 };

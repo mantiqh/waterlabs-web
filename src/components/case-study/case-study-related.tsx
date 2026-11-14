@@ -145,7 +145,8 @@ export const CaseStudyRelated = ({
                     <CTA
                       as="div"
                       variant="fill-arrow"
-                      className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm"
+                      size="compact-mobile"
+                      className="pointer-events-none h-[34px] w-[34px] shrink-0 rounded-full shadow-sm max-md:!h-[34px] max-md:!w-[34px] max-md:!p-0 md:!h-[34px] md:!w-[34px] md:!p-0 lg:!h-[48px] lg:!w-[48px] [&_svg]:h-[13px] [&_svg]:w-[9px] lg:[&_svg]:h-[19px] lg:[&_svg]:w-[13px]"
                       aria-label="View related case"
                     />
                   </div>

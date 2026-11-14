@@ -11,7 +11,7 @@ export const ThePromiseSection = () => {
       */}
       <div className="relative w-full overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:py-[80px]">
         {/* Abstract Background Graphic Pattern */}
-        <div className="pointer-events-none absolute inset-0 z-0 select-none">
+        <div className="pointer-events-none absolute inset-0 z-0 hidden select-none md:block">
           <Image
             src="/images/philosophy/the-promise/img_the_promise_bg.png"
             alt=""

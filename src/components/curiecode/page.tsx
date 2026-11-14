@@ -67,10 +67,7 @@ export default function CurieCodePage() {
               data-metric-card
               className="flex w-[240px] shrink-0 snap-start flex-col gap-3 md:w-auto"
             >
-              <AnimatedMetric
-                value={value}
-                className="type-h5 text-aqua-mint tracking-[-0.01em]"
-              />
+              <AnimatedMetric value={value} className="type-h5 text-aqua-mint tracking-[-0.01em]" />
               <p className="type-body-xxs text-ghost-white max-w-[220px] tracking-[0.01em]">
                 {description}
               </p>

@@ -31,8 +31,10 @@ export interface SolutionPageData {
     ctaText?: string;
     ctaLink?: string;
     heroImage?: string;
+    heroImageMobile?: string;
     heroImageAlt?: string;
     heroBanner?: string;
+    heroGradient?: string;
   };
 
   // 02 · The Problem Section
@@ -45,6 +47,7 @@ export interface SolutionPageData {
     quoteText?: string;
     quoteAuthor?: string;
     image?: string;
+    imageMobile?: string;
     imageAlt?: string;
   };
 

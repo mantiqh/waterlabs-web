@@ -111,7 +111,7 @@ export const ROIAssessmentSection = () => {
                   {/* CTA Button */}
                   <div className="pt-[8px] lg:pt-0">
                     <Link href="/contact-us" className="inline-block">
-                      <CTA variant="light-bg" as="div">
+                      <CTA variant="light-bg" size="compact-mobile" as="div">
                         Book my assessment
                       </CTA>
                     </Link>

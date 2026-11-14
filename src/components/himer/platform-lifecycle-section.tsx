@@ -99,33 +99,35 @@ function LifecycleStage({
 
 function ProductionProof() {
   return (
-    <div className="from-electric-blue relative bg-gradient-to-r to-black py-10 text-white lg:py-[60px]">
-      <div className="layout-container flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-        <div className="min-w-0 lg:max-w-[740px]">
-          <h3 className="type-h3 max-md:text-2xl max-md:leading-8">
-            {HIMER_LIFECYCLE_DATA.proof.headline}
-          </h3>
-          <p className="type-body-xxs text-light-gray mt-5 max-md:text-sm max-md:leading-5">
-            {HIMER_LIFECYCLE_DATA.proof.subtext}
-          </p>
-        </div>
-        <div className="grid shrink-0 grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-5">
-          {HIMER_LIFECYCLE_DATA.proof.cards.map((card, index) => (
-            <div
-              key={card.label}
-              data-metric-card
-              className="flex min-h-[96px] flex-col justify-between rounded-2xl border border-white/10 bg-white/10 p-3 md:min-h-[132px] md:w-[228px] md:p-5"
-            >
-              <p className="type-h5 max-md:text-xl max-md:leading-7">{card.value}</p>
-              <MetricBar
-                value={index === 0 ? 100 : 98.4}
-                threshold={index === 1 ? 96 : undefined}
-                className="bg-light-gray my-3 h-1 md:h-2"
-                fillClassName="from-electric-blue to-aqua-mint bg-gradient-to-r"
-              />
-              <p className="type-caption font-semibold text-white/80">{card.label}</p>
-            </div>
-          ))}
+    <div className="to-ghost-white bg-gradient-to-b from-black from-25% to-75% lg:bg-[linear-gradient(187.75deg,#000000_49.6%,#F4F6F9_97.3%)]">
+      <div className="relative rounded-tr-[30px] rounded-br-[30px] bg-[linear-gradient(271.8deg,#000000_1.7%,#0F68D6_200%)] py-10 text-white lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:bg-[linear-gradient(66.96deg,#0F68D6_-42.8%,#000000_96.5%)] lg:py-[60px]">
+        <div className="layout-container flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+          <div className="min-w-0 lg:max-w-[740px]">
+            <h3 className="type-h3 max-md:text-2xl max-md:leading-8">
+              {HIMER_LIFECYCLE_DATA.proof.headline}
+            </h3>
+            <p className="type-body-xxs text-light-gray mt-5 max-md:text-sm max-md:leading-5">
+              {HIMER_LIFECYCLE_DATA.proof.subtext}
+            </p>
+          </div>
+          <div className="grid shrink-0 grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-5">
+            {HIMER_LIFECYCLE_DATA.proof.cards.map((card, index) => (
+              <div
+                key={card.label}
+                data-metric-card
+                className="flex min-h-[96px] flex-col justify-between rounded-2xl border border-white/10 bg-white/10 p-3 md:min-h-[132px] md:w-[228px] md:p-5"
+              >
+                <p className="type-h5 max-md:text-xl max-md:leading-7">{card.value}</p>
+                <MetricBar
+                  value={index === 0 ? 100 : 98.4}
+                  threshold={index === 1 ? 96 : undefined}
+                  className="bg-light-gray my-3 h-1 md:h-2"
+                  fillClassName="from-electric-blue to-aqua-mint bg-gradient-to-r"
+                />
+                <p className="type-caption font-semibold text-white/80">{card.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -206,39 +208,42 @@ export const HimerPlatformLifecycleSection = () => {
       aria-label="Build, manage and govern"
       data-lifecycle-mode={pinned ? 'scroll' : 'stack'}
     >
-      <div
-        ref={ref}
-        className="from-electric-blue relative bg-gradient-to-r to-black"
-        style={pinned ? { height: '400svh' } : undefined}
-      >
+      <div ref={ref} className="relative" style={pinned ? { height: '400svh' } : undefined}>
         <div
           className={cn(
-            'rounded-bl-[30px] bg-black py-10 lg:rounded-bl-[60px] lg:pt-[80px] lg:pb-20',
-            pinned && 'himer-lifecycle-scene sticky top-0 flex h-svh overflow-y-auto',
+            'bg-gradient-to-b from-[#042645] to-[#062D5E] lg:from-[#010C1A] lg:to-[#0A438B]',
+            pinned && 'sticky top-0',
           )}
         >
-          <div ref={sceneRef} className="layout-container min-w-0">
-            <div ref={headerRef} className="himer-lifecycle-header mb-5 lg:mb-10">
-              <h2 className="type-h2 tracking-[-0.01em]">{HIMER_LIFECYCLE_DATA.headline}</h2>
-              <p className="type-body-xxs text-light-gray mt-5">{HIMER_LIFECYCLE_DATA.subtext}</p>
-            </div>
-            <div className={cn('grid gap-y-[60px]', pinned && 'gap-y-0')}>
-              {HIMER_LIFECYCLE_DATA.tabs.map((tab, index) => (
-                <LifecycleStage
-                  key={tab.id}
-                  tab={tab}
-                  index={index}
-                  pinned={pinned}
-                  active={index === activeStage}
-                  preloadNext={
-                    pinned &&
-                    index === activeStage + 1 &&
-                    readyVideos.has(HIMER_LIFECYCLE_DATA.tabs[activeStage].desktopVideo)
-                  }
-                  onVideoReady={onVideoReady}
-                  progress={clampProgress(stagePosition - index)}
-                />
-              ))}
+          <div
+            className={cn(
+              'rounded-tl-[30px] rounded-bl-[30px] bg-black py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:pt-[80px] lg:pb-20',
+              pinned && 'himer-lifecycle-scene flex h-svh overflow-y-auto',
+            )}
+          >
+            <div ref={sceneRef} className="layout-container min-w-0">
+              <div ref={headerRef} className="himer-lifecycle-header mb-5 lg:mb-10">
+                <h2 className="type-h2 tracking-[-0.01em]">{HIMER_LIFECYCLE_DATA.headline}</h2>
+                <p className="type-body-xxs text-light-gray mt-5">{HIMER_LIFECYCLE_DATA.subtext}</p>
+              </div>
+              <div className={cn('grid gap-y-[60px]', pinned && 'gap-y-0')}>
+                {HIMER_LIFECYCLE_DATA.tabs.map((tab, index) => (
+                  <LifecycleStage
+                    key={tab.id}
+                    tab={tab}
+                    index={index}
+                    pinned={pinned}
+                    active={index === activeStage}
+                    preloadNext={
+                      pinned &&
+                      index === activeStage + 1 &&
+                      readyVideos.has(HIMER_LIFECYCLE_DATA.tabs[activeStage].desktopVideo)
+                    }
+                    onVideoReady={onVideoReady}
+                    progress={clampProgress(stagePosition - index)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -18,7 +18,7 @@ export const HimerMemoryKnowledgeSection = () => {
   );
   const preloadTabId = focusedTabId && focusedTabId !== activeTabId ? focusedTabId : hoveredTabId;
   return (
-    <section className="relative w-full bg-gradient-to-b from-white to-black">
+    <section className="relative w-full bg-gradient-to-b from-white from-50% to-black to-50%">
       <div className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 md:py-20 lg:rounded-tl-[60px] lg:rounded-bl-[60px]">
         <div className="layout-container">
           <div className="mb-3 flex items-center gap-1">

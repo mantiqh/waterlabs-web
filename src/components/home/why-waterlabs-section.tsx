@@ -109,36 +109,45 @@ export const WhyWaterlabsSection = ({
   // Initial visit/refresh starts at index 0 (matching Figma and user reference with no cards on left)
   const [desktopIndex, setDesktopIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const isResettingRef = useRef(false);
+  const pendingIndexRef = useRef<number | null>(null);
 
-  // When transition is disabled to silently normalize the index, re-enable it on the next paint
+  // When transition is disabled to silently normalize the index, re-enable it after the snapped frame paints
   useEffect(() => {
     if (!isTransitioning) {
-      const raf1 = requestAnimationFrame(() => {
-        const raf2 = requestAnimationFrame(() => {
+      let raf1 = 0;
+      let raf2 = 0;
+      raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(() => {
+          isResettingRef.current = false;
           setIsTransitioning(true);
+          if (pendingIndexRef.current !== null) {
+            const target = pendingIndexRef.current;
+            pendingIndexRef.current = null;
+            setDesktopIndex(target);
+          }
         });
-        return () => cancelAnimationFrame(raf2);
       });
-      return () => cancelAnimationFrame(raf1);
+      return () => {
+        cancelAnimationFrame(raf1);
+        cancelAnimationFrame(raf2);
+      };
     }
   }, [isTransitioning]);
 
   const desktopRealIndex = ((desktopIndex % cards.length) + cards.length) % cards.length;
 
   const handlePrev = () => {
+    if (isResettingRef.current || !isTransitioning) return;
     const N = cards.length;
     if (N === 0) return;
 
     if (desktopIndex === 0) {
       // Smoothly loop backwards: silently jump to middle set clone of card 0 (index N), then animate to N - 1
+      isResettingRef.current = true;
+      pendingIndexRef.current = N - 1;
       setIsTransitioning(false);
       setDesktopIndex(N);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitioning(true);
-          setDesktopIndex(N - 1);
-        });
-      });
       return;
     }
 
@@ -147,11 +156,14 @@ export const WhyWaterlabsSection = ({
   };
 
   const handleNext = () => {
+    if (isResettingRef.current || !isTransitioning) return;
+    if (desktopIndex >= displayCards.length - 1) return;
     setIsTransitioning(true);
     setDesktopIndex((prev) => prev + 1);
   };
 
   const handleDotClick = (targetRealIndex: number) => {
+    if (isResettingRef.current || !isTransitioning) return;
     const N = cards.length;
     if (N === 0) return;
     const currentReal = ((desktopIndex % N) + N) % N;
@@ -160,23 +172,21 @@ export const WhyWaterlabsSection = ({
     if (diff < -N / 2) diff += N;
 
     if (desktopIndex + diff < 0) {
-      setIsTransitioning(false);
+      isResettingRef.current = true;
       const normalizedCurrent = desktopIndex + N;
+      pendingIndexRef.current = normalizedCurrent + diff;
+      setIsTransitioning(false);
       setDesktopIndex(normalizedCurrent);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsTransitioning(true);
-          setDesktopIndex(normalizedCurrent + diff);
-        });
-      });
       return;
     }
 
+    if (desktopIndex + diff >= displayCards.length) return;
     setIsTransitioning(true);
     setDesktopIndex((prev) => prev + diff);
   };
 
   const handleCardClick = (idx: number) => {
+    if (isResettingRef.current || !isTransitioning) return;
     if (idx === desktopIndex) return;
     setIsTransitioning(true);
     setDesktopIndex(idx);
@@ -190,9 +200,13 @@ export const WhyWaterlabsSection = ({
 
     // Keep active card within valid clone range without jumping when advancing from set 0
     if (desktopIndex >= 2 * N) {
+      isResettingRef.current = true;
+      pendingIndexRef.current = null;
       setIsTransitioning(false);
       setDesktopIndex((prev) => prev - N);
     } else if (desktopIndex < 0) {
+      isResettingRef.current = true;
+      pendingIndexRef.current = null;
       setIsTransitioning(false);
       setDesktopIndex((prev) => prev + N);
     }
@@ -290,11 +304,17 @@ export const WhyWaterlabsSection = ({
                 >
                   {displayCards.map((card, idx) => {
                     const isActive = idx === desktopIndex;
+                    const cardTransitionClass = isTransitioning
+                      ? 'transition-all duration-500'
+                      : 'transition-none';
+                    const titleTransitionClass = isTransitioning
+                      ? 'transition-colors duration-500'
+                      : 'transition-none';
                     return (
                       <div
                         key={card.uniqueKey}
                         onClick={() => handleCardClick(idx)}
-                        className={`flex shrink-0 cursor-pointer flex-col transition-all duration-500 ${
+                        className={`flex shrink-0 cursor-pointer flex-col ${cardTransitionClass} ${
                           isActive
                             ? 'pointer-events-auto w-[588px] gap-[20px] opacity-100'
                             : 'w-[518px] gap-[21.14px] opacity-25 hover:opacity-50'
@@ -302,7 +322,7 @@ export const WhyWaterlabsSection = ({
                       >
                         {/* Card Image */}
                         <div
-                          className={`relative overflow-hidden rounded-[20px_10px_20px_20px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-500 ${
+                          className={`relative overflow-hidden rounded-[20px_10px_20px_20px] shadow-[0_8px_30px_rgba(0,0,0,0.06)] ${cardTransitionClass} ${
                             isActive ? 'h-[304px] w-[588px]' : 'h-[211.43px] w-[518px]'
                           }`}
                         >
@@ -317,14 +337,14 @@ export const WhyWaterlabsSection = ({
 
                         {/* Card Content: Title & Description */}
                         <div
-                          className={`flex flex-col transition-all duration-500 ${
+                          className={`flex flex-col ${cardTransitionClass} ${
                             isActive
                               ? 'min-h-[140px] max-w-[588px] gap-[12px]'
                               : 'min-h-[140px] max-w-[518px] gap-[10.57px]'
                           }`}
                         >
                           <h3
-                            className={`type-h6 tracking-[-0.01em] transition-colors duration-500 ${
+                            className={`type-h6 tracking-[-0.01em] ${titleTransitionClass} ${
                               isActive ? 'text-[#0F68D6]' : 'text-[#042849]'
                             }`}
                           >

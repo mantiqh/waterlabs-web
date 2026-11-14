@@ -84,7 +84,7 @@ export const WhatWeHoldSection = () => {
         - Top-right corner rounded (rounded-tr-[60px]) exposing the teal gradient of Our story above
         - Bottom-right corner rounded (rounded-br-[60px]) exposing pure white of The Founders below
       */}
-      <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-[#F4F6F9] bg-[url('/images/about-us/what-we-hold/bg_what_we_hold_ourselves.png')] bg-cover bg-left-bottom bg-no-repeat px-[20px] pt-[40px] pb-[40px] md:px-[40px] md:pt-[60px] md:pb-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:pt-[80px] lg:pb-[80px]">
+      <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-[#F4F6F9] bg-no-repeat px-[20px] pt-[40px] pb-[40px] md:px-[40px] md:pt-[60px] md:pb-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:bg-[url('/images/about-us/what-we-hold/bg_what_we_hold_ourselves.png')] lg:bg-cover lg:bg-left-bottom lg:px-[60px] lg:pt-[80px] lg:pb-[80px]">
         <div className="mx-auto w-full max-w-[1320px]">
           {/* ========================================================================= */}
           {/* Desktop Layout (lg+): Left Heading (35% / 537px) + Right Cards (62% / 769px)*/}
@@ -92,7 +92,7 @@ export const WhatWeHoldSection = () => {
           <div className="hidden w-full flex-row items-start justify-between gap-[20px] lg:flex">
             {/* Left Column: Heading (Sticky on Desktop) */}
             <div className="w-full shrink-0 self-start pt-[32px] lg:sticky lg:top-[120px] lg:w-[35%] xl:w-[537px]">
-              <h2 className="type-h2 text-[36px] leading-[44px] tracking-[-0.01em] text-[#111111] xl:text-[52px] xl:leading-[60px]">
+              <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
                 What we hold
                 <br />
                 ourselves to
@@ -119,12 +119,8 @@ export const WhatWeHoldSection = () => {
 
                   {/* Text Container */}
                   <div className="flex flex-1 flex-col items-start gap-[10px] xl:gap-[14px]">
-                    <h5 className="type-h5 text-[22px] leading-[30px] tracking-[-0.01em] text-[#0F68D6] xl:text-[32px] xl:leading-[40px]">
-                      {item.title}
-                    </h5>
-                    <p className="type-body-xs text-[15px] leading-[22px] text-[#2A2A2A] xl:text-[18px] xl:leading-[26px]">
-                      {item.description}
-                    </p>
+                    <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{item.title}</h5>
+                    <p className="type-body-xs text-[#2A2A2A]">{item.description}</p>
                   </div>
                 </div>
               ))}
@@ -136,7 +132,7 @@ export const WhatWeHoldSection = () => {
           {/* ========================================================================= */}
           <div className="flex w-full flex-col items-start gap-[20px] lg:hidden">
             {/* Heading */}
-            <h2 className="type-h2 text-[32px] leading-[40px] tracking-[-0.01em] text-[#111111]">
+            <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
               What we hold
               <br />
               ourselves to
@@ -171,14 +167,10 @@ export const WhatWeHoldSection = () => {
                   {/* Text Container */}
                   <div className="flex flex-1 flex-col gap-[14px]">
                     {/* Title */}
-                    <h5 className="type-h5 text-[20px] leading-[28px] tracking-[-0.01em] text-[#0F68D6]">
-                      {item.title}
-                    </h5>
+                    <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{item.title}</h5>
 
                     {/* Description */}
-                    <p className="type-body-xs text-[14px] leading-[24px] text-[#2A2A2A]">
-                      {item.description}
-                    </p>
+                    <p className="type-body-xs text-[#2A2A2A]">{item.description}</p>
                   </div>
                 </div>
               ))}

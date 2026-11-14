@@ -54,7 +54,9 @@ export function MetricsCarousel() {
               value={value}
               className="type-h5 text-electric-blue tracking-[-0.01em]"
             />
-            <p className="type-body-xxs text-gray-black mt-3 max-w-[230px] tracking-[0.01em]">{description}</p>
+            <p className="type-body-xxs text-gray-black mt-3 max-w-[230px] tracking-[0.01em]">
+              {description}
+            </p>
           </div>
         ))}
       </div>

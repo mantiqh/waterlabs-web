@@ -263,10 +263,10 @@ export const WhatWeBelieveSection = () => {
                 background: 'linear-gradient(204.93deg, #63CCB7 5.28%, #0F68D6 98.54%)',
               }}
             >
-              {/* Card Mobile Background Texture */}
+              {/* Card Mobile Background Texture matching Desktop ripple circles (no logo backdrop) */}
               <div className="pointer-events-none absolute inset-0">
                 <Image
-                  src="/images/philosophy/what-we-believe/banner-mobile.png"
+                  src="/images/philosophy/what-we-believe/img_card_background.png"
                   alt="Card background texture mobile"
                   fill
                   priority
@@ -357,12 +357,12 @@ export const WhatWeBelieveSection = () => {
                       disabled={isFirst}
                       className={`flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
                         isFirst
-                          ? 'cursor-not-allowed border border-white bg-transparent text-white'
+                          ? 'cursor-not-allowed border border-white bg-transparent text-[#D7DCE2]'
                           : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm active:scale-95'
                       }`}
                     >
                       <ChevronLeft
-                        className={`h-[14px] w-[9px] ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`}
+                        className={`h-[13px] w-[9px] ${isFirst ? 'text-[#D7DCE2]' : 'text-[#0F68D6]'}`}
                       />
                     </button>
 
@@ -374,12 +374,12 @@ export const WhatWeBelieveSection = () => {
                       disabled={isLast}
                       className={`flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
                         isLast
-                          ? 'cursor-not-allowed border border-white bg-transparent text-white'
+                          ? 'cursor-not-allowed border border-white bg-transparent text-[#D7DCE2]'
                           : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm active:scale-95'
                       }`}
                     >
                       <ChevronRight
-                        className={`h-[14px] w-[9px] ${isLast ? 'text-white' : 'text-[#0F68D6]'}`}
+                        className={`h-[13px] w-[9px] ${isLast ? 'text-[#D7DCE2]' : 'text-[#0F68D6]'}`}
                       />
                     </button>
                   </div>

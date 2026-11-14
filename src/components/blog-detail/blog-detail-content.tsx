@@ -247,13 +247,13 @@ export const BlogDetailContent = ({
       </div>
 
       <div className="w-full px-[20px] md:px-[40px] lg:px-[60px]">
-        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[32px] pt-[40px] lg:flex-row lg:gap-[40px] lg:pt-[60px]">
+        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[32px] pt-0 lg:flex-row lg:gap-[40px]">
           {/* 
             =============================================================================
             LEFT COLUMN: STICKY TABLE OF CONTENTS (Desktop: Frame 2147226736: 305px wide)
             =============================================================================
           */}
-          <aside className="sticky top-[100px] z-20 hidden w-[305px] shrink-0 lg:block">
+          <aside className="sticky top-[100px] z-20 hidden w-[305px] shrink-0 pt-[32px] lg:block">
             <BlogDetailTOC
               activeTopic={activeTopic}
               onSelectTopic={scrollToTopic}
@@ -266,7 +266,7 @@ export const BlogDetailContent = ({
             RIGHT COLUMN: BLOG ARTICLE BODY CONTENT (Frame 2147226791: 975px wide)
             =============================================================================
           */}
-          <div className="flex w-full flex-1 flex-col gap-[32px] lg:max-w-[975px] lg:gap-[60px]">
+          <div className="flex w-full flex-1 flex-col gap-[32px] pt-[32px] lg:max-w-[975px] lg:gap-[60px]">
             {sections.map((section) => (
               <article
                 key={section.id}

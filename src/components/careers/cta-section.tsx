@@ -8,10 +8,10 @@ export const CareersCTASection = () => {
     <section className="relative w-full overflow-hidden bg-white">
       {/* 
         CTA Card with Top-Right rounded corner:
-        - Desktop: rounded-tr-[80px], py-[80px] px-[60px], min-h-[508px]
+        - Desktop: rounded-tr-[80px], py-[80px] px-[60px], min-h-[464px]
         - Mobile: rounded-tr-[30px], py-[40px] px-[20px], min-h-[402px]
       */}
-      <div className="relative flex min-h-[402px] w-full flex-col justify-center overflow-hidden rounded-tr-[30px] px-[20px] py-[40px] md:px-[40px] lg:min-h-[508px] lg:rounded-tr-[80px] lg:px-[60px] lg:py-[80px]">
+      <div className="relative flex min-h-[402px] w-full flex-col justify-center overflow-hidden rounded-tr-[30px] px-[20px] py-[40px] md:px-[40px] lg:min-h-[464px] lg:rounded-tr-[80px] lg:px-[60px] lg:py-[80px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -43,7 +43,9 @@ export const CareersCTASection = () => {
           {/* CTA Action Button */}
           <div className="mt-[4px] lg:mt-[8px]">
             <Link href="#where-you-would-fit">
-              <CTA variant="dark-bg">See Open Roles</CTA>
+              <CTA variant="dark-bg" size="compact-mobile" as="span">
+                See Open Roles
+              </CTA>
             </Link>
           </div>
         </div>

@@ -161,7 +161,9 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
         }`}
       >
         <header
-          className={`flex h-[60px] w-full flex-row items-center justify-between py-[8px] backdrop-blur-[13.2px] transition-all duration-300 lg:relative ${
+          className={`flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 lg:relative ${
+            activeDropdown ? '' : 'backdrop-blur-[13.2px]'
+          } ${
             theme === 'dark'
               ? isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-white/10 bg-black/85 px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/10 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
@@ -296,7 +298,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                       {item.columns && item.columns.length > 1 ? (
                         /* 2-Column Dropdown (Agentic RCM Solutions: 746px x 284px) */
                         <div
-                          className="flex w-[746px] max-w-[calc(100vw-32px)] flex-col rounded-[20px_10px_20px_20px] border border-white/70 bg-white/85 p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] backdrop-blur-[20px]"
+                          className="flex w-[746px] max-w-[calc(100vw-32px)] flex-col rounded-[20px_10px_20px_20px] border border-[#D7DCE2]/60 bg-white p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/85 supports-backdrop-filter:backdrop-blur-[40px]"
                           onMouseLeave={() => setHoveredSubItem(null)}
                         >
                           {/* Columns Frame 2147227097 */}
@@ -336,13 +338,13 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                       }}
                                       className={`body-xxs type-body-xxs flex h-[40px] flex-row items-center gap-[14px] py-[8px] transition-colors duration-150 ${
                                         isActive
-                                          ? 'text-[#0F68D6]'
-                                          : 'text-[#111111] hover:text-[#0F68D6]'
+                                          ? 'text-[#0753A8]'
+                                          : 'text-[#111111] hover:text-[#0753A8]'
                                       }`}
                                     >
                                       <span className="whitespace-nowrap">{subItem.label}</span>
                                       {isActive && (
-                                        <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0F68D6]" />
+                                        <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0753A8]" />
                                       )}
                                     </Link>
                                   );
@@ -354,7 +356,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                       ) : (
                         /* 1-Column Dropdown (About us / Products: 218px x 188px) */
                         <div
-                          className="flex w-[218px] flex-col rounded-[20px_10px_20px_20px] border border-white/70 bg-white/85 p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] backdrop-blur-[20px]"
+                          className="flex w-[218px] flex-col rounded-[20px_10px_20px_20px] border border-[#D7DCE2]/60 bg-white p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/85 supports-backdrop-filter:backdrop-blur-[40px]"
                           onMouseLeave={() => setHoveredSubItem(null)}
                         >
                           {/* Items Frame 2147227091 */}
@@ -389,13 +391,13 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                   }}
                                   className={`body-xxs type-body-xxs flex h-[40px] flex-row items-center gap-[12px] py-[8px] transition-colors duration-150 ${
                                     isActive
-                                      ? 'text-[#0F68D6]'
-                                      : 'text-[#111111] hover:text-[#0F68D6]'
+                                      ? 'text-[#0753A8]'
+                                      : 'text-[#111111] hover:text-[#0753A8]'
                                   }`}
                                 >
                                   <span className="whitespace-nowrap">{subItem.label}</span>
                                   {isActive && (
-                                    <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0F68D6]" />
+                                    <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0753A8]" />
                                   )}
                                 </Link>
                               );
@@ -505,7 +507,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
 
         {/* Mobile Menu Dropdown overlay */}
         <div
-          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-white/30 bg-white/85 p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] backdrop-blur-[13.2px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
+          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-[#D7DCE2]/60 bg-white p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/85 supports-backdrop-filter:backdrop-blur-[40px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
             isOpen
               ? 'pointer-events-auto visible translate-y-0 scale-100 opacity-100'
               : 'pointer-events-none invisible -translate-y-4 scale-[0.98] opacity-0'
@@ -524,7 +526,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                     style={{
                       transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                     }}
-                    className={`flex transform flex-col border-b border-white/30 py-[4px] transition-all duration-300 last:border-b-0 ${
+                    className={`flex transform flex-col border-b border-[#D7DCE2]/60 py-[4px] transition-all duration-300 last:border-b-0 ${
                       isOpen ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
                     }`}
                   >
@@ -568,13 +570,13 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                               }}
                               className={`body-xxs type-body-xxs flex items-center justify-between rounded-[10px] px-[10px] py-[8px] transition-all duration-150 ${
                                 isCurrent
-                                  ? 'bg-white/40 font-medium text-[#0F68D6]'
-                                  : 'text-midnight-blue/80 hover:bg-white/60 hover:text-[#0F68D6]'
+                                  ? 'bg-[#F4F6F9] font-medium text-[#0753A8]'
+                                  : 'text-midnight-blue/80 hover:bg-[#F4F6F9] hover:text-[#0753A8]'
                               }`}
                             >
                               <span>{subItem.label}</span>
                               {isCurrent && (
-                                <ChevronRight className="h-[15px] w-[10px] shrink-0 text-[#0F68D6]" />
+                                <ChevronRight className="h-[15px] w-[10px] shrink-0 text-[#0753A8]" />
                               )}
                             </Link>
                           );
@@ -597,7 +599,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                   style={{
                     transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                   }}
-                  className={`body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transform border-b border-white/30 py-[10px] transition-all duration-300 last:border-b-0 ${
+                  className={`body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transform border-b border-[#D7DCE2]/60 py-[10px] transition-all duration-300 last:border-b-0 ${
                     isOpen ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
                   }`}
                 >
@@ -611,7 +613,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
             style={{
               transitionDelay: isOpen ? '300ms' : '0ms',
             }}
-            className={`flex transform flex-col border-t border-white/40 pt-[12px] transition-all duration-300 ${
+            className={`flex transform flex-col border-t border-[#D7DCE2]/60 pt-[12px] transition-all duration-300 ${
               isOpen ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
             }`}
           >

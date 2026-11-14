@@ -12,7 +12,7 @@ export const TrustHeroSection = () => {
         - Mobile: 402px x 490px, border-radius: 0px 0px 0px 30px, padding: 20px 20px 40px
         - Background: linear-gradient(180deg, #0F68D6 41.31%, #9A84E3 100%) with banner.png
       */}
-      <div className="relative flex h-[490px] w-full flex-col justify-between gap-[20px] rounded-bl-[30px] bg-gradient-to-b from-[#0F68D6] from-40% to-[#9A84E3] px-[20px] pt-[20px] pb-[40px] md:h-[560px] md:gap-0 md:px-[40px] md:pt-[28px] md:pb-[40px] lg:h-[650px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]">
+      <div className="relative flex min-h-[490px] w-full flex-col justify-between gap-[20px] rounded-bl-[30px] bg-gradient-to-b from-[#0F68D6] from-40% to-[#9A84E3] px-[20px] pt-[20px] pb-[40px] md:h-[560px] md:gap-0 md:px-[40px] md:pt-[28px] md:pb-[40px] lg:h-[650px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]">
         {/* Background Banner Graphic aligned to bottom */}
         <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
           {/* Desktop & Tablet Banner Graphic */}

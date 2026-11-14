@@ -17,7 +17,7 @@ export const ChargeCaptureHeroSection = () => {
       <div
         className="relative flex min-h-[683px] w-full flex-col justify-between gap-[20px] overflow-hidden rounded-bl-[60px] px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pt-[28px] md:pb-[60px] lg:h-[653px] lg:gap-[32px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]"
         style={{
-          background: 'linear-gradient(180deg, #0F68D6 41.31%, #B8B1A5 108.85%)',
+          background: 'linear-gradient(180deg, #0F68D6 41.31%, #A9D154 108.85%)',
         }}
       >
         {/* Background Banner Graphic with abstract round lines */}

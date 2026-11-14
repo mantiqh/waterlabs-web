@@ -27,6 +27,7 @@ export const ContactUsPage = ({ data = DEFAULT_CONTACT_US_DATA }: ContactUsPageP
         tag={data.formTag}
         heading={data.formHeading}
         image={data.formImage}
+        imageMobile={data.formImageMobile}
         orgTypeOptions={data.orgTypeOptions}
         newsletterHeading={data.newsletterHeading}
         consentText={data.consentText}

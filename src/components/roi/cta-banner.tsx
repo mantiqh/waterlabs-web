@@ -49,7 +49,7 @@ export const ROICtaBanner = () => {
 
             <div className="shrink-0 self-start pt-[4px]">
               <Link href="/contact-us" className="inline-block">
-                <CTA variant="dark-bg" as="div">
+                <CTA variant="dark-bg" size="compact-mobile" as="div" className="max-md:!px-[20px]">
                   Get a demo
                 </CTA>
               </Link>

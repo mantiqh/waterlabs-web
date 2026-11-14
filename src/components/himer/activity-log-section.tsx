@@ -19,7 +19,7 @@ export const HimerActivityLogSection = () => {
 
   return (
     <section className="relative w-full bg-black">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-[100px] bg-gradient-to-r from-[#0F68D6] to-black lg:h-[140px]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[100px] bg-gradient-to-r from-[#063062] to-black lg:h-[140px] lg:from-[#0A4690]" />
 
       <div className="bg-ghost-white text-gray-black relative z-10 w-full rounded-tl-[30px] pt-10 pb-0 md:pt-20 md:pb-12 lg:rounded-tl-[60px] lg:pt-[80px] lg:pb-[40px]">
         <div className="layout-container flex justify-center">
