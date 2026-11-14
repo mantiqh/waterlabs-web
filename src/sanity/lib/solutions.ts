@@ -21,7 +21,9 @@ interface SanitySolutionDoc {
   heroDescription?: string;
   heroCtaText?: string;
   heroCtaLink?: string;
+  heroGradient?: string;
   heroImage?: string;
+  heroImageMobile?: string;
   heroImageAlt?: string;
   heroBanner?: string;
 
@@ -33,6 +35,7 @@ interface SanitySolutionDoc {
   problemQuoteText?: string;
   problemQuoteAuthor?: string;
   problemImage?: string;
+  problemImageMobile?: string;
   problemImageAlt?: string;
 
   closesSectionTitle?: string;
@@ -97,8 +100,10 @@ function mapSanityToSolution(doc: SanitySolutionDoc): SolutionPageData {
       ctaText: doc.heroCtaText || 'Get a Demo',
       ctaLink: doc.heroCtaLink || '/contact-us',
       heroImage: doc.heroImage,
+      heroImageMobile: doc.heroImageMobile,
       heroImageAlt: doc.heroImageAlt || doc.title,
       heroBanner: doc.heroBanner,
+      heroGradient: doc.heroGradient,
     },
 
     problem: {
@@ -110,6 +115,7 @@ function mapSanityToSolution(doc: SanitySolutionDoc): SolutionPageData {
       quoteText: doc.problemQuoteText,
       quoteAuthor: doc.problemQuoteAuthor,
       image: doc.problemImage,
+      imageMobile: doc.problemImageMobile,
       imageAlt: doc.problemImageAlt,
     },
 

@@ -21,7 +21,7 @@ export const ROIProofBand = () => {
               {/* Stat 1 */}
               <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
-                  className="type-h2 w-fit tracking-[-0.01em]"
+                  className="type-h2 w-fit tracking-[-0.01em] max-md:text-[32px] max-md:leading-[40px]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
                     WebkitBackgroundClip: 'text',
@@ -41,7 +41,7 @@ export const ROIProofBand = () => {
               {/* Stat 2 */}
               <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
-                  className="type-h2 w-fit tracking-[-0.01em]"
+                  className="type-h2 w-fit tracking-[-0.01em] max-md:text-[32px] max-md:leading-[40px]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
                     WebkitBackgroundClip: 'text',
@@ -61,7 +61,7 @@ export const ROIProofBand = () => {
               {/* Stat 3 */}
               <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
-                  className="type-h2 w-fit tracking-[-0.01em]"
+                  className="type-h2 w-fit tracking-[-0.01em] max-md:text-[32px] max-md:leading-[40px]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
                     WebkitBackgroundClip: 'text',

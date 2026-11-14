@@ -22,7 +22,7 @@ export const WhoThrivesHereSection = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#63CCB7] lg:h-[8px] lg:w-[8px]" />
-              <span className="body-xxs text-[#D7DCE2]">The Fit</span>
+              <span className="type-body-xxs text-[#D7DCE2]">The Fit</span>
             </div>
 
             {/* Title */}
@@ -47,7 +47,7 @@ export const WhoThrivesHereSection = () => {
                 </p>
                 <Link
                   href="mailto:hiring@waterlabs.ai"
-                  className="type-body-s w-fit !font-medium whitespace-nowrap text-white no-underline transition-opacity hover:opacity-90"
+                  className="type-body-s w-fit !font-bold whitespace-nowrap text-white transition-opacity hover:opacity-90 max-lg:underline lg:no-underline"
                 >
                   hiring@waterlabs.ai
                 </Link>

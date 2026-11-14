@@ -12,8 +12,7 @@ const productStatements = [
       'When a similar case arises, the agent is equipped with the necessary information.',
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(2).png',
-    mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(2).png',
+    mobileImage: '/images/philosophy/how-that-shows-up/how-that-shows-up-mobile-01.png',
   },
   {
     id: 1,
@@ -22,8 +21,7 @@ const productStatements = [
     description: 'Every denial is appealed, and every outstanding item is processed.',
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
-    mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
+    mobileImage: '/images/philosophy/how-that-shows-up/how-that-shows-up-mobile-02.png',
   },
   {
     id: 2,
@@ -33,8 +31,7 @@ const productStatements = [
       'When an agent encounters an unresolved issue, they escalate the case, providing a complete record of all attempted solutions.',
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
-    mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
+    mobileImage: '/images/philosophy/how-that-shows-up/how-that-shows-up-mobile-02.png',
   },
   {
     id: 3,
@@ -43,8 +40,7 @@ const productStatements = [
     description: 'Billing starts once they are live and working.',
     desktopImage:
       '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
-    mobileImage:
-      '/images/philosophy/how-that-shows-up/img_because_knowledge_should_compound_the_system_keeps_every_exception_it%20resolves_For_good.%20(3).png',
+    mobileImage: '/images/philosophy/how-that-shows-up/how-that-shows-up-mobile-02.png',
   },
 ];
 
@@ -52,46 +48,60 @@ export const HowThatShowsUpSection = () => {
   const [activeDesktopIndex, setActiveDesktopIndex] = useState(0);
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
 
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const desktopScrollRef = useRef<HTMLDivElement>(null);
-  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  // Sync window scroll with desktop statements progress
+  // Sync window scroll with desktop statements
   useEffect(() => {
+    let rafId: number | null = null;
+
     const handleWindowScroll = () => {
-      if (window.innerWidth < 1024 || !sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (window.innerWidth < 1024) return;
+        const el = sectionRef.current;
+        if (!el) return;
 
-      const start = windowHeight * 0.7;
-      const end = -rect.height * 0.3;
-      const total = start - end;
-      const current = start - rect.top;
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
 
-      if (current > 0 && current < total) {
-        const progress = Math.min(Math.max(current / total, 0), 1);
-        const index = Math.min(
-          Math.floor(progress * productStatements.length),
-          productStatements.length - 1,
-        );
-        setActiveDesktopIndex(index);
+        const start = windowHeight * 0.7;
+        const end = -rect.height * 0.3;
+        const total = start - end;
+        const current = start - rect.top;
 
-        if (desktopScrollRef.current) {
-          const container = desktopScrollRef.current;
-          const items = container.children;
-          if (items[index]) {
-            const targetItem = items[index] as HTMLElement;
-            container.scrollTo({
-              top: targetItem.offsetTop - container.offsetTop,
-              behavior: 'smooth',
-            });
+        if (current > 0 && current < total) {
+          const progress = Math.min(Math.max(current / total, 0), 1);
+          const index = Math.min(
+            Math.floor(progress * productStatements.length),
+            productStatements.length - 1,
+          );
+          setActiveDesktopIndex(index);
+
+          if (desktopScrollRef.current) {
+            const container = desktopScrollRef.current;
+            const items = container.children;
+            if (items[index]) {
+              const targetItem = items[index] as HTMLElement;
+              container.scrollTo({
+                top: targetItem.offsetTop - container.offsetTop,
+                behavior: 'smooth',
+              });
+            }
           }
         }
-      }
+      });
     };
 
     window.addEventListener('scroll', handleWindowScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleWindowScroll);
+    window.addEventListener('resize', handleWindowScroll);
+    handleWindowScroll();
+    return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', handleWindowScroll);
+      window.removeEventListener('resize', handleWindowScroll);
+    };
   }, []);
 
   // Handle Desktop vertical scroll
@@ -121,25 +131,6 @@ export const HowThatShowsUpSection = () => {
     }
   };
 
-  // Handle Mobile horizontal swipe / scroll
-  const handleMobileScroll = () => {
-    if (!mobileScrollRef.current) return;
-    const { scrollLeft, clientWidth } = mobileScrollRef.current;
-    if (clientWidth === 0) return;
-    const index = Math.round(scrollLeft / clientWidth);
-    setActiveMobileIndex(Math.min(Math.max(index, 0), productStatements.length - 1));
-  };
-
-  const scrollToMobileCard = (index: number) => {
-    if (!mobileScrollRef.current) return;
-    const clientWidth = mobileScrollRef.current.clientWidth;
-    mobileScrollRef.current.scrollTo({
-      left: index * clientWidth,
-      behavior: 'smooth',
-    });
-    setActiveMobileIndex(index);
-  };
-
   return (
     <section ref={sectionRef} className="relative m-0 w-full overflow-hidden bg-[#F4F6F9] p-0">
       {/* 
@@ -149,20 +140,22 @@ export const HowThatShowsUpSection = () => {
         - Background: linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)
       */}
       <div
-        className="flex w-full flex-col gap-[20px] overflow-hidden rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[32px] md:px-[40px] md:py-[60px] lg:gap-[24px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]"
+        className="flex w-full flex-col gap-[20px] rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[32px] md:px-[40px] md:py-[60px] lg:gap-[24px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]"
         style={{
           background: 'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
         }}
       >
         <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[20px] lg:gap-[24px]">
-          {/* Main Card with Background Image (Frame 2147203302: 1320px x 500px, 16px top-left radius to eliminate corner sliver) */}
-          <div className="relative flex h-[580px] w-full flex-col justify-end overflow-hidden rounded-[16px_10px_20px_20px] sm:h-[640px] md:h-[700px] lg:!h-[500px] lg:max-h-[500px] lg:justify-start lg:rounded-[16px_16px_16px_8px]">
-            {/* Background Image - Mobile & Tablet */}
-            <div className="pointer-events-none absolute inset-0 lg:hidden">
+          {/* ========================================================================= */}
+          {/* Mobile & Tablet Card (<1024px, matching Figma Image 3)                    */}
+          {/* ========================================================================= */}
+          <div className="flex w-full flex-col overflow-hidden rounded-[20px_10px_20px_20px] bg-white/[0.92] shadow-sm backdrop-blur-[12px] lg:hidden">
+            {/* Top: Image Box with crisp proportions matching Figma */}
+            <div className="relative aspect-[362/190] w-full shrink-0 overflow-hidden sm:h-[240px]">
               {productStatements.map((statement, idx) => (
                 <div
-                  key={`mobile-bg-${idx}`}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                  key={`mobile-card-img-${idx}`}
+                  className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
                     activeMobileIndex === idx ? 'opacity-100' : 'pointer-events-none opacity-0'
                   }`}
                 >
@@ -171,15 +164,63 @@ export const HowThatShowsUpSection = () => {
                     alt={`How That Shows Up Visual ${idx + 1}`}
                     fill
                     priority={idx === 0}
-                    sizes="100vw"
+                    sizes="(max-width: 1024px) 100vw, 600px"
                     className="object-cover object-center"
                   />
                 </div>
               ))}
             </div>
 
+            {/* Bottom: White Content Body */}
+            <div className="flex flex-col gap-[12px] p-[20px] sm:p-[24px]">
+              {/* Tag / Eyebrow */}
+              <div className="flex items-center gap-[6px]">
+                <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6]" />
+                <span className="type-caption tracking-[0.01em] text-[#7D8690]">Belief, Built</span>
+              </div>
+
+              {/* Heading */}
+              <h2 className="type-h3 text-black">How That Shows Up in the Product</h2>
+
+              {/* Statement text with blue highlighted segment */}
+              <p className="type-h6 text-black">
+                {productStatements[activeMobileIndex].leadText}{' '}
+                <span className="text-[#0F68D6]">
+                  {productStatements[activeMobileIndex].highlightText}
+                </span>{' '}
+                {productStatements[activeMobileIndex].description}
+              </p>
+
+              {/* Pill Indicators */}
+              <div className="flex items-center gap-[5px] pt-[6px]">
+                {productStatements.map((_, idx) => {
+                  const isActive = idx === activeMobileIndex;
+                  return (
+                    <button
+                      key={idx}
+                      type="button"
+                      aria-label={`Slide ${idx + 1}`}
+                      onClick={() => setActiveMobileIndex(idx)}
+                      className={`h-[5px] cursor-pointer rounded-[32px] border-none transition-all duration-300 outline-none ${
+                        isActive
+                          ? 'w-[32px] bg-[#0F68D6]'
+                          : idx === (activeMobileIndex + 1) % productStatements.length
+                            ? 'w-[16px] bg-[#0F68D6]/20'
+                            : 'w-[6px] bg-[#0F68D6]/20'
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* ========================================================================= */}
+          {/* Desktop Card (1024px+): Side-by-Side Scroller & Background Image          */}
+          {/* ========================================================================= */}
+          <div className="relative hidden h-[500px] max-h-[500px] w-full flex-col justify-start overflow-hidden rounded-[16px_16px_16px_8px] lg:flex">
             {/* Background Image - Desktop */}
-            <div className="pointer-events-none absolute inset-0 hidden lg:block">
+            <div className="pointer-events-none absolute inset-0">
               {productStatements.map((statement, idx) => (
                 <div
                   key={`desktop-bg-${idx}`}
@@ -200,10 +241,9 @@ export const HowThatShowsUpSection = () => {
             </div>
 
             {/* Glassmorphic Card (Frame 2147203299: 537px x 500px on desktop) */}
-            <div className="relative z-10 flex h-auto w-full flex-col justify-between gap-[14px] overflow-hidden rounded-[16px_8px_20px_20px] bg-white/[0.90] p-[20px] shadow-sm backdrop-blur-[12px] sm:p-[24px] lg:h-[500px] lg:max-h-[500px] lg:w-[360px] lg:rounded-[16px_8px_16px_8px] lg:p-[32px_32px_0px] xl:w-[537px]">
+            <div className="relative z-10 flex h-[500px] max-h-[500px] w-[360px] flex-col justify-between gap-[14px] overflow-hidden rounded-[16px_8px_16px_8px] bg-white/[0.90] p-[32px_32px_0px] shadow-sm backdrop-blur-[12px] xl:w-[537px]">
               {/* Heading Block */}
               <div className="flex flex-col gap-[10px] lg:gap-[14px]">
-                {/* Main Heading */}
                 <h2 className="type-h2 text-black">
                   How That Shows Up
                   <br />
@@ -212,7 +252,7 @@ export const HowThatShowsUpSection = () => {
               </div>
 
               {/* Desktop Progress Bar & Vertically Scrollable Statements */}
-              <div className="relative hidden flex-row items-start gap-[24px] pt-[4px] lg:flex">
+              <div className="relative flex flex-row items-start gap-[24px] pt-[4px]">
                 {/* Vertical Progress Bar (3px x 183px) */}
                 <div className="relative mt-[4px] h-[183px] w-[3px] shrink-0 overflow-hidden rounded-[12px] bg-[#7D8690]/40">
                   <div
@@ -250,53 +290,12 @@ export const HowThatShowsUpSection = () => {
                       </div>
                     );
                   })}
-                  {/* Bottom spacer so the last statement has clear breathing room and is not blurry when scrolled to the end */}
                   <div className="pointer-events-none h-[28px] shrink-0" aria-hidden="true" />
                 </div>
               </div>
 
-              {/* Mobile Horizontal Snap Scroll / Swipe Container */}
-              <div className="flex flex-col gap-[14px] pt-[2px] lg:hidden">
-                <div
-                  ref={mobileScrollRef}
-                  onScroll={handleMobileScroll}
-                  className="no-scrollbar flex w-full snap-x snap-mandatory flex-row overflow-x-auto"
-                >
-                  {productStatements.map((item) => (
-                    <div key={item.id} className="w-full min-w-full snap-start pr-[8px]">
-                      <p className="type-h6 text-black">
-                        {item.leadText} <span className="text-[#0F68D6]">{item.highlightText}</span>{' '}
-                        {item.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Carousel Indicators */}
-                <div className="flex items-center gap-[5px] pt-[2px]">
-                  {productStatements.map((_, idx) => {
-                    const isActive = idx === activeMobileIndex;
-                    return (
-                      <button
-                        key={idx}
-                        type="button"
-                        aria-label={`Slide ${idx + 1}`}
-                        onClick={() => scrollToMobileCard(idx)}
-                        className={`h-[5px] cursor-pointer rounded-[32px] border-none transition-all duration-300 outline-none ${
-                          isActive
-                            ? 'w-[32px] bg-[#0F68D6]'
-                            : idx === (activeMobileIndex + 1) % productStatements.length
-                              ? 'w-[16px] bg-[#0F68D6]/10 hover:bg-[#0F68D6]/30'
-                              : 'w-[6px] bg-[#0F68D6]/10 hover:bg-[#0F68D6]/30'
-                        }`}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-
               {/* Subtle bottom gradient fade on desktop card */}
-              <div className="pointer-events-none absolute right-0 bottom-0 left-0 hidden h-[20px] rounded-b-[8px] bg-gradient-to-t from-white/40 to-transparent lg:block" />
+              <div className="pointer-events-none absolute right-0 bottom-0 left-0 h-[20px] rounded-b-[8px] bg-gradient-to-t from-white/40 to-transparent" />
             </div>
           </div>
 

@@ -177,7 +177,7 @@ export const OurOwnCloudSection = () => {
                 <div className="flex w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex-col gap-[12px]">
                   <div className="relative aspect-[362/250] w-full overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
                     <Image
-                      src="/images/trust-and-security/our-own-cloud/img_no_shared_walls.png"
+                      src="/images/trust-and-security/our-own-cloud/img_no_shared_walls_mobile.png"
                       alt="No shared walls"
                       fill
                       sizes="100vw"
@@ -220,7 +220,7 @@ export const OurOwnCloudSection = () => {
                 <div className="flex w-[calc(100%-28px)] min-w-[calc(100%-28px)] shrink-0 snap-start flex-col gap-[12px]">
                   <div className="relative aspect-[362/250] w-full overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
                     <Image
-                      src="/images/trust-and-security/our-own-cloud/img_independently_tested.png"
+                      src="/images/trust-and-security/our-own-cloud/img_independently_tested_mobile.png"
                       alt="Independently tested"
                       fill
                       sizes="100vw"

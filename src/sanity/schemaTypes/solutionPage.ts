@@ -112,12 +112,27 @@ export const solutionPageSchema = defineType({
       ],
     }),
     defineField({
+      name: 'heroImageMobile',
+      title: 'Hero Right Image (Mobile)',
+      type: 'image',
+      group: 'hero',
+      description: 'Mobile version of hero feature graphic (optional)',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'heroBanner',
       title: 'Hero Background Pattern (Optional)',
       type: 'image',
       group: 'hero',
       description: 'Optional custom background banner overlay',
       options: { hotspot: true },
+    }),
+    defineField({
+      name: 'heroGradient',
+      title: 'Hero Background Gradient (CSS string)',
+      type: 'string',
+      group: 'hero',
+      description: 'Custom linear gradient for the hero card (optional)',
     }),
 
     // ── 02 · THE PROBLEM SECTION ──
@@ -189,6 +204,14 @@ export const solutionPageSchema = defineType({
           type: 'string',
         }),
       ],
+    }),
+    defineField({
+      name: 'problemImageMobile',
+      title: 'Problem Left Image (Mobile)',
+      type: 'image',
+      group: 'problem',
+      description: 'Mobile version of problem image (optional)',
+      options: { hotspot: true },
     }),
 
     // ── 03 · HOW WATERLABS CLOSES ──

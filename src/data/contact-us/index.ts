@@ -40,7 +40,8 @@ export const DEFAULT_CONTACT_US_DATA: ContactUsPageData = {
   // 03 · Contact Form
   formTag: 'Send us a message',
   formHeading: 'Contact Form',
-  formImage: '/images/contact-us/contact-form/contact-form.jpg',
+  formImage: '/images/contact-us/contact-form/img_contact_form_desktop.png',
+  formImageMobile: '/images/contact-us/contact-form/img_contact_form_mobile.png',
   orgTypeOptions: [
     'Health system',
     'Medical Group',

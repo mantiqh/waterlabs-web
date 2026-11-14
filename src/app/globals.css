@@ -710,6 +710,61 @@ select option {
   }
 }
 
+/* Culture card stack: ordinary layout uses Tailwind; enhancement stays scoped to this section. */
+@media (prefers-reduced-motion: no-preference) {
+  .culture-card-stack[data-animated] [data-card-track] {
+    display: block;
+    position: absolute;
+    inset: 0;
+    height: var(--deck-height);
+    overflow-y: auto;
+    scrollbar-width: none;
+    scroll-snap-type: y mandatory;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .culture-card-stack[data-animated] [data-card-rail] {
+    position: relative;
+    height: calc(var(--deck-height) * 6);
+  }
+
+  .culture-card-stack[data-animated] [data-card-snap-points] {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .culture-card-stack[data-animated] [data-card-snap-point] {
+    height: var(--deck-height);
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .culture-card-stack[data-animated] [data-deck] {
+    position: relative;
+    gap: 0;
+    padding-bottom: 40px;
+    isolation: isolate;
+    /* The native scroll layer receives gestures while the lift can draw outside it. */
+    pointer-events: none;
+  }
+
+  .culture-card-stack[data-animated] [data-culture-card] {
+    grid-area: 1 / 1;
+    transform-origin: center bottom;
+    backface-visibility: hidden;
+  }
+
+  .culture-card-stack[data-animated] [data-card-cover] {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
 /* Defer rendering of deep off-screen sections (modern-web-guidance: defer-rendering-heavy-content) */
 @utility section-deferred {
   content-visibility: auto;

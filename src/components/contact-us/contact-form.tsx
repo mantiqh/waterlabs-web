@@ -10,6 +10,7 @@ interface ContactUsContactFormProps {
   tag?: string;
   heading?: string;
   image?: string;
+  imageMobile?: string;
   orgTypeOptions?: string[];
   newsletterHeading?: string;
   consentText?: string;
@@ -20,7 +21,10 @@ interface ContactUsContactFormProps {
 export const ContactUsContactForm = ({
   tag = DEFAULT_CONTACT_US_DATA.formTag || 'Send us a message',
   heading = DEFAULT_CONTACT_US_DATA.formHeading,
-  image = DEFAULT_CONTACT_US_DATA.formImage || '/images/contact-us/contact-form/contact-form.jpg',
+  image = DEFAULT_CONTACT_US_DATA.formImage ||
+    '/images/contact-us/contact-form/img_contact_form_desktop.png',
+  imageMobile = DEFAULT_CONTACT_US_DATA.formImageMobile ||
+    '/images/contact-us/contact-form/img_contact_form_mobile.png',
   orgTypeOptions = DEFAULT_CONTACT_US_DATA.orgTypeOptions || [
     'Health system',
     'Medical Group',
@@ -47,6 +51,9 @@ export const ContactUsContactForm = ({
     challenge: '',
   });
   const [agreed, setAgreed] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState<
+    'idle' | 'sending' | 'success' | 'error'
+  >('idle');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -78,20 +85,41 @@ export const ContactUsContactForm = ({
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (submissionStatus === 'sending') return;
     if (!formData.orgType) {
       setIsDropdownOpen(true);
       return;
     }
-    // Form submission logic
-    console.log('Form submitted:', formData, agreed);
+    setSubmissionStatus('sending');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, agreed }),
+      });
+      if (!response.ok) throw new Error('Submission failed');
+      setSubmissionStatus('success');
+      setFormData({
+        name: '',
+        org: '',
+        emailId: '',
+        phoneNumber: '',
+        company: '',
+        orgType: '',
+        challenge: '',
+      });
+      setAgreed(false);
+    } catch {
+      setSubmissionStatus('error');
+    }
   };
 
   return (
     <section
       id="contact-form"
-      className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#020c47] to-50%"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#000A46] to-50% lg:to-[#010C45]"
     >
       {/* 
         Contact Form Section:
@@ -119,23 +147,30 @@ export const ContactUsContactForm = ({
               </div>
 
               {/* Image Container (Frame 2147226534: max 516px x 328px) */}
-              {image && (
-                <div className="relative aspect-[516/328] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:w-full lg:rounded-[30px_15px_30px_30px]">
-                  <Image
-                    src={image}
-                    alt="Contact form illustration"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 516px"
-                    className="object-cover object-center"
-                  />
-                  {/* Exact Figma Gradient overlay */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        'linear-gradient(180deg, rgba(99, 204, 183, 0) 45.31%, rgba(15, 104, 214, 0.7) 106.55%)',
-                    }}
-                  />
+              {(image || imageMobile) && (
+                <div className="relative aspect-[362/230] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:aspect-[516/328] lg:w-full lg:rounded-[30px_15px_30px_30px]">
+                  {image && (
+                    <div className="absolute inset-0 hidden lg:block">
+                      <Image
+                        src={image}
+                        alt="Contact form illustration"
+                        fill
+                        sizes="516px"
+                        className="object-cover object-center"
+                      />
+                    </div>
+                  )}
+                  {(imageMobile || image) && (
+                    <div className="absolute inset-0 block lg:hidden">
+                      <Image
+                        src={imageMobile || image!}
+                        alt="Contact form illustration"
+                        fill
+                        sizes="(max-width: 1023px) 100vw, 516px"
+                        className="object-cover object-center"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -150,7 +185,7 @@ export const ContactUsContactForm = ({
                 {/* Input container 1: Name & Org */}
                 <div className="flex w-full flex-col items-start gap-[12px] lg:flex-row">
                   {/* Name */}
-                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
+                  <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
                       name="name"
@@ -162,7 +197,7 @@ export const ContactUsContactForm = ({
                     />
                   </div>
                   {/* Org */}
-                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
+                  <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
                       name="org"
@@ -178,7 +213,7 @@ export const ContactUsContactForm = ({
                 {/* Input container 2: Email ID & Phone number */}
                 <div className="flex w-full flex-col items-start gap-[12px] lg:flex-row">
                   {/* Email ID */}
-                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
+                  <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="email"
                       name="emailId"
@@ -190,7 +225,7 @@ export const ContactUsContactForm = ({
                     />
                   </div>
                   {/* Phone number */}
-                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
+                  <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="tel"
                       name="phoneNumber"
@@ -205,7 +240,7 @@ export const ContactUsContactForm = ({
                 {/* Input container 3: Company & Organization Type */}
                 <div className="relative z-20 flex w-full flex-col items-start gap-[12px] lg:flex-row">
                   {/* Company */}
-                  <div className="flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
+                  <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
                       name="company"
@@ -219,7 +254,7 @@ export const ContactUsContactForm = ({
                   {/* Organization Type */}
                   <div
                     ref={dropdownRef}
-                    className="relative flex h-[60px] w-full items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1"
+                    className="relative flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1"
                   >
                     <button
                       type="button"
@@ -351,9 +386,23 @@ export const ContactUsContactForm = ({
                 </div>
 
                 {/* Desktop - Fill CTA (Submit Button) */}
-                <CTA variant="light-bg" type="submit">
-                  {submitButtonText}
+                <CTA
+                  variant="light-bg"
+                  size="compact-mobile"
+                  type="submit"
+                  disabled={submissionStatus === 'sending'}
+                >
+                  {submissionStatus === 'sending' ? 'Sending...' : submitButtonText}
                 </CTA>
+                <p
+                  role="status"
+                  aria-live="polite"
+                  className="type-body-xxs text-[#333333] empty:hidden"
+                >
+                  {submissionStatus === 'success' && 'Thank you. Your message has been sent.'}
+                  {submissionStatus === 'error' &&
+                    'Your message could not be sent. Please try again later.'}
+                </p>
               </div>
             </form>
           </div>

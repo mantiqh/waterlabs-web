@@ -113,9 +113,9 @@ export const FourThingsSection = () => {
         - Background: #F4F6F9
         - Top-right corner reveals the hero purple (#9983E2) seamlessly matching Figma
       */}
-      <div className="relative w-full rounded-tr-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:px-[60px] lg:py-[80px]">
+      <div className="relative w-full overflow-clip rounded-tr-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:px-[60px] lg:py-[80px]">
         {/* Vector Background Graphic at Left Bottom */}
-        <div className="pointer-events-none absolute bottom-0 left-0 z-0 aspect-[1126/944] w-[280px] overflow-hidden sm:w-[380px] lg:w-[480px] xl:w-[563px]">
+        <div className="pointer-events-none absolute bottom-0 left-0 z-0 hidden aspect-[1126/944] w-[280px] overflow-hidden sm:w-[380px] lg:block lg:w-[480px] xl:w-[563px]">
           <Image
             src="/images/culture/four-things/Vector.png"
             alt="Vector Graphic"

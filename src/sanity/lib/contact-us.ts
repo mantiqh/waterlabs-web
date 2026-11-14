@@ -48,6 +48,7 @@ export async function fetchContactUsPageSettings(): Promise<ContactUsPageData> {
         formTag: data.formTag ?? DEFAULT_CONTACT_US_DATA.formTag,
         formHeading: data.formHeading || DEFAULT_CONTACT_US_DATA.formHeading,
         formImage: data.formImage || DEFAULT_CONTACT_US_DATA.formImage,
+        formImageMobile: data.formImageMobile || DEFAULT_CONTACT_US_DATA.formImageMobile,
         orgTypeOptions:
           Array.isArray(data.orgTypeOptions) && data.orgTypeOptions.length > 0
             ? data.orgTypeOptions

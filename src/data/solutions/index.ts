@@ -153,7 +153,8 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
       heroImage: '/images/solutions/solutions-eligibility/hero-section/img_banner%20(9).png',
-      heroBanner: '/images/solutions/solutions-eligibility/hero-section/banner%20(4).png',
+      heroBanner:
+        '/images/solutions/solutions-eligibility/hero-section/img_banner_bg%20(3).png',
     },
     problem: {
       tag: 'The problem',
@@ -275,7 +276,8 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
       heroImage: '/images/solutions/solutions-denialmanagement/hero-section/img_banner%20(13).png',
-      heroBanner: '/images/solutions/solutions-denialmanagement/hero-section/banner%20(8).png',
+      heroBanner:
+        '/images/solutions/solutions-denialmanagement/hero-section/img_banner_bg%20(7).png',
     },
     problem: {
       tag: 'The problem',
@@ -406,7 +408,8 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
       heroImage: '/images/solutions/solutions-AR-follow-up/hero-section/img_banner%20(14).png',
-      heroBanner: '/images/solutions/solutions-AR-follow-up/hero-section/banner%20(9).png',
+      heroBanner:
+        '/images/solutions/solutions-AR-follow-up/hero-section/img_banner_bg%20(8).png',
     },
     problem: {
       tag: 'The problem',
@@ -529,7 +532,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       heroImage:
         '/images/solutions/solutions-charge-capture-&-coding/hero-section/img_banner%20(11).png',
       heroBanner:
-        '/images/solutions/solutions-charge-capture-&-coding/hero-section/banner%20(6).png',
+        '/images/solutions/solutions-charge-capture-&-coding/hero-section/img_banner_bg%20(5).png',
     },
     problem: {
       tag: 'The problem',
@@ -652,8 +655,9 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
         'Our agents reconcile remittances, post payments, and route what does not balance at any volume your practice handles.',
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
-      heroImage: '/images/solutions/solutions-payment-posting/hero-section/img_banner%20(15).png',
-      heroBanner: '/images/solutions/solutions-payment-posting/hero-section/banner%20(10).png',
+      heroImage: '/images/solutions/solutions-payment-posting/hero-section/img_banner%20(12).png',
+      heroBanner:
+        '/images/solutions/solutions-payment-posting/hero-section/img_banner_bg%20(6).png',
     },
     problem: {
       tag: 'The problem',
@@ -778,8 +782,9 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
         'Our agents review each claim against payer rules before submission, preventing delays caused by requests for information you have already provided.',
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
-      heroImage: '/images/solutions/solutions-claim-submission/hero-section/img_banner%20(12).png',
-      heroBanner: '/images/solutions/solutions-claim-submission/hero-section/banner%20(7).png',
+      heroImage: '/images/solutions/solutions-claim-submission/hero-section/img_banner%20(15).png',
+      heroBanner:
+        '/images/solutions/solutions-claim-submission/hero-section/img_banner_bg%20(9).png',
     },
     problem: {
       tag: 'The problem',
@@ -909,7 +914,8 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
       heroImage: '/images/solutions/solutions-patient-estimates/hero-section/img_banner%20(16).png',
-      heroBanner: '/images/solutions/solutions-patient-estimates/hero-section/banner%20(11).png',
+      heroBanner:
+        '/images/solutions/solutions-patient-estimates/hero-section/img_banner_bg%20(10).png',
     },
     problem: {
       tag: 'The problem',

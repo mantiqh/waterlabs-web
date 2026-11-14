@@ -7,6 +7,7 @@ export const ProductVideo = memo(function ProductVideo({
   id,
   label,
   className,
+  mediaClassName,
   active = true,
   priority = false,
   preloadInactive = false,
@@ -23,6 +24,7 @@ export const ProductVideo = memo(function ProductVideo({
   id: CurieCodeMediaId;
   label: string;
   className?: string;
+  mediaClassName?: string;
   active?: boolean;
   priority?: boolean;
   preloadInactive?: boolean;
@@ -47,6 +49,7 @@ export const ProductVideo = memo(function ProductVideo({
       mobileAspectRatio={mobileAspectRatio || `${media.mobile.width} / ${media.mobile.height}`}
       fit={fit}
       ariaLabel={label}
+      className={mediaClassName}
       containerClassName={className}
       active={active}
       priority={priority}

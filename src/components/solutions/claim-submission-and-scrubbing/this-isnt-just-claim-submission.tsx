@@ -197,13 +197,12 @@ export const ThisIsntJustClaimSubmissionSection = () => {
                   key={idx}
                   className="flex min-h-[320px] flex-1 flex-col gap-[24px] rounded-[16px] bg-white p-[32px]"
                 >
-                  <div className="relative h-[60px] w-[60px] shrink-0">
+                  <div className="relative h-[80px] w-[80px] shrink-0 xl:h-[102px] xl:w-[102px]">
                     <Image
                       src={card.icon}
                       alt={card.title}
-                      width={60}
-                      height={60}
-                      className="object-contain"
+                      fill
+                      className="object-contain object-left"
                     />
                   </div>
 
@@ -227,13 +226,12 @@ export const ThisIsntJustClaimSubmissionSection = () => {
                     key={idx}
                     className="flex w-[280px] shrink-0 flex-col gap-[20px] rounded-[16px] bg-white p-[24px] sm:w-[320px]"
                   >
-                    <div className="relative h-[48px] w-[48px] shrink-0">
+                    <div className="relative h-[62px] w-[62px] shrink-0">
                       <Image
                         src={card.icon}
                         alt={card.title}
-                        width={48}
-                        height={48}
-                        className="object-contain"
+                        fill
+                        className="object-contain object-left"
                       />
                     </div>
 

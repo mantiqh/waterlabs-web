@@ -4,12 +4,12 @@ import { ChevronRight } from '@/components/CTA';
 
 export const ComeTalkToUsSection = () => {
   return (
-    <section className="w-full overflow-hidden bg-white pr-[20px] min-[1440px]:pr-[calc((100vw-1320px)/2)] md:pr-[40px] lg:pr-[60px]">
+    <section className="w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#111111] to-50% pr-[20px] min-[1440px]:pr-[calc((100vw-1320px)/2)] md:pr-[40px] lg:pr-[60px]">
       {/* 
         Come talk to us Section:
         - Background container flush with the left viewport edge
         - Rounded right corners (rounded-tr / rounded-br) aligned with the 1320px content grid
-        - White margin on the right (matching grid margin of The Team and other sections)
+        - Top-right exposes #FFFFFF (TheTeam / TheFounders above), bottom-right exposes #111111 (Footer below)
         - Gradient background: linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)
       */}
       <div
@@ -26,14 +26,12 @@ export const ComeTalkToUsSection = () => {
             {/* Left Column: Heading, Description, CTA Button */}
             <div className="flex w-full shrink-0 flex-col items-start justify-center gap-[24px] min-[1440px]:w-[536px] min-[1440px]:gap-[40px] lg:w-[48%] xl:gap-[28px]">
               {/* Heading: General Sans, responsive scaling */}
-              <h2 className="type-h1 text-[40px] leading-[48px] tracking-[-0.01em] text-[#F4F6F9] min-[1440px]:text-[68px] min-[1440px]:leading-[76px] xl:text-[48px] xl:leading-[56px]">
-                Come talk to us.
-              </h2>
+              <h2 className="type-h1 tracking-[-0.01em] text-[#F4F6F9]">Come talk to us.</h2>
 
               {/* Sub-stack: Paragraph + CTA */}
               <div className="flex w-full flex-col items-start gap-[20px] xl:gap-[24px]">
                 {/* Paragraph: Inter, responsive sizing */}
-                <p className="type-body-s max-w-[536px] text-[16px] leading-[24px] text-white min-[1440px]:text-[20px] min-[1440px]:leading-[28px] xl:text-[17px] xl:leading-[25px]">
+                <p className="type-body-s max-w-[536px] text-white">
                   Whether it is one function that needs fixing or a revenue cycle that needs
                   rethinking, the fastest way to find out what we can do is to look at your numbers.
                 </p>
@@ -62,25 +60,23 @@ export const ComeTalkToUsSection = () => {
           {/* ========================================================================= */}
           {/* Mobile Layout (< lg): Stacked Column (Title -> Photo -> Text -> CTA)      */}
           {/* ========================================================================= */}
-          <div className="mx-auto flex w-full max-w-[342px] flex-col items-start gap-[20px] lg:hidden">
-            {/* Heading: General Sans, 36px/48px, -0.01em, #F4F6F9 */}
-            <h2 className="type-h1 text-[36px] leading-[48px] tracking-[-0.01em] text-[#F4F6F9]">
-              Come talk to us.
-            </h2>
+          <div className="mx-auto flex w-full max-w-[342px] flex-col items-start gap-[20px] md:max-w-none lg:hidden">
+            {/* Heading: General Sans */}
+            <h2 className="type-h1 tracking-[-0.01em] text-[#F4F6F9]">Come talk to us.</h2>
 
             {/* Content Frame (Figma: Frame 2147203294, gap: 12px) */}
             <div className="flex w-full flex-col items-start gap-[12px]">
               {/* Middle: Photo (342px x 203px, border-radius: 20px 10px 20px 20px) */}
               <div
-                className="h-[203px] w-full rounded-[20px_10px_20px_20px] bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img_mob%20(3).png')] bg-cover bg-center bg-no-repeat"
+                className="aspect-[342/203] w-full rounded-[20px_10px_20px_20px] bg-[url('/images/about-us/come-talk-to-us/come_talk_to_us_img_mob%20(3).png')] bg-cover bg-center bg-no-repeat"
                 role="img"
                 aria-label="Waterlabs team in conversation with healthcare client"
               />
 
               {/* Bottom Content: Paragraph + CTA (Figma: Frame 2147203307, gap: 24px) */}
               <div className="flex w-full flex-col items-start gap-[24px]">
-                {/* Paragraph: Inter, 16px/26px, #FFFFFF */}
-                <p className="type-body-s text-[16px] leading-[26px] text-white">
+                {/* Paragraph: Inter */}
+                <p className="type-body-s text-white">
                   Whether it is one function that needs fixing or a revenue cycle that needs
                   rethinking, the fastest way to find out what we can do is to look at your numbers.
                 </p>

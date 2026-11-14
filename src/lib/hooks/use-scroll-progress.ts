@@ -48,9 +48,7 @@ export function useViewportReveal<T extends HTMLElement>(
           observer.disconnect();
         }, 180);
       },
-      revealOnEntry
-        ? { threshold: 0.01 }
-        : { threshold: 0.75, rootMargin: '0px 0px -120px 0px' },
+      revealOnEntry ? { threshold: 0.01 } : { threshold: 0.75, rootMargin: '0px 0px -120px 0px' },
     );
     observer.observe(element.closest('[data-metric-card]') ?? element);
     return () => {

@@ -53,108 +53,169 @@ const TOTAL_DOTS = 3;
 
 export const HowWaterlabsClosesSection = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const [activeListIndex, setActiveListIndex] = useState(verificationSteps.length);
   const [activeDotIndex, setActiveDotIndex] = useState(0);
   const listRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeStepRef = useRef(0);
-  const isProgrammaticScroll = useRef(false);
+  const selectStepRef = useRef<(index: number) => void>(() => {});
 
-  // Repeat items for seamless, continuous looping scroll
-  const repeatedSteps = useMemo(() => {
-    const LOOP_COPIES = 3;
-    return Array.from({ length: LOOP_COPIES }).flatMap((_, setIndex) =>
-      verificationSteps.map((step, originalIndex) => ({
-        ...step,
-        originalIndex,
-        uniqueIndex: setIndex * verificationSteps.length + originalIndex,
-      })),
-    );
-  }, []);
+  // Repeated labels fill the visual list; navigation stops at the last real step.
+  const repeatedSteps = useMemo(
+    () =>
+      Array.from({ length: 3 }).flatMap((_, copy) =>
+        verificationSteps.map((step, index) => ({
+          ...step,
+          originalIndex: index,
+          uniqueIndex: copy * verificationSteps.length + index,
+        })),
+      ),
+    [],
+  );
 
-  // Position at middle set on mount
+  // One animation owns the visual position; there is no native scroll/reset feedback loop.
   useEffect(() => {
-    if (!listRef.current) return;
     const container = listRef.current;
-    const items = container.children;
-    const N = verificationSteps.length;
-    if (items.length >= 2 * N) {
-      const firstItem = items[0] as HTMLElement;
-      const midItem = items[N] as HTMLElement;
-      if (firstItem && midItem) {
-        const cycleHeight = midItem.offsetTop - firstItem.offsetTop;
-        container.scrollTop = cycleHeight;
+    const track = container?.firstElementChild;
+    const card = container?.closest('section')?.firstElementChild;
+    if (
+      !container ||
+      !(track instanceof HTMLElement) ||
+      !(card instanceof HTMLElement) ||
+      !verificationSteps.length
+    )
+      return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let offsets: number[] = [];
+    let position = 0;
+    let target = 0;
+    let frame = 0;
+    let previousTime = 0;
+    const paint = () => {
+      track.style.setProperty('--workflow-offset', `${-position}px`);
+      let nearest = 0;
+      for (let index = 1; index < offsets.length; index++) {
+        if (Math.abs(offsets[index] - position) < Math.abs(offsets[nearest] - position))
+          nearest = index;
       }
-    }
+      if (nearest !== activeStepRef.current) {
+        activeStepRef.current = nearest;
+        setActiveStep(nearest);
+      }
+    };
+    const tick = (time: number) => {
+      const elapsed = previousTime ? Math.min(64, time - previousTime) : 16;
+      previousTime = time;
+      position += (target - position) * (1 - Math.exp(-elapsed / 35));
+      if (Math.abs(target - position) < 0.25) position = target;
+      paint();
+      if (position !== target) frame = requestAnimationFrame(tick);
+      else {
+        frame = 0;
+        previousTime = 0;
+      }
+    };
+    const finish = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+      position = target;
+      paint();
+    };
+    const animate = () => {
+      if (motion.matches) finish();
+      else if (!frame) frame = requestAnimationFrame(tick);
+    };
+    const updateBoundary = () => {
+      const items = Array.from(track.children).slice(0, verificationSteps.length);
+      const first = items[0];
+      if (!(first instanceof HTMLElement)) return;
+      offsets = items.map((item) => (item as HTMLElement).offsetTop - first.offsetTop);
+      const end = offsets.at(-1) ?? 0;
+      position = Math.min(position, end);
+      target = Math.min(target, end);
+      animate();
+    };
+    const advance = (delta: number) => {
+      const next = Math.max(0, Math.min(offsets.at(-1) ?? 0, target + delta));
+      // Release outward momentum once the boundary step is visible; the track can
+      // finish its last fraction smoothly while the browser starts scrolling the page.
+      const boundaryVisible =
+        delta > 0
+          ? activeStepRef.current === verificationSteps.length - 1
+          : activeStepRef.current === 0;
+      if (next === target && (position === target || boundaryVisible)) return false;
+      target = next;
+      animate();
+      return true;
+    };
+    const handleWheel = (event: WheelEvent) => {
+      if (
+        window.innerWidth < 1024 ||
+        event.ctrlKey ||
+        !event.cancelable ||
+        !event.deltaY ||
+        Math.abs(event.deltaX) > Math.abs(event.deltaY)
+      )
+        return;
+      // Let the page reveal the full panel before directing wheel input to its steps.
+      const viewTop = window.visualViewport?.offsetTop ?? 0;
+      const viewHeight = window.visualViewport?.height ?? window.innerHeight;
+      const panel = card.getBoundingClientRect();
+      // A tall panel cannot fit: require its entire image/description/list row instead.
+      const required =
+        panel.height <= viewHeight ? panel : container.parentElement?.getBoundingClientRect();
+      if (!required || required.top < viewTop - 1 || required.bottom > viewTop + viewHeight + 1)
+        return;
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? container.clientHeight : 1;
+      // At either end, leave the event untouched so browser momentum continues on the page.
+      if (advance(event.deltaY * unit)) event.preventDefault();
+    };
+    const handleKey = (event: KeyboardEvent) => {
+      if (!(event.target instanceof Node) || !container.contains(event.target)) return;
+      const delta =
+        event.key === 'ArrowDown'
+          ? 40
+          : event.key === 'ArrowUp'
+            ? -40
+            : event.key === 'PageDown'
+              ? container.clientHeight
+              : event.key === 'PageUp'
+                ? -container.clientHeight
+                : 0;
+      if (delta && advance(delta)) event.preventDefault();
+    };
+    selectStepRef.current = (index: number) => {
+      target = offsets[index % verificationSteps.length] ?? 0;
+      animate();
+    };
+    const handleFocus = (event: FocusEvent) => {
+      const index = Array.from(track.children).findIndex(
+        (item) => item === event.target || item.contains(event.target as Node),
+      );
+      if (index >= 0 && index < verificationSteps.length) selectStepRef.current(index);
+    };
+    const observer = new ResizeObserver(updateBoundary);
+    observer.observe(container);
+    for (const item of Array.from(track.children).slice(0, verificationSteps.length))
+      observer.observe(item);
+    updateBoundary();
+    card.addEventListener('wheel', handleWheel, { passive: false });
+    card.addEventListener('keydown', handleKey);
+    track.addEventListener('focusin', handleFocus);
+    motion.addEventListener('change', finish);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      card.removeEventListener('wheel', handleWheel);
+      card.removeEventListener('keydown', handleKey);
+      track.removeEventListener('focusin', handleFocus);
+      motion.removeEventListener('change', finish);
+      selectStepRef.current = () => {};
+    };
   }, []);
 
-  const scrollToStep = (index: number) => {
-    if (!listRef.current) return;
-    const container = listRef.current;
-    const items = container.children;
-    if (items[index]) {
-      const targetItem = items[index] as HTMLElement;
-      const containerRect = container.getBoundingClientRect();
-      const targetRect = targetItem.getBoundingClientRect();
-      const targetTop = targetRect.top - containerRect.top + container.scrollTop;
+  const scrollToStep = (index: number) => selectStepRef.current(index);
 
-      isProgrammaticScroll.current = true;
-      container.scrollTo({
-        top: targetTop,
-        behavior: 'smooth',
-      });
-      const realStep = index % verificationSteps.length;
-      activeStepRef.current = realStep;
-      setActiveStep(realStep);
-      setActiveListIndex(index);
-      setTimeout(() => {
-        isProgrammaticScroll.current = false;
-      }, 400);
-    }
-  };
-
-  const handleDesktopScroll = () => {
-    if (isProgrammaticScroll.current || !listRef.current) return;
-    const container = listRef.current;
-    const items = container.children;
-    const N = verificationSteps.length;
-    if (items.length < 2 * N) return;
-
-    const firstItem = items[0] as HTMLElement;
-    const midItem = items[N] as HTMLElement;
-    if (!firstItem || !midItem) return;
-
-    const singleCycleHeight = midItem.offsetTop - firstItem.offsetTop;
-    if (singleCycleHeight > 0) {
-      if (container.scrollTop >= 2 * singleCycleHeight) {
-        container.scrollTop -= singleCycleHeight;
-      } else if (container.scrollTop <= 0.2 * singleCycleHeight) {
-        container.scrollTop += singleCycleHeight;
-      }
-    }
-
-    const containerRect = container.getBoundingClientRect();
-    let closestIndex = 0;
-    let minDiff = Infinity;
-
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i] as HTMLElement;
-      if (!item) continue;
-      const itemRect = item.getBoundingClientRect();
-      const diff = Math.abs(itemRect.top - containerRect.top);
-      if (diff < minDiff) {
-        minDiff = diff;
-        closestIndex = i;
-      }
-    }
-
-    const realStep = closestIndex % N;
-    if (realStep !== activeStepRef.current) {
-      activeStepRef.current = realStep;
-      setActiveStep(realStep);
-    }
-    setActiveListIndex(closestIndex);
-  };
   const handleScroll = () => {
     const container = scrollRef.current;
     if (!container) return;
@@ -212,6 +273,18 @@ export const HowWaterlabsClosesSection = () => {
             <span className="text-[#63CCB7]">closes the gap</span>
           </h3>
 
+          {/* Mobile Image Placed Directly Below Title (Matching Figma) */}
+          <div className="relative aspect-[353/190] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden">
+            <Image
+              src="/images/solutions/solutions-claim-submission/how-waterlabs-closes/img_waterlab_closes_the_gap%20(5).png"
+              alt="How Waterlabs closes the gap"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 353px"
+              className="object-cover object-center"
+            />
+          </div>
+
           {/* Subheading */}
           <p className="type-body-xs max-w-[873px] text-[#D7DCE2]">
             Our agents verify each claim against the payer&apos;s current rules before submission
@@ -235,42 +308,58 @@ export const HowWaterlabsClosesSection = () => {
               </div>
 
               {/* Description for active step */}
-              <p className="type-body-xs min-h-[48px] text-[#D7DCE2] transition-opacity duration-300">
-                {verificationSteps[activeStep].description}
+              <p className="type-body-xs grid min-h-[48px] text-[#D7DCE2]">
+                {/* Shared grid cells reserve content height; only the active description fades in. */}
+                {verificationSteps.map((step, index) => (
+                  <span
+                    key={index}
+                    aria-hidden={index !== activeStep}
+                    className={`transition-opacity duration-200 [grid-area:1/1] motion-reduce:transition-none ${index === activeStep ? 'visible' : 'invisible'}`}
+                    style={{ opacity: index === activeStep ? 1 : 0 }}
+                  >
+                    {step.description}
+                  </span>
+                ))}
               </p>
             </div>
 
             {/* Right Column: Tab List */}
             <div
               ref={listRef}
-              onScroll={handleDesktopScroll}
-              className="no-scrollbar flex h-[360px] min-w-0 flex-1 flex-col gap-[16px] overflow-y-auto pt-[8px] pr-[12px] xl:h-[380px] xl:gap-[20px]"
+              className="no-scrollbar flex h-[360px] min-w-0 flex-1 flex-col gap-[16px] overflow-clip pt-[8px] pr-[12px] xl:h-[380px] xl:gap-[20px]"
             >
-              {repeatedSteps.map((step) => {
-                const isActive = step.uniqueIndex === activeListIndex;
-                const distance = step.uniqueIndex - activeListIndex;
-                const opacity = isActive
-                  ? 1
-                  : distance > 0
-                    ? (stepOpacities[distance] ?? 0.15)
-                    : 0.15;
+              <div
+                className="flex shrink-0 flex-col gap-[16px] xl:gap-[20px]"
+                style={{ transform: 'translateY(var(--workflow-offset, 0px))' }}
+              >
+                {repeatedSteps.map((step) => {
+                  const isActive = step.uniqueIndex === activeStep;
+                  const distance = step.uniqueIndex - activeStep;
+                  const opacity = isActive
+                    ? 1
+                    : distance > 0
+                      ? (stepOpacities[distance] ?? 0.15)
+                      : 0.15;
 
-                return (
-                  <button
-                    key={step.uniqueIndex}
-                    type="button"
-                    className={`type-h4 cursor-pointer border-none bg-transparent p-0 text-left whitespace-normal transition-all duration-300 outline-none ${
-                      isActive ? 'text-[#91C6F2]' : 'text-[#7D8690]'
-                    }`}
-                    style={{
-                      opacity,
-                    }}
-                    onClick={() => scrollToStep(step.uniqueIndex)}
-                  >
-                    {step.title}
-                  </button>
-                );
-              })}
+                  return (
+                    <button
+                      key={step.uniqueIndex}
+                      disabled={step.uniqueIndex >= verificationSteps.length}
+                      aria-hidden={step.uniqueIndex >= verificationSteps.length}
+                      type="button"
+                      className={`type-h4 shrink-0 cursor-pointer border-none bg-transparent p-0 text-left whitespace-normal transition-all duration-300 outline-none disabled:pointer-events-none ${
+                        isActive ? 'text-[#91C6F2]' : 'text-[#7D8690]'
+                      }`}
+                      style={{
+                        opacity,
+                      }}
+                      onClick={() => scrollToStep(step.uniqueIndex)}
+                    >
+                      {step.title}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -284,29 +373,15 @@ export const HowWaterlabsClosesSection = () => {
               {verificationSteps.map((step, idx) => (
                 <div
                   key={idx}
-                  className="flex w-[320px] shrink-0 flex-col overflow-hidden rounded-[20px_10px_20px_20px] sm:w-[342px]"
+                  className="flex w-[320px] shrink-0 flex-col overflow-hidden rounded-[20px_10px_20px_20px] p-[20px] sm:w-[342px]"
                   style={{
                     background: 'rgba(17, 17, 17, 0.3)',
                   }}
                 >
-                  {/* Card Image */}
-                  <div className="relative h-[166px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px]">
-                    <Image
-                      src="/images/solutions/solutions-claim-submission/how-waterlabs-closes/img_waterlab_closes_the_gap%20(5).png"
-                      alt={step.title}
-                      fill
-                      sizes="342px"
-                      className="object-cover object-center"
-                    />
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="flex flex-col gap-[8px] p-[16px]">
-                    <h5 className="type-h5 text-[#91C6F2]">{step.title}</h5>
-                    <p className="type-body-xxs leading-[20px] text-[#D7DCE2]">
-                      {step.description}
-                    </p>
-                  </div>
+                  <h5 className="type-h5 text-[#91C6F2]">{step.title}</h5>
+                  <p className="type-body-xxs mt-[8px] leading-[20px] text-[#D7DCE2]">
+                    {step.description}
+                  </p>
                 </div>
               ))}
             </div>

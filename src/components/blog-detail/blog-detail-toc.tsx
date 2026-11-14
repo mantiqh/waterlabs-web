@@ -122,7 +122,7 @@ export const BlogDetailTOC = ({
         =============================================================================
         DESKTOP STICKY TOC CARD (Figma Frame 1272628343)
         - Width: 305px, Height: 626px (with visible styled scroller)
-        - Padding: 32px 24px, Gap: 20px
+        - Padding: 32px 24px, Gap: 24px
         - Background: #F4F6F9 with backdrop-blur-[20px]
         - Border Radius: 16px
         - Auto-scrolls so remaining items (9, 10) smoothly scroll into view as scroll progresses
@@ -132,7 +132,7 @@ export const BlogDetailTOC = ({
         ref={desktopContainerRef}
         className="hidden h-[626px] max-h-[calc(100vh-130px)] w-[305px] flex-col overflow-y-auto rounded-[16px] border border-white/60 bg-[#F4F6F9] p-[32px_24px] shadow-[0_8px_30px_rgba(0,0,0,0.03)] backdrop-blur-[20px] [scrollbar-color:#CBD5E1_transparent] [scrollbar-width:thin] lg:flex [&::-webkit-scrollbar]:w-[5px] [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#CBD5E1] hover:[&::-webkit-scrollbar-thumb]:bg-[#9CA3AF] [&::-webkit-scrollbar-track]:bg-transparent"
       >
-        <nav className="flex w-full flex-col items-start justify-start gap-[20px]">
+        <nav className="flex w-full flex-col items-start justify-start gap-[24px]">
           {topics.map((topic, index) => {
             const isActive = activeTopic === topic.id;
             const isLast = index === topics.length - 1;

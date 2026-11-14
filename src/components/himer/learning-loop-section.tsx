@@ -6,7 +6,7 @@ export const HimerLearningLoopSection = () => {
   return (
     <section className="from-ghost-white relative w-full overflow-hidden bg-gradient-to-b from-20% to-black to-80%">
       {/* Signature Waterlabs Curved Container (Top-Right & Bottom-Right rounded per Figma: [0, 60, 60, 0] node 8301:11708) */}
-      <div className="himer-surface max-md:to-midnight-blue relative z-10 w-full overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-gradient-to-br from-black to-[#0F68D6] py-16 text-white md:py-20 lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:py-20">
+      <div className="himer-surface relative z-10 w-full overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-[linear-gradient(346.38deg,#042849_-2.9%,#000000_112.3%)] py-16 text-white md:py-20 lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:bg-[linear-gradient(116.3deg,#000000_-1.8%,#0F68D6_173.8%)] lg:py-20">
         <div className="layout-container relative">
           {/* Header Grid */}
           <div className="mb-3 grid grid-cols-1 items-start gap-5 md:mb-16 lg:grid-cols-2 lg:gap-5">

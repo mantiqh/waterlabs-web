@@ -50,7 +50,7 @@ export const RevenueImpactSection = ({
             </div>
 
             {/* Title & Description */}
-            <div className="flex w-full flex-col gap-[12px] lg:gap-[20px]">
+            <div className="flex w-full flex-col gap-[16px] lg:gap-[20px]">
               <h2 className="type-h2 max-w-[696px] tracking-[-0.01em] text-white">{heading}</h2>
               <p className="type-body-xxs max-w-[696px] tracking-[0.01em] text-[#F4F6F9]">
                 {description}

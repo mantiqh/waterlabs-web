@@ -109,9 +109,9 @@ export const WeAreHiringSection = () => {
         - Top-left curve reveals white background
         - Bottom-left curve reveals Section 4's blue color (#0F68D6)
       */}
-      <div className="relative w-full rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:py-[80px]">
+      <div className="relative w-full overflow-clip rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:py-[80px]">
         {/* Decorative Vector Graphic on Bottom Left */}
-        <div className="pointer-events-none absolute bottom-0 left-0 z-0 aspect-[1126/944] w-[280px] overflow-hidden sm:w-[380px] lg:w-[480px] xl:w-[563px]">
+        <div className="pointer-events-none absolute bottom-0 left-0 z-0 hidden aspect-[1126/944] w-[280px] overflow-hidden sm:w-[380px] lg:block lg:w-[480px] xl:w-[563px]">
           <Image
             src="/images/careers/we-are-hiring/Vector.png"
             alt=""
@@ -126,7 +126,7 @@ export const WeAreHiringSection = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6] lg:h-[8px] lg:w-[8px]" />
-              <span className="body-xxs text-[#7D8690]">Where you fit</span>
+              <span className="type-body-xxs text-[#7D8690]">Where you fit</span>
             </div>
 
             {/* Heading */}
@@ -181,9 +181,7 @@ export const WeAreHiringSection = () => {
                   {/* Text Container (Frame 2147226456) */}
                   <div className="flex flex-1 flex-col gap-[14px]">
                     <h3 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{role.title}</h3>
-                    <p className="font-secondary text-[14px] leading-[24px] font-normal text-[#2A2A2A]">
-                      {role.description}
-                    </p>
+                    <p className="type-body-xxs text-[#2A2A2A]">{role.description}</p>
                   </div>
                 </div>
               ))}

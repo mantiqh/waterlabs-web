@@ -75,7 +75,9 @@ export const TrustCTASection = () => {
           {/* Frame 3 / Frame 7: Right CTA Action Button (Blue pill with white text & light blue arrow) */}
           <div className="shrink-0 self-start pt-[8px] lg:self-end lg:pt-0">
             <Link href="mailto:security@waterlabs.ai">
-              <CTA variant="light-bg">Talk to our security team</CTA>
+              <CTA variant="light-bg" size="compact-mobile">
+                Talk to our security team
+              </CTA>
             </Link>
           </div>
         </div>

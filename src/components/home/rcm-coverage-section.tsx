@@ -338,7 +338,7 @@ export const RcmCoverageSection = ({
                 {agents.map((agent) => (
                   <div
                     key={`mobile-${agent.id}`}
-                    className="flex min-h-[220px] w-[calc(100vw-60px)] max-w-[360px] shrink-0 snap-start flex-col justify-between gap-[12px] rounded-[20px] border border-[rgba(15,104,214,0.12)] bg-[rgba(145,198,242,0.1)] p-[20px] shadow-[0_8px_24px_rgba(15,104,214,0.04)] backdrop-blur-[15.7px] sm:w-[340px]"
+                    className="flex min-h-[220px] w-[calc(100vw-60px)] max-w-[360px] shrink-0 snap-start flex-col justify-start gap-[16px] rounded-[20px] border border-[rgba(15,104,214,0.12)] bg-[rgba(145,198,242,0.1)] p-[20px] shadow-[0_8px_24px_rgba(15,104,214,0.04)] backdrop-blur-[15.7px] sm:w-[340px]"
                   >
                     {/* Card Header: Agent Title */}
                     <h3 className="type-body-m text-[18px] leading-[28px] font-medium text-[#0F68D6]">
@@ -346,15 +346,15 @@ export const RcmCoverageSection = ({
                     </h3>
 
                     {/* Card Bottom: Description & Circular Blue Arrow Button */}
-                    <div className="flex w-full flex-row items-end justify-between gap-[12px]">
+                    <div className="flex w-full flex-1 flex-row items-start justify-between gap-[12px]">
                       <p className="type-body-xxs line-clamp-4 flex-1 text-[14px] leading-[20px] tracking-[0.01em] text-[#2A2A2A]">
                         {agent.description}
                       </p>
-                      <div className="shrink-0 pb-[2px]">
+                      <div className="shrink-0 self-end pb-[2px]">
                         <Link href={agent.link} aria-label={`Know more about ${agent.name}`}>
                           <CTA
                             variant="fill-arrow"
-                            className="h-[44px] w-[44px] max-sm:!h-[34px] max-sm:!min-h-[34px] max-sm:!w-[34px] max-sm:!min-w-[34px] max-sm:!p-0 [&_path]:!fill-white [&_svg]:!fill-white [&_svg]:!text-white"
+                            className="h-[44px] w-[44px] max-sm:!h-[34px] max-sm:!min-h-[34px] max-sm:!w-[34px] max-sm:!min-w-[34px] max-sm:!p-0 [&_path]:!fill-white [&_svg]:!fill-white [&_svg]:!text-white max-sm:[&_svg]:!h-[13.19px] max-sm:[&_svg]:!w-[8.78px]"
                             aria-label={`Know more about ${agent.name}`}
                           />
                         </Link>

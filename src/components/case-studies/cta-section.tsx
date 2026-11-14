@@ -11,7 +11,7 @@ export interface CaseStudiesCTASectionProps {
 
 export const CaseStudiesCTASection = ({
   headline,
-  buttonText = 'GET A DEMO',
+  buttonText = 'Get a demo',
   buttonLink = '/contact-us',
 }: CaseStudiesCTASectionProps) => {
   const safeButtonLink = buttonLink?.includes('waterlabs-w7eb.vercel.app')
@@ -48,19 +48,19 @@ export const CaseStudiesCTASection = ({
         - Desktop: 1440px x 140px, padding: 40px 60px, gap: 20px, background: #0F68D6, border-radius: 30px 0 0 30px
         - Mobile: 402px x 174px, padding: 40px 20px, gap: 24px, background: #0F68D6, border-radius: 30px 0 0 30px
       */}
-      <div className="rounded-tr-0 rounded-br-0 flex w-full items-center overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#0F68D6] px-[20px] py-[40px] md:px-[40px] md:py-[48px] lg:h-[240px] lg:px-[60px] lg:py-0">
+      <div className="flex w-full items-center overflow-hidden rounded-tl-[30px] rounded-tr-none rounded-br-none rounded-bl-[30px] bg-[#0F68D6] px-[20px] py-[40px] md:px-[40px] md:py-[48px] lg:h-[240px] lg:px-[60px] lg:py-0">
         {/* Content Container (max-w-[1320px]) */}
         <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-center lg:gap-[20px]">
           {/* Headline (Display/H2) */}
-          <h2 className="sm:type-h2 text-[23px] leading-[29px] tracking-[-0.01em] text-white min-[375px]:text-[25px] min-[375px]:leading-[31px] sm:leading-[60px]">
+          <h2 className="type-h3 md:type-h2 tracking-[-0.01em] text-white">
             {renderHeadline(headline)}
           </h2>
 
           {/* Action CTA Button */}
           <div className="flex shrink-0 items-center">
             <Link href={safeButtonLink} className="inline-block">
-              <CTA variant="dark-bg" as="div">
-                {buttonText?.toUpperCase() || 'GET A DEMO'}
+              <CTA variant="dark-bg" size="compact-mobile" as="div">
+                {buttonText || 'Get a demo'}
               </CTA>
             </Link>
           </div>

@@ -201,7 +201,7 @@ export const ThisIsntJustDenialsSection = () => {
                   key={idx}
                   className="flex min-h-[320px] flex-1 flex-col gap-[24px] rounded-[16px] bg-white p-[32px]"
                 >
-                  <div className="relative h-[80px] w-[80px] shrink-0">
+                  <div className="relative h-[80px] w-[80px] shrink-0 xl:h-[102px] xl:w-[102px]">
                     <Image
                       src={card.icon}
                       alt={card.title}
@@ -231,7 +231,7 @@ export const ThisIsntJustDenialsSection = () => {
                     key={idx}
                     className="flex min-h-[260px] w-[269px] shrink-0 flex-col gap-[20px] rounded-[16px] bg-white p-[20px]"
                   >
-                    <div className="relative h-[60px] w-[60px] shrink-0">
+                    <div className="relative h-[62px] w-[62px] shrink-0">
                       <Image
                         src={card.icon}
                         alt={card.title}

@@ -20,7 +20,7 @@ export const HimerPricingMeterSection = () => {
           aria-hidden="true"
           fill
           sizes="100vw"
-          className="pointer-events-none object-cover object-right-bottom"
+          className="pointer-events-none hidden object-cover object-right-bottom md:block"
         />
 
         <div className="layout-container relative z-10">
