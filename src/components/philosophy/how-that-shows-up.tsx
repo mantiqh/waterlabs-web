@@ -50,6 +50,7 @@ export const HowThatShowsUpSection = () => {
 
   const sectionRef = useRef<HTMLElement>(null);
   const desktopScrollRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   // Sync window scroll with desktop statements
   useEffect(() => {
@@ -183,13 +184,22 @@ export const HowThatShowsUpSection = () => {
               <h2 className="type-h3 text-black">How That Shows Up in the Product</h2>
 
               {/* Statement text with blue highlighted segment */}
-              <p className="type-h6 text-black">
-                {productStatements[activeMobileIndex].leadText}{' '}
-                <span className="text-[#0F68D6]">
-                  {productStatements[activeMobileIndex].highlightText}
-                </span>{' '}
-                {productStatements[activeMobileIndex].description}
-              </p>
+              <div
+                ref={mobileScrollRef}
+                onScroll={(event) => {
+                  const { scrollLeft, clientWidth } = event.currentTarget;
+                  if (clientWidth) setActiveMobileIndex(Math.round(scrollLeft / clientWidth));
+                }}
+                className="no-scrollbar flex w-full snap-x snap-mandatory overflow-x-auto"
+              >
+                {productStatements.map((statement) => (
+                  <p key={statement.id} className="type-h6 w-full min-w-full snap-start text-black">
+                    {statement.leadText}{' '}
+                    <span className="text-[#0F68D6]">{statement.highlightText}</span>{' '}
+                    {statement.description}
+                  </p>
+                ))}
+              </div>
 
               {/* Pill Indicators */}
               <div className="flex items-center gap-[5px] pt-[6px]">
@@ -200,7 +210,13 @@ export const HowThatShowsUpSection = () => {
                       key={idx}
                       type="button"
                       aria-label={`Slide ${idx + 1}`}
-                      onClick={() => setActiveMobileIndex(idx)}
+                      onClick={() => {
+                        const container = mobileScrollRef.current;
+                        container?.scrollTo({
+                          left: idx * container.clientWidth,
+                          behavior: 'smooth',
+                        });
+                      }}
                       className={`h-[5px] cursor-pointer rounded-[32px] border-none transition-all duration-300 outline-none ${
                         isActive
                           ? 'w-[32px] bg-[#0F68D6]'

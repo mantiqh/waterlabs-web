@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 import { AnimatedMetric } from '@/components/ui/animated-metric';
+import { MetricScrollIndicators } from '@/components/ui/carousel-indicators';
 import { HIMER_HERO_DATA } from '@/data/himer';
 
 import { HimerVideo } from './himer-video';
@@ -52,17 +53,12 @@ export const HimerHeroSection = () => (
         </Link>
       </div>
       <div className="layout-container order-4 mt-[60px] md:mt-10 lg:mt-10">
-        <div
-          role="region"
-          aria-label="Platform metrics"
-          tabIndex={0}
-          className="no-scrollbar flex w-[calc(100%+20px)] snap-x snap-mandatory gap-10 overflow-x-auto pr-5 md:grid md:w-full md:grid-cols-4 md:gap-6 md:pr-0"
-        >
+        <MetricScrollIndicators className="no-scrollbar flex w-[calc(100%+20px)] snap-x snap-mandatory gap-10 overflow-x-auto pr-5 md:grid md:w-full md:grid-cols-4 md:gap-6 md:pr-0">
           {HIMER_HERO_DATA.stats.map((stat, index) => (
             <div
               key={stat.label}
               data-metric-card
-              className={`flex shrink-0 snap-start flex-col gap-2 ${index === 0 ? 'max-md:w-[232px]' : 'max-md:w-max'}`}
+              className={`flex shrink-0 snap-start flex-col gap-2 last:snap-end ${index === 0 ? 'max-md:w-[232px]' : 'max-md:w-max'}`}
             >
               <AnimatedMetric
                 value={stat.value}
@@ -74,7 +70,7 @@ export const HimerHeroSection = () => (
               </span>
             </div>
           ))}
-        </div>
+        </MetricScrollIndicators>
       </div>
     </div>
   </section>

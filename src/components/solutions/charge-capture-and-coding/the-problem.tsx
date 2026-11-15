@@ -5,12 +5,12 @@ export const TheProblemSection = () => {
     <section
       className="relative w-full overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #9DA5AD 7.11%, #043857 92.65%)',
+        background: 'linear-gradient(180deg, #91C066 60px, #042848 calc(100% - 60px))',
       }}
     >
       {/*
         The Problem Section:
-        - Outer: gradient #9DA5AD → #043857
+        - Outer: gradient #91C066 → #042848
         - Inner: white bg, border-radius: 0 60px 60px 0 (right-side rounding)
         - Desktop: padding 0 60px, inner padding 80px 0, gap 60px
         - Mobile: padding 40px 20px
