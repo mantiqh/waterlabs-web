@@ -22,6 +22,8 @@ const DEFAULT_HUMAN_MOBILE =
   '/images/solutions/solutions-priorauthorization/human-in-the-loop/img_human_in_the_loop%20(1).png';
 const DEFAULT_PLATFORM_IMG =
   "/images/solutions/solutions-priorauthorization/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png";
+const DEFAULT_PLATFORM_MOBILE_IMG =
+  "/images/solutions/solutions-eligibility/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(2).png";
 
 const STEP_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4, 0.25, 0.15];
 const TOTAL_DOTS = 3;
@@ -136,6 +138,14 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
   const heroBanner = data.hero.heroBanner || HERO_BANNERS[data.slug] || DEFAULT_BANNER;
 
   const heroImage = data.hero.heroImage || HERO_IMAGES[data.slug] || DEFAULT_HERO_IMG;
+
+  const problemCornerColors: Record<string, string> = {
+    'denial-management': '#D18097',
+    'patient-estimates': '#D18097',
+    'charge-capture-and-coding': '#91C066',
+    'claim-submission-and-scrubbing': '#91C066',
+    'payment-posting': '#55BABC',
+  };
 
   // One animation owns the visual position; there is no native scroll/reset feedback loop.
   useEffect(() => {
@@ -481,7 +491,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
       <section
         className="relative w-full overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #9DA5AD 7.11%, #043857 92.65%)',
+          background: `linear-gradient(180deg, ${problemCornerColors[data.slug] || (data.slug === 'prior-authorization' || data.slug === 'prior-auth' ? '#9782E2' : '#9DA5AD')} ${problemCornerColors[data.slug] ? '60px' : '7.11%'}, #042848 calc(100% - 60px))`,
         }}
       >
         <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
@@ -894,13 +904,14 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
             {/* Desktop Layout */}
             <div
-              className="hidden w-full flex-row items-center overflow-hidden rounded-[20px] lg:flex"
+              className="hidden w-full flex-row items-stretch gap-[14px] overflow-hidden rounded-[20px] bg-size-[100%_100%] bg-center lg:flex"
               style={{
-                background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
+                backgroundImage: `url("/images/solutions/solutions-AR-follow-up/this-isn't-just-an-eligibility-tool/img_bg_gradient%20(1).png")`,
+                backgroundColor: '#0F68D6',
               }}
             >
               {/* Left Column: Text Content */}
-              <div className="flex w-full flex-col items-start justify-center gap-[12px] p-[24px] lg:w-[45%] lg:p-[32px] xl:w-1/2 xl:gap-[20px] xl:p-[60px]">
+              <div className="flex w-full min-w-0 flex-col items-start justify-center gap-[12px] p-[24px] lg:w-[54.1667%] lg:shrink-0 lg:p-[32px] xl:gap-[14px] xl:p-[60px]">
                 <div className="flex items-center gap-[8px]">
                   <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
                   <span className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]">
@@ -925,15 +936,15 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
               </div>
 
               {/* Right Column: Image */}
-              <div className="flex w-full items-center justify-end self-stretch overflow-hidden lg:w-[55%] xl:w-1/2">
-                <div className="relative h-full min-h-[380px] w-full xl:min-h-[500px]">
+              <div className="flex min-w-0 flex-1 items-center justify-end self-stretch overflow-hidden rounded-[20px]">
+                <div className="relative h-full min-h-[380px] w-full xl:min-h-[562px]">
                   <Image
                     src={data.platformAndFeatures.platformImage || DEFAULT_PLATFORM_IMG}
                     alt="HIMER AI OS platform overview"
                     fill
                     priority
                     sizes="(max-width: 1440px) 55vw, 653px"
-                    className="rounded-r-[20px] object-cover object-[48%_center]"
+                    className="rounded-[20px] object-cover object-[48%_center]"
                   />
                 </div>
               </div>
@@ -941,9 +952,10 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
             {/* Mobile / Tablet Layout */}
             <div
-              className="flex w-full flex-col overflow-hidden rounded-[20px] lg:hidden"
+              className="flex w-full flex-col overflow-hidden rounded-[20px] bg-size-[100%_100%] bg-center lg:hidden"
               style={{
-                background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
+                backgroundImage: `url("/images/solutions/solutions-eligibility/this-isn't-just-an-eligibility-tool/img_bg_gradient%20(2).png")`,
+                backgroundColor: '#0F68D6',
               }}
             >
               <div className="w-full overflow-hidden rounded-[20px] md:relative md:h-[380px]">
@@ -951,7 +963,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   src={
                     data.platformAndFeatures.platformImageMobile ||
                     data.platformAndFeatures.platformImage ||
-                    DEFAULT_PLATFORM_IMG
+                    DEFAULT_PLATFORM_MOBILE_IMG
                   }
                   alt="HIMER AI OS platform overview"
                   width={724}
@@ -961,7 +973,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 />
               </div>
 
-              <div className="flex flex-col items-start gap-[14px] p-[24px] sm:p-[32px]">
+              <div className="flex flex-col items-start gap-[14px] p-[32px]">
                 <div className="flex items-center gap-[4px]">
                   <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
                   <span className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]">

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/common/navbar';
 import { CTA } from '@/components/CTA';
 import { AnimatedMetric } from '@/components/ui/animated-metric';
+import { MetricScrollIndicators } from '@/components/ui/carousel-indicators';
 import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
 
 import CapabilitiesSection from './capabilities-section';
@@ -55,24 +56,24 @@ export default function CurieCodePage() {
             className="pointer-events-none absolute -bottom-[45px] left-1/2 h-[160px] w-[541px] -translate-x-1/2 bg-linear-to-b from-black/0 via-black/85 to-black to-75% blur-[18.15px] md:bottom-[8%] md:h-[192px] md:w-[115.6%] md:to-100%"
           />
         </div>
-        <div
-          role="region"
-          aria-label="Platform metrics"
-          tabIndex={0}
-          className="layout-container no-scrollbar order-4 flex snap-x snap-mandatory scroll-px-5 gap-10 overflow-x-auto pt-10 pb-10 md:grid md:grid-cols-4 md:gap-10 md:overflow-visible md:pb-20"
-        >
-          {data.metrics.map(({ value, description }) => (
-            <div
-              key={value}
-              data-metric-card
-              className="flex w-[240px] shrink-0 snap-start flex-col gap-3 md:w-auto"
-            >
-              <AnimatedMetric value={value} className="type-h5 text-aqua-mint tracking-[-0.01em]" />
-              <p className="type-body-xxs text-ghost-white max-w-[220px] tracking-[0.01em]">
-                {description}
-              </p>
-            </div>
-          ))}
+        <div className="layout-container order-4 pt-10 pb-10 md:pb-20">
+          <MetricScrollIndicators className="no-scrollbar flex w-[calc(100%+20px)] snap-x snap-mandatory gap-10 overflow-x-auto pr-5 md:grid md:w-full md:grid-cols-4 md:gap-10 md:overflow-visible md:pr-0">
+            {data.metrics.map(({ value, description }) => (
+              <div
+                key={value}
+                data-metric-card
+                className="flex w-[240px] shrink-0 snap-start flex-col gap-3 md:w-auto"
+              >
+                <AnimatedMetric
+                  value={value}
+                  className="type-h5 text-aqua-mint tracking-[-0.01em]"
+                />
+                <p className="type-body-xxs text-ghost-white max-w-[220px] tracking-[0.01em]">
+                  {description}
+                </p>
+              </div>
+            ))}
+          </MetricScrollIndicators>
         </div>
       </section>
       <div className="bg-black">

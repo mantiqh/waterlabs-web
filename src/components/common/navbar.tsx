@@ -161,9 +161,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
         }`}
       >
         <header
-          className={`flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 lg:relative ${
-            activeDropdown ? '' : 'backdrop-blur-[13.2px]'
-          } ${
+          className={`relative isolate flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:backdrop-blur-[13.2px] before:content-[''] ${
             theme === 'dark'
               ? isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-white/10 bg-black/85 px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/10 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
@@ -285,20 +283,20 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                   {/* Dropdown Card - Exact 30px gap below navbar capsule */}
                   {hasChildren && item.children && (
                     <div
-                      className={`absolute top-full z-50 origin-top pt-[30px] transition-all duration-200 ease-out ${
+                      className={`absolute top-full z-50 origin-top pt-[30px] transition-transform duration-200 ease-out motion-reduce:transition-none ${
                         item.columns && item.columns.length > 1
                           ? 'left-0 lg:max-xl:right-0 lg:max-xl:left-auto xl:right-auto xl:left-0'
                           : 'left-0'
                       } ${
                         isDropdownOpen
-                          ? 'pointer-events-auto visible translate-y-0 scale-100 opacity-100'
-                          : 'pointer-events-none invisible -translate-y-2 scale-[0.97] opacity-0'
+                          ? 'pointer-events-auto visible translate-y-0 scale-100'
+                          : 'pointer-events-none invisible -translate-y-2 scale-[0.97]'
                       }`}
                     >
                       {item.columns && item.columns.length > 1 ? (
                         /* 2-Column Dropdown (Agentic RCM Solutions: 746px x 284px) */
                         <div
-                          className="flex w-[746px] max-w-[calc(100vw-32px)] flex-col rounded-[20px_10px_20px_20px] border border-[#D7DCE2]/60 bg-white p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/85 supports-backdrop-filter:backdrop-blur-[40px]"
+                          className="flex w-[746px] max-w-[calc(100vw-32px)] flex-col rounded-[20px_10px_20px_20px] border border-[#D7DCE2]/60 bg-white p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/75 supports-backdrop-filter:backdrop-blur-[40px]"
                           onMouseLeave={() => setHoveredSubItem(null)}
                         >
                           {/* Columns Frame 2147227097 */}
@@ -356,7 +354,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                       ) : (
                         /* 1-Column Dropdown (About us / Products: 218px x 188px) */
                         <div
-                          className="flex w-[218px] flex-col rounded-[20px_10px_20px_20px] border border-[#D7DCE2]/60 bg-white p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/85 supports-backdrop-filter:backdrop-blur-[40px]"
+                          className="flex w-[218px] flex-col rounded-[20px_10px_20px_20px] border border-[#D7DCE2]/60 bg-white p-[24px] shadow-[0_16px_40px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/75 supports-backdrop-filter:backdrop-blur-[40px]"
                           onMouseLeave={() => setHoveredSubItem(null)}
                         >
                           {/* Items Frame 2147227091 */}
@@ -507,7 +505,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
 
         {/* Mobile Menu Dropdown overlay */}
         <div
-          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-[#D7DCE2]/60 bg-white p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/85 supports-backdrop-filter:backdrop-blur-[40px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
+          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-[#D7DCE2]/60 bg-white p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/75 supports-backdrop-filter:backdrop-blur-[40px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
             isOpen
               ? 'pointer-events-auto visible translate-y-0 scale-100 opacity-100'
               : 'pointer-events-none invisible -translate-y-4 scale-[0.98] opacity-0'

@@ -330,7 +330,7 @@ export const WhyWaterlabsSection = ({
                             src={card.image}
                             alt={card.title}
                             fill
-                            sizes={isActive ? '588px' : '518px'}
+                            sizes="588px"
                             className="object-cover"
                           />
                         </div>

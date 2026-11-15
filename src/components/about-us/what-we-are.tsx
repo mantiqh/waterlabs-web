@@ -4,7 +4,7 @@ export const WhatWeAreSection = () => {
       id="what-we-are"
       className="m-0 w-full overflow-hidden p-0"
       style={{
-        background: 'linear-gradient(180deg, #042849 0%, #63CCB7 100%)',
+        background: 'linear-gradient(180deg, #1E5467 20%, #F4F6F9 100%)',
       }}
     >
       {/* 

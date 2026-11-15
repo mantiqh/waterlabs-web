@@ -128,11 +128,7 @@ export const WelcomeToWaterlabsSection = ({
               {FIRST_PHRASE}{' '}
             </span>
 
-            {/* 
-              Remaining words:
-              - Mobile: always visible in #2A2A2A to match mobile Figma & screenshot
-              - Desktop: illuminates on scroll from #D7DCE2 to #2A2A2A
-            */}
+            {/* Remaining words illuminate on scroll from #D7DCE2 to #2A2A2A. */}
             {REMAINING_WORDS.map((word, idx) => {
               const threshold = idx / REMAINING_WORDS.length;
               const isLit = scrollProgress > threshold;
@@ -140,8 +136,8 @@ export const WelcomeToWaterlabsSection = ({
               return (
                 <span
                   key={`word-${idx}`}
-                  className={`inline text-[#2A2A2A] transition-colors duration-300 ${
-                    isLit ? 'lg:text-[#2A2A2A]' : 'lg:text-[#D7DCE2]'
+                  className={`inline transition-colors duration-300 ${
+                    isLit ? 'text-[#2A2A2A]' : 'text-[#D7DCE2]'
                   }`}
                 >
                   {word}{' '}

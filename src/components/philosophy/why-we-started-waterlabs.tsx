@@ -21,10 +21,21 @@ const paragraphsData = [
 ];
 
 export const WhyWeStartedWaterlabsSection = () => {
-  const [activeMobileIndex, setActiveMobileIndex] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [mobileProgress, setMobileProgress] = useState(0);
+  const [mobileViewportHeight, setMobileViewportHeight] = useState<number>();
+  const mobileSizerRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const [revealedIndices, setRevealedIndices] = useState<number[]>([0]);
+
+  useEffect(() => {
+    const sizer = mobileSizerRef.current;
+    if (!sizer) return;
+    const observer = new ResizeObserver(() => {
+      setMobileViewportHeight(Math.ceil(sizer.getBoundingClientRect().height));
+    });
+    observer.observe(sizer);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleDesktopScrollAnimation = () => {
@@ -53,24 +64,6 @@ export const WhyWeStartedWaterlabsSection = () => {
       window.removeEventListener('scroll', handleDesktopScrollAnimation);
     };
   }, []);
-
-  const handleScroll = () => {
-    if (!carouselRef.current) return;
-    const { scrollLeft, clientWidth } = carouselRef.current;
-    if (clientWidth === 0) return;
-    const index = Math.round(scrollLeft / clientWidth);
-    setActiveMobileIndex(Math.min(Math.max(index, 0), paragraphsData.length - 1));
-  };
-
-  const scrollToCard = (index: number) => {
-    if (!carouselRef.current) return;
-    const clientWidth = carouselRef.current.clientWidth;
-    carouselRef.current.scrollTo({
-      left: index * clientWidth,
-      behavior: 'smooth',
-    });
-    setActiveMobileIndex(index);
-  };
 
   return (
     <section className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#041E35] from-50% to-[#F4F6F9] to-50% p-0">
@@ -103,7 +96,7 @@ export const WhyWeStartedWaterlabsSection = () => {
             </div>
           </div>
 
-          {/* Right Column: Desktop Stacked / Mobile Native Snap Carousel */}
+          {/* Right Column: Desktop Stacked / Mobile Scrollable Text */}
           <div className="w-full max-w-[640px] lg:w-1/2">
             {/* Desktop View (3 Stacked Paragraphs with Scroll Revealing Animation) */}
             <div className="hidden max-w-[498px] flex-col gap-[40px] pt-[38px] lg:flex">
@@ -125,43 +118,51 @@ export const WhyWeStartedWaterlabsSection = () => {
               })}
             </div>
 
-            {/* Mobile / Tablet View (Native Smooth Snap Carousel with All-White Text) */}
+            {/* Mobile / Tablet View */}
             <div className="flex w-full flex-col gap-[20px] pt-[8px] lg:hidden">
-              {/* Horizontal Snap Scroll Container */}
-              <div
-                ref={carouselRef}
-                onScroll={handleScroll}
-                className="no-scrollbar flex w-full snap-x snap-mandatory flex-row overflow-x-auto"
-              >
+              <div ref={mobileSizerRef} className="relative grid w-full grid-cols-1 grid-rows-1">
                 {paragraphsData.map((item) => (
-                  <div key={item.id} className="w-full min-w-full snap-start pr-[8px]">
-                    <p className="type-body-xxs leading-relaxed tracking-[0.01em] text-white">
+                  <p
+                    key={item.id}
+                    aria-hidden="true"
+                    className="type-body-xxs invisible col-start-1 row-start-1 pr-[8px] leading-relaxed tracking-[0.01em]"
+                  >
+                    {item.text}
+                  </p>
+                ))}
+                <div
+                  role="region"
+                  aria-label="Why we started Waterlabs"
+                  tabIndex={0}
+                  style={{ height: mobileViewportHeight }}
+                  onScroll={(event) => {
+                    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+                    const distance = scrollHeight - clientHeight;
+                    setMobileProgress(
+                      distance > 0 ? Math.max(0, Math.min(1, scrollTop / distance)) : 0,
+                    );
+                  }}
+                  className="no-scrollbar absolute inset-0 flex w-full snap-y snap-mandatory flex-col overflow-y-auto focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#63CCB7]"
+                >
+                  {paragraphsData.map((item) => (
+                    <p
+                      key={item.id}
+                      className="type-body-xxs min-h-full shrink-0 snap-start pr-[8px] leading-relaxed tracking-[0.01em] text-white"
+                    >
                       {item.text}
                     </p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
-              {/* Pill Indicators */}
-              <div className="flex items-center gap-[5px] pt-[4px]">
-                {paragraphsData.map((_, index) => {
-                  const isActive = index === activeMobileIndex;
-                  return (
-                    <button
-                      key={index}
-                      type="button"
-                      aria-label={`Slide ${index + 1}`}
-                      onClick={() => scrollToCard(index)}
-                      className={`h-[5px] cursor-pointer rounded-[32px] transition-all duration-300 ${
-                        isActive
-                          ? 'w-[32px] bg-[#63CCB7]'
-                          : index === (activeMobileIndex + 1) % 3
-                            ? 'w-[16px] bg-[#63CCB7]/20 hover:bg-[#63CCB7]/40'
-                            : 'w-[6px] bg-[#63CCB7]/20 hover:bg-[#63CCB7]/40'
-                      }`}
-                    />
-                  );
-                })}
+              <div
+                aria-hidden="true"
+                className="h-[4px] w-full max-w-[440px] overflow-hidden rounded-full bg-[#63CCB7]/20"
+              >
+                <div
+                  className="h-full w-full origin-left bg-[#63CCB7]"
+                  style={{ transform: `scaleX(${mobileProgress})` }}
+                />
               </div>
             </div>
           </div>

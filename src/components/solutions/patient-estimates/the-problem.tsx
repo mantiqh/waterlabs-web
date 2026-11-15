@@ -5,7 +5,7 @@ export const TheProblemSection = () => {
     <section
       className="relative w-full overflow-hidden"
       style={{
-        background: 'linear-gradient(180deg, #9DA5AD 7.11%, #043857 92.65%)',
+        background: 'linear-gradient(180deg, #D18097 60px, #042848 calc(100% - 60px))',
       }}
     >
       <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
