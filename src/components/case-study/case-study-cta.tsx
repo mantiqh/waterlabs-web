@@ -10,9 +10,13 @@ export interface CaseStudyCTAProps {
 }
 
 export const CaseStudyCTA = ({
-  buttonText = 'GET A DEMO',
+  buttonText = 'Get a Demo',
   buttonHref = '/contact-us',
 }: CaseStudyCTAProps) => {
+  const displayButtonText =
+    !buttonText || buttonText.trim().toLowerCase() === 'get a demo'
+      ? 'Get a Demo'
+      : buttonText.toUpperCase();
   const safeButtonHref = buttonHref?.includes('waterlabs-w7eb.vercel.app')
     ? '/contact-us'
     : buttonHref || '/contact-us';
@@ -40,7 +44,7 @@ export const CaseStudyCTA = ({
           <div className="flex shrink-0 items-center">
             <Link href={safeButtonHref} className="inline-block">
               <CTA variant="dark-bg" as="div">
-                {buttonText?.toUpperCase() || 'GET A DEMO'}
+                {displayButtonText}
               </CTA>
             </Link>
           </div>

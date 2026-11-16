@@ -1,10 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from 'react';
+import { type FormEvent, type SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import { ChevronRight, CTA } from '@/components/CTA';
 import { DEFAULT_CONTACT_US_DATA } from '@/data/contact-us';
+import {
+  CONTACT_MESSAGE_LIMIT,
+  CONTACT_PHONE_LIMIT,
+  CONTACT_TEXT_LIMIT,
+  type ContactField,
+  getContactFieldError,
+} from '@/lib/contact-submission';
 
 interface ContactUsContactFormProps {
   tag?: string;
@@ -55,6 +62,7 @@ export const ContactUsContactForm = ({
     'idle' | 'sending' | 'success' | 'error'
   >('idle');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showOrgTypeTooltip, setShowOrgTypeTooltip] = useState(false);
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -62,15 +70,17 @@ export const ContactUsContactForm = ({
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
+        setShowOrgTypeTooltip(false);
       }
     };
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setIsDropdownOpen(false);
+        setShowOrgTypeTooltip(false);
       }
     };
 
-    if (isDropdownOpen) {
+    if (isDropdownOpen || showOrgTypeTooltip) {
       document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleKeyDown);
     }
@@ -79,17 +89,73 @@ export const ContactUsContactForm = ({
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isDropdownOpen]);
+  }, [isDropdownOpen, showOrgTypeTooltip]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const [invalidFields, setInvalidFields] = useState<Partial<Record<ContactField, boolean>>>({});
 
-  const handleSubmit = async (e: FormEvent) => {
+  const fieldProps = (field: Exclude<ContactField, 'agreed' | 'orgType'>) => ({
+    id: `contact-${field}`,
+    'aria-label': {
+      name: 'Name',
+      org: 'Organization',
+      emailId: 'Email ID',
+      phoneNumber: 'Phone number',
+      company: 'Company',
+      challenge: 'What challenge are you looking to overcome',
+    }[field],
+    maxLength:
+      field === 'challenge'
+        ? CONTACT_MESSAGE_LIMIT
+        : field === 'phoneNumber'
+          ? CONTACT_PHONE_LIMIT
+          : CONTACT_TEXT_LIMIT,
+    'aria-invalid': Boolean(invalidFields[field]),
+    onChange: (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const value = event.currentTarget.value;
+      if (field === 'phoneNumber' && value.replace(/\D/g, '').length > 15) {
+        // Reject the edit rather than removing existing digits elsewhere in the number.
+        const caret = event.currentTarget.selectionStart ?? value.length;
+        const previousCaret = Math.max(0, caret - (value.length - formData.phoneNumber.length));
+        event.currentTarget.value = formData.phoneNumber;
+        event.currentTarget.setSelectionRange(previousCaret, previousCaret);
+        return;
+      }
+      const message = getContactFieldError(field, value, orgTypeOptions);
+      event.currentTarget.setCustomValidity(message);
+      setFormData((prev) => ({ ...prev, [field]: value }));
+      if (submissionStatus !== 'sending') setSubmissionStatus('idle');
+      if (!message) setInvalidFields((prev) => ({ ...prev, [field]: false }));
+    },
+    onInvalid: (event: SyntheticEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const message =
+        getContactFieldError(field, event.currentTarget.value, orgTypeOptions) ||
+        event.currentTarget.validationMessage;
+      event.currentTarget.setCustomValidity(message);
+      setInvalidFields((prev) => ({ ...prev, [field]: true }));
+    },
+  });
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submissionStatus === 'sending') return;
-    if (!formData.orgType) {
-      setIsDropdownOpen(true);
+    setShowOrgTypeTooltip(false);
+    // Native controls show browser validation bubbles, including required consent.
+    // The existing custom organization menu remains validated before any request.
+    for (const [field, value] of Object.entries({ ...formData, agreed })) {
+      const message = getContactFieldError(field as ContactField, value, orgTypeOptions);
+      if (!message) continue;
+      if (field === 'orgType') {
+        setIsDropdownOpen(false);
+        setShowOrgTypeTooltip(true);
+        setInvalidFields((prev) => ({ ...prev, orgType: true }));
+        requestAnimationFrame(() => dropdownRef.current?.querySelector('button')?.focus());
+      } else {
+        const control = e.currentTarget.elements.namedItem(field);
+        if (control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement) {
+          control.setCustomValidity(message);
+          control.reportValidity();
+        }
+      }
       return;
     }
     setSubmissionStatus('sending');
@@ -111,6 +177,8 @@ export const ContactUsContactForm = ({
         challenge: '',
       });
       setAgreed(false);
+      setInvalidFields({});
+      setShowOrgTypeTooltip(false);
     } catch {
       setSubmissionStatus('error');
     }
@@ -178,6 +246,7 @@ export const ContactUsContactForm = ({
             {/* Right Column: Form (Frame: max 772px x 464px, gap: 14px) */}
             <form
               onSubmit={handleSubmit}
+              noValidate
               className="flex w-full min-w-0 flex-col items-start gap-[16px] lg:w-[60%] lg:flex-1 lg:gap-[14px] xl:w-[772px]"
             >
               {/* Input Fields Container */}
@@ -188,10 +257,11 @@ export const ContactUsContactForm = ({
                   <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
+                      {...fieldProps('name')}
+                      autoComplete="name"
                       name="name"
                       placeholder="Name*"
                       value={formData.name}
-                      onChange={handleChange}
                       required
                       className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
@@ -200,10 +270,11 @@ export const ContactUsContactForm = ({
                   <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
+                      {...fieldProps('org')}
+                      autoComplete="organization"
                       name="org"
                       placeholder="Org*"
                       value={formData.org}
-                      onChange={handleChange}
                       required
                       className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
@@ -216,10 +287,11 @@ export const ContactUsContactForm = ({
                   <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="email"
+                      {...fieldProps('emailId')}
+                      autoComplete="email"
                       name="emailId"
                       placeholder="Email ID*"
                       value={formData.emailId}
-                      onChange={handleChange}
                       required
                       className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
@@ -227,11 +299,13 @@ export const ContactUsContactForm = ({
                   {/* Phone number */}
                   <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
+                      inputMode="tel"
                       type="tel"
+                      {...fieldProps('phoneNumber')}
+                      autoComplete="tel"
                       name="phoneNumber"
                       placeholder="Phone number"
                       value={formData.phoneNumber}
-                      onChange={handleChange}
                       className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
                   </div>
@@ -243,10 +317,11 @@ export const ContactUsContactForm = ({
                   <div className="flex h-[60px] w-full min-w-0 items-center border-b border-[#D7DCE2] px-[16px] lg:w-[380px] lg:flex-1">
                     <input
                       type="text"
+                      {...fieldProps('company')}
+                      autoComplete="organization"
                       name="company"
                       placeholder="Company*"
                       value={formData.company}
-                      onChange={handleChange}
                       required
                       className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                     />
@@ -258,7 +333,16 @@ export const ContactUsContactForm = ({
                   >
                     <button
                       type="button"
-                      onClick={() => setIsDropdownOpen((prev) => !prev)}
+                      onClick={() => {
+                        setShowOrgTypeTooltip(false);
+                        setIsDropdownOpen((prev) => !prev);
+                      }}
+                      onBlur={(event) => {
+                        if (!dropdownRef.current?.contains(event.relatedTarget))
+                          setShowOrgTypeTooltip(false);
+                      }}
+                      aria-describedby={showOrgTypeTooltip ? 'contact-orgType-tooltip' : undefined}
+                      aria-invalid={Boolean(invalidFields.orgType)}
                       aria-haspopup="listbox"
                       aria-expanded={isDropdownOpen}
                       className="group flex h-full w-full cursor-pointer items-center justify-between text-left outline-none"
@@ -274,6 +358,26 @@ export const ContactUsContactForm = ({
                         <ChevronRight className="h-[12px] w-[8px] shrink-0 xl:h-[14.63px] xl:w-[9.73px]" />
                       </div>
                     </button>
+
+                    {showOrgTypeTooltip && (
+                      <div
+                        id="contact-orgType-tooltip"
+                        role="tooltip"
+                        className="absolute top-[calc(100%+8px)] left-0 z-50 flex w-max max-w-full items-start gap-2 rounded-sm border border-[#7D8690] bg-white p-3 text-sm leading-5 text-[#111111] shadow-lg"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="absolute -top-[6px] left-5 h-[10px] w-[10px] rotate-45 border-t border-l border-[#7D8690] bg-white"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[2px] bg-[#D94A00] font-bold text-white"
+                        >
+                          !
+                        </span>
+                        <span>Please select an organization type.</span>
+                      </div>
+                    )}
 
                     {/* Hidden input to maintain form state */}
                     <input type="hidden" name="orgType" value={formData.orgType} />
@@ -299,6 +403,9 @@ export const ContactUsContactForm = ({
                                 setFormData((prev) => ({ ...prev, orgType: opt }));
                                 setIsDropdownOpen(false);
                                 setHoveredOption(null);
+                                setInvalidFields((prev) => ({ ...prev, orgType: false }));
+                                setShowOrgTypeTooltip(false);
+                                dropdownRef.current?.querySelector('button')?.focus();
                               }}
                               className={`body-xxs type-body-xxs flex h-[40px] w-full cursor-pointer flex-row items-center gap-[14px] px-[12px] py-[8px] text-left transition-colors duration-150 ${
                                 isSelected || isHovered
@@ -321,10 +428,10 @@ export const ContactUsContactForm = ({
                 {/* What challenge are you looking to overcome */}
                 <div className="h-[102px] w-full border-b border-[#D7DCE2] px-[16px] pt-[18px]">
                   <textarea
+                    {...fieldProps('challenge')}
                     name="challenge"
                     placeholder="What challenge are you looking to overcome"
                     value={formData.challenge}
-                    onChange={handleChange}
                     rows={3}
                     className="type-body-xxs h-full w-full resize-none bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
                   />
@@ -343,22 +450,38 @@ export const ContactUsContactForm = ({
 
                   {/* Checkbox */}
                   <div className="flex items-center gap-[8px]">
-                    <button
-                      type="button"
-                      onClick={() => setAgreed(!agreed)}
-                      className={`flex h-[20px] w-[20px] shrink-0 cursor-pointer items-center justify-center rounded-[2px] transition-colors ${
-                        agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'
-                      }`}
-                      aria-label="Agree to terms"
-                    >
+                    <div className="relative flex h-[20px] w-[20px] shrink-0 items-center justify-center">
+                      <input
+                        id="contact-agreed"
+                        name="agreed"
+                        type="checkbox"
+                        required
+                        checked={agreed}
+                        aria-label={consentText || DEFAULT_CONTACT_US_DATA.consentText}
+                        aria-invalid={Boolean(invalidFields.agreed)}
+                        onChange={(event) => {
+                          setAgreed(event.currentTarget.checked);
+                          event.currentTarget.setCustomValidity('');
+                          setInvalidFields((prev) => ({ ...prev, agreed: false }));
+                          if (submissionStatus !== 'sending') setSubmissionStatus('idle');
+                        }}
+                        onInvalid={(event) => {
+                          event.currentTarget.setCustomValidity(
+                            'Please tick this box if you want to proceed.',
+                          );
+                          setInvalidFields((prev) => ({ ...prev, agreed: true }));
+                        }}
+                        className={`focus-visible:outline-electric-blue m-0 h-full w-full cursor-pointer appearance-none rounded-[2px] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 forced-colors:appearance-auto ${agreed ? 'bg-electric-blue' : 'bg-[#CCCCCC]'}`}
+                      />
                       {agreed && (
                         <svg
+                          aria-hidden="true"
                           width="10"
                           height="8"
                           viewBox="0 0 10 8"
                           fill="none"
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-[8px] w-[10px]"
+                          className="pointer-events-none absolute h-[8px] w-[10px] forced-colors:hidden"
                         >
                           <path
                             d="M1 4L3.5 6.5L9 1"
@@ -369,11 +492,14 @@ export const ContactUsContactForm = ({
                           />
                         </svg>
                       )}
-                    </button>
+                    </div>
                     {consentText && (
-                      <span className="type-body-xxs tracking-[0.01em] text-[#333333]">
+                      <label
+                        htmlFor="contact-agreed"
+                        className="type-body-xxs cursor-pointer tracking-[0.01em] text-[#333333]"
+                      >
                         {consentText}
-                      </span>
+                      </label>
                     )}
                   </div>
 
