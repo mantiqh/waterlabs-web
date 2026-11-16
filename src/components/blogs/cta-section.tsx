@@ -24,7 +24,7 @@ export const BlogsCTASection = () => {
           <div className="flex shrink-0 items-center">
             <Link href="/contact-us" className="inline-block">
               <CTA variant="dark-bg" as="div">
-                GET A DEMO
+                Get a Demo
               </CTA>
             </Link>
           </div>

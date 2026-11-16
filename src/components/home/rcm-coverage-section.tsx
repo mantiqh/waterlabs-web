@@ -18,7 +18,7 @@ export const DEFAULT_AGENTS: RcmAgentItem[] = [
     name: 'Eligibility & Benefits Agent',
     description:
       'Coverage is verified with the payer before the encounter and checked again if the plan changes before the service date. The gap that turns into a denial 60 days later is closed at the front door.',
-    link: '/solutions/patient-estimates',
+    link: '/solutions',
   },
   {
     id: 'prior-auth',

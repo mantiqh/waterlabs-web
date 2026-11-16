@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 
 import { checkContactRateLimit } from '@/lib/contact-rate-limit';
 import { parseContactSubmission } from '@/lib/contact-submission';
+import { fetchContactUsPageSettings } from '@/sanity/lib/contact-us';
 
 export async function POST(request: Request) {
   // Vercel supplies this header; group requests without a trusted IP together.
@@ -44,6 +45,13 @@ export async function POST(request: Request) {
   }
 
   try {
+    const settings = await fetchContactUsPageSettings();
+    if (!settings.orgTypeOptions?.includes(data.orgType)) {
+      return NextResponse.json(
+        { error: 'Please select an organization type from the list.' },
+        { status: 400 },
+      );
+    }
     const resend = new Resend(RESEND_API_KEY);
     const { error } = await resend.emails.send({
       from: CONTACT_EMAIL_FROM,
