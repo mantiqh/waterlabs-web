@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -21,7 +22,7 @@ export const HeroSection = ({
   ctaText = 'Get a demo',
   ctaLink = '/contact-us',
 }: HeroSectionProps) => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying] = useState(true);
 
   const effectiveHeading =
     !heading || heading.includes("Don't just automate")
@@ -61,27 +62,73 @@ export const HeroSection = ({
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#F4F6F9]">
+    <section
+      data-home-section="hero"
+      data-motion-group
+      data-motion-ambient
+      data-motion-paused={!isPlaying}
+      className="relative w-full overflow-hidden bg-[#F4F6F9]"
+    >
       {/* Hero Banner Card */}
-      <div
-        className="relative flex min-h-[700px] w-full flex-col justify-between overflow-hidden rounded-bl-[30px] bg-cover bg-center px-[16px] pt-[20px] pb-[40px] sm:px-[20px] md:px-[40px] lg:min-h-[830px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]"
-        style={{
-          backgroundImage: `
-            linear-gradient(180deg, rgba(0, 0, 0, 0) 39.89%, rgba(0, 0, 0, 0.65) 75%, rgba(0, 0, 0, 0.85) 100%),
-            linear-gradient(136.88deg, rgba(0, 0, 0, 0) 70%, #000000 100%),
-            url('/images/home/hero-section/bg_banner.png')
-          `,
-        }}
-      >
-        {/* Decorative Blurred Glass Layer (Figma: vector-path) */}
+      <div className="relative flex min-h-[700px] w-full flex-col justify-between overflow-hidden rounded-bl-[30px] bg-cover bg-center px-[16px] pt-[20px] pb-[40px] sm:px-[20px] md:px-[40px] lg:min-h-[830px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]">
+        <div
+          data-motion-banner
+          data-motion-src="/images/home/hero-section/homebanner.png"
+          data-motion-reveal="banner"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0"
+        >
+          <Image
+            src="/images/home/hero-section/homebanner.png"
+            alt=""
+            fill
+            sizes="(max-width: 1023px) 1200px, (max-width: 1439px) 1440px, 100vw"
+            preload
+            fetchPriority="high"
+            className="object-cover object-center"
+          />
+        </div>
+        {/* Ambient video / motion drift layer (commented out for now) */}
+        {/*
+        <div
+          data-motion-pointer
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-[-2.5%]"
+        >
+          <div
+            data-motion-drift
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url('/images/home/hero-section/homebanner.png')`,
+            }}
+          />
+        </div>
+        */}
+
+        {/* Video element (commented out for now) */}
+        {/*
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/videos/home/hero-video.mp4" type="video/mp4" />
+        </video>
+        */}
+
+        {/* Decorative Blurred Glass Layer (commented out for now) */}
+        {/*
         <div
           aria-hidden="true"
           className="pointer-events-none absolute bottom-[-146px] left-[78px] z-0 h-[393px] w-[787px] rounded-[30px] bg-[rgba(0,0,0,0.2)] backdrop-blur-[6.6px] lg:top-[61px] lg:left-[569px] lg:h-[854px] lg:w-[1708px]"
         />
+        */}
 
         {/* Top Navbar */}
         <div className="relative z-20 w-full">
-          <Navbar />
+          <Navbar motion="home" />
         </div>
 
         {/* Hero Main Content */}
@@ -93,15 +140,28 @@ export const HeroSection = ({
               {/* Eyebrow / Tag */}
               <div className="flex h-[20px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
                 <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-                <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">{subheading}</span>
+                <span
+                  data-motion-reveal="scramble"
+                  className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+                >
+                  {subheading}
+                </span>
               </div>
 
               {/* H1 Heading & Paragraph */}
               <div className="flex w-full flex-col items-start gap-[12px] lg:gap-[20px]">
-                <h1 className="type-h1 w-full max-w-[760px] tracking-[-0.01em] max-sm:tracking-[-0.025em]">
+                <h1
+                  data-motion-reveal="words"
+                  data-motion-stagger="0.07"
+                  data-motion-duration="1.5"
+                  className="type-h1 w-full max-w-[760px] tracking-[-0.01em] max-sm:tracking-[-0.025em]"
+                >
                   {renderHeading(effectiveHeading)}
                 </h1>
-                <p className="type-body-s max-w-[362px] text-[#F4F6F9] md:max-w-[600px] lg:max-w-[710px]">
+                <p
+                  data-motion-reveal="blur"
+                  className="type-body-s max-w-[362px] text-[#F4F6F9] md:max-w-[600px] lg:max-w-[710px]"
+                >
                   {effectiveDescription}
                 </p>
               </div>
@@ -109,8 +169,11 @@ export const HeroSection = ({
 
             {/* Mobile: Row with CTA Button + Pause Circle | Desktop: Button only */}
             <div className="flex w-full items-center justify-between lg:w-auto lg:justify-start">
-              <Link href={ctaLink}>
+              <Link href={ctaLink} aria-label={ctaText}>
                 <CTA
+                  data-motion-reveal="fade"
+                  as="span"
+                  data-motion-magnetic
                   variant="light-bg"
                   className="h-[44px] max-md:h-[38px] max-md:px-[20px] max-md:py-[10px]"
                 >
@@ -118,10 +181,13 @@ export const HeroSection = ({
                 </CTA>
               </Link>
 
-              {/* Video Pause Toggle Button on Mobile (aligned right on actions row) */}
+              {/* Background Animation / Video Pause Toggle Button on Mobile (commented out for now) */}
+              {/*
               <button
                 type="button"
-                aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
+                aria-label={isPlaying ? 'Pause background animation' : 'Play background animation'}
+                aria-pressed={isPlaying}
+                data-hero-pause
                 onClick={() => setIsPlaying((prev) => !prev)}
                 className="flex h-[43px] w-[43px] shrink-0 cursor-pointer items-center justify-center rounded-full bg-[rgba(42,42,42,0.8)] backdrop-blur-[14.4px] transition-all hover:scale-105 hover:bg-[rgba(42,42,42,0.95)] lg:hidden"
               >
@@ -149,13 +215,17 @@ export const HeroSection = ({
                   </svg>
                 )}
               </button>
+              */}
             </div>
           </div>
 
-          {/* Video Pause Toggle Button on Desktop (aligned bottom right of 1320px container) */}
+          {/* Background Animation / Video Pause Toggle Button on Desktop (commented out for now) */}
+          {/*
           <button
             type="button"
-            aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
+            aria-label={isPlaying ? 'Pause background animation' : 'Play background animation'}
+            aria-pressed={isPlaying}
+            data-hero-pause
             onClick={() => setIsPlaying((prev) => !prev)}
             className="hidden h-[53px] w-[53px] shrink-0 cursor-pointer items-center justify-center self-end rounded-full bg-[rgba(42,42,42,0.8)] backdrop-blur-[14.4px] transition-all hover:scale-105 hover:bg-[rgba(42,42,42,0.95)] lg:flex"
           >
@@ -183,6 +253,7 @@ export const HeroSection = ({
               </svg>
             )}
           </button>
+          */}
         </div>
       </div>
     </section>

@@ -26,9 +26,10 @@ interface NavItem {
 
 export interface NavbarProps {
   theme?: 'light' | 'dark';
+  motion?: 'none' | 'home';
 }
 
-const Navbar = ({ theme = 'light' }: NavbarProps) => {
+const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -97,6 +98,23 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const dropdownLabel = (label: string, className?: string) => (
+    <span
+      className={
+        motion === 'home' ? `inline-block overflow-clip align-bottom ${className ?? ''}` : className
+      }
+      data-nav-text-mask={motion === 'home' ? '' : undefined}
+    >
+      {motion === 'home' ? (
+        <span data-nav-reveal-text className="block">
+          {label}
+        </span>
+      ) : (
+        label
+      )}
+    </span>
+  );
+
   const handleMouseEnter = (label: string) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -115,6 +133,20 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
   const toggleMobileItem = (label: string) => {
     setExpandedMobileItem((prev) => (prev === label ? null : label));
   };
+
+  useEffect(() => {
+    if (motion !== 'home' || !menuRef.current) return;
+    const root = menuRef.current;
+    let disposed = false;
+    let cleanup: (() => void) | undefined;
+    void import('@/lib/motion/motion').then(({ mountNavbarMotion }) => {
+      if (!disposed) cleanup = mountNavbarMotion(root);
+    });
+    return () => {
+      disposed = true;
+      cleanup?.();
+    };
+  }, [motion]);
 
   // Close menu on click outside or escape key
   useEffect(() => {
@@ -154,6 +186,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
     <div className="relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)]">
       <div
         ref={menuRef}
+        data-home-nav={motion === 'home' ? '' : undefined}
         className={`fixed top-0 right-0 left-0 z-50 mx-auto w-full max-w-[1320px] transition-all duration-300 ease-out lg:relative lg:top-0 lg:right-auto lg:left-auto lg:px-0 ${
           isScrolled
             ? 'translate-y-0 px-0 opacity-100'
@@ -161,19 +194,22 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
         }`}
       >
         <header
-          className={`relative isolate flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:backdrop-blur-[13.2px] before:content-[''] ${
+          data-motion-reveal={motion === 'home' ? 'navbar-shell' : undefined}
+          data-motion-group={motion === 'home' ? '' : undefined}
+          className={`relative isolate flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:content-[''] ${motion === 'home' ? 'backdrop-blur-[13.2px]' : 'before:backdrop-blur-[13.2px]'} ${
             theme === 'dark'
               ? isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-white/10 bg-black/85 px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/10 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
                 : 'rounded-[30px] border border-white/10 bg-white/[0.05] pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.3)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
               : isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] bg-white px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
-                : 'rounded-[30px] border border-white/24 bg-white/70 pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
+                : `rounded-[30px] border border-white/24 ${motion === 'home' ? 'bg-[#F4F6F9]/70' : 'bg-white/70'} pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]`
           }`}
         >
           {/* Logo */}
           <Link
             href="/"
+            data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
             prefetch={false}
             onPointerEnter={() => prefetchRoute('/')}
             onFocus={() => prefetchRoute('/')}
@@ -213,6 +249,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                 >
                   {item.href ? (
                     <Link
+                      data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
                       href={item.href}
                       prefetch={false}
                       onPointerEnter={() => prefetchRoute(item.href)}
@@ -249,7 +286,9 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                     </Link>
                   ) : (
                     <button
+                      data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
                       type="button"
+                      aria-expanded={isDropdownOpen}
                       onClick={() =>
                         setActiveDropdown(activeDropdown === item.label ? null : item.label)
                       }
@@ -283,6 +322,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                   {/* Dropdown Card - Exact 30px gap below navbar capsule */}
                   {hasChildren && item.children && (
                     <div
+                      data-nav-open={isDropdownOpen}
                       className={`absolute top-full z-50 origin-top pt-[30px] transition-transform duration-200 ease-out motion-reduce:transition-none ${
                         item.columns && item.columns.length > 1
                           ? 'left-0 lg:max-xl:right-0 lg:max-xl:left-auto xl:right-auto xl:left-0'
@@ -340,7 +380,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                           : 'text-[#111111] hover:text-[#0753A8]'
                                       }`}
                                     >
-                                      <span className="whitespace-nowrap">{subItem.label}</span>
+                                      {dropdownLabel(subItem.label, 'whitespace-nowrap')}
                                       {isActive && (
                                         <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0753A8]" />
                                       )}
@@ -393,7 +433,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                       : 'text-[#111111] hover:text-[#0753A8]'
                                   }`}
                                 >
-                                  <span className="whitespace-nowrap">{subItem.label}</span>
+                                  {dropdownLabel(subItem.label, 'whitespace-nowrap')}
                                   {isActive && (
                                     <ChevronRight className="h-[14.63px] w-[9.73px] shrink-0 text-[#0753A8]" />
                                   )}
@@ -411,7 +451,10 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
           </nav>
 
           {/* Desktop CTA */}
-          <div className="ml-[6px] hidden shrink-0 lg:block lg:max-xl:ml-[2px] xl:ml-0">
+          <div
+            data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+            className="ml-[6px] hidden shrink-0 lg:block lg:max-xl:ml-[2px] xl:ml-0"
+          >
             <Link
               href="/contact-us"
               prefetch={false}
@@ -428,7 +471,10 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
           </div>
 
           {/* Mobile Menu Actions */}
-          <div className="gap-ds-12 md:gap-ds-20 flex shrink-0 flex-row items-center lg:hidden">
+          <div
+            data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+            className="gap-ds-12 md:gap-ds-20 flex shrink-0 flex-row items-center lg:hidden"
+          >
             <button
               type="button"
               aria-label="Search"
@@ -505,12 +551,14 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
 
         {/* Mobile Menu Dropdown overlay */}
         <div
-          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-[#D7DCE2]/60 bg-white p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] supports-backdrop-filter:bg-white/75 supports-backdrop-filter:backdrop-blur-[40px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
+          data-nav-open={isOpen}
+          aria-hidden={!isOpen}
+          inert={!isOpen}
+          className={`absolute top-[calc(100%+10px)] right-[20px] left-[20px] z-50 flex max-h-[calc(100vh-100px)] origin-top flex-col gap-[16px] overflow-y-auto rounded-[30px] border border-[#D7DCE2]/60 bg-white p-[20px] shadow-[0_12px_32px_rgba(4,40,73,0.08)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] supports-backdrop-filter:bg-white/75 supports-backdrop-filter:backdrop-blur-[40px] md:right-[40px] md:left-[40px] md:p-[24px] lg:hidden ${
             isOpen
               ? 'pointer-events-auto visible translate-y-0 scale-100 opacity-100'
               : 'pointer-events-none invisible -translate-y-4 scale-[0.98] opacity-0'
           }`}
-          aria-hidden={!isOpen}
         >
           <nav className="flex flex-col gap-[4px]">
             {navItems.map((item, index) => {
@@ -525,15 +573,18 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                       transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                     }}
                     className={`flex transform flex-col border-b border-[#D7DCE2]/60 py-[4px] transition-all duration-300 last:border-b-0 ${
-                      isOpen ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
+                      isOpen || motion === 'home'
+                        ? 'translate-x-0 opacity-100'
+                        : '-translate-x-2 opacity-0'
                     }`}
                   >
                     <button
                       type="button"
+                      aria-expanded={isExpanded}
                       onClick={() => toggleMobileItem(item.label)}
                       className="body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue flex w-full cursor-pointer items-center justify-between py-[8px] text-left transition-colors"
                     >
-                      <span className="font-medium">{item.label}</span>
+                      {dropdownLabel(item.label, 'font-medium')}
                       <ChevronRight
                         className={`h-[12px] w-[8px] shrink-0 transition-transform duration-300 ${
                           isExpanded
@@ -545,6 +596,8 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
 
                     {/* Accordion Sub-items */}
                     <div
+                      data-nav-open={isExpanded}
+                      inert={motion === 'home' && !isExpanded}
                       className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
                         isExpanded
                           ? 'mt-[2px] grid-rows-[1fr] opacity-100'
@@ -572,7 +625,7 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                                   : 'text-midnight-blue/80 hover:bg-[#F4F6F9] hover:text-[#0753A8]'
                               }`}
                             >
-                              <span>{subItem.label}</span>
+                              {dropdownLabel(subItem.label)}
                               {isCurrent && (
                                 <ChevronRight className="h-[15px] w-[10px] shrink-0 text-[#0753A8]" />
                               )}
@@ -598,10 +651,12 @@ const Navbar = ({ theme = 'light' }: NavbarProps) => {
                     transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                   }}
                   className={`body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transform border-b border-[#D7DCE2]/60 py-[10px] transition-all duration-300 last:border-b-0 ${
-                    isOpen ? 'translate-x-0 opacity-100' : '-translate-x-2 opacity-0'
+                    isOpen || motion === 'home'
+                      ? 'translate-x-0 opacity-100'
+                      : '-translate-x-2 opacity-0'
                   }`}
                 >
-                  {item.label}
+                  {dropdownLabel(item.label)}
                 </Link>
               );
             })}

@@ -1,9 +1,11 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
 import Image from 'next/image';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
+import { mountCarouselAutoplay, mountCarouselDrag } from '@/lib/motion/motion';
 
 export interface WhyWaterlabsCard {
   id: string;
@@ -83,12 +85,19 @@ export interface WhyWaterlabsSectionProps {
   cards?: WhyWaterlabsCard[];
 }
 
+function desktopOffset(track: HTMLElement, index: number, count: number) {
+  // Match the settled 518px/588px card widths, never an in-flight CSS transition.
+  const step = 518 + (parseFloat(getComputedStyle(track).columnGap) || 0);
+  return index * step + Math.floor(index / count) * (588 - 518);
+}
+
 export const WhyWaterlabsSection = ({
   eyebrow = 'Why Waterlabs is different',
   headingLine1 = 'The things no other RCM',
   headingLine2 = 'partner can say at once',
   cards = DEFAULT_CARDS,
 }: WhyWaterlabsSectionProps) => {
+  const sectionRef = useRef<HTMLElement>(null);
   // Mobile / Tablet Snap-Scroll State
   const [mobileIndex, setMobileIndex] = useState(0);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
@@ -108,108 +117,78 @@ export const WhyWaterlabsSection = ({
 
   // Initial visit/refresh starts at index 0 (matching Figma and user reference with no cards on left)
   const [desktopIndex, setDesktopIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const isResettingRef = useRef(false);
-  const pendingIndexRef = useRef<number | null>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const immediateRef = useRef(false);
+  const desktopRealIndex = cards.length
+    ? ((desktopIndex % cards.length) + cards.length) % cards.length
+    : 0;
 
-  // When transition is disabled to silently normalize the index, re-enable it after the snapped frame paints
-  useEffect(() => {
-    if (!isTransitioning) {
-      let raf1 = 0;
-      let raf2 = 0;
-      raf1 = requestAnimationFrame(() => {
-        raf2 = requestAnimationFrame(() => {
-          isResettingRef.current = false;
-          setIsTransitioning(true);
-          if (pendingIndexRef.current !== null) {
-            const target = pendingIndexRef.current;
-            pendingIndexRef.current = null;
-            setDesktopIndex(target);
-          }
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track || !cards.length) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const context = gsap.context(() => {}, track);
+    const move = (instant = false) =>
+      context.add(() => {
+        gsap.to(track, {
+          x: -desktopOffset(track, desktopIndex, cards.length),
+          duration: instant || reduced.matches ? 0 : 0.9,
+          ease: 'expo.out',
+          overwrite: true,
+          onComplete: () => {
+            if (desktopIndex >= 2 * cards.length) {
+              immediateRef.current = true;
+              setDesktopIndex((index) => index - cards.length);
+            }
+          },
         });
       });
-      return () => {
-        cancelAnimationFrame(raf1);
-        cancelAnimationFrame(raf2);
-      };
-    }
-  }, [isTransitioning]);
+    move(immediateRef.current);
+    immediateRef.current = false;
+    const resize = () => {
+      move(true);
+    };
+    window.addEventListener('resize', resize);
+    reduced.addEventListener('change', resize);
+    // Kill the old tween without reverting its position: new input continues from the visible pose.
+    return () => {
+      context.kill(false);
+      gsap.killTweensOf(track);
+      window.removeEventListener('resize', resize);
+      reduced.removeEventListener('change', resize);
+    };
+  }, [desktopIndex, cards.length]);
 
-  const desktopRealIndex = ((desktopIndex % cards.length) + cards.length) % cards.length;
+  useEffect(() => {
+    if (!sectionRef.current || cards.length < 2) return;
+    return mountCarouselAutoplay(
+      sectionRef.current,
+      () => setDesktopIndex((index) => Math.min(index + 1, cards.length * 3 - 1)),
+      6000,
+    );
+  }, [cards.length]);
 
   const handlePrev = () => {
-    if (isResettingRef.current || !isTransitioning) return;
-    const N = cards.length;
-    if (N === 0) return;
-
+    if (cards.length < 2) return;
     if (desktopIndex === 0) {
-      // Smoothly loop backwards: silently jump to middle set clone of card 0 (index N), then animate to N - 1
-      isResettingRef.current = true;
-      pendingIndexRef.current = N - 1;
-      setIsTransitioning(false);
-      setDesktopIndex(N);
-      return;
-    }
-
-    setIsTransitioning(true);
-    setDesktopIndex((prev) => prev - 1);
+      const track = trackRef.current;
+      if (track) {
+        gsap.set(track, {
+          x: -desktopOffset(track, cards.length, cards.length),
+        });
+      }
+      setDesktopIndex(cards.length - 1);
+    } else setDesktopIndex((index) => index - 1);
   };
-
   const handleNext = () => {
-    if (isResettingRef.current || !isTransitioning) return;
-    if (desktopIndex >= displayCards.length - 1) return;
-    setIsTransitioning(true);
-    setDesktopIndex((prev) => prev + 1);
+    if (cards.length < 2) return;
+    setDesktopIndex((index) => Math.min(index + 1, displayCards.length - 1));
   };
-
-  const handleDotClick = (targetRealIndex: number) => {
-    if (isResettingRef.current || !isTransitioning) return;
-    const N = cards.length;
-    if (N === 0) return;
-    const currentReal = ((desktopIndex % N) + N) % N;
-    let diff = targetRealIndex - currentReal;
-    if (diff > N / 2) diff -= N;
-    if (diff < -N / 2) diff += N;
-
-    if (desktopIndex + diff < 0) {
-      isResettingRef.current = true;
-      const normalizedCurrent = desktopIndex + N;
-      pendingIndexRef.current = normalizedCurrent + diff;
-      setIsTransitioning(false);
-      setDesktopIndex(normalizedCurrent);
-      return;
-    }
-
-    if (desktopIndex + diff >= displayCards.length) return;
-    setIsTransitioning(true);
-    setDesktopIndex((prev) => prev + diff);
+  const handleDotClick = (index: number) => {
+    setDesktopIndex((current) => Math.floor(current / cards.length) * cards.length + index);
   };
-
-  const handleCardClick = (idx: number) => {
-    if (isResettingRef.current || !isTransitioning) return;
-    if (idx === desktopIndex) return;
-    setIsTransitioning(true);
-    setDesktopIndex(idx);
-  };
-
-  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    if (e.target !== e.currentTarget || e.propertyName !== 'transform') return;
-
-    const N = cards.length;
-    if (N === 0) return;
-
-    // Keep active card within valid clone range without jumping when advancing from set 0
-    if (desktopIndex >= 2 * N) {
-      isResettingRef.current = true;
-      pendingIndexRef.current = null;
-      setIsTransitioning(false);
-      setDesktopIndex((prev) => prev - N);
-    } else if (desktopIndex < 0) {
-      isResettingRef.current = true;
-      pendingIndexRef.current = null;
-      setIsTransitioning(false);
-      setDesktopIndex((prev) => prev + N);
-    }
+  const handleCardClick = (index: number) => {
+    setDesktopIndex(index);
   };
 
   const handleMobileScroll = () => {
@@ -231,7 +210,7 @@ export const WhyWaterlabsSection = ({
     });
 
     // On md: breakpoint (768px - 1023px), clamp to 4 so last visible dot (5th) is active
-    if (typeof window !== 'undefined' && window.innerWidth >= 768 && window.innerWidth < 1024) {
+    if (typeof window !== 'undefined' && window.innerWidth >= 720 && window.innerWidth < 1024) {
       closestIndex = Math.min(closestIndex, cards.length - 2);
     }
 
@@ -247,13 +226,44 @@ export const WhyWaterlabsSection = ({
       const containerPaddingLeft = parseFloat(getComputedStyle(container).paddingLeft) || 0;
       container.scrollTo({
         left: cardElements[index].offsetLeft - container.offsetLeft - containerPaddingLeft,
-        behavior: 'smooth',
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
       });
     }
   };
 
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track?.parentElement || !cards.length) return;
+    return mountCarouselDrag(
+      track.parentElement,
+      track,
+      (direction) => {
+        if (cards.length < 2) return;
+        if (direction < 0 && desktopIndex === 0) {
+          gsap.set(track, { x: -desktopOffset(track, cards.length, cards.length) });
+          setDesktopIndex(cards.length - 1);
+        } else
+          setDesktopIndex((index) =>
+            Math.max(0, Math.min(index + direction, cards.length * 3 - 1)),
+          );
+      },
+      () => {
+        gsap.to(track, {
+          x: -desktopOffset(track, desktopIndex, cards.length),
+          duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.6,
+          ease: 'expo.out',
+          overwrite: true,
+        });
+      },
+    );
+  }, [cards.length, desktopIndex]);
+
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-t from-[#000000] via-[#000000]/60 to-[#F4F6F9]">
+    <section
+      data-home-section="why"
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-gradient-to-t from-[#000000] via-[#000000]/60 to-[#F4F6F9]"
+    >
       {/* 
         Curved Container:
         Desktop: border-radius 60px 0px 0px 60px, padding 80px 60px
@@ -274,15 +284,25 @@ export const WhyWaterlabsSection = ({
         <div className="relative z-10 mx-auto flex max-w-[1320px] flex-col lg:items-end">
           <div className="flex w-full max-w-[982px] flex-col gap-[32px] lg:gap-[40px]">
             {/* Header: Tag + Two-line Heading */}
-            <div className="flex max-w-[573px] flex-col items-start gap-[12px] lg:gap-[20px]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 72%"
+              className="flex max-w-[573px] flex-col items-start gap-[12px] lg:gap-[20px]"
+            >
               {/* Tag / Eyebrow */}
               <div className="inline-flex h-[20px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
                 <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{eyebrow}</span>
+                <span
+                  data-motion-reveal="scramble"
+                  className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+                >
+                  {eyebrow}
+                </span>
               </div>
 
               {/* Title: Line 1 in #0F68D6, Line 2 in #111111 */}
-              <h2 className="type-h2 tracking-[-0.01em]">
+              <h2 data-motion-reveal="lines" className="type-h2 tracking-[-0.01em]">
                 <span className="block text-[#0F68D6]">{headingLine1}</span>
                 <span className="block text-[#111111]">{headingLine2}</span>
               </h2>
@@ -293,27 +313,40 @@ export const WhyWaterlabsSection = ({
                ========================================================= */}
             <div className="hidden flex-col gap-[40px] lg:flex">
               {/* Card Slider Track Area */}
-              <div className="relative min-h-[464px] w-full overflow-visible">
+              <div className="relative min-h-[464px] w-full touch-pan-y overflow-visible select-none">
+                {/* Size from every caption at its narrowest width, including during a morph. */}
                 <div
-                  onTransitionEnd={handleTransitionEnd}
-                  className="flex items-start gap-[21.14px]"
-                  style={{
-                    transform: `translateX(-${desktopIndex * 539.14}px)`,
-                    transition: isTransitioning ? 'transform 500ms ease-out' : 'none',
-                  }}
+                  aria-hidden="true"
+                  inert
+                  className="pointer-events-none invisible grid w-[518px] pt-[325.14px]"
+                >
+                  {cards.map((card) => (
+                    <div
+                      key={`size-${card.id}`}
+                      className="col-start-1 row-start-1 flex min-h-[140px] flex-col gap-[12px]"
+                    >
+                      <h3 className="type-h6 tracking-[-0.01em]">{card.title}</h3>
+                      <p className="type-body-xxs tracking-[0.01em]">{card.description}</p>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  ref={trackRef}
+                  data-why-track
+                  data-active-index={desktopRealIndex}
+                  className="absolute top-0 left-0 flex w-full items-start gap-[21.14px]"
                 >
                   {displayCards.map((card, idx) => {
-                    const isActive = idx === desktopIndex;
-                    const cardTransitionClass = isTransitioning
-                      ? 'transition-all duration-500'
-                      : 'transition-none';
-                    const titleTransitionClass = isTransitioning
-                      ? 'transition-colors duration-500'
-                      : 'transition-none';
+                    // Identical clone geometry makes cycle rebasing visually unchanged.
+                    const isActive = idx % cards.length === desktopRealIndex;
+                    const cardTransitionClass =
+                      'transition-[width,height,gap,opacity] duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)]';
+                    const titleTransitionClass = 'transition-colors duration-500';
                     return (
                       <div
                         key={card.uniqueKey}
                         onClick={() => handleCardClick(idx)}
+                        aria-hidden={idx !== desktopIndex}
                         className={`flex shrink-0 cursor-pointer flex-col ${cardTransitionClass} ${
                           isActive
                             ? 'pointer-events-auto w-[588px] gap-[20px] opacity-100'
@@ -327,6 +360,8 @@ export const WhyWaterlabsSection = ({
                           }`}
                         >
                           <Image
+                            data-motion-reveal="image"
+                            data-motion-parallax
                             src={card.image}
                             alt={card.title}
                             fill
@@ -383,6 +418,7 @@ export const WhyWaterlabsSection = ({
                         type="button"
                         onClick={() => handleDotClick(i)}
                         aria-label={`Go to slide ${i + 1}`}
+                        aria-current={isActive ? 'true' : undefined}
                         className={`h-[6px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${widthClass}`}
                       />
                     );
@@ -393,6 +429,7 @@ export const WhyWaterlabsSection = ({
                 <div className="flex items-center gap-[14px]">
                   {/* Previous Arrow Button */}
                   <CTA
+                    data-motion-magnetic
                     variant="light-arrow"
                     onClick={handlePrev}
                     aria-label="Previous card"
@@ -401,6 +438,7 @@ export const WhyWaterlabsSection = ({
 
                   {/* Next Arrow Button */}
                   <CTA
+                    data-motion-magnetic
                     variant="light-arrow"
                     onClick={handleNext}
                     aria-label="Next card"
@@ -427,6 +465,8 @@ export const WhyWaterlabsSection = ({
                     {/* Card Image */}
                     <div className="relative aspect-[330/265.6] w-full overflow-hidden rounded-[20px_10px_20px_20px] shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
                       <Image
+                        data-motion-reveal="image"
+                        data-motion-parallax
                         src={card.mobileImage || card.image}
                         alt={card.title}
                         fill
