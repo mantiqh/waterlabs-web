@@ -83,13 +83,14 @@ export const CaseStudiesSection = ({
     if (cardElements[index]) {
       container.scrollTo({
         left: cardElements[index].offsetLeft - container.offsetLeft - 20,
-        behavior: 'smooth',
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
       });
     }
   };
 
   return (
     <section
+      data-home-section="results"
       className="relative w-full overflow-hidden"
       style={{
         background: 'linear-gradient(348.94deg, #F4F6F9 7.84%, #062B4B 97.51%)',
@@ -105,8 +106,17 @@ export const CaseStudiesSection = ({
           {/* =========================================================
               HEADER ROW: Heading ("Proven results with Active Clients") + CTA Button
              ========================================================= */}
-          <div className="flex w-full flex-col items-start justify-between gap-[16px] lg:flex-row lg:items-center lg:gap-[20px]">
-            <h2 className="type-h2 max-w-[731px] tracking-[-0.01em]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 72%"
+            className="flex w-full flex-col items-start justify-between gap-[16px] lg:flex-row lg:items-center lg:gap-[20px]"
+          >
+            <h2
+              data-motion-reveal="lines"
+              data-motion-at="0"
+              className="type-h2 max-w-[731px] tracking-[-0.01em]"
+            >
               {heading ? (
                 heading
               ) : (
@@ -118,8 +128,16 @@ export const CaseStudiesSection = ({
             </h2>
 
             <div className="shrink-0">
-              <Link href={ctaLink}>
-                <CTA variant="light-bg">{ctaText}</CTA>
+              <Link href={ctaLink} aria-label={ctaText}>
+                <CTA
+                  data-motion-at="0.3"
+                  data-motion-reveal="fade"
+                  data-motion-magnetic
+                  variant="light-bg"
+                  as="span"
+                >
+                  {ctaText}
+                </CTA>
               </Link>
             </div>
           </div>
@@ -128,9 +146,13 @@ export const CaseStudiesSection = ({
               DESKTOP VIEW (>= 1024px) - 3 Columns Row (1320px x 312px)
              ========================================================= */}
           <div className="hidden w-full grid-cols-3 gap-[20px] lg:grid">
-            {cards.map((card) => (
+            {cards.map((card, index) => (
               <div
                 key={card.id}
+                data-motion-reveal="fade"
+                data-motion-at={index * 0.12}
+                data-motion-y="80"
+                data-motion-duration="1.4"
                 className="flex h-[312px] flex-col justify-between rounded-[20px_10px_20px_20px] border border-transparent bg-[rgba(145,198,242,0.1)] p-[32px] transition-all duration-300 hover:border-[#0F68D6]/20 hover:shadow-[0_8px_24px_rgba(15,104,214,0.06)]"
               >
                 <div className="flex flex-col gap-[16px]">
@@ -143,7 +165,11 @@ export const CaseStudiesSection = ({
                       WebkitTextFillColor: 'transparent',
                     }}
                   >
-                    {card.metric}
+                    <span aria-label={card.metric} role="img">
+                      <span aria-hidden="true" data-motion-metric-value>
+                        {card.metric}
+                      </span>
+                    </span>
                   </span>
 
                   {/* Description */}
@@ -175,6 +201,7 @@ export const CaseStudiesSection = ({
               {cards.map((card) => (
                 <div
                   key={`mobile-${card.id}`}
+                  data-motion-reveal="fade"
                   className="flex h-[188px] w-[calc(100vw-54px)] max-w-[330px] shrink-0 snap-start flex-col justify-between rounded-[20px_10px_20px_20px] bg-[rgba(145,198,242,0.1)] p-[12px] sm:w-[330px]"
                 >
                   <div className="flex flex-col gap-[12px]">
@@ -187,7 +214,11 @@ export const CaseStudiesSection = ({
                         WebkitTextFillColor: 'transparent',
                       }}
                     >
-                      {card.metric}
+                      <span aria-label={card.metric} role="img">
+                        <span aria-hidden="true" data-motion-metric-value>
+                          {card.metric}
+                        </span>
+                      </span>
                     </span>
 
                     {/* Description */}

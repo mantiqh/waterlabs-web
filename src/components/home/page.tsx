@@ -6,6 +6,7 @@ import CTASection from './cta-section';
 import EconomicImpactSection from './economic-impact-section';
 import EnterpriseSecuritySection from './enterprise-security-section';
 import HeroSection from './hero-section';
+import HomeMotion from './home-motion';
 import PlatformEngineSection from './platform-engine-section';
 import RcmCoverageSection from './rcm-coverage-section';
 import RevenueImpactSection from './revenue-impact-section';
@@ -18,7 +19,29 @@ export interface HomePageProps {
 
 const HomePage = ({ data }: HomePageProps) => {
   return (
-    <div className="flex w-full flex-col overflow-x-clip">
+    <div
+      data-home-motion
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <HomeMotion />
+      <noscript>
+        <style>{`
+          [data-motion-root] { --motion-initial-visibility: visible !important; animation: none !important; }
+          [data-motion-root] [data-motion-scene] { height: auto !important; }
+          [data-motion-root] [data-scene-sticky] { position: static !important; }
+          [data-motion-root] [data-scene-panel] { grid-row: auto !important; }
+          [data-motion-root] [data-rcm-body] { grid-template-rows: 1fr; opacity: 1; }
+          [data-motion-root] [data-rcm-body] [inert] { visibility: visible; }
+          [data-motion-root] [data-hero-pause] { visibility: hidden; }
+        `}</style>
+      </noscript>
+      <div
+        data-home-scroll-progress
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[100] h-[2px] origin-left bg-[#63CCB7]"
+      />
       {/* 01 · Hero Section */}
       <HeroSection
         heading={data?.heroHeading}
@@ -49,14 +72,19 @@ const HomePage = ({ data }: HomePageProps) => {
       {/* 08 · Client Perspective (Testimonials Carousel) */}
       <TestimonialsSection testimonials={data?.testimonials} />
 
-      {/* 09 · Revenue Impact Calculator */}
-      <RevenueImpactSection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-economic-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          {/* 09 · Revenue Impact Calculator */}
+          <RevenueImpactSection />
 
-      {/* 10 · The Economic Impact of Going Agentic */}
-      <EconomicImpactSection />
+          {/* 10 · The Economic Impact of Going Agentic */}
+          <EconomicImpactSection />
 
-      {/* 11 · Start Automation With Any Functional Area of RCM (CTA Section) */}
-      <CTASection />
+          {/* 11 · Start Automation With Any Functional Area of RCM (CTA Section) */}
+          <CTASection />
+        </div>
+      </div>
     </div>
   );
 };

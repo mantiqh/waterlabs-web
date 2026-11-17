@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { CTA } from '@/components/CTA';
+import { mountWordHighlight } from '@/lib/motion/motion';
 
 const FIRST_PHRASE = 'We transform your RCM workflows with intelligent';
 const REMAINING_WORDS = [
@@ -73,31 +74,16 @@ export const WelcomeToWaterlabsSection = ({
   ctaLink = '/about-us',
 }: WelcomeToWaterlabsSectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Make reveal progression gradual and controlled across natural scrolling
-      const start = windowHeight * 0.75;
-      const end = windowHeight * 0.1;
-
-      const progress = Math.min(Math.max((start - rect.top) / (start - end), 0), 1);
-      setScrollProgress(progress);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    if (!sectionRef.current) return;
+    return mountWordHighlight(sectionRef.current);
   }, []);
 
   return (
     <section
+      data-home-section="welcome"
       ref={sectionRef}
-      className="relative w-full overflow-hidden rounded-br-[30px] bg-gradient-to-b from-[#060606] to-[#FFFFFF] lg:rounded-none"
+      className="relative w-full overflow-hidden rounded-br-[30px] bg-gradient-to-b from-[#0454CA] from-50% to-[#FFFFFF] to-50% lg:rounded-none"
     >
       {/* 
         Container (Welcome to Waterlabs):
@@ -118,7 +104,14 @@ export const WelcomeToWaterlabsSection = ({
           {/* Eyebrow Tag: Status dot + Welcome to Waterlabs */}
           <div className="inline-flex h-[20px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
             <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{tag}</span>
+            <span
+              data-motion-reveal="scramble"
+              data-motion-trigger="section"
+              data-motion-start="top 70%"
+              className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+            >
+              {tag}
+            </span>
           </div>
 
           {/* Statement Headline: Display/H5 (General Sans) */}
@@ -129,27 +122,19 @@ export const WelcomeToWaterlabsSection = ({
             </span>
 
             {/* Remaining words illuminate on scroll from #D7DCE2 to #2A2A2A. */}
-            {REMAINING_WORDS.map((word, idx) => {
-              const threshold = idx / REMAINING_WORDS.length;
-              const isLit = scrollProgress > threshold;
-
-              return (
-                <span
-                  key={`word-${idx}`}
-                  className={`inline transition-colors duration-300 ${
-                    isLit ? 'text-[#2A2A2A]' : 'text-[#D7DCE2]'
-                  }`}
-                >
-                  {word}{' '}
-                </span>
-              );
-            })}
+            {REMAINING_WORDS.map((word, idx) => (
+              <span key={`word-${idx}`} data-motion-word className="inline text-[#2A2A2A]">
+                {word}{' '}
+              </span>
+            ))}
           </p>
 
           {/* Actions / CTA Button: About us */}
           <div className="flex flex-col items-center">
-            <Link href={ctaLink}>
-              <CTA variant="light-bg">{ctaText}</CTA>
+            <Link href={ctaLink} aria-label={ctaText}>
+              <CTA data-motion-reveal="fade" data-motion-magnetic variant="light-bg" as="span">
+                {ctaText}
+              </CTA>
             </Link>
           </div>
         </div>

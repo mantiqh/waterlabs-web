@@ -17,7 +17,7 @@ export const CTASection = ({
   ctaLink = '/contact-us',
 }: CTASectionProps) => {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section data-home-section="cta" className="relative w-full overflow-hidden bg-white">
       {/* 
         Curved Container (Figma node 7487-16986 desktop, 7487-17280 mobile):
         - Desktop: 1440x388, padding 60px, gap 48px, border-radius 0 60px 0 0
@@ -27,6 +27,8 @@ export const CTASection = ({
         {/* Background Desktop */}
         <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
           <Image
+            data-motion-image="background"
+            data-motion-parallax
             src="/images/home/cta-section/desktop/bg_start_automation.png"
             alt=""
             fill
@@ -39,6 +41,8 @@ export const CTASection = ({
         {/* Background Mobile */}
         <div className="pointer-events-none absolute inset-0 z-0 block lg:hidden">
           <Image
+            data-motion-image="background"
+            data-motion-parallax
             src="/images/home/cta-section/mobile/bg_start_automation (1).png"
             alt=""
             fill
@@ -49,20 +53,49 @@ export const CTASection = ({
         </div>
 
         {/* Content Container (1320x268 desktop, 362x270 mobile) */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col gap-[12px] lg:gap-[20px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 78%"
+          className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col gap-[12px] lg:gap-[20px]"
+        >
           {/* Eyebrow / Tag */}
           <div className="inline-flex h-[20px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
             <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-            <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">{eyebrow}</span>
+            <span
+              data-motion-reveal="scramble"
+              className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+            >
+              {eyebrow}
+            </span>
           </div>
 
           {/* Heading + Action Button */}
-          <div className="flex flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-end">
-            <h2 className="type-h3 max-w-[873px] tracking-[-0.01em] text-white">{heading}</h2>
+          <div
+            data-motion-group
+            data-motion-together
+            className="flex flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-end"
+          >
+            <h2
+              data-motion-reveal="words"
+              data-motion-stagger="0.03"
+              data-motion-at="0.1"
+              className="type-h3 max-w-[873px] tracking-[-0.01em] text-white"
+            >
+              {heading}
+            </h2>
 
             <div className="shrink-0">
-              <Link href={ctaLink}>
-                <CTA variant="dark-bg">{ctaText}</CTA>
+              <Link href={ctaLink} aria-label={ctaText}>
+                <CTA
+                  data-motion-at="0.1"
+                  data-motion-reveal="fade"
+                  as="span"
+                  data-motion-magnetic
+                  variant="dark-bg"
+                >
+                  {ctaText}
+                </CTA>
               </Link>
             </div>
           </div>

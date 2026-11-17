@@ -49,7 +49,7 @@ export const PlatformEngineSection = ({
   products = DEFAULT_PRODUCTS,
 }: PlatformEngineSectionProps) => {
   return (
-    <section className="relative w-full bg-white">
+    <section data-home-section="platform" className="relative w-full bg-white">
       {/* 
         Curved Container:
         Desktop: border-radius 0px 60px 60px 0px, padding 80px 60px
@@ -69,7 +69,13 @@ export const PlatformEngineSection = ({
               LEFT COLUMN: Sticky Heading (sticks on desktop scroll)
              ========================================================= */}
           <div className="w-full shrink-0 self-start lg:sticky lg:top-[120px] lg:w-[389px]">
-            <h2 className="type-h2 tracking-[-0.01em]">
+            <h2
+              data-motion-reveal="words"
+              data-motion-stagger="0.08"
+              data-motion-trigger="section"
+              data-motion-start="top 70%"
+              className="type-h2 tracking-[-0.01em]"
+            >
               <span className="block text-white">{headingLine1}</span>
               <span className="text-aqua-mint block">{headingLine2}</span>
             </h2>
@@ -88,6 +94,8 @@ export const PlatformEngineSection = ({
                   }`}
                 >
                   <Image
+                    data-motion-reveal="image"
+                    data-motion-parallax
                     src={item.image}
                     alt={item.title}
                     fill
@@ -99,32 +107,61 @@ export const PlatformEngineSection = ({
                 </div>
 
                 {/* Desktop Text & Action (>= 1024px) */}
-                <div className="hidden w-full flex-row items-end justify-between gap-[32px] lg:flex">
+                <div
+                  data-motion-group
+                  data-motion-start="top 82%"
+                  className="hidden w-full flex-row items-end justify-between gap-[32px] lg:flex"
+                >
                   <div className="flex max-w-[520px] flex-col gap-[16px]">
-                    <h3 className="type-h5 bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] bg-clip-text tracking-[-0.01em] text-transparent">
+                    <h3
+                      data-motion-reveal="fade"
+                      className="type-h5 bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] bg-clip-text tracking-[-0.01em] text-transparent"
+                    >
                       {item.title}
                     </h3>
-                    <p className="type-body-s text-[#D7DCE2]">{item.description}</p>
+                    <p data-motion-reveal="blur" className="type-body-s text-[#D7DCE2]">
+                      {item.description}
+                    </p>
                   </div>
                   <div className="shrink-0">
-                    <Link href={item.href}>
-                      <CTA variant="dark-bg">{item.ctaText}</CTA>
+                    <Link href={item.href} aria-label={item.ctaText}>
+                      <CTA
+                        data-motion-reveal="fade"
+                        as="span"
+                        data-motion-magnetic
+                        variant="dark-bg"
+                      >
+                        {item.ctaText}
+                      </CTA>
                     </Link>
                   </div>
                 </div>
 
                 {/* Mobile / Tablet Text & Action (< 1024px) */}
-                <div className="flex w-full flex-col gap-[14px] lg:hidden">
-                  <h3 className="type-h5 bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] bg-clip-text tracking-[-0.01em] text-transparent">
+                <div
+                  data-motion-group
+                  data-motion-start="top 82%"
+                  className="flex w-full flex-col gap-[14px] lg:hidden"
+                >
+                  <h3
+                    data-motion-reveal="fade"
+                    className="type-h5 bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] bg-clip-text tracking-[-0.01em] text-transparent"
+                  >
                     {item.title}
                   </h3>
                   <div className="flex w-full flex-row items-end justify-between gap-[16px] sm:gap-[20px]">
-                    <p className="type-body-s flex-1 text-[16px] leading-[26px] text-[#D7DCE2]">
+                    <p
+                      data-motion-reveal="blur"
+                      className="type-body-s flex-1 text-[16px] leading-[26px] text-[#D7DCE2]"
+                    >
                       {item.description}
                     </p>
                     <div className="shrink-0 pb-[2px]">
                       <Link href={item.href} aria-label={item.ctaText}>
                         <CTA
+                          data-motion-reveal="fade"
+                          as="span"
+                          data-motion-magnetic
                           variant="dark-bg"
                           aria-label={item.ctaText}
                           className="h-[44px] w-[44px] max-sm:!h-[34px] max-sm:!min-h-[34px] max-sm:!w-[34px] max-sm:!min-w-[34px] max-sm:!p-0 max-sm:[&_svg]:!h-[13.19px] max-sm:[&_svg]:!w-[8.78px]"

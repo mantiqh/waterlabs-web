@@ -1,10 +1,12 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { CTA } from '@/components/CTA';
 import { DEFAULT_HOME_DATA } from '@/data/home';
+import { mountCarouselAutoplay, mountCarouselDrag } from '@/lib/motion/motion';
 import type { TestimonialItem } from '@/types/home';
 
 interface TestimonialsSectionProps {
@@ -14,8 +16,138 @@ interface TestimonialsSectionProps {
 export const TestimonialsSection = ({
   testimonials = DEFAULT_HOME_DATA.testimonials,
 }: TestimonialsSectionProps) => {
-  // Desktop Carousel State
+  const sectionRef = useRef<HTMLElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const directionRef = useRef(1);
+  const navigationIndexRef = useRef(0);
+  const transitioningRef = useRef(false);
+  const pendingNavigationRef = useRef<Array<{ index: number; direction: number }>>([]);
+  const navigate = useCallback(
+    (direction: number, target?: number) => {
+      if (testimonials.length < 2) return;
+      const previous = pendingNavigationRef.current.at(-1)?.index ?? navigationIndexRef.current;
+      const index = target ?? (previous + direction + testimonials.length) % testimonials.length;
+      if (index === previous) return;
+      const request = {
+        index,
+        direction: target === undefined ? direction : Math.sign(index - previous),
+      };
+      if (transitioningRef.current) {
+        pendingNavigationRef.current.push(request);
+        return;
+      }
+      transitioningRef.current = true;
+      navigationIndexRef.current = index;
+      directionRef.current = request.direction;
+      setCurrentIndex(index);
+    },
+    [testimonials.length],
+  );
+  useEffect(() => {
+    if (!sectionRef.current || testimonials.length < 2) return;
+    return mountCarouselAutoplay(sectionRef.current, () => navigate(1), 8000);
+  }, [navigate, testimonials.length]);
+  // Desktop Carousel State
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const previousIndexRef = useRef(currentIndex);
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track || !testimonials.length) return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const slides = Array.from(track.children) as HTMLElement[];
+    const previous = previousIndexRef.current;
+    const changed = previous !== currentIndex;
+    const preservePosition = (anchor: HTMLElement, reorder: () => void) => {
+      const before = anchor.getBoundingClientRect().left;
+      reorder();
+      const delta = before - anchor.getBoundingClientRect().left;
+      if (track.offsetWidth)
+        gsap.set(track, {
+          xPercent: Number(gsap.getProperty(track, 'xPercent')) + (delta / track.offsetWidth) * 100,
+        });
+    };
+    const resetOrder = () => slides.forEach((slide) => slide.style.removeProperty('order'));
+    // Park the boundary slide beside the outgoing slide without changing its visible pose.
+    // Requests are serialized, so no partially visible sibling is moved by normalization.
+    preservePosition(slides[previous] ?? slides[0], () => {
+      resetOrder();
+      if (
+        changed &&
+        directionRef.current > 0 &&
+        previous === slides.length - 1 &&
+        currentIndex === 0
+      )
+        slides[0].style.order = '1';
+      else if (
+        changed &&
+        directionRef.current < 0 &&
+        previous === 0 &&
+        currentIndex === slides.length - 1
+      )
+        slides[slides.length - 1].style.order = '-1';
+    });
+    const target = slides[currentIndex];
+    const offset = target.getBoundingClientRect().left - track.getBoundingClientRect().left;
+    const tween = gsap.to(track, {
+      xPercent: track.offsetWidth ? (-offset / track.offsetWidth) * 100 : -currentIndex * 100,
+      duration: reduced.matches ? 0 : 0.9,
+      ease: 'expo.out',
+      overwrite: 'auto',
+      onComplete: () => {
+        resetOrder();
+        // Canonical percentages also settle correctly if the desktop track was hidden mid-wrap.
+        gsap.set(track, { xPercent: -currentIndex * 100 });
+        const next = pendingNavigationRef.current.shift();
+        transitioningRef.current = !!next;
+        if (next) {
+          directionRef.current = next.direction;
+          navigationIndexRef.current = next.index;
+          setCurrentIndex(next.index);
+        }
+      },
+    });
+    previousIndexRef.current = currentIndex;
+    const copy = track.children[currentIndex]?.querySelectorAll('[data-testimonial-copy]');
+    const reveal =
+      changed && copy
+        ? gsap.fromTo(
+            copy,
+            { y: reduced.matches ? 0 : 24, opacity: reduced.matches ? 1 : 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: reduced.matches ? 0 : 0.9,
+              delay: reduced.matches ? 0 : 0.2,
+              ease: 'expo.out',
+              clearProps: 'transform,opacity',
+            },
+          )
+        : undefined;
+    const stopMotion = () => {
+      if (reduced.matches) {
+        tween.progress(1);
+        reveal?.progress(1);
+      }
+    };
+    reduced.addEventListener('change', stopMotion);
+    return () => {
+      tween.kill();
+      reveal?.revert();
+      reduced.removeEventListener('change', stopMotion);
+    };
+  }, [currentIndex, testimonials.length]);
+  useLayoutEffect(() => {
+    const track = trackRef.current;
+    if (!track?.parentElement) return;
+    return mountCarouselDrag(
+      track.parentElement,
+      track,
+      (direction) => navigate(direction),
+      undefined,
+      () => !transitioningRef.current,
+    );
+  }, [navigate]);
 
   // Mobile / Tablet Smooth Snap-Scroll State
   const mobileScrollRef = useRef<HTMLDivElement>(null);
@@ -51,28 +183,40 @@ export const TestimonialsSection = ({
     const cards = Array.from(container.children) as HTMLElement[];
     if (cards[index]) {
       const cardLeft = cards[index].offsetLeft - container.offsetLeft;
-      container.scrollTo({ left: cardLeft, behavior: 'smooth' });
+      container.scrollTo({
+        left: cardLeft,
+        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      });
       setActiveMobileIndex(index);
     }
   };
 
   // Desktop Navigation Handlers
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    navigate(-1);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    navigate(1);
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#0A60AF]">
+    <section
+      data-home-section="testimonial"
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[#0A60AF]"
+    >
       <div className="w-full rounded-bl-[30px] bg-white px-[20px] pt-[16px] pb-[32px] sm:rounded-bl-[40px] sm:pt-[24px] sm:pb-[48px] md:px-[40px] lg:rounded-bl-[80px] lg:px-[60px] lg:pt-[60px] lg:pb-[100px]">
         <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start">
           {/* Eyebrow: Client Perspective (Shown on both Mobile and Desktop) */}
           <div className="mb-[20px] inline-flex items-center gap-[6px] lg:mb-[32px] lg:gap-[8px]">
             <span className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
+            <span
+              data-motion-reveal="scramble"
+              data-motion-trigger="section"
+              data-motion-start="top 70%"
+              className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+            >
               Client Perspective
             </span>
           </div>
@@ -102,6 +246,8 @@ export const TestimonialsSection = ({
                       }}
                     >
                       <Image
+                        data-motion-reveal="image"
+                        data-motion-parallax
                         src={item.image}
                         alt={item.name}
                         fill
@@ -151,12 +297,15 @@ export const TestimonialsSection = ({
           <div className="hidden w-full flex-col lg:flex">
             <div className="w-full overflow-hidden select-none">
               <div
-                className="flex w-full transition-transform duration-[800ms] ease-[cubic-bezier(0.25,1,0.5,1)]"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                ref={trackRef}
+                data-testimonial-track
+                data-active-index={currentIndex}
+                className="flex w-full touch-pan-y"
               >
                 {testimonials.map((item, idx) => (
                   <div
                     key={`desktop-testimonial-${item._key || idx}`}
+                    aria-hidden={idx !== currentIndex}
                     className="flex w-full shrink-0 flex-row items-start gap-[32px] overflow-hidden xl:gap-[60px]"
                   >
                     {/* Left Image Side */}
@@ -171,6 +320,8 @@ export const TestimonialsSection = ({
                         }}
                       >
                         <Image
+                          data-motion-reveal="image"
+                          data-motion-parallax
                           src={item.image}
                           alt={item.name}
                           fill
@@ -188,10 +339,29 @@ export const TestimonialsSection = ({
                     )}
 
                     {/* Right Content Side */}
-                    <div className="flex min-w-0 flex-1 flex-col justify-center bg-transparent">
-                      <p className="type-body-s mb-[40px] text-[#111111]">{item.quote}</p>
+                    <div
+                      data-motion-group
+                      data-motion-together
+                      data-motion-start="top 82%"
+                      className="flex min-w-0 flex-1 flex-col justify-center bg-transparent"
+                    >
+                      <p
+                        data-testimonial-copy
+                        data-motion-reveal="blur"
+                        data-motion-at="0"
+                        className="type-body-s mb-[40px] text-[#111111]"
+                      >
+                        {item.quote}
+                      </p>
 
-                      <div className="flex flex-col gap-[6px]">
+                      <div
+                        data-testimonial-copy
+                        data-motion-reveal="fade"
+                        data-motion-at="0"
+                        data-motion-duration="1.1"
+                        data-motion-y="18"
+                        className="flex flex-col gap-[6px]"
+                      >
                         <span className="type-h5 text-electric-blue">{item.name}</span>
                         <span className="type-body-xxs text-[#7D8690]">{item.role}</span>
                       </div>
@@ -209,8 +379,11 @@ export const TestimonialsSection = ({
                   <button
                     key={`desktop-dot-${item._key || i}`}
                     type="button"
-                    onClick={() => setCurrentIndex(i)}
+                    onClick={() => {
+                      navigate(1, i);
+                    }}
                     aria-label={`Go to testimonial ${i + 1}`}
+                    aria-current={currentIndex === i ? 'true' : undefined}
                     className={`h-[7px] cursor-pointer rounded-[32px] border-none p-0 transition-all duration-300 outline-none ${
                       currentIndex === i ? 'bg-electric-blue w-[40px]' : 'w-[12px] bg-[#91C6F2]'
                     }`}
@@ -222,6 +395,8 @@ export const TestimonialsSection = ({
               <div className="flex items-center gap-[12px]">
                 {/* Left Arrow */}
                 <CTA
+                  data-motion-reveal="fade"
+                  data-motion-magnetic
                   variant="light-arrow"
                   onClick={handlePrev}
                   aria-label="Previous testimonial"
@@ -229,6 +404,8 @@ export const TestimonialsSection = ({
                 />
                 {/* Right Arrow */}
                 <CTA
+                  data-motion-reveal="fade"
+                  data-motion-magnetic
                   variant="light-arrow"
                   onClick={handleNext}
                   aria-label="Next testimonial"
