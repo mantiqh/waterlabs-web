@@ -263,7 +263,7 @@ export const ContactUsContactForm = ({
                       placeholder="Name*"
                       value={formData.name}
                       required
-                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
+                      className="h-full min-h-[44px] w-full bg-transparent py-2.5 text-base tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A] md:text-sm"
                     />
                   </div>
                   {/* Org */}
@@ -276,7 +276,7 @@ export const ContactUsContactForm = ({
                       placeholder="Org*"
                       value={formData.org}
                       required
-                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
+                      className="h-full min-h-[44px] w-full bg-transparent py-2.5 text-base tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A] md:text-sm"
                     />
                   </div>
                 </div>
@@ -293,7 +293,7 @@ export const ContactUsContactForm = ({
                       placeholder="Email ID*"
                       value={formData.emailId}
                       required
-                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
+                      className="h-full min-h-[44px] w-full bg-transparent py-2.5 text-base tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A] md:text-sm"
                     />
                   </div>
                   {/* Phone number */}
@@ -306,7 +306,7 @@ export const ContactUsContactForm = ({
                       name="phoneNumber"
                       placeholder="Phone number"
                       value={formData.phoneNumber}
-                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
+                      className="h-full min-h-[44px] w-full bg-transparent py-2.5 text-base tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A] md:text-sm"
                     />
                   </div>
                 </div>
@@ -323,7 +323,7 @@ export const ContactUsContactForm = ({
                       placeholder="Company*"
                       value={formData.company}
                       required
-                      className="type-body-xxs w-full bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
+                      className="h-full min-h-[44px] w-full bg-transparent py-2.5 text-base tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A] md:text-sm"
                     />
                   </div>
                   {/* Organization Type */}
@@ -347,7 +347,7 @@ export const ContactUsContactForm = ({
                       aria-expanded={isDropdownOpen}
                       className="group flex h-full w-full cursor-pointer items-center justify-between text-left outline-none"
                     >
-                      <span className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
+                      <span className="text-base tracking-[0.01em] text-[#2A2A2A] md:text-sm">
                         {formData.orgType || 'Organization Type*'}
                       </span>
                       <div
@@ -433,7 +433,7 @@ export const ContactUsContactForm = ({
                     placeholder="What challenge are you looking to overcome"
                     value={formData.challenge}
                     rows={3}
-                    className="type-body-xxs h-full w-full resize-none bg-transparent tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A]"
+                    className="h-full w-full resize-none bg-transparent text-base tracking-[0.01em] text-[#2A2A2A] outline-none placeholder:text-[#2A2A2A] md:text-sm"
                   />
                 </div>
               </div>
