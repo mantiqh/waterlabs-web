@@ -92,6 +92,16 @@ button:focus-visible [data-motion-reveal],
     [data-scene-surface] {
     min-height: 100svh;
     justify-content: flex-start;
+    padding-block: var(--coverage-inset, 80px);
+  }
+  [data-motion-root]
+    [data-motion-scene='accordion'][data-scene-mode='pinned']
+    [data-scene-content] {
+    min-height: calc(100svh - (2 * var(--coverage-inset, 80px)));
+  }
+  [data-motion-root] [data-motion-scene='accordion'][data-scene-mode='pinned'] [data-rcm-list] {
+    align-self: stretch;
+    justify-content: space-between;
   }
   [data-motion-root] [data-scene-mode='pinned'] [data-scene-panel],
   [data-motion-root] [data-scene-measuring] [data-scene-panel] {
@@ -100,6 +110,36 @@ button:focus-visible [data-motion-reveal],
   [data-motion-root] [data-scene-mode='pinned'] [data-scene-panels],
   [data-motion-root] [data-scene-measuring] [data-scene-panels] {
     gap: 0;
+  }
+}
+
+/* Keep the desktop scenes readable and compact on short displays. */
+@media (min-width: 1024px) and (max-height: 880px) {
+  [data-home-section='coverage'] {
+    --coverage-inset: 32px;
+  }
+  [data-home-section='coverage'] [data-scene-surface] {
+    padding-block: var(--coverage-inset);
+  }
+  [data-home-section='coverage'] [data-rcm-list] {
+    min-height: 0;
+    gap: 12px;
+  }
+  [data-home-section='coverage'] [data-rcm-item][data-rcm-active='false'] {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  [data-home-section='economic'] [data-scene-surface] {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  [data-home-section='economic'] [data-economic-card] {
+    min-height: 0;
+    gap: 20px;
+    padding: 24px;
+  }
+  [data-home-section='economic'] [data-economic-comparison] {
+    min-height: 300px;
   }
 }
 
