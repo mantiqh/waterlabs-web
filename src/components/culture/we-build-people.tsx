@@ -100,6 +100,7 @@ const CULTURE_CARDS: CultureCard[] = [
 ];
 
 const LAST_CARD = CULTURE_CARDS.length - 1;
+const CARD_TRANSITION_MS = 440;
 const BACKING_COLORS = ['#63CCB7', '#A9D154', '#D6A85F', '#AE87E4', '#D7DCE2', '#FFFFFF'];
 
 const cardFrame = (depth: number) => ({
@@ -139,7 +140,15 @@ export const WeBuildPeopleSection = () => {
     let wheelPush = 0;
     let wheelSelectedAt = 0;
     let wheelTimer: ReturnType<typeof setTimeout> | undefined;
-    let pageTouch: { x: number; y: number; handled: boolean } | null = null;
+    let pageTouch: { x: number; y: number; handled: boolean; align: boolean } | null = null;
+    const readingTop = (rect: DOMRect) =>
+      Math.min(120, Math.max(72, (window.innerHeight - rect.height) / 2));
+    const isClipped = (rect: DOMRect) => rect.top < 0 || rect.bottom > window.innerHeight;
+    const isOutward = (index: number, direction: number) =>
+      (index === 0 && direction < 0) || (index === LAST_CARD && direction > 0);
+    // Use 'instant' scroll behavior to avoid animation fighting or jitter with active wheel/touch input
+    const alignSection = (rect: DOMRect) =>
+      window.scrollBy({ top: rect.top - readingTop(rect), behavior: 'instant' });
     const showCard = (index: number, animate: boolean) => {
       if (index === active && animate) return;
       const previous = active;
@@ -161,7 +170,7 @@ export const WeBuildPeopleSection = () => {
       });
       active = index;
       if (!animate || motion.matches) return;
-      const options = { duration: 440, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' };
+      const options = { duration: CARD_TRANSITION_MS, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' };
       const turningCard = index > previous ? cards[previous] : cards[index];
       turningCard.style.zIndex = '20';
       const front = cardFrame(0).transform;
@@ -282,12 +291,12 @@ export const WeBuildPeopleSection = () => {
         event.deltaY *
         (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
       const rect = section.getBoundingClientRect();
-      const readingTop = Math.min(120, Math.max(72, (window.innerHeight - rect.height) / 2));
+      const targetTop = readingTop(rect);
       const inReadingArea = rect.top >= 72 && rect.bottom <= window.innerHeight;
       const enteringFromAbove =
-        direction > 0 && rect.top > readingTop && rect.top - delta <= readingTop;
+        direction > 0 && rect.top > targetTop && rect.top - delta <= targetTop;
       const enteringFromBelow =
-        direction < 0 && rect.top < readingTop && rect.top - delta >= readingTop;
+        direction < 0 && rect.top < targetTop && rect.top - delta >= targetTop;
       if (!track.contains(target) && !inReadingArea && !enteringFromAbove && !enteringFromBelow)
         return;
       // An intentional reversal must not wait for the previous gesture's inertia timer.
@@ -295,10 +304,18 @@ export const WeBuildPeopleSection = () => {
         resetWheelGesture();
       }
       wheelDirection = direction;
+      if (track.contains(target) && isClipped(rect)) {
+        if (isOutward(nearest(), direction)) return;
+        event.preventDefault();
+        alignSection(rect);
+        lockWheelGesture(Math.abs(delta));
+        extendWheelGesture();
+        return;
+      }
       if (!inReadingArea && (enteringFromAbove || enteringFromBelow)) {
         // A large page scroll must land on the stack rather than skip its cards.
         event.preventDefault();
-        window.scrollBy({ top: rect.top - readingTop, behavior: 'instant' });
+        alignSection(rect);
         const index = enteringFromAbove ? 0 : LAST_CARD;
         track.scrollTo({ top: index * stepHeight, behavior: 'instant' });
         showCard(index, false);
@@ -308,11 +325,18 @@ export const WeBuildPeopleSection = () => {
         return;
       }
       const current = nearest();
+      const outward = isOutward(current, direction);
+      // A sustained outward push must eventually hand control back to the page.
+      // A fading momentum tail stays captured until the normal gesture timeout.
       if (
-        !wheelLocked &&
-        ((current === 0 && direction < 0) || (current === LAST_CARD && direction > 0))
-      )
+        outward &&
+        (!wheelLocked ||
+          (performance.now() - wheelSelectedAt >= CARD_TRANSITION_MS &&
+            Math.abs(delta) >= Math.max(4, wheelPeak * 0.5)))
+      ) {
+        resetWheelGesture();
         return;
+      }
       // One trackpad/wheel gesture selects one full card; momentum cannot skip the deck.
       if (wheelLocked) {
         const magnitude = Math.abs(delta);
@@ -363,16 +387,21 @@ export const WeBuildPeopleSection = () => {
       if (
         !section.dataset.animated ||
         event.touches.length !== 1 ||
-        track.contains(target) ||
         target?.closest(
           'input, textarea, select, [contenteditable="true"], dialog, [role="dialog"]',
         )
       )
         return;
       const rect = section.getBoundingClientRect();
-      if (rect.top < 72 || rect.bottom > window.innerHeight) return;
+      const insideTrack = track.contains(target);
+      const align = insideTrack && isClipped(rect);
+      if (
+        (insideTrack && !align) ||
+        (!insideTrack && (rect.top < 72 || rect.bottom > window.innerHeight))
+      )
+        return;
       const touch = event.touches[0];
-      pageTouch = { x: touch.clientX, y: touch.clientY, handled: false };
+      pageTouch = { x: touch.clientX, y: touch.clientY, handled: false, align };
     };
     const onTouchMove = (event: TouchEvent) => {
       if (!pageTouch || event.touches.length !== 1 || !event.cancelable) return;
@@ -388,7 +417,7 @@ export const WeBuildPeopleSection = () => {
       }
       const current = nearest();
       const direction = Math.sign(delta);
-      if ((current === 0 && direction < 0) || (current === LAST_CARD && direction > 0)) {
+      if (isOutward(current, direction)) {
         pageTouch = null;
         return;
       }
@@ -396,7 +425,24 @@ export const WeBuildPeopleSection = () => {
       event.preventDefault();
       if (Math.abs(delta) < 24) return;
       pageTouch.handled = true;
+      if (pageTouch.align) {
+        alignSection(section.getBoundingClientRect());
+        return;
+      }
       goTo(current + direction);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!section.dataset.animated || event.target !== track || event.defaultPrevented) return;
+      const direction =
+        event.key === 'ArrowDown' || event.key === 'PageDown'
+          ? 1
+          : event.key === 'ArrowUp' || event.key === 'PageUp'
+            ? -1
+            : 0;
+      const rect = section.getBoundingClientRect();
+      if (!direction || !isClipped(rect) || isOutward(nearest(), direction)) return;
+      event.preventDefault();
+      alignSection(rect);
     };
     const onTouchEnd = () => {
       pageTouch = null;
@@ -429,6 +475,7 @@ export const WeBuildPeopleSection = () => {
     motion.addEventListener('change', setup);
     window.addEventListener('resize', setup);
     track.addEventListener('scroll', onScroll, { passive: true });
+    track.addEventListener('keydown', onKeyDown);
     window.addEventListener('wheel', onWheel, { passive: false });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: false });
@@ -445,6 +492,7 @@ export const WeBuildPeopleSection = () => {
       motion.removeEventListener('change', setup);
       window.removeEventListener('resize', setup);
       track.removeEventListener('scroll', onScroll);
+      track.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);

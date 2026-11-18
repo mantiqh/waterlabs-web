@@ -158,7 +158,10 @@ export const EconomicImpactSection = ({
             {/* =========================================================
                 ROW 1: Top Comparison Glassmorphic Card (1240x489 desktop, 338x517 mobile)
                ========================================================= */}
-            <div className="relative z-10 flex w-full flex-col items-start justify-between gap-[24px] overflow-hidden rounded-[20px_10px_20px_20px] border border-white/5 bg-black/40 p-[24px_16px] backdrop-blur-[25.35px] sm:p-[32px_20px] lg:min-h-[489px] lg:flex-row lg:items-center lg:gap-[32px] lg:rounded-[20px] lg:p-[32px] xl:gap-[40px]">
+            <div
+              data-economic-comparison
+              className="relative z-10 flex w-full flex-col items-start justify-between gap-[24px] overflow-hidden rounded-[20px_10px_20px_20px] border border-white/5 bg-black/40 p-[24px_16px] backdrop-blur-[25.35px] sm:p-[32px_20px] lg:min-h-[489px] lg:flex-row lg:items-center lg:gap-[32px] lg:rounded-[20px] lg:p-[32px] xl:gap-[40px]"
+            >
               {/* Vector Path on Right Side (Figma vector-path) - Clean subtle blue/white lines matching design */}
               <div
                 data-scene-logo
@@ -283,15 +286,15 @@ export const EconomicImpactSection = ({
               data-motion-reveal="fade"
               data-motion-at="0"
               data-motion-y="30"
-              className="relative z-10 flex min-h-[88px] w-full items-center rounded-[20px_10px_20px_20px] border border-white/5 bg-[rgba(0,0,0,0.21)] p-[20px] backdrop-blur-[9.5px] lg:h-[88px] lg:px-[32px] lg:py-[18px]"
+              className="relative z-10 flex min-h-[88px] w-full items-center rounded-[20px_10px_20px_20px] border border-white/5 bg-[rgba(0,0,0,0.21)] p-[20px] backdrop-blur-[9.5px] lg:px-[32px] lg:py-[18px]"
             >
-              <div className="grid w-full grid-cols-1 gap-x-[32px] gap-y-[12px] sm:grid-flow-col sm:grid-cols-[auto_1fr] sm:grid-rows-2 xl:flex xl:flex-row xl:items-center xl:justify-between xl:gap-[32px]">
+              <div className="grid w-full grid-cols-1 gap-x-[32px] gap-y-[12px] sm:grid-flow-col sm:grid-cols-[auto_minmax(0,1fr)] sm:grid-rows-2 xl:flex xl:flex-row xl:flex-wrap xl:items-center xl:justify-between xl:gap-x-[32px] xl:gap-y-[12px]">
                 {points.map((point, index) => (
                   <div
                     key={point}
                     data-motion-reveal="slide"
                     data-motion-at={0.3 + index * 0.08}
-                    className="flex items-start gap-[8px] whitespace-normal sm:items-center sm:whitespace-nowrap"
+                    className="flex max-w-full min-w-0 items-start gap-[8px] whitespace-normal sm:items-center"
                   >
                     <span className="mt-[6px] h-[5px] w-[5px] shrink-0 rounded-full bg-[#63CCB7] sm:mt-0 lg:h-[7px] lg:w-[7px]" />
                     <span className="type-body-xxs tracking-[0.01em] break-words text-white">

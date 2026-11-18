@@ -216,7 +216,10 @@ export const RcmCoverageSection = ({
             {/* =========================================================
                 DESKTOP RIGHT COLUMN: Interactive Accordion (>= 1024px)
                ========================================================= */}
-            <div className="hidden min-h-[500px] w-full flex-col justify-center gap-[18px] lg:flex lg:w-[760px]">
+            <div
+              data-rcm-list
+              className="hidden min-h-[500px] w-full flex-col justify-center gap-[16px] lg:flex lg:w-[760px]"
+            >
               {agents.map((agent, index) => {
                 const isActive = activeId === agent.id;
 
@@ -224,6 +227,7 @@ export const RcmCoverageSection = ({
                   <div
                     key={agent.id}
                     data-rcm-item
+                    data-rcm-active={isActive}
                     data-motion-reveal="fade"
                     data-motion-y="50"
                     data-motion-duration="1.3"

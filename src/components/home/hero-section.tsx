@@ -134,7 +134,7 @@ export const HeroSection = ({
         {/* Hero Main Content */}
         <div className="relative z-10 mx-auto mt-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[24px] pt-[40px] lg:flex-row lg:items-end lg:gap-[32px] lg:pt-[80px]">
           {/* Left Text & CTA Block */}
-          <div className="flex w-full max-w-[1235px] flex-col items-start gap-[24px] lg:gap-[40px]">
+          <div className="flex w-full max-w-[1235px] flex-col items-start gap-[12px] lg:gap-[20px]">
             {/* Text Stack: Eyebrow + Heading + Description */}
             <div className="flex w-full flex-col items-start gap-[12px] lg:gap-[20px]">
               {/* Eyebrow / Tag */}
@@ -158,18 +158,18 @@ export const HeroSection = ({
                 >
                   {renderHeading(effectiveHeading)}
                 </h1>
-                <p
-                  data-motion-reveal="blur"
-                  className="type-body-s max-w-[362px] text-[#F4F6F9] md:max-w-[600px] lg:max-w-[710px]"
-                >
-                  {effectiveDescription}
-                </p>
               </div>
             </div>
 
-            {/* Mobile: Row with CTA Button + Pause Circle | Desktop: Button only */}
-            <div className="flex w-full items-center justify-between lg:w-auto lg:justify-start">
-              <Link href={ctaLink} aria-label={ctaText}>
+            {/* Description and CTA share a row when there is room. */}
+            <div className="flex w-full flex-col items-start gap-[24px] lg:flex-row lg:items-center lg:justify-between lg:gap-[32px]">
+              <p
+                data-motion-reveal="blur"
+                className="type-body-s max-w-[362px] min-w-0 text-[#F4F6F9] md:max-w-[600px] lg:max-w-[710px]"
+              >
+                {effectiveDescription}
+              </p>
+              <Link href={ctaLink} aria-label={ctaText} className="shrink-0">
                 <CTA
                   data-motion-reveal="fade"
                   as="span"
