@@ -1,5 +1,6 @@
 'use client';
 
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
 import { ConnectedTimeline } from '@/components/ui/connected-timeline';
@@ -103,6 +104,10 @@ export default function WorkflowSection() {
   const active = Math.floor(position);
 
   useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [pinned]);
+
+  useEffect(() => {
     const measure = () => {
       const content = contentRef.current;
       const header = headerRef.current;
@@ -160,12 +165,24 @@ export default function WorkflowSection() {
           )}
         >
           <div ref={contentRef} className="layout-container min-w-0">
-            <div ref={headerRef} className="curiecode-workflow-header mb-10">
+            <div
+              ref={headerRef}
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 75%"
+              className="curiecode-workflow-header mb-10"
+            >
               <SectionLabel dark>{data.eyebrow}</SectionLabel>
-              <h2 className="type-h2 mt-5 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
+              <h2
+                data-motion-reveal="lines"
+                className="type-h2 mt-5 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10"
+              >
                 {data.title}
               </h2>
-              <p className="type-body-xxs text-light-gray mt-5 tracking-[0.01em] max-md:text-sm max-md:leading-5">
+              <p
+                data-motion-reveal="blur"
+                className="type-body-xxs text-light-gray mt-5 tracking-[0.01em] max-md:text-sm max-md:leading-5"
+              >
                 {data.description}
               </p>
             </div>

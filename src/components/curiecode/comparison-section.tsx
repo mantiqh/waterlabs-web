@@ -7,21 +7,35 @@ const data = CURIECODE_PAGE_DATA.comparison;
 
 export default function ComparisonSection() {
   return (
-    <section className="bg-ghost-white section-deferred rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
+    <section className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
       <div className="layout-container">
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,372fr)_minmax(0,928fr)] lg:gap-5">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 75%"
+          className="grid gap-5 lg:grid-cols-[minmax(0,372fr)_minmax(0,928fr)] lg:gap-5"
+        >
           <SectionLabel>{data.eyebrow}</SectionLabel>
           <div>
-            <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
+            <h2
+              data-motion-reveal="lines"
+              className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10"
+            >
               <span className="text-electric-blue">{data.title.accent}</span> <br />
               {data.title.rest}
             </h2>
-            <p className="type-body-xxs text-charcoal mt-5 tracking-[0.01em] max-md:text-sm max-md:leading-5 lg:whitespace-pre-line">
+            <p
+              data-motion-reveal="blur"
+              className="type-body-xxs text-charcoal mt-5 tracking-[0.01em] max-md:text-sm max-md:leading-5 lg:whitespace-pre-line"
+            >
               {data.description}
             </p>
           </div>
         </div>
-        <div className="relative isolate mt-10 overflow-hidden rounded-[20px_10px_20px_20px] bg-black">
+        <div
+          data-motion-reveal="image"
+          className="relative isolate mt-10 overflow-hidden rounded-[20px_10px_20px_20px] bg-black"
+        >
           <ProductVideo
             id="against-manual-coding"
             label="Manual coding, computer-assisted coding and CurieCode comparison"

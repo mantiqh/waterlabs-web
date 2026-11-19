@@ -105,7 +105,7 @@ export const FourThingsSection = () => {
   };
 
   return (
-    <section className="relative m-0 w-full bg-[#9983E2] p-0">
+    <section data-motion-section className="relative m-0 w-full bg-[#9983E2] p-0">
       {/* 
         Four Things Section Container (Figma top frame - color):
         - Desktop: 1440px width, padding: 80px 60px, rounded-tr-[60px]
@@ -125,7 +125,11 @@ export const FourThingsSection = () => {
         </div>
 
         {/* Content Container (1320px max width) */}
-        <div className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[32px] lg:flex-row lg:gap-[40px] xl:gap-[60px] 2xl:gap-[80px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[32px] lg:flex-row lg:gap-[40px] xl:gap-[60px] 2xl:gap-[80px]"
+        >
           {/* =================================================================
               LEFT COLUMN: Heading Block (Sticky on Desktop matching ProductsSection)
              ================================================================= */}
@@ -133,13 +137,17 @@ export const FourThingsSection = () => {
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
               <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-              <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
+              <span
+                data-motion-reveal="scramble"
+                data-motion-at="0.1"
+                className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+              >
                 What we stand for
               </span>
             </div>
 
             {/* Main Section Heading (type-h2, semantic <h2>) */}
-            <h2 className="type-h2 max-w-[476px] text-[#111111]">
+            <h2 data-motion-reveal="lines" className="type-h2 max-w-[476px] text-[#111111]">
               Four things we don&apos;t compromise on.
             </h2>
           </div>
@@ -151,6 +159,8 @@ export const FourThingsSection = () => {
             {fourThingsData.map((item, index) => (
               <div
                 key={`desktop-principle-${item.id}`}
+                data-motion-reveal="blur"
+                data-motion-at={0.2 + index * 0.1}
                 className={`flex flex-row items-start gap-[24px] pb-[32px] xl:pb-[36px] ${
                   index !== fourThingsData.length - 1
                     ? 'border-b border-[#91C6F2]'

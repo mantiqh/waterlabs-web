@@ -3,6 +3,7 @@ import Image from 'next/image';
 export const OurStatsSection = () => {
   return (
     <section
+      data-motion-section
       className="relative w-full overflow-hidden"
       style={{
         background: 'linear-gradient(180.75deg, #1C5265 -2.97%, #FFFFFF 101.15%)',
@@ -18,22 +19,41 @@ export const OurStatsSection = () => {
       <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
         <div className="mx-auto flex max-w-[1320px] flex-col gap-[40px] lg:gap-[60px]">
           {/* ── OUR STATS ── */}
-          <div className="flex flex-col gap-[20px] lg:gap-[32px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 75%"
+            className="flex flex-col gap-[20px] lg:gap-[32px]"
+          >
             {/* Section Heading */}
-            <h3 className="type-h3 text-electric-blue">Our Stats</h3>
+            <h3 data-motion-reveal="lines" className="type-h3 text-electric-blue">
+              Our Stats
+            </h3>
 
             {/* Stats Card */}
             <div className="bg-ghost-white flex w-full flex-col gap-[24px] rounded-[20px] p-[20px] md:p-[32px] lg:flex-row lg:gap-[40px] lg:p-[40px]">
               {/* Stat 1 */}
-              <div className="flex flex-1 flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">4 days to 1 day</h3>
-                <p className="type-body-xs text-charcoal">verification turnaround</p>
+              <div data-metric-card className="flex flex-1 flex-col gap-[8px] lg:gap-[12px]">
+                <h3 className="type-h3 text-black">
+                  <span className="sr-only">4 days to 1 day</span>
+                  <span aria-hidden="true" data-motion-metric-value className="inline-block">
+                    4 days to 1 day
+                  </span>
+                </h3>
+                <p data-motion-reveal="blur" className="type-body-xs text-charcoal">
+                  verification turnaround
+                </p>
               </div>
 
               {/* Stat 2 */}
-              <div className="flex flex-1 flex-col gap-[8px] lg:gap-[12px]">
-                <h3 className="type-h3 text-black">75%</h3>
-                <p className="type-body-xxs text-charcoal">
+              <div data-metric-card className="flex flex-1 flex-col gap-[8px] lg:gap-[12px]">
+                <h3 className="type-h3 text-black">
+                  <span className="sr-only">75%</span>
+                  <span aria-hidden="true" data-motion-metric-value className="inline-block">
+                    75%
+                  </span>
+                </h3>
+                <p data-motion-reveal="blur" className="type-body-xxs text-charcoal">
                   faster in a behavioral health deployment.
                 </p>
               </div>
@@ -41,13 +61,17 @@ export const OurStatsSection = () => {
           </div>
 
           {/* ── HUMAN IN THE LOOP ── */}
-          <div className="flex flex-col items-center justify-between gap-[24px] lg:flex-row lg:gap-[32px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex flex-col items-center justify-between gap-[24px] lg:flex-row lg:gap-[32px]"
+          >
             {/* Left: Text Content */}
             <div className="flex w-full flex-col justify-center gap-[16px] lg:max-w-[644px] lg:flex-1 lg:gap-[20px]">
-              <h3 className="type-h3 text-[#111111]">
+              <h3 data-motion-reveal="lines" className="type-h3 text-[#111111]">
                 <span className="text-[#0F68D6]">Human in the loop,</span> by design
               </h3>
-              <p className="type-body-xs max-w-[644px] text-[#111111]">
+              <p data-motion-reveal="blur" className="type-body-xs max-w-[644px] text-[#111111]">
                 When coverage is ambiguous, our agents route it to your team instead of guessing.
                 Coordination of benefits issues, unclear plans, or patients needing a conversation
                 about what they owe are handled. The payer response and verification history arrive
@@ -60,6 +84,8 @@ export const OurStatsSection = () => {
               {/* Desktop Image (644x309 aspect ratio, entire image visible) */}
               <div className="relative hidden aspect-[644/309] w-full overflow-hidden rounded-[30px_10px_30px_30px] lg:block">
                 <Image
+                  data-motion-reveal="image"
+                  data-motion-parallax
                   src="/images/solutions/solutions-eligibility/human-in-the-loop/Frame%202147203302%20(3).png"
                   alt="Human reviewing ambiguous coverage verification results"
                   fill
@@ -72,6 +98,8 @@ export const OurStatsSection = () => {
               {/* Mobile / Tablet Image (362x156 aspect ratio, entire image visible) */}
               <div className="relative block aspect-[362/156] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden">
                 <Image
+                  data-motion-reveal="image"
+                  data-motion-parallax
                   src="/images/solutions/solutions-eligibility/human-in-the-loop/img_human_in_the_loop%20(1).png"
                   alt="Human reviewing ambiguous coverage verification results"
                   fill

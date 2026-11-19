@@ -5,7 +5,7 @@ import { CTA } from '@/components/CTA';
 
 export const ROIAssessmentSection = () => {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section data-motion-section className="relative w-full overflow-hidden">
       {/*
         Assessment Section (Figma Specifications):
         - Outer wrapper: gradient #010101 → #010F1C (left padding on desktop for the reveal)
@@ -22,17 +22,30 @@ export const ROIAssessmentSection = () => {
         <div className="w-full rounded-tl-[30px] rounded-bl-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:py-[80px]">
           <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[40px] lg:max-w-[1260px]">
             {/* Header: Tag + Heading */}
-            <div className="flex flex-col gap-[8px] lg:gap-[14px]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 75%"
+              className="flex flex-col gap-[8px] lg:gap-[14px]"
+            >
               {/* Tag */}
               <div className="flex items-center gap-[4px] lg:gap-[8px]">
                 <div className="bg-electric-blue h-[8px] w-[8px] shrink-0 rounded-full" />
-                <span className="type-body-xxs text-medium-gray tracking-[0.01em]">
+                <span
+                  data-motion-reveal="scramble"
+                  data-motion-at="0.1"
+                  className="type-body-xxs text-medium-gray tracking-[0.01em]"
+                >
                   The Assessment
                 </span>
               </div>
 
               {/* Heading */}
-              <h2 className="type-h2 tracking-[-0.01em]">
+              <h2
+                data-motion-reveal="lines"
+                data-motion-at="0.2"
+                className="type-h2 tracking-[-0.01em]"
+              >
                 {/* Desktop Heading (md+) */}
                 <span className="hidden md:block">
                   <span className="text-electric-blue block">The next step is an assessment.</span>
@@ -60,17 +73,29 @@ export const ROIAssessmentSection = () => {
             </div>
 
             {/* Desktop Two-column / Mobile Stacked Layout */}
-            <div className="flex flex-col items-stretch gap-[20px] lg:flex-row">
+            <div
+              data-motion-group
+              data-motion-together
+              data-motion-start="top 75%"
+              className="flex flex-col items-stretch gap-[20px] lg:flex-row"
+            >
               {/* Info Card (On mobile: wraps image + features + button; on desktop: 476px wide, 492px high) */}
               <div
+                data-motion-reveal="fade"
+                data-motion-at="0.3"
                 className="flex w-full shrink-0 flex-col justify-between overflow-hidden rounded-[20px_10px_20px_20px] lg:h-[492px] lg:w-[476px]"
                 style={{
                   background: 'rgba(145, 198, 242, 0.15)',
                 }}
               >
                 {/* On mobile, image goes at the top of the card */}
-                <div className="relative block aspect-[362/233] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden">
+                <div
+                  data-motion-reveal="image"
+                  data-motion-at="0.25"
+                  className="relative block aspect-[362/233] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden"
+                >
                   <Image
+                    data-motion-parallax
                     src="/images/ROI/the-assessment/img_the_assessment_mobile (1).png"
                     alt="Waterlabs assessment interface"
                     fill
@@ -83,7 +108,11 @@ export const ROIAssessmentSection = () => {
                   {/* Feature Items */}
                   <div className="flex flex-col gap-[20px] lg:gap-[24px]">
                     {/* Feature 1 */}
-                    <div className="flex flex-col gap-[4px] lg:gap-[8px]">
+                    <div
+                      data-motion-reveal="blur"
+                      data-motion-at="0.4"
+                      className="flex flex-col gap-[4px] lg:gap-[8px]"
+                    >
                       <span className="type-body-s text-electric-blue">Read-only access</span>
                       <p className="type-body-xs text-charcoal">
                         We take read-only access to your claim and remit data. Nothing changes in
@@ -92,7 +121,11 @@ export const ROIAssessmentSection = () => {
                     </div>
 
                     {/* Feature 2 */}
-                    <div className="flex flex-col gap-[4px] lg:gap-[8px]">
+                    <div
+                      data-motion-reveal="blur"
+                      data-motion-at="0.45"
+                      className="flex flex-col gap-[4px] lg:gap-[8px]"
+                    >
                       <span className="type-body-s text-electric-blue">The mapping</span>
                       <p className="type-body-xs text-charcoal">
                         We map your cycle function by function against what we run today.
@@ -100,7 +133,11 @@ export const ROIAssessmentSection = () => {
                     </div>
 
                     {/* Feature 3 */}
-                    <div className="flex flex-col gap-[4px] lg:gap-[8px]">
+                    <div
+                      data-motion-reveal="blur"
+                      data-motion-at="0.5"
+                      className="flex flex-col gap-[4px] lg:gap-[8px]"
+                    >
                       <span className="type-body-s text-electric-blue">The walkthrough</span>
                       <p className="type-body-xs text-charcoal">
                         We take you through what we found, and what we would start with.
@@ -111,7 +148,14 @@ export const ROIAssessmentSection = () => {
                   {/* CTA Button */}
                   <div className="pt-[8px] lg:pt-0">
                     <Link href="/contact-us" className="inline-block">
-                      <CTA variant="light-bg" size="compact-mobile" as="div">
+                      <CTA
+                        data-motion-reveal="fade"
+                        data-motion-at="0.55"
+                        data-motion-magnetic
+                        variant="light-bg"
+                        size="compact-mobile"
+                        as="div"
+                      >
                         Book my assessment
                       </CTA>
                     </Link>
@@ -120,8 +164,13 @@ export const ROIAssessmentSection = () => {
               </div>
 
               {/* Right: Assessment Image (Desktop only: 492px high, matching left card) */}
-              <div className="relative hidden h-[492px] flex-1 overflow-hidden rounded-[20px_10px_20px_20px] lg:block">
+              <div
+                data-motion-reveal="image"
+                data-motion-at="0.35"
+                className="relative hidden h-[492px] flex-1 overflow-hidden rounded-[20px_10px_20px_20px] lg:block"
+              >
                 <Image
+                  data-motion-parallax
                   src="/images/ROI/the-assessment/img_the_assessment.png"
                   alt="Waterlabs assessment interface"
                   fill

@@ -1,8 +1,14 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
 
 import BlogDetailTOC, { BLOG_DETAIL_TOPICS, type TOCItem } from './blog-detail-toc';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export interface BlogArticleSection {
   id: string;
@@ -125,74 +131,40 @@ export const BlogDetailContent = ({
   const isManualScrollRef = useRef<boolean>(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Responsive scroll-spy logic with calibrated trigger threshold
+  // High-performance GSAP ScrollTrigger tracking (eliminates reflow thrashing on scroll)
   useEffect(() => {
-    const handleScroll = () => {
-      const isMobile = window.innerWidth < 1024;
+    if (typeof window === 'undefined' || !topics.length) return;
 
-      // Check if mobile indicator reached sticky top-[60px]
+    const ctx = gsap.context(() => {
+      // 1. Mobile sentinel trigger for sticky indicator bar
       if (sentinelRef.current) {
-        const sentinelRect = sentinelRef.current.getBoundingClientRect();
-        setIsSticky(sentinelRect.top <= 61);
+        ScrollTrigger.create({
+          trigger: sentinelRef.current,
+          start: 'top 60px',
+          onToggle: (self) => setIsSticky(self.isActive),
+        });
       }
 
-      // If user recently clicked a TOC item, let the smooth scroll finish without jitter
-      if (isManualScrollRef.current) {
-        return;
-      }
-
-      // If near the top of the page, activate the first section
-      if (window.scrollY < 160 && topics.length > 0) {
-        setActiveTopic(topics[0].id);
-        return;
-      }
-
-      // If user has scrolled near the bottom of the page, activate the last section
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const bottomThreshold = document.documentElement.scrollHeight - 120;
-      if (scrollPosition >= bottomThreshold && topics.length > 0) {
-        setActiveTopic(topics[topics.length - 1].id);
-        return;
-      }
-
-      // Check the last section: if its heading has reached into the viewport (upper 70%),
-      // activate it so concluding sections are promptly and accurately highlighted
-      if (topics.length > 0) {
-        const lastTopic = topics[topics.length - 1];
-        const lastEl = document.getElementById(lastTopic.id);
-        if (lastEl) {
-          const lastRect = lastEl.getBoundingClientRect();
-          if (lastRect.top <= window.innerHeight * 0.7) {
-            setActiveTopic(lastTopic.id);
-            return;
-          }
-        }
-      }
-
-      // Trigger threshold: A section activates when its heading enters the reading zone
-      // (upper 55% of viewport on desktop, 50% on mobile), matching what the reader is viewing.
-      const targetY = isMobile ? window.innerHeight * 0.5 : window.innerHeight * 0.55;
-
-      // Check sections from bottom to top to find the section currently in the reading zone
-      let activeId = topics[0]?.id || '';
-      for (let i = topics.length - 1; i >= 0; i--) {
-        const el = document.getElementById(topics[i].id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= targetY) {
-            activeId = topics[i].id;
-            break;
-          }
-        }
-      }
-      setActiveTopic(activeId);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+      // 2. Section boundary tracking without layout thrashing
+      topics.forEach((topic, idx) => {
+        const el = document.getElementById(topic.id);
+        if (!el) return;
+        const isLast = idx === topics.length - 1;
+        ScrollTrigger.create({
+          trigger: el,
+          start: isLast ? 'top 70%' : 'top 55%',
+          end: isLast ? 'bottom bottom' : 'bottom 55%',
+          onToggle: (self) => {
+            if (self.isActive && !isManualScrollRef.current) {
+              setActiveTopic(topic.id);
+            }
+          },
+        });
+      });
+    });
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      ctx.revert();
       if (scrollTimeoutRef.current) {
         clearTimeout(scrollTimeoutRef.current);
       }
@@ -220,7 +192,10 @@ export const BlogDetailContent = ({
   };
 
   return (
-    <section className="relative w-full rounded-tr-[30px] rounded-br-[30px] bg-white pb-[80px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:pb-[80px]">
+    <section
+      data-motion-section
+      className="relative w-full rounded-tr-[30px] rounded-br-[30px] bg-white pb-[80px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:pb-[80px]"
+    >
       {/* Sentinel for detecting when mobile TOC hits sticky position */}
       <div ref={sentinelRef} className="pointer-events-none block h-[1px] w-full lg:hidden" />
 
@@ -271,15 +246,20 @@ export const BlogDetailContent = ({
               <article
                 key={section.id}
                 id={section.id}
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
                 {/* Heading: Display/H4 */}
-                <h4 className="type-h4 max-w-[975px] text-[#111111]">{section.title}</h4>
+                <h4 data-motion-reveal="lines" className="type-h4 max-w-[975px] text-[#111111]">
+                  {section.title}
+                </h4>
 
                 {/* Paragraphs: Body/Body-XS */}
                 <div className="flex max-w-[975px] flex-col items-start gap-[16px] lg:gap-[20px]">
                   {section.paragraphs.map((para, pIdx) => (
-                    <p key={pIdx} className="type-body-xs text-[#2A2A2A]">
+                    <p key={pIdx} data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
                       {renderFormattedText(para)}
                     </p>
                   ))}

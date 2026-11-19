@@ -1,3 +1,5 @@
+import PageMotion from '@/components/common/page-motion';
+
 import ROIAssessmentSection from './assessment-section';
 import ROICalculatorSection from './calculator-section';
 import ROICtaBanner from './cta-banner';
@@ -7,14 +9,19 @@ import ROISampleReportSection from './sample-report-section';
 
 export const ROIPage = () => {
   return (
-    <main className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
       <ROIHeroSection />
       <ROIProofBand />
       <ROICalculatorSection />
       <ROISampleReportSection />
       <ROIAssessmentSection />
       <ROICtaBanner />
-    </main>
+    </div>
   );
 };
 

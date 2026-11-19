@@ -5,7 +5,7 @@ import { CTA } from '@/components/CTA';
 
 export const TrustCTASection = () => {
   return (
-    <section className="relative m-0 w-full overflow-hidden bg-[#DBE2F0] p-0">
+    <section data-motion-section className="relative m-0 w-full overflow-hidden bg-[#DBE2F0] p-0">
       {/* 
         Main Dark CTA Card with top-right curve:
         - Desktop: Frame 1272628356 (width: 1440px, height: 444px, padding: 80px 60px, rounded-tr-[80px])
@@ -36,11 +36,19 @@ export const TrustCTASection = () => {
         </div>
 
         {/* Content Container (Frame 21: max-w 1320px, height 284px on desktop) */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[28px] lg:flex-row lg:items-end lg:gap-[40px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 85%"
+          className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[28px] lg:flex-row lg:items-end lg:gap-[40px]"
+        >
           {/* Left Text Block (Frame 2147203251: width 873px, height 284px) */}
           <div className="flex w-full flex-col items-start justify-center gap-[16px] lg:w-[873px] lg:gap-[20px]">
             {/* Frame 17: Tagline */}
-            <div className="flex max-w-full flex-row items-center gap-[8px]">
+            <div
+              data-motion-reveal="fade"
+              className="flex max-w-full flex-row items-center gap-[8px]"
+            >
               <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
               <span className="type-body-xxs tracking-[0.01em] text-white">
                 Don&apos;t just automate your revenue cycle. Apply intelligence to it.
@@ -48,7 +56,7 @@ export const TrustCTASection = () => {
             </div>
 
             {/* Display/H3 Heading with #91C6F2 accent for "Ours has answers." */}
-            <h2 className="type-h3 tracking-[-0.01em]">
+            <h2 data-motion-reveal="lines" className="type-h3 tracking-[-0.01em]">
               <span className="text-white">
                 Your security team
                 <br />
@@ -59,7 +67,7 @@ export const TrustCTASection = () => {
             </h2>
 
             {/* Subtext */}
-            <p className="type-body-s max-w-[873px] text-[#F4F6F9]">
+            <p data-motion-reveal="blur" className="type-body-s max-w-[873px] text-[#F4F6F9]">
               Send us your questionnaire, your review,
               <br className="hidden sm:inline" /> your hardest questions. Or{' '}
               <Link
@@ -75,7 +83,13 @@ export const TrustCTASection = () => {
           {/* Frame 3 / Frame 7: Right CTA Action Button (Blue pill with white text & light blue arrow) */}
           <div className="shrink-0 self-start pt-[8px] lg:self-end lg:pt-0">
             <Link href="mailto:security@waterlabs.ai">
-              <CTA variant="light-bg" size="compact-mobile">
+              <CTA
+                data-motion-reveal="fade"
+                data-motion-at="0.15"
+                data-motion-magnetic
+                variant="light-bg"
+                size="compact-mobile"
+              >
                 Talk to our security team
               </CTA>
             </Link>

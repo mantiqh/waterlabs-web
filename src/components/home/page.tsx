@@ -26,17 +26,6 @@ const HomePage = ({ data }: HomePageProps) => {
       className="flex w-full flex-col overflow-x-clip"
     >
       <HomeMotion />
-      <noscript>
-        <style>{`
-          [data-motion-root] { --motion-initial-visibility: visible !important; animation: none !important; }
-          [data-motion-root] [data-motion-scene] { height: auto !important; }
-          [data-motion-root] [data-scene-sticky] { position: static !important; }
-          [data-motion-root] [data-scene-panel] { grid-row: auto !important; }
-          [data-motion-root] [data-rcm-body] { grid-template-rows: 1fr; opacity: 1; }
-          [data-motion-root] [data-rcm-body] [inert] { visibility: visible; }
-          [data-motion-root] [data-hero-pause] { visibility: hidden; }
-        `}</style>
-      </noscript>
       <div
         data-home-scroll-progress
         aria-hidden="true"

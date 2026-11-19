@@ -2,7 +2,10 @@ import Image from 'next/image';
 
 export const WhatWeDoMattersSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#B8B1A5] from-50% to-[#F4F6F9] to-50%">
+    <section
+      data-motion-section
+      className="relative w-full overflow-hidden bg-gradient-to-b from-[#B8B1A5] from-50% to-[#F4F6F9] to-50%"
+    >
       {/* 
         White Wrapper Frame with top-right and bottom-right rounded corners:
         - Desktop: rounded-tr-[60px] rounded-br-[60px]
@@ -15,7 +18,11 @@ export const WhatWeDoMattersSection = () => {
           Desktop: 1320px x 650px, rounded-tl-[20px] rounded-tr-[20px] rounded-br-[40px] rounded-bl-[20px], p-[32px], gap-[40px]
           Mobile: rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px], p-[32px], gap-[20px]
         */}
-        <div className="relative mx-auto flex w-full max-w-[1320px] flex-col justify-start gap-[20px] overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#042849] p-[32px] lg:gap-[40px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          className="relative mx-auto flex w-full max-w-[1320px] flex-col justify-start gap-[20px] overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#042849] p-[32px] lg:gap-[40px] lg:rounded-tl-[20px] lg:rounded-tr-[20px] lg:rounded-br-[40px] lg:rounded-bl-[20px]"
+        >
           {/* Background Architectural Image */}
           <div className="pointer-events-none absolute inset-0 z-0">
             <Image
@@ -32,7 +39,11 @@ export const WhatWeDoMattersSection = () => {
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#63CCB7] lg:h-[8px] lg:w-[8px]" />
-              <span className="type-caption md:type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+              <span
+                data-motion-reveal="scramble"
+                data-motion-at="0.1"
+                className="type-caption md:type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+              >
                 Why what we do matters
               </span>
             </div>
@@ -42,14 +53,14 @@ export const WhatWeDoMattersSection = () => {
           <div className="relative z-10 flex w-full max-w-[1024px] flex-col items-start justify-between gap-[16px] lg:flex-row lg:gap-[20px]">
             {/* Left Column: Display/H5 subheading */}
             <div className="w-full min-w-0 lg:w-[508px] lg:max-w-[508px]">
-              <h3 className="type-h5 tracking-[-0.01em] text-white">
+              <h3 data-motion-reveal="lines" className="type-h5 tracking-[-0.01em] text-white">
                 This is a hard problem to solve.
               </h3>
             </div>
 
             {/* Right Column: Paragraph & Team Image (Figma Frame 2147226457: 496px width, gap 16px) */}
             <div className="flex w-full min-w-0 flex-col gap-[16px] lg:w-[496px] lg:max-w-[496px] lg:gap-[20px]">
-              <p className="type-body-xs max-w-[496px] text-[#D7DCE2]">
+              <p data-motion-reveal="blur" className="type-body-xs max-w-[496px] text-[#D7DCE2]">
                 Revenue cycle is one of the hardest problems in healthcare. Here, the rules are
                 complex, the exceptions are abundant, and the stakes are high. Whether you&apos;re
                 defining software, running operations, or working with customers, you&apos;ll be
@@ -57,8 +68,12 @@ export const WhatWeDoMattersSection = () => {
               </p>
 
               {/* Team Image (Frame 2147203292: 496px x 250px with rounded-tl-[40px] rounded-tr-[10px] rounded-br-[40px] rounded-bl-[10px]) */}
-              <div className="relative aspect-[322/182] w-full shrink-0 overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.2)] lg:aspect-auto lg:h-[240px] lg:w-[496px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] xl:h-[250px]">
+              <div
+                data-motion-reveal="image"
+                className="relative aspect-[322/182] w-full shrink-0 overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] shadow-[0_8px_30px_rgba(0,0,0,0.2)] lg:aspect-auto lg:h-[240px] lg:w-[496px] lg:rounded-tl-[40px] lg:rounded-tr-[10px] lg:rounded-br-[40px] lg:rounded-bl-[10px] xl:h-[250px]"
+              >
                 <Image
+                  data-motion-parallax
                   src="/images/careers/what-we-do-matters/Frame%202147203292.png"
                   alt="Problem Solving Team"
                   fill

@@ -5,7 +5,7 @@ import { CTA } from '@/components/CTA';
 
 export const CareersCTASection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section data-motion-section className="relative w-full overflow-hidden bg-white">
       {/* 
         CTA Card with Top-Right rounded corner:
         - Desktop: rounded-tr-[80px], py-[80px] px-[60px], min-h-[464px]
@@ -25,16 +25,21 @@ export const CareersCTASection = () => {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] lg:gap-[24px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 85%"
+          className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] lg:gap-[24px]"
+        >
           {/* Main Text Content Block */}
           <div className="flex w-full max-w-[687px] flex-col items-start gap-[14px] lg:gap-[20px]">
             {/* Heading */}
-            <h2 className="type-h3 text-white lg:text-[#91C6F2]">
+            <h2 data-motion-reveal="lines" className="type-h3 text-white lg:text-[#91C6F2]">
               Come do the most meaningful work of your career. On a problem that matters.
             </h2>
 
             {/* Description Subheading */}
-            <p className="type-body-xs max-w-[566px] text-[#F4F6F9]">
+            <p data-motion-reveal="blur" className="type-body-xs max-w-[566px] text-[#F4F6F9]">
               We work for impact. The applause follows. Your work matters. We&apos;ll help you turn
               it into results that are visible.
             </p>
@@ -43,7 +48,14 @@ export const CareersCTASection = () => {
           {/* CTA Action Button */}
           <div className="mt-[4px] lg:mt-[8px]">
             <Link href="#where-you-would-fit">
-              <CTA variant="dark-bg" size="compact-mobile" as="span">
+              <CTA
+                data-motion-reveal="fade"
+                data-motion-at="0.15"
+                data-motion-magnetic
+                variant="dark-bg"
+                size="compact-mobile"
+                as="span"
+              >
                 See Open Roles
               </CTA>
             </Link>

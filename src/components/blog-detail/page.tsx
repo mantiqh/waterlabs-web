@@ -9,6 +9,7 @@ import BlogDetailHeroSection, {
   type BlogDetailHeroProps,
 } from '@/components/blog-detail/hero-section';
 import BlogsCTASection from '@/components/blogs/cta-section';
+import PageMotion from '@/components/common/page-motion';
 
 export interface BlogDetailPageProps {
   heroProps?: BlogDetailHeroProps;
@@ -24,7 +25,12 @@ export const BlogDetailPage = ({
   relatedBlogs,
 }: BlogDetailPageProps) => {
   return (
-    <div className="flex w-full flex-col bg-white">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip bg-white"
+    >
+      <PageMotion />
       {/* Blog Detail Hero Section */}
       <BlogDetailHeroSection {...heroProps} />
 

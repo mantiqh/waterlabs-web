@@ -88,7 +88,7 @@ export const HimerActivityLogSection = () => {
             </h2>
 
             {/* Video Container */}
-            <div className="w-full max-w-[840px]">
+            <div data-motion-reveal="image" data-motion-parallax className="w-full max-w-[840px]">
               <HimerVideo
                 desktopSrc={HIMER_ACTIVITY_LOG_DATA.desktopVideo}
                 mobileSrc={HIMER_ACTIVITY_LOG_DATA.mobileVideo}

@@ -1,3 +1,4 @@
+import PageMotion from '@/components/common/page-motion';
 import { DEFAULT_CONTACT_US_DATA } from '@/data/contact-us';
 import type { ContactUsPageData } from '@/types/contact-us';
 
@@ -12,7 +13,12 @@ interface ContactUsPageProps {
 
 export const ContactUsPage = ({ data = DEFAULT_CONTACT_US_DATA }: ContactUsPageProps) => {
   return (
-    <main className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
       <ContactUsHeroSection
         heading={data.heroHeading}
         headingHighlight={data.heroHeadingHighlight}
@@ -42,7 +48,7 @@ export const ContactUsPage = ({ data = DEFAULT_CONTACT_US_DATA }: ContactUsPageP
         imageDesktop={data.ctaBackgroundImageDesktop}
         imageMobile={data.ctaBackgroundImageMobile}
       />
-    </main>
+    </div>
   );
 };
 

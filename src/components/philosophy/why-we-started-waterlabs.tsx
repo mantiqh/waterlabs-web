@@ -1,6 +1,12 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const paragraphsData = [
   {
@@ -25,7 +31,6 @@ export const WhyWeStartedWaterlabsSection = () => {
   const [mobileViewportHeight, setMobileViewportHeight] = useState<number>();
   const mobileSizerRef = useRef<HTMLDivElement>(null);
   const paragraphRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const [revealedIndices, setRevealedIndices] = useState<number[]>([0]);
 
   useEffect(() => {
     const sizer = mobileSizerRef.current;
@@ -38,35 +43,43 @@ export const WhyWeStartedWaterlabsSection = () => {
   }, []);
 
   useEffect(() => {
-    const handleDesktopScrollAnimation = () => {
-      if (window.innerWidth < 1024) return;
+    if (window.innerWidth < 1024) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) return;
 
-      const newRevealed: number[] = [0];
-      const windowHeight = window.innerHeight;
-
+    const ctx = gsap.context(() => {
       paragraphRefs.current.forEach((el, index) => {
         if (!el) return;
-        const rect = el.getBoundingClientRect();
-        if (rect.top < windowHeight * 0.75) {
-          if (!newRevealed.includes(index)) {
-            newRevealed.push(index);
-          }
+        if (index === 0) {
+          gsap.set(el, { color: '#D7DCE2', opacity: 1 });
+          return;
         }
+        gsap.fromTo(
+          el,
+          { color: '#7D8690', opacity: 0.35 },
+          {
+            color: '#D7DCE2',
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 75%',
+              toggleActions: 'play none none reverse',
+            },
+          },
+        );
       });
+    });
 
-      setRevealedIndices(newRevealed);
-    };
-
-    window.addEventListener('scroll', handleDesktopScrollAnimation, { passive: true });
-    handleDesktopScrollAnimation();
-
-    return () => {
-      window.removeEventListener('scroll', handleDesktopScrollAnimation);
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#041E35] from-50% to-[#F4F6F9] to-50% p-0">
+    <section
+      data-motion-section
+      className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#041E35] from-50% to-[#F4F6F9] to-50% p-0"
+    >
       {/* 
         Top Frame Card:
         - Spans w-full edge-to-edge
@@ -74,6 +87,8 @@ export const WhyWeStartedWaterlabsSection = () => {
         - Rounded on right: rounded-tr-[30px] rounded-br-[30px] lg:rounded-tr-[60px] lg:rounded-br-[60px]
       */}
       <div
+        data-motion-reveal="panel-ltr"
+        data-motion-start="top 100%"
         className="flex w-full flex-col justify-center rounded-tr-[30px] rounded-br-[30px] bg-[#111111] bg-cover bg-center bg-no-repeat px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]"
         style={{
           backgroundImage:
@@ -81,12 +96,17 @@ export const WhyWeStartedWaterlabsSection = () => {
         }}
       >
         {/* Content Container (Max width 1320px centered) */}
-        <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[24px] lg:flex-row lg:gap-[40px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="mx-auto flex w-full max-w-[1320px] flex-col items-start justify-between gap-[24px] lg:flex-row lg:gap-[40px]"
+        >
           {/* Left Column: Title */}
           <div className="flex w-full max-w-[640px] flex-col gap-[12px] lg:w-1/2 lg:gap-[14px]">
             {/* Title */}
             <div className="w-full max-w-[640px]">
-              <h2 className="type-h2">
+              <h2 data-motion-reveal="lines" className="type-h2">
                 <span className="text-[#F4F6F9]">
                   Why we
                   <br />
@@ -100,22 +120,21 @@ export const WhyWeStartedWaterlabsSection = () => {
           <div className="w-full max-w-[640px] lg:w-1/2">
             {/* Desktop View (3 Stacked Paragraphs with Scroll Revealing Animation) */}
             <div className="hidden max-w-[498px] flex-col gap-[40px] pt-[38px] lg:flex">
-              {paragraphsData.map((item) => {
-                const isRevealed = revealedIndices.includes(item.id);
-                return (
-                  <p
-                    key={item.id}
-                    ref={(el) => {
-                      paragraphRefs.current[item.id] = el;
-                    }}
-                    className={`type-body-xxs leading-relaxed tracking-[0.01em] transition-all duration-700 ease-out ${
-                      isRevealed ? 'text-[#D7DCE2] opacity-100' : 'text-[#7D8690] opacity-35'
-                    }`}
-                  >
-                    {item.text}
-                  </p>
-                );
-              })}
+              {paragraphsData.map((item, index) => (
+                <p
+                  key={item.id}
+                  data-motion-reveal="blur"
+                  data-motion-at={0.25 + index * 0.15}
+                  ref={(el) => {
+                    paragraphRefs.current[item.id] = el;
+                  }}
+                  className={`type-body-xxs leading-relaxed tracking-[0.01em] transition-colors duration-500 ${
+                    index === 0 ? 'text-[#D7DCE2]' : 'text-[#7D8690]'
+                  } motion-reduce:text-[#D7DCE2] motion-reduce:opacity-100`}
+                >
+                  {item.text}
+                </p>
+              ))}
             </div>
 
             {/* Mobile / Tablet View */}

@@ -86,6 +86,7 @@ export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
 
   return (
     <section
+      data-motion-section
       className="w-full overflow-hidden"
       style={{
         background: 'linear-gradient(261.06deg, #63CCB7 -3.05%, #0F68D6 70.56%)',
@@ -101,16 +102,31 @@ export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
           {/* Tag / Eyebrow */}
           <div className="flex items-center gap-[8px]">
             <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-            <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{leadersTag}</span>
+            <span
+              data-motion-reveal="scramble"
+              data-motion-at="0.1"
+              className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+            >
+              {leadersTag}
+            </span>
           </div>
 
           {/* Leadership Grid: 3 columns desktop, 2 columns tablet, 1 column mobile */}
           <div className="grid w-full grid-cols-1 items-start gap-x-[20px] gap-y-[28px] md:grid-cols-2 lg:grid-cols-3 lg:gap-y-[32px]">
             {leaders.map((leader, idx) => (
-              <div key={leader._key || idx} className="flex w-full flex-col items-start gap-[16px]">
+              <div
+                key={leader._key || idx}
+                data-motion-group
+                data-motion-trigger="section"
+                className="flex w-full flex-col items-start gap-[16px]"
+              >
                 {/* Leader Photo */}
-                <div className="relative aspect-[426.67/300] w-full overflow-hidden rounded-[20px_10px_20px_20px] bg-gradient-to-b from-[#7D8690] to-[#D7DCE2] xl:h-[300px]">
+                <div
+                  data-motion-reveal="image"
+                  className="relative aspect-[426.67/300] w-full overflow-hidden rounded-[20px_10px_20px_20px] bg-gradient-to-b from-[#7D8690] to-[#D7DCE2] xl:h-[300px]"
+                >
                   <Image
+                    data-motion-parallax
                     src={leader.image}
                     alt={leader.name}
                     fill
@@ -122,8 +138,15 @@ export const LeadershipSection = ({ data }: LeadershipSectionProps) => {
                 {/* Leader Details */}
                 <div className="flex w-full flex-row items-start justify-between gap-[4px]">
                   <div className="flex min-w-0 flex-1 flex-col items-start gap-[4px]">
-                    <h5 className="type-h5 text-[#042849]">{leader.name}</h5>
-                    <p className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{leader.title}</p>
+                    <h5 data-motion-reveal="lines" className="type-h5 text-[#042849]">
+                      {leader.name}
+                    </h5>
+                    <p
+                      data-motion-reveal="blur"
+                      className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+                    >
+                      {leader.title}
+                    </p>
                   </div>
                   {/* LinkedIn Icon */}
                   <div className="shrink-0 pt-[9px]">

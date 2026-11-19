@@ -1,3 +1,4 @@
+import PageMotion from '@/components/common/page-motion';
 import type { BlogsPageProps } from '@/types/blogs';
 
 import BlogsCTASection from './cta-section';
@@ -6,7 +7,12 @@ import BlogsTabsSection from './tabs-section';
 
 export const BlogsPage = ({ articles, pageSettings }: BlogsPageProps) => {
   return (
-    <div className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
       <BlogsHeroSection />
       <BlogsTabsSection
         initialArticles={articles}

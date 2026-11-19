@@ -215,6 +215,7 @@ export const BlogsTabsSection = ({
 
   return (
     <section
+      data-motion-section
       className="relative m-0 w-full overflow-hidden p-0"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 50%, #0F68D6 50%)',
@@ -227,15 +228,21 @@ export const BlogsTabsSection = ({
           {/* ========================================================================= */}
 
           {/* Desktop Filter Bar (Figma: Frame 2147226517) */}
-          <div className="hidden w-full flex-row items-center justify-between gap-[32px] lg:flex">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="hidden w-full flex-row items-center justify-between gap-[32px] lg:flex"
+          >
             {/* Category Tabs */}
             <div className="flex flex-row flex-wrap items-center gap-[12px] xl:gap-[16px]">
-              {categoriesList.map((category) => {
+              {categoriesList.map((category, idx) => {
                 const isSelected = selectedCategory === category;
                 return (
                   <button
                     key={category}
                     type="button"
+                    data-motion-reveal="fade"
+                    data-motion-at={0.1 + idx * 0.05}
                     onClick={() => handleCategorySelect(category)}
                     className={`body-cta h-[40px] cursor-pointer rounded-[64px] px-[16px] py-[8px] font-medium transition-all duration-300 ${
                       isSelected
@@ -250,7 +257,11 @@ export const BlogsTabsSection = ({
             </div>
 
             {/* Search Input */}
-            <div className="flex h-[40px] w-[280px] items-center gap-[10px] rounded-[64px] border border-white bg-white/70 px-[16px] py-[8px] transition-all focus-within:border-[#0F68D6] focus-within:bg-white xl:w-[313px]">
+            <div
+              data-motion-reveal="fade"
+              data-motion-at={0.1 + categoriesList.length * 0.05}
+              className="flex h-[40px] w-[280px] items-center gap-[10px] rounded-[64px] border border-white bg-white/70 px-[16px] py-[8px] transition-all focus-within:border-[#0F68D6] focus-within:bg-white xl:w-[313px]"
+            >
               <svg
                 width="14"
                 height="14"
@@ -278,11 +289,19 @@ export const BlogsTabsSection = ({
           </div>
 
           {/* Mobile & Tablet Filter Bar (Figma: Frame 2147226778) */}
-          <div className="flex w-full flex-col gap-[16px] lg:hidden">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex w-full flex-col gap-[16px] lg:hidden"
+          >
             {/* Top Search & Filter by Row */}
             <div className="flex w-full flex-row items-center gap-[12px]">
               {/* Search Input */}
-              <div className="flex h-[39px] flex-1 items-center gap-[8px] rounded-[12px_6px_12px_12px] border border-transparent bg-white px-[12px] focus-within:border-[#0F68D6]">
+              <div
+                data-motion-reveal="fade"
+                data-motion-at={0.1}
+                className="flex h-[39px] flex-1 items-center gap-[8px] rounded-[12px_6px_12px_12px] border border-transparent bg-white px-[12px] focus-within:border-[#0F68D6]"
+              >
                 <svg
                   width="14"
                   height="14"
@@ -309,7 +328,7 @@ export const BlogsTabsSection = ({
               </div>
 
               {/* Filter by Dropdown Trigger */}
-              <div className="relative">
+              <div data-motion-reveal="fade" data-motion-at={0.15} className="relative">
                 <button
                   type="button"
                   onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
@@ -367,6 +386,8 @@ export const BlogsTabsSection = ({
           {/* ========================================================================= */}
           <div
             ref={gridRef}
+            data-motion-group
+            data-motion-trigger="section"
             className="grid w-full grid-cols-1 gap-x-[32px] gap-y-[32px] lg:grid-cols-2 lg:gap-y-[40px]"
           >
             {paginatedArticles.map((article) => (
@@ -376,7 +397,9 @@ export const BlogsTabsSection = ({
               >
                 {/* Tag / Eyebrow (Text - Tag) */}
                 <div className="flex items-center gap-[6px] lg:gap-[8px]">
-                  <span className="type-caption text-[#7D8690]">{article.tag}</span>
+                  <span data-motion-reveal="scramble" className="type-caption text-[#7D8690]">
+                    {article.tag}
+                  </span>
                   {article.subTag && (
                     <>
                       <span className="h-[12px] w-[1px] bg-[#7D8690]/40 lg:h-[14px]" />
@@ -389,14 +412,23 @@ export const BlogsTabsSection = ({
                 <div className="hidden w-full flex-row items-stretch justify-between gap-[20px] md:flex">
                   {/* Left Text & CTA (Frame 2147226512) */}
                   <div className="flex min-w-0 flex-1 flex-col items-start gap-[16px]">
-                    <h6 className="type-h6 tracking-[-0.01em] text-black">{article.title}</h6>
+                    <h6
+                      data-motion-reveal="lines"
+                      className="type-h6 tracking-[-0.01em] text-black"
+                    >
+                      {article.title}
+                    </h6>
 
-                    <Link href={`/blogs/${article.slug}`} className="inline-block">
-                      <div className="flex h-[44px] cursor-pointer items-center gap-[10px] rounded-[64px] border border-[#F4F6F9] bg-[rgba(214,214,214,0.21)] px-[20px] py-[10px] backdrop-blur-[12px] transition-all duration-300 hover:border-[#0F68D6]/30 hover:bg-white/60">
+                    <Link href={`/blogs/${article.slug}`} className="group inline-block">
+                      <div
+                        data-motion-reveal="fade"
+                        data-motion-magnetic
+                        className="flex h-[44px] cursor-pointer items-center gap-[10px] rounded-[64px] border border-[#F4F6F9] bg-[rgba(214,214,214,0.21)] px-[20px] py-[10px] backdrop-blur-[12px] transition-all duration-300 hover:border-[#0F68D6]/30 hover:bg-white/60"
+                      >
                         <span className="type-body-xxs font-medium text-[#2A2A2A]">
                           {settings?.readBlogButtonText || 'Read blog'}
                         </span>
-                        <ChevronRight className="text-[#2A2A2A] opacity-60" />
+                        <ChevronRight className="text-[#2A2A2A] opacity-60 transition-transform duration-300 [@media(hover:hover)]:group-hover:translate-x-1" />
                       </div>
                     </Link>
                   </div>
@@ -404,6 +436,8 @@ export const BlogsTabsSection = ({
                   {/* Right Image (Frame 2147203302) */}
                   <div className="relative min-h-[144px] w-[227px] shrink-0 self-stretch overflow-hidden rounded-[20px] shadow-sm">
                     <Image
+                      data-motion-reveal="image"
+                      data-motion-parallax
                       src={article.desktopImage}
                       alt={article.rawTitle}
                       fill
@@ -426,6 +460,8 @@ export const BlogsTabsSection = ({
                   {/* Mobile Top Image (Frame 2147203302) */}
                   <div className="relative h-[217px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-sm">
                     <Image
+                      data-motion-reveal="image"
+                      data-motion-parallax
                       src={article.mobileImage}
                       alt={article.rawTitle}
                       fill
@@ -445,21 +481,24 @@ export const BlogsTabsSection = ({
                   {/* Mobile Bottom Row (Title + Circular Arrow Indicator) */}
                   <Link
                     href={`/blogs/${article.slug}`}
-                    className="flex w-full flex-row items-end justify-between gap-[12px] pt-[4px]"
+                    className="group flex w-full flex-row items-end justify-between gap-[12px] pt-[4px]"
                   >
                     <h6 className="type-h6 flex-1 text-[18px] leading-[26px] text-black">
                       {article.title}
                     </h6>
 
                     {/* Circular Arrow Indicator (Fill - arrow - indicator) */}
-                    <div className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm">
+                    <div
+                      data-motion-magnetic
+                      className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm"
+                    >
                       <svg
                         width="10"
                         height="14"
                         viewBox="0 0 13 19"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
-                        className="shrink-0"
+                        className="shrink-0 transition-transform duration-300 [@media(hover:hover)]:group-hover:translate-x-1"
                       >
                         <path
                           d="M2.23988 17.3712C1.82018 17.3372 1.61024 16.9423 1.65663 16.5523C1.79481 15.3885 2.66557 13.4789 3.35352 12.5279L3.96468 11.6817L4.61946 10.9053C5.12328 10.3077 5.68936 9.77948 6.26741 9.2754C7.24881 8.41892 8.75327 7.56539 9.98349 7.75537C10.7098 7.86734 11.3359 8.5842 11.3318 9.3445C11.3252 10.4672 10.8094 11.5484 10.0742 12.4102L9.77328 12.7621L9.48014 13.1653L8.43251 14.2261C8.36361 14.2654 8.19742 14.3593 8.13659 14.4119L7.38625 15.0718C6.2137 16.0077 4.88937 16.6975 3.49535 17.171C3.08228 17.3113 2.68079 17.4037 2.24081 17.3687L2.23988 17.3712Z"

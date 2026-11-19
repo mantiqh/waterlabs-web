@@ -1,5 +1,6 @@
 'use client';
 
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { ConnectedTimeline } from '@/components/ui/connected-timeline';
@@ -22,19 +23,19 @@ const lifecycleBullets = HIMER_LIFECYCLE_DATA.tabs.map((tab) =>
 function LifecycleStage({
   tab,
   index,
-  progress,
   pinned,
   active,
   preloadNext,
   onVideoReady,
+  progress,
 }: {
   tab: LifecycleTab;
   index: number;
-  progress: number;
   pinned: boolean;
   active: boolean;
   preloadNext: boolean;
   onVideoReady: (desktopSrc: string) => void;
+  progress: number;
 }) {
   const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus', !pinned);
   const value = pinned ? progress : entryProgress;
@@ -45,7 +46,7 @@ function LifecycleStage({
       aria-hidden={pinned && !active ? true : undefined}
       className={cn(
         'himer-lifecycle-stage grid min-w-0 grid-cols-1 items-center gap-5 lg:grid-cols-[minmax(0,513fr)_minmax(0,787fr)] lg:gap-5',
-        pinned && 'col-start-1 row-start-1',
+        pinned && 'col-start-1 row-start-1 transition-opacity duration-300',
         pinned && !active && 'invisible opacity-0',
       )}
     >
@@ -99,25 +100,48 @@ function LifecycleStage({
 
 function ProductionProof() {
   return (
-    <div className="to-ghost-white bg-gradient-to-b from-black from-25% to-75% lg:bg-[linear-gradient(187.75deg,#000000_49.6%,#F4F6F9_97.3%)]">
+    <div
+      data-motion-section
+      className="to-ghost-white bg-gradient-to-b from-black from-25% to-75% lg:bg-[linear-gradient(187.75deg,#000000_49.6%,#F4F6F9_97.3%)]"
+    >
       <div className="relative rounded-tr-[30px] rounded-br-[30px] bg-[linear-gradient(271.8deg,#000000_1.7%,#0F68D6_200%)] py-10 text-white lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:bg-[linear-gradient(66.96deg,#0F68D6_-42.8%,#000000_96.5%)] lg:py-[60px]">
         <div className="layout-container flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
-          <div className="min-w-0 lg:max-w-[740px]">
-            <h3 className="type-h3 max-md:text-2xl max-md:leading-8">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 75%"
+            className="min-w-0 lg:max-w-[740px]"
+          >
+            <h3 data-motion-reveal="lines" className="type-h3 max-md:text-2xl max-md:leading-8">
               {HIMER_LIFECYCLE_DATA.proof.headline}
             </h3>
-            <p className="type-body-xxs text-light-gray mt-5 max-md:text-sm max-md:leading-5">
+            <p
+              data-motion-reveal="blur"
+              className="type-body-xxs text-light-gray mt-5 max-md:text-sm max-md:leading-5"
+            >
               {HIMER_LIFECYCLE_DATA.proof.subtext}
             </p>
           </div>
-          <div className="grid shrink-0 grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-5">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 75%"
+            className="grid shrink-0 grid-cols-1 gap-3.5 md:grid-cols-2 md:gap-5"
+          >
             {HIMER_LIFECYCLE_DATA.proof.cards.map((card, index) => (
               <div
                 key={card.label}
                 data-metric-card
                 className="flex min-h-[96px] flex-col justify-between rounded-2xl border border-white/10 bg-white/10 p-3 md:min-h-[132px] md:w-[228px] md:p-5"
               >
-                <p className="type-h5 max-md:text-xl max-md:leading-7">{card.value}</p>
+                <p className="type-h5 max-md:text-xl max-md:leading-7">
+                  <span className="sr-only">{card.value}</span>
+                  <span className="inline-flex overflow-hidden align-bottom">
+                    <span aria-hidden="true" data-motion-metric-value className="inline-block">
+                      {card.value}
+                    </span>
+                  </span>
+                </p>
                 <MetricBar
                   value={index === 0 ? 100 : 98.4}
                   threshold={index === 1 ? 96 : undefined}
@@ -155,6 +179,10 @@ export const HimerPlatformLifecycleSection = () => {
     HIMER_LIFECYCLE_DATA.tabs.length - Number.EPSILON * 4,
   );
   const activeStage = Math.min(2, Math.floor(stagePosition));
+
+  useEffect(() => {
+    ScrollTrigger.refresh();
+  }, [pinned]);
 
   useEffect(() => {
     let frame = 0;

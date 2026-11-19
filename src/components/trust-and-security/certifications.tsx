@@ -76,6 +76,7 @@ export const CertificationsSection = () => {
   return (
     <section
       id="certifications"
+      data-motion-section
       className="relative m-0 w-full scroll-mt-[60px] overflow-hidden bg-gradient-to-b from-[#FFFFFF] from-50% to-[#000000] to-50% p-0"
     >
       {/* 
@@ -98,7 +99,7 @@ export const CertificationsSection = () => {
               1. Top Headline (Placed directly at top of #DBE2F0 section)
               - Token: font/h4 (General Sans, 40px / 48px, -0.01em, Regular 400, #042849)
             */}
-            <h2 className="type-h4 max-w-[920px] text-[#042849]">
+            <h2 data-motion-reveal="lines" className="type-h4 max-w-[920px] text-[#042849]">
               All infrastructure runs in the United States. For <br className="hidden lg:inline" />
               many clients that&apos;s not a preference, it&apos;s a{' '}
               <br className="hidden lg:inline" />
@@ -111,7 +112,10 @@ export const CertificationsSection = () => {
               - Background: #FFFFFF, rounded-[20px]
               - Gap: 40px
             */}
-            <div className="flex w-full flex-col gap-[28px] overflow-hidden rounded-[20px] bg-white pb-[28px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] lg:gap-[40px] lg:pb-[36px]">
+            <div
+              data-motion-reveal="fade"
+              className="flex w-full flex-col gap-[28px] overflow-hidden rounded-[20px] bg-white pb-[28px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] lg:gap-[40px] lg:pb-[36px]"
+            >
               {/* 
                 Top Feature Banner Card (Figma Frame 2147203214)
                 - Mobile: 362px x 331px, img_the_floor_cleared (1).png

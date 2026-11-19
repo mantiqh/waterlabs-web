@@ -107,7 +107,7 @@ export const CaseStudiesTabsSection = ({
 }: CaseStudiesTabsSectionProps) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  // const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const gridRef = useRef<HTMLDivElement>(null);
 
@@ -200,15 +200,15 @@ export const CaseStudiesTabsSection = ({
     return [1, '...', safeCurrentPage - 1, safeCurrentPage, safeCurrentPage + 1, '...', totalPages];
   }, [totalPages, safeCurrentPage]);
 
-  // const handleCategorySelect = (category: string) => {
-  //   setSelectedCategory(category);
-  //   setCurrentPage(1);
-  // };
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
 
-  // const handleSearchChange = (query: string) => {
-  //   setSearchQuery(query);
-  //   setCurrentPage(1);
-  // };
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    setCurrentPage(1);
+  };
 
   const handlePageChange = (newPage: number) => {
     if (newPage < 1 || newPage > totalPages || newPage === safeCurrentPage) return;
@@ -222,6 +222,7 @@ export const CaseStudiesTabsSection = ({
 
   return (
     <section
+      data-motion-section
       className="relative m-0 w-full overflow-hidden p-0"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 50%, #0F68D6 50%)',
@@ -235,23 +236,29 @@ export const CaseStudiesTabsSection = ({
       <div className="w-full overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
         <div className="mx-auto flex w-full max-w-[1320px] flex-col gap-[32px] md:gap-[40px] lg:gap-[40px]">
           {/* ========================================================================= */}
-          {/* Top Filter & Search Bar - Commented out for now                           */}
+          {/* Top Filter & Search Bar                                                   */}
           {/* ========================================================================= */}
 
           {/* Desktop Filter Bar (Figma: Frame 2147226517) */}
-          {/* <div className="hidden lg:flex flex-row items-center justify-between gap-[32px] w-full">
-            <div className="flex flex-row items-center gap-[12px] xl:gap-[16px] flex-wrap">
-              {categoriesList.map((category) => {
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="hidden w-full flex-row items-center justify-between gap-[32px] lg:flex"
+          >
+            <div className="flex flex-row flex-wrap items-center gap-[12px] xl:gap-[16px]">
+              {categoriesList.map((category, idx) => {
                 const isSelected = selectedCategory === category;
                 return (
                   <button
                     key={category}
                     type="button"
+                    data-motion-reveal="fade"
+                    data-motion-at={0.1 + idx * 0.05}
                     onClick={() => handleCategorySelect(category)}
-                    className={`h-[40px] px-[16px] py-[8px] rounded-[64px] type-cta font-medium transition-all duration-300 cursor-pointer ${
+                    className={`type-cta h-[40px] cursor-pointer rounded-[64px] px-[16px] py-[8px] font-medium transition-all duration-300 ${
                       isSelected
                         ? 'bg-gradient-to-r from-[#63CCB7] to-[#0F68D6] text-white shadow-sm'
-                        : 'bg-[#91C6F2]/[0.09] text-[#7D8690] hover:text-[#042849] hover:bg-[#91C6F2]/[0.18]'
+                        : 'bg-[#91C6F2]/[0.09] text-[#7D8690] hover:bg-[#91C6F2]/[0.18] hover:text-[#042849]'
                     }`}
                   >
                     {category}
@@ -260,49 +267,67 @@ export const CaseStudiesTabsSection = ({
               })}
             </div>
 
-            <div className="w-[280px] xl:w-[313px] h-[40px] bg-white/70 border border-white rounded-[64px] px-[16px] py-[8px] flex items-center gap-[10px] focus-within:bg-white focus-within:border-[#0F68D6] transition-all">
+            <div
+              data-motion-reveal="fade"
+              data-motion-at={0.1 + categoriesList.length * 0.05}
+              className="flex h-[40px] w-[280px] items-center gap-[10px] rounded-[64px] border border-white bg-white/70 px-[16px] py-[8px] transition-all focus-within:border-[#0F68D6] focus-within:bg-white xl:w-[313px]"
+            >
               <svg
                 width="14"
                 height="14"
                 viewBox="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-[#042849] shrink-0"
+                className="shrink-0 text-[#042849]"
               >
                 <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-                <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path
+                  d="M11 11L14.5 14.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
               </svg>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder={settings?.searchPlaceholder || 'Search'}
-                className="w-full bg-transparent border-none outline-none type-cta font-normal text-[#2A2A2A] placeholder:text-[#7D8690]"
+                className="type-cta w-full border-none bg-transparent font-normal text-[#2A2A2A] outline-none placeholder:text-[#7D8690]"
               />
             </div>
-          </div> */}
+          </div>
 
           {/* Mobile & Tablet Filter Bar (Figma: Frame 2147226778) */}
-          {/* <div className="flex lg:hidden flex-col gap-[16px] w-full">
-            <div className="flex flex-row items-center gap-[12px] w-full">
-              <div className="flex-1 h-[39px] bg-white rounded-[12px_6px_12px_12px] px-[12px] flex items-center gap-[8px] border border-transparent focus-within:border-[#0F68D6]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex w-full flex-col gap-[16px] lg:hidden"
+          >
+            <div className="flex w-full flex-row items-center gap-[12px]">
+              <div className="flex h-[39px] flex-1 items-center gap-[8px] rounded-[12px_6px_12px_12px] border border-transparent bg-white px-[12px] focus-within:border-[#0F68D6]">
                 <svg
                   width="14"
                   height="14"
                   viewBox="0 0 16 16"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="text-[#042849] shrink-0"
+                  className="shrink-0 text-[#042849]"
                 >
                   <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-                  <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path
+                    d="M11 11L14.5 14.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => handleSearchChange(e.target.value)}
                   placeholder={settings?.searchPlaceholder || 'Search'}
-                  className="w-full bg-transparent border-none outline-none type-caption text-[#2A2A2A] placeholder:text-[#D7DCE2]"
+                  className="type-caption w-full border-none bg-transparent text-[#2A2A2A] outline-none placeholder:text-[#D7DCE2]"
                 />
               </div>
 
@@ -310,7 +335,7 @@ export const CaseStudiesTabsSection = ({
                 <button
                   type="button"
                   onClick={() => setIsFilterDropdownOpen((prev) => !prev)}
-                  className="h-[39px] px-[12px] bg-white border border-[#F4F6F9] rounded-[8px_2px_8px_8px] flex items-center gap-[8px] cursor-pointer"
+                  className="flex h-[39px] cursor-pointer items-center gap-[8px] rounded-[8px_2px_8px_8px] border border-[#F4F6F9] bg-white px-[12px]"
                 >
                   <span className="type-caption text-[#2A2A2A]">
                     {settings?.filterByLabel || 'Filter by'}
@@ -321,14 +346,20 @@ export const CaseStudiesTabsSection = ({
                     viewBox="0 0 14 14"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="text-black shrink-0"
+                    className="shrink-0 text-black"
                   >
-                    <path d="M3.5 5.25L7 8.75L10.5 5.25" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M3.5 5.25L7 8.75L10.5 5.25"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </button>
 
                 {isFilterDropdownOpen && (
-                  <div className="absolute right-0 top-[45px] z-30 w-[180px] bg-white rounded-[12px] shadow-lg border border-[#D7DCE2] py-[6px] overflow-hidden">
+                  <div className="absolute top-[45px] right-0 z-30 w-[180px] overflow-hidden rounded-[12px] border border-[#D7DCE2] bg-white py-[6px] shadow-lg">
                     {categoriesList.map((category) => (
                       <button
                         key={category}
@@ -337,9 +368,9 @@ export const CaseStudiesTabsSection = ({
                           handleCategorySelect(category);
                           setIsFilterDropdownOpen(false);
                         }}
-                        className={`w-full text-left px-[14px] py-[8px] type-caption transition-colors cursor-pointer ${
+                        className={`type-caption w-full cursor-pointer px-[14px] py-[8px] text-left transition-colors ${
                           selectedCategory === category
-                            ? 'bg-[#0F68D6]/10 text-[#0F68D6] font-medium'
+                            ? 'bg-[#0F68D6]/10 font-medium text-[#0F68D6]'
                             : 'text-[#2A2A2A] hover:bg-[#F4F6F9]'
                         }`}
                       >
@@ -350,13 +381,15 @@ export const CaseStudiesTabsSection = ({
                 )}
               </div>
             </div>
-          </div> */}
+          </div>
 
           {/* ========================================================================= */}
           {/* Case Studies Grid (2 Columns on Desktop)                                  */}
           {/* ========================================================================= */}
           <div
             ref={gridRef}
+            data-motion-group
+            data-motion-trigger="section"
             className="grid w-full grid-cols-1 gap-x-[32px] gap-y-[32px] lg:grid-cols-2 lg:gap-y-[40px]"
           >
             {paginatedItems.map((card) => (
@@ -364,13 +397,16 @@ export const CaseStudiesTabsSection = ({
                 key={card.id}
                 className="flex w-full flex-col gap-[8px] border-b border-[#D7DCE2] pb-[20px] md:gap-[12px] md:pb-[24px]"
               >
-                {/* Eyebrow Tag: Blue Dot + Text - Commented out */}
-                {/* <div className="flex items-center gap-[6px] lg:gap-[8px]">
-                  <div className="w-[8px] h-[8px] rounded-full bg-[#0F68D6] shrink-0" />
-                  <span className="type-body-xxs text-[14px] lg:text-[16px] text-[rgba(42,42,42,0.6)] tracking-[0.01em]">
+                {/* Eyebrow Tag: Blue Dot + Text */}
+                <div className="flex items-center gap-[6px] lg:gap-[8px]">
+                  <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
+                  <span
+                    data-motion-reveal="scramble"
+                    className="type-body-xxs tracking-[0.01em] text-[rgba(42,42,42,0.6)]"
+                  >
                     {card.tag}
                   </span>
-                </div> */}
+                </div>
 
                 {/* =================================================================== */}
                 {/* Desktop Card Layout (Side-by-side)                                  */}
@@ -381,18 +417,28 @@ export const CaseStudiesTabsSection = ({
                     <div className="flex w-full flex-col items-start gap-[12px]">
                       {/* Clickable Card Heading matching inner case study page */}
                       <Link href={`/case-study/${card.slug}`} className="group/title block w-full">
-                        <h5 className="type-body-l lg:type-body-s xl:type-body-l text-[#042849] transition-colors group-hover/title:text-[#0F68D6]">
+                        <h5
+                          data-motion-reveal="lines"
+                          className="type-body-l lg:type-body-s xl:type-body-l text-[#042849] transition-colors group-hover/title:text-[#0F68D6]"
+                        >
                           {card.title || card.stat}
                         </h5>
                       </Link>
                     </div>
 
-                    <Link href={`/case-study/${card.slug}`} className="group inline-block">
-                      <div className="flex h-[44px] cursor-pointer items-center gap-[10px] rounded-[64px] border border-[#F4F6F9] bg-[rgba(214,214,214,0.6)] px-[20px] py-[10px] backdrop-blur-[12px] transition-all duration-300 hover:border-[#0F68D6]/30 hover:bg-white/80">
+                    <Link
+                      href={`/case-study/${card.slug}`}
+                      data-motion-reveal="fade"
+                      className="group inline-block"
+                    >
+                      <div
+                        data-motion-magnetic
+                        className="flex h-[44px] cursor-pointer items-center gap-[10px] rounded-[64px] border border-[#F4F6F9] bg-[rgba(214,214,214,0.6)] px-[20px] py-[10px] backdrop-blur-[12px] transition-all duration-300 hover:border-[#0F68D6]/30 hover:bg-white/80"
+                      >
                         <span className="type-body-xxs text-[#2A2A2A]">
                           {settings?.readStoryButtonText || 'Read the story'}
                         </span>
-                        <ChevronRight className="h-[18px] w-[12px] text-[#2A2A2A] opacity-20 transition-opacity group-hover:opacity-70" />
+                        <ChevronRight className="h-[18px] w-[12px] text-[#2A2A2A] opacity-20 transition-all duration-300 group-hover:opacity-70 [@media(hover:hover)]:group-hover:translate-x-1" />
                       </div>
                     </Link>
                   </div>
@@ -400,6 +446,8 @@ export const CaseStudiesTabsSection = ({
                   {/* Right Column: Image */}
                   <div className="relative h-[174px] w-[227px] shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] shadow-sm">
                     <Image
+                      data-motion-reveal="image"
+                      data-motion-parallax
                       src={card.desktopImage}
                       alt={card.title || card.stat}
                       fill
@@ -416,6 +464,8 @@ export const CaseStudiesTabsSection = ({
                   {/* Top Image */}
                   <div className="relative h-[217px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] shadow-sm">
                     <Image
+                      data-motion-reveal="image"
+                      data-motion-parallax
                       src={card.mobileImage}
                       alt={card.title || card.stat}
                       fill
@@ -439,9 +489,11 @@ export const CaseStudiesTabsSection = ({
                     <Link
                       href={`/case-study/${card.slug}`}
                       aria-label={settings?.readStoryButtonText || 'Read the story'}
-                      className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm transition-colors hover:bg-[#042849]"
+                      data-motion-reveal="fade"
+                      data-motion-magnetic
+                      className="group flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white shadow-sm transition-colors hover:bg-[#042849]"
                     >
-                      <ChevronRight className="h-[13px] w-[9px] text-white" />
+                      <ChevronRight className="h-[13px] w-[9px] text-white transition-transform duration-300 [@media(hover:hover)]:group-hover:translate-x-1" />
                     </Link>
                   </div>
                 </div>

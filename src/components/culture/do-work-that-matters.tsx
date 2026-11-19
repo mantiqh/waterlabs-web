@@ -5,7 +5,7 @@ import { CTA } from '@/components/CTA';
 
 export const DoWorkThatMattersSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-[#111111]">
+    <section data-motion-section className="relative w-full overflow-hidden bg-[#111111]">
       {/* 
         Culture Page Last Section Wrapper:
         - Background #111111 to match Footer
@@ -20,10 +20,20 @@ export const DoWorkThatMattersSection = () => {
             - Frame 2147203133: gap 8px (Tag + Headline + Description)
             - Frame 7: CTA Button
         */}
-        <div className="relative z-10 mx-auto flex min-h-[462px] w-full max-w-[1320px] flex-col items-stretch justify-start gap-[24px] overflow-hidden rounded-t-[8px] rounded-b-[20px] bg-white p-0 shadow-sm lg:flex-row lg:items-center lg:gap-[32px] lg:rounded-[20px] lg:pr-[40px] xl:gap-[44px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 85%"
+          className="relative z-10 mx-auto flex min-h-[462px] w-full max-w-[1320px] flex-col items-stretch justify-start gap-[24px] overflow-hidden rounded-t-[8px] rounded-b-[20px] bg-white p-0 shadow-sm lg:flex-row lg:items-center lg:gap-[32px] lg:rounded-[20px] lg:pr-[40px] xl:gap-[44px]"
+        >
           {/* Left Column: Speaker Image (Mobile: 8px 8px 32px 8px, Desktop: 650px x 462px with 8px top-right and 32px bottom-right) */}
-          <div className="relative min-h-[250px] w-full shrink-0 self-stretch overflow-hidden rounded-tl-[8px] rounded-tr-[8px] rounded-br-[32px] rounded-bl-[8px] sm:min-h-[380px] lg:min-h-[462px] lg:w-[480px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] xl:w-[650px]">
+          <div
+            data-motion-reveal="image"
+            data-motion-at="0.1"
+            className="relative min-h-[250px] w-full shrink-0 self-stretch overflow-hidden rounded-tl-[8px] rounded-tr-[8px] rounded-br-[32px] rounded-bl-[8px] sm:min-h-[380px] lg:min-h-[462px] lg:w-[480px] lg:rounded-t-none lg:rounded-l-[20px] lg:rounded-tr-[8px] lg:rounded-br-[32px] xl:w-[650px]"
+          >
             <Image
+              data-motion-parallax
               src="/images/culture/do-work-that-matters/do_work_that_matters.png"
               alt="Do work that matters, with people who'll back you"
               fill
@@ -40,18 +50,30 @@ export const DoWorkThatMattersSection = () => {
               {/* Tag / Eyebrow (Text - Tag) */}
               <div className="flex items-center gap-[8px]">
                 <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">
+                <span
+                  data-motion-reveal="scramble"
+                  data-motion-at="0.15"
+                  className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+                >
                   Build what&apos;s next
                 </span>
               </div>
 
               {/* Headline: type-h2, semantic <h2> */}
-              <h2 className="type-h2 max-w-[570px] text-[#042849]">
+              <h2
+                data-motion-reveal="lines"
+                data-motion-at="0.2"
+                className="type-h2 max-w-[570px] text-[#042849]"
+              >
                 Do work that matters, with people who&apos;ll back you.
               </h2>
 
               {/* Body Description: type-body-xs (Exact line breaks matching Figma Image 1) */}
-              <p className="type-body-xs max-w-[540px] pt-[2px] text-[#111111]">
+              <p
+                data-motion-reveal="blur"
+                data-motion-at="0.3"
+                className="type-body-xs max-w-[540px] pt-[2px] text-[#111111]"
+              >
                 We want curious people who take ownership and want to solve real problems. Whether
                 you are early in your career or leading a team, there is room here to build
                 something real.
@@ -62,6 +84,9 @@ export const DoWorkThatMattersSection = () => {
             <div>
               <Link href="/careers#where-you-would-fit">
                 <CTA
+                  data-motion-reveal="fade"
+                  data-motion-at="0.4"
+                  data-motion-magnetic
                   variant="light-bg"
                   size="compact-mobile"
                   as="span"

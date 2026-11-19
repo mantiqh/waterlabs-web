@@ -31,6 +31,7 @@ export const SecurityAndComplianceSection = () => {
   return (
     <section
       id="security-and-compliance"
+      data-motion-section
       className="relative m-0 w-full scroll-mt-[60px] overflow-hidden bg-gradient-to-b from-[#000000] from-50% to-[#DBE2F0] to-50% p-0"
     >
       {/* 
@@ -58,7 +59,10 @@ export const SecurityAndComplianceSection = () => {
               - Background: #E7E7F4 with 3D shield graphic
               - Heading: General Sans, 32px / 40px (mobile) -> 52px / 60px (desktop), -0.01em, #111111 / #0F68D6 (Bold 700)
             */}
-            <div className="relative isolate mb-[12px] flex h-[320px] w-full flex-col items-start justify-end overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#E7E7F4] p-[20px] shadow-[0_12px_40px_rgba(0,0,0,0.06)] sm:p-[28px] lg:mb-0 lg:h-[381px] lg:p-[40px]">
+            <div
+              data-motion-reveal="fade"
+              className="relative isolate mb-[12px] flex h-[320px] w-full flex-col items-start justify-end overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#E7E7F4] p-[20px] shadow-[0_12px_40px_rgba(0,0,0,0.06)] sm:p-[28px] lg:mb-0 lg:h-[381px] lg:p-[40px]"
+            >
               {/* Desktop Banner Graphic Background */}
               <div className="pointer-events-none absolute inset-0 z-0 hidden sm:block">
                 <Image
@@ -103,9 +107,13 @@ export const SecurityAndComplianceSection = () => {
                ===================================================================== */}
             <div className="hidden w-full flex-col gap-[36px] lg:flex lg:gap-[48px]">
               {/* Card 1: Closely monitored agents (Image on Left, Text on Right) */}
-              <div className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
+              <div
+                data-motion-reveal="slide"
+                className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]"
+              >
                 <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-[16px] bg-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] lg:w-[45%] xl:w-[420px] xl:rounded-[20px]">
                   <Image
+                    data-motion-parallax
                     src="/images/trust-and-security/security-and-compliance/img_closely_monitored_agents.png"
                     alt="Closely Monitored Agents"
                     fill
@@ -124,9 +132,13 @@ export const SecurityAndComplianceSection = () => {
               </div>
 
               {/* Card 2: Business Associate Agreement, every time (Text on Left, Image on Right) */}
-              <div className="flex flex-row-reverse items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
+              <div
+                data-motion-reveal="slide"
+                className="flex flex-row-reverse items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]"
+              >
                 <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-[16px] bg-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] lg:w-[45%] xl:w-[420px] xl:rounded-[20px]">
                   <Image
+                    data-motion-parallax
                     src="/images/trust-and-security/security-and-compliance/img_business_associate_agreement_every_time.png"
                     alt="Business Associate Agreement"
                     fill

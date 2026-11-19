@@ -2,7 +2,7 @@ import Navbar from '@/components/common/navbar';
 
 export const HeroSection = () => {
   return (
-    <section className="w-full overflow-hidden bg-white">
+    <section data-motion-section="hero" className="w-full overflow-hidden bg-white">
       {/* 
         Hero Banner Section (Desktop: 6211-17465 / Mobile: 6211-17810):
         - Desktop: 1440px width, 726px height, padding: 40px 60px 80px, border-radius: 0 0 0 60px
@@ -15,10 +15,19 @@ export const HeroSection = () => {
         <Navbar />
 
         {/* Hero Content Area (Figma: Frame 2147203192) */}
-        <div className="mx-auto flex w-full max-w-[1320px] flex-col justify-between gap-[12px] lg:flex-row lg:items-end lg:gap-[20px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="mx-auto flex w-full max-w-[1320px] flex-col justify-between gap-[12px] lg:flex-row lg:items-end lg:gap-[20px]"
+        >
           {/* Heading */}
           <div className="w-full shrink-0 lg:w-[522px]">
-            <h2 className="type-h1 tracking-[-0.01em] text-white">
+            <h2
+              data-motion-reveal="lines"
+              data-motion-start="top 100%"
+              className="type-h1 tracking-[-0.01em] text-white"
+            >
               We are building
               <br />
               the revenue cycle
@@ -29,7 +38,11 @@ export const HeroSection = () => {
 
           {/* Description */}
           <div className="w-full flex-1 lg:max-w-[778px]">
-            <p className="type-body-s text-[#F4F6F9]">
+            <p
+              data-motion-reveal="blur"
+              data-motion-start="top 100%"
+              className="type-body-s text-[#F4F6F9]"
+            >
               The US healthcare system loses billions every year to a revenue cycle run by hand.
               Waterlabs builds the agentic AI that runs it instead. Our agents work every stage, in
               every specialty, at health system scale.

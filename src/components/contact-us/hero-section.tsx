@@ -37,7 +37,7 @@ export const ContactUsHeroSection = ({
   };
 
   return (
-    <section className="relative w-full bg-white">
+    <section data-motion-section="hero" className="relative w-full bg-white">
       {/* 
         Contact Us Hero Banner:
         - Desktop: 1440px x 550px, border-radius: 0px 0px 0px 60px, padding: 40px 60px 80px
@@ -77,24 +77,42 @@ export const ContactUsHeroSection = ({
         </div>
 
         {/* Hero Content (Desktop: Frame 8 / Frame 12 / Frame 2147203284, Mobile: Bottom aligned) */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-grow flex-col items-start justify-end pt-[32px] lg:justify-center">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-grow flex-col items-start justify-end pt-[32px] lg:justify-center"
+        >
           {/* Content Block (Mobile: gap-12, Desktop: Frame 2147226510 gap-20) */}
           <div className="flex w-full max-w-[664px] flex-col items-start gap-[12px] lg:gap-[20px]">
             {/* Heading + Subheading Stack (Frame 2147226524 gap-12) */}
             <div className="flex w-full flex-col items-start gap-[12px]">
               {/* Heading (Mobile: 32px / 40px, Desktop: type-h2, #111111) */}
-              <h2 className="type-h2 tracking-[-0.01em] text-[#111111] max-md:text-[32px] max-md:leading-[40px]">
+              <h2
+                data-motion-reveal="lines"
+                data-motion-start="top 100%"
+                className="type-h2 tracking-[-0.01em] text-[#111111] max-md:text-[32px] max-md:leading-[40px]"
+              >
                 {renderHeading()}
               </h2>
               {/* Subheading (20px / 28px, #2A2A2A) */}
-              <p className="type-body-s max-w-[540px] text-[#2A2A2A] lg:max-w-[664px]">
+              <p
+                data-motion-reveal="blur"
+                data-motion-start="top 100%"
+                className="type-body-s max-w-[540px] text-[#2A2A2A] lg:max-w-[664px]"
+              >
                 {subheading}
               </p>
             </div>
 
             {/* CTA Button */}
             <a href={ctaLink}>
-              <CTA variant="light-bg" size="compact-mobile">
+              <CTA
+                data-motion-reveal="fade"
+                data-motion-magnetic
+                variant="light-bg"
+                size="compact-mobile"
+              >
                 {ctaText}
               </CTA>
             </a>

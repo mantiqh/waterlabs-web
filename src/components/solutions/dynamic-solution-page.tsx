@@ -1,10 +1,12 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import Navbar from '@/components/common/navbar';
+import PageMotion from '@/components/common/page-motion';
 import { CTA } from '@/components/CTA';
 import { SolutionPageData } from '@/types/solution';
 
@@ -103,7 +105,8 @@ interface DynamicSolutionPageProps {
 }
 
 export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) {
-  const steps = useMemo(() => data.closes.steps || [], [data.closes.steps]);
+  const rawSteps = data.closes?.steps;
+  const steps = useMemo(() => rawSteps || [], [rawSteps]);
 
   // Repeated labels fill the visual list; navigation stops at the last real step.
   const displaySteps = useMemo(
@@ -119,6 +122,8 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
   );
 
   // Closes section state & refs
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [closesDotIndex, setClosesDotIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -147,80 +152,72 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
     'payment-posting': '#55BABC',
   };
 
-  // One animation owns the visual position; there is no native scroll/reset feedback loop.
+  // GSAP-powered smooth list offset and wheel boundary release
   useEffect(() => {
     const container = listRef.current;
-    const track = container?.firstElementChild;
-    const card = container?.closest('section')?.firstElementChild;
-    if (
-      !container ||
-      !(track instanceof HTMLElement) ||
-      !(card instanceof HTMLElement) ||
-      !steps.length
-    )
-      return;
+    const track = container?.firstElementChild as HTMLElement | null;
+    const card = cardRef.current;
+    if (!container || !track || !card || !steps.length) return;
+
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let offsets: number[] = [];
-    let position = 0;
+    const posState = { pos: 0 };
     let target = 0;
-    let frame = 0;
-    let previousTime = 0;
-    const paint = () => {
-      track.style.setProperty('--workflow-offset', `${-position}px`);
-      let nearest = 0;
-      for (let index = 1; index < offsets.length; index++) {
-        if (Math.abs(offsets[index] - position) < Math.abs(offsets[nearest] - position))
-          nearest = index;
+    const ctx = gsap.context(() => {}, card);
+
+    const animateToTarget = (targetOffset: number, nearestIdx: number) => {
+      if (motion.matches) {
+        posState.pos = targetOffset;
+        track.style.setProperty('--workflow-offset', `${-targetOffset}px`);
+      } else {
+        ctx.add(() => {
+          gsap.to(posState, {
+            pos: targetOffset,
+            duration: 0.42,
+            ease: 'power2.out',
+            overwrite: 'auto',
+            onUpdate: () => {
+              track.style.setProperty('--workflow-offset', `${-posState.pos}px`);
+            },
+          });
+        });
       }
-      if (nearest !== activeStepRef.current) {
-        activeStepRef.current = nearest;
-        setActiveStep(nearest);
+
+      if (nearestIdx !== activeStepRef.current) {
+        activeStepRef.current = nearestIdx;
+        setActiveStep(nearestIdx);
       }
     };
-    const tick = (time: number) => {
-      const elapsed = previousTime ? Math.min(64, time - previousTime) : 16;
-      previousTime = time;
-      position += (target - position) * (1 - Math.exp(-elapsed / 35));
-      if (Math.abs(target - position) < 0.25) position = target;
-      paint();
-      if (position !== target) frame = requestAnimationFrame(tick);
-      else {
-        frame = 0;
-        previousTime = 0;
-      }
-    };
-    const finish = () => {
-      cancelAnimationFrame(frame);
-      frame = 0;
-      previousTime = 0;
-      position = target;
-      paint();
-    };
-    const animate = () => {
-      if (motion.matches) finish();
-      else if (!frame) frame = requestAnimationFrame(tick);
-    };
+
     const updateBoundary = () => {
       const items = Array.from(track.children).slice(0, steps.length);
       const first = items[0];
       if (!(first instanceof HTMLElement)) return;
       offsets = items.map((item) => (item as HTMLElement).offsetTop - first.offsetTop);
       const end = offsets.at(-1) ?? 0;
-      position = Math.min(position, end);
       target = Math.min(target, end);
-      animate();
+      posState.pos = Math.min(posState.pos, end);
+      track.style.setProperty('--workflow-offset', `${-posState.pos}px`);
     };
+
     const advance = (delta: number) => {
-      const next = Math.max(0, Math.min(offsets.at(-1) ?? 0, target + delta));
-      // Release outward momentum once the boundary step is visible; the track can
-      // finish its last fraction smoothly while the browser starts scrolling the page.
+      if (!offsets.length) return false;
+      const end = offsets[steps.length - 1] ?? 0;
+      const next = Math.max(0, Math.min(end, target + delta));
       const boundaryVisible =
         delta > 0 ? activeStepRef.current === steps.length - 1 : activeStepRef.current === 0;
-      if (next === target && (position === target || boundaryVisible)) return false;
+
+      if (next === target && (posState.pos === target || boundaryVisible)) return false;
+
       target = next;
-      animate();
+      let nearest = 0;
+      for (let i = 1; i < offsets.length; i++) {
+        if (Math.abs(offsets[i] - target) < Math.abs(offsets[nearest] - target)) nearest = i;
+      }
+      animateToTarget(target, nearest);
       return true;
     };
+
     const handleWheel = (event: WheelEvent) => {
       if (
         window.innerWidth < 1024 ||
@@ -230,19 +227,19 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
         Math.abs(event.deltaX) > Math.abs(event.deltaY)
       )
         return;
-      // Let the page reveal the full panel before directing wheel input to its steps.
+
       const viewTop = window.visualViewport?.offsetTop ?? 0;
       const viewHeight = window.visualViewport?.height ?? window.innerHeight;
       const panel = card.getBoundingClientRect();
-      // A tall panel cannot fit: require its entire image/description/list row instead.
       const required =
         panel.height <= viewHeight ? panel : container.parentElement?.getBoundingClientRect();
       if (!required || required.top < viewTop - 1 || required.bottom > viewTop + viewHeight + 1)
         return;
+
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? container.clientHeight : 1;
-      // At either end, leave the event untouched so browser momentum continues on the page.
       if (advance(event.deltaY * unit)) event.preventDefault();
     };
+
     const handleKey = (event: KeyboardEvent) => {
       if (!(event.target instanceof Node) || !container.contains(event.target)) return;
       const delta =
@@ -257,34 +254,40 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 : 0;
       if (delta && advance(delta)) event.preventDefault();
     };
+
     selectStepRef.current = (index: number) => {
-      target = offsets[index % steps.length] ?? 0;
-      animate();
+      const realIdx = index % steps.length;
+      target = offsets[realIdx] ?? 0;
+      animateToTarget(target, realIdx);
     };
+
     const handleFocus = (event: FocusEvent) => {
       const index = Array.from(track.children).findIndex(
         (item) => item === event.target || item.contains(event.target as Node),
       );
       if (index >= 0 && index < steps.length) selectStepRef.current(index);
     };
+
     const observer = new ResizeObserver(updateBoundary);
     observer.observe(container);
-    for (const item of Array.from(track.children).slice(0, steps.length)) observer.observe(item);
+    for (const item of Array.from(track.children).slice(0, steps.length)) {
+      observer.observe(item);
+    }
     updateBoundary();
+
     card.addEventListener('wheel', handleWheel, { passive: false });
     card.addEventListener('keydown', handleKey);
     track.addEventListener('focusin', handleFocus);
-    motion.addEventListener('change', finish);
+
     return () => {
-      cancelAnimationFrame(frame);
+      ctx.revert();
       observer.disconnect();
       card.removeEventListener('wheel', handleWheel);
       card.removeEventListener('keydown', handleKey);
       track.removeEventListener('focusin', handleFocus);
-      motion.removeEventListener('change', finish);
       selectStepRef.current = () => {};
     };
-  }, [steps]);
+  }, [steps.length]);
 
   const scrollToStep = (index: number) => selectStepRef.current(index);
 
@@ -381,9 +384,15 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
   };
 
   return (
-    <div className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
+
       {/* ── 01 · HERO SECTION ── */}
-      <section className="relative w-full overflow-hidden bg-white">
+      <section data-motion-section="hero" className="relative w-full overflow-hidden bg-white">
         <div
           className="relative flex min-h-[683px] w-full flex-col justify-between gap-[20px] overflow-hidden rounded-bl-[60px] px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pt-[28px] md:pb-[60px] lg:h-[653px] lg:gap-[32px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]"
           style={{
@@ -407,27 +416,48 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
           </div>
 
           {/* Desktop: Two-Column Hero Content */}
-          <div className="relative z-10 mx-auto hidden w-full max-w-[1320px] flex-row items-center justify-between gap-[20px] lg:flex">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 100%"
+            className="relative z-10 mx-auto hidden w-full max-w-[1320px] flex-row items-center justify-between gap-[20px] lg:flex"
+          >
             {/* Left Column: Text Content */}
             <div className="flex w-full flex-col justify-center gap-[20px] pt-[32px] lg:max-w-[650px] lg:flex-1 lg:pt-0">
               {/* Tag / Eyebrow */}
               <div className="flex items-center gap-[8px]">
                 <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-                <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+                <span
+                  data-motion-reveal="scramble"
+                  data-motion-start="top 100%"
+                  className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+                >
                   {data.hero.eyebrow || `Agentic RCM Solutions · ${data.title}`}
                 </span>
               </div>
 
               {/* Headline */}
-              <h2 className="type-h1 tracking-[-0.01em] text-white">{data.hero.headline}</h2>
+              <h2
+                data-motion-reveal="lines"
+                data-motion-start="top 100%"
+                className="type-h1 tracking-[-0.01em] text-white"
+              >
+                {data.hero.headline}
+              </h2>
 
               {/* Description */}
-              <p className="type-body-s max-w-[650px] text-[#F4F6F9]">{data.hero.description}</p>
+              <p
+                data-motion-reveal="blur"
+                data-motion-start="top 100%"
+                className="type-body-s max-w-[650px] text-[#F4F6F9]"
+              >
+                {data.hero.description}
+              </p>
 
               {/* CTA Button */}
               <div>
                 <Link href={data.hero.ctaLink || '/contact-us'}>
-                  <CTA variant="dark-bg" as="div">
+                  <CTA data-motion-reveal="fade" data-motion-magnetic variant="dark-bg" as="div">
                     {data.hero.ctaText || 'Get a Demo'}
                   </CTA>
                 </Link>
@@ -435,8 +465,12 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
             </div>
 
             {/* Right Column: Hero Image */}
-            <div className="relative z-[2] aspect-[650/441] w-full overflow-hidden rounded-[20px] lg:max-w-[650px] lg:flex-1">
+            <div
+              data-motion-reveal="image"
+              className="relative z-[2] aspect-[650/441] w-full overflow-hidden rounded-[20px] lg:max-w-[650px] lg:flex-1"
+            >
               <Image
+                data-motion-parallax
                 src={heroImage}
                 alt={data.hero.heroImageAlt || data.hero.headline}
                 fill
@@ -448,33 +482,58 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
           </div>
 
           {/* Mobile & Tablet: Stacked Hero Content */}
-          <div className="relative z-10 flex w-full flex-col items-start gap-[20px] lg:hidden">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 100%"
+            className="relative z-10 flex w-full flex-col items-start gap-[20px] lg:hidden"
+          >
             {/* Tag */}
             <div className="flex items-center gap-[8px]">
               <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-              <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+              <span
+                data-motion-reveal="scramble"
+                data-motion-start="top 100%"
+                className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+              >
                 {data.hero.eyebrow || `Agentic RCM Solutions · ${data.title}`}
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="type-h1 tracking-[-0.01em] text-white">{data.hero.headline}</h2>
+            <h2
+              data-motion-reveal="lines"
+              data-motion-start="top 100%"
+              className="type-h1 tracking-[-0.01em] text-white"
+            >
+              {data.hero.headline}
+            </h2>
 
             {/* Description */}
-            <p className="type-body-s text-[#F4F6F9]">{data.hero.description}</p>
+            <p
+              data-motion-reveal="blur"
+              data-motion-start="top 100%"
+              className="type-body-s text-[#F4F6F9]"
+            >
+              {data.hero.description}
+            </p>
 
             {/* CTA Button */}
             <div>
               <Link href={data.hero.ctaLink || '/contact-us'}>
-                <CTA variant="dark-bg" as="div">
+                <CTA data-motion-reveal="fade" data-motion-magnetic variant="dark-bg" as="div">
                   {data.hero.ctaText || 'Get a Demo'}
                 </CTA>
               </Link>
             </div>
 
             {/* Mobile Hero Image */}
-            <div className="relative z-[2] aspect-[362/246] w-full overflow-hidden rounded-[20px]">
+            <div
+              data-motion-reveal="image"
+              className="relative z-[2] aspect-[362/246] w-full overflow-hidden rounded-[20px]"
+            >
               <Image
+                data-motion-parallax
                 src={data.hero.heroImageMobile || data.hero.heroImage || heroImage}
                 alt={data.hero.heroImageAlt || data.hero.headline}
                 fill
@@ -489,6 +548,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
       {/* ── 02 · THE PROBLEM SECTION ── */}
       <section
+        data-motion-section
         className="relative w-full overflow-hidden"
         style={{
           background: `linear-gradient(180deg, ${problemCornerColors[data.slug] || (data.slug === 'prior-authorization' || data.slug === 'prior-auth' ? '#9782E2' : '#9DA5AD')} ${problemCornerColors[data.slug] ? '60px' : '7.11%'}, #042848 calc(100% - 60px))`,
@@ -497,10 +557,18 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
         <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
           <div className="mx-auto max-w-[1320px]">
             {/* Desktop Layout: Image Left + Card Right */}
-            <div className="hidden flex-row items-stretch justify-between gap-[20px] lg:flex">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              className="hidden flex-row items-stretch justify-between gap-[20px] lg:flex"
+            >
               {/* Left: Large Image */}
-              <div className="relative min-h-[456px] w-full min-w-0 overflow-hidden rounded-[30px_10px_30px_30px] lg:max-w-[830px] lg:flex-[1.766]">
+              <div
+                data-motion-reveal="image"
+                className="relative min-h-[456px] w-full min-w-0 overflow-hidden rounded-[30px_10px_30px_30px] lg:max-w-[830px] lg:flex-[1.766]"
+              >
                 <Image
+                  data-motion-parallax
                   src={data.problem.image || DEFAULT_PROBLEM_IMG}
                   alt={data.problem.imageAlt || data.problem.headline}
                   fill
@@ -533,13 +601,19 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   {/* Tag */}
                   <div className="flex items-center gap-[8px]">
                     <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                    <span className="type-caption tracking-[0.01em] text-[#2A2A2A]">
+                    <span
+                      data-motion-reveal="scramble"
+                      className="type-caption tracking-[0.01em] text-[#2A2A2A]"
+                    >
                       {data.problem.tag || 'The problem'}
                     </span>
                   </div>
 
                   {/* Headline */}
-                  <h5 className="type-h5 tracking-[-0.01em] text-[#111111]">
+                  <h5
+                    data-motion-reveal="lines"
+                    className="type-h5 tracking-[-0.01em] text-[#111111]"
+                  >
                     {data.problem.headline}{' '}
                     {data.problem.headlineHighlight && (
                       <span className="text-[#0F68D6]">{data.problem.headlineHighlight}</span>
@@ -547,7 +621,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   </h5>
 
                   {/* Description Paragraphs */}
-                  <div className="flex flex-col gap-[14px]">
+                  <div data-motion-reveal="blur" className="flex flex-col gap-[14px]">
                     <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
                       {data.problem.description}
                     </p>
@@ -574,11 +648,19 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
             </div>
 
             {/* Mobile / Tablet Layout: Single Card */}
-            <div className="flex flex-col items-center justify-center lg:hidden">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              className="flex flex-col items-center justify-center lg:hidden"
+            >
               {/* Mobile Problem Image above card */}
               {(data.problem.imageMobile || data.problem.image) && (
-                <div className="relative mb-[16px] aspect-[338/186] w-full max-w-[362px] overflow-hidden rounded-[20px] md:max-w-[460px]">
+                <div
+                  data-motion-reveal="image"
+                  className="relative mb-[16px] aspect-[338/186] w-full max-w-[362px] overflow-hidden rounded-[20px] md:max-w-[460px]"
+                >
                   <Image
+                    data-motion-parallax
                     src={data.problem.imageMobile || data.problem.image || DEFAULT_PROBLEM_IMG}
                     alt={data.problem.imageAlt || data.problem.headline}
                     fill
@@ -610,13 +692,19 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   {/* Tag */}
                   <div className="flex items-center gap-[4px]">
                     <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                    <span className="type-caption tracking-[0.01em] text-[#2A2A2A]">
+                    <span
+                      data-motion-reveal="scramble"
+                      className="type-caption tracking-[0.01em] text-[#2A2A2A]"
+                    >
                       {data.problem.tag || 'The problem'}
                     </span>
                   </div>
 
                   {/* Headline */}
-                  <h5 className="type-h5 tracking-[-0.01em] text-[#111111]">
+                  <h5
+                    data-motion-reveal="lines"
+                    className="type-h5 tracking-[-0.01em] text-[#111111]"
+                  >
                     {data.problem.headline}{' '}
                     {data.problem.headlineHighlight && (
                       <span className="text-[#0F68D6]">{data.problem.headlineHighlight}</span>
@@ -624,7 +712,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   </h5>
 
                   {/* Description Paragraphs */}
-                  <div className="flex flex-col gap-[14px]">
+                  <div data-motion-reveal="blur" className="flex flex-col gap-[14px]">
                     <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
                       {data.problem.description}
                     </p>
@@ -654,20 +742,33 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
       </section>
 
       {/* ── 03 · HOW WATERLABS CLOSES ── */}
-      <section className="w-full overflow-hidden bg-white">
-        <div className="ml-[20px] overflow-hidden rounded-tl-[30px] rounded-bl-[30px] px-[20px] py-[40px] [background:linear-gradient(180deg,#042849_16.18%,#63CCB7_178.86%)] md:ml-[40px] md:px-[36px] md:py-[60px] lg:ml-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[48px] lg:py-[80px] lg:[background:linear-gradient(174.65deg,#042849_59.28%,#63CCB7_206.84%)] xl:ml-[max(60px,calc((100vw-1320px)/2))] xl:px-[60px]">
-          <div className="flex w-full max-w-[1320px] flex-col gap-[20px] lg:gap-[32px]">
+      <section ref={sectionRef} data-motion-section className="w-full overflow-hidden bg-white">
+        <div
+          ref={cardRef}
+          data-motion-reveal="panel-rtl"
+          className="ml-[20px] overflow-hidden rounded-tl-[30px] rounded-bl-[30px] px-[20px] py-[40px] [background:linear-gradient(180deg,#042849_16.18%,#63CCB7_178.86%)] md:ml-[40px] md:px-[36px] md:py-[60px] lg:ml-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[48px] lg:py-[80px] lg:[background:linear-gradient(174.65deg,#042849_59.28%,#63CCB7_206.84%)] xl:ml-[max(60px,calc((100vw-1320px)/2))] xl:px-[60px]"
+        >
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex w-full max-w-[1320px] flex-col gap-[20px] lg:gap-[32px]"
+          >
             {/* Heading */}
-            <h3 className="type-h3 text-[#F4F6F9]">
-              {data.closes.sectionTitle || 'How Waterlabs'} <br className="lg:hidden" />
+            <h3 data-motion-reveal="lines" data-motion-at="0.55" className="type-h3 text-[#F4F6F9]">
+              {data.closes.sectionTitle || 'How Waterlabs'}{' '}
               <span className="text-[#63CCB7]">
                 {data.closes.sectionTitleHighlight || 'closes the gap'}
               </span>
             </h3>
 
             {/* Mobile Image Placed Directly Below Title (Matching Figma) */}
-            <div className="relative aspect-[353/190] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden">
+            <div
+              data-motion-reveal="image"
+              data-motion-at="0.65"
+              className="relative aspect-[353/190] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden"
+            >
               <Image
+                data-motion-parallax
                 src={data.closes.image || DEFAULT_CLOSES_IMG}
                 alt={data.closes.sectionTitle || 'How Waterlabs closes the gap'}
                 fill
@@ -679,7 +780,13 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
             {/* Subheading */}
             {data.closes.subtitle && (
-              <p className="type-body-xs max-w-[873px] text-[#D7DCE2]">{data.closes.subtitle}</p>
+              <p
+                data-motion-reveal="blur"
+                data-motion-at="0.65"
+                className="type-body-xs max-w-[873px] text-[#D7DCE2]"
+              >
+                {data.closes.subtitle}
+              </p>
             )}
 
             {/* Desktop Layout: Image+Description Left, Step List Right */}
@@ -687,8 +794,13 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
               <div className="hidden flex-row items-start justify-between gap-[24px] pt-[20px] lg:flex xl:gap-[40px]">
                 {/* Left Column: Image + Description */}
                 <div className="flex w-full shrink-0 flex-col gap-[24px] lg:w-[44%] lg:max-w-[590px] xl:w-[590px]">
-                  <div className="relative aspect-[590/287] w-full overflow-hidden rounded-[20px_10px_20px_20px]">
+                  <div
+                    data-motion-reveal="image"
+                    data-motion-at="0.65"
+                    className="relative aspect-[590/287] w-full overflow-hidden rounded-[20px_10px_20px_20px]"
+                  >
                     <Image
+                      data-motion-parallax
                       src={steps[activeStep]?.image || data.closes.image || DEFAULT_CLOSES_IMG}
                       alt={steps[activeStep]?.title || 'How Waterlabs closes the gap'}
                       fill
@@ -699,7 +811,11 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                   </div>
 
                   {/* Description for active step */}
-                  <p className="type-body-xs grid min-h-[48px] text-[#D7DCE2]">
+                  <p
+                    data-motion-reveal="fade"
+                    data-motion-at="0.75"
+                    className="type-body-xs grid min-h-[48px] text-[#D7DCE2]"
+                  >
                     {/* Shared grid cells reserve content height; only the active description fades in. */}
                     {steps.map((step, index) => (
                       <span
@@ -717,6 +833,8 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 {/* Right Column: Scrollable Step List */}
                 <div
                   ref={listRef}
+                  data-motion-reveal="fade"
+                  data-motion-at="0.7"
                   className="no-scrollbar flex h-[360px] min-w-0 flex-1 flex-col gap-[16px] overflow-clip pt-[8px] pr-[12px] xl:h-[380px] xl:gap-[20px]"
                 >
                   <div
@@ -809,6 +927,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
       {/* ── 04 · STATS & HUMAN IN THE LOOP ── */}
       <section
+        data-motion-section
         className="relative w-full overflow-hidden"
         style={{
           background: 'linear-gradient(180.75deg, #1C5265 -2.97%, #FFFFFF 101.15%)',
@@ -817,17 +936,30 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
         <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
           <div className="mx-auto flex max-w-[1320px] flex-col gap-[40px] lg:gap-[60px]">
             {/* ── OUR STATS (Optional if stats are present) ── */}
-            {data.statsAndHuman.stats && data.statsAndHuman.stats.length > 0 && (
-              <div className="flex flex-col gap-[20px] lg:gap-[32px]">
-                <h3 className="type-h3 text-electric-blue">
+            {data.statsAndHuman?.stats && data.statsAndHuman.stats.length > 0 && (
+              <div
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 75%"
+                className="flex flex-col gap-[20px] lg:gap-[32px]"
+              >
+                <h3 data-motion-reveal="lines" className="type-h3 text-electric-blue">
                   {data.statsAndHuman.statsTitle || 'Our Stats'}
                 </h3>
 
                 <div className="bg-ghost-white flex w-full flex-col gap-[24px] rounded-[20px] p-[20px] md:p-[32px] lg:flex-row lg:gap-[40px] lg:p-[40px]">
                   {data.statsAndHuman.stats.map((stat, sIdx) => (
                     <div key={sIdx} className="flex flex-1 flex-col gap-[8px] lg:gap-[12px]">
-                      <h3 className="type-h3 text-black">{stat.value}</h3>
-                      <p className="type-body-xs text-charcoal">{stat.label}</p>
+                      <h3
+                        data-motion-metric-value={stat.value}
+                        data-motion-reveal="metric"
+                        className="type-h3 text-black"
+                      >
+                        {stat.value}
+                      </h3>
+                      <p data-motion-reveal="blur" className="type-body-xs text-charcoal">
+                        {stat.label}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -835,22 +967,32 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
             )}
 
             {/* ── HUMAN IN THE LOOP ── */}
-            <div className="flex flex-col items-center justify-between gap-[24px] lg:flex-row lg:gap-[32px]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              className="flex flex-col items-center justify-between gap-[24px] lg:flex-row lg:gap-[32px]"
+            >
               {/* Left: Text Content */}
               <div className="flex w-full flex-col justify-center gap-[16px] lg:max-w-[644px] lg:flex-1 lg:gap-[20px]">
-                <h3 className="type-h3 text-[#111111]">
-                  {data.statsAndHuman.humanHeadingHighlight && (
+                <h3 data-motion-reveal="lines" className="type-h3 text-[#111111]">
+                  {data.statsAndHuman?.humanHeadingHighlight && (
                     <span className="text-[#0F68D6]">
                       {data.statsAndHuman.humanHeadingHighlight}{' '}
                     </span>
                   )}
-                  {data.statsAndHuman.humanHeading
-                    .replace(data.statsAndHuman.humanHeadingHighlight || '', '')
-                    .trim()}
+                  {data.statsAndHuman?.humanHeading
+                    ? data.statsAndHuman.humanHeading
+                        .replace(data.statsAndHuman.humanHeadingHighlight || '', '')
+                        .trim()
+                    : null}
                 </h3>
 
-                {data.statsAndHuman.humanParagraphs.map((para, pIdx) => (
-                  <p key={pIdx} className="type-body-xs max-w-[644px] text-[#111111]">
+                {data.statsAndHuman?.humanParagraphs?.map((para, pIdx) => (
+                  <p
+                    key={pIdx}
+                    data-motion-reveal="blur"
+                    className="type-body-xs max-w-[644px] text-[#111111]"
+                  >
                     {para}
                   </p>
                 ))}
@@ -859,8 +1001,12 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
               {/* Right: Image */}
               <div className="w-full lg:max-w-[644px] lg:flex-1">
                 {/* Desktop Image */}
-                <div className="relative hidden aspect-[644/309] w-full overflow-hidden rounded-[30px_10px_30px_30px] lg:block">
+                <div
+                  data-motion-reveal="image"
+                  className="relative hidden aspect-[644/309] w-full overflow-hidden rounded-[30px_10px_30px_30px] lg:block"
+                >
                   <Image
+                    data-motion-parallax
                     src={data.statsAndHuman.humanImage || DEFAULT_HUMAN_IMG}
                     alt={data.statsAndHuman.humanImageAlt || data.statsAndHuman.humanHeading}
                     fill
@@ -871,8 +1017,12 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 </div>
 
                 {/* Mobile / Tablet Image */}
-                <div className="relative block aspect-[362/156] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden">
+                <div
+                  data-motion-reveal="image"
+                  className="relative block aspect-[362/156] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden"
+                >
                   <Image
+                    data-motion-parallax
                     src={
                       data.statsAndHuman.humanImageMobile ||
                       data.statsAndHuman.humanImage ||
@@ -893,6 +1043,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
       {/* ── 05 · PLATFORM (HIMER AI OS) & THE THREE THINGS ── */}
       <section
+        data-motion-section
         className="relative w-full overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #FFFFFF 0%, #0F68D6 100%)',
@@ -904,6 +1055,8 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
             {/* Desktop Layout */}
             <div
+              data-motion-group
+              data-motion-trigger="section"
               className="hidden w-full flex-row items-stretch gap-[14px] overflow-hidden rounded-[20px] bg-size-[100%_100%] bg-center lg:flex"
               style={{
                 backgroundImage: `url("/images/solutions/solutions-AR-follow-up/this-isn't-just-an-eligibility-tool/img_bg_gradient%20(1).png")`,
@@ -914,31 +1067,38 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
               <div className="flex w-full min-w-0 flex-col items-start justify-center gap-[12px] p-[24px] lg:w-[54.1667%] lg:shrink-0 lg:p-[32px] xl:gap-[14px] xl:p-[60px]">
                 <div className="flex items-center gap-[8px]">
                   <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-                  <span className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]">
+                  <span
+                    data-motion-reveal="scramble"
+                    className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]"
+                  >
                     {data.platformAndFeatures.platformEyebrow ||
                       `This isn't just a ${data.title.toLowerCase()} tool`}
                   </span>
                 </div>
 
-                <h3 className="type-h3 tracking-[-0.01em] text-white">
+                <h3 data-motion-reveal="lines" className="type-h3 tracking-[-0.01em] text-white">
                   {data.platformAndFeatures.platformHeading}
                 </h3>
 
-                <p className="type-body-xs text-[#F4F6F9]">
+                <p data-motion-reveal="blur" className="type-body-xs text-[#F4F6F9]">
                   {data.platformAndFeatures.platformDescription}
                 </p>
 
                 <Link href={data.platformAndFeatures.platformCtaLink || '/product/himer'}>
-                  <CTA variant="dark-bg">
+                  <CTA as="div" data-motion-reveal="fade" data-motion-magnetic variant="dark-bg">
                     {data.platformAndFeatures.platformCtaText || 'Explore HIMER AI OS'}
                   </CTA>
                 </Link>
               </div>
 
               {/* Right Column: Image */}
-              <div className="flex min-w-0 flex-1 items-center justify-end self-stretch overflow-hidden rounded-[20px]">
+              <div
+                data-motion-reveal="image"
+                className="flex min-w-0 flex-1 items-center justify-end self-stretch overflow-hidden rounded-[20px]"
+              >
                 <div className="relative h-full min-h-[380px] w-full xl:min-h-[562px]">
                   <Image
+                    data-motion-parallax
                     src={data.platformAndFeatures.platformImage || DEFAULT_PLATFORM_IMG}
                     alt="HIMER AI OS platform overview"
                     fill
@@ -952,14 +1112,20 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
             {/* Mobile / Tablet Layout */}
             <div
+              data-motion-group
+              data-motion-trigger="section"
               className="flex w-full flex-col overflow-hidden rounded-[20px] bg-size-[100%_100%] bg-center lg:hidden"
               style={{
                 backgroundImage: `url("/images/solutions/solutions-eligibility/this-isn't-just-an-eligibility-tool/img_bg_gradient%20(2).png")`,
                 backgroundColor: '#0F68D6',
               }}
             >
-              <div className="w-full overflow-hidden rounded-[20px] md:relative md:h-[380px]">
+              <div
+                data-motion-reveal="image"
+                className="w-full overflow-hidden rounded-[20px] md:relative md:h-[380px]"
+              >
                 <Image
+                  data-motion-parallax
                   src={
                     data.platformAndFeatures.platformImageMobile ||
                     data.platformAndFeatures.platformImage ||
@@ -976,22 +1142,28 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
               <div className="flex flex-col items-start gap-[14px] p-[32px]">
                 <div className="flex items-center gap-[4px]">
                   <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-                  <span className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]">
+                  <span
+                    data-motion-reveal="scramble"
+                    className="type-body-xxs tracking-[0.01em] text-[#F4F6F9]"
+                  >
                     {data.platformAndFeatures.platformEyebrow ||
                       `This isn't just a ${data.title.toLowerCase()} tool`}
                   </span>
                 </div>
 
-                <h3 className="type-h3 tracking-[-0.01em] text-white">
+                <h3 data-motion-reveal="lines" className="type-h3 tracking-[-0.01em] text-white">
                   {data.platformAndFeatures.platformHeading}
                 </h3>
 
-                <p className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+                <p
+                  data-motion-reveal="blur"
+                  className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+                >
                   {data.platformAndFeatures.platformDescription}
                 </p>
 
                 <Link href={data.platformAndFeatures.platformCtaLink || '/product/himer'}>
-                  <CTA variant="dark-bg">
+                  <CTA as="div" data-motion-reveal="fade" data-motion-magnetic variant="dark-bg">
                     {data.platformAndFeatures.platformCtaText || 'Explore HIMER AI OS'}
                   </CTA>
                 </Link>
@@ -1001,8 +1173,12 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
             {/* ── THREE THINGS SECTION ── */}
             {data.platformAndFeatures.threeThingsCards &&
               data.platformAndFeatures.threeThingsCards.length > 0 && (
-                <div className="flex flex-col gap-[20px] lg:gap-[32px]">
-                  <h3 className="type-h3 text-black">
+                <div
+                  data-motion-group
+                  data-motion-trigger="section"
+                  className="flex flex-col gap-[20px] lg:gap-[32px]"
+                >
+                  <h3 data-motion-reveal="lines" className="type-h3 text-black">
                     {data.platformAndFeatures.threeThingsHeadingHighlight && (
                       <span className="text-electric-blue">
                         {data.platformAndFeatures.threeThingsHeadingHighlight}{' '}
@@ -1019,11 +1195,17 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                     {data.platformAndFeatures.threeThingsCards.map((card, idx) => (
                       <div
                         key={idx}
+                        data-motion-reveal="slide"
+                        data-motion-at={0.15 + idx * 0.12}
                         className="flex min-h-[320px] flex-1 flex-col gap-[24px] rounded-[16px] bg-white p-[32px]"
                       >
                         {card.icon ? (
-                          <div className="relative h-[80px] w-[80px] shrink-0 xl:h-[102px] xl:w-[102px]">
+                          <div
+                            data-motion-reveal="image"
+                            className="relative h-[80px] w-[80px] shrink-0 xl:h-[102px] xl:w-[102px]"
+                          >
                             <Image
+                              data-motion-parallax
                               src={card.icon}
                               alt={card.title}
                               fill
@@ -1053,11 +1235,17 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                       {data.platformAndFeatures.threeThingsCards.map((card, idx) => (
                         <div
                           key={idx}
+                          data-motion-reveal="slide"
+                          data-motion-at={0.15 + idx * 0.12}
                           className="flex w-[280px] shrink-0 snap-start flex-col gap-[16px] rounded-[16px] bg-white p-[24px] sm:w-[320px]"
                         >
                           {card.icon ? (
-                            <div className="relative h-[62px] w-[62px] shrink-0">
+                            <div
+                              data-motion-reveal="image"
+                              className="relative h-[62px] w-[62px] shrink-0"
+                            >
                               <Image
+                                data-motion-parallax
                                 src={card.icon}
                                 alt={card.title}
                                 fill
@@ -1102,20 +1290,36 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
 
       {/* ── 06 · CTA SECTION ── */}
       <section
+        data-motion-section
         className="relative w-full overflow-hidden"
         style={{
           background: 'linear-gradient(180deg, #FFFFFF 0%, #111111 100%)',
         }}
       >
         <div className="bg-electric-blue w-full rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[40px] md:px-[40px] md:py-[50px] lg:rounded-bl-[30px] lg:px-[60px] lg:py-[60px]">
-          <div className="mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[24px] lg:flex-row lg:items-center lg:gap-[20px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 85%"
+            className="mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[24px] lg:flex-row lg:items-center lg:gap-[20px]"
+          >
             {/* Heading */}
-            <h2 className="type-h2 max-w-[1148px] text-white">{data.cta.headline}</h2>
+            <h2 data-motion-reveal="lines" className="type-h2 max-w-[1148px] text-white">
+              {data.cta.headline}
+            </h2>
 
             {/* CTA Button */}
             <div className="shrink-0">
               <Link href={data.cta.buttonLink || '/contact-us'}>
-                <CTA variant="dark-bg">{data.cta.buttonText || 'Get a Demo'}</CTA>
+                <CTA
+                  as="div"
+                  data-motion-reveal="fade"
+                  data-motion-at="0.15"
+                  data-motion-magnetic
+                  variant="dark-bg"
+                >
+                  {data.cta.buttonText || 'Get a Demo'}
+                </CTA>
               </Link>
             </div>
           </div>

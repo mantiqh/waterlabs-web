@@ -1,3 +1,5 @@
+import PageMotion from '@/components/common/page-motion';
+
 import HimerActivityLogSection from './activity-log-section';
 import HimerClaimJourneySection from './claim-journey-section';
 import HimerCTASection from './cta-section';
@@ -11,7 +13,12 @@ import HimerTrustSecuritySection from './trust-security-section';
 
 export const HimerPage = () => {
   return (
-    <div className="himer-page flex w-full flex-col overflow-x-clip bg-white">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="himer-page flex w-full flex-col overflow-x-clip bg-white"
+    >
+      <PageMotion />
       {/* Track A: Platform Foundation & Clinical Journey */}
       <HimerHeroSection />
       <HimerMetricsSection />

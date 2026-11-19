@@ -187,6 +187,7 @@ export const ContactUsContactForm = ({
   return (
     <section
       id="contact-form"
+      data-motion-section
       className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#000A46] to-50% lg:to-[#010C45]"
     >
       {/* 
@@ -198,7 +199,11 @@ export const ContactUsContactForm = ({
       */}
       <div className="bg-ghost-white w-full rounded-l-[30px] lg:rounded-l-[60px]">
         <div className="mx-auto w-full max-w-[1440px] px-[20px] py-[40px] md:px-[40px] lg:px-[60px] lg:py-[80px]">
-          <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] lg:flex-row lg:gap-[32px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] lg:flex-row lg:gap-[32px]"
+          >
             {/* Left Column (Frame 2147226540: max 516px, gap: 40px) */}
             <div className="flex w-full min-w-0 shrink-0 flex-col items-start gap-[12px] lg:w-[40%] lg:max-w-[516px] lg:gap-[40px] xl:w-[516px]">
               {/* Tag + Heading (Frame 2147226533: 516px x 96px, gap: 12px) */}
@@ -207,19 +212,33 @@ export const ContactUsContactForm = ({
                 {tag && (
                   <div className="flex h-[24px] items-center gap-[8px]">
                     <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                    <span className="type-body-xxs tracking-[0.01em] text-[#7D8690]">{tag}</span>
+                    <span
+                      data-motion-reveal="scramble"
+                      className="type-body-xxs tracking-[0.01em] text-[#7D8690]"
+                    >
+                      {tag}
+                    </span>
                   </div>
                 )}
                 {/* Heading (52px / 60px / -0.01em, #0F68D6) */}
-                <h2 className="type-h2 text-electric-blue tracking-[-0.01em]">{heading}</h2>
+                <h2
+                  data-motion-reveal="lines"
+                  className="type-h2 text-electric-blue tracking-[-0.01em]"
+                >
+                  {heading}
+                </h2>
               </div>
 
               {/* Image Container (Frame 2147226534: max 516px x 328px) */}
               {(image || imageMobile) && (
-                <div className="relative aspect-[362/230] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:aspect-[516/328] lg:w-full lg:rounded-[30px_15px_30px_30px]">
+                <div
+                  data-motion-reveal="image"
+                  className="relative aspect-[362/230] w-full overflow-hidden rounded-[20px_10px_20px_20px] lg:aspect-[516/328] lg:w-full lg:rounded-[30px_15px_30px_30px]"
+                >
                   {image && (
                     <div className="absolute inset-0 hidden lg:block">
                       <Image
+                        data-motion-parallax
                         src={image}
                         alt="Contact form illustration"
                         fill
@@ -231,6 +250,7 @@ export const ContactUsContactForm = ({
                   {(imageMobile || image) && (
                     <div className="absolute inset-0 block lg:hidden">
                       <Image
+                        data-motion-parallax
                         src={imageMobile || image!}
                         alt="Contact form illustration"
                         fill
@@ -247,6 +267,7 @@ export const ContactUsContactForm = ({
             <form
               onSubmit={handleSubmit}
               noValidate
+              data-motion-reveal="fade"
               className="flex w-full min-w-0 flex-col items-start gap-[16px] lg:w-[60%] lg:flex-1 lg:gap-[14px] xl:w-[772px]"
             >
               {/* Input Fields Container */}
@@ -513,6 +534,7 @@ export const ContactUsContactForm = ({
 
                 {/* Desktop - Fill CTA (Submit Button) */}
                 <CTA
+                  data-motion-magnetic
                   variant="light-bg"
                   size="compact-mobile"
                   type="submit"

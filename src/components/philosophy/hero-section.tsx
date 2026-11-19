@@ -4,7 +4,7 @@ import Navbar from '@/components/common/navbar';
 
 export const PhilosophyHeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-[#111111]">
+    <section data-motion-section="hero" className="relative w-full overflow-hidden bg-[#111111]">
       {/* 
         Philosophy Hero Banner (Figma Specifications):
         - Desktop: 1440px x 650px, border-radius: 0px 0px 0px 60px, padding: 40px 60px 80px, gap: 10px
@@ -50,9 +50,14 @@ export const PhilosophyHeroSection = () => {
         </div>
 
         {/* Content Container (Figma Mobile Frame 2147226740 / Frame 12 | Tablet Left Aligned | Desktop Frame 8 / Frame 12) */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[362px] flex-1 flex-col items-start justify-start pt-[0px] md:mx-0 md:max-w-none lg:mx-auto lg:max-w-[1320px] lg:justify-center lg:pt-[32px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="relative z-10 mx-auto flex w-full max-w-[362px] flex-1 flex-col items-start justify-start pt-[0px] md:mx-0 md:max-w-none lg:mx-auto lg:max-w-[1320px] lg:justify-center lg:pt-[32px]"
+        >
           <div className="w-full max-w-[362px] md:max-w-[540px] lg:max-w-[664px]">
-            <h2 className="type-h1 lg:type-h2">
+            <h2 data-motion-reveal="lines" className="type-h1 lg:type-h2">
               <span className="text-white">
                 Each year, health systems
                 <br className="hidden md:inline lg:inline" /> spend billions to collect

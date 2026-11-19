@@ -1,3 +1,4 @@
+import PageMotion from '@/components/common/page-motion';
 import type { CaseStudiesPageProps } from '@/types/case-study';
 
 import CaseStudiesCTASection from './cta-section';
@@ -6,7 +7,12 @@ import CaseStudiesTabsSection from './tabs-section';
 
 export const CaseStudiesPage = ({ caseStudies, pageSettings }: CaseStudiesPageProps) => {
   return (
-    <div className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
       <CaseStudiesHeroSection />
       <CaseStudiesTabsSection
         initialCaseStudies={caseStudies}

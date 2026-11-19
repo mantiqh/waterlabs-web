@@ -3,6 +3,7 @@ import Image from 'next/image';
 export const TheProblemSection = () => {
   return (
     <section
+      data-motion-section
       className="relative w-full overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #9DA5AD 7.11%, #042848 calc(100% - 60px))',
@@ -18,10 +19,16 @@ export const TheProblemSection = () => {
       <div className="w-full rounded-tr-[30px] rounded-br-[30px] bg-white px-[20px] py-[40px] md:px-[40px] md:py-[60px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-[1320px]">
           {/* Desktop Layout: Image Left + Card Right */}
-          <div className="hidden flex-row items-stretch justify-between gap-[20px] lg:flex">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="hidden flex-row items-stretch justify-between gap-[20px] lg:flex"
+          >
             {/* Left: Large Image */}
             <div className="relative min-h-[456px] w-full min-w-0 overflow-hidden rounded-[30px_10px_30px_30px] lg:max-w-[830px] lg:flex-[1.766]">
               <Image
+                data-motion-reveal="image"
+                data-motion-parallax
                 src="/images/solutions/solutions-eligibility/the-problem/img_the_problem%20(1).png"
                 alt="Healthcare staff manually verifying patient eligibility"
                 fill
@@ -57,23 +64,37 @@ export const TheProblemSection = () => {
                 {/* Tag */}
                 <div className="flex items-center gap-[8px]">
                   <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                  <span className="type-caption tracking-[0.01em] text-[#2A2A2A]">The problem</span>
+                  <span
+                    data-motion-reveal="scramble"
+                    className="type-caption tracking-[0.01em] text-[#2A2A2A]"
+                  >
+                    The problem
+                  </span>
                 </div>
 
                 {/* Headline */}
-                <h5 className="type-h5 tracking-[-0.01em] text-[#111111]">
+                <h5
+                  data-motion-reveal="lines"
+                  className="type-h5 tracking-[-0.01em] text-[#111111]"
+                >
                   Which patient on tomorrow&apos;s schedule has coverage that changed{' '}
                   <span className="text-[#0F68D6]">since you checked?</span>
                 </h5>
 
                 {/* Description Paragraphs */}
                 <div className="flex flex-col gap-[14px]">
-                  <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
+                  <p
+                    data-motion-reveal="blur"
+                    className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]"
+                  >
                     Most practices verify once at booking and never check again. Coverage changes
                     after the appointment, and nobody finds out until the claim returns 60 days
                     later.
                   </p>
-                  <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
+                  <p
+                    data-motion-reveal="blur"
+                    className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]"
+                  >
                     Caught before the visit, an eligibility error costs a phone call. Caught as a
                     denial 60 days later, it costs many times that.
                   </p>
@@ -83,7 +104,11 @@ export const TheProblemSection = () => {
           </div>
 
           {/* Mobile / Tablet Layout: Single Card */}
-          <div className="flex justify-center lg:hidden">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex justify-center lg:hidden"
+          >
             <div className="relative flex w-full max-w-[362px] flex-col overflow-hidden rounded-[20px_10px_20px_20px] bg-[rgba(145,198,242,0.3)]">
               {/* Subtle Decorative Shape matching Image 5 */}
               <div
@@ -101,11 +126,19 @@ export const TheProblemSection = () => {
                 {/* Tag */}
                 <div className="flex items-center gap-[4px]">
                   <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                  <span className="type-caption tracking-[0.01em] text-[#2A2A2A]">The problem</span>
+                  <span
+                    data-motion-reveal="scramble"
+                    className="type-caption tracking-[0.01em] text-[#2A2A2A]"
+                  >
+                    The problem
+                  </span>
                 </div>
 
                 {/* Headline (in exactly 3 lines matching Figma and screenshot) */}
-                <h5 className="type-h5 tracking-[-0.01em] text-[#111111]">
+                <h5
+                  data-motion-reveal="lines"
+                  className="type-h5 tracking-[-0.01em] text-[#111111]"
+                >
                   Which patient on tomorrow&apos;s
                   <br />
                   schedule has coverage that changed
@@ -116,6 +149,8 @@ export const TheProblemSection = () => {
                 {/* Image */}
                 <div className="relative aspect-[338/185.7] w-full overflow-hidden rounded-[20px_10px_20px_20px]">
                   <Image
+                    data-motion-reveal="image"
+                    data-motion-parallax
                     src="/images/solutions/solutions-eligibility/the-problem/img_the_problem%20(2).png"
                     alt="Healthcare staff manually verifying patient eligibility"
                     fill
@@ -134,12 +169,18 @@ export const TheProblemSection = () => {
 
                 {/* Description Paragraphs */}
                 <div className="flex flex-col gap-[14px]">
-                  <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
+                  <p
+                    data-motion-reveal="blur"
+                    className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]"
+                  >
                     Most practices verify once at booking and never check again. Coverage changes
                     after the appointment, and nobody finds out until the claim returns 60 days
                     later.
                   </p>
-                  <p className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]">
+                  <p
+                    data-motion-reveal="blur"
+                    className="type-body-xxs tracking-[0.01em] text-[#2A2A2A]"
+                  >
                     Caught before the visit, an eligibility error costs a phone call. Caught as a
                     denial 60 days later, it costs many times that.
                   </p>

@@ -5,7 +5,10 @@ import { HIMER_FINAL_CTA_DATA } from '@/data/himer';
 
 export const HimerCTASection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white from-40% to-[#111111] to-40%">
+    <section
+      data-motion-section="cta"
+      className="relative w-full overflow-hidden bg-gradient-to-b from-white from-40% to-[#111111] to-40%"
+    >
       {/*
         CTA Card with Top-Left and Bottom-Left Curves (Figma node 8301:11874):
         - Desktop: radii [60, 0, 0, 60], padding [40, 60, 40, 60]
@@ -17,13 +20,26 @@ export const HimerCTASection = () => {
         <div className="layout-container">
           <div className="flex flex-col gap-3 md:gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
             {/* Left Column: Headline and Description */}
-            <div className="flex flex-col gap-5 lg:max-w-3xl">
-              <h2 className="type-h2 text-gray-black font-normal tracking-tight max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 75%"
+              className="flex flex-col gap-5 lg:max-w-3xl"
+            >
+              <h2
+                data-motion-reveal="words"
+                data-motion-at="0.5"
+                className="type-h2 text-gray-black font-normal tracking-tight max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]"
+              >
                 <span className="text-electric-blue">Bring us one function </span>
                 <br className="hidden sm:inline" />
                 <span>you want running itself.</span>
               </h2>
-              <p className="type-body-xxs text-charcoal max-w-2xl max-md:text-sm max-md:leading-6 lg:max-w-[505px]">
+              <p
+                data-motion-reveal="blur"
+                data-motion-at="0.7"
+                className="type-body-xxs text-charcoal max-w-2xl max-md:text-sm max-md:leading-6 lg:max-w-[505px]"
+              >
                 {HIMER_FINAL_CTA_DATA.subtext}
               </p>
             </div>
@@ -31,7 +47,14 @@ export const HimerCTASection = () => {
             {/* Right Column: Get a demo button aligned to the bottom end */}
             <div className="flex shrink-0 justify-start md:pb-1 lg:justify-end">
               <Link href={HIMER_FINAL_CTA_DATA.ctaHref}>
-                <CTA variant="light-bg" size="compact-mobile" as="span">
+                <CTA
+                  data-motion-reveal="fade"
+                  data-motion-at="0.85"
+                  data-motion-magnetic
+                  variant="light-bg"
+                  size="compact-mobile"
+                  as="span"
+                >
                   <span>{HIMER_FINAL_CTA_DATA.ctaText}</span>
                 </CTA>
               </Link>

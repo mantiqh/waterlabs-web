@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import { AnimatedMetric } from '@/components/ui/animated-metric';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
 
@@ -50,10 +49,16 @@ export function MetricsCarousel() {
             data-metric-card
             className="min-h-[164px] w-[264px] shrink-0 snap-start rounded-[20px] bg-black/[0.02] p-8 lg:w-auto"
           >
-            <AnimatedMetric
-              value={value}
-              className="type-h5 text-electric-blue tracking-[-0.01em]"
-            />
+            <span className="sr-only">{value}</span>
+            <span className="inline-flex overflow-hidden align-bottom">
+              <span
+                aria-hidden="true"
+                data-motion-metric-value
+                className="type-h5 text-electric-blue inline-block tracking-[-0.01em]"
+              >
+                {value}
+              </span>
+            </span>
             <p className="type-body-xxs text-gray-black mt-3 max-w-[230px] tracking-[0.01em]">
               {description}
             </p>
