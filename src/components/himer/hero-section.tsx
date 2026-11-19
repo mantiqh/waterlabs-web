@@ -13,7 +13,14 @@ export const HimerHeroSection = () => (
       <div className="layout-container relative z-50 mb-5 md:mb-12 lg:mb-16">
         <Navbar theme="dark" />
       </div>
-      <div className="relative order-1 mb-5 w-full md:order-3 md:mx-auto md:mt-0 md:mb-0 md:max-w-[1440px] lg:mt-0">
+      <div
+        data-motion-reveal="hero-media"
+        data-motion-group
+        data-motion-trigger="section"
+        data-motion-start="top 100%"
+        data-motion-at="0.95"
+        className="relative order-1 mb-5 w-full md:order-3 md:mx-auto md:mt-0 md:mb-0 md:max-w-[1440px] lg:mt-0"
+      >
         <HimerVideo
           desktopSrc={HIMER_HERO_DATA.desktopVideo}
           mobileSrc={HIMER_HERO_DATA.mobileVideo}

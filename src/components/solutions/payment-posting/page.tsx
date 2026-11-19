@@ -24,11 +24,16 @@ export const PaymentPostingPage = () => {
         `}</style>
       </noscript>
       <PaymentPostingHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisIsntJustPaymentPostingSection />
-      <PaymentPostingCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisIsntJustPaymentPostingSection />
+          <PaymentPostingCTASection />
+        </div>
+      </div>
     </div>
   );
 };

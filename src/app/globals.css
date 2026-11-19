@@ -1,5 +1,33 @@
 @import 'tailwindcss';
 
+@media (prefers-reduced-motion: no-preference) {
+  [data-motion-root][data-motion-state='pending']
+    :is([data-motion-section='hero'], [data-home-section='hero'])
+    [data-motion-reveal] {
+    visibility: hidden;
+    animation: page-entry-fallback 1.4s steps(1, end) forwards;
+  }
+  [data-motion-root][data-motion-state='pending']
+    [data-motion-section='hero']
+    [data-motion-reveal='hero-media'] {
+    visibility: visible;
+    opacity: 0;
+    animation: page-media-entry-fallback 1.4s steps(1, end) forwards;
+  }
+}
+
+@keyframes page-entry-fallback {
+  to {
+    visibility: visible;
+  }
+}
+
+@keyframes page-media-entry-fallback {
+  to {
+    opacity: 1;
+  }
+}
+
 /* Site-wide motion engine. Native scrolling and static SSR remain available. */
 [data-motion-root] [data-motion-entry='prepared'],
 [data-motion-root] [data-motion-entry='running'] {
@@ -138,6 +166,21 @@ button:focus-visible [data-motion-reveal],
   [data-philosophy-sequence] [data-shows-up-statements],
   [data-philosophy-sequence] [data-shows-up-progress-bar] {
     height: 140px !important;
+  }
+  [data-solution-sequence] [data-scene-content] {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  [data-solution-sequence] [data-solution-closes-card] {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  [data-solution-sequence] [data-solution-closes-image] {
+    aspect-ratio: 590 / 220 !important;
+    max-height: 220px !important;
+  }
+  [data-solution-sequence] [data-solution-closes-list] {
+    height: 260px !important;
   }
 }
 

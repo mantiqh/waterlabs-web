@@ -3,13 +3,10 @@
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ConnectedTimeline } from '@/components/ui/connected-timeline';
+import { ConnectedTimeline, updateConnectedTimeline } from '@/components/ui/connected-timeline';
 import { HIMER_LIFECYCLE_DATA } from '@/data/himer';
-import {
-  clampProgress,
-  useReducedMotion,
-  useScrollProgress,
-} from '@/lib/hooks/use-scroll-progress';
+import { useScrollDriver } from '@/lib/hooks/use-scroll-driver';
+import { clampProgress, useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 import { cn } from '@/lib/utils';
 import type { LifecycleTab } from '@/types/himer';
 
@@ -27,7 +24,6 @@ function LifecycleStage({
   active,
   preloadNext,
   onVideoReady,
-  progress,
 }: {
   tab: LifecycleTab;
   index: number;
@@ -35,10 +31,17 @@ function LifecycleStage({
   active: boolean;
   preloadNext: boolean;
   onVideoReady: (desktopSrc: string) => void;
-  progress: number;
 }) {
-  const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus', !pinned);
-  const value = pinned ? progress : entryProgress;
+  const reducedMotion = useReducedMotion();
+  const ref = useScrollDriver<HTMLUListElement>('focus', !pinned, (progress, element) => {
+    updateConnectedTimeline(element, progress);
+    const bar = element
+      .closest('[data-lifecycle-stage]')
+      ?.querySelector<HTMLElement>('[data-lifecycle-progress]');
+    if (bar)
+      bar.style.transform = `scaleX(${(index + progress) / HIMER_LIFECYCLE_DATA.tabs.length})`;
+  });
+  const value = reducedMotion ? 1 : 0;
   return (
     <div
       id={`himer-${tab.id}`}
@@ -159,7 +162,6 @@ function ProductionProof() {
 }
 
 export const HimerPlatformLifecycleSection = () => {
-  const { ref, progress } = useScrollProgress<HTMLDivElement>('travel');
   const sceneRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const [canPin, setCanPin] = useState(false);
@@ -174,11 +176,26 @@ export const HimerPlatformLifecycleSection = () => {
   }, []);
   const reducedMotion = useReducedMotion();
   const pinned = canPin && !reducedMotion;
-  const stagePosition = Math.min(
-    progress * HIMER_LIFECYCLE_DATA.tabs.length,
-    HIMER_LIFECYCLE_DATA.tabs.length - Number.EPSILON * 4,
-  );
-  const activeStage = Math.min(2, Math.floor(stagePosition));
+  const [activeStage, setActiveStage] = useState(0);
+  const activeStageRef = useRef(0);
+  const ref = useScrollDriver<HTMLDivElement>('travel', pinned, (progress) => {
+    const count = HIMER_LIFECYCLE_DATA.tabs.length;
+    const position = Math.min(progress * count, count - Number.EPSILON * 4);
+    const next = Math.min(count - 1, Math.floor(position));
+    if (next !== activeStageRef.current) {
+      activeStageRef.current = next;
+      setActiveStage(next);
+    }
+    sceneRef.current
+      ?.querySelectorAll<HTMLElement>('[data-lifecycle-stage]')
+      .forEach((stage, index) => {
+        const value = clampProgress(position - index);
+        const list = stage.querySelector<HTMLElement>('[data-connected-timeline]');
+        const bar = stage.querySelector<HTMLElement>('[data-lifecycle-progress]');
+        if (list) updateConnectedTimeline(list, value);
+        if (bar) bar.style.transform = `scaleX(${(index + value) / count})`;
+      });
+  });
 
   useEffect(() => {
     ScrollTrigger.refresh();
@@ -268,7 +285,6 @@ export const HimerPlatformLifecycleSection = () => {
                       readyVideos.has(HIMER_LIFECYCLE_DATA.tabs[activeStage].desktopVideo)
                     }
                     onVideoReady={onVideoReady}
-                    progress={clampProgress(stagePosition - index)}
                   />
                 ))}
               </div>

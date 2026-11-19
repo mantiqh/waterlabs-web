@@ -1,6 +1,10 @@
 'use client';
 
-import { clampProgress, useScrollProgress } from '@/lib/hooks/use-scroll-progress';
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { useEffect, useRef } from 'react';
+
+import { clampProgress, useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 
 const REVEAL_TEXT =
   'your patient data stays in your environment, is never copied to us, and is never stored by us. Our agents do the work in the moment, and then the trace is gone. We keep the lesson, not the patient.';
@@ -9,7 +13,34 @@ const REVEAL_WORDS = REVEAL_TEXT.split(' ');
 const WORD_WINDOW = 0.16;
 
 export const ManifestoSection = () => {
-  const { ref, progress } = useScrollProgress<HTMLElement>('focus');
+  const ref = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const section = ref.current;
+    if (!section) return;
+    const words = Array.from(section.querySelectorAll<HTMLElement>('[data-manifesto-word]'));
+    const render = (progress: number) => {
+      words.forEach((word, index) => {
+        const start = (index / words.length) * (1 - WORD_WINDOW);
+        word.style.opacity = String(0.25 + 0.75 * clampProgress((progress - start) / WORD_WINDOW));
+      });
+    };
+    if (reducedMotion) {
+      render(1);
+      return;
+    }
+    gsap.registerPlugin(ScrollTrigger);
+    const trigger = ScrollTrigger.create({
+      trigger: section,
+      start: 'top 75%',
+      end: () => `+=${Math.max(1, section.getBoundingClientRect().height + innerHeight * 0.35)}`,
+      onUpdate: (self) => render(self.progress),
+      onRefresh: (self) => render(self.progress),
+    });
+    render(trigger.progress);
+    return () => trigger.kill();
+  }, [reducedMotion]);
 
   return (
     <section
@@ -36,15 +67,12 @@ export const ManifestoSection = () => {
             </span>
             <span>
               {REVEAL_WORDS.map((word, index) => {
-                const start = (index / REVEAL_WORDS.length) * (1 - WORD_WINDOW);
-                const wordProgress = clampProgress((progress - start) / WORD_WINDOW);
-                const opacity = 0.25 + 0.75 * wordProgress;
-
                 return (
                   <span
                     key={`${word}-${index}`}
+                    data-manifesto-word
                     className="text-[#111111] transition-opacity duration-150 will-change-[opacity]"
-                    style={{ opacity }}
+                    style={{ opacity: reducedMotion ? 1 : 0.25 }}
                   >
                     {word}
                     {index < REVEAL_WORDS.length - 1 ? ' ' : ''}

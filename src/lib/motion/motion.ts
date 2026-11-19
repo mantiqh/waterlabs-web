@@ -226,7 +226,6 @@ export function mountPageMotion(
           restores.push(() => observer.disconnect());
           return true;
         };
-        const foregroundStart = 0.6;
         root.querySelectorAll<HTMLElement>('[data-motion-reveal]').forEach((target) => {
           const kind = target.dataset.motionReveal;
           const section = target.closest<HTMLElement>(
@@ -302,7 +301,7 @@ export function mountPageMotion(
             element.style.willChange = originalWillChange;
             delete element.dataset.motionEntry;
           });
-          gsap.set(element, { autoAlpha: 0 });
+          gsap.set(element, kind === 'hero-media' ? { opacity: 0 } : { autoAlpha: 0 });
           if (kind === 'lines' || kind === 'words') {
             split = SplitText.create(element, {
               type: kind === 'words' ? 'lines,words' : 'lines',
@@ -421,6 +420,8 @@ export function mountPageMotion(
               duration: 1.8,
               ease: 'expo.out',
             });
+          } else if (kind === 'hero-media') {
+            timeline.to(element, { opacity: 1, duration: 0.85, ease: 'power3.out' });
           } else if (kind === 'navbar-shell') {
             // Share the first item's start/ease; leave the mobile scroll-hide transform alone.
             timeline.to(element, { autoAlpha: 1, duration: 0.85, ease: 'power3.out' });
@@ -481,6 +482,8 @@ export function mountPageMotion(
               sequence = gsap.timeline({ paused: true });
               groups.set(group, sequence);
             }
+            const isHome = section?.dataset.homeSection === 'hero';
+            const foregroundStart = isHome ? 0.55 : 0.05;
             const position = Number.isFinite(at)
               ? at
               : !intro
@@ -499,16 +502,26 @@ export function mountPageMotion(
                 : kind === 'navbar-shell'
                   ? foregroundStart
                   : kind === 'navbar'
-                    ? foregroundStart + Math.max(0, sequence.getChildren(false).length - 1) * 0.055
+                    ? foregroundStart +
+                      0.04 +
+                      Math.max(0, sequence.getChildren(false).length - 1) * 0.045
                     : kind === 'banner'
                       ? 0
                       : kind === 'scramble'
-                        ? foregroundStart
+                        ? isHome
+                          ? 0.95
+                          : 0.65
                         : kind === 'lines' || kind === 'words'
-                          ? foregroundStart + 0.1
+                          ? isHome
+                            ? 1.05
+                            : 0.75
                           : kind === 'blur'
-                            ? foregroundStart + 0.28
-                            : foregroundStart + 0.44;
+                            ? isHome
+                              ? 1.25
+                              : 0.95
+                            : isHome
+                              ? 1.45
+                              : 1.15;
             sequence.add(timeline.paused(false), position);
           } else {
             const delay = ownViewport ? Math.min(Number.isFinite(at) ? at : 0.15, 0.2) : at;

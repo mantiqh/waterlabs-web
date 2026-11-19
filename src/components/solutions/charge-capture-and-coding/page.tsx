@@ -24,11 +24,16 @@ export const ChargeCaptureAndCodingPage = () => {
         `}</style>
       </noscript>
       <ChargeCaptureHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisRunsOnCurieCodeSection />
-      <ChargeCaptureCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisRunsOnCurieCodeSection />
+          <ChargeCaptureCTASection />
+        </div>
+      </div>
     </div>
   );
 };

@@ -24,11 +24,16 @@ export const DenialManagementPage = () => {
         `}</style>
       </noscript>
       <DenialManagementHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisIsntJustDenialsSection />
-      <DenialManagementCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisIsntJustDenialsSection />
+          <DenialManagementCTASection />
+        </div>
+      </div>
     </div>
   );
 };

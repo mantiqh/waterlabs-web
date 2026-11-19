@@ -174,7 +174,7 @@ export const HimerClaimJourneySection = () => {
                           variant="fill-arrow"
                           size="compact-mobile"
                           as="span"
-                          className="himer-carousel-arrow"
+                          className="himer-carousel-arrow [&_svg]:group-hover:!translate-x-0"
                         />
                       </Link>
                     )}
@@ -203,7 +203,7 @@ export const HimerClaimJourneySection = () => {
                   iconDirection="left"
                   type="button"
                   onClick={prevSlide}
-                  className="md:h-12 md:w-12"
+                  className="md:h-12 md:w-12 [&_svg]:!rotate-180"
                   aria-label="Previous card"
                 />
 

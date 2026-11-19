@@ -24,11 +24,16 @@ export const PriorAuthorizationPage = () => {
         `}</style>
       </noscript>
       <PriorAuthorizationHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisIsntJustPriorAuthorizationSection />
-      <PriorAuthorizationCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisIsntJustPriorAuthorizationSection />
+          <PriorAuthorizationCTASection />
+        </div>
+      </div>
     </div>
   );
 };

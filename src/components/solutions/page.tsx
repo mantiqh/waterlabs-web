@@ -16,11 +16,16 @@ export const SolutionsPage = () => {
     >
       <PageMotion />
       <SolutionsHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <OurStatsSection />
-      <ThisIsntJustEligibilitySection />
-      <SolutionsCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <OurStatsSection />
+          <ThisIsntJustEligibilitySection />
+          <SolutionsCTASection />
+        </div>
+      </div>
     </div>
   );
 };

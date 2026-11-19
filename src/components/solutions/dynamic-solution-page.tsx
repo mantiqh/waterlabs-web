@@ -3,11 +3,12 @@
 import { gsap } from 'gsap/dist/gsap';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Navbar from '@/components/common/navbar';
 import PageMotion from '@/components/common/page-motion';
 import { CTA } from '@/components/CTA';
+import { mountScrollScene, type SceneMode,sceneScrollPosition } from '@/lib/motion/scroll-scene';
 import { SolutionPageData } from '@/types/solution';
 
 const DEFAULT_BANNER =
@@ -124,12 +125,13 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
   // Closes section state & refs
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const [sceneMode, setSceneMode] = useState<SceneMode>('pending');
   const [closesDotIndex, setClosesDotIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(0);
   const activeStepRef = useRef(0);
-  const selectStepRef = useRef<(index: number) => void>(() => {});
+  const posRef = useRef({ pos: 0 });
 
   // Three things mobile state
   const [featuresDotIndex, setFeaturesDotIndex] = useState(0);
@@ -152,144 +154,92 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
     'payment-posting': '#55BABC',
   };
 
-  // GSAP-powered smooth list offset and wheel boundary release
-  useEffect(() => {
-    const container = listRef.current;
-    const track = container?.firstElementChild as HTMLElement | null;
-    const card = cardRef.current;
-    if (!container || !track || !card || !steps.length) return;
-
-    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let offsets: number[] = [];
-    const posState = { pos: 0 };
-    let target = 0;
-    const ctx = gsap.context(() => {}, card);
-
-    const animateToTarget = (targetOffset: number, nearestIdx: number) => {
-      if (motion.matches) {
-        posState.pos = targetOffset;
-        track.style.setProperty('--workflow-offset', `${-targetOffset}px`);
-      } else {
-        ctx.add(() => {
-          gsap.to(posState, {
-            pos: targetOffset,
-            duration: 0.42,
-            ease: 'power2.out',
-            overwrite: 'auto',
-            onUpdate: () => {
-              track.style.setProperty('--workflow-offset', `${-posState.pos}px`);
-            },
-          });
-        });
-      }
-
-      if (nearestIdx !== activeStepRef.current) {
-        activeStepRef.current = nearestIdx;
-        setActiveStep(nearestIdx);
-      }
-    };
-
-    const updateBoundary = () => {
+  const updateListOffset = useCallback(
+    (index: number) => {
+      const container = listRef.current;
+      const track = container?.firstElementChild;
+      if (!container || !(track instanceof HTMLElement)) return;
       const items = Array.from(track.children).slice(0, steps.length);
       const first = items[0];
       if (!(first instanceof HTMLElement)) return;
-      offsets = items.map((item) => (item as HTMLElement).offsetTop - first.offsetTop);
-      const end = offsets.at(-1) ?? 0;
-      target = Math.min(target, end);
-      posState.pos = Math.min(posState.pos, end);
-      track.style.setProperty('--workflow-offset', `${-posState.pos}px`);
-    };
+      const offsets = items.map((item) => (item as HTMLElement).offsetTop - first.offsetTop);
+      const target = offsets[index] ?? 0;
 
-    const advance = (delta: number) => {
-      if (!offsets.length) return false;
-      const end = offsets[steps.length - 1] ?? 0;
-      const next = Math.max(0, Math.min(end, target + delta));
-      const boundaryVisible =
-        delta > 0 ? activeStepRef.current === steps.length - 1 : activeStepRef.current === 0;
-
-      if (next === target && (posState.pos === target || boundaryVisible)) return false;
-
-      target = next;
-      let nearest = 0;
-      for (let i = 1; i < offsets.length; i++) {
-        if (Math.abs(offsets[i] - target) < Math.abs(offsets[nearest] - target)) nearest = i;
+      const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (motion.matches) {
+        posRef.current.pos = target;
+        track.style.setProperty('--workflow-offset', `${-target}px`);
+      } else {
+        gsap.to(posRef.current, {
+          pos: target,
+          duration: 0.42,
+          ease: 'power2.out',
+          overwrite: 'auto',
+          onUpdate: () => {
+            track.style.setProperty('--workflow-offset', `${-posRef.current.pos}px`);
+          },
+        });
       }
-      animateToTarget(target, nearest);
-      return true;
-    };
+    },
+    [steps.length],
+  );
 
-    const handleWheel = (event: WheelEvent) => {
-      if (
-        window.innerWidth < 1024 ||
-        event.ctrlKey ||
-        !event.cancelable ||
-        !event.deltaY ||
-        Math.abs(event.deltaX) > Math.abs(event.deltaY)
-      )
-        return;
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const root =
+      sectionRef.current.closest<HTMLElement>('[data-solution-sequence]') ?? sectionRef.current;
+    return mountScrollScene(root, {
+      count: steps.length,
+      onIndex: (index) => {
+        activeStepRef.current = index;
+        setActiveStep(index);
+        updateListOffset(index);
+      },
+      onMode: setSceneMode,
+      kind: 'comparison',
+      allowMobile: false,
+    });
+  }, [steps.length, updateListOffset]);
 
-      const viewTop = window.visualViewport?.offsetTop ?? 0;
-      const viewHeight = window.visualViewport?.height ?? window.innerHeight;
-      const panel = card.getBoundingClientRect();
-      const required =
-        panel.height <= viewHeight ? panel : container.parentElement?.getBoundingClientRect();
-      if (!required || required.top < viewTop - 1 || required.bottom > viewTop + viewHeight + 1)
-        return;
+  const scrollToStep = useCallback(
+    (index: number) => {
+      const realIdx = index % steps.length;
+      activeStepRef.current = realIdx;
+      setActiveStep(realIdx);
+      updateListOffset(realIdx);
+      if (!sectionRef.current) return;
+      const root =
+        sectionRef.current.closest<HTMLElement>('[data-solution-sequence]') ?? sectionRef.current;
+      if (sceneMode === 'pinned') {
+        const targetProgress = (realIdx + 0.5) / steps.length;
+        const targetScrollY = sceneScrollPosition(root, targetProgress);
+        window.scrollTo({
+          top: targetScrollY,
+          behavior: 'smooth',
+        });
+      }
+    },
+    [sceneMode, steps.length, updateListOffset],
+  );
 
-      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? container.clientHeight : 1;
-      if (advance(event.deltaY * unit)) event.preventDefault();
-    };
-
+  useEffect(() => {
+    const container = listRef.current;
+    if (!container) return;
     const handleKey = (event: KeyboardEvent) => {
       if (!(event.target instanceof Node) || !container.contains(event.target)) return;
-      const delta =
-        event.key === 'ArrowDown'
-          ? 40
-          : event.key === 'ArrowUp'
-            ? -40
-            : event.key === 'PageDown'
-              ? container.clientHeight
-              : event.key === 'PageUp'
-                ? -container.clientHeight
-                : 0;
-      if (delta && advance(delta)) event.preventDefault();
+      if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        const next = Math.min(steps.length - 1, activeStepRef.current + 1);
+        scrollToStep(next);
+      } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+        event.preventDefault();
+        const prev = Math.max(0, activeStepRef.current - 1);
+        scrollToStep(prev);
+      }
     };
-
-    selectStepRef.current = (index: number) => {
-      const realIdx = index % steps.length;
-      target = offsets[realIdx] ?? 0;
-      animateToTarget(target, realIdx);
-    };
-
-    const handleFocus = (event: FocusEvent) => {
-      const index = Array.from(track.children).findIndex(
-        (item) => item === event.target || item.contains(event.target as Node),
-      );
-      if (index >= 0 && index < steps.length) selectStepRef.current(index);
-    };
-
-    const observer = new ResizeObserver(updateBoundary);
-    observer.observe(container);
-    for (const item of Array.from(track.children).slice(0, steps.length)) {
-      observer.observe(item);
-    }
-    updateBoundary();
-
-    card.addEventListener('wheel', handleWheel, { passive: false });
-    card.addEventListener('keydown', handleKey);
-    track.addEventListener('focusin', handleFocus);
-
-    return () => {
-      ctx.revert();
-      observer.disconnect();
-      card.removeEventListener('wheel', handleWheel);
-      card.removeEventListener('keydown', handleKey);
-      track.removeEventListener('focusin', handleFocus);
-      selectStepRef.current = () => {};
-    };
-  }, [steps.length]);
-
-  const scrollToStep = (index: number) => selectStepRef.current(index);
+    container.addEventListener('keydown', handleKey);
+    return () => container.removeEventListener('keydown', handleKey);
+  }, [scrollToStep, steps.length]);
 
   const handleMobileScroll = () => {
     const container = scrollRef.current;
@@ -546,7 +496,10 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
         </div>
       </section>
 
-      {/* ── 02 · THE PROBLEM SECTION ── */}
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          {/* ── 02 · THE PROBLEM SECTION ── */}
       <section
         data-motion-section
         className="relative w-full overflow-hidden"
@@ -742,9 +695,16 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
       </section>
 
       {/* ── 03 · HOW WATERLABS CLOSES ── */}
-      <section ref={sectionRef} data-motion-section className="w-full overflow-hidden bg-white">
+      <section
+        ref={sectionRef}
+        data-scene-surface
+        data-motion-section
+        className="w-full overflow-hidden bg-white"
+      >
         <div
           ref={cardRef}
+          data-scene-content
+          data-solution-closes-card
           data-motion-reveal="panel-rtl"
           className="ml-[20px] overflow-hidden rounded-tl-[30px] rounded-bl-[30px] px-[20px] py-[40px] [background:linear-gradient(180deg,#042849_16.18%,#63CCB7_178.86%)] md:ml-[40px] md:px-[36px] md:py-[60px] lg:ml-[60px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[48px] lg:py-[80px] lg:[background:linear-gradient(174.65deg,#042849_59.28%,#63CCB7_206.84%)] xl:ml-[max(60px,calc((100vw-1320px)/2))] xl:px-[60px]"
         >
@@ -795,6 +755,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 {/* Left Column: Image + Description */}
                 <div className="flex w-full shrink-0 flex-col gap-[24px] lg:w-[44%] lg:max-w-[590px] xl:w-[590px]">
                   <div
+                    data-solution-closes-image
                     data-motion-reveal="image"
                     data-motion-at="0.65"
                     className="relative aspect-[590/287] w-full overflow-hidden rounded-[20px_10px_20px_20px]"
@@ -833,6 +794,7 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
                 {/* Right Column: Scrollable Step List */}
                 <div
                   ref={listRef}
+                  data-solution-closes-list
                   data-motion-reveal="fade"
                   data-motion-at="0.7"
                   className="no-scrollbar flex h-[360px] min-w-0 flex-1 flex-col gap-[16px] overflow-clip pt-[8px] pr-[12px] xl:h-[380px] xl:gap-[20px]"
@@ -1325,6 +1287,8 @@ export default function DynamicSolutionPage({ data }: DynamicSolutionPageProps) 
           </div>
         </div>
       </section>
+        </div>
+      </div>
     </div>
   );
 }
