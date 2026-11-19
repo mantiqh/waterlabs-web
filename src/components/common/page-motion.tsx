@@ -85,7 +85,13 @@ export function PageMotion({
           ScrollTrigger.clearScrollMemory?.();
           ScrollTrigger.refresh();
 
-          const initial = true;
+          const heroEntry = root.querySelector<HTMLElement>(
+            '[data-motion-section="hero"] [data-motion-reveal]',
+          );
+          const initial =
+            root.dataset.motionState === 'pending' &&
+            !!heroEntry &&
+            getComputedStyle(heroEntry).visibility === 'hidden';
 
           if (initial && !motionPreference.matches && entranceCover) {
             cover = document.createElement('div');

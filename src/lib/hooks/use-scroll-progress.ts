@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 
 const motionQuery = '(prefers-reduced-motion: reduce)';
 const subscribeMotion = (notify: () => void) => {
@@ -61,48 +61,3 @@ export function useViewportReveal<T extends HTMLElement>(
 }
 
 export const clampProgress = (value: number) => Math.min(1, Math.max(0, value));
-
-/** Entry settles early; travel maps a sticky runway; focus follows the visible content itself. */
-export function useScrollProgress<T extends HTMLElement>(
-  mode: 'entry' | 'travel' | 'focus' = 'entry',
-  enabled = true,
-) {
-  const ref = useRef<T>(null);
-  const [progress, setProgress] = useState(0);
-  const reducedMotion = useReducedMotion();
-
-  useEffect(() => {
-    if (!enabled || reducedMotion) return;
-    let frame = 0;
-    const measure = () => {
-      frame = 0;
-      const element = ref.current;
-      if (!element) return;
-      const rect = element.getBoundingClientRect();
-      const viewport = window.innerHeight;
-      const value =
-        mode === 'travel'
-          ? -rect.top / Math.max(1, rect.height - viewport)
-          : mode === 'focus'
-            ? (viewport * 0.75 - rect.top) / Math.max(1, rect.height + viewport * 0.35)
-            : (viewport * 0.85 - rect.top) / Math.max(1, viewport * 0.5);
-      setProgress(clampProgress(value));
-    };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(measure);
-    };
-    const observer = new ResizeObserver(schedule);
-    if (ref.current) observer.observe(ref.current);
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    schedule();
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-    };
-  }, [enabled, mode, reducedMotion]);
-
-  return { ref, progress: reducedMotion ? 1 : progress };
-}

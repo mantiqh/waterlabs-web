@@ -24,11 +24,16 @@ export const ClaimSubmissionPage = () => {
         `}</style>
       </noscript>
       <ClaimSubmissionHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisIsntJustClaimSubmissionSection />
-      <ClaimSubmissionCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisIsntJustClaimSubmissionSection />
+          <ClaimSubmissionCTASection />
+        </div>
+      </div>
     </div>
   );
 };

@@ -24,11 +24,16 @@ export const ARFollowUpPage = () => {
         `}</style>
       </noscript>
       <ARFollowUpHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisIsntJustARSection />
-      <ARFollowUpCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisIsntJustARSection />
+          <ARFollowUpCTASection />
+        </div>
+      </div>
     </div>
   );
 };

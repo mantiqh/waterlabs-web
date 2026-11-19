@@ -11,6 +11,13 @@ export function sceneIndex(progress: number, count: number): number {
   return count ? Math.min(count - 1, Math.max(0, Math.floor(progress * count))) : -1;
 }
 
+export function sceneScrollPosition(root: HTMLElement, progress: number): number {
+  const rect = root.getBoundingClientRect();
+  const sceneTop = window.scrollY + rect.top;
+  const stickyTop = Number.parseFloat(root.style.getPropertyValue('--scene-sticky-top')) || 0;
+  return sceneTop - stickyTop + Math.min(1, Math.max(0, progress)) * window.innerHeight * 2;
+}
+
 export function canPinScene(
   width: number,
   height: number,
@@ -19,7 +26,11 @@ export function canPinScene(
   count: number,
   allowMobile = false,
 ): boolean {
-  return !reduced && count > 1 && (width >= 1024 || allowMobile) && contentHeight + 16 <= height;
+  if (reduced || count <= 1) return false;
+  if (width >= 1024) {
+    return height >= 400 && contentHeight + 16 <= height;
+  }
+  return allowMobile && contentHeight + 16 <= height;
 }
 
 export interface SceneOptions {

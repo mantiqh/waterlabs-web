@@ -32,10 +32,13 @@ export default function HomeMotion() {
     const start = () => {
       if (disposed) return;
       clearTimeout(timeout);
+      const heroEntry = root.querySelector<HTMLElement>(
+        '[data-home-section="hero"] [data-motion-reveal]',
+      );
       const initial =
         root.dataset.motionState === 'pending' &&
-        getComputedStyle(root).getPropertyValue('--motion-initial-visibility').trim() !==
-          'visible' &&
+        !!heroEntry &&
+        getComputedStyle(heroEntry).visibility === 'hidden' &&
         scrollY < 10;
       if (initial && !motionPreference.matches) {
         cover = document.createElement('div');

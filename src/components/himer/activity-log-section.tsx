@@ -1,7 +1,8 @@
 'use client';
 
 import { HIMER_ACTIVITY_LOG_DATA } from '@/data/himer';
-import { useScrollProgress } from '@/lib/hooks/use-scroll-progress';
+import { useScrollDriver } from '@/lib/hooks/use-scroll-driver';
+import { useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 import { cn } from '@/lib/utils';
 
 import { HimerVideo } from './himer-video';
@@ -15,7 +16,17 @@ const TOTAL_REMAINING_WORDS =
   REMAINING_WORDS_SENTENCE_1.length + SENTENCE_2_WORDS.length + SENTENCE_3_WORDS.length;
 
 export const HimerActivityLogSection = () => {
-  const { ref: cardRef, progress: scrollProgress } = useScrollProgress<HTMLDivElement>();
+  const reducedMotion = useReducedMotion();
+  const cardRef = useScrollDriver<HTMLDivElement>('entry', true, (progress, element) => {
+    element
+      .querySelectorAll<HTMLElement>('[data-activity-word]')
+      .forEach((word, index) => {
+        const lit = progress > index / TOTAL_REMAINING_WORDS;
+        word.classList.toggle('text-gray-black', lit);
+        word.classList.toggle('text-[#848E9C]', !lit);
+      });
+  });
+  const scrollProgress = reducedMotion ? 1 : 0;
 
   return (
     <section className="relative w-full bg-black">
@@ -38,6 +49,7 @@ export const HimerActivityLogSection = () => {
                   return (
                     <span
                       key={`w1-${idx}`}
+                      data-activity-word
                       className={cn(
                         'inline transition-colors duration-300',
                         isLit ? 'text-gray-black' : 'text-[#848E9C]',
@@ -56,6 +68,7 @@ export const HimerActivityLogSection = () => {
                   return (
                     <span
                       key={`w2-${idx}`}
+                      data-activity-word
                       className={cn(
                         'inline transition-colors duration-300',
                         isLit ? 'text-gray-black' : 'text-[#848E9C]',
@@ -75,6 +88,7 @@ export const HimerActivityLogSection = () => {
                   return (
                     <span
                       key={`w3-${idx}`}
+                      data-activity-word
                       className={cn(
                         'inline transition-colors duration-300',
                         isLit ? 'text-gray-black' : 'text-[#848E9C]',
@@ -88,14 +102,19 @@ export const HimerActivityLogSection = () => {
             </h2>
 
             {/* Video Container */}
-            <div data-motion-reveal="image" data-motion-parallax className="w-full max-w-[840px]">
-              <HimerVideo
-                desktopSrc={HIMER_ACTIVITY_LOG_DATA.desktopVideo}
-                mobileSrc={HIMER_ACTIVITY_LOG_DATA.mobileVideo}
-                aspectRatio="1680 / 960"
-                mobileAspectRatio="362 / 350"
-                containerClassName=" w-full border border-[#D7DCE2] rounded-[20px] md:rounded-tl-[30px] md:rounded-tr-[10px] md:rounded-br-[30px] md:rounded-bl-[30px]"
-              />
+            <div
+              data-activity-video-frame
+              className="w-full max-w-[840px] overflow-hidden rounded-[20px] border border-[#D7DCE2] md:overflow-visible md:rounded-none md:border-0"
+            >
+              <div data-motion-reveal="image" data-motion-parallax>
+                <HimerVideo
+                  desktopSrc={HIMER_ACTIVITY_LOG_DATA.desktopVideo}
+                  mobileSrc={HIMER_ACTIVITY_LOG_DATA.mobileVideo}
+                  aspectRatio="1680 / 960"
+                  mobileAspectRatio="362 / 350"
+                  containerClassName="w-full rounded-[20px] md:rounded-tl-[30px] md:rounded-tr-[10px] md:rounded-br-[30px] md:rounded-bl-[30px] md:border md:border-[#D7DCE2]"
+                />
+              </div>
             </div>
           </div>
         </div>

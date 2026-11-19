@@ -26,10 +26,10 @@ interface NavItem {
 
 export interface NavbarProps {
   theme?: 'light' | 'dark';
-  motion?: 'none' | 'home';
+  motion?: 'none' | 'home' | 'all';
 }
 
-const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
+const Navbar = ({ theme = 'light', motion = 'all' }: NavbarProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -100,18 +100,12 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
 
   const dropdownLabel = (label: string, className?: string) => (
     <span
-      className={
-        motion === 'home' ? `inline-block overflow-clip align-bottom ${className ?? ''}` : className
-      }
-      data-nav-text-mask={motion === 'home' ? '' : undefined}
+      className={`inline-block overflow-clip align-bottom ${className ?? ''}`}
+      data-nav-text-mask=""
     >
-      {motion === 'home' ? (
-        <span data-nav-reveal-text className="block">
-          {label}
-        </span>
-      ) : (
-        label
-      )}
+      <span data-nav-reveal-text className="block">
+        {label}
+      </span>
     </span>
   );
 
@@ -135,7 +129,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
   };
 
   useEffect(() => {
-    if (motion !== 'home' || !menuRef.current) return;
+    if (!menuRef.current) return;
     const root = menuRef.current;
     let disposed = false;
     let cleanup: (() => void) | undefined;
@@ -146,7 +140,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
       disposed = true;
       cleanup?.();
     };
-  }, [motion]);
+  }, []);
 
   // Close menu on click outside or escape key
   useEffect(() => {
@@ -186,7 +180,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
     <div className="relative z-50 mx-auto h-[60px] w-full max-w-[1320px] lg:h-auto lg:max-xl:-mx-[24px] lg:max-xl:w-[calc(100%+48px)]">
       <div
         ref={menuRef}
-        data-home-nav={motion === 'home' ? '' : undefined}
+        data-home-nav={motion !== 'none' ? '' : undefined}
         className={`fixed top-0 right-0 left-0 z-50 mx-auto w-full max-w-[1320px] transition-all duration-300 ease-out lg:relative lg:top-0 lg:right-auto lg:left-auto lg:px-0 ${
           isScrolled
             ? 'translate-y-0 px-0 opacity-100'
@@ -194,10 +188,10 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
         }`}
       >
         <header
-          data-motion-reveal={motion === 'home' ? 'navbar-shell' : undefined}
-          data-motion-group={motion === 'home' ? '' : undefined}
+          data-motion-reveal={motion !== 'none' ? 'navbar-shell' : undefined}
+          data-motion-group={motion !== 'none' ? '' : undefined}
           className={`relative isolate flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:content-[''] ${
-            motion === 'home' ? 'backdrop-blur-[13.2px]' : 'before:backdrop-blur-[13.2px]'
+            activeDropdown ? 'before:backdrop-blur-[13.2px]' : 'backdrop-blur-[13.2px]'
           } ${
             theme === 'dark'
               ? isScrolled
@@ -205,15 +199,13 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
                 : 'rounded-[30px] border border-white/10 bg-white/[0.05] pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.3)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
               : isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] bg-white px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
-                : `rounded-[30px] border border-white/24 ${
-                    motion === 'home' ? 'bg-[#F4F6F9]/70' : 'bg-white/70'
-                  } pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]`
+                : 'rounded-[30px] border border-white/24 bg-[#F4F6F9]/70 pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
           }`}
         >
           {/* Logo */}
           <Link
             href="/"
-            data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+            data-motion-reveal={motion !== 'none' ? 'navbar' : undefined}
             prefetch={false}
             onPointerEnter={() => prefetchRoute('/')}
             onFocus={() => prefetchRoute('/')}
@@ -253,7 +245,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
                 >
                   {item.href ? (
                     <Link
-                      data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+                      data-motion-reveal={motion !== 'none' ? 'navbar' : undefined}
                       href={item.href}
                       prefetch={false}
                       onPointerEnter={() => prefetchRoute(item.href)}
@@ -290,7 +282,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
                     </Link>
                   ) : (
                     <button
-                      data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+                      data-motion-reveal={motion !== 'none' ? 'navbar' : undefined}
                       type="button"
                       aria-expanded={isDropdownOpen}
                       onClick={() =>
@@ -456,7 +448,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
 
           {/* Desktop CTA */}
           <div
-            data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+            data-motion-reveal={motion !== 'none' ? 'navbar' : undefined}
             className="ml-[6px] hidden shrink-0 lg:block lg:max-xl:ml-[2px] xl:ml-0"
           >
             <Link
@@ -478,7 +470,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
 
           {/* Mobile Menu Actions */}
           <div
-            data-motion-reveal={motion === 'home' ? 'navbar' : undefined}
+            data-motion-reveal={motion !== 'none' ? 'navbar' : undefined}
             className="gap-ds-12 md:gap-ds-20 flex shrink-0 flex-row items-center lg:hidden"
           >
             <button
@@ -579,7 +571,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
                       transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                     }}
                     className={`flex transform flex-col border-b border-[#D7DCE2]/60 py-[4px] transition-all duration-300 last:border-b-0 ${
-                      isOpen || motion === 'home'
+                      isOpen
                         ? 'translate-x-0 opacity-100'
                         : '-translate-x-2 opacity-0'
                     }`}
@@ -603,7 +595,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
                     {/* Accordion Sub-items */}
                     <div
                       data-nav-open={isExpanded}
-                      inert={motion === 'home' && !isExpanded}
+                      inert={motion !== 'none' && !isExpanded}
                       className={`grid overflow-hidden transition-all duration-300 ease-in-out ${
                         isExpanded
                           ? 'mt-[2px] grid-rows-[1fr] opacity-100'
@@ -657,7 +649,7 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
                     transitionDelay: isOpen ? `${index * 35 + 60}ms` : '0ms',
                   }}
                   className={`body-xxs type-body-xxs text-midnight-blue hover:text-electric-blue transform border-b border-[#D7DCE2]/60 py-[10px] transition-all duration-300 last:border-b-0 ${
-                    isOpen || motion === 'home'
+                    isOpen
                       ? 'translate-x-0 opacity-100'
                       : '-translate-x-2 opacity-0'
                   }`}

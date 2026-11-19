@@ -4,6 +4,39 @@ import { cn } from '@/lib/utils';
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
 
+export function updateConnectedTimeline(list: HTMLElement, progress: number) {
+  const rows = Array.from(list.children) as HTMLElement[];
+  const position = clamp(progress) * (rows.length - 1);
+  const color = list.dataset.timelineColor || 'var(--color-aqua-mint)';
+  rows.forEach((row, index) => {
+    const fill = clamp(position - index);
+    const highlight = clamp(position - index + 1);
+    const connector = row.querySelector<HTMLElement>('[data-timeline-connector]');
+    const moving = row.querySelector<HTMLElement>('[data-timeline-moving]');
+    const dot = row.querySelector<HTMLElement>('[data-timeline-dot]');
+    const glow = row.querySelector<HTMLElement>('[data-timeline-glow]');
+    const label = row.querySelector<HTMLElement>('[data-timeline-label]');
+    if (connector) connector.style.transform = `scaleY(${fill})`;
+    if (moving) {
+      moving.style.top = `${fill * 100}%`;
+      moving.style.opacity = position >= index && position < index + 1 ? '1' : '0';
+    }
+    if (dot) dot.style.backgroundColor = position >= index ? color : '';
+    if (glow) glow.style.opacity = String(clamp(1 - Math.abs(position - index) / 0.75));
+    if (label) {
+      if (list.dataset.timelineGray === 'true') {
+        label.style.color =
+          highlight === 0
+            ? ''
+            : `color-mix(in srgb, var(--color-light-gray) ${(1 - highlight) * 100}%, var(--color-white))`;
+        label.style.opacity = String(0.75 + 0.25 * highlight);
+      } else {
+        label.style.opacity = String(0.6 + 0.4 * highlight);
+      }
+    }
+  });
+}
+
 export function ConnectedTimeline({
   items,
   progress,
@@ -22,7 +55,13 @@ export function ConnectedTimeline({
   const position = clamp(progress) * (items.length - 1);
   const color = tone === 'mint' ? 'var(--color-aqua-mint)' : 'var(--color-electric-blue)';
   return (
-    <ul ref={listRef} className={cn('relative', className)} data-connected-timeline>
+    <ul
+      ref={listRef}
+      className={cn('relative', className)}
+      data-connected-timeline
+      data-timeline-color={color}
+      data-timeline-gray={inactiveLabelColor === 'medium-gray'}
+    >
       {items.map((item, index) => {
         const fill = clamp(position - index);
         const highlight = clamp(position - index + 1);
@@ -52,6 +91,7 @@ export function ConnectedTimeline({
               className="absolute top-[9px] bottom-[-9px] left-px w-px group-last:hidden"
             >
               <span
+                data-timeline-moving
                 className="absolute -left-[2px] size-[5px] -translate-y-1/2 rounded-full"
                 style={{
                   backgroundColor: color,
@@ -63,12 +103,14 @@ export function ConnectedTimeline({
             </span>
             <span
               aria-hidden="true"
+              data-timeline-dot
               className="bg-light-gray absolute top-[7px] -left-px size-[5px] rounded-full"
               style={{
                 backgroundColor: position >= index ? color : undefined,
               }}
             >
               <span
+                data-timeline-glow
                 className="absolute inset-0 rounded-full"
                 style={{
                   boxShadow: `0 0 10px 3px ${color}`,
@@ -77,6 +119,7 @@ export function ConnectedTimeline({
               />
             </span>
             <span
+              data-timeline-label
               className={cn(
                 'type-body-xxs max-md:text-sm max-md:leading-5',
                 tone === 'mint'

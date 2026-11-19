@@ -71,7 +71,14 @@ export default function CurieCodePage() {
             </CTA>
           </Link>
         </div>
-        <div className="relative order-2 mx-auto w-full max-w-[1440px] md:order-3">
+        <div
+          data-motion-reveal="hero-media"
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          data-motion-at="0.95"
+          className="relative order-2 mx-auto w-full max-w-[1440px] md:order-3"
+        >
           <ProductVideo
             id="hero-banner"
             label="CurieCode autonomous coding demonstration"

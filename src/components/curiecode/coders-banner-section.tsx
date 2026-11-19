@@ -1,12 +1,21 @@
 'use client';
 
 import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
-import { clampProgress, useScrollProgress } from '@/lib/hooks/use-scroll-progress';
+import { useScrollDriver } from '@/lib/hooks/use-scroll-driver';
+import { clampProgress, useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 
 const data = CURIECODE_PAGE_DATA.banner;
 
 export default function CodersBannerSection() {
-  const { ref, progress } = useScrollProgress<HTMLElement>('focus');
+  const reducedMotion = useReducedMotion();
+  const ref = useScrollDriver<HTMLElement>('focus', true, (progress, element) => {
+    element.querySelectorAll<HTMLElement>('[data-coders-line]').forEach((line, index) => {
+      line.style.opacity = String(
+        index === 0 ? 1 : 0.22 + 0.78 * clampProgress(progress * 3 - index + 0.5),
+      );
+    });
+  });
+  const progress = reducedMotion ? 1 : 0;
   return (
     <div className="from-ghost-white bg-linear-to-b from-50% to-black to-50%">
       <section
@@ -23,6 +32,7 @@ export default function CodersBannerSection() {
           {data.map((line, index) => (
             <p
               key={line}
+              data-coders-line
               className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10"
               style={{
                 opacity: index === 0 ? 1 : 0.22 + 0.78 * clampProgress(progress * 3 - index + 0.5),

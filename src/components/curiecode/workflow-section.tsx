@@ -3,13 +3,10 @@
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 
-import { ConnectedTimeline } from '@/components/ui/connected-timeline';
+import { ConnectedTimeline, updateConnectedTimeline } from '@/components/ui/connected-timeline';
 import { CURIECODE_MEDIA, CURIECODE_PAGE_DATA } from '@/data/curiecode';
-import {
-  clampProgress,
-  useReducedMotion,
-  useScrollProgress,
-} from '@/lib/hooks/use-scroll-progress';
+import { useScrollDriver } from '@/lib/hooks/use-scroll-driver';
+import { clampProgress, useReducedMotion } from '@/lib/hooks/use-scroll-progress';
 import { cn } from '@/lib/utils';
 
 import { ProductVideo } from './product-video';
@@ -26,7 +23,6 @@ const WorkflowStage = memo(function WorkflowStage({
   active,
   preloadNext,
   onVideoReady,
-  progress,
 }: {
   step: (typeof steps)[number];
   index: number;
@@ -34,11 +30,16 @@ const WorkflowStage = memo(function WorkflowStage({
   active: boolean;
   preloadNext?: boolean;
   onVideoReady: (desktopSrc: string) => void;
-  progress: number;
 }) {
-  const { ref, progress: entryProgress } = useScrollProgress<HTMLUListElement>('focus', !pinned);
   const reduced = useReducedMotion();
-  const value = reduced ? 1 : pinned ? progress : entryProgress;
+  const ref = useScrollDriver<HTMLUListElement>('focus', !pinned, (progress, element) => {
+    updateConnectedTimeline(element, progress);
+    const bar = element
+      .closest('[data-workflow-stage]')
+      ?.querySelector<HTMLElement>('[data-workflow-progress]');
+    if (bar) bar.style.transform = `scaleX(${(index + progress) / steps.length})`;
+  });
+  const value = reduced ? 1 : 0;
   return (
     <article
       data-workflow-stage={index + 1}
@@ -95,13 +96,29 @@ export default function WorkflowSection() {
   const onVideoReady = useCallback((source: string) => {
     setReadyVideos((current) => (current.has(source) ? current : new Set(current).add(source)));
   }, []);
-  const { ref, progress } = useScrollProgress<HTMLElement>('travel', canPin);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const pinned = canPin && !reduced;
-  const position = Math.min(progress * steps.length, steps.length - 0.0001);
-  const active = Math.floor(position);
+  const [active, setActive] = useState(0);
+  const activeRef = useRef(0);
+  const ref = useScrollDriver<HTMLElement>('travel', pinned, (progress) => {
+    const position = Math.min(progress * steps.length, steps.length - 0.0001);
+    const next = Math.floor(position);
+    if (next !== activeRef.current) {
+      activeRef.current = next;
+      setActive(next);
+    }
+    contentRef.current
+      ?.querySelectorAll<HTMLElement>('[data-workflow-stage]')
+      .forEach((stage, index) => {
+        const value = clampProgress(position - index);
+        const list = stage.querySelector<HTMLElement>('[data-connected-timeline]');
+        const bar = stage.querySelector<HTMLElement>('[data-workflow-progress]');
+        if (list) updateConnectedTimeline(list, value);
+        if (bar) bar.style.transform = `scaleX(${(index + value) / steps.length})`;
+      });
+  });
 
   useEffect(() => {
     ScrollTrigger.refresh();
@@ -200,7 +217,6 @@ export default function WorkflowSection() {
                     readyVideos.has(CURIECODE_MEDIA[steps[active].media].desktop.src)
                   }
                   onVideoReady={onVideoReady}
-                  progress={clampProgress(position - index)}
                 />
               ))}
             </div>

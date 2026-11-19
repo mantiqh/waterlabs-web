@@ -24,11 +24,16 @@ export const PatientEstimatesPage = () => {
         `}</style>
       </noscript>
       <PatientEstimatesHeroSection />
-      <TheProblemSection />
-      <HowWaterlabsClosesSection />
-      <HumanInTheLoopSection />
-      <ThisIsntJustPatientEstimatesSection />
-      <PatientEstimatesCTASection />
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-solution-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <TheProblemSection />
+          <HowWaterlabsClosesSection />
+          <HumanInTheLoopSection />
+          <ThisIsntJustPatientEstimatesSection />
+          <PatientEstimatesCTASection />
+        </div>
+      </div>
     </div>
   );
 };
