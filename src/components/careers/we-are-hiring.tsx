@@ -103,7 +103,10 @@ export const WeAreHiringSection = () => {
   };
 
   return (
-    <section className="relative m-0 w-full bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50% p-0">
+    <section
+      data-motion-section
+      className="relative m-0 w-full bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50% p-0"
+    >
       {/* 
         Gray Card with left curves:
         - Top-left curve reveals white background
@@ -120,17 +123,29 @@ export const WeAreHiringSection = () => {
           />
         </div>
 
-        <div className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[20px] lg:flex-row lg:gap-[40px] xl:gap-[60px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          className="relative z-10 mx-auto flex max-w-[1320px] flex-col items-start justify-between gap-[20px] lg:flex-row lg:gap-[40px] xl:gap-[60px]"
+        >
           {/* Left Column: Heading Block (Sticky on Desktop) */}
           <div className="flex w-full min-w-0 shrink-0 flex-col gap-[12px] self-start lg:sticky lg:top-[120px] lg:w-[38%] lg:gap-[14px] xl:w-[537px]">
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6] lg:h-[8px] lg:w-[8px]" />
-              <span className="type-body-xxs text-[#7D8690]">Where you fit</span>
+              <span
+                data-motion-reveal="scramble"
+                data-motion-at="0.1"
+                className="type-body-xxs text-[#7D8690]"
+              >
+                Where you fit
+              </span>
             </div>
 
             {/* Heading */}
-            <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">We are hiring!</h2>
+            <h2 data-motion-reveal="lines" className="type-h2 tracking-[-0.01em] text-[#111111]">
+              We are hiring!
+            </h2>
           </div>
 
           {/* Right Column: Desktop Vertical List (hidden on mobile/tablet) */}
@@ -138,6 +153,8 @@ export const WeAreHiringSection = () => {
             {hiringRoles.map((role, index) => (
               <div
                 key={`desktop-role-${index}`}
+                data-motion-reveal="blur"
+                data-motion-at={0.2 + index * 0.1}
                 className="flex flex-row items-center gap-[20px] border-b border-[#91C6F2] pb-[20px] xl:gap-[24px] xl:pb-[24px]"
               >
                 {/* Role 3D Icon */}

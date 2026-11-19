@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
+import { mountScrollScene, type SceneMode } from '@/lib/motion/scroll-scene';
+
 const productStatements = [
   {
     id: 0,
@@ -47,100 +49,75 @@ const productStatements = [
 export const HowThatShowsUpSection = () => {
   const [activeDesktopIndex, setActiveDesktopIndex] = useState(0);
   const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+  const [sceneMode, setSceneMode] = useState<SceneMode>('pending');
+  const [itemOffsets, setItemOffsets] = useState<number[]>([0, 0, 0, 0]);
 
   const sectionRef = useRef<HTMLElement>(null);
-  const desktopScrollRef = useRef<HTMLDivElement>(null);
+  const statementItemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  // Sync window scroll with desktop statements
+  // Measure vertical offsets of desktop statement items for transform sliding
   useEffect(() => {
-    let rafId: number | null = null;
-
-    const handleWindowScroll = () => {
-      if (rafId !== null) return;
-      rafId = requestAnimationFrame(() => {
-        rafId = null;
-        if (window.innerWidth < 1024) return;
-        const el = sectionRef.current;
-        if (!el) return;
-
-        const rect = el.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-
-        const start = windowHeight * 0.7;
-        const end = -rect.height * 0.3;
-        const total = start - end;
-        const current = start - rect.top;
-
-        if (current > 0 && current < total) {
-          const progress = Math.min(Math.max(current / total, 0), 1);
-          const index = Math.min(
-            Math.floor(progress * productStatements.length),
-            productStatements.length - 1,
-          );
-          setActiveDesktopIndex(index);
-
-          if (desktopScrollRef.current) {
-            const container = desktopScrollRef.current;
-            const items = container.children;
-            if (items[index]) {
-              const targetItem = items[index] as HTMLElement;
-              container.scrollTo({
-                top: targetItem.offsetTop - container.offsetTop,
-                behavior: 'smooth',
-              });
-            }
-          }
-        }
-      });
+    const updateOffsets = () => {
+      const offsets = statementItemRefs.current.map((el) => el?.offsetTop ?? 0);
+      setItemOffsets(offsets);
     };
-
-    window.addEventListener('scroll', handleWindowScroll, { passive: true });
-    window.addEventListener('resize', handleWindowScroll);
-    handleWindowScroll();
-    return () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
-      window.removeEventListener('scroll', handleWindowScroll);
-      window.removeEventListener('resize', handleWindowScroll);
-    };
+    updateOffsets();
+    window.addEventListener('resize', updateOffsets);
+    void document.fonts.ready.then(updateOffsets);
+    return () => window.removeEventListener('resize', updateOffsets);
   }, []);
 
-  // Handle Desktop vertical scroll
-  const handleDesktopScroll = () => {
-    if (!desktopScrollRef.current) return;
-    const { scrollTop, scrollHeight, clientHeight } = desktopScrollRef.current;
-    if (scrollHeight <= clientHeight) return;
-    const scrollFraction = scrollTop / (scrollHeight - clientHeight);
-    const index = Math.min(
-      Math.max(Math.round(scrollFraction * (productStatements.length - 1)), 0),
-      productStatements.length - 1,
-    );
-    setActiveDesktopIndex(index);
-  };
+  // Mount comparison scroll scene on shared sequence root
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const root =
+      sectionRef.current.closest<HTMLElement>('[data-philosophy-sequence]') ?? sectionRef.current;
+    return mountScrollScene(root, {
+      count: productStatements.length,
+      onIndex: setActiveDesktopIndex,
+      onMode: setSceneMode,
+      kind: 'comparison',
+      allowMobile: false,
+    });
+  }, []);
 
   const scrollToDesktopStatement = (index: number) => {
-    if (!desktopScrollRef.current) return;
-    const container = desktopScrollRef.current;
-    const items = container.children;
-    if (items[index]) {
-      const targetItem = items[index] as HTMLElement;
-      container.scrollTo({
-        top: targetItem.offsetTop - container.offsetTop,
+    setActiveDesktopIndex(index);
+    if (!sectionRef.current) return;
+    const root =
+      sectionRef.current.closest<HTMLElement>('[data-philosophy-sequence]') ?? sectionRef.current;
+
+    if (sceneMode === 'pinned') {
+      const totalScrollable = root.offsetHeight - window.innerHeight;
+      if (totalScrollable <= 0) return;
+
+      const targetProgress = (index + 0.5) / productStatements.length;
+      const rect = root.getBoundingClientRect();
+      const sectionTop = window.scrollY + rect.top;
+      const targetScrollY = sectionTop + targetProgress * totalScrollable;
+      window.scrollTo({
+        top: targetScrollY,
         behavior: 'smooth',
       });
-      setActiveDesktopIndex(index);
     }
   };
 
   return (
-    <section ref={sectionRef} className="relative m-0 w-full overflow-hidden bg-[#F4F6F9] p-0">
+    <section
+      ref={sectionRef}
+      data-scene-surface
+      className="relative m-0 w-full overflow-hidden bg-[#F4F6F9] p-0"
+    >
       {/* 
-        Outer Container Card (Frame 2147203276 / top frame):
-        - Desktop: 1440px x 764px, rounded-tr-[60px] rounded-br-[60px], padding: 80px 60px, gap: 40px
-        - Mobile: 402px x 672px, rounded-tr-[30px] rounded-br-[30px], padding: 20px 20px 40px, gap: 20px
-        - Background: linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)
-      */}
+            Outer Container Card (Frame 2147203276 / top frame):
+            - Desktop: 1440px x 764px, rounded-tr-[60px] rounded-br-[60px], padding: 80px 60px, gap: 40px
+            - Mobile: 402px x 672px, rounded-tr-[30px] rounded-br-[30px], padding: 20px 20px 40px, gap: 20px
+            - Background: linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)
+          */}
       <div
+        data-scene-content
+        data-motion-reveal="panel-ltr"
         className="flex w-full flex-col gap-[20px] rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[32px] md:px-[40px] md:py-[60px] lg:gap-[24px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]"
         style={{
           background: 'linear-gradient(239.93deg, #63CCB7 21.64%, #0F68D6 94.97%)',
@@ -234,7 +211,10 @@ export const HowThatShowsUpSection = () => {
           {/* ========================================================================= */}
           {/* Desktop Card (1024px+): Side-by-Side Scroller & Background Image          */}
           {/* ========================================================================= */}
-          <div className="relative hidden h-[500px] max-h-[500px] w-full flex-col justify-start overflow-hidden rounded-[16px_16px_16px_8px] lg:flex">
+          <div
+            data-shows-up-card
+            className="relative hidden h-[500px] max-h-[500px] w-full flex-col justify-start overflow-hidden rounded-[16px_16px_16px_8px] lg:flex"
+          >
             {/* Background Image - Desktop */}
             <div className="pointer-events-none absolute inset-0">
               {productStatements.map((statement, idx) => (
@@ -257,7 +237,10 @@ export const HowThatShowsUpSection = () => {
             </div>
 
             {/* Glassmorphic Card (Frame 2147203299: 537px x 500px on desktop) */}
-            <div className="relative z-10 flex h-[500px] max-h-[500px] w-[360px] flex-col justify-between gap-[14px] overflow-hidden rounded-[16px_8px_16px_8px] bg-white/[0.90] p-[32px_32px_0px] shadow-sm backdrop-blur-[12px] xl:w-[537px]">
+            <div
+              data-shows-up-card
+              className="relative z-10 flex h-[500px] max-h-[500px] w-[360px] flex-col justify-between gap-[14px] overflow-hidden rounded-[16px_8px_16px_8px] bg-white/[0.90] p-[32px_32px_0px] shadow-sm backdrop-blur-[12px] xl:w-[537px]"
+            >
               {/* Heading Block */}
               <div className="flex flex-col gap-[10px] lg:gap-[14px]">
                 <h2 className="type-h2 text-black">
@@ -267,10 +250,13 @@ export const HowThatShowsUpSection = () => {
                 </h2>
               </div>
 
-              {/* Desktop Progress Bar & Vertically Scrollable Statements */}
+              {/* Desktop Progress Bar & Smooth Sliding Statements Track */}
               <div className="relative flex flex-row items-start gap-[24px] pt-[4px]">
                 {/* Vertical Progress Bar (3px x 183px) */}
-                <div className="relative mt-[4px] h-[183px] w-[3px] shrink-0 overflow-hidden rounded-[12px] bg-[#7D8690]/40">
+                <div
+                  data-shows-up-progress-bar
+                  className="relative mt-[4px] h-[183px] w-[3px] shrink-0 overflow-hidden rounded-[12px] bg-[#7D8690]/40"
+                >
                   <div
                     className="absolute left-0 w-full rounded-[12px] bg-[#0F68D6] transition-all duration-300 ease-out"
                     style={{
@@ -280,33 +266,41 @@ export const HowThatShowsUpSection = () => {
                   />
                 </div>
 
-                {/* Vertical Scrollable Statements List */}
+                {/* Vertical Statements Track (Smooth transform sliding, zero dual-scroll fight) */}
                 <div
-                  ref={desktopScrollRef}
-                  onScroll={handleDesktopScroll}
-                  className="no-scrollbar flex h-[183px] flex-1 snap-y snap-mandatory flex-col gap-[20px] overflow-y-auto pr-[8px] pb-[48px] select-none"
+                  data-shows-up-statements
+                  className="relative flex h-[183px] flex-1 flex-col overflow-hidden pr-[8px] select-none"
                 >
-                  {productStatements.map((item, index) => {
-                    const isActive = index === activeDesktopIndex;
-                    return (
-                      <div
-                        key={item.id}
-                        onClick={() => scrollToDesktopStatement(index)}
-                        className={`snap-start transition-all duration-300 ${
-                          isActive ? 'opacity-100' : 'opacity-20 hover:opacity-50'
-                        }`}
-                      >
-                        <p className="type-h6 text-black">
-                          {item.leadText}{' '}
-                          <span className={isActive ? 'text-[#0F68D6]' : 'text-black'}>
-                            {item.highlightText}
-                          </span>{' '}
-                          {item.description}
-                        </p>
-                      </div>
-                    );
-                  })}
-                  <div className="pointer-events-none h-[28px] shrink-0" aria-hidden="true" />
+                  <div
+                    className="flex flex-col gap-[20px] transition-transform duration-500 ease-out"
+                    style={{
+                      transform: `translate3d(0, -${itemOffsets[activeDesktopIndex] || 0}px, 0)`,
+                    }}
+                  >
+                    {productStatements.map((item, index) => {
+                      const isActive = index === activeDesktopIndex;
+                      return (
+                        <div
+                          key={item.id}
+                          ref={(el) => {
+                            statementItemRefs.current[index] = el;
+                          }}
+                          onClick={() => scrollToDesktopStatement(index)}
+                          className={`cursor-pointer transition-all duration-300 ${
+                            isActive ? 'opacity-100' : 'opacity-20 hover:opacity-50'
+                          }`}
+                        >
+                          <p className="type-h6 text-black">
+                            {item.leadText}{' '}
+                            <span className={isActive ? 'text-[#0F68D6]' : 'text-black'}>
+                              {item.highlightText}
+                            </span>{' '}
+                            {item.description}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
 

@@ -31,7 +31,7 @@ export const BlogDetailHeroSection = ({
   paragraphs = DEFAULT_PARAGRAPHS,
 }: BlogDetailHeroProps) => {
   return (
-    <section className="relative w-full bg-white">
+    <section data-motion-section="hero" className="relative w-full bg-white">
       {/* 
         Blog Detail Hero Banner (Figma Specifications):
         - Desktop (Figma: 5915-17005): 1440px x 1122px, padding: 40px 60px 80px, gap: 60px, rounded-bl: 60px
@@ -56,18 +56,27 @@ export const BlogDetailHeroSection = ({
           - Top gap: 40px on mobile, 60px on desktop
         */}
         <div className="relative z-10 mx-auto mt-[32px] flex w-full max-w-[1320px] flex-col items-center md:mt-[48px] lg:mt-[60px]">
-          <div className="flex w-full max-w-[1096px] flex-col gap-[24px] md:gap-[32px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 100%"
+            className="flex w-full max-w-[1096px] flex-col gap-[24px] md:gap-[32px]"
+          >
             {/* Header / Title Group (Frame 2147203266 & Frame 2147226509) */}
             <div className="flex w-full flex-col items-start gap-[8px] md:gap-[12px]">
               {/* Text - Tag Eyebrow */}
               <div className="flex items-center gap-[8px]">
-                <span className="type-caption text-[#7D8690]">{tag}</span>
+                <span data-motion-reveal="scramble" className="type-caption text-[#7D8690]">
+                  {tag}
+                </span>
                 <span className="h-[14px] w-[1px] bg-[#7D8690]/50 md:h-[17.5px]" />
-                <span className="type-caption text-[#7D8690]">{subTag}</span>
+                <span data-motion-reveal="scramble" className="type-caption text-[#7D8690]">
+                  {subTag}
+                </span>
               </div>
 
               {/* Title (Display/H2: General Sans Regular, 52px / 60px desktop, 32px / 40px mobile) */}
-              <h2 className="type-h2 max-w-[874px]">
+              <h2 data-motion-reveal="lines" className="type-h2 max-w-[874px]">
                 {title ? (
                   <span className="text-[#042849]">{title}</span>
                 ) : (
@@ -80,7 +89,11 @@ export const BlogDetailHeroSection = ({
             </div>
 
             {/* Hero Image Banner (Frame 2147203302): 1096px x 350px on desktop, 362px x 245px on mobile */}
-            <div className="relative h-[245px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-[0_8px_30px_rgba(4,40,73,0.06)] sm:h-[290px] md:h-[320px] lg:h-[350px]">
+            <div
+              data-motion-reveal="image"
+              data-motion-parallax
+              className="relative h-[245px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-[0_8px_30px_rgba(4,40,73,0.06)] sm:h-[290px] md:h-[320px] lg:h-[350px]"
+            >
               {/* Desktop / Tablet Image */}
               <Image
                 src={desktopImage}
@@ -104,7 +117,7 @@ export const BlogDetailHeroSection = ({
             {/* Introductory Body Copy (Body-XS / Body-S in Figma: 18px / 26px desktop, 14px / 24px mobile) */}
             <div className="flex w-full flex-col gap-[16px] md:gap-[20px]">
               {paragraphs.map((paragraph, index) => (
-                <p key={index} className="type-body-xs text-[#2A2A2A]">
+                <p key={index} data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
                   {renderFormattedText(paragraph)}
                 </p>
               ))}

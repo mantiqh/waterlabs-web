@@ -5,6 +5,7 @@ import CaseStudyContent from '@/components/case-study/case-study-content';
 import CaseStudyCTA from '@/components/case-study/case-study-cta';
 import CaseStudyHero from '@/components/case-study/case-study-hero';
 import CaseStudyRelated, { RelatedCaseItem } from '@/components/case-study/case-study-related';
+import PageMotion from '@/components/common/page-motion';
 import {
   fetchAllCaseStudySlugs,
   fetchCaseStudyBySlug,
@@ -69,7 +70,12 @@ export default async function CaseStudyPage({ params }: Props) {
   }
 
   return (
-    <div className="min-h-screen w-full bg-white">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex min-h-screen w-full flex-col overflow-x-clip bg-white"
+    >
+      <PageMotion />
       <CaseStudyHero caseStudy={caseStudy} />
       <CaseStudyContent caseStudy={caseStudy} />
       <CaseStudyRelated heading={caseStudy.relatedCasesHeading} relatedCases={relatedCases} />

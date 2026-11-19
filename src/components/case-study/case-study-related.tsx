@@ -45,7 +45,10 @@ export const CaseStudyRelated = ({
   relatedCases = DEFAULT_RELATED_CASES,
 }: CaseStudyRelatedProps) => {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50%">
+    <section
+      data-motion-section
+      className="relative w-full overflow-hidden bg-gradient-to-b from-white from-50% to-[#0F68D6] to-50%"
+    >
       {/* 
         Related Cases Container (Figma Specification):
         - Frame width: 1440px (desktop), 402px (mobile), background: #F4F6F9
@@ -56,7 +59,16 @@ export const CaseStudyRelated = ({
       <div className="w-full rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px]">
         <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] py-[40px] md:py-[64px] lg:gap-[40px] lg:py-[80px]">
           {/* Section Heading: Display/H2 token */}
-          <h2 className="type-h2 text-[#0F68D6]">{heading}</h2>
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 85%"
+            className="w-full"
+          >
+            <h2 data-motion-reveal="lines" className="type-h2 text-[#0F68D6]">
+              {heading}
+            </h2>
+          </div>
 
           {/* =================================================================
               DESKTOP: 3 columns grid (untouched)
@@ -66,6 +78,9 @@ export const CaseStudyRelated = ({
               <Link
                 key={item.id}
                 href={item.href}
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="group flex w-full flex-col items-start gap-[16px] lg:gap-[20px]"
               >
                 {/* Image Card Container (Frame 2147203302)
@@ -73,6 +88,7 @@ export const CaseStudyRelated = ({
                     - Card 2: height 288px (matching exact Figma specifications)
                 */}
                 <div
+                  data-motion-reveal="image"
                   className={`relative w-full overflow-hidden rounded-[20px] shadow-sm transition-transform duration-300 group-hover:scale-[1.01] ${
                     item.isShorter
                       ? 'h-[240px] sm:h-[260px] lg:h-[288px]'
@@ -92,12 +108,18 @@ export const CaseStudyRelated = ({
 
                 {/* Caption Text & CTA Arrow (Frame 2147226519) */}
                 <div className="flex w-full flex-row items-center justify-between gap-[12px] pt-[4px]">
-                  <p className="type-body-s line-clamp-2 flex-1 text-[#000000]">{item.title}</p>
+                  <p
+                    data-motion-reveal="lines"
+                    className="type-body-s line-clamp-2 flex-1 text-[#000000]"
+                  >
+                    {item.title}
+                  </p>
 
                   {/* Circular Arrow Button (Default design system CTA button) */}
                   <CTA
                     as="div"
                     variant="fill-arrow"
+                    data-motion-magnetic
                     className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm transition-all duration-200 group-hover:scale-105"
                     aria-label="View related case"
                   />

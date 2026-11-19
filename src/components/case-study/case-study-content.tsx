@@ -1,10 +1,16 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
 
 import type { CaseStudy } from '@/types/case-study';
 
 import CaseStudyTOC, { CASE_STUDY_TOPICS } from './case-study-toc';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface CaseStudyContentProps {
   caseStudy: CaseStudy;
@@ -73,7 +79,7 @@ const renderResultsParagraphs = (content?: string) => {
   return (
     <div className="flex max-w-[975px] flex-col items-start gap-[16px] lg:gap-[20px]">
       {paragraphs.map((para, idx) => (
-        <p key={idx} className="type-body-xs text-[#2A2A2A]">
+        <p key={idx} data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
           {renderResultsDetailParagraph(para)}
         </p>
       ))}
@@ -87,7 +93,7 @@ export const renderFormattedParagraphs = (content?: string) => {
   return (
     <div className="flex max-w-[975px] flex-col items-start gap-[16px] lg:gap-[20px]">
       {paragraphs.map((para, idx) => (
-        <p key={idx} className="type-body-xs text-[#2A2A2A]">
+        <p key={idx} data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
           {renderFormattedText(para)}
         </p>
       ))}
@@ -111,47 +117,40 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
     bottomLine,
   } = caseStudy;
 
-  // Scroll Spy Logic matching trust-and-security/interactive-security-sections.tsx with bottom detection and sticky check
+  // High-performance GSAP ScrollTrigger tracking (eliminates reflow thrashing on scroll)
   useEffect(() => {
-    const handleScroll = () => {
-      const isMobile = window.innerWidth < 1024;
-      const targetY = isMobile ? 120 : 160;
+    if (typeof window === 'undefined' || !CASE_STUDY_TOPICS.length) return;
 
-      // Check if mobile indicator reached sticky top-[60px]
+    const isMobile = window.innerWidth < 1024;
+    const targetY = isMobile ? 120 : 160;
+
+    const ctx = gsap.context(() => {
+      // 1. Mobile sentinel trigger for sticky header
       if (sentinelRef.current) {
-        const sentinelRect = sentinelRef.current.getBoundingClientRect();
-        setIsSticky(sentinelRect.top <= 61);
+        ScrollTrigger.create({
+          trigger: sentinelRef.current,
+          start: 'top 60px',
+          onToggle: (self) => setIsSticky(self.isActive),
+        });
       }
 
-      // If user has scrolled near the bottom of the page, activate the last section
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const bottomThreshold = document.documentElement.scrollHeight - 120;
-      if (scrollPosition >= bottomThreshold) {
-        setActiveTopic(CASE_STUDY_TOPICS[CASE_STUDY_TOPICS.length - 1].id);
-        return;
-      }
+      // 2. Section boundary tracking without layout thrashing
+      CASE_STUDY_TOPICS.forEach((topic, idx) => {
+        const el = document.getElementById(topic.id);
+        if (!el) return;
+        const isLast = idx === CASE_STUDY_TOPICS.length - 1;
+        ScrollTrigger.create({
+          trigger: el,
+          start: `top ${targetY + 40}px`,
+          end: isLast ? 'bottom bottom' : `bottom ${targetY + 40}px`,
+          onToggle: (self) => {
+            if (self.isActive) setActiveTopic(topic.id);
+          },
+        });
+      });
+    });
 
-      // Check sections from bottom to top to find the first section whose top has crossed targetY
-      let activeId = CASE_STUDY_TOPICS[0].id;
-      for (let i = CASE_STUDY_TOPICS.length - 1; i >= 0; i--) {
-        const el = document.getElementById(CASE_STUDY_TOPICS[i].id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= targetY + 40) {
-            activeId = CASE_STUDY_TOPICS[i].id;
-            break;
-          }
-        }
-      }
-      setActiveTopic(activeId);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => ctx.revert();
   }, []);
 
   // Smooth scroll to selected topic with navbar offset
@@ -167,7 +166,7 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
   };
 
   return (
-    <section className="relative w-full bg-white pb-[80px] lg:pb-[80px]">
+    <section data-motion-section className="relative w-full bg-white pb-[80px] lg:pb-[80px]">
       {/* Sentinel for detecting when mobile TOC hits sticky position */}
       <div ref={sentinelRef} className="pointer-events-none block h-[1px] w-full lg:hidden" />
 
@@ -209,6 +208,9 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             {/* Section 1: The Client (Frame 2147226939) */}
             <section
               id="the-client"
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 85%"
               className="flex scroll-mt-[120px] flex-col items-start gap-[24px] lg:gap-[32px]"
             >
               {clientSummary && renderFormattedParagraphs(clientSummary)}
@@ -219,6 +221,7 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
                   {statBadges.map((badge, idx) => (
                     <div
                       key={idx}
+                      data-motion-reveal="fade"
                       className="flex items-center justify-center gap-[10px] rounded-tl-[12px] rounded-tr-[6px] rounded-br-[12px] rounded-bl-[12px] bg-[#F4F6F9] px-[16px] py-[12px] lg:p-[20px]"
                     >
                       <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
@@ -235,9 +238,15 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             {challenge && (
               <section
                 id="the-challenge"
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
-                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
+                <h3
+                  data-motion-reveal="lines"
+                  className="type-h4 font-normal tracking-[-0.01em] text-[#000000]"
+                >
                   The Challenge
                 </h3>
                 {renderFormattedParagraphs(challenge)}
@@ -248,9 +257,15 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             {whatWaterlabsDid && (
               <section
                 id="what-waterlabs-did"
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
-                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
+                <h3
+                  data-motion-reveal="lines"
+                  className="type-h4 font-normal tracking-[-0.01em] text-[#000000]"
+                >
                   What Waterlabs did
                 </h3>
                 {renderFormattedParagraphs(whatWaterlabsDid)}
@@ -261,17 +276,26 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             {resultsBlock && (
               <section
                 id="the-results"
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
-                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
+                <h3
+                  data-motion-reveal="lines"
+                  className="type-h4 font-normal tracking-[-0.01em] text-[#000000]"
+                >
                   The Results
                 </h3>
                 <div className="flex w-full flex-col items-start gap-[16px] lg:gap-[20px]">
                   <div className="flex flex-col items-start gap-[8px] lg:gap-[16px]">
-                    <div className="type-body-xl font-bold text-[#111111]">
+                    <div
+                      data-motion-reveal="lines"
+                      className="type-body-xl font-bold text-[#111111]"
+                    >
                       {resultsBlock.headline}
                     </div>
-                    <p className="type-body-xs text-[#2A2A2A]">
+                    <p data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
                       {renderFormattedText(resultsBlock.subheadline)}
                     </p>
                   </div>
@@ -284,9 +308,15 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             {outcomes && (
               <section
                 id="the-outcomes"
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
-                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
+                <h3
+                  data-motion-reveal="lines"
+                  className="type-h4 font-normal tracking-[-0.01em] text-[#000000]"
+                >
                   The Outcomes
                 </h3>
                 {renderFormattedParagraphs(outcomes)}
@@ -297,9 +327,15 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
             {bottomLine && (
               <section
                 id="the-bottom-line"
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="flex scroll-mt-[120px] flex-col items-start gap-[20px] lg:gap-[32px]"
               >
-                <h3 className="type-h4 font-normal tracking-[-0.01em] text-[#000000]">
+                <h3
+                  data-motion-reveal="lines"
+                  className="type-h4 font-normal tracking-[-0.01em] text-[#000000]"
+                >
                   The Bottom Line
                 </h3>
                 <div className="flex w-full flex-col items-start gap-[40px]">
@@ -320,6 +356,7 @@ export const CaseStudyContent = ({ caseStudy }: CaseStudyContentProps) => {
                         .map((tag) => (
                           <div
                             key={tag}
+                            data-motion-reveal="fade"
                             className="flex items-center gap-[10px] rounded-full bg-[rgba(145,198,242,0.1)] px-[16px] py-[8px]"
                           >
                             <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />

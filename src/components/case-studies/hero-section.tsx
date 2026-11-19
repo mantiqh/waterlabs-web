@@ -7,7 +7,7 @@ import Navbar from '@/components/common/navbar';
 
 export const CaseStudiesHeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-[#F4F6F9]">
+    <section data-motion-section="hero" className="relative w-full overflow-hidden bg-[#F4F6F9]">
       <div className="w-full overflow-hidden rounded-bl-[30px] bg-white px-[20px] pt-[20px] pb-[40px] md:px-[40px] md:pb-[60px] lg:rounded-bl-[60px] lg:px-[60px] lg:pt-[40px] lg:pb-[80px]">
         {/* Top Navbar */}
         <div className="mx-auto w-full max-w-[1320px]">
@@ -23,6 +23,9 @@ export const CaseStudiesHeroSection = () => {
         */}
         <Link
           href="/case-study/regional-behavioral-health-network"
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
           className="group relative mx-auto mt-[24px] block w-full max-w-[1320px] cursor-pointer overflow-hidden rounded-[20px_10px_20px_20px] border border-[#E2E8F0]/80 bg-[#F4F6F9] text-left shadow-[0_12px_40px_rgba(4,40,73,0.06)] transition-all duration-300 hover:shadow-[0_16px_48px_rgba(4,40,73,0.12)] lg:mt-[32px] lg:rounded-[40px_20px_40px_20px] xl:mt-[40px]"
           aria-label="Read case study: How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1."
         >
@@ -43,20 +46,31 @@ export const CaseStudiesHeroSection = () => {
               {/* Tag / Eyebrow */}
               <div className="flex items-center gap-[8px]">
                 <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-                <span className="body-caption tracking-[0.01em] text-[#7D8690]">
+                <span
+                  data-motion-reveal="scramble"
+                  className="body-caption tracking-[0.01em] text-[#7D8690]"
+                >
                   Case Study · Behavioral Health
                 </span>
               </div>
 
               {/* Title & Subtitle */}
               <div className="flex w-full flex-col items-start gap-[12px] xl:gap-[16px]">
-                <h1 className="type-h2 text-[#111111] transition-colors group-hover:text-[#042849]">
+                <h1
+                  data-motion-reveal="lines"
+                  data-motion-start="top 100%"
+                  className="type-h2 text-[#111111] transition-colors group-hover:text-[#042849]"
+                >
                   How a behavioral health practice used{' '}
                   <span className="text-[#0F68D6]">
                     Waterlabs to cut benefits verification from 4 days to 1.
                   </span>
                 </h1>
-                <p className="type-body-xs max-w-[560px] text-[#2A2A2A]">
+                <p
+                  data-motion-reveal="blur"
+                  data-motion-start="top 100%"
+                  className="type-body-xs max-w-[560px] text-[#2A2A2A]"
+                >
                   An outpatient intake operation where every new patient waited on a phone call
                   before anyone could book them in.
                 </p>
@@ -66,6 +80,8 @@ export const CaseStudiesHeroSection = () => {
             {/* Right Column: Hero Image Card */}
             <div className="relative aspect-[580/410] w-[48%] shrink-0 overflow-hidden rounded-tl-[10px] rounded-tr-[40px] rounded-br-[10px] rounded-bl-[40px] shadow-sm transition-transform duration-300 group-hover:scale-[1.01] xl:w-[580px]">
               <Image
+                data-motion-reveal="image"
+                data-motion-parallax
                 src="/images/case-study/case-study-4-behavioral/Frame%202147226953%20(3).png"
                 alt="How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1."
                 fill
@@ -81,6 +97,8 @@ export const CaseStudiesHeroSection = () => {
             {/* Top Image */}
             <div className="rounded-b-0 relative aspect-[640/400] w-full shrink-0 overflow-hidden rounded-t-[20px] sm:h-[280px]">
               <Image
+                data-motion-reveal="image"
+                data-motion-parallax
                 src="/images/case-study/case-study-4-behavioral/Frame%202147226953%20(3).png"
                 alt="How a behavioral health practice used Waterlabs to cut benefits verification from 4 days to 1."
                 fill
@@ -95,20 +113,31 @@ export const CaseStudiesHeroSection = () => {
               {/* Tag / Eyebrow */}
               <div className="flex items-center gap-[6px]">
                 <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6]" />
-                <span className="body-caption tracking-[0.01em] text-[#7D8690]">
+                <span
+                  data-motion-reveal="scramble"
+                  className="body-caption tracking-[0.01em] text-[#7D8690]"
+                >
                   Case Study · Behavioral Health
                 </span>
               </div>
 
               {/* Title & Subtitle */}
               <div className="flex w-full flex-col items-start gap-[10px]">
-                <h1 className="type-h3 sm:type-h2 text-[#111111]">
+                <h1
+                  data-motion-reveal="lines"
+                  data-motion-start="top 100%"
+                  className="type-h3 sm:type-h2 text-[#111111]"
+                >
                   How a behavioral health practice used{' '}
                   <span className="text-[#0F68D6]">
                     Waterlabs to cut benefits verification from 4 days to 1.
                   </span>
                 </h1>
-                <p className="type-body-xs text-[#2A2A2A]">
+                <p
+                  data-motion-reveal="blur"
+                  data-motion-start="top 100%"
+                  className="type-body-xs text-[#2A2A2A]"
+                >
                   An outpatient intake operation where every new patient waited on a phone call
                   before anyone could book them in.
                 </p>

@@ -4,7 +4,7 @@ import Navbar from '@/components/common/navbar';
 
 export const CultureHeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-[#F4F6F9]">
+    <section data-motion-section="hero" className="relative w-full overflow-hidden bg-[#F4F6F9]">
       {/* 
         Culture Hero Banner (Figma Specifications):
         - Desktop: 1440px x 653px, border-radius: 0px 0px 0px 60px, padding: 40px 60px 80px, gap: 32px
@@ -21,7 +21,13 @@ export const CultureHeroSection = () => {
         }}
       >
         {/* Background Banner Graphic */}
-        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]">
+        <div
+          data-motion-banner
+          data-motion-src="/images/culture/hero-section/banner%20(4).png"
+          data-motion-reveal="banner"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-bl-[30px] lg:rounded-bl-[60px]"
+        >
           <Image
             src="/images/culture/hero-section/banner%20(4).png"
             alt="Culture Hero Background"
@@ -37,22 +43,40 @@ export const CultureHeroSection = () => {
         </div>
 
         {/* Introduction Section (1320px x 441px) */}
-        <div className="relative z-10 mx-auto my-auto flex w-full max-w-[1320px] flex-1 flex-col items-center justify-between gap-[24px] lg:flex-row lg:gap-[32px] xl:gap-[40px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="relative z-10 mx-auto my-auto flex w-full max-w-[1320px] flex-1 flex-col items-center justify-between gap-[24px] lg:flex-row lg:gap-[32px] xl:gap-[40px]"
+        >
           {/* Left Column: Introduction Content (order-2 on small screens, order-1 on desktop) */}
           <div className="order-2 flex w-full min-w-0 flex-col items-start justify-center gap-[16px] lg:order-1 lg:w-1/2 lg:gap-[20px] xl:w-[650px]">
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
               <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-              <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+              <span
+                data-motion-reveal="scramble"
+                className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+              >
                 People &amp; Culture
               </span>
             </div>
 
             {/* Main Headline */}
-            <h2 className="type-h1 text-white">Built by people who stayed close to the problem.</h2>
+            <h2
+              data-motion-reveal="lines"
+              data-motion-start="top 100%"
+              className="type-h1 text-white"
+            >
+              Built by people who stayed close to the problem.
+            </h2>
 
             {/* Subtext Paragraph */}
-            <p className="type-body-s max-w-[650px] leading-relaxed text-[#F4F6F9]">
+            <p
+              data-motion-reveal="blur"
+              data-motion-start="top 100%"
+              className="type-body-s max-w-[650px] leading-relaxed text-[#F4F6F9]"
+            >
               Waterlabs is a technology company with people at its center. We built our culture like
               our product, around ownership. You get clear expectations, real feedback, and room to
               do work that matters. In return, we ask one thing. Own the outcome.
@@ -60,8 +84,13 @@ export const CultureHeroSection = () => {
           </div>
 
           {/* Right Column: Introduction Image Card (order-1 on small screens, order-2 on desktop) */}
-          <div className="relative order-1 h-[300px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-lg sm:h-[380px] lg:order-2 lg:h-[420px] lg:w-1/2 xl:h-[441px] xl:w-[650px]">
+          <div
+            data-motion-reveal="image"
+            data-motion-start="top 100%"
+            className="relative order-1 h-[300px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-lg sm:h-[380px] lg:order-2 lg:h-[420px] lg:w-1/2 xl:h-[441px] xl:w-[650px]"
+          >
             <Image
+              data-motion-parallax
               src="/images/culture/hero-section/introduction_banner.png"
               alt="People at Waterlabs"
               fill

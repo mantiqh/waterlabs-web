@@ -10,22 +10,70 @@ gsap.registerPlugin(ScrollTrigger, SplitText, ScrambleTextPlugin);
 export type MotionCleanup = () => void;
 
 export interface MotionMetric {
-  value: number;
+  value?: number;
   prefix: string;
   suffix: string;
   decimals: number;
+  isRange?: boolean;
+  min?: number;
+  max?: number;
+  isFraction?: boolean;
+  fractionTotal?: number;
 }
 
 export function parseMotionMetric(text: string): MotionMetric | null {
-  const match = text.match(
-    /^([$£€]?)(-?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?)([%KMBkmb+]?)(?:\s*)$/,
+  const trimmed = text.trim();
+
+  // 1. Check Range: e.g. "30–70%", "30-70%", "$25–181", "60%–70%"
+  const rangeMatch = trimmed.match(
+    /^([$£€<+≈~≥≤>±~]|[-+][$£€])?\s*(\d+)(?:%|px)?\s*[–-]\s*([$£€<+≈~≥≤>±~]|[-+][$£€])?\s*(\d+)(.*)$/,
+  );
+  if (rangeMatch) {
+    return {
+      isRange: true,
+      min: Number(rangeMatch[2]),
+      max: Number(rangeMatch[4]),
+      prefix: rangeMatch[1] ?? '',
+      suffix: rangeMatch[5] ?? '',
+      decimals: 0,
+    };
+  }
+
+  // 2. Check Fraction: e.g. "30 / 30"
+  const fractionMatch = trimmed.match(/^(\d+)\s*\/\s*(\d+)$/);
+  if (fractionMatch) {
+    return {
+      isFraction: true,
+      value: Number(fractionMatch[1]),
+      fractionTotal: Number(fractionMatch[2]),
+      prefix: '',
+      suffix: ` / ${fractionMatch[2]}`,
+      decimals: 0,
+    };
+  }
+
+  // 3. Standard Number / Currency / Multiplier / Unit: e.g. "95%", "100+", "4,000+", "$4.2M", "2 weeks", "24 hrs", "≈6,000", "+35%"
+  const match = trimmed.match(
+    /^([$£€<+≈~≥≤>±~]|[-+][$£€]|(?:Up to|Under|About|Approx\.?)\s+)?(-?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?)(.*)$/i,
   );
   if (!match) return null;
+  const suffix = match[3] ?? '';
+  const suffixMatch = suffix.match(
+    /^(\s*(?:%[+]?|[KMBkmbxX+]|hrs?|days?|weeks?|months?|x\s+\w+))\s*$/i,
+  );
+  if (suffix.trim() && !suffixMatch) return null;
+
+  const rawNumber = match[2];
+  const cleanNumber = rawNumber.replace(/,/g, '');
+  const value = Number(cleanNumber);
+  if (Number.isNaN(value)) return null;
+
+  const decimals = cleanNumber.includes('.') ? cleanNumber.split('.')[1].length : 0;
   return {
-    value: Number(match[2].replaceAll(',', '')),
-    prefix: match[1],
-    suffix: match[3],
-    decimals: match[2].split('.')[1]?.length ?? 0,
+    value,
+    prefix: match[1] ?? '',
+    suffix: suffixMatch ? suffixMatch[1] : suffix,
+    decimals,
   };
 }
 
@@ -158,7 +206,13 @@ export function mountPageMotion(
         // A sticky sequence moves with its neighboring sections. Observe their actual
         // viewport entry rather than a document scroll position calculated before pinning.
         const observeSequenceEntry = (element: HTMLElement, animation: gsap.core.Animation) => {
-          if (!element.closest('[data-economic-sequence]')) return false;
+          if (element.hasAttribute('data-scene-content')) return false;
+          if (
+            !element.closest(
+              '[data-economic-sequence], [data-philosophy-sequence], [data-motion-scene="comparison"]',
+            )
+          )
+            return false;
           const observer = new IntersectionObserver(
             (entries) => {
               if (entries.some((entry) => entry.isIntersecting)) {
@@ -175,8 +229,11 @@ export function mountPageMotion(
         const foregroundStart = 0.6;
         root.querySelectorAll<HTMLElement>('[data-motion-reveal]').forEach((target) => {
           const kind = target.dataset.motionReveal;
-          const section = target.closest<HTMLElement>('[data-home-section]');
-          const intro = section?.dataset.homeSection === 'hero';
+          const section = target.closest<HTMLElement>(
+            '[data-motion-section], [data-home-section], section',
+          );
+          const intro =
+            section?.dataset.homeSection === 'hero' || section?.dataset.motionSection === 'hero';
           const excluded = kind === 'card' ? target.parentElement : target;
           if (
             !target.getClientRects().length ||
@@ -190,7 +247,7 @@ export function mountPageMotion(
           hosts.add(element);
           const rect = element.getBoundingClientRect();
           if (rect.right <= 0 || rect.left >= innerWidth) return;
-          if (rect.bottom < 0 || (!animateVisible && rect.top < innerHeight)) {
+          if ((rect.bottom < 0 && !intro) || (!animateVisible && rect.top < innerHeight)) {
             seen.add(target);
             return;
           }
@@ -210,7 +267,10 @@ export function mountPageMotion(
               element.style.willChange =
                 kind === 'navbar-shell'
                   ? 'opacity'
-                  : kind === 'panel' || kind === 'image'
+                  : kind === 'panel' ||
+                      kind === 'panel-ltr' ||
+                      kind === 'panel-rtl' ||
+                      kind === 'image'
                     ? 'clip-path'
                     : kind === 'blur'
                       ? 'transform,opacity,filter'
@@ -222,7 +282,10 @@ export function mountPageMotion(
                 clearProps:
                   kind === 'navbar-shell'
                     ? 'opacity,visibility'
-                    : kind === 'panel' || kind === 'image'
+                    : kind === 'panel' ||
+                        kind === 'panel-ltr' ||
+                        kind === 'panel-rtl' ||
+                        kind === 'image'
                       ? 'clip-path,opacity,visibility'
                       : kind === 'blur'
                         ? 'transform,opacity,visibility,filter'
@@ -241,29 +304,30 @@ export function mountPageMotion(
           });
           gsap.set(element, { autoAlpha: 0 });
           if (kind === 'lines' || kind === 'words') {
-            let textAnimation: gsap.core.Tween | undefined;
             split = SplitText.create(element, {
               type: kind === 'words' ? 'lines,words' : 'lines',
               mask: 'lines',
               autoSplit: true,
-              onSplit: (self) => {
-                textAnimation = gsap.fromTo(
-                  kind === 'words' ? self.words : self.lines,
-                  { yPercent: 110 },
-                  {
-                    yPercent: 0,
-                    duration: Number.isFinite(duration) ? duration : 1.15,
-                    stagger:
-                      Number.parseFloat(target.dataset.motionStagger ?? '') ||
-                      (kind === 'words' ? 0.035 : 0.1),
-                    ease: 'power3.out',
-                  },
-                );
-                return textAnimation;
-              },
             });
+            const targets = (kind === 'words' ? split.words : split.lines)?.length
+              ? kind === 'words'
+                ? split.words
+                : split.lines
+              : [element];
+            const textAnimation = gsap.fromTo(
+              targets,
+              { yPercent: 110 },
+              {
+                yPercent: 0,
+                duration: Number.isFinite(duration) ? duration : 1.15,
+                stagger:
+                  Number.parseFloat(target.dataset.motionStagger ?? '') ||
+                  (kind === 'words' ? 0.035 : 0.1),
+                ease: 'power3.out',
+              },
+            );
             timeline.to(element, { autoAlpha: 1, duration: 0.18 }, 0);
-            if (textAnimation) timeline.add(textAnimation, 0);
+            timeline.add(textAnimation, 0);
           } else if (kind === 'blur') {
             // Descriptions reveal as a whole block, rather than as individual words.
             gsap.set(element, { y: 18, filter: 'blur(6px)' });
@@ -312,18 +376,32 @@ export function mountPageMotion(
               },
               0,
             );
-          } else if (kind === 'panel') {
+          } else if (kind === 'panel' || kind === 'panel-ltr') {
             gsap.set(element, { clipPath: 'inset(0% 100% 0% 0%)' });
             timeline.set(element, { autoAlpha: 1 }, 0).to(
               element,
               {
                 clipPath: 'inset(0% 0% 0% 0%)',
-                duration: 1.6,
+                duration: Number.isFinite(duration) ? duration : 1.6,
                 ease: 'expo.inOut',
               },
               0,
             );
             // A keyboard user can reach the CTA while its containing panel is revealing.
+            const finish = () => timeline.progress(1);
+            element.addEventListener('focusin', finish);
+            restores.push(() => element.removeEventListener('focusin', finish));
+          } else if (kind === 'panel-rtl') {
+            gsap.set(element, { clipPath: 'inset(0% 0% 0% 100%)' });
+            timeline.set(element, { autoAlpha: 1 }, 0).to(
+              element,
+              {
+                clipPath: 'inset(0% 0% 0% 0%)',
+                duration: Number.isFinite(duration) ? duration : 1.6,
+                ease: 'expo.inOut',
+              },
+              0,
+            );
             const finish = () => timeline.progress(1);
             element.addEventListener('focusin', finish);
             restores.push(() => element.removeEventListener('focusin', finish));
@@ -406,7 +484,10 @@ export function mountPageMotion(
             const position = Number.isFinite(at)
               ? at
               : !intro
-                ? kind === 'scramble' || kind === 'panel'
+                ? kind === 'scramble' ||
+                  kind === 'panel' ||
+                  kind === 'panel-ltr' ||
+                  kind === 'panel-rtl'
                   ? 0
                   : kind === 'lines' || kind === 'words'
                     ? 0.1
@@ -462,7 +543,7 @@ export function mountPageMotion(
           ScrollTrigger.create({
             trigger:
               group.getAttribute('data-motion-trigger') === 'section'
-                ? (group.closest('[data-home-section]') ?? group)
+                ? (group.closest('[data-motion-section], [data-home-section], section') ?? group)
                 : group,
             start: group.getAttribute('data-motion-start') ?? 'top 82%',
             once: true,
@@ -474,29 +555,153 @@ export function mountPageMotion(
           if (!target.getClientRects().length) return;
           const text = target.textContent ?? '';
           const metric = parseMotionMetric(text);
-          if (!metric) return;
+          if (!target.hasAttribute('aria-label')) {
+            target.setAttribute('aria-label', text);
+          }
           restores.push(() => {
             target.textContent = text;
+            target.removeAttribute('aria-label');
+            gsap.set(target, { clearProps: 'all' });
           });
-          const card = target.closest<HTMLElement>('[data-motion-reveal]');
+          const card = target.closest<HTMLElement>('[data-motion-reveal], [data-metric-card]');
+          const section = target.closest<HTMLElement>(
+            '[data-motion-section], [data-home-section], section',
+          );
+          const intro =
+            section?.dataset.homeSection === 'hero' || section?.dataset.motionSection === 'hero';
+
+          const parentContainer = card?.parentElement ?? target.parentElement;
+          const cards = parentContainer
+            ? Array.from(parentContainer.querySelectorAll<HTMLElement>('[data-metric-card]'))
+            : [];
+          const cardIndex =
+            card && cards.length
+              ? Math.max(0, cards.indexOf(card))
+              : parentContainer
+                ? Array.from(
+                    parentContainer.querySelectorAll<HTMLElement>('[data-motion-metric-value]'),
+                  ).indexOf(target)
+                : 0;
+          const explicitAt = Number.parseFloat(card?.dataset.motionAt ?? '');
+          const delay = Number.isFinite(explicitAt)
+            ? explicitAt
+            : intro
+              ? 0.75 + cardIndex * 0.12
+              : cardIndex * 0.12;
+
+          const startText = text.replace(/\d/g, '0');
+          target.innerHTML = Array.from(startText)
+            .map(
+              (char) =>
+                `<span class="metric-character inline-block" style="display:inline-block;">${char === ' ' ? '&nbsp;' : char}</span>`,
+            )
+            .join('');
+          const chars = Array.from(target.querySelectorAll<HTMLElement>('.metric-character'));
+          gsap.set(chars, { yPercent: 110, opacity: 0 });
+
+          const animateMetric = () => {
+            const tl = gsap.timeline({ delay });
+
+            // 1. Character-by-character staggered slide-up from bottom
+            tl.to(chars, {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.65,
+              stagger: 0.045,
+              ease: 'power3.out',
+            });
+
+            // 2. Number roll
+            if (metric) {
+              if (metric.isRange && metric.min !== undefined && metric.max !== undefined) {
+                const rangeVal = { min: 0, max: 0 };
+                tl.to(
+                  rangeVal,
+                  {
+                    min: metric.min,
+                    max: metric.max,
+                    duration: 2.0,
+                    ease: 'expo.out',
+                    onUpdate: () => {
+                      target.textContent = `${metric.prefix}${Math.round(rangeVal.min)}–${Math.round(rangeVal.max)}${metric.suffix}`;
+                    },
+                    onComplete: () => {
+                      target.textContent = text;
+                      gsap.set(target, { clearProps: 'all' });
+                    },
+                  },
+                  '-=0.15',
+                );
+              } else if (
+                metric.isFraction &&
+                metric.fractionTotal !== undefined &&
+                metric.value !== undefined
+              ) {
+                const fracVal = { current: 0 };
+                tl.to(
+                  fracVal,
+                  {
+                    current: metric.value,
+                    duration: 2.0,
+                    ease: 'expo.out',
+                    onUpdate: () => {
+                      target.textContent = `${Math.round(fracVal.current)} / ${metric.fractionTotal}`;
+                    },
+                    onComplete: () => {
+                      target.textContent = text;
+                      gsap.set(target, { clearProps: 'all' });
+                    },
+                  },
+                  '-=0.15',
+                );
+              } else if (metric.value !== undefined) {
+                const value = { current: 0 };
+                tl.to(
+                  value,
+                  {
+                    current: metric.value,
+                    duration: 2.0,
+                    ease: 'expo.out',
+                    onUpdate: () => {
+                      target.textContent = `${metric.prefix}${value.current.toLocaleString(
+                        'en-US',
+                        {
+                          minimumFractionDigits: metric.decimals,
+                          maximumFractionDigits: metric.decimals,
+                          useGrouping: text.includes(','),
+                        },
+                      )}${metric.suffix}`;
+                    },
+                    onComplete: () => {
+                      target.textContent = text;
+                      gsap.set(target, { clearProps: 'all' });
+                    },
+                  },
+                  '-=0.15',
+                );
+              }
+            } else {
+              tl.add(() => {
+                target.textContent = text;
+                gsap.set(target, { clearProps: 'all' });
+              });
+            }
+          };
+
+          const group = target.closest<HTMLElement>('[data-motion-group]');
+          const groupTrigger =
+            group?.getAttribute('data-motion-trigger') === 'section'
+              ? (group.closest('[data-motion-section], [data-home-section], section') ?? group)
+              : (group ?? card ?? target);
+          const groupStart =
+            group?.getAttribute('data-motion-start') ?? (card ? 'top 85%' : 'top 88%');
+
           ScrollTrigger.create({
-            trigger: card ?? target,
-            start: card ? 'top 82%' : 'top 88%',
+            trigger: groupTrigger,
+            start: groupStart,
             once: true,
             onEnter: contextSafe(() => {
-              const value = { current: 0 };
-              gsap.to(value, {
-                current: metric.value,
-                duration: 2.2,
-                delay: Number.parseFloat(card?.dataset.motionAt ?? '') || 0,
-                ease: 'expo.out',
-                onUpdate: () => {
-                  target.textContent = `${metric.prefix}${value.current.toLocaleString('en-US', { minimumFractionDigits: metric.decimals, maximumFractionDigits: metric.decimals, useGrouping: text.includes(',') })}${metric.suffix}`;
-                },
-                onComplete: () => {
-                  target.textContent = text;
-                },
-              });
+              animateMetric();
             }),
           });
         });
@@ -530,30 +735,54 @@ export function mountPageMotion(
             delete target.dataset.motionFooter;
             delete target.dataset.motionEntry;
           });
-          const animation = gsap.from(target, {
-            paused: true,
-            ...(divider
+          const animation = gsap.fromTo(
+            target,
+            divider
               ? { scaleX: 0, transformOrigin: '0% 50%' }
-              : { y: index < 0 ? 16 : 30, opacity: 0 }),
-            duration: divider ? 1.4 : 1.1,
-            delay: Math.max(0, index) * 0.08,
-            ease: 'power3.out',
-            onStart: () => {
-              seen.add(target);
-              target.dataset.motionEntry = 'running';
+              : { y: index < 0 ? 16 : 30, opacity: 0 },
+            {
+              paused: true,
+              ...(divider ? { scaleX: 1, transformOrigin: '0% 50%' } : { y: 0, opacity: 1 }),
+              duration: divider ? 1.4 : 1.1,
+              delay: Math.max(0, index) * 0.08,
+              ease: 'power3.out',
+              onStart: () => {
+                seen.add(target);
+                target.dataset.motionEntry = 'running';
+              },
+              onComplete: () => {
+                target.dataset.motionEntry = 'complete';
+              },
+              clearProps: 'transform,transformOrigin,opacity',
             },
-            onComplete: () => {
-              target.dataset.motionEntry = 'complete';
-            },
-            clearProps: 'transform,transformOrigin,opacity',
+          );
+          ScrollTrigger.create({
+            trigger: target,
+            start: 'top 98%',
+            once: true,
+            onEnter: () => animation.play(),
           });
-          ScrollTrigger.create({ trigger: target, start: 'clamp(top 90%)', once: true, animation });
         };
         Array.from(footerGrid?.children ?? []).forEach((column, index) =>
           revealFooter(column, index),
         );
         revealFooter(footerGrid?.nextElementSibling, 0, true);
         revealFooter(footerGrid?.nextElementSibling?.nextElementSibling, -1);
+        const dynamicDecks = root.querySelectorAll<HTMLElement>('[data-deck], .culture-card-stack');
+        if (dynamicDecks.length) {
+          let deckRaf: number | undefined;
+          const deckObserver = new ResizeObserver(() => {
+            if (deckRaf) cancelAnimationFrame(deckRaf);
+            deckRaf = requestAnimationFrame(() => {
+              ScrollTrigger.refresh();
+            });
+          });
+          dynamicDecks.forEach((d) => deckObserver.observe(d));
+          restores.push(() => {
+            if (deckRaf) cancelAnimationFrame(deckRaf);
+            deckObserver.disconnect();
+          });
+        }
         // Final geometry and clamp-to-page-end positions depend on all prepared reveals.
         ScrollTrigger.refresh();
         function contextSafe(callback: () => void) {

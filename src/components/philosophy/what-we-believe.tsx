@@ -1,7 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { mountCarouselAutoplay } from '@/lib/motion/motion';
 
 const ChevronRight = ({ className }: { className?: string }) => (
   <svg
@@ -71,24 +73,34 @@ const convictionsData = [
 
 export const WhatWeBelieveSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    return mountCarouselAutoplay(
+      sectionRef.current,
+      () => setCurrentSlide((curr) => (curr + 1) % convictionsData.length),
+      6000,
+    );
+  }, []);
 
   const isFirst = currentSlide === 0;
   const isLast = currentSlide === convictionsData.length - 1;
 
   const handlePrev = () => {
-    if (!isFirst) {
-      setCurrentSlide((prev) => prev - 1);
-    }
+    setCurrentSlide((prev) => (prev === 0 ? convictionsData.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    if (!isLast) {
-      setCurrentSlide((prev) => prev + 1);
-    }
+    setCurrentSlide((prev) => (prev + 1) % convictionsData.length);
   };
 
   return (
-    <section className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#111111] from-50% to-[#2481ce] to-50% p-0">
+    <section
+      ref={sectionRef}
+      data-motion-section
+      className="relative m-0 w-full overflow-hidden bg-gradient-to-b from-[#111111] from-50% to-[#2481ce] to-50% p-0"
+    >
       {/* 
         Top Frame Card:
         - Desktop: 1440px x 597px (inner max-w: 1320px), padding: 80px 60px, rounded-tl-[60px] rounded-bl-[60px]
@@ -102,17 +114,26 @@ export const WhatWeBelieveSection = () => {
             {/* Left Column: Heading, Subtitle & Syncing 3D Graphic */}
             <div className="flex h-full w-[38%] max-w-[512px] shrink-0 flex-col justify-between xl:w-[512px]">
               {/* Header Text Block */}
-              <div className="flex flex-col gap-[10px] xl:gap-[14px]">
-                <h2 className="type-h2 text-[#111111]">
+              <div
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 75%"
+                className="flex flex-col gap-[10px] xl:gap-[14px]"
+              >
+                <h2 data-motion-reveal="lines" className="type-h2 text-[#111111]">
                   What <span className="text-[#0F68D6]">we believe</span>
                 </h2>
-                <p className="type-body-xs text-[#111111]">
+                <p data-motion-reveal="blur" className="type-body-xs text-[#111111]">
                   Three convictions sit under everything we build.
                 </p>
               </div>
 
               {/* Left Image Card with Smooth Cross-Fade Animation */}
-              <div className="relative h-[220px] w-full shrink-0 overflow-hidden rounded-[30px_10px_30px_10px] border-b border-[#91C6F2] xl:h-[287px] xl:rounded-[40px_10px_40px_10px]">
+              <div
+                data-motion-reveal="image"
+                data-motion-trigger="section"
+                className="relative h-[220px] w-full shrink-0 overflow-hidden rounded-[30px_10px_30px_10px] border-b border-[#91C6F2] xl:h-[287px] xl:rounded-[40px_10px_40px_10px]"
+              >
                 {convictionsData.map((item, idx) => (
                   <div
                     key={`desktop-img-${item.id}`}
@@ -123,6 +144,7 @@ export const WhatWeBelieveSection = () => {
                     }`}
                   >
                     <Image
+                      data-motion-parallax
                       src={item.image}
                       alt={item.title}
                       fill
@@ -208,35 +230,39 @@ export const WhatWeBelieveSection = () => {
                 <div className="flex items-center gap-[10px] xl:gap-[14px]">
                   {/* Prev Button */}
                   <button
+                    data-motion-reveal="fade"
+                    data-motion-magnetic
                     type="button"
                     aria-label="Previous conviction"
                     onClick={handlePrev}
                     disabled={isFirst}
-                    className={`flex h-[42px] w-[42px] items-center justify-center rounded-[64px] transition-all duration-300 outline-none xl:h-[48px] xl:w-[48px] ${
+                    className={`group flex h-[42px] w-[42px] items-center justify-center rounded-[64px] transition-all duration-300 outline-none xl:h-[48px] xl:w-[48px] ${
                       isFirst
                         ? 'cursor-not-allowed border border-white bg-transparent text-white'
                         : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm hover:scale-105 active:scale-95'
                     }`}
                   >
                     <ChevronLeft
-                      className={`h-[16px] w-[11px] xl:h-[18px] xl:w-[12px] ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`}
+                      className={`h-[16px] w-[11px] transition-transform duration-300 xl:h-[18px] xl:w-[12px] [@media(hover:hover)]:group-hover:-translate-x-1 ${isFirst ? 'text-white' : 'text-[#0F68D6]'}`}
                     />
                   </button>
 
                   {/* Next Button */}
                   <button
+                    data-motion-reveal="fade"
+                    data-motion-magnetic
                     type="button"
                     aria-label="Next conviction"
                     onClick={handleNext}
                     disabled={isLast}
-                    className={`flex h-[42px] w-[42px] items-center justify-center rounded-[64px] transition-all duration-300 outline-none xl:h-[48px] xl:w-[48px] ${
+                    className={`group flex h-[42px] w-[42px] items-center justify-center rounded-[64px] transition-all duration-300 outline-none xl:h-[48px] xl:w-[48px] ${
                       isLast
                         ? 'cursor-not-allowed border border-white bg-transparent text-white'
                         : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm hover:scale-105 active:scale-95'
                     }`}
                   >
                     <ChevronRight
-                      className={`h-[16px] w-[11px] xl:h-[18px] xl:w-[12px] ${isLast ? 'text-white' : 'text-[#0F68D6]'}`}
+                      className={`h-[16px] w-[11px] transition-transform duration-300 xl:h-[18px] xl:w-[12px] [@media(hover:hover)]:group-hover:translate-x-1 ${isLast ? 'text-white' : 'text-[#0F68D6]'}`}
                     />
                   </button>
                 </div>
@@ -247,11 +273,16 @@ export const WhatWeBelieveSection = () => {
           {/* Mobile & Tablet Layout (<1024px, Figma node 3883-12296) */}
           <div className="flex w-full flex-col gap-[32px] lg:hidden">
             {/* Mobile Header Block */}
-            <div className="flex w-full flex-col gap-[12px]">
-              <h2 className="type-h2 text-[#111111]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 75%"
+              className="flex w-full flex-col gap-[12px]"
+            >
+              <h2 data-motion-reveal="lines" className="type-h2 text-[#111111]">
                 What <span className="text-[#0F68D6]">we believe</span>
               </h2>
-              <p className="type-body-xs text-[#111111]">
+              <p data-motion-reveal="blur" className="type-body-xs text-[#111111]">
                 Three convictions sit under everything we build.
               </p>
             </div>
@@ -275,7 +306,11 @@ export const WhatWeBelieveSection = () => {
               </div>
 
               {/* Mobile Card Top Image with Smooth Cross-Fade Animation */}
-              <div className="relative h-[190px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px]">
+              <div
+                data-motion-reveal="image"
+                data-motion-trigger="section"
+                className="relative h-[190px] w-full shrink-0 overflow-hidden rounded-[20px_10px_20px_20px]"
+              >
                 {convictionsData.map((item, idx) => (
                   <div
                     key={`mobile-img-${item.id}`}
@@ -286,6 +321,7 @@ export const WhatWeBelieveSection = () => {
                     }`}
                   >
                     <Image
+                      data-motion-parallax
                       src={item.image}
                       alt={item.title}
                       fill
@@ -351,35 +387,39 @@ export const WhatWeBelieveSection = () => {
                   <div className="flex items-center gap-[8px]">
                     {/* Prev */}
                     <button
+                      data-motion-reveal="fade"
+                      data-motion-magnetic
                       type="button"
                       aria-label="Previous conviction"
                       onClick={handlePrev}
                       disabled={isFirst}
-                      className={`flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
+                      className={`group flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
                         isFirst
                           ? 'cursor-not-allowed border border-white bg-transparent text-[#D7DCE2]'
                           : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm active:scale-95'
                       }`}
                     >
                       <ChevronLeft
-                        className={`h-[13px] w-[9px] ${isFirst ? 'text-[#D7DCE2]' : 'text-[#0F68D6]'}`}
+                        className={`h-[13px] w-[9px] transition-transform duration-300 [@media(hover:hover)]:group-hover:-translate-x-1 ${isFirst ? 'text-[#D7DCE2]' : 'text-[#0F68D6]'}`}
                       />
                     </button>
 
                     {/* Next */}
                     <button
+                      data-motion-reveal="fade"
+                      data-motion-magnetic
                       type="button"
                       aria-label="Next conviction"
                       onClick={handleNext}
                       disabled={isLast}
-                      className={`flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
+                      className={`group flex h-[34px] w-[34px] items-center justify-center rounded-[45px] transition-all duration-300 outline-none ${
                         isLast
                           ? 'cursor-not-allowed border border-white bg-transparent text-[#D7DCE2]'
                           : 'cursor-pointer border-none bg-white text-[#0F68D6] shadow-sm active:scale-95'
                       }`}
                     >
                       <ChevronRight
-                        className={`h-[13px] w-[9px] ${isLast ? 'text-[#D7DCE2]' : 'text-[#0F68D6]'}`}
+                        className={`h-[13px] w-[9px] transition-transform duration-300 [@media(hover:hover)]:group-hover:translate-x-1 ${isLast ? 'text-[#D7DCE2]' : 'text-[#0F68D6]'}`}
                       />
                     </button>
                   </div>

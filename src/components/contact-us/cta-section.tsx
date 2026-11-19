@@ -24,7 +24,10 @@ export const ContactUsCTASection = ({
     '/images/contact-us/cta-section/img_start_building_waterlas_today_mobile.png',
 }: ContactUsCTASectionProps) => {
   return (
-    <section className="from-ghost-white relative w-full overflow-hidden bg-gradient-to-b from-50% to-[#111111] to-50%">
+    <section
+      data-motion-section
+      className="from-ghost-white relative w-full overflow-hidden bg-gradient-to-b from-50% to-[#111111] to-50%"
+    >
       {/* 
         Start Building CTA Section:
         - Desktop: 1440px, padding: 80px 60px, gap: 48px, border-radius: 0px 20px 20px 0px
@@ -63,11 +66,16 @@ export const ContactUsCTASection = ({
         </div>
 
         {/* Content */}
-        <div className="relative z-10 mx-auto w-full max-w-[1320px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 85%"
+          className="relative z-10 mx-auto w-full max-w-[1320px]"
+        >
           <div className="flex flex-col items-start justify-between gap-[20px] lg:flex-row lg:items-end">
             {/* Heading */}
             <div className="flex flex-col items-start justify-center gap-[20px]">
-              <h2 className="type-h3 max-w-[873px] tracking-[-0.01em]">
+              <h2 data-motion-reveal="lines" className="type-h3 max-w-[873px] tracking-[-0.01em]">
                 <span className="text-white">
                   {heading}
                   {headingHighlight ? <br /> : null}
@@ -79,7 +87,13 @@ export const ContactUsCTASection = ({
             {/* CTA Button */}
             <div className="shrink-0">
               <Link href={buttonLink}>
-                <CTA variant="dark-bg" size="compact-mobile">
+                <CTA
+                  data-motion-reveal="fade"
+                  data-motion-at="0.15"
+                  data-motion-magnetic
+                  variant="dark-bg"
+                  size="compact-mobile"
+                >
                   {buttonText}
                 </CTA>
               </Link>

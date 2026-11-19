@@ -27,11 +27,12 @@ export interface SceneOptions {
   onIndex: (index: number) => void;
   onMode: (mode: SceneMode) => void;
   kind?: 'accordion' | 'comparison';
+  allowMobile?: boolean;
 }
 
 export function mountScrollScene(
   root: HTMLElement,
-  { count, onIndex, onMode, kind = 'accordion' }: SceneOptions,
+  { count, onIndex, onMode, kind = 'accordion', allowMobile }: SceneOptions,
 ): MotionCleanup {
   const content = root.querySelector<HTMLElement>('[data-scene-content]');
   const surface = root.querySelector<HTMLElement>('[data-scene-surface]');
@@ -102,7 +103,7 @@ export function mountScrollScene(
       height + mobileNavHeight,
       reduced.matches,
       count,
-      kind === 'comparison',
+      allowMobile ?? kind === 'comparison',
     );
     const mode: SceneMode = pinned ? 'pinned' : 'flow';
     if (kind === 'comparison') {

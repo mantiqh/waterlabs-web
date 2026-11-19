@@ -7,7 +7,7 @@ import bannerMobile from '../../../public/images/ROI/hero-section/img_banner_mob
 
 export const ROIHeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section data-motion-section="hero" className="relative w-full overflow-hidden">
       {/*
         Hero Banner (Figma Specifications):
         - Desktop: 1440px x 622px, background: linear-gradient(180deg, #0F68D6 68.83%, #63CCB7 108.85%),
@@ -21,7 +21,13 @@ export const ROIHeroSection = () => {
         }}
       >
         {/* Desktop Background Image */}
-        <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
+        <div
+          data-motion-banner
+          data-motion-src="/images/ROI/hero-section/img_banner_bg (2).png"
+          data-motion-reveal="banner"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 hidden lg:block"
+        >
           <Image
             src="/images/ROI/hero-section/img_banner_bg (2).png"
             alt=""
@@ -32,7 +38,13 @@ export const ROIHeroSection = () => {
         </div>
 
         {/* Mobile / Tablet Background Image */}
-        <div className="pointer-events-none absolute inset-0 z-0 block lg:hidden">
+        <div
+          data-motion-banner
+          data-motion-src="/images/ROI/hero-section/img_banner_bg_mobile (3).png"
+          data-motion-reveal="banner"
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0 block lg:hidden"
+        >
           <Image
             src="/images/ROI/hero-section/img_banner_bg_mobile (3).png"
             alt=""
@@ -48,10 +60,19 @@ export const ROIHeroSection = () => {
         </div>
 
         {/* Content Area: Text + Image side-by-side (desktop) / stacked (mobile) */}
-        <div className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-1 flex-col items-start gap-[20px] lg:flex-row lg:items-center lg:gap-[32px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="relative z-10 mx-auto flex w-full max-w-[1320px] flex-1 flex-col items-start gap-[20px] lg:flex-row lg:items-center lg:gap-[32px]"
+        >
           {/* Left: Headline */}
           <div className="w-full lg:flex-1">
-            <h1 className="type-h2 tracking-[-0.01em] text-white">
+            <h1
+              data-motion-reveal="lines"
+              data-motion-start="top 100%"
+              className="type-h2 tracking-[-0.01em] text-white"
+            >
               Find out what your revenue cycle actually costs you. Then find out what it could cost
               instead.
             </h1>
@@ -60,8 +81,13 @@ export const ROIHeroSection = () => {
           {/* Right: Hero Image */}
           <div className="relative w-full lg:flex-1">
             {/* Desktop image */}
-            <div className="relative hidden aspect-[644/425] w-full overflow-hidden rounded-[20px_10px_20px_20px] md:block">
+            <div
+              data-motion-reveal="image"
+              data-motion-start="top 100%"
+              className="relative hidden aspect-[644/425] w-full overflow-hidden rounded-[20px_10px_20px_20px] md:block"
+            >
               <Image
+                data-motion-parallax
                 src={bannerDesktop}
                 alt="ROI Calculator preview showing estimated savings and revenue opportunity"
                 fill
@@ -70,8 +96,13 @@ export const ROIHeroSection = () => {
               />
             </div>
             {/* Mobile image */}
-            <div className="relative block aspect-[362/246] w-full overflow-hidden rounded-[20px_10px_20px_20px] md:hidden">
+            <div
+              data-motion-reveal="image"
+              data-motion-start="top 100%"
+              className="relative block aspect-[362/246] w-full overflow-hidden rounded-[20px_10px_20px_20px] md:hidden"
+            >
               <Image
+                data-motion-parallax
                 src={bannerMobile}
                 alt="ROI Calculator preview showing estimated savings and revenue opportunity"
                 fill

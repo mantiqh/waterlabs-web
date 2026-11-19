@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
 import Navbar from '@/components/common/navbar';
+import PageMotion from '@/components/common/page-motion';
 import { CTA } from '@/components/CTA';
-import { AnimatedMetric } from '@/components/ui/animated-metric';
 import { MetricScrollIndicators } from '@/components/ui/carousel-indicators';
 import { CURIECODE_PAGE_DATA } from '@/data/curiecode';
 
@@ -22,22 +22,51 @@ const data = CURIECODE_PAGE_DATA.hero;
 
 export default function CurieCodePage() {
   return (
-    <div className="bg-ghost-white w-full overflow-x-clip">
-      <section className="relative z-50 flex flex-col overflow-hidden rounded-br-[30px] bg-black text-white lg:rounded-br-[60px]">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="bg-ghost-white w-full overflow-x-clip"
+    >
+      <PageMotion />
+      <section
+        data-motion-section="hero"
+        className="relative z-50 flex flex-col overflow-hidden rounded-br-[30px] bg-black text-white lg:rounded-br-[60px]"
+      >
         <HeroGradient />
         <div className="layout-container relative z-10 order-1 pt-5 md:pt-8 lg:pt-10">
           <Navbar theme="dark" />
         </div>
-        <div className="layout-container relative isolate order-3 flex flex-col items-center pt-10 text-center md:order-2 md:pt-20">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="layout-container relative isolate order-3 flex flex-col items-center pt-10 text-center md:order-2 md:pt-20"
+        >
           <HeroGradient mobile />
-          <h1 className="type-h2 max-w-[280px] tracking-[-0.01em] max-md:text-[32px] max-md:leading-10 md:max-w-[916px] lg:whitespace-pre-line">
-            {data.title}
+          <h1
+            data-motion-reveal="lines"
+            className="type-h2 max-w-[280px] tracking-[-0.01em] max-md:text-[32px] max-md:leading-10 md:max-w-[916px] lg:whitespace-pre-line"
+          >
+            {data.title.split('\n').map((line, index, arr) => (
+              <span key={index}>
+                {line}
+                {index < arr.length - 1 && (
+                  <>
+                    <span className="inline lg:hidden"> </span>
+                    <br className="hidden lg:inline" />
+                  </>
+                )}
+              </span>
+            ))}
           </h1>
-          <p className="type-body-xxs text-light-gray mt-5 max-w-[708px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
+          <p
+            data-motion-reveal="blur"
+            className="type-body-xxs text-light-gray mt-5 max-w-[708px] tracking-[0.01em] max-md:text-sm max-md:leading-5"
+          >
             {data.description}
           </p>
-          <Link href={data.cta.href} className="mt-5">
-            <CTA as="span" variant="light-bg" size="compact-mobile">
+          <Link href={data.cta.href} data-motion-reveal="fade" className="mt-5">
+            <CTA as="span" variant="light-bg" size="compact-mobile" data-motion-magnetic>
               {data.cta.label}
             </CTA>
           </Link>
@@ -57,17 +86,26 @@ export default function CurieCodePage() {
           />
         </div>
         <div className="layout-container order-4 pt-10 pb-10 md:pb-20">
-          <MetricScrollIndicators className="no-scrollbar flex w-[calc(100%+20px)] snap-x snap-mandatory gap-10 overflow-x-auto pr-5 md:grid md:w-full md:grid-cols-4 md:gap-10 md:overflow-visible md:pr-0">
+          <MetricScrollIndicators
+            data-motion-group
+            className="no-scrollbar flex w-[calc(100%+20px)] snap-x snap-mandatory gap-10 overflow-x-auto pr-5 md:grid md:w-full md:grid-cols-4 md:gap-10 md:overflow-visible md:pr-0"
+          >
             {data.metrics.map(({ value, description }) => (
               <div
                 key={value}
                 data-metric-card
                 className="flex w-[240px] shrink-0 snap-start flex-col gap-3 md:w-auto"
               >
-                <AnimatedMetric
-                  value={value}
-                  className="type-h5 text-aqua-mint tracking-[-0.01em]"
-                />
+                <span className="sr-only">{value}</span>
+                <span className="inline-flex overflow-hidden align-bottom">
+                  <span
+                    aria-hidden="true"
+                    data-motion-metric-value
+                    className="type-h5 text-aqua-mint inline-block tracking-[-0.01em]"
+                  >
+                    {value}
+                  </span>
+                </span>
                 <p className="type-body-xxs text-ghost-white max-w-[220px] tracking-[0.01em]">
                   {description}
                 </p>

@@ -82,7 +82,7 @@ export default function GettingStartedSection() {
   }, []);
 
   return (
-    <section className="section-deferred relative overflow-hidden rounded-tl-[30px] rounded-tr-[30px] rounded-bl-[30px] bg-white py-10 lg:rounded-tl-[60px] lg:rounded-tr-[60px] lg:rounded-bl-[60px] lg:py-20">
+    <section className="relative overflow-hidden rounded-tl-[30px] rounded-tr-[30px] rounded-bl-[30px] bg-white py-10 lg:rounded-tl-[60px] lg:rounded-tr-[60px] lg:rounded-bl-[60px] lg:py-20">
       <Image
         src={data.backgroundImage}
         alt=""
@@ -92,21 +92,29 @@ export default function GettingStartedSection() {
         className="pointer-events-none hidden object-cover object-right-bottom md:block"
       />
       <div className="layout-container relative">
-        <SectionLabel>{data.eyebrow}</SectionLabel>
-        <div className="mt-5 grid gap-5 lg:grid-cols-2">
-          <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
-            {data.titleLines[0]} <br />
-            <span className="text-electric-blue">{data.titleLines[1]}</span>
-          </h2>
-          <div>
-            <p className="type-body-xs max-w-[430px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
-              {data.description}
-            </p>
-            <Link href={data.cta.href} className="mt-5 inline-block">
-              <CTA variant="light-bg" as="span" size="compact-mobile">
-                {data.cta.label}
-              </CTA>
-            </Link>
+        <div data-motion-group data-motion-trigger="section" data-motion-start="top 75%">
+          <SectionLabel>{data.eyebrow}</SectionLabel>
+          <div className="mt-5 grid gap-5 lg:grid-cols-2">
+            <h2
+              data-motion-reveal="lines"
+              className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10"
+            >
+              {data.titleLines[0]} <br />
+              <span className="text-electric-blue">{data.titleLines[1]}</span>
+            </h2>
+            <div>
+              <p
+                data-motion-reveal="blur"
+                className="type-body-xs max-w-[430px] tracking-[0.01em] max-md:text-sm max-md:leading-5"
+              >
+                {data.description}
+              </p>
+              <Link href={data.cta.href} className="mt-5 inline-block">
+                <CTA data-motion-magnetic variant="light-bg" as="span" size="compact-mobile">
+                  {data.cta.label}
+                </CTA>
+              </Link>
+            </div>
           </div>
         </div>
         <div className="mt-10 grid items-start gap-8 lg:grid-cols-[minmax(0,548fr)_minmax(0,732fr)] lg:gap-10">
@@ -155,11 +163,13 @@ export default function GettingStartedSection() {
               </div>
             ))}
           </div>
-          <ProductVideo
-            id="getting-started"
-            label="From sample charts to autonomous coding"
-            seekTo={seekTo}
-          />
+          <div data-motion-reveal="image">
+            <ProductVideo
+              id="getting-started"
+              label="From sample charts to autonomous coding"
+              seekTo={seekTo}
+            />
+          </div>
         </div>
         <p className="type-caption text-charcoal mt-10 max-w-[548px] leading-5">
           {data.disclaimer}

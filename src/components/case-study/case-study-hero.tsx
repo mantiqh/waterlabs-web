@@ -12,7 +12,7 @@ export const CaseStudyHero = ({ caseStudy }: CaseStudyHeroProps) => {
   const { categoryTag, title, titleHighlight, subtitle, heroImage, heroImageAlt } = caseStudy;
 
   return (
-    <section className="relative w-full bg-white">
+    <section data-motion-section="hero" className="relative w-full bg-white">
       {/* 
         Case Study Banner (Figma Specifications):
         - Desktop (1440px x 690px):
@@ -50,17 +50,27 @@ export const CaseStudyHero = ({ caseStudy }: CaseStudyHeroProps) => {
               On mobile: order-2 (text below image)
               On desktop: order-1 (text on left)
           */}
-          <div className="order-2 flex w-full min-w-0 flex-col items-start justify-center gap-[12px] lg:order-1 lg:w-1/2 lg:max-w-[640px] lg:gap-[16px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 100%"
+            className="order-2 flex w-full min-w-0 flex-col items-start justify-center gap-[12px] lg:order-1 lg:w-1/2 lg:max-w-[640px] lg:gap-[16px]"
+          >
             {/* Tag / Eyebrow (Text - Tag) */}
             <div className="flex items-center gap-[8px]">
               <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#0F68D6]" />
-              <span className="body-caption tracking-[0.01em] text-[#7D8690]">{categoryTag}</span>
+              <span
+                data-motion-reveal="scramble"
+                className="body-caption tracking-[0.01em] text-[#7D8690]"
+              >
+                {categoryTag}
+              </span>
             </div>
 
             {/* Headline & Subtitle Container (Frame 2147226938) */}
             <div className="flex w-full flex-col items-start gap-[8px] lg:gap-[12px]">
               {/* Headline: semantic <h2> with type-h2 and dynamic blue accent */}
-              <h2 className="type-h2 text-[#111111]">
+              <h2 data-motion-reveal="lines" className="type-h2 text-[#111111]">
                 {titleHighlight && title.includes(titleHighlight) ? (
                   <>
                     {title.split(titleHighlight)[0]}
@@ -73,7 +83,7 @@ export const CaseStudyHero = ({ caseStudy }: CaseStudyHeroProps) => {
               </h2>
 
               {/* Subtitle / Excerpt: type-body-xs */}
-              <p className="type-body-xs max-w-[640px] text-[#2A2A2A]">
+              <p data-motion-reveal="blur" className="type-body-xs max-w-[640px] text-[#2A2A2A]">
                 {renderFormattedText(subtitle)}
               </p>
             </div>
@@ -83,7 +93,11 @@ export const CaseStudyHero = ({ caseStudy }: CaseStudyHeroProps) => {
               On mobile: order-1 (image on top), border-radius: 10px 20px 20px 20px
               On desktop: order-2 (image on right), border-radius: 10px 40px 10px 40px
           */}
-          <div className="relative order-1 aspect-[640/450] w-full shrink-0 overflow-hidden rounded-tl-[10px] rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] shadow-sm lg:order-2 lg:w-1/2 lg:max-w-[640px] lg:rounded-tl-[10px] lg:rounded-tr-[40px] lg:rounded-br-[10px] lg:rounded-bl-[40px]">
+          <div
+            data-motion-reveal="image"
+            data-motion-parallax
+            className="relative order-1 aspect-[640/450] w-full shrink-0 overflow-hidden rounded-tl-[10px] rounded-tr-[20px] rounded-br-[20px] rounded-bl-[20px] shadow-sm lg:order-2 lg:w-1/2 lg:max-w-[640px] lg:rounded-tl-[10px] lg:rounded-tr-[40px] lg:rounded-br-[10px] lg:rounded-bl-[40px]"
+          >
             <Image
               src={heroImage}
               alt={heroImageAlt || title}

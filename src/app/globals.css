@@ -1,24 +1,9 @@
 @import 'tailwindcss';
 
-/* Home motion owns only this route. Native scrolling and static SSR remain available. */
-@media (prefers-reduced-motion: no-preference) {
-  [data-motion-root][data-motion-state='pending'] {
-    --motion-initial-visibility: hidden;
-    animation: motion-init-fallback 0s 1800ms forwards;
-  }
-  [data-motion-root][data-motion-state='pending'] [data-motion-reveal] {
-    visibility: var(--motion-initial-visibility, visible);
-  }
-}
-@keyframes motion-init-fallback {
-  to {
-    --motion-initial-visibility: visible;
-  }
-}
+/* Site-wide motion engine. Native scrolling and static SSR remain available. */
 [data-motion-root] [data-motion-entry='prepared'],
 [data-motion-root] [data-motion-entry='running'] {
-  transition-property:
-    color, background-color, border-color, border-radius, box-shadow, width, height, gap, padding;
+  transition-property: color, background-color, border-color, border-radius, box-shadow;
 }
 a:focus-visible [data-motion-reveal],
 button:focus-visible [data-motion-reveal],
@@ -29,7 +14,8 @@ button:focus-visible [data-motion-reveal],
 [data-motion-root] [data-scene-sticky] {
   position: static;
 }
-[data-home-nav] > header {
+[data-home-nav] > header,
+[data-page-nav] > header {
   transition-property: color, background-color, border-color, border-radius, box-shadow;
 }
 [data-motion-root] [data-scene-panel] {
@@ -141,6 +127,18 @@ button:focus-visible [data-motion-reveal],
   [data-home-section='economic'] [data-economic-comparison] {
     min-height: 300px;
   }
+  [data-philosophy-sequence] [data-scene-content] {
+    padding-top: 24px !important;
+    padding-bottom: 24px !important;
+  }
+  [data-philosophy-sequence] [data-shows-up-card] {
+    height: 420px !important;
+    max-height: 420px !important;
+  }
+  [data-philosophy-sequence] [data-shows-up-statements],
+  [data-philosophy-sequence] [data-shows-up-progress-bar] {
+    height: 140px !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,7 +158,9 @@ button:focus-visible [data-motion-reveal],
   [data-motion-root] [data-rcm-body],
   [data-motion-root] [data-scene-copy],
   [data-home-nav] [data-nav-open],
-  [data-home-nav] [data-nav-open] * {
+  [data-home-nav] [data-nav-open] *,
+  [data-page-nav] [data-nav-open],
+  [data-page-nav] [data-nav-open] * {
     transition-property: color, background-color, border-color, box-shadow;
   }
   [data-motion-root] .snap-x {
@@ -179,12 +179,14 @@ button:focus-visible [data-motion-reveal],
 }
 @supports (animation-timeline: scroll(root block)) {
   @media (prefers-reduced-motion: no-preference) {
+    [data-page-scroll-progress],
     [data-home-scroll-progress] {
       animation: home-page-progress auto linear both;
       animation-timeline: scroll(root block);
     }
   }
 }
+[data-page-scroll-progress],
 [data-home-scroll-progress] {
   transform: scaleX(0);
 }
@@ -731,7 +733,9 @@ select option {
 }
 
 /* Shared metric reveal: scoped to AnimatedMetric on any product page. */
-.animated-metric .metric-gradient {
+.animated-metric .metric-gradient,
+.metric-gradient,
+.metric-gradient .metric-character {
   background-image: linear-gradient(to bottom, var(--color-sky-blue), var(--color-aqua-mint));
   background-clip: text;
   -webkit-background-clip: text;

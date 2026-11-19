@@ -5,7 +5,10 @@ import { CTA } from '@/components/CTA';
 
 export const ROICtaBanner = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#F4F6F9_0%,#111111_100%)] lg:bg-[linear-gradient(180deg,#FFFFFF_0%,#111111_100%)]">
+    <section
+      data-motion-section
+      className="relative w-full overflow-hidden bg-[linear-gradient(180deg,#F4F6F9_0%,#111111_100%)] lg:bg-[linear-gradient(180deg,#FFFFFF_0%,#111111_100%)]"
+    >
       {/*
         CTA Banner Section (Figma Specifications):
         - Outer: gradient #FFFFFF (desktop) / #F4F6F9 (mobile) to #111111
@@ -37,10 +40,15 @@ export const ROICtaBanner = () => {
         </div>
 
         {/* Content Container (Frame 21: max-w-[1320px] mx-auto) */}
-        <div className="relative z-10 mx-auto w-full max-w-[1320px]">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 85%"
+          className="relative z-10 mx-auto w-full max-w-[1320px]"
+        >
           {/* Mobile / Tablet layout (< lg) */}
           <div className="flex flex-col items-start gap-[20px] lg:hidden">
-            <h2 className="type-h3 max-w-[873px] tracking-[-0.01em]">
+            <h2 data-motion-reveal="lines" className="type-h3 max-w-[873px] tracking-[-0.01em]">
               <span className="text-aqua-mint block">Bring us one function.</span>
               <span className="text-white">
                 Prior authorization, eligibility, denials. Whichever is costing you the most.
@@ -49,7 +57,15 @@ export const ROICtaBanner = () => {
 
             <div className="shrink-0 self-start pt-[4px]">
               <Link href="/contact-us" className="inline-block">
-                <CTA variant="dark-bg" size="compact-mobile" as="div" className="max-md:!px-[20px]">
+                <CTA
+                  data-motion-reveal="fade"
+                  data-motion-at="0.15"
+                  data-motion-magnetic
+                  variant="dark-bg"
+                  size="compact-mobile"
+                  as="div"
+                  className="max-md:!px-[20px]"
+                >
                   Get a demo
                 </CTA>
               </Link>
@@ -58,13 +74,19 @@ export const ROICtaBanner = () => {
 
           {/* Desktop layout (>= lg) */}
           <div className="hidden flex-col items-start lg:flex">
-            <h2 className="type-h3 tracking-[-0.01em]">
+            <h2 data-motion-reveal="lines" className="type-h3 tracking-[-0.01em]">
               <span className="text-aqua-mint block">Bring us one function.</span>
               <span className="block text-white">Prior authorization, eligibility, denials.</span>
               <span className="flex items-center gap-[100px] xl:gap-[130px]">
                 <span className="text-white">Whichever is costing you the most.</span>
                 <Link href="/contact-us" className="inline-block shrink-0 font-normal not-italic">
-                  <CTA variant="dark-bg" as="span">
+                  <CTA
+                    data-motion-reveal="fade"
+                    data-motion-at="0.15"
+                    data-motion-magnetic
+                    variant="dark-bg"
+                    as="span"
+                  >
                     Get a demo
                   </CTA>
                 </Link>

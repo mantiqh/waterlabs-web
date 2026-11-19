@@ -132,7 +132,12 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(
         break;
     }
 
-    const iconClassName = `${iconClasses} ${iconDirection === 'left' ? 'rotate-180' : ''} ${size === 'compact-mobile' ? 'max-md:h-[13px] max-md:w-[9px]' : ''}`;
+    const translateClass =
+      iconDirection === 'left'
+        ? 'transition-transform duration-300 [@media(hover:hover)]:group-hover:-translate-x-1'
+        : 'transition-transform duration-300 [@media(hover:hover)]:group-hover:translate-x-1';
+
+    const iconClassName = `${iconClasses} ${translateClass} ${iconDirection === 'left' ? 'rotate-180' : ''} ${size === 'compact-mobile' ? 'max-md:h-[13px] max-md:w-[9px]' : ''}`;
 
     if (as === 'div') {
       return (

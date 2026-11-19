@@ -142,6 +142,7 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
   return (
     <section
       id="where-you-would-fit"
+      data-motion-section
       className="relative m-0 w-full scroll-mt-[60px] overflow-hidden bg-gradient-to-b from-[#0F68D6] from-50% to-[#0B0B0B] to-50% p-0 lg:scroll-mt-[80px]"
     >
       <div id="open-roles" className="pointer-events-none absolute -top-[60px] lg:-top-[80px]" />
@@ -153,15 +154,28 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
       <div className="relative w-full overflow-hidden rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] py-[40px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:bg-white lg:px-[60px] lg:py-[80px]">
         <div className="mx-auto flex max-w-[1320px] flex-col gap-[36px] lg:gap-[60px]">
           {/* Header Block: Tag + Title */}
-          <div className="flex w-full flex-col gap-[8px] lg:gap-[14px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex w-full flex-col gap-[8px] lg:gap-[14px]"
+          >
             {/* Tag */}
             <div className="flex items-center gap-[4px] lg:gap-[8px]">
               <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6] lg:h-[8px] lg:w-[8px]" />
-              <span className="type-caption text-[#7D8690]">{tagText}</span>
+              <span
+                data-motion-reveal="scramble"
+                data-motion-at="0.1"
+                className="type-caption text-[#7D8690]"
+              >
+                {tagText}
+              </span>
             </div>
 
             {/* Title */}
-            <h2 className="type-h2 tracking-[-0.01em] text-[#000000] lg:text-[#111111]">
+            <h2
+              data-motion-reveal="lines"
+              className="type-h2 tracking-[-0.01em] text-[#000000] lg:text-[#111111]"
+            >
               {headingText}
             </h2>
           </div>
@@ -277,7 +291,11 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
             </div>
 
             {/* Job Openings Cards List */}
-            <div className="flex w-full flex-col gap-[12px] lg:gap-[20px]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              className="flex w-full flex-col gap-[12px] lg:gap-[20px]"
+            >
               {filteredJobs.length === 0 ? (
                 <div className="flex w-full flex-col items-center justify-center gap-[12px] rounded-[16px] bg-white p-[32px] text-center lg:bg-[#F4F6F9] lg:p-[48px]">
                   <p className="type-body-m font-medium text-[#042849]">
@@ -298,6 +316,8 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
                   return (
                     <div
                       key={job._key || job.id || `${job.title}-${idx}`}
+                      data-motion-reveal="fade"
+                      data-motion-at={0.1 + (idx % 6) * 0.08}
                       className="group flex w-full flex-col gap-[12px] rounded-[16px_8px_16px_16px] bg-white p-[16px] shadow-[0_2px_12px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] lg:gap-[16px] lg:rounded-[16px] lg:bg-[#F4F6F9] lg:p-[24px] lg:shadow-none"
                     >
                       {/* Title */}
@@ -352,9 +372,10 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
                           aria-label={`Apply for ${job.title}`}
                           target={isExternal ? '_blank' : undefined}
                           rel={isExternal ? 'noopener noreferrer' : undefined}
+                          data-motion-magnetic
                           className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] text-white transition-transform hover:scale-105 lg:h-[48px] lg:w-[48px]"
                         >
-                          <ChevronRight className="h-[13px] w-[9px] text-white lg:h-[18px] lg:w-[12px]" />
+                          <ChevronRight className="h-[13px] w-[9px] text-white transition-transform duration-300 group-hover:translate-x-1 lg:h-[18px] lg:w-[12px]" />
                         </Link>
                       </div>
                     </div>
@@ -369,8 +390,9 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
             {/* Desktop (lg: 1024px+, Figma #6870:15045) */}
             <div className="relative hidden min-h-[433px] w-full overflow-hidden rounded-[30px_10px_30px_30px] lg:flex">
               {/* Right Photo Background */}
-              <div className="pointer-events-none absolute inset-0 z-0">
+              <div data-motion-reveal="image" className="pointer-events-none absolute inset-0 z-0">
                 <Image
+                  data-motion-parallax
                   src="/images/careers/where-you-would-fit/img_dont_see_a_fit%20(1).png"
                   alt="Don't see a fit?"
                   fill
@@ -380,7 +402,11 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
               </div>
 
               {/* Left Aqua Mint Panel */}
-              <div className="relative z-10 flex min-h-[433px] w-[539px] shrink-0 flex-col justify-center gap-[20px] overflow-hidden rounded-tl-[30px] rounded-br-[60px] bg-[#63CCB7] p-[40px]">
+              <div
+                data-motion-group
+                data-motion-trigger="section"
+                className="relative z-10 flex min-h-[433px] w-[539px] shrink-0 flex-col justify-center gap-[20px] overflow-hidden rounded-tl-[30px] rounded-br-[60px] bg-[#63CCB7] p-[40px]"
+              >
                 {/* Subtle Sky-Blue Ambient Glow */}
                 <div
                   aria-hidden="true"
@@ -388,8 +414,10 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
                 />
 
                 <div className="relative z-10 flex flex-col gap-[20px]">
-                  <h2 className="type-h2 text-[#042849]">Don&apos;t see a fit?</h2>
-                  <p className="type-body-s max-w-[459px] text-[#111111]">
+                  <h2 data-motion-reveal="lines" className="type-h2 text-[#042849]">
+                    Don&apos;t see a fit?
+                  </h2>
+                  <p data-motion-reveal="blur" className="type-body-s max-w-[459px] text-[#111111]">
                     We make a few great hires every quarter, and the best people rarely fit a box
                     we&apos;ve already drawn. If you&apos;re exceptional and you see the mission,
                     tell us anyway.
@@ -397,6 +425,8 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
                   <div className="w-fit">
                     <a href="mailto:hiring@waterlabs.ai">
                       <CTA
+                        data-motion-reveal="fade"
+                        data-motion-magnetic
                         variant="dark-bg"
                         size="compact-mobile"
                         as="div"
@@ -413,8 +443,12 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
             {/* Mobile / Tablet (< 1024px, Figma #6870:15351) */}
             <div className="flex w-full flex-col overflow-hidden rounded-[20px_10px_20px_20px] lg:hidden">
               {/* Top Photo */}
-              <div className="relative h-[222px] w-full shrink-0 sm:h-[280px]">
+              <div
+                data-motion-reveal="image"
+                className="relative h-[222px] w-full shrink-0 sm:h-[280px]"
+              >
                 <Image
+                  data-motion-parallax
                   src="/images/careers/where-you-would-fit/mobile.jpg"
                   alt="Don't see a fit?"
                   fill
@@ -424,7 +458,11 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
               </div>
 
               {/* Bottom Aqua Mint Panel */}
-              <div className="relative z-10 -mt-[20px] flex w-full flex-col gap-[20px] overflow-hidden rounded-[20px_0px_20px_20px] bg-[#63CCB7] p-[24px] sm:p-[40px]">
+              <div
+                data-motion-group
+                data-motion-trigger="section"
+                className="relative z-10 -mt-[20px] flex w-full flex-col gap-[20px] overflow-hidden rounded-[20px_0px_20px_20px] bg-[#63CCB7] p-[24px] sm:p-[40px]"
+              >
                 {/* Subtle Sky-Blue Ambient Glow */}
                 <div
                   aria-hidden="true"
@@ -432,8 +470,10 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
                 />
 
                 <div className="relative z-10 flex flex-col gap-[20px]">
-                  <h2 className="type-h2 text-[#042849]">Don&apos;t see a fit?</h2>
-                  <p className="type-body-s text-[#111111]">
+                  <h2 data-motion-reveal="lines" className="type-h2 text-[#042849]">
+                    Don&apos;t see a fit?
+                  </h2>
+                  <p data-motion-reveal="blur" className="type-body-s text-[#111111]">
                     We make a few great hires every quarter, and the best people rarely fit a box
                     we&apos;ve already drawn. If you&apos;re exceptional and you see the mission,
                     tell us anyway.
@@ -441,6 +481,8 @@ export const WhereYouWouldFitSection = ({ data }: WhereYouWouldFitSectionProps) 
                   <div className="w-fit">
                     <a href="mailto:hiring@waterlabs.ai">
                       <CTA
+                        data-motion-reveal="fade"
+                        data-motion-magnetic
                         variant="dark-bg"
                         size="compact-mobile"
                         as="div"

@@ -71,6 +71,7 @@ export const WhatWeHoldSection = () => {
 
   return (
     <section
+      data-motion-section
       className="w-full"
       style={{
         background:
@@ -92,7 +93,7 @@ export const WhatWeHoldSection = () => {
           <div className="hidden w-full flex-row items-start justify-between gap-[20px] lg:flex">
             {/* Left Column: Heading (Sticky on Desktop) */}
             <div className="w-full shrink-0 self-start pt-[32px] lg:sticky lg:top-[120px] lg:w-[35%] xl:w-[537px]">
-              <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
+              <h2 data-motion-reveal="lines" className="type-h2 tracking-[-0.01em] text-[#111111]">
                 What we hold
                 <br />
                 ourselves to
@@ -104,11 +105,17 @@ export const WhatWeHoldSection = () => {
               {VALUES.map((item, index) => (
                 <div
                   key={index}
+                  data-motion-group
+                  data-motion-trigger="section"
                   className="flex w-full flex-row items-start gap-[16px] border-b border-[#91C6F2] pb-[20px] xl:gap-[24px] xl:pb-[24px]"
                 >
                   {/* 3D Glass Icon */}
-                  <div className="flex h-[78px] w-[80px] shrink-0 items-start justify-center xl:h-[100px] xl:w-[102px]">
+                  <div
+                    data-motion-reveal="image"
+                    className="flex h-[78px] w-[80px] shrink-0 items-start justify-center xl:h-[100px] xl:w-[102px]"
+                  >
                     <Image
+                      data-motion-parallax
                       src={item.icon}
                       alt=""
                       width={item.width}
@@ -119,8 +126,15 @@ export const WhatWeHoldSection = () => {
 
                   {/* Text Container */}
                   <div className="flex flex-1 flex-col items-start gap-[10px] xl:gap-[14px]">
-                    <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{item.title}</h5>
-                    <p className="type-body-xs text-[#2A2A2A]">{item.description}</p>
+                    <h5
+                      data-motion-reveal="lines"
+                      className="type-h5 tracking-[-0.01em] text-[#0F68D6]"
+                    >
+                      {item.title}
+                    </h5>
+                    <p data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -132,7 +146,7 @@ export const WhatWeHoldSection = () => {
           {/* ========================================================================= */}
           <div className="flex w-full flex-col items-start gap-[20px] lg:hidden">
             {/* Heading */}
-            <h2 className="type-h2 tracking-[-0.01em] text-[#111111]">
+            <h2 data-motion-reveal="lines" className="type-h2 tracking-[-0.01em] text-[#111111]">
               What we hold
               <br />
               ourselves to
@@ -151,11 +165,17 @@ export const WhatWeHoldSection = () => {
               {VALUES.map((item, index) => (
                 <div
                   key={index}
+                  data-motion-group
+                  data-motion-trigger="section"
                   className="flex w-[269px] shrink-0 snap-start flex-col items-start justify-start gap-[14px] border-b border-[#91C6F2] pb-[20px]"
                 >
                   {/* Icon on Top for Mobile */}
-                  <div className="flex h-[62px] w-[64px] shrink-0 items-center justify-start">
+                  <div
+                    data-motion-reveal="image"
+                    className="flex h-[62px] w-[64px] shrink-0 items-center justify-start"
+                  >
                     <Image
+                      data-motion-parallax
                       src={item.icon}
                       alt=""
                       width={64}
@@ -167,10 +187,17 @@ export const WhatWeHoldSection = () => {
                   {/* Text Container */}
                   <div className="flex flex-1 flex-col gap-[14px]">
                     {/* Title */}
-                    <h5 className="type-h5 tracking-[-0.01em] text-[#0F68D6]">{item.title}</h5>
+                    <h5
+                      data-motion-reveal="lines"
+                      className="type-h5 tracking-[-0.01em] text-[#0F68D6]"
+                    >
+                      {item.title}
+                    </h5>
 
                     {/* Description */}
-                    <p className="type-body-xs text-[#2A2A2A]">{item.description}</p>
+                    <p data-motion-reveal="blur" className="type-body-xs text-[#2A2A2A]">
+                      {item.description}
+                    </p>
                   </div>
                 </div>
               ))}

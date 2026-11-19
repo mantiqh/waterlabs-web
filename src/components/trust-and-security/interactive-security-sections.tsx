@@ -1,5 +1,7 @@
 'use client';
 
+import { gsap } from 'gsap/dist/gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
 
 import CertificationsSection from './certifications';
@@ -15,44 +17,48 @@ export const InteractiveSecuritySections = () => {
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Responsive target line: 120px on mobile/tablet (60px navbar + indicator), 140px on desktop
-      const isMobile = window.innerWidth < 1024;
-      const targetY = isMobile ? 120 : 140;
+    if (typeof window === 'undefined') return;
+    gsap.registerPlugin(ScrollTrigger);
 
-      // Check if mobile indicator reached sticky top-[60px]
+    const isMobile = window.innerWidth < 1024;
+    const targetY = isMobile ? 120 : 140;
+
+    const ctx = gsap.context(() => {
+      // 1. Mobile sentinel trigger for sticky header
       if (sentinelRef.current) {
-        const sentinelRect = sentinelRef.current.getBoundingClientRect();
-        setIsSticky(sentinelRect.top <= 61);
+        ScrollTrigger.create({
+          trigger: sentinelRef.current,
+          start: 'top 60px',
+          onToggle: (self) => setIsSticky(self.isActive),
+        });
       }
 
-      // Check if desktop indicator reached sticky state / scrolling has started into section
+      // 2. Desktop sticky indicator state
       const sectionEl = document.getElementById('interactive-security-sections');
       if (sectionEl) {
-        const sectionRect = sectionEl.getBoundingClientRect();
-        setIsDesktopSticky(sectionRect.top <= 120);
+        ScrollTrigger.create({
+          trigger: sectionEl,
+          start: 'top 120px',
+          onToggle: (self) => setIsDesktopSticky(self.isActive),
+        });
       }
 
-      let activeId = topics[0].id;
-      for (let i = 0; i < topics.length; i++) {
-        const el = document.getElementById(topics[i].id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= targetY && rect.bottom > targetY) {
-            activeId = topics[i].id;
-            break;
-          }
-        }
-      }
-      setActiveTopic(activeId);
-    };
+      // 3. Section boundary tracking without layout thrashing
+      topics.forEach((topic) => {
+        const el = document.getElementById(topic.id);
+        if (!el) return;
+        ScrollTrigger.create({
+          trigger: el,
+          start: `top ${targetY}px`,
+          end: `bottom ${targetY}px`,
+          onToggle: (self) => {
+            if (self.isActive) setActiveTopic(topic.id);
+          },
+        });
+      });
+    });
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => ctx.revert();
   }, []);
 
   const scrollToTopic = (id: string) => {

@@ -85,6 +85,7 @@ export const ThisIsntJustEligibilitySection = () => {
 
   return (
     <section
+      data-motion-section
       className="relative w-full overflow-hidden"
       style={{
         background: 'linear-gradient(180deg, #FFFFFF 0%, #0F68D6 100%)',
@@ -103,6 +104,8 @@ export const ThisIsntJustEligibilitySection = () => {
 
           {/* Desktop Layout: hidden on mobile/tablet, visible on lg: */}
           <div
+            data-motion-group
+            data-motion-trigger="section"
             className="hidden w-full flex-row items-center overflow-hidden rounded-[20px] lg:flex"
             style={{
               background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
@@ -119,13 +122,13 @@ export const ThisIsntJustEligibilitySection = () => {
               </div>
 
               {/* Heading */}
-              <h3 className="type-h3 tracking-[-0.01em] text-white">
+              <h3 data-motion-reveal="lines" className="type-h3 tracking-[-0.01em] text-white">
                 It&apos;s one application on an operating system that manages the full revenue
                 cycle.
               </h3>
 
               {/* Description */}
-              <p className="type-body-xs text-[#F4F6F9]">
+              <p data-motion-reveal="blur" className="type-body-xs text-[#F4F6F9]">
                 Eligibility runs on our proprietary HIMER AI OS, which also manages prior
                 authorization, denials, accounts receivable, cash posting, and coding. The coverage
                 details our eligibility agent finds are the same as the details our authorization
@@ -134,7 +137,9 @@ export const ThisIsntJustEligibilitySection = () => {
 
               {/* CTA */}
               <Link href="/contact-us">
-                <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
+                <CTA data-motion-reveal="fade" data-motion-magnetic variant="dark-bg">
+                  Explore HIMER AI OS
+                </CTA>
               </Link>
             </div>
 
@@ -142,6 +147,8 @@ export const ThisIsntJustEligibilitySection = () => {
             <div className="flex w-full items-center justify-end self-stretch overflow-hidden lg:w-[55%] xl:w-1/2">
               <div className="relative h-full min-h-[380px] w-full xl:min-h-[500px]">
                 <Image
+                  data-motion-reveal="image"
+                  data-motion-parallax
                   src="/images/solutions/solutions-eligibility/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(1).png"
                   alt="HIMER AI OS platform overview"
                   fill
@@ -155,6 +162,8 @@ export const ThisIsntJustEligibilitySection = () => {
 
           {/* Mobile / Tablet Layout: visible below lg:, matches Figma Frame 2147226590 */}
           <div
+            data-motion-group
+            data-motion-trigger="section"
             className="flex w-full flex-col overflow-hidden rounded-[20px] lg:hidden"
             style={{
               background: 'linear-gradient(116.88deg, #0F68D6 49.69%, #AE87E4 69.22%)',
@@ -163,6 +172,8 @@ export const ThisIsntJustEligibilitySection = () => {
             {/* Top: Laptop Image (full width, natural height on mobile, increased height on md:, 20px radius on all corners) */}
             <div className="w-full overflow-hidden rounded-[20px] md:relative md:h-[380px]">
               <Image
+                data-motion-reveal="image"
+                data-motion-parallax
                 src="/images/solutions/solutions-eligibility/this-isn't-just-an-eligibility-tool/img_this_isn't_just_an_eligibility_tool%20(2).png"
                 alt="HIMER AI OS platform overview"
                 width={724}
@@ -183,13 +194,16 @@ export const ThisIsntJustEligibilitySection = () => {
               </div>
 
               {/* Heading */}
-              <h3 className="type-h3 tracking-[-0.01em] text-white">
+              <h3 data-motion-reveal="lines" className="type-h3 tracking-[-0.01em] text-white">
                 It&apos;s one application on an operating system that manages the full revenue
                 cycle.
               </h3>
 
               {/* Description */}
-              <p className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+              <p
+                data-motion-reveal="blur"
+                className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+              >
                 Eligibility runs on our proprietary HIMER AI OS, which also manages prior
                 authorization, denials, accounts receivable, cash posting, and coding. The coverage
                 details our eligibility agent finds are the same as the details our authorization
@@ -198,15 +212,21 @@ export const ThisIsntJustEligibilitySection = () => {
 
               {/* CTA */}
               <Link href="/contact-us">
-                <CTA variant="dark-bg">Explore HIMER AI OS</CTA>
+                <CTA data-motion-reveal="fade" data-motion-magnetic variant="dark-bg">
+                  Explore HIMER AI OS
+                </CTA>
               </Link>
             </div>
           </div>
 
           {/* ── THREE THINGS SECTION ── */}
-          <div className="flex flex-col gap-[20px] lg:gap-[32px]">
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex flex-col gap-[20px] lg:gap-[32px]"
+          >
             {/* Heading */}
-            <h3 className="type-h3 text-black">
+            <h3 data-motion-reveal="lines" className="type-h3 text-black">
               <span className="text-electric-blue">The three things that usually</span>{' '}
               <br className="hidden lg:block" />
               stop people. None of them apply here.
@@ -217,6 +237,7 @@ export const ThisIsntJustEligibilitySection = () => {
               {threeThingsCards.map((card, idx) => (
                 <div
                   key={idx}
+                  data-motion-reveal="fade"
                   className="flex min-h-[320px] flex-1 flex-col gap-[24px] rounded-[16px] bg-white p-[32px]"
                 >
                   {/* Icon */}
@@ -249,6 +270,7 @@ export const ThisIsntJustEligibilitySection = () => {
                 {threeThingsCards.map((card, idx) => (
                   <div
                     key={idx}
+                    data-motion-reveal="fade"
                     className="flex min-h-[260px] w-[269px] shrink-0 flex-col gap-[20px] rounded-[16px] bg-white p-[20px]"
                   >
                     {/* Icon */}

@@ -10,6 +10,7 @@ interface LocationCardProps {
   hours: string;
   buttonText: string;
   href: string;
+  index?: number;
 }
 
 const LocationCard = ({
@@ -20,13 +21,21 @@ const LocationCard = ({
   hours,
   buttonText,
   href,
+  index = 0,
 }: LocationCardProps) => {
   return (
-    <div className="flex w-full min-w-0 flex-col items-start gap-[8px] border-b border-[#D7DCE2] pb-[12px] lg:h-full lg:max-w-[418.67px] lg:flex-1 lg:gap-[14px] lg:border-b-0 lg:pb-0">
+    <div
+      data-motion-reveal="fade"
+      data-motion-at={0.15 + index * 0.15}
+      className="flex w-full min-w-0 flex-col items-start gap-[8px] border-b border-[#D7DCE2] pb-[12px] lg:h-full lg:max-w-[418.67px] lg:flex-1 lg:gap-[14px] lg:border-b-0 lg:pb-0"
+    >
       {/* Text - Tag */}
       <div className="flex h-[16px] items-center gap-[4px] lg:h-[24px] lg:gap-[8px]">
         <div className="h-[6px] w-[6px] shrink-0 rounded-full bg-[#0F68D6] lg:h-[8px] lg:w-[8px]" />
-        <span className="lg:type-body-xxs text-[12px] leading-[16px] tracking-[0.01em] text-[#7D8690]">
+        <span
+          data-motion-reveal="scramble"
+          className="lg:type-body-xxs text-[12px] leading-[16px] tracking-[0.01em] text-[#7D8690]"
+        >
           {tag}
         </span>
       </div>
@@ -52,7 +61,9 @@ const LocationCard = ({
         {/* Desktop CTA Button */}
         <div className="hidden lg:mt-auto lg:block">
           <a href={href} target="_blank" rel="noopener noreferrer">
-            <CTA variant="light-bg">{buttonText}</CTA>
+            <CTA data-motion-magnetic variant="light-bg">
+              {buttonText}
+            </CTA>
           </a>
         </div>
 
@@ -63,7 +74,7 @@ const LocationCard = ({
             target="_blank"
             rel="noopener noreferrer"
             aria-label={buttonText}
-            className="hover:bg-royal-blue flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] transition-colors"
+            className="group hover:bg-royal-blue flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-full bg-[#0F68D6] transition-colors"
           >
             <svg
               width="9"
@@ -71,7 +82,7 @@ const LocationCard = ({
               viewBox="0 0 9 14"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="h-[13px] w-[9px]"
+              className="h-[13px] w-[9px] transition-transform duration-300 group-hover:translate-x-1"
             >
               <path
                 d="M2 2L7 7L2 12"
@@ -98,7 +109,10 @@ export const ContactUsOperatingInfo = ({
   bgImage = DEFAULT_CONTACT_US_DATA.operatingInfoBgImage,
 }: ContactUsOperatingInfoProps) => {
   return (
-    <section className="to-ghost-white relative w-full overflow-hidden bg-gradient-to-b from-[#8EBFE7] from-50% to-50%">
+    <section
+      data-motion-section
+      className="to-ghost-white relative w-full overflow-hidden bg-gradient-to-b from-[#8EBFE7] from-50% to-50%"
+    >
       {/* 
         Operating Info / Locations Section:
         - Desktop: 1440px, padding: 80px 60px, bg: white, border-radius: 0px 60px 60px 0px
@@ -113,10 +127,15 @@ export const ContactUsOperatingInfo = ({
       >
         <div className="relative z-10 mx-auto w-full max-w-[1320px]">
           {/* Frame 2147226790 / Frame 2147226529 */}
-          <div className="flex max-w-[869.33px] flex-col items-start gap-[32px] lg:flex-row lg:items-stretch">
-            {locations.map((loc) => (
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            className="flex max-w-[869.33px] flex-col items-start gap-[32px] lg:flex-row lg:items-stretch"
+          >
+            {locations.map((loc, idx) => (
               <LocationCard
                 key={loc._key || loc.tag}
+                index={idx}
                 tag={loc.tag}
                 title={loc.title}
                 address={loc.address}

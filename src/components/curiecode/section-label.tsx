@@ -12,7 +12,7 @@ export function SectionLabel({ children, dark = false }: { children: string; dar
         aria-hidden="true"
         className={cn('size-2 shrink-0 rounded-full', dark ? 'bg-aqua-mint' : 'bg-electric-blue')}
       />
-      {children}
+      <span data-motion-reveal="scramble">{children}</span>
     </p>
   );
 }

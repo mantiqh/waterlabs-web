@@ -1,3 +1,5 @@
+import PageMotion from '@/components/common/page-motion';
+
 import PhilosophyCTASection from './cta-section';
 import PhilosophyHeroSection from './hero-section';
 import HowThatShowsUpSection from './how-that-shows-up';
@@ -7,14 +9,24 @@ import WhyWeStartedWaterlabsSection from './why-we-started-waterlabs';
 
 export const PhilosophyPage = () => {
   return (
-    <main className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
       <PhilosophyHeroSection />
       <WhyWeStartedWaterlabsSection />
-      <WhatWeBelieveSection />
-      <HowThatShowsUpSection />
-      <ThePromiseSection />
-      <PhilosophyCTASection />
-    </main>
+      {/* Keep adjacent surfaces together while the comparison holds its position. */}
+      <div data-philosophy-sequence data-motion-scene="comparison" data-scene-mode="pending">
+        <div data-scene-sticky>
+          <WhatWeBelieveSection />
+          <HowThatShowsUpSection />
+          <ThePromiseSection />
+          <PhilosophyCTASection />
+        </div>
+      </div>
+    </div>
   );
 };
 

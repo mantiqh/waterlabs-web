@@ -31,6 +31,7 @@ export const DataSovereigntySection = () => {
   return (
     <section
       id="data-sovereignty"
+      data-motion-section
       className="relative m-0 w-full scroll-mt-[60px] overflow-hidden bg-gradient-to-b from-white from-50% to-[#000000] to-50% p-0"
     >
       {/* 
@@ -56,7 +57,10 @@ export const DataSovereigntySection = () => {
               - Border Radius: 20px 10px 20px 20px
               - Padding: 20px (mobile) / 40px (desktop)
             */}
-            <div className="relative isolate mb-[36px] flex h-[320px] w-full flex-col items-start justify-end overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#000000] p-[20px] shadow-[0_12px_40px_rgba(0,0,0,0.15)] sm:p-[28px] lg:mb-0 lg:h-[381px] lg:p-[40px]">
+            <div
+              data-motion-reveal="fade"
+              className="relative isolate mb-[36px] flex h-[320px] w-full flex-col items-start justify-end overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-[#000000] p-[20px] shadow-[0_12px_40px_rgba(0,0,0,0.15)] sm:p-[28px] lg:mb-0 lg:h-[381px] lg:p-[40px]"
+            >
               {/* Desktop Fingerprint Graphic Background */}
               <div className="pointer-events-none absolute inset-0 z-0 hidden sm:block">
                 <Image
@@ -103,9 +107,13 @@ export const DataSovereigntySection = () => {
                ===================================================================== */}
             <div className="hidden w-full flex-col gap-[36px] lg:flex lg:gap-[48px]">
               {/* Feature Card 1: We keep the lesson, not the patient (Image on Left, Text on Right) */}
-              <div className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
+              <div
+                data-motion-reveal="slide"
+                className="flex flex-row items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]"
+              >
                 <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] lg:w-[45%] xl:w-[420px]">
                   <Image
+                    data-motion-parallax
                     src="/images/trust-and-security/data-sovereignty/img_we_keep_the_lesson_not_the_patient.png"
                     alt="We keep the lesson, not the patient"
                     fill
@@ -129,9 +137,13 @@ export const DataSovereigntySection = () => {
               </div>
 
               {/* Feature Card 2: Nothing to mishandle (Text on Left, Image on Right) */}
-              <div className="flex flex-row-reverse items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]">
+              <div
+                data-motion-reveal="slide"
+                className="flex flex-row-reverse items-center justify-between gap-[20px] lg:gap-[28px] xl:gap-[40px]"
+              >
                 <div className="relative aspect-[420/290] w-full shrink-0 overflow-hidden rounded-tl-[20px] rounded-tr-[10px] rounded-br-[20px] rounded-bl-[20px] bg-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] lg:w-[45%] xl:w-[420px]">
                   <Image
+                    data-motion-parallax
                     src="/images/trust-and-security/data-sovereignty/img_nothing_to_mishandle.png"
                     alt="Nothing to mishandle"
                     fill

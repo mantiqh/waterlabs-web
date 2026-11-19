@@ -196,14 +196,18 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
         <header
           data-motion-reveal={motion === 'home' ? 'navbar-shell' : undefined}
           data-motion-group={motion === 'home' ? '' : undefined}
-          className={`relative isolate flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:content-[''] ${motion === 'home' ? 'backdrop-blur-[13.2px]' : 'before:backdrop-blur-[13.2px]'} ${
+          className={`relative isolate flex h-[60px] w-full flex-row items-center justify-between py-[8px] transition-all duration-300 before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:content-[''] ${
+            motion === 'home' ? 'backdrop-blur-[13.2px]' : 'before:backdrop-blur-[13.2px]'
+          } ${
             theme === 'dark'
               ? isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-white/10 bg-black/85 px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/10 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
                 : 'rounded-[30px] border border-white/10 bg-white/[0.05] pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(0,0,0,0.3)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
               : isScrolled
                 ? 'rounded-none border-x-0 border-t-0 border-b border-[#D7DCE2] bg-white px-[20px] md:px-[40px] lg:rounded-[30px] lg:border lg:border-white/24 lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]'
-                : `rounded-[30px] border border-white/24 ${motion === 'home' ? 'bg-[#F4F6F9]/70' : 'bg-white/70'} pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]`
+                : `rounded-[30px] border border-white/24 ${
+                    motion === 'home' ? 'bg-[#F4F6F9]/70' : 'bg-white/70'
+                  } pr-[8px] pl-[16px] shadow-[0_4px_24px_rgba(4,40,73,0.06)] md:pr-[12px] md:pl-[20px] lg:pr-[6px] lg:pl-[12px] xl:pr-[12px] xl:pl-[24px]`
           }`}
         >
           {/* Logo */}
@@ -462,6 +466,8 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
               onFocus={() => prefetchRoute('/contact-us')}
             >
               <CTA
+                as="div"
+                data-motion-magnetic
                 variant="light-bg"
                 className="body-cta type-cta lg:max-xl:!h-[38px] lg:max-xl:!gap-[6px] lg:max-xl:!px-[12px] xl:h-[44px] xl:gap-[10px] xl:px-[20px]"
               >
@@ -679,7 +685,12 @@ const Navbar = ({ theme = 'light', motion = 'none' }: NavbarProps) => {
               onClick={() => setIsOpen(false)}
               className="w-full"
             >
-              <CTA variant="light-bg" className="w-full justify-center">
+              <CTA
+                as="div"
+                data-motion-magnetic
+                variant="light-bg"
+                className="w-full justify-center"
+              >
                 Contact Us
               </CTA>
             </Link>

@@ -1,3 +1,5 @@
+import PageMotion from '@/components/common/page-motion';
+
 import SolutionsCTASection from './cta-section';
 import SolutionsHeroSection from './hero-section';
 import HowWaterlabsClosesSection from './how-waterlabs-closes';
@@ -7,7 +9,12 @@ import ThisIsntJustEligibilitySection from './this-isnt-just-eligibility';
 
 export const SolutionsPage = () => {
   return (
-    <div className="flex w-full flex-col">
+    <div
+      data-motion-root
+      data-motion-state="pending"
+      className="flex w-full flex-col overflow-x-clip"
+    >
+      <PageMotion />
       <SolutionsHeroSection />
       <TheProblemSection />
       <HowWaterlabsClosesSection />

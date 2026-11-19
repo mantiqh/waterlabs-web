@@ -1,7 +1,10 @@
 'use client';
 
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+
+import { mountCarouselAutoplay } from '@/lib/motion/motion';
 
 interface CultureCard {
   id: string;
@@ -246,6 +249,12 @@ export const WeBuildPeopleSection = () => {
       // Keeping its snap position synchronous avoids a second, interruptible animation.
       track.scrollTo({ top: target * stepHeight, behavior: 'instant' });
       showCard(target, true);
+      if (target !== settled) {
+        settled = target;
+        setAnnouncement(
+          `${CULTURE_CARDS[target].title} Card ${target + 1} of ${CULTURE_CARDS.length}.`,
+        );
+      }
     };
     const resetWheelGesture = () => {
       wheelLocked = false;
@@ -469,6 +478,7 @@ export const WeBuildPeopleSection = () => {
       section.style.setProperty('--deck-height', `${stepHeight}px`);
       track.scrollTo({ top: active * stepHeight, behavior: 'instant' });
       showCard(active, false);
+      ScrollTrigger.refresh();
     };
     const observer = new ResizeObserver(setup);
     observer.observe(deck);
@@ -483,7 +493,16 @@ export const WeBuildPeopleSection = () => {
     window.addEventListener('touchcancel', onTouchEnd);
     if (settleEvent) track.addEventListener(settleEvent, settle);
     setup();
+    const unmountAutoplay = mountCarouselAutoplay(
+      section,
+      () => {
+        if (!section.dataset.animated) return;
+        goTo((active + 1) % CULTURE_CARDS.length);
+      },
+      6000,
+    );
     return () => {
+      unmountAutoplay();
       observer.disconnect();
       cancelAnimationFrame(frame);
       clearTimeout(settleTimer);
@@ -506,6 +525,7 @@ export const WeBuildPeopleSection = () => {
   return (
     <section
       ref={sectionRef}
+      data-motion-section
       className="culture-card-stack layout-margin bg-ghost-white"
       aria-label="Culture at Waterlabs - How we work"
       aria-roledescription="carousel"

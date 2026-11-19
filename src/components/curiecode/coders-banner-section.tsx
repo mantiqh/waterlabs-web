@@ -12,6 +12,7 @@ export default function CodersBannerSection() {
       <section
         ref={ref}
         data-coders-banner
+        data-motion-reveal="panel"
         className="relative overflow-hidden rounded-tr-[30px] rounded-br-[30px] bg-black py-10 text-center text-white lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:py-20"
       >
         <div

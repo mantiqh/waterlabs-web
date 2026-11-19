@@ -75,7 +75,7 @@ export const BlogDetailRelated = ({
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section data-motion-section className="relative w-full overflow-hidden bg-white">
       {/* 
         Related Blogs Container (Figma Specifications):
         - Desktop (Figma: 5915-17085): 1440px x 721px, padding: 0px 60px, background: #F4F6F9, border-radius: 60px 0px 0px 60px
@@ -84,7 +84,16 @@ export const BlogDetailRelated = ({
       <div className="w-full rounded-tl-[30px] rounded-bl-[30px] bg-[#F4F6F9] px-[20px] md:px-[40px] lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:px-[60px]">
         <div className="mx-auto flex w-full max-w-[1320px] flex-col items-start gap-[20px] py-[40px] md:py-[64px] lg:gap-[40px] lg:py-[80px]">
           {/* Section Heading: Display/H2 token */}
-          <h2 className="type-h2 text-[#0F68D6]">Related Blogs</h2>
+          <div
+            data-motion-group
+            data-motion-trigger="section"
+            data-motion-start="top 85%"
+            className="w-full"
+          >
+            <h2 data-motion-reveal="lines" className="type-h2 text-[#0F68D6]">
+              Related Blogs
+            </h2>
+          </div>
 
           {/* =================================================================
               DESKTOP: 3-column Grid (Figma Frame 2147226524: 1320px x 461px)
@@ -94,6 +103,9 @@ export const BlogDetailRelated = ({
               <Link
                 key={item.id}
                 href={item.href}
+                data-motion-group
+                data-motion-trigger="section"
+                data-motion-start="top 85%"
                 className="group flex w-full flex-col items-start gap-[16px] lg:gap-[20px]"
               >
                 {/* Image Card Container (Frame 2147203302)
@@ -101,6 +113,7 @@ export const BlogDetailRelated = ({
                     - Card 2: height 288px (matching staggered Figma design)
                 */}
                 <div
+                  data-motion-reveal="image"
                   className={`relative w-full overflow-hidden rounded-[20px] shadow-sm transition-transform duration-300 group-hover:scale-[1.01] ${
                     item.isShorter ? 'h-[288px]' : 'h-[357px]'
                   }`}
@@ -124,12 +137,18 @@ export const BlogDetailRelated = ({
 
                 {/* Caption Text & CTA Arrow (Frame 2147226519) */}
                 <div className="flex w-full flex-row items-center justify-between gap-[12px] pt-[4px]">
-                  <p className="type-body-s line-clamp-2 flex-1 text-[#000000]">{item.title}</p>
+                  <p
+                    data-motion-reveal="lines"
+                    className="type-body-s line-clamp-2 flex-1 text-[#000000]"
+                  >
+                    {item.title}
+                  </p>
 
                   {/* Circular Arrow Button */}
                   <CTA
                     as="div"
                     variant="fill-arrow"
+                    data-motion-magnetic
                     className="pointer-events-none h-[48px] w-[48px] shrink-0 rounded-full shadow-sm transition-all duration-200 group-hover:scale-105"
                     aria-label="View related blog"
                   />

@@ -6,7 +6,7 @@ import { CTA } from '@/components/CTA';
 
 export const SolutionsHeroSection = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section data-motion-section="hero" className="relative w-full overflow-hidden bg-white">
       {/*
         Solutions Hero Banner:
         - Desktop: 1440×653, padding: 40px 60px 80px, gap: 32px
@@ -50,31 +50,48 @@ export const SolutionsHeroSection = () => {
         </div>
 
         {/* Desktop: Two-Column Hero Content */}
-        <div className="relative z-10 mx-auto hidden w-full max-w-[1320px] flex-row items-center justify-between gap-[20px] lg:flex">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="relative z-10 mx-auto hidden w-full max-w-[1320px] flex-row items-center justify-between gap-[20px] lg:flex"
+        >
           {/* Left Column: Text Content */}
           <div className="flex w-full flex-col justify-center gap-[20px] pt-[32px] lg:max-w-[650px] lg:flex-1 lg:pt-0">
             {/* Tag / Eyebrow */}
             <div className="flex items-center gap-[8px]">
               <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-              <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+              <span
+                data-motion-reveal="scramble"
+                data-motion-start="top 100%"
+                className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+              >
                 Agentic RCM Solutions &middot; Eligibility &amp; Benefits Verification
               </span>
             </div>
 
             {/* Headline */}
-            <h2 className="type-h1 tracking-[-0.01em] text-white">
+            <h2
+              data-motion-reveal="lines"
+              data-motion-start="top 100%"
+              className="type-h1 tracking-[-0.01em] text-white"
+            >
               Every patient verified before they arrive.
             </h2>
 
             {/* Description */}
-            <p className="type-body-s max-w-[650px] text-[#F4F6F9]">
+            <p
+              data-motion-reveal="blur"
+              data-motion-start="top 100%"
+              className="type-body-s max-w-[650px] text-[#F4F6F9]"
+            >
               Our agents check coverage, benefits, and patient responsibility ahead of the visit.
             </p>
 
             {/* CTA Button */}
             <div>
               <Link href="/contact-us">
-                <CTA variant="dark-bg" as="div">
+                <CTA data-motion-reveal="fade" data-motion-magnetic variant="dark-bg" as="div">
                   Get a Demo
                 </CTA>
               </Link>
@@ -82,8 +99,12 @@ export const SolutionsHeroSection = () => {
           </div>
 
           {/* Right Column: Hero Image */}
-          <div className="relative z-[2] aspect-[650/441] w-full overflow-hidden rounded-[20px] lg:max-w-[650px] lg:flex-1">
+          <div
+            data-motion-reveal="image"
+            className="relative z-[2] aspect-[650/441] w-full overflow-hidden rounded-[20px] lg:max-w-[650px] lg:flex-1"
+          >
             <Image
+              data-motion-parallax
               src="/images/solutions/solutions-eligibility/hero-section/img_banner%20(9).png"
               alt="Patient eligibility verification digital cards"
               fill
@@ -95,11 +116,20 @@ export const SolutionsHeroSection = () => {
         </div>
 
         {/* Mobile & Tablet: Stacked Hero Content */}
-        <div className="relative z-10 flex w-full flex-col items-start gap-[20px] lg:hidden">
+        <div
+          data-motion-group
+          data-motion-trigger="section"
+          data-motion-start="top 100%"
+          className="relative z-10 flex w-full flex-col items-start gap-[20px] lg:hidden"
+        >
           {/* Tag */}
           <div className="flex items-center gap-[8px]">
             <div className="h-[8px] w-[8px] shrink-0 rounded-full bg-[#91C6F2]" />
-            <span className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]">
+            <span
+              data-motion-reveal="scramble"
+              data-motion-start="top 100%"
+              className="type-body-xxs tracking-[0.01em] text-[#D7DCE2]"
+            >
               Agentic RCM Solutions &middot; Eligibility &amp; Benefits{' '}
               <br className="block sm:hidden" />
               Verification
@@ -107,27 +137,39 @@ export const SolutionsHeroSection = () => {
           </div>
 
           {/* Headline */}
-          <h2 className="type-h1 tracking-[-0.01em] text-white">
+          <h2
+            data-motion-reveal="lines"
+            data-motion-start="top 100%"
+            className="type-h1 tracking-[-0.01em] text-white"
+          >
             Every patient verified before they arrive.
           </h2>
 
           {/* Description */}
-          <p className="type-body-s text-[#F4F6F9]">
+          <p
+            data-motion-reveal="blur"
+            data-motion-start="top 100%"
+            className="type-body-s text-[#F4F6F9]"
+          >
             Our agents check coverage, benefits, and patient responsibility ahead of the visit.
           </p>
 
           {/* CTA Button */}
           <div>
             <Link href="/contact-us">
-              <CTA variant="dark-bg" as="div">
+              <CTA data-motion-reveal="fade" data-motion-magnetic variant="dark-bg" as="div">
                 Get a Demo
               </CTA>
             </Link>
           </div>
 
           {/* Hero Image (Mobile & Tablet) */}
-          <div className="relative z-[2] aspect-[362/246] w-full overflow-hidden rounded-[20px]">
+          <div
+            data-motion-reveal="image"
+            className="relative z-[2] aspect-[362/246] w-full overflow-hidden rounded-[20px]"
+          >
             <Image
+              data-motion-parallax
               src="/images/solutions/solutions-eligibility/hero-section/img_banner%20(9).png"
               alt="Patient eligibility verification digital cards"
               fill

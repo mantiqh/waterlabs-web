@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef, useState, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 
 import { CTA } from '@/components/CTA';
 import { CarouselIndicators } from '@/components/ui/carousel-indicators';
 import { HIMER_CLAIM_JOURNEY_DATA } from '@/data/himer';
 import { useReducedMotion } from '@/lib/hooks/use-scroll-progress';
+import { mountCarouselAutoplay } from '@/lib/motion/motion';
 
 import { HimerVideo } from './himer-video';
 
@@ -18,6 +19,7 @@ const subscribeViewport = (notify: () => void) => {
 
 export const HimerClaimJourneySection = () => {
   const [currentCard, setCurrentCard] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
   const paired = useSyncExternalStore(
@@ -29,20 +31,49 @@ export const HimerClaimJourneySection = () => {
   const perPage = paired ? 2 : 1;
   const totalSlides = Math.ceil(cards.length / perPage);
   const currentSlide = Math.min(totalSlides - 1, Math.floor(currentCard / perPage));
-  const selectSlide = (index: number) => {
+
+  const selectSlide = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      const card = track?.children[index * perPage] as HTMLElement | undefined;
+      if (track && card)
+        track.scrollTo({
+          left: card.offsetLeft - (track.firstElementChild as HTMLElement).offsetLeft,
+          behavior: reducedMotion ? 'instant' : 'smooth',
+        });
+    },
+    [perPage, reducedMotion],
+  );
+
+  const nextSlide = useCallback(() => {
     const track = trackRef.current;
-    const card = track?.children[index * perPage] as HTMLElement | undefined;
-    if (track && card)
-      track.scrollTo({
-        left: card.offsetLeft - (track.firstElementChild as HTMLElement).offsetLeft,
-        behavior: reducedMotion ? 'instant' : 'smooth',
-      });
-  };
-  const nextSlide = () => selectSlide((currentSlide + 1) % totalSlides);
-  const prevSlide = () => selectSlide((currentSlide - 1 + totalSlides) % totalSlides);
+    if (!track || track.children.length < 2) return;
+    const first = track.children[0] as HTMLElement;
+    const second = track.children[1] as HTMLElement;
+    const cardWidth = second.offsetLeft - first.offsetLeft;
+    const currentIdx = Math.round(track.scrollLeft / cardWidth);
+    const currSlide = Math.min(totalSlides - 1, Math.floor(currentIdx / perPage));
+    selectSlide((currSlide + 1) % totalSlides);
+  }, [totalSlides, perPage, selectSlide]);
+
+  const prevSlide = useCallback(() => {
+    const track = trackRef.current;
+    if (!track || track.children.length < 2) return;
+    const first = track.children[0] as HTMLElement;
+    const second = track.children[1] as HTMLElement;
+    const cardWidth = second.offsetLeft - first.offsetLeft;
+    const currentIdx = Math.round(track.scrollLeft / cardWidth);
+    const currSlide = Math.min(totalSlides - 1, Math.floor(currentIdx / perPage));
+    selectSlide((currSlide - 1 + totalSlides) % totalSlides);
+  }, [totalSlides, perPage, selectSlide]);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    return mountCarouselAutoplay(sectionRef.current, nextSlide, 6000);
+  }, [nextSlide]);
 
   return (
-    <section className="bg-ghost-white relative w-full text-black">
+    <section ref={sectionRef} className="bg-ghost-white relative w-full text-black">
       {/*
         Signature Waterlabs Curved Container (Figma: Frame 2147227449 8301:11589 / top frame - color 8301:11590):
         - Desktop: rounded-tr-[60px] rounded-br-[60px], py-[80px]
@@ -54,21 +85,30 @@ export const HimerClaimJourneySection = () => {
           {/* Header Row (Figma 8301:11594: Top-aligned items-start so headline and subtext share the exact same top level) */}
           <div className="mb-5 flex flex-col justify-between gap-5 md:mb-16 md:gap-6 lg:mb-16 lg:flex-row lg:items-start lg:gap-5">
             <div className="min-w-0 lg:w-1/2">
-              <h2 className="type-h2 tracking-tight text-black max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]">
+              <h2
+                data-motion-reveal="lines"
+                className="type-h2 tracking-tight text-black max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]"
+              >
                 <span className="text-electric-blue">Every function of the</span>
                 <br />
                 <span>revenue cycle, on one system.</span>
               </h2>
             </div>
             <div className="min-w-0 lg:w-1/2">
-              <p className="type-body-xxs text-charcoal max-md:text-sm max-md:leading-5 lg:max-w-[560px]">
+              <p
+                data-motion-reveal="blur"
+                className="type-body-xxs text-charcoal max-md:text-sm max-md:leading-5 lg:max-w-[560px]"
+              >
                 {HIMER_CLAIM_JOURNEY_DATA.subtext}
               </p>
             </div>
           </div>
 
           {/* Claim Journey Video / Animation Container */}
-          <div className="mb-5 w-full overflow-hidden rounded-[20px] md:mb-12 md:rounded-[28px]">
+          <div
+            data-motion-reveal="image"
+            className="mb-5 w-full overflow-hidden rounded-[20px] md:mb-12 md:rounded-[28px]"
+          >
             <HimerVideo
               desktopSrc={HIMER_CLAIM_JOURNEY_DATA.desktopVideo}
               mobileSrc={HIMER_CLAIM_JOURNEY_DATA.mobileVideo}
@@ -79,7 +119,7 @@ export const HimerClaimJourneySection = () => {
           </div>
 
           {/* Stage Cards Carousel */}
-          <div className="relative">
+          <div data-motion-reveal="fade" className="relative">
             <div
               ref={trackRef}
               role="region"
@@ -157,6 +197,8 @@ export const HimerClaimJourneySection = () => {
               {/* Prev / Next buttons */}
               <div className="hidden items-center gap-[14px] md:flex">
                 <CTA
+                  data-motion-reveal="fade"
+                  data-motion-magnetic
                   variant="light-arrow"
                   iconDirection="left"
                   type="button"
@@ -166,6 +208,8 @@ export const HimerClaimJourneySection = () => {
                 />
 
                 <CTA
+                  data-motion-reveal="fade"
+                  data-motion-magnetic
                   variant="fill-arrow"
                   type="button"
                   onClick={nextSlide}

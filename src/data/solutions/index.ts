@@ -153,8 +153,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
       heroImage: '/images/solutions/solutions-eligibility/hero-section/img_banner%20(9).png',
-      heroBanner:
-        '/images/solutions/solutions-eligibility/hero-section/img_banner_bg%20(3).png',
+      heroBanner: '/images/solutions/solutions-eligibility/hero-section/img_banner_bg%20(3).png',
     },
     problem: {
       tag: 'The problem',
@@ -408,8 +407,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionPageData> = {
       ctaText: 'Get a Demo',
       ctaLink: '/contact-us',
       heroImage: '/images/solutions/solutions-AR-follow-up/hero-section/img_banner%20(14).png',
-      heroBanner:
-        '/images/solutions/solutions-AR-follow-up/hero-section/img_banner_bg%20(8).png',
+      heroBanner: '/images/solutions/solutions-AR-follow-up/hero-section/img_banner_bg%20(8).png',
     },
     problem: {
       tag: 'The problem',

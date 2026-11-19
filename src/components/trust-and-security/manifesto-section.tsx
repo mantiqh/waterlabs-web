@@ -12,7 +12,11 @@ export const ManifestoSection = () => {
   const { ref, progress } = useScrollProgress<HTMLElement>('focus');
 
   return (
-    <section ref={ref} className="relative m-0 w-full overflow-hidden bg-white p-0">
+    <section
+      ref={ref}
+      data-motion-section
+      className="relative m-0 w-full overflow-hidden bg-white p-0"
+    >
       {/* Top-right #9983E2 backdrop matches the Hero bottom-right seamlessly behind rounded-tr */}
       <div
         aria-hidden="true"

@@ -22,14 +22,22 @@ export default function CapabilitiesSection() {
   return (
     <section className="bg-ghost-white rounded-tl-[30px] rounded-bl-[30px] py-10 lg:rounded-tl-[60px] lg:rounded-bl-[60px] lg:py-20">
       <div className="layout-container">
-        <SectionLabel>{data.eyebrow}</SectionLabel>
-        <div className="mt-5 grid gap-5 lg:grid-cols-2">
-          <h2 className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10">
-            {data.title}
-          </h2>
-          <p className="type-body-xxs text-charcoal max-w-[530px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
-            {data.description}
-          </p>
+        <div data-motion-group data-motion-trigger="section" data-motion-start="top 75%">
+          <SectionLabel>{data.eyebrow}</SectionLabel>
+          <div className="mt-5 grid gap-5 lg:grid-cols-2">
+            <h2
+              data-motion-reveal="lines"
+              className="type-h2 tracking-[-0.01em] max-md:text-[32px] max-md:leading-10"
+            >
+              {data.title}
+            </h2>
+            <p
+              data-motion-reveal="blur"
+              className="type-body-xxs text-charcoal max-w-[530px] tracking-[0.01em] max-md:text-sm max-md:leading-5"
+            >
+              {data.description}
+            </p>
+          </div>
         </div>
         <div className="mt-10 flex flex-col gap-8 rounded-[20px_10px_20px_20px] bg-white p-5 md:hidden">
           {capabilities.map((item) => (
@@ -95,11 +103,14 @@ export default function CapabilitiesSection() {
           </div>
         </div>
         <div className="mt-5 flex flex-col items-start justify-between gap-5 md:mt-10 lg:flex-row lg:gap-20">
-          <p className="type-body-xxs text-charcoal max-w-[680px] tracking-[0.01em] max-md:text-sm max-md:leading-5">
+          <p
+            data-motion-reveal="blur"
+            className="type-body-xxs text-charcoal max-w-[680px] tracking-[0.01em] max-md:text-sm max-md:leading-5"
+          >
             {data.platformDescription}
           </p>
           <Link href={data.platformCta.href} className="shrink-0">
-            <CTA variant="light-bg" size="compact-mobile" as="span">
+            <CTA data-motion-magnetic variant="light-bg" size="compact-mobile" as="span">
               {data.platformCta.label}
             </CTA>
           </Link>

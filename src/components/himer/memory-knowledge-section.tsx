@@ -23,17 +23,29 @@ export const HimerMemoryKnowledgeSection = () => {
         <div className="layout-container">
           <div className="mb-3 flex items-center gap-1">
             <span className="bg-electric-blue size-2 rounded-full" />
-            <span className="type-body-xxs text-[#68727d] max-md:text-sm max-md:leading-5">
+            <span
+              data-motion-reveal="scramble"
+              className="type-body-xxs text-[#68727d] max-md:text-sm max-md:leading-5"
+            >
               {HIMER_MEMORY_DATA.tag}
             </span>
           </div>
-          <h2 className="type-h2 text-black max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]">
+          <h2
+            data-motion-reveal="lines"
+            className="type-h2 text-black max-md:text-[32px] max-md:leading-10 max-md:tracking-[-0.01em]"
+          >
             <span className="text-electric-blue">The revenue cycle,</span> written into software.
           </h2>
-          <p className="type-body-xxs text-charcoal mt-5 mb-5 max-md:text-sm max-md:leading-5">
+          <p
+            data-motion-reveal="blur"
+            className="type-body-xxs text-charcoal mt-5 mb-5 max-md:text-sm max-md:leading-5"
+          >
             {HIMER_MEMORY_DATA.subtext}
           </p>
-          <div className="mb-5 grid max-w-[1190px] grid-cols-1 gap-5 md:mb-20 md:grid-cols-2 md:gap-[60px]">
+          <div
+            data-motion-group
+            className="mb-5 grid max-w-[1190px] grid-cols-1 gap-5 md:mb-20 md:grid-cols-2 md:gap-[60px]"
+          >
             {[HIMER_MEMORY_DATA.split.alreadyInHimer, HIMER_MEMORY_DATA.split.learnedFromYou].map(
               (label, index) => (
                 <div key={label} data-metric-card className="flex flex-col gap-6">
@@ -126,11 +138,20 @@ export const HimerMemoryKnowledgeSection = () => {
             </div>
           </div>
           <div className="flex flex-col items-start gap-3 rounded-[20px] bg-white p-5 md:flex-row md:items-center md:justify-between md:p-10">
-            <h3 className="type-h5 text-midnight-blue max-md:text-xl max-md:leading-7">
+            <h3
+              data-motion-reveal="lines"
+              className="type-h5 text-midnight-blue max-md:text-xl max-md:leading-7"
+            >
               {HIMER_MEMORY_DATA.callout}
             </h3>
             <Link href="/contact-us">
-              <CTA variant="light-bg" size="compact-mobile" as="span">
+              <CTA
+                data-motion-reveal="fade"
+                data-motion-magnetic
+                variant="light-bg"
+                size="compact-mobile"
+                as="span"
+              >
                 Get a demo
               </CTA>
             </Link>

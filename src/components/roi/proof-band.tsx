@@ -1,6 +1,6 @@
 export const ROIProofBand = () => {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section data-motion-section className="relative w-full overflow-hidden">
       {/*
         Proof Band (Figma Specifications):
         - Outer wrapper: gradient from teal to white so the top-right corner radius syncs with the hero section
@@ -17,10 +17,16 @@ export const ROIProofBand = () => {
         <div className="bg-ghost-white w-full rounded-tr-[30px] rounded-br-[30px] px-[20px] py-[40px] md:px-[40px] md:py-[48px] lg:rounded-tr-[60px] lg:rounded-br-[60px] lg:px-[60px] lg:py-[60px]">
           <div className="mx-auto w-full max-w-[1320px]">
             {/* Stats Grid */}
-            <div className="flex flex-col items-start gap-[40px] lg:flex-row lg:gap-[40px]">
+            <div
+              data-motion-group
+              data-motion-trigger="section"
+              data-motion-start="top 75%"
+              className="flex flex-col items-start gap-[40px] lg:flex-row lg:gap-[40px]"
+            >
               {/* Stat 1 */}
               <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
+                  data-motion-metric-value="93%"
                   className="type-h2 w-fit tracking-[-0.01em] max-md:text-[32px] max-md:leading-[40px]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
@@ -32,7 +38,7 @@ export const ROIProofBand = () => {
                 >
                   93%
                 </h2>
-                <p className="type-body-xxs text-charcoal">
+                <p data-motion-reveal="blur" className="type-body-xxs text-charcoal">
                   Less intake headcount,
                   <br className="sm:hidden" /> physical therapy network
                 </p>
@@ -41,6 +47,7 @@ export const ROIProofBand = () => {
               {/* Stat 2 */}
               <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
+                  data-motion-metric-value="$72M"
                   className="type-h2 w-fit tracking-[-0.01em] max-md:text-[32px] max-md:leading-[40px]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
@@ -52,7 +59,7 @@ export const ROIProofBand = () => {
                 >
                   $72M
                 </h2>
-                <p className="type-body-xxs text-charcoal">
+                <p data-motion-reveal="blur" className="type-body-xxs text-charcoal">
                   Released 3 to 5 days sooner,
                   <br className="sm:hidden" /> rural health system
                 </p>
@@ -61,6 +68,7 @@ export const ROIProofBand = () => {
               {/* Stat 3 */}
               <div className="flex flex-1 flex-col gap-[8px] lg:gap-[14px]">
                 <h2
+                  data-motion-metric-value="90%"
                   className="type-h2 w-fit tracking-[-0.01em] max-md:text-[32px] max-md:leading-[40px]"
                   style={{
                     background: 'linear-gradient(90deg, #0F68D6 76.92%, #63CCB7 100%)',
@@ -72,7 +80,7 @@ export const ROIProofBand = () => {
                 >
                   90%
                 </h2>
-                <p className="type-body-xxs text-charcoal">
+                <p data-motion-reveal="blur" className="type-body-xxs text-charcoal">
                   Of ED encounters coded
                   <br className="sm:hidden" /> without a coder
                 </p>
