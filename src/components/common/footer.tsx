@@ -77,24 +77,6 @@ export const Footer = () => {
                     Solutions
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/case-studies"
-                    prefetch={false}
-                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
-                  >
-                    Results
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/blogs"
-                    prefetch={false}
-                    className={`type-body-xxs hover:text-electric-blue text-white/70 transition-colors ${isHimer ? 'max-md:text-sm max-md:leading-5' : ''}`}
-                  >
-                    Resources
-                  </Link>
-                </li>
               </ul>
             </div>
 
