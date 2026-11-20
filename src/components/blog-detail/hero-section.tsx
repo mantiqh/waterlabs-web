@@ -91,7 +91,6 @@ export const BlogDetailHeroSection = ({
             {/* Hero Image Banner (Frame 2147203302): 1096px x 350px on desktop, 362px x 245px on mobile */}
             <div
               data-motion-reveal="image"
-              data-motion-parallax
               className="relative h-[245px] w-full shrink-0 overflow-hidden rounded-[20px] shadow-[0_8px_30px_rgba(4,40,73,0.06)] sm:h-[290px] md:h-[320px] lg:h-[350px]"
             >
               {/* Desktop / Tablet Image */}
